@@ -24,6 +24,12 @@ jobs:
         with:
           github-token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
           script: |
+            const source = await github.rest.repos.getCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha
+            })
+            const commit = source.data.commit
             await github.rest.repos.createDispatchEvent({
               owner: 'Antiokh',
               repo: 'rslive.ru',
@@ -31,6 +37,10 @@ jobs:
               client_payload: {
                 sha: context.sha,
                 ref: context.ref,
-                source_repo: `${context.repo.owner}/${context.repo.repo}`
+                source_repo: `${context.repo.owner}/${context.repo.repo}`,
+                source_url: source.data.html_url,
+                message: commit.message,
+                author: commit.author?.name || source.data.author?.login || '',
+                author_email: commit.author?.email || ''
               }
             })
