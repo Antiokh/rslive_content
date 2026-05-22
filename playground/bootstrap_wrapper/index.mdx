@@ -1,0 +1,341 @@
+---
+title: "Bootstrap Wrapper Plugin"
+description: "---- plugin ---- description: Useful plugin for add several Bootstrap components (Jumbotron, Alerts, Panels, Nav & Tabs, etc) to DokuWiki especially in combination with a Bootstrap template author : Giuseppe Di Terlizzi "
+source: "www/doku-secure/data/pages/playground/bootstrap_wrapper.txt"
+---
+
+---- plugin ----
+description: Useful plugin for add several Bootstrap components (Jumbotron, Alerts, Panels, Nav & Tabs, etc) to DokuWiki especially in combination with a Bootstrap template
+author     : Giuseppe Di Terlizzi
+email      : giuseppe.diterlizzi@gmail.com
+type       : syntax, action
+lastupdate : 2022-09-22
+compatible : Igor, Hogfather, Greebo, Frusterick Manners, Elenor of Tsort, Detritus, Weatherwax, Hrun
+depends    :
+conflicts  : caption, alertbox
+similar    : mikioplugin, wrap
+tags       : alert, annotations, bootstrap, boxes, button, dropdown, formatting, grids, hide, highlight, icons, jumbotron, language, nav, printing, style, tabs, thumbnail, typography, wrap, callouts, modal, popover
+
+downloadurl: https://github.com/LotarProject/dokuwiki-plugin-bootswrapper/zipball/master
+bugtracker : https://github.com/LotarProject/dokuwiki-plugin-bootswrapper/issues
+sourcerepo : https://github.com/LotarProject/dokuwiki-plugin-bootswrapper/
+donationurl: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9LJDLVSNGYSA2
+
+screenshot_img :
+----
+
+Useful plugin for adding several Bootstrap components (Jumbotron, Alert, Panel) to DokuWiki especially in combination with a Bootstrap template.
+
+:!: **Note**: This plugin will only work with Bootstrap-compatible templates, of which the default DokuWiki template is not one.
+
+This plugin adds to your DokuWiki, several Bootstrap components:
+
+  * [](/#Jumbotron)
+  * [Buttons](/#button)
+  * [Alerts](/#alert)
+  * [](/#Text)
+  * [Tooltips](/#tooltip)
+  * [](/#Grids)
+  * [Thumbnails](/#thumbnail)
+  * [Panels](/#panel)
+  * [Wells](/#well)
+  * Labels
+  * [Nav & Tabs (with dropdown)](/#nav)
+  * Page heading
+  * Lead
+  * Badges
+  * [List Group](/#List-Group)
+  * Progress Bars
+  * Affix
+  * Carousel
+  * [Accordion](/#accordion)
+  * Callouts
+  * Modal (with `remote` attribute)
+  * Popover
+Launch demo modal
+<modal id="modal-demo" title="Modal title" dismiss="true" backdrop="true">
+#### Text in a modal
+
+Duis mollis, est non commodo luctus, nisi erat porttitor ligula. [...]
+</modal>
+
+## Installation
+
+Search and install the plugin using the DokuWiki Extension Manager. Refer to the DokuWiki plugin documentation when installing plugins manually.
+
+**NOTE**: This plugin require `SimpleXML` PHP module. You can install it using a package manager of your Linux distribution.
+
+Run this command to check if the module is installed in your system:
+
+<code>
+php -m | grep -i simplexml
+</code>
+
+## Examples/Usage
+
+## Syntax
+
+For complete samples and syntax, visit http://www.lotar.altervista.org/dokuwiki/wiki/plugin/bootswrapper.
+
+### Jumbotron
+
+<code>
+
+
+## Hello, world!
+
+This is a simple hero unit, a simple jumbotron-style
+component for calling extra attention to featured
+content or information.
+
+
+</code>
+
+
+## Hello, world!
+
+This is a simple hero unit, a simple jumbotron-style
+component for calling extra attention to featured
+content or information.
+
+
+### Panel
+
+<code>
+<details>
+<summary>Title of Panel</summary>
+
+Panel content
+
+</details>
+</code>
+
+<details>
+<summary>Title of Panel</summary>
+
+Panel content
+
+</details>
+
+### Alert
+
+<code>:::success
+**Well done!** You successfully read this important alert message.
+:::</code>
+
+:::success
+**Well done!** You successfully read this important alert message.
+:::
+
+### Text
+
+<code>
+  * <text type="muted">muted</text>
+  * <text type="primary">primary</text>
+  * <text type="success">success</text>
+  * <text type="info">info</text>
+  * <text type="warning">warning</text>
+  * <text type="danger">danger</text>
+</code>
+
+  * <text type="muted">muted</text>
+  * <text type="primary">primary</text>
+  * <text type="success">success</text>
+  * <text type="info">info</text>
+  * <text type="warning">warning</text>
+  * <text type="danger">danger</text>
+
+### Tooltip
+
+<code><span title="Sample Text">Lorem ipsum</span> dolor sit amet...</code>
+
+<span title="Sample Text">Lorem ipsum</span> dolor sit amet...
+
+### Grids
+
+<code><grid>
+.col-sm-6
+.col-sm-6
+</grid></code>
+
+<code><grid>
+.col-xs-12 .col-sm-6 .col-lg-8
+.col-xs-6 .col-lg-4
+</grid></code>
+
+### Thumbnail
+
+<code><grid>
+...
+
+<thumbnail>
+![dokuwiki-128.png](/media/wiki/dokuwiki-128.webp)
+</thumbnail>
+
+...
+</grid></code>
+
+<grid>
+...
+
+<thumbnail>
+![dokuwiki-128.png](/media/wiki/dokuwiki-128.webp)
+</thumbnail>
+
+...
+</grid>
+
+<code><grid>
+...
+
+<thumbnail>
+![dokuwiki-128.png](/media/wiki/dokuwiki-128.webp)
+<caption>
+#### DokuWiki
+
+*DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database. It is loved by users for its clean and readable syntax. The ease of maintenance, backup and integration makes it an administrator's favorite. Built in access controls and authentication connectors make DokuWiki especially useful in the enterprise context and the large number of plugins contributed by its vibrant community allow for a broad range of use cases beyond a traditional wiki.*
+</caption>
+</thumbnail>
+...
+
+</grid></code>
+
+<grid>
+...
+
+<thumbnail>
+![dokuwiki-128.png](/media/wiki/dokuwiki-128.webp)
+<caption>
+#### DokuWiki
+
+*DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database. It is loved by users for its clean and readable syntax. The ease of maintenance, backup and integration makes it an administrator's favorite. Built in access controls and authentication connectors make DokuWiki especially useful in the enterprise context and the large number of plugins contributed by its vibrant community allow for a broad range of use cases beyond a traditional wiki.*
+</caption>
+</thumbnail>
+...
+
+</grid>
+
+### Well
+
+<code><well>Look, I'm in a well!</well></code>
+
+<well>Look, I'm in a well!</well>
+
+### Button
+
+<code><button type="success" size="lg" icon="glyphicon glyphicon-edit">wiki:welcome</button></code>
+
+<button type="success" size="lg" icon="glyphicon glyphicon-edit">wiki:welcome</button>
+
+### Nav
+
+<code><nav>
+  * start
+  * Plugin
+  * [playground:playground](/playground/playground/)
+  * DokuWiki
+    * wiki:welcome
+    * wiki:syntax
+</nav></code>
+
+<nav>
+  * start
+  * Plugin
+  * [playground:playground](/playground/playground/)
+  * DokuWiki
+    * wiki:welcome
+    * wiki:syntax
+</nav>
+
+### List-Group =
+
+<code>
+  * [[fa->home?48]] [:](/) \\ Link zur Hauptseite des Wikis mit FA-Icon Home mit 48 Punkten
+  * wiki:test \\ Link zum Namensraum Test ohne Icon
+</code>
+
+
+  * [[fa->home?48]] [:](/) \\ Link zur Hauptseite des Wikis mit FA-Icon Home mit 48 Punkten
+  * wiki:test \\ Link zum Namensraum Test ohne Icon
+
+
+### Accordion
+<code>
+<details>
+<summary>First panel</summary>
+
+First panel content
+
+</details>
+<details>
+<summary>Second panel</summary>
+
+Second panel content
+
+</details>
+</code>
+
+<details>
+<summary>First panel</summary>
+
+First panel content
+
+</details>
+<details>
+<summary>Second panel</summary>
+
+Second panel content
+
+</details>
+
+## Sites using this plugin
+
+  * https://crocs.fi.muni.cz/ (wikitext viewable)
+  * https://www.refa-sachsenanhalt.de (wikitext viewable, but hard to read)
+
+## Development
+
+[![Build Status](https:*travis-ci.org/LotarProject/dokuwiki-plugin-bootswrapper.png)](https:*travis-ci.org/LotarProject/dokuwiki-plugin-bootswrapper)
+
+#### Change Log
+
+[[rss>https://github.com/LotarProject/dokuwiki-plugin-bootswrapper/commits/master.atom author date]]
+
+#### Known Bugs and Issues
+
+Please report bugs or feature requests at the [Bug tracker](https://github.com/LotarProject/dokuwiki-plugin-bootswrapper/issues).
+
+#### ToDo/Wish List
+
+  * <del>Add support to Nav</del>
+  * <del>Improve support to Tab</del>
+  * <del>Add support to Collapse / Accordion</del>
+  * Add support to PopupOver
+  * Add support to DropDown
+  * <del>Add support to Progress Bar</del>
+  * Add support to Breadcrumbs
+  * <del>Add support to Badges</del>
+  * <del>Add support to List Group</del>
+  * <del>Add support to Carousel</del>
+
+## FAQ
+
+## Discussion
+
+### Image sizes
+
+What image sizes should we use for jumbotron background?
+
+### Jumbotron and dw2pdf
+
+Printing the web page makes appear jumbotron. But building the PDF with dw2pdf does it not. What should I do to make it work?
+
+Further to this, could full support for dw2pdf be added so that all the feature styles map across?
+
+### Accordion collapsible function
+
+Hello, thank you for your plugin, it's really useful. I wondering whether there is an option to start the accordion so that **all** the panels are collapsed by default? Using the collapsible function the first panel in the accordion is always open and the rest is collapsed. I was thinking about a workaround with the "collapse button" function but maybe there is another way? - Thanks, Arkul
+
+## See also
+
+  * [Glyphicons](http://glyphicons.com/)

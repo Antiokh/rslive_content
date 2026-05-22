@@ -1,0 +1,36 @@
+name: Notify rslive.ru about content changes
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: notify-rslive-ru
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[skip content-sync]')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dispatch sync workflow in rslive.ru
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          script: |
+            await github.rest.repos.createDispatchEvent({
+              owner: 'Antiokh',
+              repo: 'rslive.ru',
+              event_type: 'rslive-content-updated',
+              client_payload: {
+                sha: context.sha,
+                ref: context.ref,
+                source_repo: `${context.repo.owner}/${context.repo.repo}`
+              }
+            })

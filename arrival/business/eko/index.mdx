@@ -1,0 +1,191 @@
+---
+title: "Эко-такса (эко-налог)"
+description: "Эко-такса в Сербии: кто подаёт Obrazac 1, срок до 30 апреля, как паушальцу заполнить заявление через LPA и ConsentID."
+keywords: ["эко такса Сербия", "эко налог Сербия", "eko taksa Srbija", "Obrazac 1", "LPA eko taksa", "паушалец эко такса"]
+source: "www/doku-secure/data/pages/arrival/business/eko.txt"
+---
+
+<Aside type="tip" title="Срок подачи">
+  <Countdown date="04-30" annual label="до ежегодного дедлайна по внесению данных (30 апреля): ##DATE##" />
+</Aside>
+
+Эко-такса — разговорное название сербской **naknada za zaštitu i unapređivanje životne sredine**: платы за защиту и улучшение окружающей среды.
+
+Её платят юридические лица и предприниматели, включая [паушальцев](/arrival/business/prvsdoo/), если их деятельность относится к видам деятельности, влияющим на окружающую среду. Для большинства обычных предпринимательских кодов деятельности, включая IT и услуги, обязанность на практике возникает.
+
+Заявление подаётся через портал **JIS LPA** — локальной налоговой администрации. Для электронной подачи нужен [ConsentID](/adaptation/consentid/) с включённым облачным подписанием или квалифицированный электронный сертификат.
+
+## Правовая база
+
+Основные документы:
+
+- **Zakon o naknadama za korišćenje javnih dobara** — закон о платах за использование публичных благ.[^law]
+- **Uredba o kriterijumima za određivanje aktivnosti koje utiču na životnu sredinu i iznosima naknada** — уредба, которая определяет степень влияния деятельности и суммы платы.[^uredba]
+- **Pravilnik o izgledu, sadržini i načinu dostavljanja prijave za naknadu za zaštitu i unapređivanje životne sredine** — правилник по форме заявления.[^pravilnik]
+- Инструкция JIS LPA по заполнению **Obrazac 1**.[^lpa]
+
+## Кто подаёт заявление
+
+Заявление подают:
+
+- предприниматели, включая паушальцев;
+- DOO и другие юридические лица;
+- филиалы иностранных юридических лиц;
+- субъекты, которые начали, приостановили или прекратили деятельность в течение года.
+
+Если предприниматель открылся в текущем году, заявление всё равно нужно подать, но плата за первый год обычно не начисляется либо рассчитывается с учётом периода деятельности. Если деятельность временно приостановлена через APR, обязанность зависит от периода фактического ведения деятельности.
+
+<Aside type="tip" title="Для паушальцев">
+  Паушальцы платят эко-таксу как категория **mikro pravna lica i preduzetnici**. Итоговую сумму всё равно устанавливает LPA решением.
+</Aside>
+
+## Сроки
+
+| Действие | Срок |
+| --- | --- |
+| Ежегодная подача Obrazac 1 | до **30 апреля** текущего года |
+| Начало деятельности, приостановка, прекращение деятельности | обычно в течение **15 дней** после регистрации изменения |
+| Оплата | по решению LPA, обычно после получения решения |
+
+Уведомление или решение обычно приходит в личный кабинет LPA, на e-mail или в [eSanduče](/integration/euprava/).
+
+## Как рассчитывается сумма
+
+Сумма зависит от трёх факторов:
+
+1. **степень негативного влияния деятельности** — veliki, srednji или mali uticaj;
+2. **размер субъекта** — preduzetnik / mikro / malo / srednje / veliko;
+3. **период деятельности** в году.
+
+Для паушальца чаще всего указывается:
+
+- размер субъекта: **Preduzetnik**;
+- степень влияния: обычно **Mali uticaj na životnu sredinu**, если основной код деятельности относится к малому влиянию;
+- доход за прошлый год: сумма из налогового решения за прошлый год.
+
+Если вы паушалец, для поля дохода обычно используют сумму годовой основы из решения о паушальном налоге. На практике это сумма месячных основ за 12 месяцев прошлого года. Если бизнес работал не весь год, берётся соответствующий период.
+
+<Aside type="caution" title="Проверьте с бухгалтером">
+  У разных LPA могут быть нюансы обработки заявления. Если у вас не обычный паушалец, несколько муниципалитетов, несколько кодов деятельности, DOO или деятельность с повышенным экологическим влиянием — лучше сверить заполнение с бухгалтером.
+</Aside>
+
+## Где взять сумму для поля дохода
+
+Для паушальца сумму берут из документа **Rešenje o utvrđivanju poreza**.
+
+Обычно нужен показатель, связанный с годовой основой / основицей за прошлый год. Если в решении сумма дана помесячно, сложите месяцы за период деятельности в прошлом календарном году.
+
+![Пример суммы в решении](/media/arrival/business/pasted/20250414-002521.webp)
+
+## Как подать заявление через LPA
+
+<Steps>
+
+1. Получите [ConsentID](/adaptation/consentid/) и включите облачное подписание документов.
+
+2. Откройте портал [lpa.gov.rs](https://lpa.gov.rs/jisportal/).
+
+3. Нажмите **Prijava na sistem**.
+
+4. Авторизуйтесь через **ConsentID / Mobile application** или квалифицированный электронный сертификат.
+
+5. Выберите фирму или предпринимателя из списка и нажмите **Izaberi**.
+
+6. Откройте раздел **Poreske prijave → Prijava za utvrđivanje naknade za zaštitu i unapređivanje životne sredine (Obrazac 1)**.
+
+7. Если подаёте впервые, нажмите **UNOS PRIJAVE**.
+
+8. Если подаёте повторно, можно открыть старую декларацию и сделать копию через **KOPIJA PRIJAVE**, изменив год, суммы и даты.
+
+9. Заполните обязательные поля.
+
+10. Нажмите **SAČUVAJ**.
+
+11. Нажмите **POTPIŠI I PODNESI PRIJAVU**.
+
+12. Подтвердите подпись в ConsentID.
+
+13. Проверьте, что заявление получило статус подачи, например **PODNETA**, **NEOBRAĐENA (LPA)** или **U OBRADI-LPA**.
+
+14. Ждите решение LPA и реквизиты для оплаты.
+
+</Steps>
+
+## Какие поля заполнять паушальцу
+
+Ниже — практический ориентир для обычного паушальца с одним местом ведения деятельности.
+
+| Поле | Что указать |
+| --- | --- |
+| **Razlog podnošenja prijave** | **Redovna prijava** для ежегодной подачи. **Početak obavljanja delatnosti** — если подаёте из-за начала деятельности. |
+| **1.4.2. Mesto** | город или община юридического адреса |
+| **1.4.3. Naziv ulice** | улица юридического адреса, если не подтянулась автоматически |
+| **1.4.4. Broj** | номер дома |
+| **1.4.5. Sprat, broj posebnog dela objekta** | этаж, квартира, офис или локал, если есть |
+| **1.4.6. Broj telefona** | сербский номер телефона |
+| **1.4.7. E-mail** | e-mail предпринимателя |
+| **1.7. Naziv i šifra pretežne delatnosti** | основной код деятельности из APR или деятельность, давшая больше всего дохода |
+| **2.2. Stepen negativnog uticaja aktivnosti** | обычно **Mali uticaj na životnu sredinu** для стандартных услуг и IT |
+| **2.3. Ukupan prihod obveznika ostvaren u prethodnoj godini** | годовая сумма за прошлый календарный год; для паушальца — сумма из налогового решения |
+| **2.4. Veličina obveznika** | **Preduzetnik** |
+| **2.5. Broj opština** | обычно **1**, если деятельность ведётся в одной общине |
+| **5.1. Period od** | **01.01** текущего года или дата открытия предпринимателя |
+| **5.2. Period do** | **31.12** текущего года или дата прекращения деятельности |
+
+## Статусы заявления
+
+После подачи в LPA можно увидеть один из статусов:
+
+| Статус | Значение |
+| --- | --- |
+| **U PRIPREMI** | заявление создано, но ещё не подано |
+| **POTPISIVANJE U TOKU** | начат процесс подписания |
+| **PODNETA** | заявление подано |
+| **NEOBRAĐENA (LPA)** | заявление доступно локальной налоговой, но ещё не обработано |
+| **U OBRADI-LPA** | LPA начала обработку |
+| **DONETO REŠENJE** | решение вынесено |
+| **ODBIJENA (LPA)** | заявление отклонено |
+| **GREŠKA U OBRADI** | техническая ошибка обработки |
+
+## Как оплатить
+
+После обработки заявления LPA выносит решение (**rešenje**) с суммой и реквизитами.
+
+Оплачивайте только по реквизитам из решения. В разных муниципалитетах могут отличаться:
+
+- счёт получателя;
+- модель и позив на број;
+- срок оплаты;
+- возможность оплаты одной суммой или частями.
+
+## Частые ошибки
+
+- Подать заявление после 30 апреля.
+- Указать доход в тысячах динаров, а не точную сумму в динарах.
+- Указать неправильный период: например, 01.01 для предпринимателя, открытого в середине года.
+- Выбрать не ту общину LPA.
+- Не подтвердить подпись в ConsentID после нажатия **POTPIŠI I PODNESI PRIJAVU**.
+- Сохранить заявление, но не отправить его.
+- Перепутать основной код деятельности с дополнительным.
+
+## Связанные статьи
+
+- [Паушалец в Сербии](/arrival/business/prvsdoo/)
+- [Открытие ИП в Сербии](/arrival/business/prvsdoo/)
+- [ConsentID](/adaptation/consentid/)
+- [eUprava](/integration/euprava/)
+- [eSanduče](/integration/euprava/)
+- [Налоги для бизнеса](/gov/taxes/)
+
+## Полезные ссылки
+
+- [JIS LPA](https://lpa.gov.rs/jisportal/)
+- [Инструкция LPA по Obrazac 1](https://lpa.gov.rs/jisportal/assets/downloads/obrazac_1_readme.pdf?t=240424)
+- [Zakon o naknadama za korišćenje javnih dobara](https://www.paragraf.rs/propisi/zakon-o-naknadama-za-koriscenje-javnih-dobara.html)
+- [Uredba o kriterijumima za određivanje aktivnosti koje utiču na životnu sredinu](https://www.paragraf.rs/propisi/uredba-o-kriterijumima-za-odredjivanje-aktivnosti-koje-uticu-na-zivotnu-sredinu-prema-kolicini-zagadjenja.html)
+- [Pravilnik o izgledu, sadržini i načinu dostavljanja prijave](https://pravno-informacioni-sistem.rs/eli/rep/sgrs/ministarstva/pravilnik/2024/30/4)
+
+[^law]: Закон: [Zakon o naknadama za korišćenje javnih dobara](https://www.paragraf.rs/propisi/zakon-o-naknadama-za-koriscenje-javnih-dobara.html).
+[^uredba]: Уредба: [Uredba o kriterijumima za određivanje aktivnosti koje utiču na životnu sredinu i iznosima naknada](https://www.paragraf.rs/propisi/uredba-o-kriterijumima-za-odredjivanje-aktivnosti-koje-uticu-na-zivotnu-sredinu-prema-kolicini-zagadjenja.html).
+[^pravilnik]: Правилник: [Pravilnik o izgledu, sadržini i načinu dostavljanja prijave za naknadu za zaštitu i unapređivanje životne sredine](https://pravno-informacioni-sistem.rs/eli/rep/sgrs/ministarstva/pravilnik/2024/30/4).
+[^lpa]: Инструкция LPA: [Popunjavanje i podnošenje poreske prijave — Obrazac 1](https://lpa.gov.rs/jisportal/assets/downloads/obrazac_1_readme.pdf?t=240424).

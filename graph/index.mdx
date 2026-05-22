@@ -1,0 +1,84 @@
+---
+title: "Схема миграции в Сербию"
+description: "Навигационная схема основных этапов переезда, адаптации и интеграции в Сербии."
+source: "www/doku-secure/data/pages/graph.txt"
+---
+
+<MermaidGraph
+  code={`graph TD
+    A["Подготовка к переезду"] --> B1["Подготовка документов"]
+    B1 --> B2["Сделать карту UnionPay"]
+    B2 --> B3["Сделать Шенген"]
+    B3 --> B4["Купить билет на самолёт"]
+    B4 --> B5["Забронировать гостиницу"]
+    B5 --> B6["Аренда авто"]
+
+    C["Первые шаги"] --> D1["После прилёта"]
+    D1 --> D2["Купить сим-карту"]
+    D2 --> D3["Заказать такси"]
+    D3 --> D4["Общественный транспорт"]
+    D4 --> D5["Открыть карту"]
+    D5 --> D6["Оформить ДМС"]
+    D6 --> D7["Перевод денег"]
+
+    E["Адаптация"] --> F1["Поиск квартиры"]
+    F1 --> F2["Купить продукты"]
+    F2 --> F3["Открытие бизнеса"]
+    F3 --> F4["Визаран"]
+    F4 --> F5["Документы на РВП"]
+    F5 --> F6["Сербский язык"]
+    F6 --> F7["Замена прав"]
+
+    G["Интеграция"] --> H1["Продление РВП"]
+    H1 --> H2["Резидентский счёт"]
+    H2 --> H3["Покупка машины"]
+    H3 --> H4["Визы из Сербии"]
+    H4 --> H5["Получение ПМЖ"]
+    H5 --> H6["Получение гражданства"]
+
+    I["Дети"] --> J1["Рождение детей"]
+    J1 --> J2["Детские сады"]
+    J2 --> J3["Среднее образование"]
+    J3 --> J4["Высшее образование"]
+
+    click A "/move/"
+    click B1 "/move/visa/"
+    click B2 "/move/finance/"
+    click B3 "/move/travel/"
+    click B4 "/move/travel/"
+    click B5 "/move/travel/"
+    click B6 "/arrival/rentacar/"
+
+    click C "/arrival/"
+    click D1 "/arrival/beli-karton/"
+    click D2 "/arrival/mobile/"
+    click D3 "/arrival/prevoz/"
+    click D4 "/arrival/prevoz/"
+    click D5 "/arrival/banks/"
+    click D6 "/arrival/zdravlje/"
+    click D7 "/move/finance/"
+
+    click E "/adaptation/"
+    click F1 "/move/housing/"
+    click F2 "/arrival/shops/"
+    click F3 "/arrival/business/"
+    click F4 "/arrival/visarun/"
+    click F5 "/arrival/boravak/"
+    click F6 "/adaptation/srpski/"
+    click F7 "/integration/driver_license/"
+
+    click G "/integration/"
+    click H1 "/arrival/boravak/"
+    click H2 "/arrival/banks/"
+    click H3 "/drive/buy/"
+    click H4 "/integration/visas/"
+    click H5 "/integration/stalni/"
+    click H6 "/integration/passport/"
+
+    click I "/children/"
+    click J1 "/children/birth/"
+    click J2 "/children/kindergarten/"
+    click J3 "/children/school/"
+    click J4 "/children/university/"
+  `}
+/>
