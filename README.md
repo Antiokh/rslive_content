@@ -6,6 +6,7 @@ The files here are synchronized with:
 
 ```text
 Antiokh/rslive.ru: astro/src/content/docs
+Antiokh/rslive_content: src/content/docs
 ```
 
 Edit content in either repository. The sync workflows copy content both ways.
@@ -15,15 +16,15 @@ Edit content in either repository. The sync workflows copy content both ways.
 Each page usually lives in a folder with an `index.mdx` file:
 
 ```text
-arrival/boravak/index.mdx       -> https://rslive.ru/arrival/boravak/
-move/visa/index.mdx             -> https://rslive.ru/move/visa/
-integration/euprava/index.mdx   -> https://rslive.ru/integration/euprava/
+src/content/docs/arrival/boravak/index.mdx       -> https://rslive.ru/arrival/boravak/
+src/content/docs/move/visa/index.mdx             -> https://rslive.ru/move/visa/
+src/content/docs/integration/euprava/index.mdx   -> https://rslive.ru/integration/euprava/
 ```
 
 Section landing pages are also `index.mdx`:
 
 ```text
-move/index.mdx -> https://rslive.ru/move/
+src/content/docs/move/index.mdx -> https://rslive.ru/move/
 ```
 
 ## Frontmatter
@@ -227,16 +228,6 @@ build output directory: dist
 
 ## Sync notes
 
-The sync excludes repository metadata files:
-
-```text
-.github/
-.gitignore
-LICENSE
-LICENSE.*
-README.md
-```
-
-That means this README is kept in `rslive_content` and is not copied into `astro/src/content/docs`.
+Only `src/content/docs` is mirrored with the private repository. Repository-level files such as `README.md`, `LICENSE`, `.gitignore`, and `.github/` stay at the root of `rslive_content`.
 
 Sync commits include `[skip content-sync]`. This prevents the two repositories from triggering each other endlessly.
