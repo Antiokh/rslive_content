@@ -1,59 +1,233 @@
-# RSLive content
+# RSLive Content — контент энциклопедии «Инструкция по Сербии»
 
-This repository is the public content mirror for `Antiokh/rslive.ru`.
+Этот репозиторий — **основная точка редактирования и source of truth для статей** сайта [rslive.ru](https://rslive.ru).
 
-The files here are synchronized with:
+Движок, компоненты, стили, сборка и деплой находятся в приватном репозитории [`Antiokh/rslive.ru`](https://github.com/Antiokh/rslive.ru). Здесь хранятся только материалы энциклопедии и относящаяся к ним редакционная документация.
 
-```text
-Antiokh/rslive.ru: astro/src/content/docs
-Antiokh/rslive_content: src/content/docs
-```
+## Где редактировать
 
-Edit content in either repository. The sync workflows copy content both ways.
-
-## File layout
-
-Each page usually lives in a folder with an `index.mdx` file:
+Редактируйте статьи только здесь:
 
 ```text
-src/content/docs/arrival/boravak/index.mdx       -> https://rslive.ru/arrival/boravak/
-src/content/docs/move/visa/index.mdx             -> https://rslive.ru/move/visa/
-src/content/docs/integration/euprava/index.mdx   -> https://rslive.ru/integration/euprava/
+src/content/docs/
 ```
 
-Section landing pages are also `index.mdx`:
+Каталог движка:
+
+```text
+Antiokh/rslive.ru: astro/src/content/docs/
+```
+
+— синхронизируемое зеркало. Не используйте его как штатную точку редактирования: импорт из этого репозитория выполняется через `rsync --delete`, поэтому несогласованные изменения в зеркале могут быть перезаписаны.
+
+Обратная синхронизация из `rslive.ru` существует для совместимости и аварийных случаев, но обычная редакционная работа должна оставаться в `rslive_content`.
+
+## Быстрый старт для агента
+
+Перед изменением контента:
+
+1. Прочитайте этот README.
+2. Откройте [`src/content/docs/CONTENT_INDEX.yml`](src/content/docs/CONTENT_INDEX.yml).
+3. Найдите существующую статью, соседние страницы раздела и подходящие внутренние ссылки.
+4. Проверьте факты, даты, юридические термины и внешние источники.
+5. Внесите минимальное связное изменение в `src/content/docs/**`.
+6. Обновите `CONTENT_INDEX.yml`, если изменились страницы, маршруты или контекст перелинковки.
+7. Проверьте MDX-синтаксис, сноски, ссылки и компоненты.
+8. После push в `main` дождитесь статуса `rslive.ru / Cloudflare Pages` на исходном коммите.
+
+Если задача касается компонента, CSS, sidebar, поиска, API, PWA, редиректа, сборки или Cloudflare — это задача для [`Antiokh/rslive.ru`](https://github.com/Antiokh/rslive.ru), а не для этого репозитория.
+
+## Редакционный стандарт
+
+RSLive — веб-энциклопедия по переезду и жизни в Сербии.
+
+Текст должен быть:
+
+- энциклопедическим, конкретным и практичным;
+- написанным преимущественно в императивной форме там, где описывается порядок действий;
+- пригодным для человека, который впервые сталкивается с процедурой;
+- связанным с другими статьями внутренними ссылками;
+- снабжённым внешними источниками для проверяемых фактических и юридических утверждений.
+
+Не превращайте статьи в блоговые заметки, рекламу, пересказ слухов или набор общих советов.
+
+### Разделяйте типы информации
+
+Не смешивайте без маркировки:
+
+- норму закона;
+- официальную инструкцию ведомства;
+- установленный административный порядок;
+- практику конкретного отделения или инспектора;
+- пользовательский опыт;
+- оценку, прогноз или рекомендацию редакции.
+
+Если официальное правило и наблюдаемая практика отличаются, опишите оба уровня отдельно.
+
+Не выдавайте пользовательский опыт за обязательное правило и не делайте юридический вывод только из того, что «так обычно принимают».
+
+## Источники и фактчекинг
+
+Для существенных утверждений используйте источники в таком порядке:
+
+1. законы и подзаконные акты Сербии;
+2. официальные сайты министерств, ведомств, муниципалитетов и государственных организаций;
+3. официальные инструкции, тарифы, формы и реестры;
+4. сайты регулируемых организаций и поставщиков услуг;
+5. надёжные вторичные источники;
+6. пользовательский опыт — только как практическое дополнение.
+
+Для юридических утверждений по возможности ссылайтесь не только на документ целиком, но и на конкретную статью, раздел или официальный фрагмент процедуры.
+
+Проверяйте:
+
+- актуальность редакции закона;
+- дату тарифа, суммы или административного сбора;
+- компетенцию органа;
+- территориальные различия;
+- исключения и переходные положения;
+- отличается ли правило для граждан, иностранцев, резидентов, нерезидентов, предпринимателей или членов семьи.
+
+Не придумывайте отсутствующие сроки, документы, основания отказа, обязанности ведомств или правоприменительную практику.
+
+Если надёжного ответа нет, прямо укажите границу известного и не превращайте предположение в факт.
+
+## Структура репозитория
+
+```text
+.github/workflows/
+  notify-rslive-ru.yml       # уведомляет движок об изменениях контента
+
+src/content/docs/
+  CONTENT_INDEX.yml          # семантический индекс и карта перелинковки
+  index.mdx                  # главная страница
+  arrival/
+  move/
+  adaptation/
+  integration/
+  lifestyle/
+  med/
+  edu/
+  gov/
+  map/
+  tools/
+  about/
+  blog/
+```
+
+Статья обычно находится в папке с `index.mdx`:
+
+```text
+src/content/docs/arrival/boravak/index.mdx      -> https://rslive.ru/arrival/boravak/
+src/content/docs/move/visa/index.mdx            -> https://rslive.ru/move/visa/
+src/content/docs/integration/euprava/index.mdx  -> https://rslive.ru/integration/euprava/
+```
+
+Главная страница раздела также называется `index.mdx`:
 
 ```text
 src/content/docs/move/index.mdx -> https://rslive.ru/move/
 ```
 
+## Обновление существующей статьи
+
+1. Найдите страницу через файловую структуру и `CONTENT_INDEX.yml`.
+2. Прочитайте статью целиком, а не только изменяемый абзац.
+3. Проверьте соседние статьи на дублирование и возможную перелинковку.
+4. Сохраните тезис, структуру и полезные детали, если задача не требует полного переписывания.
+5. Обновите источники и даты проверки.
+6. Проверьте, не противоречит ли новое утверждение другим страницам.
+7. Если меняется смысл страницы, обновите `description`, ключевые слова и индекс.
+
+## Добавление новой статьи
+
+Создайте папку и файл по ожидаемому URL:
+
+```text
+src/content/docs/arrival/new-topic/index.mdx
+```
+
+Минимальный шаблон:
+
+```mdx
+---
+title: "Название статьи"
+description: "Короткое описание содержания страницы для поиска и превью."
+keywords: ["ключевая фраза 1", "ключевая фраза 2"]
+sourceCheckedAt: 2026-07-31
+---
+
+Коротко объясните, кому нужна эта статья и какой результат получит читатель.
+
+## Что нужно знать
+
+Основные правила, ограничения и условия.
+
+## Порядок действий
+
+<Steps>
+
+1. Выполните первый шаг.
+2. Подготовьте документы.
+3. Подайте заявление.
+4. Проверьте результат.
+
+</Steps>
+
+## Практические особенности
+
+Отдельно опишите различия между официальным порядком и наблюдаемой практикой.
+
+## Примечания
+
+[^1]: [Официальный источник](https://example.com)
+```
+
+После добавления страницы внесите её в `CONTENT_INDEX.yml` и добавьте ссылки из релевантных существующих статей.
+
 ## Frontmatter
 
-Every article needs frontmatter at the top. `title` is required; `description` is strongly recommended.
+Каждая статья должна начинаться с frontmatter. Поле `title` обязательно, `description` настоятельно рекомендуется.
 
 ```mdx
 ---
 title: "Визы и документы"
-description: "Краткое описание страницы для SEO и превью."
-keywords: ["виза в Сербию", "ВНЖ Сербия", "документы Сербия"]
+description: "Виды виз, правила въезда и документы для переезда в Сербию."
+keywords: ["виза в Сербию", "въезд в Сербию", "документы"]
+sourceCheckedAt: 2026-07-31
 ---
 ```
 
-Use `sidebar` when you need a custom label or order in the side menu:
+Поддерживаемые дополнительные поля:
+
+```yaml
+ogTitle: "Короткий заголовок для соцсетей"
+ogDescription: "Короткое описание для OG-карточки"
+author: "Автор"
+reviewedBy: "Проверяющий"
+sourceCheckedAt: 2026-07-31
+source: "описание или путь к исходному материалу"
+```
+
+`reviewedBy` может быть строкой или массивом.
+
+Для управления боковым меню:
 
 ```mdx
 ---
 title: "Контентные компоненты"
-description: "Примеры MDX-компонентов для статей."
+description: "Примеры компонентов, доступных в статьях."
 sidebar:
   label: "Компоненты"
   order: 60
 ---
 ```
 
-## Markdown and links
+Не добавляйте новое поле frontmatter без поддержки в схеме движка. Схема находится в `Antiokh/rslive.ru/astro/src/content.config.ts`.
 
-Use normal Markdown/MDX:
+## Markdown и MDX
+
+Используйте обычный Markdown и MDX:
 
 ```mdx
 ## Раздел
@@ -64,55 +238,172 @@ Use normal Markdown/MDX:
 - Пункт списка
 - Ещё пункт
 
-[^1]: Источник: https://example.com
+1. Первый шаг
+2. Второй шаг
 ```
 
-Internal links should be absolute site-root paths:
+Внутренние ссылки должны быть абсолютными путями от корня сайта и обычно заканчиваться `/`:
 
 ```mdx
 [боравак](/arrival/boravak/)
 ```
 
-Avoid Markdown autolinks in angle brackets, because MDX can parse them as JSX:
+Не используйте относительные переходы вроде `../boravak/`, если можно указать канонический маршрут.
+
+### Сноски
+
+Используйте цифровые Markdown-сноски:
 
 ```mdx
-<!-- Bad -->
-<http://onelink.to/q9p3q2>
+Утверждение, требующее подтверждения.[^1]
 
-<!-- Good -->
+[^1]: [Официальный источник](https://example.com)
+```
+
+Для нескольких источников:
+
+```mdx
+Требование установлено законом и официальной инструкцией.[^1][^2]
+
+[^1]: [Текст закона](https://example.com/law)
+[^2]: [Инструкция ведомства](https://example.com/instruction)
+```
+
+Не используйте именованные labels вместо цифровых `[^1]`, `[^2]` и далее.
+
+Ставьте сноску рядом с утверждением, которое она подтверждает. Не прикрепляйте одну ссылку ко всему разделу, если из неё не следует каждое утверждение раздела.
+
+### URL в угловых скобках
+
+MDX может принять Markdown-autolink за JSX.
+
+Плохо:
+
+```mdx
+<http://onelink.to/q9p3q2>
+```
+
+Правильно:
+
+```mdx
 [http://onelink.to/q9p3q2](http://onelink.to/q9p3q2)
 ```
 
-## Components available in MDX
+## `CONTENT_INDEX.yml`
 
-The main Astro project auto-imports common components. Do not add local imports for these in articles.
+[`src/content/docs/CONTENT_INDEX.yml`](src/content/docs/CONTENT_INDEX.yml) — семантическая карта сайта для поиска страниц и внутренней перелинковки.
 
-Starlight components:
+Типичная запись:
 
-```text
-Aside, Badge, Card, CardGrid, FileTree, Icon, LinkButton, LinkCard, Steps, Tabs, TabItem
+```yaml
+- url: /arrival/beli-karton/
+  title: "Белый картон: регистрация иностранца в Сербии"
+  tags: [боравак, регистрация, документ, адрес]
+  aliases: [белый картон, prijava boravka, регистрация иностранца]
+  link_when:
+    - нужно оформить регистрацию после приезда
+    - требуется подтверждение адреса
+  anchors: []
 ```
 
-RSLive components:
+Обновляйте индекс, когда:
+
+- добавлена или удалена страница;
+- изменён URL;
+- изменено название или основная тема статьи;
+- появились важные aliases или варианты терминов;
+- изменился контекст, в котором на страницу нужно ссылаться;
+- добавлен проверенный стабильный anchor.
+
+Не добавляйте anchor по памяти. Заголовок MDX и итоговый Astro ID могут различаться. Оставляйте `anchors: []`, пока anchor не проверен по собранной странице.
+
+`CONTENT_INDEX.yml` не заменяет ссылки в статьях. Он помогает находить правильные страницы, но фактическую перелинковку нужно добавлять в MDX.
+
+## Компоненты MDX
+
+Движок автоматически импортирует общие компоненты. Не добавляйте локальные `import` для перечисленных компонентов.
+
+### Starlight
 
 ```text
-Accordion, AccordionItem, ContentInclude, Countdown, DiasporaChart, EmbedFrame,
-MapEmbed, MermaidGraph, SanityTable, SmartTable, Spoiler, StructTable,
-SupabaseTable, UplatnicaGenerator, YouTube
+Aside, Badge, Card, CardGrid, FileTree, Icon, LinkButton, LinkCard,
+Steps, Tabs, TabItem
 ```
 
-Examples:
+### RSLive
+
+```text
+Accordion, AccordionItem, ContentInclude, Countdown, DiasporaChart,
+EmbedFrame, MapEmbed, MermaidGraph, SanityTable, SmartTable, Spoiler,
+StructTable, SupabaseTable, UplatnicaGenerator, YouTube
+```
+
+### Aside
 
 ```mdx
 <Aside type="tip" title="Совет">
-  Текст подсказки.
+
+Текст подсказки.
+
 </Aside>
+```
 
+Используйте `tip` для практического совета, `note` для пояснения и `caution` для существенного риска или ограничения.
+
+### Steps
+
+```mdx
 <Steps>
-1. Первый шаг.
-2. Второй шаг.
-</Steps>
 
+1. Подготовьте документы.
+2. Оплатите сбор.
+3. Подайте заявление.
+
+</Steps>
+```
+
+### Accordion
+
+```mdx
+<Accordion title="Частые вопросы">
+  <AccordionItem title="Нужна ли запись?">
+    Ответ с пояснением и источником.
+  </AccordionItem>
+  <AccordionItem title="Сколько длится процедура?">
+    Ответ.
+  </AccordionItem>
+</Accordion>
+```
+
+### Spoiler
+
+```mdx
+<Spoiler title="Показать подробности">
+  Скрытый дополнительный материал.
+</Spoiler>
+```
+
+### UplatnicaGenerator
+
+```mdx
+<UplatnicaGenerator
+  payer="Ваше имя и адрес"
+  subject="Название услуги или назначение платежа"
+  recipient={`Назив примаоца
+Адрес примаоца`}
+  code="153"
+  sum="11745.00"
+  account="840-1848-16"
+  model="97"
+  target="Позив на број"
+/>
+```
+
+Не публикуйте квитанцию как актуальную без проверки суммы, счёта, модели и позива на број по официальному источнику. Если реквизиты зависят от муниципалитета или заявителя, укажите это рядом с компонентом.
+
+### Медиа
+
+```mdx
 <YouTube id="NHkCfZjIEV4" title="Название видео" />
 
 <MapEmbed
@@ -120,30 +411,22 @@ Examples:
   title="Карта"
   caption="Описание карты"
 />
-
-<Spoiler title="Показать подробности">
-  Скрытый текст.
-</Spoiler>
-
-<Accordion title="Частые вопросы">
-  <AccordionItem title="Вопрос">
-    Ответ.
-  </AccordionItem>
-</Accordion>
 ```
 
-## Tables
+Перед добавлением внешнего embed проверьте, что он доступен без авторизации и не содержит секретных параметров.
 
-Small tables can be normal Markdown:
+## Таблицы
+
+Небольшие таблицы пишите обычным Markdown:
 
 ```mdx
 | Город | Адрес | Очередь |
 | --- | --- | ---: |
-| Белград | Bulevar Zorana Djindjica 64a | 18 |
-| Нови-Сад | Bulevar oslobodjenja 56a | 7 |
+| Белград | Bulevar Zorana Đinđića 64a | 18 |
+| Нови-Сад | Bulevar oslobođenja 56a | 7 |
 ```
 
-For filtering, sorting, long text, links, and icons, use `SmartTable`:
+Для фильтрации, сортировки, длинного текста, ссылок и иконок используйте `SmartTable`:
 
 ```mdx
 <SmartTable
@@ -158,21 +441,32 @@ For filtering, sorting, long text, links, and icons, use `SmartTable`:
     { key: 'website', label: 'Сайт', icon: 'website', iconOnly: true },
   ]}
   rows={[
-    { name: 'GTC', address: 'Bulevar Zorana Djindjica 64a', city: 'Beograd', queue: 18, website: 'https://example.com' },
+    {
+      name: 'GTC',
+      address: 'Bulevar Zorana Đinđića 64a',
+      city: 'Beograd',
+      queue: 18,
+      website: 'https://example.com',
+    },
   ]}
 />
 ```
 
-Supported `icon` values:
+Поддерживаемые значения `icon`:
 
 ```text
 telegram | whatsapp | website | facebook | email | link
 ```
 
-For managed data tables, use:
+Для управляемых таблиц используются:
 
 ```mdx
-<SanityTable tableId="banks_raiffeisen" title="Список подразделений Raiffeisen" limit={100} pageSize={25} />
+<SanityTable
+  tableId="banks_raiffeisen"
+  title="Список подразделений Raiffeisen"
+  limit={100}
+  pageSize={25}
+/>
 
 <SupabaseTable
   table="data_banks_raiffeisen"
@@ -186,9 +480,11 @@ For managed data tables, use:
 <StructTable schema="banks_raiffeisen" pageSize={25} />
 ```
 
-## DokuWiki syntax to remove
+Не угадывайте имя таблицы, schema или колонки. Проверьте реализацию компонента и источник данных в репозитории движка.
 
-MDX is stricter than DokuWiki. Replace old syntax before publishing:
+## Старый синтаксис
+
+Не добавляйте DokuWiki-синтаксис в новые или обновляемые статьи:
 
 ```text
 [[page:name|Текст]]
@@ -199,7 +495,7 @@ MDX is stricter than DokuWiki. Replace old syntax before publishing:
 <autott>...</autott>
 ```
 
-Use Markdown or components instead:
+Используйте Markdown или MDX-компоненты:
 
 ```mdx
 [Текст](/page/name/)
@@ -209,25 +505,114 @@ Use Markdown or components instead:
 </Spoiler>
 ```
 
-## Build check
+При встрече legacy-синтаксиса заменяйте только после проверки, что новая конструкция сохраняет смысл и поведение исходной вставки.
 
-The site is built from the main repository, not from this content repository:
+## Синхронизация и автодеплой
 
-```powershell
-cd D:\Git\rslive.ru\astro
-npm run build
-```
-
-Cloudflare Pages settings in the main repository:
+Основной поток публикации:
 
 ```text
-root directory: astro/
-build command: npm run build
-build output directory: dist
+push в Antiokh/rslive_content:main
+→ .github/workflows/notify-rslive-ru.yml
+→ repository_dispatch: rslive-content-updated
+→ Antiokh/rslive.ru/.github/workflows/sync-docs-from-rslive-content.yml
+→ rsync src/content/docs/ в astro/src/content/docs/
+→ коммит в Antiokh/rslive.ru:main
+→ Cloudflare Pages build
+→ статус rslive.ru / Cloudflare Pages на исходном контентном коммите
 ```
 
-## Sync notes
+Синхронизируется только:
 
-Only `src/content/docs` is mirrored with the private repository. Repository-level files such as `README.md`, `LICENSE`, `.gitignore`, and `.github/` stay at the root of `rslive_content`.
+```text
+rslive_content/src/content/docs/
+→ rslive.ru/astro/src/content/docs/
+```
 
-Sync commits include `[skip content-sync]`. This prevents the two repositories from triggering each other endlessly.
+Файлы уровня репозитория — `README.md`, `LICENSE`, `.gitignore`, `.github/` и другие — не копируются в движок.
+
+Синхронизационные коммиты содержат:
+
+```text
+[skip content-sync]
+```
+
+Маркер предотвращает бесконечный цикл между репозиториями. Не удаляйте эту проверку из workflow и не используйте маркер в обычных редакционных коммитах.
+
+Для синхронизации в обоих репозиториях используется Actions secret:
+
+```text
+RSLIVE_CONTENT_SYNC_TOKEN
+```
+
+Если публикация не произошла, проверьте:
+
+1. workflow `Notify rslive.ru about content changes` в этом репозитории;
+2. workflow `Sync docs from rslive_content` в `rslive.ru`;
+3. наличие и permissions `RSLIVE_CONTENT_SYNC_TOKEN`;
+4. commit status `rslive.ru / Cloudflare Pages`;
+5. лог Cloudflare Pages;
+6. MDX-ошибку в изменённой статье;
+7. конфликтующий push в `main` во время синхронизации.
+
+## Проверка сборки
+
+Этот репозиторий не содержит Astro-приложение и сам по себе не может выполнить полный production build.
+
+Обычная удалённая проверка выполняется автоматически после push через `rslive.ru` и Cloudflare Pages. Результат возвращается в исходный коммит как:
+
+```text
+rslive.ru / Cloudflare Pages
+```
+
+Для локальной полной проверки нужен приватный репозиторий движка. Если оба репозитория клонированы рядом:
+
+```bash
+rsync -a --delete \
+  ../rslive_content/src/content/docs/ \
+  ./astro/src/content/docs/
+
+cd astro
+npm ci
+npm run check
+```
+
+Не коммитьте результат локального копирования в зеркало движка как альтернативный редакционный поток.
+
+## Правила для агента
+
+1. Работайте с контентом в этом репозитории, а не в зеркале движка.
+2. Не меняйте маршрут страницы без проверки ссылок и необходимости редиректа в `rslive.ru`.
+3. Не удаляйте факты, источники и полезные детали только ради сокращения текста.
+4. Не добавляйте фактические или юридические утверждения без проверки.
+5. Не используйте один вторичный источник там, где доступен официальный.
+6. Не называйте практический опыт обязательным правилом.
+7. Не создавайте дублирующую статью до проверки `CONTENT_INDEX.yml` и соседних разделов.
+8. Не придумывайте component props. Найдите существующее использование или проверьте компонент в движке.
+9. При добавлении компонента движка обновите этот README или профильную документацию для авторов.
+10. При изменении страницы проверьте входящие и исходящие внутренние ссылки.
+11. При значимом обновлении фактов измените `sourceCheckedAt`.
+12. Перед завершением перечитайте diff целиком и убедитесь, что `CONTENT_INDEX.yml` остаётся актуальным.
+
+## Контрольный список перед merge или push в `main`
+
+- изменён правильный файл в `src/content/docs`;
+- `title` и `description` соответствуют содержанию;
+- фактические и юридические утверждения подтверждены;
+- официальные источники имеют приоритет;
+- суммы, сроки и процедуры датированы или проверены;
+- сноски цифровые и стоят рядом с утверждениями;
+- внутренние ссылки ведут на существующие канонические маршруты;
+- `CONTENT_INDEX.yml` обновлён при необходимости;
+- MDX не содержит autolink в угловых скобках;
+- legacy DokuWiki-синтаксис не добавлен;
+- component props проверены по существующим примерам или коду движка;
+- новая страница связана с соседними статьями;
+- после push получен результат `rslive.ru / Cloudflare Pages`.
+
+## Связанная документация
+
+- [`CONTENT_INDEX.yml`](src/content/docs/CONTENT_INDEX.yml) — карта страниц и перелинковки;
+- [`Antiokh/rslive.ru/README.md`](https://github.com/Antiokh/rslive.ru/blob/main/README.md) — стартовая документация движка;
+- [`Antiokh/rslive.ru/astro/CUSTOMIZATION_INVENTORY.md`](https://github.com/Antiokh/rslive.ru/blob/main/astro/CUSTOMIZATION_INVENTORY.md) — компоненты и кастомизации;
+- [`Antiokh/rslive.ru/docs/content-sync.md`](https://github.com/Antiokh/rslive.ru/blob/main/docs/content-sync.md) — техническая схема синхронизации.
