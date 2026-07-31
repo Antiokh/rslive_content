@@ -1,0 +1,58 @@
+name: Apply live frontmatter
+
+on:
+  push:
+    branches:
+      - agent/live-frontmatter
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Migrate metadata and verify published URLs
+        id: migrate
+        continue-on-error: true
+        run: |
+          set +e
+          node .github/scripts/apply-live-frontmatter.mjs > /tmp/live-frontmatter.log 2>&1
+          status=$?
+          cat /tmp/live-frontmatter.log
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          if [ "$status" -ne 0 ]; then
+            cp /tmp/live-frontmatter.log LIVE_FRONTMATTER_FAILURES.txt
+          fi
+
+      - name: Save failure report
+        if: steps.migrate.outputs.status != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add LIVE_FRONTMATTER_FAILURES.txt
+          git diff --cached --quiet || git commit -m "Report live metadata migration failure"
+          git push
+          exit 1
+
+      - name: Remove temporary migration files
+        if: steps.migrate.outputs.status == '0'
+        run: |
+          rm .github/workflows/apply-live-frontmatter.yml
+          rm .github/scripts/apply-live-frontmatter.mjs
+          rm -f LIVE_FRONTMATTER_FAILURES.txt
+
+      - name: Commit refreshed migration
+        if: steps.migrate.outputs.status == '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Replace source metadata with live URLs"
+          git push
