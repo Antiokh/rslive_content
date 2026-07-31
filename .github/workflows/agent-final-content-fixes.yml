@@ -1,0 +1,67 @@
+name: Agent final content fixes
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - synchronize
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agent-final-content-fixes
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out cleanup branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/cleanup-content-syntax-v2
+
+      - name: Apply exact manual fixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          intro = Path('src/content/docs/intro/index.mdx')
+          text = intro.read_text(encoding='utf-8')
+          old = 'а также изложена из собственного опыта [Список источников](/sources/).'
+          new = 'а также изложена из собственного опыта. См. [список источников](/sources/).'
+          if old not in text:
+              raise SystemExit('Expected intro fragment not found')
+          intro.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          prevoz = Path('src/content/docs/arrival/prevoz/index.mdx')
+          text = prevoz.read_text(encoding='utf-8')
+          replacements = {
+              '[^1]: Мобильное приложение nSmart для Android': '[^1]: [Мобильное приложение nSmart для Android](https://play.google.com/store/apps/details?id=buslogic.nsmartapp)',
+              '[^2]: Мобильное приложение nSmart для iOS': '[^2]: [Мобильное приложение nSmart для iOS](https://apps.apple.com/rs/app/nsmart-jgsp-novi-sad/id1557928546)',
+              '[^3]: Мобильное приложение Srbija Voz для Android': '[^3]: [Мобильное приложение Srbija Voz для Android](https://play.google.com/store/apps/details?id=com.srbijavoz.app)',
+              '[^4]: Мобильное приложение Srbija Voz для iOS': '[^4]: [Мобильное приложение Srbija Voz для iOS](https://apps.apple.com/rs/app/srbija-voz/id1600735042)',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'Expected transport fragment not found: {old}')
+              text = text.replace(old, new, 1)
+          prevoz.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit final fixes
+        run: |
+          set -euo pipefail
+          git config user.name "rslive content cleanup"
+          git config user.email "actions@github.com"
+          if [ -z "$(git status --porcelain -- src/content/docs)" ]; then
+            echo "No changes."
+            exit 0
+          fi
+          git add src/content/docs
+          git diff --cached --check
+          git commit -m "Polish cleaned content references"
+          git push
