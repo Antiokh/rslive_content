@@ -1,0 +1,57 @@
+name: Agent content cleanup
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - synchronize
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agent-content-cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out cleanup branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/cleanup-content-syntax
+
+      - name: Normalize and audit content
+        id: cleanup
+        shell: bash
+        run: |
+          set +e
+          node scripts/agent-content-cleanup.mjs --write
+          status=$?
+          set -e
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Commit cleanup changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "rslive content cleanup"
+          git config user.email "actions@github.com"
+
+          if [ -z "$(git status --porcelain -- src/content/docs)" ]; then
+            echo "No content changes."
+            exit 0
+          fi
+
+          git add src/content/docs
+          git diff --cached --check
+          git commit -m "Clean legacy content syntax [skip agent-cleanup]"
+          git push
+
+      - name: Fail on unresolved findings
+        if: steps.cleanup.outputs.status != '0'
+        shell: bash
+        run: exit 1
