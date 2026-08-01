@@ -1,84 +1,135 @@
 ---
 title: "Схема миграции в Сербию"
-description: "Навигационная схема основных этапов переезда, адаптации и интеграции в Сербии."
+description: "Навигационная схема основных этапов переезда, легализации, адаптации и долгосрочной жизни в Сербии."
 live: "https://rslive.ru/graph/"
 ---
 
+Схема связывает основные процедуры в последовательные маршруты. Для детальных условий и документов переходите в соответствующую статью.
+
 <MermaidGraph
-  code={`graph TD
-    A["Подготовка к переезду"] --> B1["Подготовка документов"]
-    B1 --> B2["Сделать карту UnionPay"]
-    B2 --> B3["Сделать Шенген"]
-    B3 --> B4["Купить билет на самолёт"]
-    B4 --> B5["Забронировать гостиницу"]
-    B5 --> B6["Аренда авто"]
+  code={`flowchart TD
+    subgraph PREP["Подготовка к переезду"]
+      P0["Общий план"] --> P1["Виза и въезд"]
+      P0 --> P2["Жильё и аренда"]
+      P0 --> P3["Легализация документов"]
+      P0 --> P4["Финансы и переводы"]
+      P0 --> P5["Маршрут в Сербию"]
+    end
 
-    C["Первые шаги"] --> D1["После прилёта"]
-    D1 --> D2["Купить сим-карту"]
-    D2 --> D3["Заказать такси"]
-    D3 --> D4["Общественный транспорт"]
-    D4 --> D5["Открыть карту"]
-    D5 --> D6["Оформить ДМС"]
-    D6 --> D7["Перевод денег"]
+    subgraph ARRIVAL["Первые дни после приезда"]
+      A0["Первые шаги"] --> A1["Белый картон"]
+      A1 --> A2["Регистрация через eUprava"]
+      A0 --> A3["Банковский счёт"]
+      A0 --> A4["Медицинская страховка"]
+      A1 --> A5["Временное пребывание"]
+    end
 
-    E["Адаптация"] --> F1["Поиск квартиры"]
-    F1 --> F2["Купить продукты"]
-    F2 --> F3["Открытие бизнеса"]
-    F3 --> F4["Визаран"]
-    F4 --> F5["Документы на РВП"]
-    F5 --> F6["Сербский язык"]
-    F6 --> F7["Замена прав"]
+    subgraph STATUS["Легализация и долгосрочный статус"]
+      S0["РВП и единое разрешение"] --> S1["Смена адреса при РВП"]
+      S0 --> S2["Постоянное проживание"]
+      S2 --> S3["Смена адреса при ПМЖ"]
+      S2 --> S4["Гражданство и паспорт"]
+      S0 --> S5["Недвижимость"]
+      S2 --> S6["Визы в другие страны"]
+      S2 --> S7["Социальная поддержка"]
+    end
 
-    G["Интеграция"] --> H1["Продление РВП"]
-    H1 --> H2["Резидентский счёт"]
-    H2 --> H3["Покупка машины"]
-    H3 --> H4["Визы из Сербии"]
-    H4 --> H5["Получение ПМЖ"]
-    H5 --> H6["Получение гражданства"]
+    subgraph DIGITAL["Госуслуги и налоги"]
+      G0["Государство и бюрократия"] --> G1["eUprava"]
+      G0 --> G2["Налоги и пошлины"]
+      G2 --> G3["ePorezi"]
+      G2 --> G4["Экологический сбор"]
+      G2 --> G5["Переплата и ошибочный платёж"]
+    end
 
-    I["Дети"] --> J1["Рождение детей"]
-    J1 --> J2["Детские сады"]
-    J2 --> J3["Среднее образование"]
-    J3 --> J4["Высшее образование"]
+    subgraph BUSINESS["Работа и бизнес"]
+      B0["Бизнес в Сербии"] --> B1["Налоги бизнеса"]
+      B0 --> B2["Инвестиции"]
+      B0 --> B3["Закрытие предпринимателя"]
+      B3 --> G4
+      B3 --> G5
+    end
 
-    click A "/move/"
-    click B1 "/move/visa/"
-    click B2 "/move/finance/"
-    click B3 "/move/travel/"
-    click B4 "/move/travel/"
-    click B5 "/move/travel/"
-    click B6 "/arrival/rentacar/"
+    subgraph HEALTH["Медицина и семья"]
+      M0["Медицина"] --> M1["Русскоязычные врачи"]
+      M1 --> M2["Фразы для врача"]
+      M0 --> M3["Лекарства и рецепты"]
+      M0 --> M4["ДМС DDOR"]
+      M0 --> F0["Рождение ребёнка"]
+      F0 --> F1["Ведение беременности"]
+      F0 --> F2["Подготовка к родам"]
+      F0 --> F3["Роддом и экстренная помощь"]
+      F0 --> F4["Декрет и выплаты"]
+      F0 --> F5["Документы после родов"]
+      F0 --> F6["Уход за ребёнком"]
+      F5 --> E0["Образование"]
+    end
 
-    click C "/arrival/"
-    click D1 "/arrival/beli-karton/"
-    click D2 "/arrival/mobile/"
-    click D3 "/arrival/prevoz/"
-    click D4 "/arrival/prevoz/"
-    click D5 "/arrival/banks/"
-    click D6 "/arrival/zdravlje/"
-    click D7 "/move/finance/"
+    PREP --> ARRIVAL
+    ARRIVAL --> STATUS
+    A2 --> G1
+    A3 --> P4
+    A4 --> M0
+    S0 --> G1
+    S0 --> G0
+    S0 --> B0
+    S2 --> G0
 
-    click E "/adaptation/"
-    click F1 "/move/housing/"
-    click F2 "/arrival/shops/"
-    click F3 "/arrival/business/"
-    click F4 "/arrival/visarun/"
-    click F5 "/arrival/boravak/"
-    click F6 "/adaptation/srpski/"
-    click F7 "/integration/driver_license/"
+    click P0 "/move/prepare/"
+    click P1 "/move/visa/"
+    click P2 "/move/housing/"
+    click P3 "/move/legal/"
+    click P4 "/move/finance/"
+    click P5 "/move/travel/"
 
-    click G "/integration/"
-    click H1 "/arrival/boravak/"
-    click H2 "/arrival/banks/"
-    click H3 "/drive/buy/"
-    click H4 "/integration/visas/"
-    click H5 "/integration/stalni/"
-    click H6 "/integration/passport/"
+    click A0 "/arrival/"
+    click A1 "/arrival/beli-karton/"
+    click A2 "/integration/prijavastranca/"
+    click A3 "/arrival/bank/"
+    click A4 "/arrival/zdravlje/"
+    click A5 "/arrival/boravak/"
 
-    click I "/children/"
-    click J1 "/children/birth/"
-    click J2 "/children/kindergarten/"
-    click J3 "/children/school/"
-    click J4 "/children/university/"
+    click S0 "/arrival/boravak/"
+    click S1 "/arrival/boravak/change-address/"
+    click S2 "/integration/stalni/"
+    click S3 "/integration/stalni/change-address/"
+    click S4 "/integration/passport/"
+    click S5 "/integration/properties/"
+    click S6 "/integration/visas/"
+    click S7 "/integration/social/"
+
+    click G0 "/gov/"
+    click G1 "/integration/euprava/"
+    click G2 "/gov/taxes/"
+    click G3 "/gov/taxes/eporezi/"
+    click G4 "/gov/taxes/eco/"
+    click G5 "/gov/taxes/overpayment/"
+
+    click B0 "/arrival/business/"
+    click B1 "/gov/taxes/"
+    click B2 "/integration/investment/"
+    click B3 "/arrival/business/close/"
+
+    click M0 "/med/"
+    click M1 "/med/doctors/"
+    click M2 "/med/doctors/phrases/"
+    click M3 "/med/medications/"
+    click M4 "/med/ddor/"
+    click F0 "/adaptation/birth/"
+    click F1 "/adaptation/birth/med/"
+    click F2 "/adaptation/birth/prepare/"
+    click F3 "/adaptation/birth/clinics/"
+    click F4 "/adaptation/birth/maternity/"
+    click F5 "/adaptation/birth/after/"
+    click F6 "/adaptation/birth/care/"
+    click E0 "/edu/"
   `}
 />
+
+## Ключевые маршруты
+
+- [Подготовка к переезду](/move/prepare/) → [первые шаги после приезда](/arrival/) → [РВП и единое разрешение](/arrival/boravak/) → [постоянное проживание](/integration/stalni/) → [гражданство](/integration/passport/).
+- [Белый картон](/arrival/beli-karton/) → [онлайн-регистрация иностранца](/integration/prijavastranca/) → [смена адреса при РВП](/arrival/boravak/change-address/) или [при постоянном проживании](/integration/stalni/change-address/).
+- [eUprava](/integration/euprava/) → [налоги и пошлины](/gov/taxes/) → [ePorezi](/gov/taxes/eporezi/) → [исправление ошибочного платежа](/gov/taxes/overpayment/).
+- [Бизнес в Сербии](/arrival/business/) → [налоговые процедуры](/gov/taxes/) → [закрытие предпринимателя](/arrival/business/close/).
+- [Медицина](/med/) → [страхование](/arrival/zdravlje/) → [рождение ребёнка](/adaptation/birth/) → [образование](/edu/).
