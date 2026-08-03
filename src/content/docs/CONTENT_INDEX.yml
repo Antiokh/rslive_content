@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-07-31
+# Last updated: 2026-08-03
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -540,10 +540,38 @@ pages:
   - url: /lifestyle/history/
     title: История Сербии
     tags: [история, сербия, балканы, война, культура]
-    aliases: [история, исторические события]
+    aliases: [история, исторические события, история Сербии]
     link_when:
       - интересуешься историей
-      - хочешь понять контекст
+      - хочешь понять сербскую историческую память
+    anchors: []
+
+  - url: /lifestyle/history/raska/
+    title: Добро пожаловать в «Рашку»
+    tags: [история, культура, Рашка, Raška, эмиграция, общение]
+    aliases: [Рашка, Raška, русская Рашка, опасные шутки, культурные ошибки]
+    link_when:
+      - нужно объяснить значение слова Рашка в Сербии
+      - эмигрант обсуждает чувствительные исторические темы
+      - нужна практическая памятка о культурных конфликтах
+    anchors: []
+
+  - url: /lifestyle/history/yugoslavia/
+    title: Югославия и её распад
+    tags: [история, Югославия, распад, войны, сербская память]
+    aliases: [Югославия, распад Югославии, СФРЮ, Тито]
+    link_when:
+      - нужно понять сербский взгляд на распад Югославии
+      - обсуждаются войны и беженцы 1990-х годов
+    anchors: []
+
+  - url: /lifestyle/history/nato/
+    title: Бомбардировки Югославии НАТО (1999)
+    tags: [история, НАТО, 1999, бомбардировки, Косово, память]
+    aliases: [НАТО 1999, бомбардировки Сербии, бомбардировки Югославии]
+    link_when:
+      - нужно понять отношение сербов к НАТО
+      - обсуждаются бомбардировки 1999 года
     anchors: []
 
   - url: /lifestyle/history/srebrenica/
