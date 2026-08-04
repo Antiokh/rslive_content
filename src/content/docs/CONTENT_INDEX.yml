@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-03
+# Last updated: 2026-08-04
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -843,6 +843,70 @@ pages:
       - потеряна или украдена карточка РВП
       - нужно различить РВП, ВНЖ и ПМЖ
       - нужно выбрать основание для проживания
+    anchors: []
+
+  - url: /arrival/boravak/volontiranje/
+    title: РВП по волонтёрству
+    tags: [волонтёрство, РВП, организатор, договор, иностранцы, ESC]
+    aliases: [РВП по волонтёрству, volontiranje, волонтёрская виза, волонтёрские организации Сербии]
+    link_when:
+      - нужно оформить визу D или РВП по волонтёрству
+      - нужно проверить организатора и договор
+      - нужно сравнить волонтёрские программы в Сербии
+    anchors: []
+
+  - url: /arrival/boravak/volontiranje/nof/
+    title: 'Novosadski omladinski forum: волонтёрские программы'
+    tags: [волонтёрство, РВП, NOF, Нови-Сад, молодёжь, организатор]
+    aliases: [Novosadski omladinski forum, NOF, Volonterski klub NOF]
+    link_when:
+      - нужно проверить NOF как организатора волонтёрства
+      - нужна волонтёрская программа в Нови-Саде
+    anchors: []
+
+  - url: /arrival/boravak/volontiranje/caritas-sabac/
+    title: 'Caritas Šabac: волонтёрские программы'
+    tags: [волонтёрство, РВП, Caritas, Шабац, Caschi bianchi, гуманитарная помощь]
+    aliases: [Caritas Šabac, Каритас Шабац, Caschi bianchi]
+    link_when:
+      - нужно проверить Caritas Šabac как организатора волонтёрства
+      - нужна годовая гуманитарная программа в Шабаце
+    anchors: []
+
+  - url: /arrival/boravak/volontiranje/mladi-istrazivaci-srbije/
+    title: 'Mladi istraživači Srbije: долгосрочное волонтёрство'
+    tags: [волонтёрство, РВП, MIS, VSS, ESC, международные программы]
+    aliases: [Mladi istraživači Srbije, Volonterski servis Srbije, MIS, VSS]
+    link_when:
+      - нужна международная или долгосрочная волонтёрская программа
+      - нужно проверить знак качества ESC организации
+    anchors: []
+
+  - url: /arrival/boravak/volontiranje/volonterski-centar-vojvodine/
+    title: 'Volonterski centar Vojvodine: международное волонтёрство'
+    tags: [волонтёрство, РВП, VCV, SCI, ESC, Нови-Сад]
+    aliases: [Volonterski centar Vojvodine, VCV, SCI Serbia]
+    link_when:
+      - нужна программа SCI или ESC в Сербии
+      - нужно проверить Volonterski centar Vojvodine
+    anchors: []
+
+  - url: /arrival/boravak/volontiranje/adra-serbia/
+    title: 'ADRA Serbia: волонтёрские программы'
+    tags: [волонтёрство, РВП, ADRA, ESC, гуманитарная помощь, Белград]
+    aliases: [ADRA Serbia, ADRA Сербия, ADRA Beograd]
+    link_when:
+      - нужна долгосрочная гуманитарная программа ESC
+      - нужно определить юридическое лицо ADRA в договоре
+    anchors: []
+
+  - url: /arrival/boravak/volontiranje/udruzenje-svetlost/
+    title: 'Udruženje Svetlost: волонтёрские программы'
+    tags: [волонтёрство, РВП, Svetlost, ESC, Шабац, молодёжь]
+    aliases: [Udruženje Svetlost, Svetlost Šabac, NVO Svetlost]
+    link_when:
+      - нужна долгосрочная программа ESC в Шабаце
+      - нужно проверить Udruženje Svetlost
     anchors: []
 
   - url: /arrival/boravak/volontiranje/russian-diaspora/
