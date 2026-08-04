@@ -188,7 +188,7 @@ live: "https://rslive.ru/arrival/new-topic/"
 
 ## Frontmatter
 
-Каждая статья должна начинаться с frontmatter. Поля `title` и `live` обязательны, `description` настоятельно рекомендуется.
+Каждая статья должна начинаться с frontmatter. Поле `title` обязательно по схеме. Для новых и существенно переработанных публичных страниц также указывайте `description` и канонический URL `live`.
 
 `live` содержит абсолютный канонический URL опубликованной страницы на `https://rslive.ru`. Значение выводится из пути файла: `src/content/docs/index.mdx` соответствует `https://rslive.ru/`, а `src/content/docs/arrival/boravak/index.mdx` — `https://rslive.ru/arrival/boravak/`. Для файлов не с именем `index.mdx` используйте маршрут с именем файла без расширения и завершающим `/`.
 
@@ -197,7 +197,11 @@ live: "https://rslive.ru/arrival/new-topic/"
 ```mdx
 ---
 title: "Визы и документы"
+seoTitle: "Визы в Сербию: виды, правила въезда и документы"
 description: "Виды виз, правила въезда и документы для переезда в Сербию."
+ogTitle: "Визы и документы для въезда в Сербию"
+ogDescription: "Какая виза нужна, как подготовить документы и проверить условия въезда."
+ogSticker: passport
 keywords: ["виза в Сербию", "въезд в Сербию", "документы"]
 sourceCheckedAt: 2026-07-31
 live: "https://rslive.ru/move/visa/"
@@ -207,15 +211,20 @@ live: "https://rslive.ru/move/visa/"
 Поддерживаемые дополнительные поля:
 
 ```yaml
+seoTitle: "Отдельный заголовок для поисковой выдачи"
 ogTitle: "Короткий заголовок для соцсетей"
 ogDescription: "Короткое описание для OG-карточки"
+ogSticker: passport
 author: "Автор"
 reviewedBy: "Проверяющий"
 sourceCheckedAt: 2026-07-31
 live: "https://rslive.ru/arrival/boravak/"
 ```
 
-`reviewedBy` может быть строкой или массивом.
+- `seoTitle` позволяет задать SEO-заголовок, не меняя видимый `title` статьи.
+- `ogTitle` и `ogDescription` переопределяют текст сгенерированной Open Graph-карточки; без них используются `title` и `description`.
+- `ogSticker` задаёт стикер для широкой Open Graph-карточки. Указывайте техническое английское имя без `.svg` или `.png`; доступные значения собраны на странице [/about/stickers/](/about/stickers/).
+- `reviewedBy` может быть строкой или массивом.
 
 Для управления боковым меню:
 
@@ -340,8 +349,8 @@ Steps, Tabs, TabItem
 
 ```text
 Accordion, AccordionItem, ContentInclude, Countdown, DiasporaChart,
-EmbedFrame, MapEmbed, MermaidGraph, SanityTable, SmartTable, Spoiler,
-StructTable, SupabaseTable, UplatnicaGenerator, YouTube
+EmbedFrame, MapEmbed, MermaidGraph, SanityTable, SmartTable, StickerGallery,
+Spoiler, StructTable, SupabaseTable, UplatnicaGenerator, YouTube
 ```
 
 ### Aside
