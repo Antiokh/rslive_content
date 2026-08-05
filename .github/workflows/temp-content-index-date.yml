@@ -1,0 +1,32 @@
+name: Update content index date
+
+on:
+  push:
+    branches:
+      - agent/travel-section
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/travel-section
+          fetch-depth: 0
+      - run: |
+          python <<'PY'
+          from pathlib import Path
+          path = Path('src/content/docs/CONTENT_INDEX.yml')
+          text = path.read_text().replace('# Last updated: 2026-08-04', '# Last updated: 2026-08-05', 1)
+          path.write_text(text)
+          PY
+          rm .github/workflows/temp-content-index-date.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Обновить индекс путешествий"
+          git push origin HEAD:agent/travel-section
