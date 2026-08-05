@@ -14,9 +14,18 @@
 
 <!-- Перечислите используемые или изменённые MDX-компоненты. Подтвердите, что props сверены с Antiokh/rslive.ru. -->
 
+## Атрибуция
+
+- [ ] Автор каждого коммита — реальный участник, а его email связан с аккаунтом GitHub.
+- [ ] AI-сервисы, модели и агенты не указаны в `Author`, `Committer`, `Co-Authored-By`, `Signed-off-by` или других trailers авторства.
+- [ ] Человеческие соавторы указаны корректно и с их согласия.
+- [ ] Использование AI-инструмента, если это существенно, описано здесь в тексте PR, а не в metadata коммита.
+
+Правила: [`docs/CONTRIBUTOR_ATTRIBUTION.md`](../docs/CONTRIBUTOR_ATTRIBUTION.md).
+
 ## Проверка
 
-- [ ] Прочитаны `AGENTS.md`, `PROJECT_CONTEXT.md` и `CONTRIBUTING.md`.
+- [ ] Прочитаны `AGENTS.md`, `PROJECT_CONTEXT.md`, `CONTRIBUTING.md` и `docs/CONTRIBUTOR_ATTRIBUTION.md`.
 - [ ] Изменены только относящиеся к задаче файлы.
 - [ ] Перед записью получены актуальные версии изменяемых файлов.
 - [ ] Frontmatter корректен; `title` и `description` соответствуют статье.
