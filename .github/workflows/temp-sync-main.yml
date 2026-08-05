@@ -1,0 +1,28 @@
+name: Sync travel branch with main
+
+on:
+  push:
+    branches:
+      - agent/travel-section
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/travel-section
+          fetch-depth: 0
+      - run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git fetch origin main
+          git merge --no-edit origin/main
+          rm .github/workflows/temp-sync-main.yml
+          git add -A
+          git commit -m "Удалить временный workflow" || true
+          git push origin HEAD:agent/travel-section
