@@ -1,0 +1,50 @@
+name: Temporary remove default OG stickers
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  remove-default-stickers:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/remove-default-og-stickers
+          fetch-depth: 0
+
+      - name: Remove explicit fallback stickers
+        shell: python
+        run: |
+          from pathlib import Path
+
+          files = [
+              "src/content/docs/adaptation/birth/index.mdx",
+              "src/content/docs/adaptation/birth/care/index.mdx",
+              "src/content/docs/adaptation/psy/index.mdx",
+              "src/content/docs/children/birth/index.mdx",
+          ]
+
+          marker = "ogSticker: giant-book\n"
+          for filename in files:
+              path = Path(filename)
+              text = path.read_text(encoding="utf-8")
+              count = text.count(marker)
+              if count != 1:
+                  raise RuntimeError(f"{filename}: expected one explicit fallback, found {count}")
+              path.write_text(text.replace(marker, "", 1), encoding="utf-8")
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/docs
+          git diff --cached --check
+          git commit -m "Remove explicit fallback OG stickers"
+          git push origin HEAD:agent/remove-default-og-stickers
