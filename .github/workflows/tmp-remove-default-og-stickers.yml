@@ -1,6 +1,9 @@
 name: Temporary remove default OG stickers
 
 on:
+  push:
+    branches:
+      - agent/remove-default-og-stickers
   pull_request:
     branches:
       - main
