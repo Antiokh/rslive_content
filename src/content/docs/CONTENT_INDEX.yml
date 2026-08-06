@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-05
+# Last updated: 2026-08-06
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -1017,6 +1017,16 @@ pages:
       - нужно выбрать налоговый портал или процедуру
       - нужно проверить или оплатить налоги
       - нужны сведения о госпошлинах и местных сборах
+    anchors: []
+
+  - url: /gov/taxes/residency/
+    title: Подтверждение налогового резидентства Сербии
+    tags: [налоговое резидентство, ПОР-1, POR-1, Poreska uprava, двойное налогообложение]
+    aliases: [сертификат налогового резидентства Сербии, подтверждение резидентства Сербии, potvrda o rezidentnosti]
+    link_when:
+      - иностранный плательщик просит сертификат налогового резидентства Сербии
+      - нужно применить соглашение об избежании двойного налогообложения
+      - нужно получить ПОР-1 через Пореску управу
     anchors: []
 
   - url: /gov/taxes/borovak/
