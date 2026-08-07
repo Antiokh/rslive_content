@@ -71,6 +71,15 @@ pages:
       - нерезидент без работы
       - нужны комиссии и условия
     anchors: []
+  - url: /arrival/bank/adriatic/
+    title: Adriatic Banka
+    tags: [банк, adriatic, счёт, нерезидент, без РВП, SEPA, финансы]
+    aliases: [adriatic banka, адриатик банка]
+    link_when:
+      - нужен счёт без РВП
+      - выбираешь банк для нерезидента
+      - нужны SEPA и международные переводы
+    anchors: []
   - url: /arrival/bank/alta/
     title: Alta Banka
     tags: [банк, alta, счёт, нерезидент, финансы]
