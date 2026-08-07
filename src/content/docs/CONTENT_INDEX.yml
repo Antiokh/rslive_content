@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-06
+# Last updated: 2026-08-07
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -70,6 +70,15 @@ pages:
       - выбираешь где открыть счёт
       - нерезидент без работы
       - нужны комиссии и условия
+    anchors: []
+  - url: /arrival/bank/adriatic/
+    title: Adriatic Banka
+    tags: [банк, adriatic, счёт, нерезидент, без РВП, SEPA, финансы]
+    aliases: [adriatic banka, адриатик банка]
+    link_when:
+      - нужен счёт без РВП
+      - выбираешь банк для нерезидента
+      - нужны SEPA и международные переводы
     anchors: []
   - url: /arrival/bank/alta/
     title: Alta Banka
