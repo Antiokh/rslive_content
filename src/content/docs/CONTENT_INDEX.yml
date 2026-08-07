@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-06
+# Last updated: 2026-08-07
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -621,6 +621,16 @@ pages:
     link_when:
       - ищешь что делать в свободное время
       - хочешь развлечься
+    anchors: []
+
+  - url: /lifestyle/fun/pools/
+    title: Бесплатные бассейны в Белграде
+    tags: [бассейн, Белград, досуг, бесплатно, prebivalište, ПМЖ]
+    aliases: [бесплатные бассейны Белграда, бесплатный бассейн, besplatni bazeni Beograd, kartica za bazen]
+    link_when:
+      - нужен бесплатный бассейн в Белграде
+      - нужно получить сезонную карту на городские бассейны
+      - нужно проверить доступность программы при РВП или ПМЖ
     anchors: []
 
   - url: /lifestyle/fun/dance/
