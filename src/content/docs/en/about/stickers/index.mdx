@@ -1,0 +1,82 @@
+---
+title: "RSLive stickers"
+description: "The pig mascot sticker pack: where to install it, how the illustrations are used on RSLive and how technical sticker names work."
+ogSticker: petar
+live: "https://rslive.ru/en/about/stickers/"
+---
+
+The pig holding a sign is the mascot of RSLive. A long-standing visual idea grew into sticker packs about Serbia and **Petar Otišić**: everyday situations, documents, transport, food, holidays and Serbian expressions.
+
+<LinkButton href="https://t.me/addstickers/rslive_tg" icon="external">
+  Add the sticker pack to Telegram
+</LinkButton>
+
+## Why there is a pig in the logo
+
+The RSLive mascot is called **Petar Otišić**. His ancestor is Pig Peter (*Поросёнок Пётр*), the character from books by Lyudmila Petrushevskaya illustrated by Alexander Reichstein. Three books about his adventures were published in 2002. Reichstein had moved to Finland in 1990, and the story of a travelling pig later acquired a second life in Russian internet culture as an image of leaving, migration and self-irony.
+
+![Cover of the original children's book about Pig Peter](/media/user/petr_cover.webp)
+
+### From a children's book to an emigration meme
+
+In the mid-2000s Pig Peter spread through Russian internet forums. Parody books, poems, a song and later an animated adaptation followed. The pig travelling on a tractor became particularly recognisable and was used by emigrant communities and in jokes about the Russian expression roughly meaning “time to get out”.
+
+That is why the character works on two levels: it is a funny children's-book pig, but for part of the Russian-speaking internet it is also an ironic image of somebody deciding to leave a familiar environment and start elsewhere.
+
+![Pig Peter sets off on a journey](/media/user/porosyata_s_ebyvayut.webp)
+
+### A new life in Serbia
+
+RSLive imagined that Peter's journey could have continued to Serbia and gave him a Serbian name: **Petar Otišić**. An early version kept the tractor from the well-known meme. After consultation with Serbian readers, the tractor was replaced by an aeroplane: a red tractor in Serbia has a strong association with the 1995 Operation Oluja and therefore carries a very different historical meaning from the Russian meme.
+
+Petar consequently became a symbol not only of departure but of arrival and a new beginning. His visual descendants remain in the RSLive identity and have grown into a larger sticker collection.
+
+For a fuller explanation of the character, see [Pig Peter and the RSLive mascot](/en/pig-peter/).
+
+## What the collection contains
+
+The stickers cover administrative and everyday topics: passports and residence documents, housing, work, public transport, travel, medicine, food, holidays and common situations in Serbia. Most stickers exist as SVG and prepared PNG files.
+
+The Telegram set is called **«Инструкция по Сербии (rslive.ru)»**. The gallery below contains the stickers that are also available to the site's Open Graph image generator. Internal service illustrations are not included.
+
+Each entry has two identifiers:
+
+- a **human-readable title**, describing the scene or purpose of the illustration;
+- a **technical English name**, used as the `ogSticker` value in article frontmatter.
+
+For example, to use the passport illustration on an Open Graph card:
+
+```yaml
+ogSticker: passport
+```
+
+Copy the technical name exactly and omit `.svg` or `.png`.
+
+The source files are available in the [public content repository](https://github.com/Antiokh/rslive_content/tree/main/src/content/docs/about/stickers/assets). Most stickers have both PNG and SVG sources; `pig-in-bushes` is retained only as PNG.
+
+<StickerGallery />
+
+## Where to install the stickers
+
+- [Telegram: «Инструкция по Сербии (rslive.ru)»](https://t.me/addstickers/rslive_tg)
+- [Viber: part 1](https://stickers.viber.com/pages/custom-sticker-packs/11f01aea1b139edc8ca2edf0ebc6f9c9fa9a3732a156fc52)
+- [Viber: part 2](https://stickers.viber.com/pages/custom-sticker-packs/11f01aeaf4d85f4a9cc991a8e2f2ba35025b96f1f51e748e)
+- [Viber: part 3](https://stickers.viber.com/pages/custom-sticker-packs/11f01aeba0e94236b955a9ce031f1f72c9a266a2bad98542)
+
+The Viber collection had to be split because of the platform's limit on the number of stickers in one pack. Pig-head stickers with numbers identify the corresponding Viber part and are not part of the Open Graph catalogue above.
+
+A separate Facebook sticker pack could not be added. Third-party applications can import Telegram stickers into WhatsApp, but RSLive does not currently maintain an official WhatsApp pack.
+
+The first public announcement of the packs is preserved in a [Facebook post](https://www.facebook.com/share/p/1J798L8x7b/).
+
+## How stickers are used on the site
+
+RSLive can select a thematic illustration for a wide Open Graph card from the `ogSticker` field in frontmatter. For example, `passport` can be used for document articles, `javni-prevoz` for public transport and `building-a-house` for housing.
+
+If `ogSticker` is absent or the requested illustration is unavailable to the renderer, the generator uses a fallback image. Choose a technical name from the gallery above.
+
+A full sticker is shown only when the title leaves enough room. With long titles the text takes the full width of the card. The square image used by services with square previews keeps only a small pig-head favicon in the corner so the illustration does not compete with the text.
+
+## Can the stickers be reused?
+
+You can share the packs and use them in ordinary messaging. If you need source artwork for a publication, integration or another sticker pack, contact the project through the [public repository](https://github.com/Antiokh/rslive_content/issues/new) and describe the platform and required format.
