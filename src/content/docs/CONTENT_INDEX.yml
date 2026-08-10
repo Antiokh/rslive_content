@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-08
+# Last updated: 2026-08-11
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -688,6 +688,18 @@ pages:
       - нужно обратиться к государственной службе
       - административные вопросы
     anchors: []
+
+  - url: /gov/ombudsman/
+    title: 'Защитник граждан: жалоба на государственный орган'
+    tags: [Защитник граждан, омбудсман, жалоба, госорган, права иностранцев, администрация]
+    aliases: [Zaštitnik građana, омбудсман Сербии, pritužba, жалоба на МУП, жалоба на государственный орган]
+    link_when:
+      - государственный орган не отвечает или затягивает решение
+      - обычные средства защиты уже использованы, но нарушение не устранено
+      - иностранцу нужно пожаловаться на работу органа управления
+      - нужно проверить принципы хорошего управления
+    anchors: []
+
   - url: /gov/notary/
     title: 'Нотариус в Сербии: заверение документов и доверенности'
     tags: [нотариус, доверенность, заверение, подпись, копия, solemnizacija, документы]
@@ -1004,7 +1016,7 @@ pages:
     aliases: [srpski, сербский, RSLive na srpskom]
     link_when:
       - нужен материал RSLive для сербского читателя
-      - нужно отправить сербу самостоятельную инструкцию
+      - нужно перейти в сербскую редакцию
     anchors: []
 
   - url: /sr/about/
