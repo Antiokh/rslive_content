@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-08
+# Last updated: 2026-08-11
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -688,6 +688,17 @@ pages:
       - нужно обратиться к государственной службе
       - административные вопросы
     anchors: []
+
+  - url: /gov/law/
+    title: Законы Республики Сербия
+    tags: [законы, законодательство, нормативные акты, eKonsultacije, konsultacije, javna rasprava]
+    aliases: [законы Сербии, законодательство Сербии, нормативные акты Сербии, публичные консультации Сербия, публичное обсуждение законопроектов Сербия]
+    link_when:
+      - нужно найти официальный текст закона или нормативного акта
+      - нужно следить за подготовкой закона или документа публичной политики
+      - нужно участвовать в konsultacije или javna rasprava
+    anchors: []
+
   - url: /gov/notary/
     title: 'Нотариус в Сербии: заверение документов и доверенности'
     tags: [нотариус, доверенность, заверение, подпись, копия, solemnizacija, документы]
