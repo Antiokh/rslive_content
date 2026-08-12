@@ -2,7 +2,7 @@
 
 ## Перед началом
 
-Прочитайте `AGENTS.md`, `PROJECT_CONTEXT.md`, `README.md`, `src/content/docs/CONTENT_INDEX.yml` и `docs/MDX_COMPONENTS.md`.
+Прочитайте `AGENTS.md`, `PROJECT_CONTEXT.md`, `README.md`, `src/content/docs/CONTENT_INDEX.yml`, `docs/MDX_COMPONENTS.md` и `docs/updates/README.md`.
 
 Получите актуальную версию статьи из GitHub непосредственно перед редактированием. Не работайте по копии из истории чата или старому вложению.
 
@@ -222,6 +222,16 @@ import Aside from '@astrojs/starlight/components/Aside.astro';
 4. Обновите `docs/MDX_COMPONENTS.md` в этом репозитории.
 5. Не используйте новый синтаксис в контенте до появления реализации в основной ветке или согласованной связанной ветке.
 
+## Update stack
+
+При содержательном изменении опубликованной статьи обновите в том же PR:
+
+- `docs/updates/daily/YYYY-MM-DD.json`;
+- `docs/updates/daily/YYYY-MM-DD.md`;
+- `docs/updates/monthly/YYYY-MM.md`.
+
+Если статья уже присутствует в daily stack за этот день, не создавайте второй блок статьи: добавьте новые summaries в существующий. Детальные правила находятся в `docs/updates/README.md`.
+
 ## Проверка перед PR
 
 Проверьте:
@@ -236,6 +246,7 @@ import Aside from '@astrojs/starlight/components/Aside.astro';
 - [ ] MDX-компоненты существуют и props совпадают с `Antiokh/rslive.ru`;
 - [ ] JSX/MDX-теги парные;
 - [ ] `CONTENT_INDEX.yml` обновлён при изменении маршрутов или структуры;
+- [ ] `docs/updates` обновлён для содержательных изменений опубликованных статей;
 - [ ] необходимость редиректа проверена;
 - [ ] сборка запущена в основном репозитории либо ограничение явно указано.
 
