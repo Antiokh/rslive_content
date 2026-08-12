@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-11
+# Last updated: 2026-08-12
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -265,6 +265,15 @@ pages:
       - дети в Сербии
     link_when:
       - используется старая ссылка на раздел о рождении ребёнка
+    anchors: []
+  - url: /children/kindergarten/
+    title: Детские сады
+    tags: [детский сад, дошкольное образование, PPP, predškolska, eVrtić, IOP, дополнительная поддержка]
+    aliases: [детский сад в Сербии, детские сады Сербии, pripremni predškolski program, предшкольска, eVrtić, IOP в детском саду]
+    link_when:
+      - нужно записать ребёнка в детский сад или обязательную PPP
+      - иностранному родителю нужна запись через eVrtić
+      - ребёнку нужна дополнительная поддержка или IOP в дошкольном учреждении
     anchors: []
 
   # ==== INTEGRATION SECTION (Интеграция) ====
