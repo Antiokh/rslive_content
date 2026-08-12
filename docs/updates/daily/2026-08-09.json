@@ -1,0 +1,10 @@
+{
+  "date": "2026-08-09",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 2,
+  "articles": [
+    {"repo_path":"src/content/docs/adaptation/russians/national-council/index.mdx","title":"Национальный совет русского национального меньшинства","live_url":"https://rslive.ru/adaptation/russians/national-council/","summaries":["Расширили статью до постоянного энциклопедического материала о национальном меньшинстве, правах, выборах и специальном списке избирателей"]},
+    {"repo_path":"src/content/docs/lifestyle/ecology/index.mdx","title":"Экологическое волонтёрство в Сербии","live_url":"https://rslive.ru/lifestyle/ecology/","summaries":["Добавили способы участвовать в экологических акциях и живые источники актуальных анонсов"]}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "date": "2026-08-01",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 2,
+  "articles": [
+    {"repo_path":"src/content/docs/edu/index.mdx","title":"Образование в Сербии","live_url":"https://rslive.ru/edu/","summaries":["Полностью переработали систему уровней образования, поступление иностранцев и признание документов и дипломов"]},
+    {"repo_path":"src/content/docs/arrival/boravak/index.mdx","title":"РВП и ВНЖ в Сербии","live_url":"https://rslive.ru/arrival/boravak/","summaries":["Добавили смену и прекращение основания РВП и действия при утрате биометрической карточки"]},
+    {"repo_path":"src/content/docs/arrival/freelance/index.mdx","title":"Фриланс в Сербии","live_url":"https://rslive.ru/arrival/freelance/","summaries":["Актуализировали налоговый режим фрилансера на 2026 год и отделили налоги от миграционного права на работу"]},
+    {"repo_path":"src/content/docs/arrival/jedinstvena-dozvola/index.mdx","title":"Единое разрешение на проживание и работу","live_url":"https://rslive.ru/arrival/jedinstvena-dozvola/","summaries":["Добавили право на работу по другим статусам и краткосрочные исключения из единого разрешения"]},
+    {"repo_path":"src/content/docs/integration/law_changes_2024/index.mdx","title":"Реформа миграционного законодательства 2023–2024","live_url":"https://rslive.ru/integration/law_changes_2024/","summaries":["Переписали исторический материал: действующие нормы отделены от старых трактовок и законопроектов"]},
+    {"repo_path":"src/content/docs/integration/stalni/index.mdx","title":"Постоянное проживание","live_url":"https://rslive.ru/integration/stalni/","summaries":["Вернули подробную пошаговую процедуру ПМЖ, специальные основания и действия после одобрения"]}
+  ]
+}

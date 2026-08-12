@@ -1,0 +1,110 @@
+{
+  "date": "2026-07-31",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 2,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/adaptation/birth/after/index.mdx",
+      "title": "После родов: патронаж, врач и документы ребёнка",
+      "live_url": "https://rslive.ru/adaptation/birth/after/",
+      "summaries": ["Актуализировали патронаж, педиатра, eBeba и документы новорождённого"]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/birth/clinics/index.mdx",
+      "title": "Роды в Сербии: выбор роддома и экстренная помощь",
+      "live_url": "https://rslive.ru/adaptation/birth/clinics/",
+      "summaries": ["Перепроверили выбор роддома, плановое и экстренное поступление и убрали устаревшие правила"]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/birth/index.mdx",
+      "title": "Рождение ребёнка в Сербии",
+      "live_url": "https://rslive.ru/adaptation/birth/",
+      "summaries": ["Перестроили навигацию по беременности, родам, декрету и документам ребёнка"]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/birth/maternity/index.mdx",
+      "title": "Больничный, декрет и выплаты в Сербии",
+      "live_url": "https://rslive.ru/adaptation/birth/maternity/",
+      "summaries": ["Актуализировали больничный по беременности, декрет и расчёт выплат для разных статусов занятости"]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/birth/med/index.mdx",
+      "title": "Беременность и медицинское наблюдение",
+      "live_url": "https://rslive.ru/adaptation/birth/med/",
+      "summaries": ["Переписали гайд по ведению беременности в государственной, частной и смешанной системе"]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/zdravlje/index.mdx",
+      "title": "Здравоохранение и медицинское страхование в Сербии",
+      "live_url": "https://rslive.ru/arrival/zdravlje/",
+      "summaries": ["Обновили RFZO, экстренную помощь, права пациента и возврат расходов при недоступной услуге"]
+    },
+    {
+      "repo_path": "src/content/docs/children/birth/index.mdx",
+      "title": "Рождение ребёнка",
+      "live_url": "https://rslive.ru/children/birth/",
+      "summaries": ["Обновили навигацию по материалам о рождении и документах ребёнка"]
+    },
+    {
+      "repo_path": "src/content/docs/med/ddor/index.mdx",
+      "title": "Медицинское страхование DDOR",
+      "live_url": "https://rslive.ru/med/ddor/",
+      "summaries": ["Заменили устаревшие страховые пакеты на актуальную структуру покрытия DDOR"]
+    },
+    {
+      "repo_path": "src/content/docs/med/index.mdx",
+      "title": "Медицина",
+      "live_url": "https://rslive.ru/med/",
+      "summaries": ["Обновили базовую навигацию по медицинской помощи, страхованию и экстренным ситуациям"]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/boravak/change-address/index.mdx",
+      "title": "Смена адреса при РВП",
+      "live_url": "https://rslive.ru/arrival/boravak/change-address/",
+      "summaries": ["Добавили отдельную инструкцию по смене адреса временного проживания"]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/close/index.mdx",
+      "title": "Закрытие предпринимателя",
+      "live_url": "https://rslive.ru/arrival/business/close/",
+      "summaries": ["Добавили проверенную процедуру добровольного удаления предпринимателя из APR"]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/index.mdx",
+      "title": "Бизнес в Сербии",
+      "live_url": "https://rslive.ru/arrival/business/",
+      "summaries": ["Перестроили бизнес-раздел вокруг практических процедур и государственных систем"]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/eco/index.mdx",
+      "title": "Экологический сбор",
+      "live_url": "https://rslive.ru/gov/taxes/eco/",
+      "summaries": ["Добавили актуальную инструкцию по экологическому сбору, регистрации и приостановке деятельности"]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/eporezi/index.mdx",
+      "title": "ePorezi",
+      "live_url": "https://rslive.ru/gov/taxes/eporezi/",
+      "summaries": ["Добавили инструкцию по ePorezi, проверке счетов и электронным полномочиям"]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/index.mdx",
+      "title": "Налоги",
+      "live_url": "https://rslive.ru/gov/taxes/",
+      "summaries": ["Перестроили налоговый раздел как практическую навигацию по процедурам"]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/overpayment/index.mdx",
+      "title": "Переплата по налогам",
+      "live_url": "https://rslive.ru/gov/taxes/overpayment/",
+      "summaries": ["Добавили инструкцию по переносу и возврату налоговой переплаты через ZPP"]
+    },
+    {
+      "repo_path": "src/content/docs/integration/stalni/change-address/index.mdx",
+      "title": "Смена адреса при постоянном проживании",
+      "live_url": "https://rslive.ru/integration/stalni/change-address/",
+      "summaries": ["Добавили отдельную процедуру смены места жительства при постоянном проживании"]
+    }
+  ]
+}

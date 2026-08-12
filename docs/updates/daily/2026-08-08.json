@@ -1,0 +1,29 @@
+{
+  "date": "2026-08-08",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 5,
+  "articles": [
+    {"repo_path":"src/content/docs/arrival/boravak/index.mdx","title":"РВП и ВНЖ в Сербии","live_url":"https://rslive.ru/arrival/boravak/","summaries":["Добавили сравнение официальной русской миграционной терминологии России, Беларуси, Казахстана и Кыргызстана","Добавили Грузию и исправили вывод о термине «временный вид на жительство»"]},
+    {"repo_path":"src/content/docs/en/index.mdx","title":"RSLive in English","live_url":"https://rslive.ru/en/","summaries":["Запустили расширенную английскую редакцию с навигацией по проекту, руководствам и русским в Сербии"]},
+    {"repo_path":"src/content/docs/en/about/index.mdx","title":"About RSLive","live_url":"https://rslive.ru/en/about/","summaries":["Добавили английскую страницу о проекте и редакционных принципах"]},
+    {"repo_path":"src/content/docs/en/about/stickers/index.mdx","title":"RSLive stickers","live_url":"https://rslive.ru/en/about/stickers/","summaries":["Добавили английскую страницу о стикерах и Open Graph"]},
+    {"repo_path":"src/content/docs/en/pig-peter/index.mdx","title":"Pig Peter","live_url":"https://rslive.ru/en/pig-peter/","summaries":["Добавили английскую страницу о маскоте RSLive"]},
+    {"repo_path":"src/content/docs/en/foreigner-residence-registration/index.mdx","title":"Registering a foreigner’s residence","live_url":"https://rslive.ru/en/foreigner-residence-registration/","summaries":["Добавили английскую инструкцию владельцу жилья по eID, ConsentID и eUprava"]},
+    {"repo_path":"src/content/docs/en/russians-in-serbia/index.mdx","title":"Russians in Serbia","live_url":"https://rslive.ru/en/russians-in-serbia/","summaries":["Добавили английский обзор русских в Сербии"]},
+    {"repo_path":"src/content/docs/en/russians-in-serbia/demographics/index.mdx","title":"Russians in Serbia: demographics","live_url":"https://rslive.ru/en/russians-in-serbia/demographics/","summaries":["Добавили английскую демографическую справку с данными по 2025 год"]},
+    {"repo_path":"src/content/docs/en/russians-in-serbia/ksors/index.mdx","title":"KSORS in Serbia","live_url":"https://rslive.ru/en/russians-in-serbia/ksors/","summaries":["Добавили английскую справку о КСОРС"]},
+    {"repo_path":"src/content/docs/en/russians-in-serbia/national-council/index.mdx","title":"National Council of the Russian National Minority","live_url":"https://rslive.ru/en/russians-in-serbia/national-council/","summaries":["Добавили английскую справку о Национальном совете"]},
+    {"repo_path":"src/content/docs/en/russians-in-serbia/russian-house/index.mdx","title":"Russian House in Belgrade","live_url":"https://rslive.ru/en/russians-in-serbia/russian-house/","summaries":["Добавили английскую справку о Русском доме"]},
+    {"repo_path":"src/content/docs/sr/index.mdx","title":"RSLive na srpskom","live_url":"https://rslive.ru/sr/","summaries":["Расширили сербскую редакцию и её верхнеуровневую структуру"]},
+    {"repo_path":"src/content/docs/sr/about/index.mdx","title":"O RSLive","live_url":"https://rslive.ru/sr/about/","summaries":["Добавили сербскую страницу о проекте и редакционных принципах"]},
+    {"repo_path":"src/content/docs/sr/about/stickers/index.mdx","title":"RSLive stikeri","live_url":"https://rslive.ru/sr/about/stickers/","summaries":["Добавили сербскую страницу о стикерах и Open Graph"]},
+    {"repo_path":"src/content/docs/sr/prase-petar/index.mdx","title":"Prase Petar","live_url":"https://rslive.ru/sr/prase-petar/","summaries":["Расширили сербскую страницу о маскоте"]},
+    {"repo_path":"src/content/docs/sr/rusi-u-srbiji/index.mdx","title":"Rusi u Srbiji","live_url":"https://rslive.ru/sr/rusi-u-srbiji/","summaries":["Добавили сербский обзор русских в Сербии"]},
+    {"repo_path":"src/content/docs/sr/rusi-u-srbiji/demografija/index.mdx","title":"Rusi u Srbiji: demografija","live_url":"https://rslive.ru/sr/rusi-u-srbiji/demografija/","summaries":["Добавили сербскую демографическую справку с данными по 2025 год"]},
+    {"repo_path":"src/content/docs/sr/rusi-u-srbiji/ksors/index.mdx","title":"KSORS u Srbiji","live_url":"https://rslive.ru/sr/rusi-u-srbiji/ksors/","summaries":["Добавили сербскую справку о КСОРС"]},
+    {"repo_path":"src/content/docs/sr/rusi-u-srbiji/nacionalni-savet/index.mdx","title":"Nacionalni savet ruske nacionalne manjine","live_url":"https://rslive.ru/sr/rusi-u-srbiji/nacionalni-savet/","summaries":["Добавили сербскую справку о Национальном совете"]},
+    {"repo_path":"src/content/docs/sr/rusi-u-srbiji/ruski-dom/index.mdx","title":"Ruski dom u Beogradu","live_url":"https://rslive.ru/sr/rusi-u-srbiji/ruski-dom/","summaries":["Добавили сербскую справку о Русском доме"]},
+    {"repo_path":"src/content/docs/arrival/boravak/change/index.mdx","title":"Смена основания и прекращение РВП","live_url":"https://rslive.ru/arrival/boravak/change/","summaries":["Добавили отдельную инструкцию по смене основания и добровольному прекращению РВП","Перепроверили процедуру по МВД: сроки продления, рабочие основания, единое разрешение и добровольное прекращение"]}
+  ]
+}
