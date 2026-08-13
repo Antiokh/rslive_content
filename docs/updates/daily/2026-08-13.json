@@ -1,11 +1,12 @@
 {
   "date": "2026-08-13",
   "hours": 24,
-  "generated_at": "2026-08-13T11:13:00+02:00",
-  "commit_count": 2,
+  "generated_at": "2026-08-13T11:24:00+02:00",
+  "commit_count": 3,
   "articles": [
     {"repo_path":"src/content/docs/gov/law/lost-house-documents/index.mdx","title":"Потеря документов на недвижимость в Сербии","live_url":"https://rslive.ru/gov/law/lost-house-documents/","summaries":["Добавили актуальный режим Svoj na svome: сроки, позднюю подачу по уважительной причине, проверку статуса и предупреждение покупателю"]},
     {"repo_path":"src/content/docs/med/index.mdx","title":"Медицина и экстренная помощь","live_url":"https://rslive.ru/med/","summaries":["Актуализировали экстренную помощь в Нови-Саде: номер 194, перенос ночной амбулатории, взрослый Urgentni centar и детский институт"]},
-    {"repo_path":"src/content/docs/arrival/zdravlje/index.mdx","title":"Здравоохранение и медицинское страхование в Сербии","live_url":"https://rslive.ru/arrival/zdravlje/","summaries":["Уточнили экстренный медицинский маршрут: профильный номер 194 и ссылка на актуальные адреса Нови-Сада"]}
+    {"repo_path":"src/content/docs/arrival/zdravlje/index.mdx","title":"Здравоохранение и медицинское страхование в Сербии","live_url":"https://rslive.ru/arrival/zdravlje/","summaries":["Уточнили экстренный медицинский маршрут: профильный номер 194 и ссылка на актуальные адреса Нови-Сада"]},
+    {"repo_path":"src/content/docs/drive/index.mdx","title":"Авто- мото- вело-","live_url":"https://rslive.ru/drive/","summaries":["Добавили актуальные правила страхования автомобилей на российских номерах: приостановление Green Card, пограничное страхование, регистрация и действия после ДТП"]}
   ]
 }
