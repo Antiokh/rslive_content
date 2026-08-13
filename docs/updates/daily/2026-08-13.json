@@ -1,8 +1,8 @@
 {
   "date": "2026-08-13",
   "hours": 24,
-  "generated_at": "2026-08-13T18:23:00+02:00",
-  "commit_count": 10,
+  "generated_at": "2026-08-13T20:08:00+02:00",
+  "commit_count": 11,
   "articles": [
     {"repo_path":"src/content/docs/gov/law/lost-house-documents/index.mdx","title":"Потеря документов на недвижимость в Сербии","live_url":"https://rslive.ru/gov/law/lost-house-documents/","summaries":["Добавили актуальный режим Svoj na svome: сроки, позднюю подачу по уважительной причине, проверку статуса и предупреждение покупателю"]},
     {"repo_path":"src/content/docs/med/index.mdx","title":"Медицина и экстренная помощь","live_url":"https://rslive.ru/med/","summaries":["Актуализировали экстренную помощь в Нови-Саде: номер 194, перенос ночной амбулатории, взрослый Urgentni centar и детский институт"]},
@@ -14,6 +14,7 @@
     {"repo_path":"src/content/docs/edu/school/index.mdx","title":"Школьное образование","live_url":"https://rslive.ru/edu/school/","summaries":["Добавили инструкцию по индивидуальному образовательному плану IOP: виды, порядок оформления, участие родителя и адаптации"]},
     {"repo_path":"src/content/docs/adaptation/birth/maternity/index.mdx","title":"Больничный, декрет и выплаты в Сербии","live_url":"https://rslive.ru/adaptation/birth/maternity/","summaries":["Добавили родительское и детское пособия: условия для иностранцев с ПМЖ, дополнительные критерии, порядок подачи, доходный период и продление"]},
     {"repo_path":"src/content/docs/gov/family/index.mdx","title":"Брак и семейные документы в Сербии","live_url":"https://rslive.ru/gov/family/","summaries":["Добавили порядок срочной защиты при домашнем насилии и механизм Алиментационного фонда: условия, сроки и действия через публичного исполнителя"]},
-    {"repo_path":"src/content/docs/gov/ombudsman/index.mdx","title":"Защитник граждан: жалоба на государственный орган","live_url":"https://rslive.ru/gov/ombudsman/","summaries":["Добавили порядок жалобы Защитнику граждан и развилку с административным спором в Управном суде, включая сроки и способы подачи"]}
+    {"repo_path":"src/content/docs/gov/ombudsman/index.mdx","title":"Защитник граждан: жалоба на государственный орган","live_url":"https://rslive.ru/gov/ombudsman/","summaries":["Добавили порядок жалобы Защитнику граждан и развилку с административным спором в Управном суде, включая сроки и способы подачи"]},
+    {"repo_path":"src/content/docs/arrival/business/types/index.mdx","title":"Формы ведения бизнеса в Сербии","live_url":"https://rslive.ru/arrival/business/types/","summaries":["Добавили интерактивную шкалу оборота для paušal, knjigaš и PDV и объяснили 50%-ное уменьшение базы в год регистрации и отдельное 10%-ное ограничение роста базы в 2026–2027 годах"]}
   ]
 }
