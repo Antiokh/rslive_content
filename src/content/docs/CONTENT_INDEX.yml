@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-12
+# Last updated: 2026-08-13
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -706,6 +706,17 @@ pages:
       - нужно найти официальный текст закона или нормативного акта
       - нужно следить за подготовкой закона или документа публичной политики
       - нужно участвовать в konsultacije или javna rasprava
+    anchors: []
+
+  - url: /gov/lawyer/
+    title: Юристы и адвокаты
+    tags: [юрист, адвокат, тариф, стоимость услуг, бесплатная юридическая помощь, besplatna pravna pomoć]
+    aliases: [адвокат в Сербии, русскоговорящий юрист, стоимость адвоката, адвокатский тариф, бесплатный адвокат, бесплатная юридическая помощь]
+    link_when:
+      - нужен русскоговорящий юрист или адвокат
+      - нужно проверить адвокатский тариф и стоимость услуг
+      - нужна государственная бесплатная юридическая помощь
+      - нужно найти порядок подачи заявления на besplatna pravna pomoć
     anchors: []
 
   - url: /gov/notary/
