@@ -2,7 +2,7 @@
   "date": "2026-08-13",
   "hours": 24,
   "generated_at": "2026-08-13T18:23:00+02:00",
-  "commit_count": 8,
+  "commit_count": 9,
   "articles": [
     {"repo_path":"src/content/docs/gov/law/lost-house-documents/index.mdx","title":"Потеря документов на недвижимость в Сербии","live_url":"https://rslive.ru/gov/law/lost-house-documents/","summaries":["Добавили актуальный режим Svoj na svome: сроки, позднюю подачу по уважительной причине, проверку статуса и предупреждение покупателю"]},
     {"repo_path":"src/content/docs/med/index.mdx","title":"Медицина и экстренная помощь","live_url":"https://rslive.ru/med/","summaries":["Актуализировали экстренную помощь в Нови-Саде: номер 194, перенос ночной амбулатории, взрослый Urgentni centar и детский институт"]},
@@ -12,6 +12,7 @@
     {"repo_path":"src/content/docs/gov/taxes/index.mdx","title":"Налоги и пошлины","live_url":"https://rslive.ru/gov/taxes/","summaries":["Добавили порядок уплаты налога на имущество: квартальные сроки, авансовые платежи, переплату и расчёт пени"]},
     {"repo_path":"src/content/docs/map/ruska_ambasada/index.mdx","title":"Посольство России в Сербии","live_url":"https://rslive.ru/map/ruska_ambasada/","summaries":["Добавили актуальную процедуру истребования личных документов из России через консульский отдел"]},
     {"repo_path":"src/content/docs/edu/school/index.mdx","title":"Школьное образование","live_url":"https://rslive.ru/edu/school/","summaries":["Добавили инструкцию по индивидуальному образовательному плану IOP: виды, порядок оформления, участие родителя и адаптации"]},
-    {"repo_path":"src/content/docs/adaptation/birth/maternity/index.mdx","title":"Больничный, декрет и выплаты в Сербии","live_url":"https://rslive.ru/adaptation/birth/maternity/","summaries":["Добавили родительское и детское пособия: условия для иностранцев с ПМЖ, дополнительные критерии, порядок подачи, доходный период и продление"]}
+    {"repo_path":"src/content/docs/adaptation/birth/maternity/index.mdx","title":"Больничный, декрет и выплаты в Сербии","live_url":"https://rslive.ru/adaptation/birth/maternity/","summaries":["Добавили родительское и детское пособия: условия для иностранцев с ПМЖ, дополнительные критерии, порядок подачи, доходный период и продление"]},
+    {"repo_path":"src/content/docs/gov/family/index.mdx","title":"Брак и семейные документы в Сербии","live_url":"https://rslive.ru/gov/family/","summaries":["Добавили порядок срочной защиты при домашнем насилии и механизм Алиментационного фонда: условия, сроки и действия через публичного исполнителя"]}
   ]
 }
