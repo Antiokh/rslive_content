@@ -1,10 +1,11 @@
 {
   "date": "2026-08-14",
   "hours": 24,
-  "generated_at": "2026-08-14T10:33:00+02:00",
-  "commit_count": 2,
+  "generated_at": "2026-08-14T12:20:00+02:00",
+  "commit_count": 3,
   "articles": [
     {"repo_path":"src/content/docs/arrival/business/types/index.mdx","title":"Формы ведения бизнеса в Сербии","live_url":"https://rslive.ru/arrival/business/types/","summaries":["Заменили базовый налоговый график на полный сравнительный калькулятор со скрываемыми дополнительными режимами и пояснили расчёт стоимости сотрудника bruto 2"]},
-    {"repo_path":"src/content/docs/arrival/freelance/index.mdx","title":"Фриланс","live_url":"https://rslive.ru/arrival/freelance/","summaries":["Добавили интерактивное сравнение двух моделей фриланса с трудовым договором и возможностью подключить предпринимательские режимы"]}
+    {"repo_path":"src/content/docs/arrival/freelance/index.mdx","title":"Фриланс","live_url":"https://rslive.ru/arrival/freelance/","summaries":["Добавили интерактивное сравнение двух моделей фриланса с трудовым договором и возможностью подключить предпринимательские режимы"]},
+    {"repo_path":"src/content/docs/lifestyle/culture/books/index.mdx","title":"Книги, библиотеки и книжная жизнь в Сербии","live_url":"https://rslive.ru/lifestyle/culture/books/","summaries":["Добавили большой гид по русским и сербским книжным, публичным и историческим русским библиотекам, COBISS, издательствам, Белградскому книжному сајму и читательским клубам"]}
   ]
 }
