@@ -7,7 +7,7 @@ sourceCheckedAt: 2026-08-14
 live: "https://rslive.ru/arrival/business/types/"
 ---
 
-import BusinessTaxCalculatorFullCompare from '../../../../../components/BusinessTaxCalculatorFullCompare.astro';
+import TaxCalculator from '../../../../../components/TaxCalculator.astro';
 
 В Сербии сначала выбирают **правовую форму**, а для предпринимателя (`preduzetnik`) — ещё и налоговый режим. Перед регистрацией сравните ответственность, налоги, бухгалтерию и миграционные последствия в статье [ИП или ООО](/arrival/business/prvsdoo/).
 
@@ -81,7 +81,7 @@ import BusinessTaxCalculatorFullCompare from '../../../../../components/Business
 
 По умолчанию показаны только предпринимательские режимы. Через `+` в легенде можно добавить две модели налогообложения фрилансера, `Сотрудник net` и `Стоимость сотрудника`. Последняя линия показывает **bruto 2**: bruto 1 плюс обязательные взносы работодателя — PIO 10% и медицинское страхование 5,15% — с учётом максимальной месячной базы взносов 732 820 RSD в 2026 году.[^11][^12] Взнос на безработицу 0,75% удерживается из базы сотрудника и отдельного начисления работодателя сверху не создаёт.[^11] Транспорт, питание, регресс за отпуск и другие переменные расходы работодателя в эту линию не включены.
 
-<BusinessTaxCalculatorFullCompare year={2026} minMonthlyEur={500} maxMonthlyEur={10000} defaultSeries={['gross', 'pausal', 'books', 'pdv']} />
+<TaxCalculator year={2026} minMonthlyEur={500} maxMonthlyEur={10000} defaultSeries={['gross', 'pausal', 'books', 'pdv']} />
 
 ### Тест самостоятельности
 
