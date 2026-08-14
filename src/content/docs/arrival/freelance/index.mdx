@@ -7,7 +7,7 @@ sourceCheckedAt: 2026-08-01
 live: "https://rslive.ru/arrival/freelance/"
 ---
 
-import BusinessTaxCalculatorFreelanceCompare from '../../../../components/BusinessTaxCalculatorFreelanceCompare.astro';
+import TaxCalculator from '../../../../components/TaxCalculator.astro';
 
 В сербском законодательстве нет отдельного юридического статуса «фрилансер». Это условное название физического лица, которое получает авторское вознаграждение или плату за выполненную работу от лица, не удерживающего сербские налоги и взносы при выплате.[^1]
 
@@ -91,7 +91,7 @@ import BusinessTaxCalculatorFreelanceCompare from '../../../../components/Busine
 
 Калькулятор ниже сравнивает обе модели фриланса с обычным трудовым договором при одной и той же сумме месячной выручки. Если медицинская страховка уже есть по другому основанию, отметьте это под легендой. Через `+` можно дополнительно включить предпринимательские режимы и сравнить их на том же графике.
 
-<BusinessTaxCalculatorFreelanceCompare />
+<TaxCalculator defaultSeries={['gross', 'freelance1', 'freelance2', 'employeeNet', 'employeeCost']} />
 
 Расчёт служит для сравнения режимов и не заменяет квартальную декларацию или официальный калькулятор Frilenseri. Для фактической подачи используйте параметры соответствующего квартала и данные о реально полученном доходе.[^5]
 
