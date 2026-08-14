@@ -3,11 +3,11 @@ title: "Формы ведения бизнеса в Сербии"
 description: "Как выбрать форму бизнеса в Сербии: preduzetnik, paušal, DOO, OD, KD, AD, zadruga, филиал или представительство иностранной компании, лимиты и НДС."
 ogSticker: letter-list
 keywords: ["формы бизнеса в Сербии", "preduzetnik", "paušal", "паушал Сербия", "паушальное налогообложение Сербия", "6 миллионов динаров", "8 миллионов НДС", "DOO Сербия", "zadruga", "ogranak stranog privrednog društva", "predstavništvo stranog privrednog društva", "индивидуальный предприниматель", "общество с ограниченной ответственностью"]
-sourceCheckedAt: 2026-08-13
+sourceCheckedAt: 2026-08-14
 live: "https://rslive.ru/arrival/business/types/"
 ---
 
-import BusinessTaxCalculator from '../../../../../components/BusinessTaxCalculator.astro';
+import BusinessTaxCalculatorFullCompare from '../../../../../components/BusinessTaxCalculatorFullCompare.astro';
 
 В Сербии сначала выбирают **правовую форму**, а для предпринимателя (`preduzetnik`) — ещё и налоговый режим. Перед регистрацией сравните ответственность, налоги, бухгалтерию и миграционные последствия в статье [ИП или ООО](/arrival/business/prvsdoo/).
 
@@ -79,7 +79,9 @@ import BusinessTaxCalculator from '../../../../../components/BusinessTaxCalculat
 
 Расчёт `knjigaš` здесь сравнительный: он использует ставку налога на доход от самостоятельной деятельности 10%, действующие ставки обязательных взносов и минимальную месячную базу 2026 года. Итог конкретного предпринимателя зависит от признанных расходов, страхования по другому основанию, личной зарплаты, минимальной и максимальной базы и других обстоятельств.[^11]
 
-<BusinessTaxCalculator year={2026} minMonthlyEur={500} maxMonthlyEur={10000} />
+По умолчанию показаны только предпринимательские режимы. Через `+` в легенде можно добавить две модели налогообложения фрилансера, `Сотрудник net` и `Стоимость сотрудника`. Последняя линия показывает **bruto 2**: bruto 1 плюс обязательные взносы работодателя — PIO 10% и медицинское страхование 5,15% — с учётом максимальной месячной базы взносов 732 820 RSD в 2026 году.[^11][^12] Взнос на безработицу 0,75% удерживается из базы сотрудника и отдельного начисления работодателя сверху не создаёт.[^11] Транспорт, питание, регресс за отпуск и другие переменные расходы работодателя в эту линию не включены.
+
+<BusinessTaxCalculatorFullCompare year={2026} minMonthlyEur={500} maxMonthlyEur={10000} defaultSeries={['gross', 'pausal', 'books', 'pdv']} />
 
 ### Тест самостоятельности
 
@@ -187,3 +189,4 @@ DOO требует полноценного корпоративного и бу
 [^9]: Налоговая администрация Сербии: [продление ограничения роста базы](https://www.purs.gov.rs/lat/odnosi-s-javnoscu/novosti/4608465/produzeno-ogranicenje-rasta-poreske-osnovice-za-preduzetnike-pausalce.html) — для 2026 и 2027 годов база по общему правилу не может вырасти более чем на 10% относительно предыдущего года; указаны исключения при изменении кода деятельности, муниципалитета и/или места регистрации.
 [^10]: Народный банк Сербии: [официальный средний курс на 29.07.2026](https://webappcenter.nbs.rs/ExchangeRateWebApp/ExchangeRate/IndexPrint?ExchangeRateListID=065a4031-0fa7-4e22-ad44-95b1a9603f78) — 1 EUR = 117,4119 RSD, 1 USD = 102,9568 RSD.
 [^11]: `Zakon o doprinosima za obavezno socijalno osiguranje`, статья 44 — ставки 24% PIO, 10,3% здравство и 0,75% безработица; Налоговая администрация Сербии: [минимальная месячная база 2026](https://www.purs.gov.rs/lat/pruzaoci-racunovodstvenih-usluga/aktuelno/4608502/dostavljanje-resenja-o-utvrdjenim-obavezama-poljoprivrednika-za-2026-godinu.html) — 51 297 RSD. Расчёт в калькуляторе используется только для сравнительного ориентира и не заменяет индивидуальный налоговый расчёт.
+[^12]: Республиканский фонд пенсионного и инвалидного страхования (PIO): [минимальная, максимальная месячная и максимальная годовая базы взносов на 2026 год](https://www.pio.rs/sr/osnovice-za-uplatu-doprinosa) — максимальная месячная база составляет 732 820 RSD, максимальная годовая — 8 793 840 RSD.
