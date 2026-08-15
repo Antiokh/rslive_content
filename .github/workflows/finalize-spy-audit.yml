@@ -1,0 +1,57 @@
+name: Finalize Spy audit content
+
+on:
+  push:
+    branches: [agent/spy-audit-2026-08-15]
+    paths:
+      - '.github/workflows/finalize-spy-audit.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Write required update stack
+        shell: python
+        run: |
+          import json
+          import pathlib
+
+          daily_dir = pathlib.Path('docs/updates/daily')
+          daily_dir.mkdir(parents=True, exist_ok=True)
+          articles = [
+              {'repo_path':'src/content/docs/arrival/business/efaktura/index.mdx','title':'eFaktura и SEF','live_url':'https://rslive.ru/arrival/business/efaktura/','summaries':['Добавили отдельную инструкцию по SEF/eFaktura: круг пользователей, проверка контрагента, доступ, рабочий процесс и изменения 2025–2026 годов']},
+              {'repo_path':'src/content/docs/drive/parking/index.mdx','title':'Парковка в Сербии','live_url':'https://rslive.ru/drive/parking/','summaries':['Добавили отдельную инструкцию по платной парковке, зонам, резидентским картам и проверке актуальных правил Белграда и Нови-Сада']},
+              {'repo_path':'src/content/docs/integration/driver_license/index.mdx','title':'Замена водительских прав РФ на сербские','live_url':'https://rslive.ru/integration/driver_license/','summaries':['Добавили международное водительское удостоверение и связанные водительские сервисы']},
+              {'repo_path':'src/content/docs/move/housing/index.mdx','title':'Поиск жилья','live_url':'https://rslive.ru/move/housing/','summaries':['Добавили официальные страницы для проверки плановых отключений электричества и воды и вынесли изменчивые парковочные правила в отдельную инструкцию']},
+          ]
+          json_path = daily_dir / '2026-08-15.json'
+          md_path = daily_dir / '2026-08-15.md'
+          if json_path.exists() or md_path.exists():
+              raise SystemExit('2026-08-15 update stack unexpectedly already exists')
+          daily_json = {'date':'2026-08-15','hours':24,'generated_at':'2026-08-15T17:35:00+02:00','commit_count':1,'articles':articles}
+          json_path.write_text(json.dumps(daily_json, ensure_ascii=False, indent=2) + '\n')
+          blocks = ['---','date: 2026-08-15','type: content-update-daily',f'article_count: {len(articles)}','---','','# Обновления за 15.08.2026','','За этот календарный день в `main` опубликованы такие содержательные изменения:','']
+          for article in articles:
+              blocks += [f"## {article['title']}", article['live_url'], '', *[f'- {s}' for s in article['summaries']], '']
+          md_path.write_text('\n'.join(blocks).rstrip() + '\n')
+          monthly_path = pathlib.Path('docs/updates/monthly/2026-08.md')
+          monthly = monthly_path.read_text()
+          assert 'days: 14' in monthly
+          assert '## 2026-08-15' not in monthly
+          monthly = monthly.replace('days: 14', 'days: 15', 1).rstrip() + '\n\n## 2026-08-15\n\n[Подневный сборник](../daily/2026-08-15.md)\n\n'
+          for article in articles:
+              monthly += f"- [{article['title']}]({article['live_url']}) — {'; '.join(article['summaries'])}\n"
+          monthly_path.write_text(monthly)
+      - name: Commit update stack
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/updates/daily/2026-08-15.json docs/updates/daily/2026-08-15.md docs/updates/monthly/2026-08.md
+          git commit -m 'Record Spy audit content updates'
+          git push
