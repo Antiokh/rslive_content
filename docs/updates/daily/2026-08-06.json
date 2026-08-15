@@ -1,0 +1,10 @@
+{
+  "date": "2026-08-06",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 2,
+  "articles": [
+    {"repo_path":"src/content/docs/arrival/jobs/index.mdx","title":"Поиск работы в Сербии","live_url":"https://rslive.ru/arrival/jobs/","summaries":["Расширили и перепроверили сайты вакансий, агентства, работодателей, Telegram/Facebook и способы проверки работодателя"]},
+    {"repo_path":"src/content/docs/gov/taxes/residency/index.mdx","title":"Подтверждение налогового резидентства Сербии","live_url":"https://rslive.ru/gov/taxes/residency/","summaries":["Добавили инструкцию по получению ПОР-1: критерии, документы, подача, сроки и пошлины 2026 года"]}
+  ]
+}

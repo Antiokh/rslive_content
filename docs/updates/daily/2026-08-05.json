@@ -1,0 +1,16 @@
+{
+  "date": "2026-08-05",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 7,
+  "articles": [
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/index.mdx","title":"РВП по волонтёрству","live_url":"https://rslive.ru/arrival/boravak/volontiranje/","summaries":["Добавили Workaway как бытовой обмен жильём на помощь после оформления законного основания, с миграционными оговорками"]},
+    {"repo_path":"src/content/docs/lifestyle/travel/stari-ras-novi-pazar/index.mdx","title":"Стари-Рас, Нови-Пазар и Пештер","live_url":"https://rslive.ru/lifestyle/travel/stari-ras-novi-pazar/","summaries":["Добавили практический маршрут по Нови-Пазару, объектам ЮНЕСКО Стари-Рас и Сопочаны и Пештеру","Перенесли маршрут в новый раздел путешествий без потери исторического контекста"]},
+    {"repo_path":"src/content/docs/lifestyle/history/raska/index.mdx","title":"Добро пожаловать в «Рашку»","live_url":"https://rslive.ru/lifestyle/history/raska/","summaries":["Добавили пример «Ковчег Бизнес» как казус ложных друзей переводчика"]},
+    {"repo_path":"src/content/docs/lifestyle/travel/index.mdx","title":"Путешествия по Сербии","live_url":"https://rslive.ru/lifestyle/travel/","summaries":["Добавили отдельный свёрнутый раздел для маршрутов по Сербии"]},
+    {"repo_path":"src/content/docs/adaptation/russians/ksors/index.mdx","title":"Объединение КСОРС","live_url":"https://rslive.ru/adaptation/russians/ksors/","summaries":["Обновили рабочие сектора, текущих руководителей и состав КСОРС"]},
+    {"repo_path":"src/content/docs/map/ruska_ambasada/index.mdx","title":"Посольство России и консульские услуги","live_url":"https://rslive.ru/map/ruska_ambasada/","summaries":["Актуализировали консульское присутствие в Нови-Саде, очереди и разграничение функций почётного консульства"]},
+    {"repo_path":"src/content/docs/adaptation/psy/index.mdx","title":"Психологическая помощь и адаптация","live_url":"https://rslive.ru/adaptation/psy/","summaries":["Расширили бесплатную и кризисную психологическую помощь, вернули ориентиры этапов адаптации и практические упражнения"]},
+    {"repo_path":"src/content/docs/move/travel/index.mdx","title":"Как добраться до Сербии","live_url":"https://rslive.ru/move/travel/","summaries":["Полностью переработали маршруты в Сербию, шенгенский транзит, автомобиль, страховку и связанные ограничения"]}
+  ]
+}

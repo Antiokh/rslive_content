@@ -1,0 +1,24 @@
+{
+  "date": "2026-08-03",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 9,
+  "articles": [
+    {"repo_path":"src/content/docs/arrival/boravak/index.mdx","title":"РВП и ВНЖ в Сербии","live_url":"https://rslive.ru/arrival/boravak/","summaries":["Вернули общую сравнительную таблицу туристического пребывания, РВП, ПМЖ и гражданства"]},
+    {"repo_path":"src/content/docs/integration/stalni/index.mdx","title":"Постоянное проживание","live_url":"https://rslive.ru/integration/stalni/","summaries":["Вернули общую сравнительную таблицу правовых статусов","Добавили предупреждение о спорной практике зачёта РВП по волонтёрству в срок для ПМЖ"]},
+    {"repo_path":"src/content/docs/integration/passport/index.mdx","title":"Гражданство и паспорт","live_url":"https://rslive.ru/integration/passport/","summaries":["Добавили общую сравнительную таблицу правовых статусов"]},
+    {"repo_path":"src/content/docs/lifestyle/history/raska/index.mdx","title":"Добро пожаловать в «Рашку»","live_url":"https://rslive.ru/lifestyle/history/raska/","summaries":["Добавили статью о значении названия Рашка и культурном контексте чувствительных исторических тем"]},
+    {"repo_path":"src/content/docs/med/doctors/index.mdx","title":"Врачи","live_url":"https://rslive.ru/med/doctors/","summaries":["Исправили лимит каталога врачей: теперь отображаются все записи, а не первые 100"]},
+    {"repo_path":"src/content/docs/adaptation/russians/index.mdx","title":"Русские в Сербии","live_url":"https://rslive.ru/adaptation/russians/","summaries":["Исправили лимит каталога Telegram-групп и убрали сломанный блок отсутствующей таблицы блогов"]},
+    {"repo_path":"src/content/docs/integration/visas/index.mdx","title":"Визы в другие страны","live_url":"https://rslive.ru/integration/visas/","summaries":["Убрали устаревшие локальные визовые таблицы и переписали страницу вокруг актуальных официальных источников"]},
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/index.mdx","title":"РВП по волонтёрству","live_url":"https://rslive.ru/arrival/boravak/volontiranje/","summaries":["Добавили риск перехода с волонтёрского РВП на ПМЖ и порядок действий при спорной практике МВД","Добавили критерии организатора, документы для долгосрочного волонтёрства и альтернативные программы"]},
+    {"repo_path":"src/content/docs/gov/notary/index.mdx","title":"Нотариат","live_url":"https://rslive.ru/gov/notary/","summaries":["Добавили практический гайд по нотариальным действиям, доверенностям, солемнизации и документам для использования за границей"]},
+    {"repo_path":"src/content/docs/gov/consumer-rights/index.mdx","title":"Защита прав потребителей","live_url":"https://rslive.ru/gov/consumer-rights/","summaries":["Добавили гайд по рекламациям, дистанционным покупкам и внесудебному разрешению потребительских споров"]},
+    {"repo_path":"src/content/docs/gov/family/index.mdx","title":"Семейные документы и брак","live_url":"https://rslive.ru/gov/family/","summaries":["Добавили гайд по браку с иностранцем, иностранным свидетельствам, разводу и брачному договору"]},
+    {"repo_path":"src/content/docs/arrival/post/index.mdx","title":"Почта, международные посылки и таможня","live_url":"https://rslive.ru/arrival/post/","summaries":["Добавили адресование, PAK, международные посылки, таможенные платежи и представительство"]},
+    {"repo_path":"src/content/docs/move/pets/index.mdx","title":"Путешествия с домашними животными","live_url":"https://rslive.ru/move/pets/","summaries":["Добавили проверенные правила ввоза и вывоза питомцев, включая поездки из Сербии в ЕС"]},
+    {"repo_path":"src/content/docs/move/prepare/index.mdx","title":"Подготовка к переезду","live_url":"https://rslive.ru/move/prepare/","summaries":["Заменили устаревший универсальный совет о справке для животных на маршрутно-зависимый алгоритм"]},
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/russian-diaspora/index.mdx","title":"«Русская диаспора в Сербии»","live_url":"https://rslive.ru/arrival/boravak/volontiranje/russian-diaspora/","summaries":["Добавили фактологическую справку по регистрации, членству, финансам, руководству и публичным источникам","Переписали материал в энциклопедическом фактологическом стиле","Убрали инструкции, перекладывавшие редакционное расследование на читателя"]},
+    {"repo_path":"src/content/docs/adaptation/russians/officials/index.mdx","title":"Официальные и общественные структуры","live_url":"https://rslive.ru/adaptation/russians/officials/","summaries":["Заменили оценочное описание «Русской диаспоры» на проверяемые регистрационные сведения"]}
+  ]
+}
