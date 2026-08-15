@@ -1,0 +1,24 @@
+name: Test sync token status write
+
+on:
+  push:
+    branches:
+      - agent/content-sync-status-test
+
+permissions:
+  contents: read
+
+jobs:
+  status-write:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish test commit status with sync token
+        env:
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          gh api --method POST repos/Antiokh/rslive_content/statuses/"$SOURCE_SHA" \
+            -f state="success" \
+            -f context="rslive.ru / Sync token permission test" \
+            -f description="RSLIVE_CONTENT_SYNC_TOKEN can write commit statuses"
