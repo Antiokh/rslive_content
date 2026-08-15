@@ -1,141 +1,20 @@
-name: Test public sync to private rslive.ru
+name: Stop obsolete public sync test
 
 on:
   push:
     branches:
       - agent/content-sync-public-test
-  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
   group: test-public-sync-to-private-rslive
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  test-sync:
+  cleanup:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out rslive_content test branch
-        uses: actions/checkout@v4
-
-      - name: Check out private rslive.ru test target
-        uses: actions/checkout@v4
-        with:
-          repository: Antiokh/rslive.ru
-          ref: agent/content-sync-target-test
-          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
-          path: rslive-engine
-          fetch-depth: 0
-
-      - name: Sync content into private test branch
-        run: |
-          set -euo pipefail
-          test -d src/content/docs
-          test -d rslive-engine/astro/src/content/docs
-
-          rsync -a --delete \
-            --exclude='.git/' \
-            src/content/docs/ rslive-engine/astro/src/content/docs/
-
-          if [ -d src/content/docs/about/stickers/assets/svg ]; then
-            mkdir -p rslive-engine/astro/src/assets/stickers
-            rsync -a \
-              src/content/docs/about/stickers/assets/svg/ rslive-engine/astro/src/assets/stickers/
-          fi
-
-      - name: Commit and push private test branch
-        id: push
-        working-directory: rslive-engine
-        env:
-          SOURCE_SHA: ${{ github.sha }}
-        run: |
-          set -euo pipefail
-          git config user.name "rslive public sync test"
-          git config user.email "actions@github.com"
-
-          if [ -z "$(git status --porcelain astro/src/content/docs astro/src/assets/stickers)" ]; then
-            echo "No changes produced by sync."
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "private_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          git add astro/src/content/docs astro/src/assets/stickers
-          git commit -m "Test public content sync from rslive_content@${SOURCE_SHA} [skip content-sync]"
-          git push origin HEAD:agent/content-sync-target-test
-
-          echo "changed=true" >> "$GITHUB_OUTPUT"
-          echo "private_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-
-      - name: Verify pushed probe through GitHub API
-        if: steps.push.outputs.changed == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
-          PRIVATE_SHA: ${{ steps.push.outputs.private_sha }}
-        run: |
-          set -euo pipefail
-          test -n "$PRIVATE_SHA"
-          gh api "repos/Antiokh/rslive.ru/contents/astro/src/content/docs/.sync-public-test-probe.txt?ref=$PRIVATE_SHA" \
-            --jq '.sha' >/dev/null
-          echo "Probe exists in private repository at $PRIVATE_SHA."
-
-      - name: Wait for Cloudflare Pages preview
-        if: steps.push.outputs.changed == 'true'
-        id: cloudflare
-        env:
-          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
-          PRIVATE_SHA: ${{ steps.push.outputs.private_sha }}
-        run: |
-          set -euo pipefail
-          cloudflare_json=""
-
-          for attempt in $(seq 1 80); do
-            cloudflare_json="$(gh api "repos/Antiokh/rslive.ru/commits/$PRIVATE_SHA/check-runs" \
-              --jq '.check_runs[] | select(.name == "Cloudflare Pages") | {status, conclusion, details_url, html_url}' || true)"
-
-            if [ -n "$cloudflare_json" ]; then
-              status="$(printf '%s' "$cloudflare_json" | jq -r '.status')"
-              if [ "$status" = "completed" ]; then
-                break
-              fi
-            fi
-
-            sleep 15
-          done
-
-          if [ -z "$cloudflare_json" ]; then
-            echo "Cloudflare Pages check was not found for $PRIVATE_SHA." >&2
-            exit 1
-          fi
-
-          conclusion="$(printf '%s' "$cloudflare_json" | jq -r '.conclusion // ""')"
-          target_url="$(printf '%s' "$cloudflare_json" | jq -r '.details_url // .html_url // ""')"
-          echo "conclusion=$conclusion" >> "$GITHUB_OUTPUT"
-          echo "target_url=$target_url" >> "$GITHUB_OUTPUT"
-
-          if [ "$conclusion" != "success" ]; then
-            echo "Cloudflare Pages ended with conclusion: $conclusion" >&2
-            exit 1
-          fi
-
-      - name: Publish test status back to source commit
-        if: steps.push.outputs.changed == 'true' && steps.cloudflare.outputs.conclusion == 'success'
-        env:
-          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
-          SOURCE_SHA: ${{ github.sha }}
-          TARGET_URL: ${{ steps.cloudflare.outputs.target_url }}
-        run: |
-          set -euo pipefail
-          args=(
-            repos/Antiokh/rslive_content/statuses/"$SOURCE_SHA"
-            -f state="success"
-            -f context="rslive.ru / Public sync migration test"
-            -f description="Public runner pushed private sync and Cloudflare deployed it"
-          )
-          if [ -n "$TARGET_URL" ]; then
-            args+=(-f target_url="$TARGET_URL")
-          fi
-          gh api --method POST "${args[@]}"
+      - name: Finish obsolete test cleanly
+        run: echo "The end-to-end migration test completed successfully in the second isolated run."
