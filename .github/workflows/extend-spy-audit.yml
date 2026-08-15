@@ -1,0 +1,101 @@
+name: Extend Spy audit content
+
+on:
+  push:
+    branches: [agent/spy-audit-2026-08-15]
+    paths:
+      - '.github/workflows/extend-spy-audit.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  extend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch content and update stack
+        shell: python
+        run: |
+          import json
+          import pathlib
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+
+          med_path = pathlib.Path('src/content/docs/med/index.mdx')
+          med = med_path.read_text()
+          assert '/med/blood-donation/' not in med
+          needle = '- [Здравоохранение и медицинское страхование](/arrival/zdravlje/)\n'
+          assert needle in med
+          med = med.replace(needle, needle + '- [Донорство крови в Сербии](/med/blood-donation/)\n', 1)
+          med_path.write_text(med)
+
+          index_path = pathlib.Path('src/content/docs/CONTENT_INDEX.yml')
+          index = index_path.read_text()
+          assert '/med/blood-donation/' not in index
+          needle = '  - url: /med/doctors/\n'
+          assert needle in index
+          block = '''  - url: /med/blood-donation/\n    title: Донорство крови в Сербии\n    tags: [донорство, кровь, медицина, иностранец, transfuzija]\n    aliases: [сдать кровь, донор крови, донорство крови]\n    link_when:\n      - хочешь сдать кровь в Сербии\n      - нужно узнать может ли иностранец стать донором крови\n      - ищешь пункт сдачи крови в Белграде или Нови-Саде\n    anchors: []\n'''
+          index = index.replace(needle, block + needle, 1)
+          index_path.write_text(index)
+
+          housing_path = pathlib.Path('src/content/docs/move/housing/index.mdx')
+          housing = housing_path.read_text()
+          if 'sourceCheckedAt:' not in housing.split('---', 2)[1]:
+              live = 'live: "https://rslive.ru/move/housing/"\n'
+              assert live in housing
+              housing = housing.replace(live, live + 'sourceCheckedAt: 2026-08-15\n', 1)
+          assert '### Как передавать показания электричества' not in housing
+          outage_aside = '''<Aside type="tip" title="Если отключение уже произошло">\n  Сначала проверьте плановые работы и аварии у оператора. Если вашего адреса в списках нет, тогда звоните в аварийную/контактную службу: это быстрее, чем искать объяснение в районных чатах.\n</Aside>'''
+          assert outage_aside in housing
+          meter = '''\n\n### Как передавать показания электричества\n\n`Elektrodistribucija Srbije` принимает самостоятельные показания счётчика **с 1-го по 6-е число каждого месяца**. Передать их можно через приложение **ED Srbija**, официальный сайт EDS, электронную почту, стойку обслуживания или бесплатный контакт-центр **0800 360 300**.[^6]\n\nДля домохозяйств на гарантированном снабжении EPS действует скидка **6%** за самостоятельную передачу показаний в установленный срок при оплате счёта до 20-го числа месяца. EPS подтверждала применение этой скидки и в 2026 году.[^7]\n\n<Aside type="caution" title="Не ориентируйтесь на старое правило «раз в три месяца»">\n  В публикациях 2025 года встречалось утверждение, что оператор будет физически снимать показания только раз в три месяца. EDS позднее официально сообщила, что применение части закона, связанной с увеличенным периодом считывания, временно отложено. Самостоятельная передача показаний с 1-го по 6-е число работает, но фактическую периодичность контрольного считывания проверяйте по текущим сообщениям EDS.[^6]\n</Aside>'''
+          housing = housing.replace(outage_aside, outage_aside + meter, 1)
+          assert '[^6]:' not in housing and '[^7]:' not in housing
+          housing = housing.rstrip() + '''\n[^6]: Elektrodistribucija Srbije: [официальные сообщения и способы передачи показаний](https://www.elektrodistribucija.rs/informacije/saopstenja). EDS принимает самостоятельные показания с 1-го по 6-е число и сообщала о временном отложении применения нормы о более длинном периоде считывания.\n[^7]: Elektroprivreda Srbije: [скидки за январский счёт 2026 года](https://www.eps.rs/cir/vesti/Pages/eps-racun-januar-popust.aspx) — для домохозяйств, самостоятельно передающих показания, сохранялась скидка 6%; базовое правило предусматривает оплату до 20-го числа.\n'''
+          housing_path.write_text(housing)
+
+          daily_json_path = pathlib.Path('docs/updates/daily/2026-08-15.json')
+          daily = json.loads(daily_json_path.read_text())
+          assert not any(a['repo_path'] == 'src/content/docs/med/blood-donation/index.mdx' for a in daily['articles'])
+          for article in daily['articles']:
+              if article['repo_path'] == 'src/content/docs/move/housing/index.mdx':
+                  article['summaries'] = ['Добавили официальные страницы плановых отключений электричества и воды, самостоятельную передачу показаний электричества 1–6 числа и актуальную скидку; вынесли изменчивые парковочные правила в отдельную инструкцию']
+          daily['articles'].append({
+              'repo_path': 'src/content/docs/med/blood-donation/index.mdx',
+              'title': 'Донорство крови в Сербии',
+              'live_url': 'https://rslive.ru/med/blood-donation/',
+              'summaries': ['Добавили инструкцию по донорству крови для иностранцев: документы, критерии допуска, процедура, пункты в Белграде и Нови-Саде и оплачиваемое отсутствие по Закону о труде'],
+          })
+          daily['generated_at'] = datetime.now(ZoneInfo('Europe/Belgrade')).isoformat(timespec='seconds')
+          daily_json_path.write_text(json.dumps(daily, ensure_ascii=False, indent=2) + '\n')
+
+          daily_md_path = pathlib.Path('docs/updates/daily/2026-08-15.md')
+          daily_md = daily_md_path.read_text()
+          assert 'article_count: 4' in daily_md
+          assert '## Донорство крови в Сербии' not in daily_md
+          daily_md = daily_md.replace('article_count: 4', 'article_count: 5', 1)
+          old_housing = '- Добавили официальные страницы для проверки плановых отключений электричества и воды и вынесли изменчивые парковочные правила в отдельную инструкцию'
+          new_housing = '- Добавили официальные страницы плановых отключений электричества и воды, самостоятельную передачу показаний электричества 1–6 числа и актуальную скидку; вынесли изменчивые парковочные правила в отдельную инструкцию'
+          assert old_housing in daily_md
+          daily_md = daily_md.replace(old_housing, new_housing, 1).rstrip() + '''\n\n## Донорство крови в Сербии\nhttps://rslive.ru/med/blood-donation/\n\n- Добавили инструкцию по донорству крови для иностранцев: документы, критерии допуска, процедура, пункты в Белграде и Нови-Саде и оплачиваемое отсутствие по Закону о труде\n'''
+          daily_md_path.write_text(daily_md)
+
+          monthly_path = pathlib.Path('docs/updates/monthly/2026-08.md')
+          monthly = monthly_path.read_text()
+          assert '## 2026-08-15' in monthly
+          assert 'Донорство крови в Сербии' not in monthly
+          old = '- [Поиск жилья](https://rslive.ru/move/housing/) — Добавили официальные страницы для проверки плановых отключений электричества и воды и вынесли изменчивые парковочные правила в отдельную инструкцию'
+          new = '- [Поиск жилья](https://rslive.ru/move/housing/) — Добавили официальные страницы плановых отключений электричества и воды, самостоятельную передачу показаний электричества 1–6 числа и актуальную скидку; вынесли изменчивые парковочные правила в отдельную инструкцию\n- [Донорство крови в Сербии](https://rslive.ru/med/blood-donation/) — Добавили инструкцию по донорству крови для иностранцев: документы, критерии допуска, процедура, пункты в Белграде и Нови-Саде и оплачиваемое отсутствие по Закону о труде'
+          assert old in monthly
+          monthly = monthly.replace(old, new, 1)
+          monthly_path.write_text(monthly)
+
+      - name: Commit extension
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/content/docs/med/index.mdx src/content/docs/CONTENT_INDEX.yml src/content/docs/move/housing/index.mdx docs/updates/daily/2026-08-15.json docs/updates/daily/2026-08-15.md docs/updates/monthly/2026-08.md
+          git commit -m 'Expand Spy audit with donor and meter guidance'
+          git push
