@@ -1,0 +1,13 @@
+{
+  "date": "2026-08-10",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 5,
+  "articles": [
+    {"repo_path":"src/content/docs/integration/stalni/index.mdx","title":"Постоянное проживание","live_url":"https://rslive.ru/integration/stalni/","summaries":["Добавили процедуру добровольного и безотзывного отказа от постоянного проживания"]},
+    {"repo_path":"src/content/docs/arrival/jobs/index.mdx","title":"Поиск работы в Сербии","live_url":"https://rslive.ru/arrival/jobs/","summaries":["Добавили права работника при опасной работе, производственной травме и обращения в Инспекторат труда"]},
+    {"repo_path":"src/content/docs/edu/school/resources/index.mdx","title":"Полезные школьные ресурсы","live_url":"https://rslive.ru/edu/school/resources/","summaries":["Добавили порядок действий при дискриминации по гражданству, миграционному статусу, происхождению или языку"]},
+    {"repo_path":"src/content/docs/lifestyle/travel/index.mdx","title":"Путешествия по Сербии","live_url":"https://rslive.ru/lifestyle/travel/","summaries":["Добавили проверенный обзор пяти национальных парков Сербии и практический чек-лист перед поездкой"]},
+    {"repo_path":"src/content/docs/gov/index.mdx","title":"Государство и бюрократия","live_url":"https://rslive.ru/gov/","summaries":["Добавили экстренные номера 192/193/194, систему предупреждений МВД и базовую подготовку к ЧС"]}
+  ]
+}

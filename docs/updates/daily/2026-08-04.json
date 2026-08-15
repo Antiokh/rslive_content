@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-04",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 10,
+  "articles": [
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/nof/index.mdx","title":"Novosadski omladinski forum (NOF)","live_url":"https://rslive.ru/arrival/boravak/volontiranje/nof/","summaries":["Добавили профиль организации, её волонтёрских программ, документов, финансов и контактов"]},
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/caritas-sabac/index.mdx","title":"Caritas Šabac","live_url":"https://rslive.ru/arrival/boravak/volontiranje/caritas-sabac/","summaries":["Добавили профиль организации и подтверждённых волонтёрских программ"]},
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/mladi-istrazivaci-srbije/index.mdx","title":"Mladi istraživači Srbije","live_url":"https://rslive.ru/arrival/boravak/volontiranje/mladi-istrazivaci-srbije/","summaries":["Добавили профиль Volonterski servis Srbije и международных волонтёрских программ"]},
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/volonterski-centar-vojvodine/index.mdx","title":"Volonterski centar Vojvodine","live_url":"https://rslive.ru/arrival/boravak/volontiranje/volonterski-centar-vojvodine/","summaries":["Добавили профиль центра, программ и условий участия"]},
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/adra-serbia/index.mdx","title":"ADRA Serbia","live_url":"https://rslive.ru/arrival/boravak/volontiranje/adra-serbia/","summaries":["Добавили профиль организации и международных волонтёрских программ"]},
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/udruzenje-svetlost/index.mdx","title":"Udruženje Svetlost","live_url":"https://rslive.ru/arrival/boravak/volontiranje/udruzenje-svetlost/","summaries":["Добавили профиль организации и доступных волонтёрских программ"]},
+    {"repo_path":"src/content/docs/arrival/boravak/volontiranje/russian-diaspora/index.mdx","title":"«Русская диаспора в Сербии»","live_url":"https://rslive.ru/arrival/boravak/volontiranje/russian-diaspora/","summaries":["Разделили описание организации, редакционную проверку и публичный конфликт; добавили прямые ссылки на исходные публикации"]},
+    {"repo_path":"src/content/docs/about/stickers/index.mdx","title":"Стикеры RSLive","live_url":"https://rslive.ru/about/stickers/","summaries":["Опубликовали страницу о стикерах и архив Telegram-набора","Добавили русские значения и технические идентификаторы ogSticker"]},
+    {"repo_path":"src/content/docs/adaptation/russians/index.mdx","title":"Русские в Сербии","live_url":"https://rslive.ru/adaptation/russians/","summaries":["Развели КСОРС, Национальный совет русского национального меньшинства и Русский дом по статусу и назначению"]},
+    {"repo_path":"src/content/docs/adaptation/russians/ksors/index.mdx","title":"Объединение КСОРС","live_url":"https://rslive.ru/adaptation/russians/ksors/","summaries":["Вынесли КСОРС в отдельную подробную статью","Расширили историю, устройство, организации сети, правовой центр, мероприятия и медийный контекст"]},
+    {"repo_path":"src/content/docs/adaptation/russians/national-council/index.mdx","title":"Национальный совет русского национального меньшинства","live_url":"https://rslive.ru/adaptation/russians/national-council/","summaries":["Добавили подробную статью о правовом статусе, выборах, полномочиях, руководстве и проектах"]},
+    {"repo_path":"src/content/docs/adaptation/russians/russian-house/index.mdx","title":"Русский дом в Белграде","live_url":"https://rslive.ru/adaptation/russians/russian-house/","summaries":["Добавили подробную статью об истории, статусе Россотрудничества, программах и внешнем политическом контексте"]},
+    {"repo_path":"src/content/docs/blog/chto_izmenilos_v_rslive_za_mesjac/index.mdx","title":"Что изменилось в RSLive за месяц","live_url":"https://rslive.ru/blog/chto_izmenilos_v_rslive_za_mesjac/","summaries":["Опубликовали первый большой обзор изменений контента, редакционной политики и движка"]},
+    {"repo_path":"src/content/docs/lifestyle/second-hand/index.mdx","title":"Покупка и продажа б/у вещей","live_url":"https://rslive.ru/lifestyle/second-hand/","summaries":["Добавили Ovdix как площадку объявлений с автоматическим переводом между русским и сербским"]}
+  ]
+}

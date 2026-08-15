@@ -1,0 +1,12 @@
+{
+  "date": "2026-08-11",
+  "hours": 24,
+  "generated_at": "2026-08-12T16:45:00+02:00",
+  "commit_count": 4,
+  "articles": [
+    {"repo_path":"src/content/docs/arrival/business/types/index.mdx","title":"Формы ведения бизнеса","live_url":"https://rslive.ru/arrival/business/types/","summaries":["Актуализировали paušal, лимиты 6/8 млн RSD, test samostalnosti и формы бизнеса на 2026 год"]},
+    {"repo_path":"src/content/docs/arrival/mobile/index.mdx","title":"Мобильная связь и интернет","live_url":"https://rslive.ru/arrival/mobile/","summaries":["Полностью обновили регистрацию prepaid SIM, eSIM, перенос номера, интернет, RATEL NetTest и роуминг Западных Балкан"]},
+    {"repo_path":"src/content/docs/gov/law/index.mdx","title":"Законы Республики Сербия","live_url":"https://rslive.ru/gov/law/","summaries":["Добавили практическую инструкцию по eKonsultacije, консультациям и публичным обсуждениям"]},
+    {"repo_path":"src/content/docs/arrival/jobs/index.mdx","title":"Поиск работы в Сербии","live_url":"https://rslive.ru/arrival/jobs/","summaries":["Добавили международный поиск и релокацию через отраслевые каталоги компаний"]}
+  ]
+}
