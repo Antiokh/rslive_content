@@ -1,0 +1,3 @@
+RSLive public-to-private sync test probe 2.
+This test runs after the private target branch already has an open draft PR, so Cloudflare Pages should create a branch preview check.
+This file must never be merged to main.
