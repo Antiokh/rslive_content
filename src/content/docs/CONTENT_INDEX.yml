@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-13
+# Last updated: 2026-08-14
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -577,6 +577,18 @@ pages:
       - хочешь понять сербскую культуру
       - интересуешься обычаями
     anchors: []
+
+  - url: /lifestyle/culture/books/
+    title: Книги, библиотеки и книжная жизнь в Сербии
+    tags: [книги, библиотеки, книжные магазины, русские книги, сербская литература, издательства, COBISS]
+    aliases: [книги в Сербии, книги на русском в Белграде, русские книги в Сербии, библиотеки Сербии, книжные Белграда]
+    link_when:
+      - нужно купить или взять книгу на русском в Сербии
+      - нужно найти книгу через библиотечный каталог COBISS
+      - интересуют сербские издательства, книжные магазины или книжный сајам
+      - нужен книжный или читательский клуб в Белграде
+    anchors: []
+
   - url: /lifestyle/culture/slava/
     title: Слава — главный праздник
     tags: [слава, праздник, святой, религия, семья, традиция]
