@@ -5,9 +5,9 @@
   "commit_count": 1,
   "articles": [
     {
-      "repo_path": "src/content/docs/children/university/index.mdx",
+      "repo_path": "src/content/docs/edu/university/index.mdx",
       "title": "Высшее образование в Сербии",
-      "live_url": "https://rslive.ru/children/university/",
+      "live_url": "https://rslive.ru/edu/university/",
       "summaries": [
         "Переработали отдельный гайд по высшему образованию для иностранцев: права абитуриентов, университеты и академии, аккредитация, платное и бесплатное обучение, стипендии, англоязычные программы, поступление и РВП по учёбе"
       ]
