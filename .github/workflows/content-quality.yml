@@ -29,14 +29,14 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     env:
-      QC_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+      QC_BASE_SHA: ${{ github.event.before }}
       QC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 
     steps:
       - name: Check out trusted quality tooling
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          ref: ${{ github.event.pull_request.base.ref || github.sha }}
           path: trusted
           fetch-depth: 1
           persist-credentials: false
@@ -50,13 +50,15 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Fetch pull request comparison base
+      - name: Resolve current pull request base
         if: github.event_name == 'pull_request_target'
         working-directory: candidate
         env:
           BASE_REPOSITORY: ${{ github.repository }}
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        run: git fetch --no-tags --depth=1 "https://github.com/${BASE_REPOSITORY}.git" "${BASE_SHA}"
+        run: |
+          base_sha="$(git -C ../trusted rev-parse HEAD)"
+          git fetch --no-tags --depth=1 "https://github.com/${BASE_REPOSITORY}.git" "${base_sha}"
+          echo "QC_BASE_SHA=${base_sha}" >> "${GITHUB_ENV}"
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
