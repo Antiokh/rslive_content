@@ -1,0 +1,50 @@
+name: Content quality
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+    paths:
+      - "src/content/docs/**"
+      - "docs/updates/**"
+      - "tools/content-quality/**"
+      - ".github/workflows/content-quality.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "src/content/docs/**"
+      - "docs/updates/**"
+      - "tools/content-quality/**"
+      - ".github/workflows/content-quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      QC_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+      QC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Install content parser
+        run: npm install --prefix tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
+
+      - name: Lint content
+        run: node tools/content-quality/lint-content.mjs
