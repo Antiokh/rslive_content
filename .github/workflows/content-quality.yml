@@ -28,13 +28,18 @@ permissions:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    env:
+      QC_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+      QC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 22
 
