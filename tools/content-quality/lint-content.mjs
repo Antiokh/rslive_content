@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
@@ -11,6 +12,7 @@ const docsRoot = path.join(root, 'src', 'content', 'docs');
 const updatesRoot = path.join(root, 'docs', 'updates');
 const contentIndexPath = path.join(docsRoot, 'CONTENT_INDEX.yml');
 const stickerRoot = path.join(docsRoot, 'about', 'stickers', 'assets', 'svg');
+const docsPrefix = 'src/content/docs/';
 
 let errorCount = 0;
 let warningCount = 0;
@@ -35,6 +37,10 @@ function report(level, file, line, message) {
   );
 }
 
+function issue(level, code, line, message) {
+  return { level, code, line, message };
+}
+
 async function walk(dir, predicate = () => true) {
   const result = [];
   let entries;
@@ -55,9 +61,9 @@ async function walk(dir, predicate = () => true) {
   return result.sort();
 }
 
-function routeForFile(file) {
-  const relative = toPosix(path.relative(docsRoot, file));
-  const withoutExtension = relative.replace(/\.(?:md|mdx)$/i, '');
+function routeForRelativeFile(relative) {
+  const docsRelative = toPosix(relative).replace(/^src\/content\/docs\//, '');
+  const withoutExtension = docsRelative.replace(/\.(?:md|mdx)$/i, '');
 
   if (withoutExtension === 'index') return '/';
   if (withoutExtension.endsWith('/index')) {
@@ -66,13 +72,22 @@ function routeForFile(file) {
   return `/${withoutExtension}/`;
 }
 
-function splitFrontmatter(source, file) {
+function routeForFile(file) {
+  return routeForRelativeFile(relativeToRoot(file));
+}
+
+function parseFrontmatter(source) {
   const normalized = source.replace(/^\uFEFF/, '');
   const lines = normalized.split(/\r?\n/);
 
   if (lines[0]?.trim() !== '---') {
-    report('error', file, 1, 'MDX page must start with YAML frontmatter (---).');
-    return { data: {}, body: normalized, bodyStartLine: 1 };
+    return {
+      data: {},
+      body: normalized,
+      bodyStartLine: 1,
+      errors: [{ line: 1, message: 'MDX page must start with YAML frontmatter (---).' }],
+      warnings: [],
+    };
   }
 
   let closing = -1;
@@ -85,8 +100,13 @@ function splitFrontmatter(source, file) {
   }
 
   if (closing === -1) {
-    report('error', file, 1, 'Frontmatter is not closed with --- or ....');
-    return { data: {}, body: normalized, bodyStartLine: 1 };
+    return {
+      data: {},
+      body: normalized,
+      bodyStartLine: 1,
+      errors: [{ line: 1, message: 'Frontmatter is not closed with --- or ....' }],
+      warnings: [],
+    };
   }
 
   const rawFrontmatter = lines.slice(1, closing).join('\n');
@@ -96,27 +116,28 @@ function splitFrontmatter(source, file) {
     uniqueKeys: true,
   });
 
-  for (const issue of document.errors) {
-    const line = issue?.linePos?.[0]?.line ? issue.linePos[0].line + 1 : 2;
-    report('error', file, line, `Invalid frontmatter YAML: ${issue.message}`);
-  }
-
-  for (const issue of document.warnings) {
-    const line = issue?.linePos?.[0]?.line ? issue.linePos[0].line + 1 : 2;
-    report('warning', file, line, `Frontmatter YAML warning: ${issue.message}`);
-  }
+  const errors = document.errors.map((item) => ({
+    line: item?.linePos?.[0]?.line ? item.linePos[0].line + 1 : 2,
+    message: `Invalid frontmatter YAML: ${item.message}`,
+  }));
+  const warnings = document.warnings.map((item) => ({
+    line: item?.linePos?.[0]?.line ? item.linePos[0].line + 1 : 2,
+    message: `Frontmatter YAML warning: ${item.message}`,
+  }));
 
   let data = {};
-  if (document.errors.length === 0) {
+  if (errors.length === 0) {
     const parsed = document.toJS();
     if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) data = parsed;
-    else report('error', file, 2, 'Frontmatter must be a YAML mapping/object.');
+    else errors.push({ line: 2, message: 'Frontmatter must be a YAML mapping/object.' });
   }
 
   return {
     data,
     body: lines.slice(closing + 1).join('\n'),
     bodyStartLine: closing + 2,
+    errors,
+    warnings,
   };
 }
 
@@ -143,7 +164,8 @@ function lineAt(text, index) {
   return text.slice(0, index).split('\n').length;
 }
 
-function checkFootnotes(file, body, bodyStartLine) {
+function collectFootnoteIssues(body, bodyStartLine) {
+  const result = [];
   const masked = maskCode(body);
   const definitions = new Map();
   const references = [];
@@ -154,7 +176,7 @@ function checkFootnotes(file, body, bodyStartLine) {
     const line = bodyStartLine + lineAt(masked, match.index) - 1;
     definitions.set(label, line);
     if (!/^\d+$/.test(label)) {
-      report('error', file, line, `Footnote label must be numeric: [^${label}].`);
+      result.push(issue('error', `footnote-label:${label}`, line, `Footnote label must be numeric: [^${label}].`));
     }
   }
 
@@ -169,7 +191,7 @@ function checkFootnotes(file, body, bodyStartLine) {
     const line = bodyStartLine + lineAt(masked, match.index) - 1;
     references.push({ label, line });
     if (!/^\d+$/.test(label)) {
-      report('error', file, line, `Footnote reference must be numeric: [^${label}].`);
+      result.push(issue('error', `footnote-reference:${label}`, line, `Footnote reference must be numeric: [^${label}].`));
     }
   }
 
@@ -177,18 +199,27 @@ function checkFootnotes(file, body, bodyStartLine) {
 
   for (const reference of references) {
     if (!definitions.has(reference.label)) {
-      report(
-        'error',
-        file,
-        reference.line,
-        `Footnote [^${reference.label}] has no definition.`,
+      result.push(
+        issue(
+          'error',
+          `footnote-missing:${reference.label}`,
+          reference.line,
+          `Footnote [^${reference.label}] has no definition.`,
+        ),
       );
     }
   }
 
   for (const [label, line] of definitions) {
     if (!referencedLabels.has(label)) {
-      report('error', file, line, `Footnote definition [^${label}] is never referenced.`);
+      result.push(
+        issue(
+          'error',
+          `footnote-unused:${label}`,
+          line,
+          `Footnote definition [^${label}] is never referenced.`,
+        ),
+      );
     }
   }
 
@@ -203,14 +234,18 @@ function checkFootnotes(file, body, bodyStartLine) {
   firstNumericReferences.forEach((reference, index) => {
     const expected = String(index + 1);
     if (reference.label !== expected) {
-      report(
-        'error',
-        file,
-        reference.line,
-        `Footnotes must be numbered by first appearance: expected [^${expected}], found [^${reference.label}].`,
+      result.push(
+        issue(
+          'warning',
+          `footnote-order:${reference.label}:${expected}`,
+          reference.line,
+          `Footnotes should be numbered by first appearance: expected [^${expected}], found [^${reference.label}].`,
+        ),
       );
     }
   });
+
+  return result;
 }
 
 const allowedDynamicRoutes = [
@@ -220,16 +255,19 @@ const allowedDynamicRoutes = [
   /^\/\.well-known(?:\/|$)/,
 ];
 
-function checkLinks(file, body, bodyStartLine, routeSet) {
+function collectLinkIssues(body, bodyStartLine, knownRoutes) {
+  const result = [];
   const masked = maskCode(body);
 
   for (const match of masked.matchAll(/<https?:\/\/[^>\s]+>/g)) {
     const line = bodyStartLine + lineAt(masked, match.index) - 1;
-    report(
-      'error',
-      file,
-      line,
-      'Markdown autolinks in angle brackets are not allowed; use [URL](URL).',
+    result.push(
+      issue(
+        'error',
+        `autolink:${match[0]}`,
+        line,
+        'Markdown autolinks in angle brackets are not allowed; use [URL](URL).',
+      ),
     );
   }
 
@@ -250,11 +288,13 @@ function checkLinks(file, body, bodyStartLine, routeSet) {
     const line = bodyStartLine + lineAt(masked, match.index) - 1;
 
     if (!destination.startsWith('/')) {
-      report(
-        'error',
-        file,
-        line,
-        `Internal link must use an absolute root path: ${destination}`,
+      result.push(
+        issue(
+          'error',
+          `relative-link:${destination}`,
+          line,
+          `Internal link must use an absolute root path: ${destination}`,
+        ),
       );
       continue;
     }
@@ -264,67 +304,104 @@ function checkLinks(file, body, bodyStartLine, routeSet) {
     if (allowedDynamicRoutes.some((pattern) => pattern.test(pathname))) continue;
     if (/\.[a-z0-9]{1,8}$/i.test(pathname)) continue;
 
-    if (!routeSet.has(pathname)) {
-      if (!pathname.endsWith('/') && routeSet.has(`${pathname}/`)) {
-        report(
-          'error',
-          file,
-          line,
-          `Internal route must use its canonical trailing slash: ${pathname}/`,
+    if (!knownRoutes.has(pathname)) {
+      if (!pathname.endsWith('/') && knownRoutes.has(`${pathname}/`)) {
+        result.push(
+          issue(
+            'error',
+            `trailing-slash:${pathname}`,
+            line,
+            `Internal route must use its canonical trailing slash: ${pathname}/`,
+          ),
         );
       } else {
-        report('error', file, line, `Internal route does not exist in src/content/docs: ${pathname}`);
+        result.push(
+          issue(
+            'warning',
+            `unknown-route:${pathname}`,
+            line,
+            `Route is not present in the public MDX tree or CONTENT_INDEX.yml; verify it in rslive.ru: ${pathname}`,
+          ),
+        );
       }
     }
   }
+
+  return result;
 }
 
-async function checkMdxFile(file, routeSet, stickerNames) {
-  const relative = relativeToRoot(file);
-  const source = await readFile(file, 'utf8');
-  const { data, body, bodyStartLine } = splitFrontmatter(source, relative);
-  const route = routeForFile(file);
-
-  if (typeof data.title !== 'string' || data.title.trim() === '') {
-    report('error', relative, 2, 'Frontmatter must contain a non-empty title.');
-  }
+function collectEditorialIssues(parsed, relative, knownRoutes, stickerNames) {
+  const result = [];
+  const { data, body, bodyStartLine } = parsed;
+  const route = routeForRelativeFile(relative);
 
   if (!data.description) {
-    report('warning', relative, 2, 'Frontmatter has no description (allowed for legacy pages).');
+    result.push(
+      issue('warning', 'description-missing', 2, 'Frontmatter has no description.'),
+    );
   }
 
   if (Object.hasOwn(data, 'source')) {
-    report('warning', relative, 2, 'Legacy frontmatter field source is deprecated; use live.');
+    result.push(
+      issue('warning', 'legacy-source', 2, 'Legacy frontmatter field source is deprecated; use live.'),
+    );
   }
 
   if (typeof data.live === 'string') {
     const expected = `https://rslive.ru${route}`;
     if (data.live !== expected) {
-      report('error', relative, 2, `Frontmatter live must match the file route: ${expected}`);
+      result.push(
+        issue('error', `live-mismatch:${expected}`, 2, `Frontmatter live must match the file route: ${expected}`),
+      );
     }
   }
 
   if (typeof data.ogSticker === 'string' && !stickerNames.has(data.ogSticker)) {
-    report('error', relative, 2, `Unknown ogSticker: ${data.ogSticker}`);
+    result.push(
+      issue(
+        'warning',
+        `unknown-public-sticker:${data.ogSticker}`,
+        2,
+        `ogSticker is not in the public SVG archive; verify that it is an engine-only sticker: ${data.ogSticker}`,
+      ),
+    );
+  }
+
+  result.push(...collectFootnoteIssues(body, bodyStartLine));
+  result.push(...collectLinkIssues(body, bodyStartLine, knownRoutes));
+  return result;
+}
+
+async function checkGlobalMdxFile(file) {
+  const relative = relativeToRoot(file);
+  const source = await readFile(file, 'utf8');
+  const parsed = parseFrontmatter(source);
+
+  for (const item of parsed.errors) report('error', relative, item.line, item.message);
+  for (const item of parsed.warnings) report('warning', relative, item.line, item.message);
+
+  if (parsed.errors.length === 0) {
+    if (typeof parsed.data.title !== 'string' || parsed.data.title.trim() === '') {
+      report('error', relative, 2, 'Frontmatter must contain a non-empty title.');
+    }
   }
 
   try {
-    await compile({ path: relative, value: body }, { remarkPlugins: [remarkGfm] });
+    await compile({ path: relative, value: parsed.body }, { remarkPlugins: [remarkGfm] });
   } catch (error) {
     const parserLine = error?.position?.start?.line ?? 1;
     report(
       'error',
       relative,
-      bodyStartLine + parserLine - 1,
+      parsed.bodyStartLine + parserLine - 1,
       `Invalid MDX syntax: ${error?.reason || error?.message || String(error)}`,
     );
   }
 
-  checkFootnotes(relative, body, bodyStartLine);
-  checkLinks(relative, body, bodyStartLine, routeSet);
+  return { source, parsed };
 }
 
-async function checkContentIndex(routeSet) {
+async function checkContentIndex() {
   const relative = relativeToRoot(contentIndexPath);
   const source = await readFile(contentIndexPath, 'utf8');
   const document = YAML.parseDocument(source, {
@@ -333,17 +410,17 @@ async function checkContentIndex(routeSet) {
     uniqueKeys: true,
   });
 
-  for (const issue of document.errors) {
-    const line = issue?.linePos?.[0]?.line ?? 1;
-    report('error', relative, line, `Invalid CONTENT_INDEX.yml: ${issue.message}`);
+  for (const item of document.errors) {
+    const line = item?.linePos?.[0]?.line ?? 1;
+    report('error', relative, line, `Invalid CONTENT_INDEX.yml: ${item.message}`);
   }
 
-  if (document.errors.length > 0) return;
+  if (document.errors.length > 0) return new Set();
 
   const data = document.toJS();
   if (!Array.isArray(data?.pages)) {
     report('error', relative, 1, 'CONTENT_INDEX.yml must contain a pages array.');
-    return;
+    return new Set();
   }
 
   const seen = new Set();
@@ -359,10 +436,9 @@ async function checkContentIndex(routeSet) {
     if (!url.startsWith('/') || (url !== '/' && !url.endsWith('/'))) {
       report('error', relative, 1, `CONTENT_INDEX URL must be an absolute canonical route: ${url}`);
     }
-    if (!routeSet.has(url)) {
-      report('error', relative, 1, `CONTENT_INDEX URL has no matching content file: ${url}`);
-    }
   }
+
+  return seen;
 }
 
 async function checkUpdateJson() {
@@ -391,6 +467,142 @@ async function loadStickerNames() {
   return names;
 }
 
+function gitOutput(args) {
+  return execFileSync('git', args, {
+    cwd: root,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  }).trim();
+}
+
+function loadChangedPages() {
+  const base = process.env.QC_BASE_SHA?.trim();
+  const head = process.env.QC_HEAD_SHA?.trim() || 'HEAD';
+  if (!base || /^0+$/.test(base)) {
+    console.log('No comparison base SHA; running repository-wide syntax checks only.');
+    return { current: new Map(), deleted: [] };
+  }
+
+  let output;
+  try {
+    output = gitOutput([
+      'diff',
+      '--name-status',
+      '--find-renames',
+      base,
+      head,
+      '--',
+      'src/content/docs',
+      'docs/updates',
+    ]);
+  } catch (error) {
+    console.log(`Could not determine changed files from ${base} to ${head}; repository-wide syntax checks still run.`);
+    return { current: new Map(), deleted: [] };
+  }
+
+  const current = new Map();
+  const deleted = [];
+  if (!output) return { current, deleted };
+
+  for (const line of output.split('\n')) {
+    const fields = line.split('\t');
+    const status = fields[0];
+
+    if (status.startsWith('R') && fields.length >= 3) {
+      const oldPath = toPosix(fields[1]);
+      const newPath = toPosix(fields[2]);
+      if (/^src\/content\/docs\/.*\.(?:md|mdx)$/i.test(oldPath)) deleted.push(oldPath);
+      if (/^src\/content\/docs\/.*\.(?:md|mdx)$/i.test(newPath)) {
+        current.set(newPath, { status: 'R', baselinePath: oldPath });
+      }
+      continue;
+    }
+
+    const file = toPosix(fields[1] || '');
+    if (!/^src\/content\/docs\/.*\.(?:md|mdx)$/i.test(file)) continue;
+
+    if (status.startsWith('D')) deleted.push(file);
+    else current.set(file, { status: status[0], baselinePath: status.startsWith('A') ? null : file });
+  }
+
+  return { current, deleted };
+}
+
+function readFileAtRevision(revision, relative) {
+  try {
+    return gitOutput(['show', `${revision}:${relative}`]);
+  } catch {
+    return null;
+  }
+}
+
+function issueKey(item) {
+  return `${item.level}|${item.code}`;
+}
+
+function reportNewIssues(file, currentIssues, baselineIssues) {
+  const baselineKeys = new Set(baselineIssues.map(issueKey));
+  for (const item of currentIssues) {
+    if (!baselineKeys.has(issueKey(item))) {
+      report(item.level, file, item.line, item.message);
+    }
+  }
+}
+
+async function checkChangedPages(changes, parsedByFile, knownRoutes, indexUrls, stickerNames) {
+  const base = process.env.QC_BASE_SHA?.trim();
+
+  for (const [relative, change] of changes.current) {
+    const absolute = path.join(root, relative);
+    const currentParsed = parsedByFile.get(relative)?.parsed;
+    if (!currentParsed) continue;
+
+    const currentIssues = collectEditorialIssues(
+      currentParsed,
+      relative,
+      knownRoutes,
+      stickerNames,
+    );
+
+    let baselineIssues = [];
+    if (base && change.baselinePath) {
+      const baselineSource = readFileAtRevision(base, change.baselinePath);
+      if (baselineSource !== null) {
+        const baselineParsed = parseFrontmatter(baselineSource);
+        baselineIssues = collectEditorialIssues(
+          baselineParsed,
+          change.baselinePath,
+          knownRoutes,
+          stickerNames,
+        );
+      }
+    }
+
+    reportNewIssues(relative, currentIssues, baselineIssues);
+
+    if ((change.status === 'A' || change.status === 'R') && !indexUrls.has(routeForFile(absolute))) {
+      report(
+        'error',
+        relative,
+        1,
+        `New content route must be registered in CONTENT_INDEX.yml: ${routeForFile(absolute)}`,
+      );
+    }
+  }
+
+  for (const relative of changes.deleted) {
+    const route = routeForRelativeFile(relative);
+    if (indexUrls.has(route)) {
+      report(
+        'error',
+        'src/content/docs/CONTENT_INDEX.yml',
+        1,
+        `Deleted or renamed content route is still present in CONTENT_INDEX.yml: ${route}`,
+      );
+    }
+  }
+}
+
 async function main() {
   await access(docsRoot);
 
@@ -400,12 +612,22 @@ async function main() {
   );
   const routeSet = new Set(mdxFiles.map(routeForFile));
   const stickerNames = await loadStickerNames();
+  const changes = loadChangedPages();
 
-  console.log(`Checking ${mdxFiles.length} content pages...`);
+  console.log(`Checking syntax for ${mdxFiles.length} content pages...`);
+  console.log(`Applying delta-aware editorial checks to ${changes.current.size} changed page(s) and ${changes.deleted.length} deleted/renamed route(s).`);
 
-  await checkContentIndex(routeSet);
+  const indexUrls = await checkContentIndex();
+  const knownRoutes = new Set([...routeSet, ...indexUrls]);
   await checkUpdateJson();
-  for (const file of mdxFiles) await checkMdxFile(file, routeSet, stickerNames);
+
+  const parsedByFile = new Map();
+  for (const file of mdxFiles) {
+    const relative = relativeToRoot(file);
+    parsedByFile.set(relative, await checkGlobalMdxFile(file));
+  }
+
+  await checkChangedPages(changes, parsedByFile, knownRoutes, indexUrls, stickerNames);
 
   console.log(`Content quality: ${errorCount} error(s), ${warningCount} warning(s).`);
   if (errorCount > 0) process.exitCode = 1;
