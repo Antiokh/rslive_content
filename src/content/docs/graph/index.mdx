@@ -39,8 +39,9 @@ live: "https://rslive.ru/graph/"
 
     I["Дети"] --> J1["Рождение детей"]
     J1 --> J2["Детские сады"]
-    J2 --> J3["Среднее образование"]
-    J3 --> J4["Высшее образование"]
+    J2 --> J3["Школьное образование"]
+
+    K["Образование"] --> K1["Высшее образование"]
 
     click A "/move/"
     click B1 "/move/visa/"
@@ -80,6 +81,8 @@ live: "https://rslive.ru/graph/"
     click J1 "/children/birth/"
     click J2 "/children/kindergarten/"
     click J3 "/children/school/"
-    click J4 "/edu/university/"
+
+    click K "/edu/"
+    click K1 "/edu/university/"
   `}
 />
