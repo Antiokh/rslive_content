@@ -1,4 +1,4 @@
-name: Notify rslive.ru about content changes
+name: Publish content to rslive.ru
 
 on:
   push:
@@ -10,37 +10,222 @@ permissions:
   contents: read
 
 concurrency:
-  group: notify-rslive-ru
+  group: publish-rslive-ru
   cancel-in-progress: false
 
 jobs:
-  notify:
+  publish:
     if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[skip content-sync]')
     runs-on: ubuntu-latest
 
     steps:
-      - name: Dispatch sync workflow in rslive.ru
-        uses: actions/github-script@v7
+      - name: Check out rslive_content
+        uses: actions/checkout@v4
         with:
-          github-token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
-          script: |
-            const source = await github.rest.repos.getCommit({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: context.sha
-            })
-            const commit = source.data.commit
-            await github.rest.repos.createDispatchEvent({
-              owner: 'Antiokh',
-              repo: 'rslive.ru',
-              event_type: 'rslive-content-updated',
-              client_payload: {
-                sha: context.sha,
-                ref: context.ref,
-                source_repo: `${context.repo.owner}/${context.repo.repo}`,
-                source_url: source.data.html_url,
-                message: commit.message,
-                author: commit.author?.name || source.data.author?.login || '',
-                author_email: commit.author?.email || ''
-              }
-            })
+          fetch-depth: 1
+
+      - name: Check out private rslive.ru
+        uses: actions/checkout@v4
+        with:
+          repository: Antiokh/rslive.ru
+          ref: main
+          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          path: rslive-engine
+          fetch-depth: 0
+
+      - name: Copy public content and sticker sources
+        run: |
+          set -euo pipefail
+          test -d src/content/docs
+          test -d src/content/docs/about/stickers/assets/svg
+          test -d rslive-engine/astro/src/content/docs
+
+          rsync -a --delete \
+            --exclude='.git/' \
+            src/content/docs/ rslive-engine/astro/src/content/docs/
+
+          mkdir -p rslive-engine/astro/src/assets/stickers
+          rsync -a \
+            src/content/docs/about/stickers/assets/svg/ rslive-engine/astro/src/assets/stickers/
+
+      - name: Commit and push synced changes
+        id: sync_commit
+        working-directory: rslive-engine
+        env:
+          CONTENT_SHA: ${{ github.sha }}
+          CONTENT_REPO: ${{ github.repository }}
+          CONTENT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          CONTENT_MESSAGE="$(git -C "$GITHUB_WORKSPACE" show -s --format=%B "$CONTENT_SHA")"
+          CONTENT_AUTHOR="$(git -C "$GITHUB_WORKSPACE" show -s --format=%an "$CONTENT_SHA")"
+          CONTENT_AUTHOR_EMAIL="$(git -C "$GITHUB_WORKSPACE" show -s --format=%ae "$CONTENT_SHA")"
+
+          git config user.name "rslive content sync"
+          git config user.email "actions@github.com"
+
+          if [ -z "$(git status --porcelain astro/src/content/docs astro/src/assets/stickers)" ]; then
+            echo "No content or sticker changes to sync."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "content_sha=$CONTENT_SHA" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          changed_index_paths="$(git status --porcelain -- astro/src/content/docs | awk '{print $NF}' | grep '/index\.mdx$' || true)"
+          changed_index_paths="$(printf '%s\n' "$changed_index_paths" | while IFS= read -r path; do
+            if [ -n "$path" ] && [ -f "$path" ]; then
+              printf '%s\n' "$path"
+            fi
+          done)"
+          changed_page_count="$(printf '%s\n' "$changed_index_paths" | sed '/^$/d' | wc -l | tr -d ' ')"
+          preview_url=""
+          preview_route=""
+          if [ "$changed_page_count" -gt 0 ]; then
+            first_index_path="$(printf '%s\n' "$changed_index_paths" | sed -n '1p')"
+            route="${first_index_path#astro/src/content/docs/}"
+            route="${route%index.mdx}"
+            preview_route="/${route}"
+            preview_url="https://rslive.ru/${route}"
+          fi
+
+          git add astro/src/content/docs astro/src/assets/stickers
+          subject="$(printf '%s\n' "$CONTENT_MESSAGE" | sed -n '1p')"
+          if [ -z "$subject" ]; then
+            subject="Sync docs from rslive_content"
+          fi
+
+          {
+            printf '%s [skip content-sync]\n\n' "$subject"
+            printf 'Original content commit message:\n\n'
+            printf '%s\n\n' "$CONTENT_MESSAGE"
+            printf 'Sync metadata:\n\n'
+            printf '%s\n' "- Source repository: $CONTENT_REPO"
+            printf '%s\n' "- Source commit: $CONTENT_SHA"
+            printf '%s\n' "- Source URL: $CONTENT_URL"
+            if [ -n "$CONTENT_AUTHOR" ]; then
+              printf '%s' "- Source author: $CONTENT_AUTHOR"
+              if [ -n "$CONTENT_AUTHOR_EMAIL" ]; then
+                printf ' <%s>' "$CONTENT_AUTHOR_EMAIL"
+              fi
+              printf '\n'
+            fi
+            printf '%s\n' "- Sync workflow: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          } > /tmp/content-sync-commit-message.txt
+
+          git commit -F /tmp/content-sync-commit-message.txt
+
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              break
+            fi
+
+            if [ "$attempt" = "3" ]; then
+              exit 1
+            fi
+
+            git pull --rebase origin main
+            sleep 5
+          done
+
+          private_sha="$(git rev-parse HEAD)"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "content_sha=$CONTENT_SHA" >> "$GITHUB_OUTPUT"
+          echo "private_sha=$private_sha" >> "$GITHUB_OUTPUT"
+          echo "preview_url=$preview_url" >> "$GITHUB_OUTPUT"
+          echo "preview_route=$preview_route" >> "$GITHUB_OUTPUT"
+          echo "changed_page_count=$changed_page_count" >> "$GITHUB_OUTPUT"
+
+      - name: Mark source commit when no mirror changes are needed
+        if: steps.sync_commit.outputs.changed == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          CONTENT_SHA: ${{ steps.sync_commit.outputs.content_sha }}
+        run: |
+          set -euo pipefail
+          gh api --method POST repos/Antiokh/rslive_content/statuses/"$CONTENT_SHA" \
+            -f state="success" \
+            -f context="rslive.ru / Cloudflare Pages" \
+            -f description="No mirrored content changes to deploy" \
+            -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
+      - name: Wait for Cloudflare Pages and publish status
+        if: steps.sync_commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          PRIVATE_SHA: ${{ steps.sync_commit.outputs.private_sha }}
+          CONTENT_SHA: ${{ steps.sync_commit.outputs.content_sha }}
+          PREVIEW_URL: ${{ steps.sync_commit.outputs.preview_url }}
+          PREVIEW_ROUTE: ${{ steps.sync_commit.outputs.preview_route }}
+          CHANGED_PAGE_COUNT: ${{ steps.sync_commit.outputs.changed_page_count }}
+        run: |
+          set -euo pipefail
+
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          gh api --method POST repos/Antiokh/rslive_content/statuses/"$CONTENT_SHA" \
+            -f state="pending" \
+            -f context="rslive.ru / Cloudflare Pages" \
+            -f description="Waiting for rslive.ru Cloudflare Pages deploy" \
+            -f target_url="$run_url"
+
+          cloudflare_json=""
+          for attempt in $(seq 1 60); do
+            cloudflare_json="$(gh api "repos/Antiokh/rslive.ru/commits/$PRIVATE_SHA/check-runs" \
+              --jq '[.check_runs[] | select(.name == "Cloudflare Pages")] | sort_by(.started_at) | last | if . == null then empty else {status, conclusion, details_url, html_url} end' || true)"
+
+            if [ -n "$cloudflare_json" ]; then
+              status="$(printf '%s' "$cloudflare_json" | jq -r '.status')"
+              if [ "$status" = "completed" ]; then
+                break
+              fi
+            fi
+
+            echo "Waiting for Cloudflare Pages check for $PRIVATE_SHA ($attempt/60)..."
+            sleep 15
+          done
+
+          if [ -z "$cloudflare_json" ]; then
+            state="error"
+            description="rslive.ru Cloudflare Pages check was not found"
+            target_url="$run_url"
+          else
+            conclusion="$(printf '%s' "$cloudflare_json" | jq -r '.conclusion // ""')"
+            target_url="$(printf '%s' "$cloudflare_json" | jq -r '.details_url // .html_url // ""')"
+            case "$conclusion" in
+              success)
+                state="success"
+                description="rslive.ru Cloudflare Pages deploy succeeded"
+                if [ -n "$PREVIEW_URL" ]; then
+                  target_url="$PREVIEW_URL"
+                  if [ "${CHANGED_PAGE_COUNT:-0}" = "1" ]; then
+                    description="Deploy succeeded: $PREVIEW_ROUTE"
+                  else
+                    description="Deploy succeeded: ${CHANGED_PAGE_COUNT:-multiple} pages changed"
+                  fi
+                fi
+                ;;
+              failure|timed_out|cancelled|action_required)
+                state="failure"
+                description="rslive.ru Cloudflare Pages deploy failed"
+                ;;
+              *)
+                state="error"
+                description="rslive.ru Cloudflare Pages deploy ended: ${conclusion:-unknown}"
+                ;;
+            esac
+          fi
+
+          args=(
+            repos/Antiokh/rslive_content/statuses/"$CONTENT_SHA"
+            -f state="$state"
+            -f context="rslive.ru / Cloudflare Pages"
+            -f description="$description"
+          )
+          if [ -n "${target_url:-}" ]; then
+            args+=(-f target_url="$target_url")
+          fi
+          gh api --method POST "${args[@]}"
+
+          if [ "$state" != "success" ]; then
+            exit 1
+          fi
