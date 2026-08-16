@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-14
+# Last updated: 2026-08-16
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -795,6 +795,17 @@ pages:
       - вопросы об учёбе
     anchors: []
 
+  - url: /edu/university/
+    title: Высшее образование в Сербии
+    tags: [высшее образование, университет, вуз, студент, поступление, иностранец, стипендии, РВП]
+    aliases: [университеты Сербии, вузы Сербии, поступление в вуз Сербии, учеба в Сербии, Study in Serbia]
+    link_when:
+      - нужно выбрать вуз или программу высшего образования
+      - иностранцу нужно поступить в сербский вуз
+      - нужно проверить стоимость, стипендии или программы на английском
+      - нужен РВП по учёбе
+    anchors: []
+
   - url: /edu/school/
     title: Школьное образование
     tags: [школа, образование, ребёнок, основная школа, средняя школа, гимназия]
@@ -1397,7 +1408,6 @@ pages:
       - нужно понять как сформировать и оплатить реквизиты
       - платёж не распознан электронной заявкой
     anchors: []
-
   - url: /gov/taxes/eco/
     title: Экологический сбор
     tags: [экологический сбор, eko taksa, LPA, предприниматель, декларация]
