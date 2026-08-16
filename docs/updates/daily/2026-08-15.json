@@ -1,0 +1,48 @@
+{
+  "date": "2026-08-15",
+  "hours": 24,
+  "generated_at": "2026-08-15T17:50:39+02:00",
+  "commit_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/business/efaktura/index.mdx",
+      "title": "eFaktura и SEF",
+      "live_url": "https://rslive.ru/arrival/business/efaktura/",
+      "summaries": [
+        "Добавили отдельную инструкцию по SEF/eFaktura: круг пользователей, проверка контрагента, доступ, рабочий процесс и изменения 2025–2026 годов"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/drive/parking/index.mdx",
+      "title": "Парковка в Сербии",
+      "live_url": "https://rslive.ru/drive/parking/",
+      "summaries": [
+        "Добавили отдельную инструкцию по платной парковке, зонам, резидентским картам и проверке актуальных правил Белграда и Нови-Сада"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/integration/driver_license/index.mdx",
+      "title": "Замена водительских прав РФ на сербские",
+      "live_url": "https://rslive.ru/integration/driver_license/",
+      "summaries": [
+        "Добавили международное водительское удостоверение и связанные водительские сервисы"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/index.mdx",
+      "title": "Поиск жилья",
+      "live_url": "https://rslive.ru/move/housing/",
+      "summaries": [
+        "Добавили официальные страницы плановых отключений электричества и воды, самостоятельную передачу показаний электричества 1–6 числа и актуальную скидку; вынесли изменчивые парковочные правила в отдельную инструкцию"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/med/blood-donation/index.mdx",
+      "title": "Донорство крови в Сербии",
+      "live_url": "https://rslive.ru/med/blood-donation/",
+      "summaries": [
+        "Добавили инструкцию по донорству крови для иностранцев: документы, критерии допуска, процедура, пункты в Белграде и Нови-Саде и оплачиваемое отсутствие по Закону о труде"
+      ]
+    }
+  ]
+}
