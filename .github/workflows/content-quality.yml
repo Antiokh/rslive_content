@@ -50,15 +50,16 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Resolve current pull request base
+      - name: Resolve pull request merge base
         if: github.event_name == 'pull_request_target'
         working-directory: candidate
         env:
           BASE_REPOSITORY: ${{ github.repository }}
         run: |
-          base_sha="$(git -C ../trusted rev-parse HEAD)"
-          git fetch --no-tags --depth=1 "https://github.com/${BASE_REPOSITORY}.git" "${base_sha}"
-          echo "QC_BASE_SHA=${base_sha}" >> "${GITHUB_ENV}"
+          current_base_sha="$(git -C ../trusted rev-parse HEAD)"
+          git fetch --no-tags "https://github.com/${BASE_REPOSITORY}.git" "${current_base_sha}"
+          merge_base_sha="$(git merge-base "${QC_HEAD_SHA}" "${current_base_sha}")"
+          echo "QC_BASE_SHA=${merge_base_sha}" >> "${GITHUB_ENV}"
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
