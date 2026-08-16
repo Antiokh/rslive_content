@@ -1,7 +1,7 @@
 name: Content quality
 
 on:
-  pull_request:
+  pull_request_target:
     types:
       - opened
       - synchronize
@@ -29,22 +29,45 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     env:
-      QC_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+      QC_BASE_SHA: ${{ github.event.before }}
       QC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 
     steps:
-      - name: Check out repository
+      - name: Check out trusted quality tooling
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event.pull_request.base.ref || github.sha }}
+          path: trusted
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Check out content under review
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: candidate
           fetch-depth: 0
+          persist-credentials: false
+
+      - name: Resolve current pull request base
+        if: github.event_name == 'pull_request_target'
+        working-directory: candidate
+        env:
+          BASE_REPOSITORY: ${{ github.repository }}
+        run: |
+          base_sha="$(git -C ../trusted rev-parse HEAD)"
+          git fetch --no-tags --depth=1 "https://github.com/${BASE_REPOSITORY}.git" "${base_sha}"
+          echo "QC_BASE_SHA=${base_sha}" >> "${GITHUB_ENV}"
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
           node-version: 22
 
-      - name: Install content parser
-        run: npm install --prefix tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
+      - name: Install trusted content parser
+        run: npm install --prefix trusted/tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
 
       - name: Lint content
-        run: node tools/content-quality/lint-content.mjs
+        working-directory: candidate
+        run: node ../trusted/tools/content-quality/lint-content.mjs
