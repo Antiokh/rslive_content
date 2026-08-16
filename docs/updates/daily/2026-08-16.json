@@ -1,0 +1,25 @@
+{
+  "date": "2026-08-16",
+  "hours": 24,
+  "generated_at": "2026-08-16T09:20:00+02:00",
+  "commit_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/integration/properties/index.mdx",
+      "title": "Недвижимость в Сербии",
+      "live_url": "https://rslive.ru/integration/properties/",
+      "summaries": [
+        "Добавили цены реальных сделок RGZ за I квартал 2026 года по Белграду, Нови-Саду и Нишу и разделили их с ценами объявлений",
+        "Добавили инструменты для проверки рынка: публичный Реестр цен RGZ, Stanomer, Kaza.rs и аналитику Nekretnine.rs"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/index.mdx",
+      "title": "Поиск жилья",
+      "live_url": "https://rslive.ru/move/housing/",
+      "summaries": [
+        "Добавили ориентиры долгосрочной аренды по Белграду, Нови-Саду и Нишу и сервисы KolikoStane и Nekretnine.rs для проверки цены объявления"
+      ]
+    }
+  ]
+}
