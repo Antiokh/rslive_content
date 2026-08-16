@@ -1,8 +1,8 @@
 {
   "date": "2026-08-16",
   "hours": 24,
-  "generated_at": "2026-08-16T11:15:00+02:00",
-  "commit_count": 3,
+  "generated_at": "2026-08-16T13:19:00+02:00",
+  "commit_count": 10,
   "articles": [
     {
       "repo_path": "src/content/docs/edu/university/index.mdx",
@@ -36,6 +36,190 @@
       "live_url": "https://rslive.ru/move/visa/",
       "summaries": [
         "Исправили сравнительную таблицу статусов: бесплатное высшее образование для иностранца не следует из РВП или ПМЖ и доступно только по отдельной программе или стипендии; для граждан Сербии бюджет доступен по конкурсу"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/types/index.mdx",
+      "title": "Формы ведения бизнеса в Сербии",
+      "live_url": "https://rslive.ru/arrival/business/types/",
+      "summaries": [
+        "Уточнили сравнение paušal, knjigaš и lična zarada и связали калькулятор с новой структурой налогового раздела"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/index.mdx",
+      "title": "Налоги и пошлины",
+      "live_url": "https://rslive.ru/gov/taxes/",
+      "summaries": [
+        "Перестроили налоговый хаб по задачам бизнеса, физического лица и активов и добавили переходы к отдельным расчётным и процедурным статьям"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/calculation/index.mdx",
+      "title": "Как считаются налоги в Сербии",
+      "live_url": "https://rslive.ru/gov/taxes/calculation/",
+      "summaries": [
+        "Добавили отдельное объяснение налоговой базы, взносов и расчётной механики для зарплаты, предпринимателя, DOO, фриланса и PDV"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/business/index.mdx",
+      "title": "Налоги бизнеса",
+      "live_url": "https://rslive.ru/gov/taxes/business/",
+      "summaries": [
+        "Добавили навигационный раздел по налогам preduzetnik, DOO, PDV и дивидендам"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/business/preduzetnik/index.mdx",
+      "title": "Налоги preduzetnik",
+      "live_url": "https://rslive.ru/gov/taxes/business/preduzetnik/",
+      "summaries": [
+        "Развели paušal, knjigaš и knjigaš с lična zarada, включая базы взносов, максимальную месячную базу и практический расчёт"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/business/doo/index.mdx",
+      "title": "Налоги DOO",
+      "live_url": "https://rslive.ru/gov/taxes/business/doo/",
+      "summaries": [
+        "Добавили отдельный гайд по налогу на прибыль DOO, авансам, декларациям и способам выплаты денег владельцу"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/business/dividends/index.mdx",
+      "title": "Дивиденды",
+      "live_url": "https://rslive.ru/gov/taxes/business/dividends/",
+      "summaries": [
+        "Добавили отдельный разбор дивидендов сербских и иностранных компаний, деклараций и налогового кредита"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/business/pdv/index.mdx",
+      "title": "PDV",
+      "live_url": "https://rslive.ru/gov/taxes/business/pdv/",
+      "summaries": [
+        "Добавили отдельный гайд по порогу регистрации, ставкам, входному и исходящему PDV и расчёту налога из цены"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/personal/index.mdx",
+      "title": "Личные налоги",
+      "live_url": "https://rslive.ru/gov/taxes/personal/",
+      "summaries": [
+        "Добавили навигационный раздел по зарплате, фрилансу, иностранным доходам и годовому налогу"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/personal/salary/index.mdx",
+      "title": "Налог с зарплаты",
+      "live_url": "https://rslive.ru/gov/taxes/personal/salary/",
+      "summaries": [
+        "Добавили расчёт net, bruto 1 и bruto 2, налога и социальных взносов"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/personal/freelance/index.mdx",
+      "title": "Налоги фрилансера",
+      "live_url": "https://rslive.ru/gov/taxes/personal/freelance/",
+      "summaries": [
+        "Вынесли квартальное самообложение фрилансера, две модели и PP OPO-K в отдельную налоговую статью"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/personal/foreign-income/index.mdx",
+      "title": "Иностранные доходы",
+      "live_url": "https://rslive.ru/gov/taxes/personal/foreign-income/",
+      "summaries": [
+        "Добавили отдельный гайд по иностранным доходам налогового резидента, PP OPO и зачёту иностранного налога"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/personal/annual-income/index.mdx",
+      "title": "Годовой налог на доход",
+      "live_url": "https://rslive.ru/gov/taxes/personal/annual-income/",
+      "summaries": [
+        "Добавили отдельный гайд по годовому налогу, порогу, вычетам, ставкам и декларации PP GPDG"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/assets/index.mdx",
+      "title": "Имущество и активы",
+      "live_url": "https://rslive.ru/gov/taxes/assets/",
+      "summaries": [
+        "Добавили навигационный раздел по недвижимости, капитальному приросту и зарубежным активам"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/assets/property/index.mdx",
+      "title": "Налог на недвижимость",
+      "live_url": "https://rslive.ru/gov/taxes/assets/property/",
+      "summaries": [
+        "Вынесли налог на владение недвижимостью, квартальные авансы и налогообложение аренды в отдельную статью"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/assets/foreign-assets/index.mdx",
+      "title": "Зарубежные активы",
+      "live_url": "https://rslive.ru/gov/taxes/assets/foreign-assets/",
+      "summaries": [
+        "Добавили различие между владением зарубежным активом, доходом от него и его продажей, включая старую форму IPP"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/assets/capital-gains/index.mdx",
+      "title": "Капитальный прирост",
+      "live_url": "https://rslive.ru/gov/taxes/assets/capital-gains/",
+      "summaries": [
+        "Добавили отдельный гайд по продаже недвижимости, акций, долей и цифровых активов, убыткам и PPDG-3R"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/ruska_ambasada/index.mdx",
+      "title": "Посольство России в Сербии",
+      "live_url": "https://rslive.ru/map/ruska_ambasada/",
+      "summaries": [
+        "Уточнили уведомление России после сербского stalno nastanjenje: 60 дней считаются от решения, а при пропуске срока консульство направляет подавать уведомление в МВД после въезда в Россию"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/eporezi/index.mdx",
+      "title": "Портал ePorezi",
+      "live_url": "https://rslive.ru/gov/taxes/eporezi/",
+      "summaries": [
+        "Добавили оплату месячных авансов паушальца по действующему решению и уточнили, что BOP — только часть полного poziv na broj"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/mobile/index.mdx",
+      "title": "Мобильная связь и интернет",
+      "live_url": "https://rslive.ru/arrival/mobile/",
+      "summaries": [
+        "Уточнили доказательную методику RATEL NetTest для претензии по фиксированному интернету и 60-дневный срок обращения в RATEL после ответа оператора"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/culture/books/index.mdx",
+      "title": "Книги, библиотеки и книжная жизнь в Сербии",
+      "live_url": "https://rslive.ru/lifestyle/culture/books/",
+      "summaries": [
+        "Убрали неподтверждённые тарифы и условия библиотеки Русского дома и коммерческие регистрационные данные панчевской Ruska biblioteka, сохранив подтверждённые адреса, фонды и практические способы проверки"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/integration/properties/index.mdx",
+      "title": "Недвижимость в Сербии",
+      "live_url": "https://rslive.ru/integration/properties/",
+      "summaries": [
+        "Обновили блок рынка недвижимости по официальным данным RGZ и отделили цены завершённых сделок от цен объявлений"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/index.mdx",
+      "title": "Жильё и аренда",
+      "live_url": "https://rslive.ru/move/housing/",
+      "summaries": [
+        "Добавили актуальные ориентиры рынка аренды и источники для проверки цен без подмены фактических сделок объявлениями"
       ]
     }
   ]
