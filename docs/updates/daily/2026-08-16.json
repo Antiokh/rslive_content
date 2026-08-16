@@ -1,8 +1,8 @@
 {
   "date": "2026-08-16",
   "hours": 24,
-  "generated_at": "2026-08-16T13:19:00+02:00",
-  "commit_count": 10,
+  "generated_at": "2026-08-16T17:33:00+02:00",
+  "commit_count": 11,
   "articles": [
     {
       "repo_path": "src/content/docs/edu/university/index.mdx",
@@ -220,6 +220,14 @@
       "live_url": "https://rslive.ru/move/housing/",
       "summaries": [
         "Добавили актуальные ориентиры рынка аренды и источники для проверки цен без подмены фактических сделок объявлениями"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/integration/driver_license/index.mdx",
+      "title": "Замена водительских прав РФ на сербские",
+      "live_url": "https://rslive.ru/integration/driver_license/",
+      "summaries": [
+        "Привели официальный пакет документов к требованиям МУП и добавили свежий белградский кейс августа 2026 года: подготовку за день, подачу и выдачу в Ljermontovljeva 12a, реальные расходы и сроки с явной маркировкой пользовательского опыта"
       ]
     }
   ]
