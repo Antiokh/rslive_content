@@ -1,0 +1,315 @@
+name: Preview content on rslive.ru
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review, closed]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+concurrency:
+  group: rslive-content-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  ENGINE_REPO: Antiokh/rslive.ru
+
+jobs:
+  deploy:
+    if: >-
+      github.event.action != 'closed' &&
+      github.actor == github.repository_owner &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+
+    steps:
+      # pull_request_target intentionally keeps the workflow itself on trusted main.
+      # The PR checkout below is data-only: nothing from it is executed on the runner.
+      - name: Check out proposed content
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: content
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out current rslive.ru engine
+        uses: actions/checkout@v4
+        with:
+          repository: Antiokh/rslive.ru
+          ref: main
+          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          path: rslive-engine
+          fetch-depth: 0
+
+      - name: Mirror PR content into preview branch
+        id: mirror
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+
+          preview_branch="content-pr-${PR_NUMBER}"
+          preview_root="https://${preview_branch}.rslive.pages.dev"
+
+          echo "preview_branch=$preview_branch" >> "$GITHUB_OUTPUT"
+          echo "preview_root=$preview_root" >> "$GITHUB_OUTPUT"
+
+          test -d content/src/content/docs
+          test -d content/src/content/docs/about/stickers/assets/svg
+          test -d rslive-engine/astro/src/content/docs
+
+          git -C content fetch --no-tags origin "$BASE_SHA" || true
+          git -C rslive-engine checkout -B "$preview_branch" origin/main
+          git -C rslive-engine config user.name "Anton Nazarov"
+          git -C rslive-engine config user.email "antiokh@yandex.ru"
+
+          : > /tmp/preview-routes.md
+          route_count=0
+          while IFS= read -r path; do
+            [ -n "$path" ] || continue
+            [ -f "content/$path" ] || continue
+
+            relative="${path#src/content/docs/}"
+            if [ "$relative" = "index.mdx" ]; then
+              route="/"
+            else
+              route="/${relative%index.mdx}"
+            fi
+
+            # Keep path text out of Markdown unless it is a normal RSLive route.
+            if [[ ! "$route" =~ ^/[A-Za-z0-9/_-]*$ ]]; then
+              continue
+            fi
+
+            route_count=$((route_count + 1))
+            if [ "$route_count" -le 15 ]; then
+              printf -- '- [`%s`](%s%s)\n' "$route" "$preview_root" "$route" >> /tmp/preview-routes.md
+            fi
+          done < <(git -C content diff --name-only "$BASE_SHA...$HEAD_SHA" -- 'src/content/docs/**/index.mdx' || true)
+
+          if [ "$route_count" -gt 15 ]; then
+            printf '\n_И ещё %s изменённых страниц._\n' "$((route_count - 15))" >> /tmp/preview-routes.md
+          fi
+
+          rsync -a --delete \
+            --exclude='.git/' \
+            content/src/content/docs/ rslive-engine/astro/src/content/docs/
+
+          mkdir -p rslive-engine/astro/src/assets/stickers
+          rsync -a \
+            content/src/content/docs/about/stickers/assets/svg/ rslive-engine/astro/src/assets/stickers/
+
+          if [ -z "$(git -C rslive-engine status --porcelain astro/src/content/docs astro/src/assets/stickers)" ]; then
+            echo "No mirrored site changes in this PR."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            git -C rslive-engine push origin --delete "$preview_branch" >/dev/null 2>&1 || true
+            exit 0
+          fi
+
+          git -C rslive-engine add astro/src/content/docs astro/src/assets/stickers
+          git -C rslive-engine commit -m "Preview rslive_content PR #${PR_NUMBER}" \
+            -m "Source: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}" \
+            -m "Source commit: ${HEAD_SHA}"
+
+          remote_sha="$(git -C rslive-engine ls-remote origin "refs/heads/$preview_branch" | awk '{print $1}')"
+          if [ -n "$remote_sha" ]; then
+            git -C rslive-engine push \
+              --force-with-lease="refs/heads/${preview_branch}:${remote_sha}" \
+              origin "HEAD:refs/heads/${preview_branch}"
+          else
+            git -C rslive-engine push origin "HEAD:refs/heads/${preview_branch}"
+          fi
+
+          private_sha="$(git -C rslive-engine rev-parse HEAD)"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "private_sha=$private_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for Cloudflare Pages
+        id: cloudflare
+        if: steps.mirror.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          PRIVATE_SHA: ${{ steps.mirror.outputs.private_sha }}
+        run: |
+          set -euo pipefail
+
+          cloudflare_json=""
+          for attempt in $(seq 1 60); do
+            cloudflare_json="$(gh api "repos/${ENGINE_REPO}/commits/${PRIVATE_SHA}/check-runs" \
+              --jq '[.check_runs[] | select(.name == "Cloudflare Pages" and .app.slug == "cloudflare-workers-and-pages")] | sort_by(.started_at) | last | if . == null then empty else {status, conclusion, details_url, html_url} end' || true)"
+
+            if [ -n "$cloudflare_json" ]; then
+              status="$(printf '%s' "$cloudflare_json" | jq -r '.status')"
+              if [ "$status" = "completed" ]; then
+                break
+              fi
+            fi
+
+            echo "Waiting for Cloudflare Pages check for $PRIVATE_SHA ($attempt/60)..."
+            sleep 15
+          done
+
+          if [ -z "$cloudflare_json" ]; then
+            echo "state=error" >> "$GITHUB_OUTPUT"
+            echo "conclusion=check-not-found" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          conclusion="$(printf '%s' "$cloudflare_json" | jq -r '.conclusion // "unknown"')"
+          logs_url="$(printf '%s' "$cloudflare_json" | jq -r '.details_url // .html_url // ""')"
+
+          if [[ "$logs_url" != https://dash.cloudflare.com/* && "$logs_url" != https://*.cloudflare.com/* ]]; then
+            logs_url=""
+          fi
+
+          case "$conclusion" in
+            success)
+              state="success"
+              ;;
+            failure|timed_out|cancelled|action_required)
+              state="failure"
+              ;;
+            *)
+              state="error"
+              ;;
+          esac
+
+          echo "state=$state" >> "$GITHUB_OUTPUT"
+          echo "conclusion=$conclusion" >> "$GITHUB_OUTPUT"
+          echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
+
+      - name: Create or update PR preview report
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          MIRROR_OUTCOME: ${{ steps.mirror.outcome }}
+          CHANGED: ${{ steps.mirror.outputs.changed }}
+          PREVIEW_ROOT: ${{ steps.mirror.outputs.preview_root }}
+          PREVIEW_BRANCH: ${{ steps.mirror.outputs.preview_branch }}
+          CF_STATE: ${{ steps.cloudflare.outputs.state }}
+          CF_CONCLUSION: ${{ steps.cloudflare.outputs.conclusion }}
+          CF_LOGS_URL: ${{ steps.cloudflare.outputs.logs_url }}
+        run: |
+          set -euo pipefail
+
+          marker='<!-- rslive-content-preview -->'
+          short_sha="${HEAD_SHA:0:7}"
+          source_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${HEAD_SHA}"
+          workflow_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+          {
+            echo "$marker"
+
+            if [ "$MIRROR_OUTCOME" != "success" ]; then
+              echo '### ❌ Контентный preview не подготовлен'
+              echo
+              echo 'Синхронизация PR-контента с preview-веткой завершилась ошибкой до Cloudflare deploy.'
+              echo
+              echo "- **Workflow:** [логи GitHub Actions](${workflow_url})"
+              echo "- **Контент:** [\`${short_sha}\`](${source_url})"
+            elif [ "$CHANGED" != "true" ]; then
+              echo '### ℹ️ Preview сайта не требуется'
+              echo
+              echo 'В PR нет изменений, которые меняют зеркалируемый контент сайта.'
+            elif [ "$CF_STATE" = "success" ]; then
+              echo '### ✅ Контентный preview готов'
+              echo
+              echo 'Astro-сборка и Cloudflare Pages deploy прошли успешно.'
+              echo
+              echo "- **Preview:** <${PREVIEW_ROOT}>"
+              if [ -n "$CF_LOGS_URL" ]; then
+                echo "- **Cloudflare:** [логи deploy](${CF_LOGS_URL})"
+              fi
+              echo "- **Контент:** [\`${short_sha}\`](${source_url})"
+              echo "- **Служебная ветка:** \`${PREVIEW_BRANCH}\` в \`${ENGINE_REPO}\`"
+
+              if [ -s /tmp/preview-routes.md ]; then
+                echo
+                echo '**Изменённые страницы:**'
+                cat /tmp/preview-routes.md
+              fi
+            else
+              echo '### ❌ Контентный preview не собрался'
+              echo
+              echo "Cloudflare Pages завершил deploy со статусом \`${CF_CONCLUSION:-unknown}\`."
+              echo
+              if [ -n "$CF_LOGS_URL" ]; then
+                echo "- **Cloudflare:** [логи deploy](${CF_LOGS_URL})"
+              fi
+              echo "- **Workflow:** [логи GitHub Actions](${workflow_url})"
+              echo "- **Контент:** [\`${short_sha}\`](${source_url})"
+            fi
+
+            echo
+            echo '_Комментарий обновляется автоматически после каждого изменения PR._'
+          } > /tmp/preview-comment.md
+
+          comment_id="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100" \
+            --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body // "") | contains("<!-- rslive-content-preview -->"))) | .id' \
+            | sed -n '1p')"
+
+          if [ -n "$comment_id" ]; then
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              -f body="$(cat /tmp/preview-comment.md)" >/dev/null
+          else
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" \
+              -f body="$(cat /tmp/preview-comment.md)" >/dev/null
+          fi
+
+      - name: Fail when preview deploy failed
+        if: steps.mirror.outputs.changed == 'true' && steps.cloudflare.outputs.state != 'success'
+        run: exit 1
+
+  cleanup:
+    if: >-
+      github.event.action == 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete mirrored preview branch
+        env:
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          preview_branch="content-pr-${PR_NUMBER}"
+          gh api --method DELETE "repos/${ENGINE_REPO}/git/refs/heads/${preview_branch}" >/dev/null 2>&1 || true
+
+      - name: Mark preview report as closed
+        env:
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGED: ${{ github.event.pull_request.merged }}
+        run: |
+          set -euo pipefail
+
+          marker='<!-- rslive-content-preview -->'
+          comment_id="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100" \
+            --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body // "") | contains("<!-- rslive-content-preview -->"))) | .id' \
+            | sed -n '1p')"
+
+          [ -n "$comment_id" ] || exit 0
+
+          {
+            echo "$marker"
+            echo '### 🗄️ Контентный preview закрыт'
+            echo
+            echo 'Служебная preview-ветка удалена и больше не обновляется.'
+            if [ "$MERGED" = "true" ]; then
+              echo 'После merge публикацию отслеживает production-синхронизация `rslive.ru / Cloudflare Pages`.'
+            fi
+          } > /tmp/preview-closed.md
+
+          gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+            -f body="$(cat /tmp/preview-closed.md)" >/dev/null
