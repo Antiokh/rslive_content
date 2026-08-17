@@ -1,8 +1,8 @@
 {
   "date": "2026-08-17",
   "hours": 24,
-  "generated_at": "2026-08-17T21:06:00+02:00",
-  "commit_count": 6,
+  "generated_at": "2026-08-17T21:12:00+02:00",
+  "commit_count": 7,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/visarun/index.mdx",
@@ -142,6 +142,22 @@
       "live_url": "https://rslive.ru/gov/taxes/eporezi/",
       "summaries": [
         "Добавили прямой порядок оплаты налогов предпринимателя с бизнес-счёта, действия после ошибочной оплаты с личного счёта и алгоритм короткой просрочки с процентами с первого дня после срока и повторной проверкой состояния налоговых счетов"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/types/index.mdx",
+      "title": "Формы ведения бизнеса в Сербии",
+      "live_url": "https://rslive.ru/arrival/business/types/",
+      "summaries": [
+        "Уточнили лимиты 6/8 млн RSD и правило места реализации услуг: B2B-услуга иностранному заказчику обычно имеет место реализации вне Сербии и не входит в PDV-порог 8 млн, если не действует специальное правило"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/business/pdv/index.mdx",
+      "title": "PDV",
+      "live_url": "https://rslive.ru/gov/taxes/business/pdv/",
+      "summaries": [
+        "Уточнили специальное понятие ukupan promet для порога 8 млн RSD и место реализации услуг по статье 12: типичные B2B-услуги иностранному заказчику с местом реализации вне Сербии не являются предметом сербского PDV и не входят в порог; экспорт товаров отделён как другой режим"
       ]
     }
   ]
