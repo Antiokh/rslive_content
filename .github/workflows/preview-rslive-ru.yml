@@ -20,6 +20,7 @@ jobs:
   deploy:
     if: >-
       github.event.action != 'closed' &&
+      github.actor == github.repository_owner &&
       github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.pull_request.user.login == github.repository_owner
     runs-on: ubuntu-latest
@@ -187,7 +188,7 @@ jobs:
       - name: Create or update PR preview report
         if: always()
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           MIRROR_OUTCOME: ${{ steps.mirror.outcome }}
@@ -252,9 +253,9 @@ jobs:
             echo '_Комментарий обновляется автоматически после каждого изменения PR._'
           } > /tmp/preview-comment.md
 
-          comment_id="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100" \
+          comment_id="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100" \
             --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body // "") | contains("<!-- rslive-content-preview -->"))) | .id' \
-            | head -n 1)"
+            | sed -n '1p')"
 
           if [ -n "$comment_id" ]; then
             gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
@@ -287,16 +288,16 @@ jobs:
 
       - name: Mark preview report as closed
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           MERGED: ${{ github.event.pull_request.merged }}
         run: |
           set -euo pipefail
 
           marker='<!-- rslive-content-preview -->'
-          comment_id="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100" \
+          comment_id="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100" \
             --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body // "") | contains("<!-- rslive-content-preview -->"))) | .id' \
-            | head -n 1)"
+            | sed -n '1p')"
 
           [ -n "$comment_id" ] || exit 0
 
