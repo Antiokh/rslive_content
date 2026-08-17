@@ -188,7 +188,7 @@ jobs:
       - name: Create or update PR preview report
         if: always()
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           MIRROR_OUTCOME: ${{ steps.mirror.outcome }}
@@ -288,7 +288,7 @@ jobs:
 
       - name: Mark preview report as closed
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           MERGED: ${{ github.event.pull_request.merged }}
         run: |
