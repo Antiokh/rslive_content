@@ -1,8 +1,8 @@
 {
   "date": "2026-08-17",
   "hours": 24,
-  "generated_at": "2026-08-17T21:24:00+02:00",
-  "commit_count": 8,
+  "generated_at": "2026-08-17T22:41:00+02:00",
+  "commit_count": 9,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/visarun/index.mdx",
@@ -166,6 +166,15 @@
       "live_url": "https://rslive.ru/arrival/jobs/",
       "summaries": [
         "Расширили международные источники поиска работы: стартапы, remote, Европа/CEE/relocation, общие и русскоязычные площадки; отделили freelance/contract-сервисы и добавили правило перепроверять конкретную вакансию на career-сайте работодателя или в ATS"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/rentacar/index.mdx",
+      "title": "Аренда авто",
+      "live_url": "https://rslive.ru/arrival/rentacar/",
+      "summaries": [
+        "Провели полный аудит аренды авто: убрали рекламные и устаревшие универсальные формулировки, перепроверили действующие сайты прокатчиков и развели условия возраста, стажа, депозита, топлива, страхования и выезда за границу по конкретным договорам",
+        "Убрали устаревшие парковочные цены в пользу актуального гайда, сохранили полезные правила Anygo, Yandex Go, CAR:GO и BlaBlaCar и исправили формулировку о международной передаче данных Yandex Go по текущему Privacy Notice"
       ]
     }
   ]
