@@ -1,0 +1,24 @@
+{
+  "date": "2026-08-17",
+  "hours": 24,
+  "generated_at": "2026-08-17T17:56:00+02:00",
+  "commit_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/business/types/index.mdx",
+      "title": "Формы ведения бизнеса в Сербии",
+      "live_url": "https://rslive.ru/arrival/business/types/",
+      "summaries": [
+        "Исправили модель PDV для услуг иностранным клиентам: калькулятор теперь учитывает место реализации услуг, не применяет сербский PDV и порог 8 млн RSD к потоку с местом реализации вне Сербии, сохраняя отдельный лимит 6 млн RSD для paušal"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/business/pdv/index.mdx",
+      "title": "PDV",
+      "live_url": "https://rslive.ru/gov/taxes/business/pdv/",
+      "summaries": [
+        "Уточнили состав оборота для порога 8 млн RSD и правила места реализации услуг: типичная B2B-услуга иностранной компании обычно не облагается сербским PDV и не входит в этот порог, но иностранный платёж сам по себе такого результата не даёт"
+      ]
+    }
+  ]
+}
