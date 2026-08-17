@@ -254,7 +254,7 @@ jobs:
           } > /tmp/preview-comment.md
 
           comment_id="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100" \
-            --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body // "") | contains("<!-- rslive-content-preview -->"))) | .id' \
+            --jq '.[] | select((.body // "") | contains("<!-- rslive-content-preview -->")) | .id' \
             | sed -n '1p')"
 
           if [ -n "$comment_id" ]; then
@@ -296,7 +296,7 @@ jobs:
 
           marker='<!-- rslive-content-preview -->'
           comment_id="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100" \
-            --jq '.[] | select(.user.login == "github-actions[bot]" and ((.body // "") | contains("<!-- rslive-content-preview -->"))) | .id' \
+            --jq '.[] | select((.body // "") | contains("<!-- rslive-content-preview -->")) | .id' \
             | sed -n '1p')"
 
           [ -n "$comment_id" ] || exit 0
