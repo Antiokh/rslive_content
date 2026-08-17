@@ -65,6 +65,9 @@ jobs:
           test -d rslive-engine/astro/src/content/docs
 
           git -C content fetch --no-tags origin "$BASE_SHA" || true
+          git -C rslive-engine checkout -B "$preview_branch" origin/main
+          git -C rslive-engine config user.name "Anton Nazarov"
+          git -C rslive-engine config user.email "antiokh@yandex.ru"
 
           : > /tmp/preview-routes.md
           route_count=0
@@ -79,7 +82,7 @@ jobs:
               route="/${relative%index.mdx}"
             fi
 
-            # Keep untrusted path text out of Markdown unless it is a normal RSLive route.
+            # Keep path text out of Markdown unless it is a normal RSLive route.
             if [[ ! "$route" =~ ^/[A-Za-z0-9/_-]*$ ]]; then
               continue
             fi
@@ -102,13 +105,10 @@ jobs:
           rsync -a \
             content/src/content/docs/about/stickers/assets/svg/ rslive-engine/astro/src/assets/stickers/
 
-          git -C rslive-engine checkout -B "$preview_branch" origin/main
-          git -C rslive-engine config user.name "Anton Nazarov"
-          git -C rslive-engine config user.email "antiokh@yandex.ru"
-
           if [ -z "$(git -C rslive-engine status --porcelain astro/src/content/docs astro/src/assets/stickers)" ]; then
             echo "No mirrored site changes in this PR."
             echo "changed=false" >> "$GITHUB_OUTPUT"
+            git -C rslive-engine push origin --delete "$preview_branch" >/dev/null 2>&1 || true
             exit 0
           fi
 
@@ -190,6 +190,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          MIRROR_OUTCOME: ${{ steps.mirror.outcome }}
           CHANGED: ${{ steps.mirror.outputs.changed }}
           PREVIEW_ROOT: ${{ steps.mirror.outputs.preview_root }}
           PREVIEW_BRANCH: ${{ steps.mirror.outputs.preview_branch }}
@@ -202,11 +203,19 @@ jobs:
           marker='<!-- rslive-content-preview -->'
           short_sha="${HEAD_SHA:0:7}"
           source_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${HEAD_SHA}"
+          workflow_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 
           {
             echo "$marker"
 
-            if [ "$CHANGED" != "true" ]; then
+            if [ "$MIRROR_OUTCOME" != "success" ]; then
+              echo '### ❌ Контентный preview не подготовлен'
+              echo
+              echo 'Синхронизация PR-контента с preview-веткой завершилась ошибкой до Cloudflare deploy.'
+              echo
+              echo "- **Workflow:** [логи GitHub Actions](${workflow_url})"
+              echo "- **Контент:** [\`${short_sha}\`](${source_url})"
+            elif [ "$CHANGED" != "true" ]; then
               echo '### ℹ️ Preview сайта не требуется'
               echo
               echo 'В PR нет изменений, которые меняют зеркалируемый контент сайта.'
@@ -235,6 +244,7 @@ jobs:
               if [ -n "$CF_LOGS_URL" ]; then
                 echo "- **Cloudflare:** [логи deploy](${CF_LOGS_URL})"
               fi
+              echo "- **Workflow:** [логи GitHub Actions](${workflow_url})"
               echo "- **Контент:** [\`${short_sha}\`](${source_url})"
             fi
 
