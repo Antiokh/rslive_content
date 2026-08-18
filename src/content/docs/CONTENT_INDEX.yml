@@ -984,6 +984,7 @@ pages:
 
   # ==== LANGUAGE EDITIONS ====
   - url: /en/
+    locale: en
     title: RSLive in English
     tags: [английский, язык, выборочная редакция, english]
     aliases: [English edition, RSLive in English]
@@ -993,6 +994,7 @@ pages:
     anchors: []
 
   - url: /en/about/
+    locale: en
     title: About RSLive
     tags: [английский, RSLive, о проекте, редакция, источники]
     aliases: [about RSLive, project information in English]
@@ -1002,6 +1004,7 @@ pages:
     anchors: []
 
   - url: /en/about/stickers/
+    locale: en
     title: RSLive stickers
     tags: [английский, стикеры, маскот, Open Graph, Petar Otišić]
     aliases: [RSLive sticker pack, stickers in English]
@@ -1011,6 +1014,7 @@ pages:
     anchors: []
 
   - url: /en/pig-peter/
+    locale: en
     title: Pig Peter and the RSLive mascot
     tags: [английский, Pig Peter, маскот, мем, эмиграция]
     aliases: [Pig Peter, Petar Otišić, RSLive mascot]
@@ -1020,6 +1024,7 @@ pages:
     anchors: []
 
   - url: /en/foreigner-residence-registration/
+    locale: en
     title: How to register a foreigner's stay through eUprava
     tags: [английский, регистрация иностранца, eUprava, eID, ConsentID, landlord]
     aliases: [foreigner residence registration Serbia, landlord guide eUprava, beli karton English]
@@ -1029,6 +1034,7 @@ pages:
     anchors: []
 
   - url: /en/russians-in-serbia/
+    locale: en
     title: Russians in Serbia
     tags: [английский, русские, русская миграция, русское сообщество, организации]
     aliases: [Russian community Serbia, Russians in Serbia]
@@ -1038,6 +1044,7 @@ pages:
     anchors: []
 
   - url: /en/russians-in-serbia/demographics/
+    locale: en
     title: Demographics of Russians in Serbia
     tags: [английский, русские, демография, миграция, temporary residence, permanent residence]
     aliases: [Russian migration Serbia statistics, Russians Serbia demographics]
@@ -1047,6 +1054,7 @@ pages:
     anchors: []
 
   - url: /en/russians-in-serbia/ksors/
+    locale: en
     title: KSORS Serbia and its member organisations
     tags: [английский, КСОРС, русские организации, соотечественники]
     aliases: [KSORS Serbia, Russian compatriot organisations Serbia]
@@ -1056,6 +1064,7 @@ pages:
     anchors: []
 
   - url: /en/russians-in-serbia/national-council/
+    locale: en
     title: National Council of the Russian National Minority
     tags: [английский, национальный совет, русское меньшинство, Serbia]
     aliases: [Russian National Minority Council Serbia, Russian minority council]
@@ -1065,6 +1074,7 @@ pages:
     anchors: []
 
   - url: /en/russians-in-serbia/russian-house/
+    locale: en
     title: Russian House in Belgrade
     tags: [английский, Русский дом, Россотрудничество, Белград, культура]
     aliases: [Russian House Belgrade, Rossotrudnichestvo Serbia]
@@ -1074,6 +1084,7 @@ pages:
     anchors: []
 
   - url: /sr/
+    locale: sr
     title: RSLive на српском
     tags: [сербский, язык, выборочная редакция, српски]
     aliases: [srpski, сербский, RSLive na srpskom]
@@ -1083,6 +1094,7 @@ pages:
     anchors: []
 
   - url: /sr/about/
+    locale: sr
     title: О RSLive
     tags: [сербский, RSLive, о проекте, редакция, источники]
     aliases: [O RSLive, о проекте на сербском]
@@ -1092,6 +1104,7 @@ pages:
     anchors: []
 
   - url: /sr/about/stickers/
+    locale: sr
     title: RSLive стикери
     tags: [сербский, стикеры, маскот, Open Graph, Петар Отишић]
     aliases: [RSLive stikeri, стикеры на сербском]
@@ -1101,6 +1114,7 @@ pages:
     anchors: []
 
   - url: /sr/prase-petar/
+    locale: sr
     title: Прасе Петар и маскота RSLive
     tags: [сербский, Прасе Петар, RSLive, мем, культура]
     aliases: [Поросёнок Пётр на сербском, Prase Petar, Petar Otišić]
@@ -1110,6 +1124,7 @@ pages:
     anchors: []
 
   - url: /sr/prijava-boravista-stranca/
+    locale: sr
     title: Како пријавити боравиште странца преко еУправе
     tags: [сербский, пријава странца, еУправа, eID, ConsentID, власник стана]
     aliases: [пријава боравишта странца, упутство за власника стана]
@@ -1119,6 +1134,7 @@ pages:
     anchors: []
 
   - url: /sr/rusi-u-srbiji/
+    locale: sr
     title: Руси у Србији
     tags: [сербский, руси, руска миграција, руска заједница, Србија]
     aliases: [Rusi u Srbiji, русские в Сербии на сербском]
@@ -1128,6 +1144,7 @@ pages:
     anchors: []
 
   - url: /sr/rusi-u-srbiji/demografija/
+    locale: sr
     title: Демографија Руса у Србији
     tags: [сербский, руси, демография, миграция, привремени боравак, стално настањење]
     aliases: [demografija Rusa u Srbiji, русская миграция в Сербии на сербском]
@@ -1137,6 +1154,7 @@ pages:
     anchors: []
 
   - url: /sr/rusi-u-srbiji/ksors/
+    locale: sr
     title: КСОРС Србије и организације у његовој мрежи
     tags: [сербский, КСОРС, русские организации, соотечественники]
     aliases: [KSORS Srbija, Koordinacioni savet ruskih sunarodnika]
@@ -1146,6 +1164,7 @@ pages:
     anchors: []
 
   - url: /sr/rusi-u-srbiji/nacionalni-savet/
+    locale: sr
     title: Национални савет руске националне мањине
     tags: [сербский, национальный совет, русская нацменьшина, Србија]
     aliases: [Nacionalni savet ruske nacionalne manjine, NSRNM]
@@ -1155,6 +1174,7 @@ pages:
     anchors: []
 
   - url: /sr/rusi-u-srbiji/ruski-dom/
+    locale: sr
     title: Руски дом у Београду
     tags: [сербский, Руски дом, Россотрудничество, Београд, культура]
     aliases: [Ruski dom Beograd, Rossotrudničestvo Srbija]
@@ -1621,4 +1641,555 @@ pages:
       - планируешь поездку в Нови-Пазар и окрестности
       - нужен маршрут по памятникам Стари-Рас и Сопочаны
       - собираешься на Пештерское плато
+    anchors: []
+
+  # ==== ROUTE COVERAGE (auto-added; enrich semantic metadata when editing) ====
+  - url: /404/
+    title: "404"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /about/editorial-policy/
+    title: "Редакционная политика"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /about/
+    title: "О проекте RSLive"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /about/stickers/
+    title: "Стикеры RSLive"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/cef/
+    title: "ЭЦП, картицы, читач, челик"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/consentid/
+    title: "Приложение ConsentID"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/ebs_jmbg_pib/
+    title: "JMBG, EBS и PIB"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/eid/
+    title: "Портал eID"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/menjacnice/
+    title: "Менячницы"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/psy/
+    title: "Психологическая помощь при эмиграции"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/russians/count/
+    title: "Демография диаспоры"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/russians/
+    title: "Русское комьюнити в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/russians/ksors/
+    title: "КСОРС Сербии и входящие организации"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/russians/national-council/
+    title: "Национальный совет русского национального меньшинства в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/russians/officials/
+    title: "Официальные лица"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/russians/russian-house/
+    title: "Русский дом в Белграде"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/srpski/
+    title: "Изучение сербского языка"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /adaptation/work/
+    title: "Работа и бизнес"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/banks/
+    title: "banks"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/boravak/change/
+    title: "Смена основания и отказ от РВП"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/boravak/talent/
+    title: "РВП по основанию «Талант»"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/business/acquiring/
+    title: "Эквайринг и приём платежей"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/business/codes/
+    title: "Коды деятельности"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/business/doo/
+    title: "Открытие общества с ограниченной ответственностью (D.O.O.)"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/business/e-comm/
+    title: "Электронная коммерция в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/business/eko/
+    title: "Эко-такса (эко-налог)"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/business/inflow/
+    title: "Приём платежей от юрлиц"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/business/prvsdoo/
+    title: "ИП или ООО? Плюсы, минусы и особенности"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/business/register/
+    title: "Регистрация бизнеса в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/business/types/
+    title: "Формы ведения бизнеса в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/carry/
+    title: "Перевозки Россия – Сербия"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/mobile/
+    title: "Мобильная связь и интернет"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/nostrifikacija/
+    title: "Профессиональное признание (нострификация) диплома"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/prevoz/
+    title: "Общественный транспорт и поезда в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/rentacar/
+    title: "Аренда авто"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/shops/
+    title: "Покупка товаров первой необходимости"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /arrival/visarun/
+    title: "Визаран"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /beli-karton/
+    title: "Форма белого картона"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/chto_izmenilos_v_rslive_za_mesjac/
+    title: "RSLive за месяц: новые статьи, новый редакционный стандарт и два контрибьютора"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/dobro_pozhalovat_v_instrukciju_po_serbii/
+    title: "Добро пожаловать в \\\"Инструкцию по Сербии\\\""
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/gde_dorozhe_v_rossii_ili_v_serbii/
+    title: "Где дороже: в России или в Сербии?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/javljaetsja_li_serbija_bezopasnoj_stranoj/
+    title: "Является ли Сербия безопасной страной?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/javljaetsja_li_serbija_xoroshej_stranoj_dlja_pereezda/
+    title: "Является ли Сербия хорошей страной для переезда?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/kak_otnosjatsja_k_lgbt_v_serbii/
+    title: "Как относятся к ЛГБТ в Сербии?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/kak_v_serbii_otnosjatsja_k_russkim/
+    title: "Как в Сербии относятся к русским?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/kakaja_srednjaja_zarplata_v_serbii/
+    title: "Какая средняя зарплата в Сербии?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/kogda_serbija_budet_v_es/
+    title: "Когда Сербия будет в ЕС?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/kogo_podderzhala_serbija_v_vojne_s_ukrainoj/
+    title: "Кого поддержала Сербия в войне с Украиной?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/osnovnye_nalogovye_objazatelstva_do_konca_goda_v_serbii/
+    title: "Основные налоговые обязательства до конца года в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/pochemu_russkie_edut_v_serbiju/
+    title: "Почему русские едут в Сербию?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/pochemu_serbija_byla_pod_sankcijami/
+    title: "Почему Сербия была под санкциями?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/pochemu_serbija_ljubit_rossiju/
+    title: "Почему Сербия любит Россию?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/pochemu_serbija_luchshaja_strana_dlja_immigracii_russkix/
+    title: "Почему Сербия — лучшая страна для иммиграции русских?"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /blog/serbija_samaja_dinamichno_rastuschaja_ehkonomika_evropy/
+    title: "Сербия — самая динамично растущая экономика Европы по росту ВВП"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /children/
+    title: "Дети"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /children/school/
+    title: "Среднее образование"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /cookie/banner/
+    title: "banner"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /cookie/delete/
+    title: "Политика удаления учётной записи"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /cookie/
+    title: "start"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /cookie/policy/
+    title: "Политика конфиденциальности"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /drive/buy/
+    title: "Покупка автомобиля"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /drive/
+    title: "Авто- мото- вело-"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /drive/register_auto/
+    title: "Регистрация автомобиля"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /en/cookie/
+    locale: en
+    title: "Cookies"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /en/cookie/policy/
+    locale: en
+    title: "Privacy Policy"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /gov/consul_prime/
+    title: "Сервисное бюро «Консул Прайм»"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /gov/law/license/
+    title: "Лицензированная деятельность"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /gov/law/license/music/
+    title: "Лицензирование музыки"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /gov/law/license/tourist/
+    title: "Туристические агентства"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /gov/law/lost-house-documents/
+    title: "Потеря документов на недвижимость в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /gov/notguilty/
+    title: "Справка об отсутствии судимости"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /gov/taxes/codes/
+    title: "Платёжные коды квитанций"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /gov/taxes/marketplace/
+    title: "Покупки в онлайн-магазинах"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /gov/uverenje_boravak/
+    title: "Уверење о боравку"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /graph/
+    title: "Схема миграции в Сербию"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /integration/apostil/
+    title: "Апостиль на документы"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /integration/autoobuka/
+    title: "Получение водительских прав категории «В»"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /integration/dresscode/
+    title: "Дресс-код государственных учреждений"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /integration/driver_license/
+    title: "Замена водительских прав РФ на сербские"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /integration/house/
+    title: "Покупка дома в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /intro/
+    title: "Инструкция по Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /lifestyle/second-hand/
+    title: "Покупка и продажа б/у вещей в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /list/
+    title: "Дерево разделов, тем и статей"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /m25/
+    title: "Русская масленица"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /m26/
+    title: "m26"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /med/oms/
+    title: "ОМС для официально работающих в Сербии"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /move/pdd/
+    title: "ПДД и автомобильные правила Сербии: отличия от России"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /move/risks/
+    title: "Риски для уехавших из РФ"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /ru/
+    title: "start"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /sr/user/petro/
+    locale: sr
+    title: "petro"
+    tags: []
+    aliases: []
+    link_when: []
+    anchors: []
+  - url: /uplatnica/
+    title: "Форма платёжки (Uplatnica)"
+    tags: []
+    aliases: []
+    link_when: []
     anchors: []
