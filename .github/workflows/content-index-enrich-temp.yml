@@ -1,0 +1,43 @@
+name: Temporary content index enrichment
+
+on:
+  push:
+    branches:
+      - agent/content-index-localized-pages
+
+permissions:
+  contents: write
+
+jobs:
+  enrich:
+    if: github.actor == 'Antiokh'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/content-index-localized-pages
+          fetch-depth: 0
+
+      - name: Fetch current main
+        run: git fetch origin main
+
+      - name: Install content-quality dependencies
+        working-directory: tools/content-quality
+        run: npm install --package-lock=false --ignore-scripts --no-audit --no-fund
+
+      - name: Add base semantic metadata
+        run: node tools/content-quality/enrich-index-temp.mjs
+
+      - name: Validate content and index
+        run: node tools/content-quality/lint-content.mjs
+
+      - name: Commit enriched index and remove temporary tooling
+        run: |
+          rm tools/content-quality/enrich-index-temp.mjs
+          rm .github/workflows/content-index-enrich-temp.yml
+          git add src/content/docs/CONTENT_INDEX.yml tools/content-quality/enrich-index-temp.mjs .github/workflows/content-index-enrich-temp.yml
+          git diff --cached --check
+          git config user.name "Antiokh"
+          git config user.email "4112893+Antiokh@users.noreply.github.com"
+          git commit -m "Add base semantics to indexed routes"
+          git push origin HEAD:agent/content-index-localized-pages
