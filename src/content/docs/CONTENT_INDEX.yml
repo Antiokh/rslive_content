@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-16
+# Last updated: 2026-08-18
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -1332,10 +1332,12 @@ pages:
 
   - url: /arrival/business/close/
     title: Закрытие предпринимателя
-    tags: [бизнес, предприниматель, закрытие, APR, налоги, долги]
-    aliases: [закрыть ИП, закрытие предузетника, brisanje preduzetnika, удалить предпринимателя]
+    tags: [бизнес, предприниматель, закрытие, приостановка, заморозка, разморозка, APR, prekid, nastavak, налоги, долги]
+    aliases: [закрыть ИП, закрытие предузетника, brisanje preduzetnika, удалить предпринимателя, заморозить ИП, разморозить ИП, приостановка ИП, prekid obavljanja delatnosti, nastavak obavljanja delatnosti]
     link_when:
       - нужно закрыть предпринимателя в Сербии
+      - нужно временно приостановить или возобновить деятельность предпринимателя
+      - нужно разобраться с заморозкой или разморозкой ИП
       - нужны налоговые справки для удаления из APR
       - нужно понять последствия закрытия для долгов или РВП
     anchors: []
