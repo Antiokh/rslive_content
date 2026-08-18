@@ -104,7 +104,7 @@ async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) result.push(...(await walk(full));
+    if (entry.isDirectory()) result.push(...(await walk(full)));
     else if (entry.isFile() && /\.(?:md|mdx)$/i.test(entry.name)) result.push(full);
   }
   return result;
