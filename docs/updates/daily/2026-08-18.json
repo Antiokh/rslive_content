@@ -2,7 +2,7 @@
   "date": "2026-08-18",
   "hours": 24,
   "generated_at": "2026-08-18T00:20:00+02:00",
-  "commit_count": 1,
+  "commit_count": 2,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/business/close/index.mdx",
@@ -10,6 +10,22 @@
       "live_url": "https://rslive.ru/arrival/business/close/",
       "summaries": [
         "Добавили инструкцию по временной приостановке и возобновлению preduzetnik: APR/Dodatak 06, различия paušal/knjigaš/PDV, ePorezi, LPA, CROSO/RFZO, PGJO, банк, поздние платежи и миграционное основание; практические кейсы отделили от официальных правил и разобрали устаревший совет PPDG-1R и бытовой «лимит 29 дней»"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/russians/index.mdx",
+      "title": "Русское комьюнити в Сербии",
+      "live_url": "https://rslive.ru/adaptation/russians/",
+      "summaries": [
+        "Сократили дублирование КСОРС: оставили на общей странице практический маршрут к правовой и консульской помощи, а историю встреч, структуру и другие организационные подробности убрали из общего обзора"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/russians/ksors/index.mdx",
+      "title": "КСОРС Сербии и входящие организации",
+      "live_url": "https://rslive.ru/adaptation/russians/ksors/",
+      "summaries": [
+        "Дополнен профиль Центра правовой поддержки КСОРС: перенесены городские контакты, сведения о выездной встрече в Крушевце и информация о публикации правовых материалов"
       ]
     }
   ]
