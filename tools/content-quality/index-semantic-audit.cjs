@@ -72,13 +72,21 @@ const genericLinkPatterns = [
   /^нужна служебная страница/,
 ];
 const badMarkup = /(----|\b(schema|class|csv):|<\/?[A-Z][A-Za-z0-9]*\b|\{\{|\}\}|\[\[|\]\])/i;
+const knownNonMdxRoutes = new Set(['/addressbook/']);
 
 const pages = YAML.parse(fs.readFileSync(indexPath, 'utf8')).pages || [];
 const byUrl = new Map(pages.map(p => [p.url, p]));
 const files = walk(docsRoot);
 const routes = new Set(files.map(routeFor));
-const extras = pages.filter(p => typeof p.url === 'string' && !routes.has(p.url)).map(p => p.url);
+const nonMdx = pages.filter(p => typeof p.url === 'string' && !routes.has(p.url)).map(p => p.url);
+const unexpectedExtras = nonMdx.filter(url => !knownNonMdxRoutes.has(url));
 const missing = [...routes].filter(r => !byUrl.has(r));
+
+let baseUrls = null;
+if (process.env.BASE_INDEX && fs.existsSync(process.env.BASE_INDEX)) {
+  const basePages = YAML.parse(fs.readFileSync(process.env.BASE_INDEX, 'utf8')).pages || [];
+  baseUrls = new Set(basePages.map(p => p.url));
+}
 
 const rows = [];
 const reasonCounts = new Map();
@@ -110,8 +118,12 @@ for (const file of files) {
     reasons.push('link_when-generic'); score += 2;
   }
 
-  if (links.some(v => badMarkup.test(v) || v.length > 240 || (v.length >= 180 && !/[.!?…)]$/.test(v.trim())))) {
-    reasons.push('link_when-suspicious'); score += 3;
+  if (links.some(v => badMarkup.test(v))) {
+    reasons.push('link_when-markup'); score += 4;
+  } else if (links.some(v => v.length > 260)) {
+    reasons.push('link_when-overlong'); score += 1;
+  } else if (links.some(v => v.length >= 180 && !/[.!?…)]$/.test(v.trim()))) {
+    reasons.push('link_when-long');
   }
 
   const topical = new Set(uniq([...tags, ...aliases]));
@@ -126,24 +138,36 @@ for (const file of files) {
 
   if (technicalTitles.has(nTitle)) { reasons.push('technical-title'); score += 1; }
 
-  const bucket = score >= 3 ? 'weak' : score === 2 ? 'borderline' : 'ok';
-  rows.push({ route, score, bucket, reasons, title, keywords: keywords.length, tags: tags.length, aliases: aliases.length, links: links.length });
+  const bucket = score >= 4 ? 'weak' : score >= 2 ? 'borderline' : 'ok';
+  const origin = baseUrls ? (baseUrls.has(route) ? 'existing' : 'new') : 'unknown';
+  rows.push({ route, score, bucket, origin, reasons, title, keywords: keywords.length, tags: tags.length, aliases: aliases.length, links: links.length });
   for (const reason of reasons) reasonCounts.set(reason, (reasonCounts.get(reason) || 0) + 1);
 }
 
-const counts = Object.fromEntries(['ok', 'borderline', 'weak'].map(k => [k, rows.filter(r => r.bucket === k).length]));
-console.log(`AUDIT_SUMMARY content_pages=${files.length} index_entries=${pages.length} missing=${missing.length} extra=${extras.length} ok=${counts.ok} borderline=${counts.borderline} weak=${counts.weak}`);
-console.log(`AUDIT_EXTRA ${extras.length ? extras.join(',') : '-'}`);
+function count(bucket, origin = null) {
+  return rows.filter(r => r.bucket === bucket && (!origin || r.origin === origin)).length;
+}
+
+console.log(`AUDIT_SUMMARY content_pages=${files.length} index_entries=${pages.length} missing=${missing.length} non_mdx=${nonMdx.length} unexpected_extra=${unexpectedExtras.length} ok=${count('ok')} borderline=${count('borderline')} weak=${count('weak')}`);
+if (baseUrls) {
+  console.log(`AUDIT_ORIGIN existing=${rows.filter(r => r.origin === 'existing').length} existing_ok=${count('ok','existing')} existing_borderline=${count('borderline','existing')} existing_weak=${count('weak','existing')} new=${rows.filter(r => r.origin === 'new').length} new_ok=${count('ok','new')} new_borderline=${count('borderline','new')} new_weak=${count('weak','new')}`);
+}
+console.log(`AUDIT_NON_MDX ${nonMdx.length ? nonMdx.join(',') : '-'}`);
+console.log(`AUDIT_UNEXPECTED_EXTRA ${unexpectedExtras.length ? unexpectedExtras.join(',') : '-'}`);
 console.log(`AUDIT_MISSING ${missing.length ? missing.join(',') : '-'}`);
 console.log('AUDIT_REASON_COUNTS');
-for (const [reason, count] of [...reasonCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))) {
-  console.log(`${reason}\t${count}`);
+for (const [reason, total] of [...reasonCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))) {
+  console.log(`${reason}\t${total}`);
 }
 console.log('AUDIT_WEAK');
 for (const row of rows.filter(r => r.bucket === 'weak').sort((a, b) => b.score - a.score || a.route.localeCompare(b.route))) {
-  console.log(`${row.score}\t${row.route}\t${row.reasons.join(',')}\tK=${row.keywords}\tT=${row.tags}\tA=${row.aliases}\tL=${row.links}\t${row.title}`);
+  console.log(`${row.score}\t${row.origin}\t${row.route}\t${row.reasons.join(',')}\tK=${row.keywords}\tT=${row.tags}\tA=${row.aliases}\tL=${row.links}\t${row.title}`);
 }
 console.log('AUDIT_BORDERLINE');
-for (const row of rows.filter(r => r.bucket === 'borderline').sort((a, b) => a.route.localeCompare(b.route))) {
-  console.log(`${row.score}\t${row.route}\t${row.reasons.join(',')}\tK=${row.keywords}\tT=${row.tags}\tA=${row.aliases}\tL=${row.links}\t${row.title}`);
+for (const row of rows.filter(r => r.bucket === 'borderline').sort((a, b) => a.origin.localeCompare(b.origin) || a.route.localeCompare(b.route))) {
+  console.log(`${row.score}\t${row.origin}\t${row.route}\t${row.reasons.join(',')}\tK=${row.keywords}\tT=${row.tags}\tA=${row.aliases}\tL=${row.links}\t${row.title}`);
+}
+console.log('AUDIT_LONG_CONTEXT_REVIEW');
+for (const row of rows.filter(r => r.reasons.includes('link_when-long')).sort((a, b) => a.route.localeCompare(b.route))) {
+  console.log(`${row.origin}\t${row.route}\t${row.title}`);
 }
