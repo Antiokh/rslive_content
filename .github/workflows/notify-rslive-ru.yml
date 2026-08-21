@@ -24,6 +24,9 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Validate map snapshots before destructive sync
+        run: node scripts/check-map-data.mjs
+
       - name: Check out private rslive.ru
         uses: actions/checkout@v4
         with:
