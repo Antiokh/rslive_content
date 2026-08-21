@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { access, readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
+import { gunzipSync } from 'node:zlib';
 
 const root = process.cwd();
 const mapRoot = path.join(root, 'map-data');
@@ -39,6 +40,32 @@ async function readJson(file, label) {
   }
 }
 
+async function checkOptionalGzip(sourceFile, label) {
+  const gzipFile = `${sourceFile}.gz`;
+  if (!(await exists(gzipFile))) return { present: false };
+
+  const [source, compressed] = await Promise.all([
+    readFile(sourceFile),
+    readFile(gzipFile),
+  ]);
+  let roundTrip;
+  try {
+    roundTrip = gunzipSync(compressed);
+  } catch (error) {
+    fail(`${label}: ${path.basename(gzipFile)} не является валидным gzip: ${error?.message || error}`);
+  }
+  if (!roundTrip.equals(source)) fail(`${label}: gzip устарел относительно source GeoJSON`);
+  if (compressed.byteLength >= source.byteLength) {
+    fail(`${label}: gzip не уменьшает source: source=${source.byteLength}, gzip=${compressed.byteLength}`);
+  }
+  return {
+    present: true,
+    sourceBytes: source.byteLength,
+    gzipBytes: compressed.byteLength,
+    savedPercent: Number(((1 - compressed.byteLength / source.byteLength) * 100).toFixed(1)),
+  };
+}
+
 function checkFeatureCollection(document, label) {
   if (document?.type !== 'FeatureCollection' || !Array.isArray(document.features)) {
     fail(`${label} должен быть GeoJSON FeatureCollection`);
@@ -64,20 +91,34 @@ async function checkSerbia() {
   if (roads < 50 || rivers < 2 || labels < 8) {
     fail(`Карта Сербии выглядит неполной: roads=${roads}, rivers=${rivers}, labels=${labels}`);
   }
-  return { features: document.features.length, roads, rivers, labels };
+  return {
+    features: document.features.length,
+    roads,
+    rivers,
+    labels,
+    gzip: await checkOptionalGzip(file, 'Карта Сербии'),
+  };
 }
 
-async function checkCity(id) {
+async function checkCity(id, { acceptedRegionIds = [id], requireOptionalPack = true } = {}) {
   const file = path.join(mapRoot, `packs/cities/${id}.geojson`);
   if (!(await exists(file))) fail(`Обязательный городской snapshot отсутствует: map-data/packs/cities/${id}.geojson`);
   const document = await readJson(file, `Городской snapshot ${id}`);
   checkFeatureCollection(document, `Городской snapshot ${id}`);
-  if (document.properties?.regionId !== id) fail(`${id}: regionId должен быть ${id}`);
-  if (document.properties?.optionalPack !== true) fail(`${id}: optionalPack должен быть true`);
+  if (!acceptedRegionIds.includes(document.properties?.regionId)) {
+    fail(`${id}: неожиданный regionId ${document.properties?.regionId || 'нет'}; ожидается ${acceptedRegionIds.join(' или ')}`);
+  }
+  if (requireOptionalPack && document.properties?.optionalPack !== true) fail(`${id}: optionalPack должен быть true`);
   const roads = categoryCount(document, (value) => value === 'road');
   const water = categoryCount(document, (value) => value.startsWith('water'));
   if (roads < 20 || water < 2) fail(`${id} выглядит неполным: roads=${roads}, water=${water}`);
-  return { present: true, features: document.features.length, roads, water };
+  return {
+    present: true,
+    features: document.features.length,
+    roads,
+    water,
+    gzip: await checkOptionalGzip(file, `Городской snapshot ${id}`),
+  };
 }
 
 async function checkLegacyBelgradeLite() {
@@ -137,6 +178,12 @@ const result = {
   belgradeLite: await checkLegacyBelgradeLite(),
   cities: {
     belgrade: await checkCity('belgrade'),
+    'belgrade-ext': await checkCity('belgrade-ext', {
+      // The current extended snapshot predates the public target id and may still carry the
+      // historical Belgrade metadata. File identity is authoritative until the next manual refresh.
+      acceptedRegionIds: ['belgrade-ext', 'belgrade'],
+      requireOptionalPack: false,
+    }),
     'novi-sad': await checkCity('novi-sad'),
     nis: await checkCity('nis'),
     subotica: await checkCity('subotica'),
