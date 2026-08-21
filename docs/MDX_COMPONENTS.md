@@ -409,6 +409,8 @@ loading?: "eager" | "visible" = "visible"
 debug?: boolean = false
 ```
 
+`x` условно обязателен: для human-table его можно не указывать — осью X станет первая колонка; для object-array `x` нужно задавать явно.
+
 Для данных, редактируемых человеком в статье, используйте человекочитаемый табличный синтаксис:
 
 ```mdx
@@ -460,7 +462,7 @@ order?: string
 ascending?: boolean = true
 ```
 
-Остальные props (`type`, `series`, `unit`, `title`, `description`, `source*`, `locale`, `tableOpen`, `engine`, `loading`, `debug`) совпадают с `DataChart`.
+Остальные props (`type`, `series`, `unit`, `title`, `description`, `sourceLabel`, `sourceUrl`, `sourcePeriod`, `locale`, `tableOpen`, `engine`, `loading`, `debug`) совпадают с `DataChart`.
 
 ```mdx
 <SupabaseChart
