@@ -15,6 +15,7 @@ map-data/
   packs/
     cities/
       belgrade.geojson
+      novi-sad.geojson   # когда будет подготовлен
   snapshots/
     google-mymaps/
       <mid>.kml
@@ -36,15 +37,13 @@ map-data/
 
 ## Serbia Overview
 
-Источник — OpenStreetMap. Для ручной выгрузки удобно использовать [Overpass Turbo](https://overpass-turbo.eu/).
+Источник — OpenStreetMap. Для ручной выгрузки используйте [Overpass Turbo](https://overpass-turbo.eu/).
 
 Текущий обзор содержит:
 
 - дороги `motorway`, `trunk`, `primary` с `ref`;
 - именованные реки;
 - подписи населённых пунктов `city` и `town`.
-
-Можно использовать такой запрос:
 
 ```overpass
 [out:json][timeout:60];
@@ -72,43 +71,65 @@ out geom;
 
 Минимальная проверка текущего engine-контракта: не менее 50 дорог, 2 рек и 8 подписей.
 
-## Belgrade Lite
+## Городские паки
 
-Границы пилотного покрытия:
+На первом этапе поддерживаем только два practically useful optional pack:
 
-```text
-south: 44.68
-west:  20.18
-north: 44.97
-east:  20.68
-```
+- Белград;
+- Нови-Сад.
 
-Запрос для Overpass Turbo:
+Ниш, Суботица, Крагуевац и другие города можно добавить позже, если появится реальная пользовательская потребность. Не нужно заранее поддерживать и обновлять паки «на всякий случай».
+
+Городскую карту выгружайте **по административной области**, а не по прямоугольнику renderer. Overpass Turbo умеет через `{{geocodeArea:...}}` найти административную область с помощью Nominatim и использовать её как `area`. После запуска обязательно визуально проверьте, что выбрана именно нужная административная территория. Прямоугольный `bounds` в engine остаётся UI-ограничением renderer и не определяет состав исходной OSM-выгрузки.
+
+### Белград
 
 ```overpass
-[out:json][timeout:70];
+[out:json][timeout:90];
+{{geocodeArea:Belgrade, Serbia}}->.city;
 (
-  way["waterway"~"river|canal"](44.68,20.18,44.97,20.68);
-  way["natural"="water"](44.68,20.18,44.97,20.68);
-  way["leisure"="park"](44.68,20.18,44.97,20.68);
-  way["landuse"~"forest|recreation_ground"](44.68,20.18,44.97,20.68);
-  way["highway"~"motorway|trunk|primary|secondary|tertiary"](44.68,20.18,44.97,20.68);
-  node["place"~"city|town|suburb|quarter"](44.68,20.18,44.97,20.68);
+  way["waterway"~"river|canal"](area.city);
+  way["natural"="water"](area.city);
+  way["leisure"="park"](area.city);
+  way["landuse"~"forest|recreation_ground"](area.city);
+  way["highway"~"motorway|trunk|primary|secondary|tertiary"](area.city);
+  node["place"~"city|town|suburb|quarter"](area.city);
 );
 out geom;
 ```
 
-Экспортируйте результат как GeoJSON и нормализуйте свойства по существующему `map-data/basemaps/belgrade-lite.geojson`:
+### Нови-Сад
 
-- дороги → `category: "road"`;
-- river/canal → `category: "water-line"`;
-- `natural=water` → `category: "water-area"`;
-- park/forest/recreation_ground → `category: "green"`;
-- place nodes → `category: "label"`.
+```overpass
+[out:json][timeout:90];
+{{geocodeArea:Novi Sad, Serbia}}->.city;
+(
+  way["waterway"~"river|canal"](area.city);
+  way["natural"="water"](area.city);
+  way["leisure"="park"](area.city);
+  way["landuse"~"forest|recreation_ground"](area.city);
+  way["highway"~"motorway|trunk|primary|secondary|tertiary"](area.city);
+  node["place"~"city|town|suburb|quarter"](area.city);
+);
+out geom;
+```
 
-Минимальная проверка: не менее 20 дорожных объектов и 2 водных объектов.
+Для каждого города:
 
-`map-data/packs/cities/belgrade.geojson` использует те же features, но дополнительно содержит региональные metadata (`regionId: "belgrade"`, bounds, `optionalPack: true`). После обновления Belgrade Lite обновите и этот pack, сохранив его текущий контракт.
+1. запустите запрос и визуально проверьте административную область;
+2. `Export` → `GeoJSON`;
+3. нормализуйте свойства по текущему городскому контракту:
+   - дороги → `category: "road"`;
+   - river/canal → `category: "water-line"`;
+   - `natural=water` → `category: "water-area"`;
+   - park/forest/recreation_ground → `category: "green"`;
+   - place nodes → `category: "label"`;
+4. добавьте региональные metadata: `regionId`, `regionTitle`, `kind: "city"`, `parent: "serbia-overview"`, renderer `bbox`, `optionalPack: true`;
+5. проверьте разумный размер и полноту данных перед заменой last-known-good.
+
+Минимальная проверка для текущего городского слоя: не менее 20 дорожных объектов и 2 водных объектов.
+
+Текущий `map-data/basemaps/belgrade-lite.geojson` — историческое имя pilot-базы. После стабилизации renderer отдельный `basemaps/` слой можно убрать и использовать `packs/cities/belgrade.geojson` как единственный источник городских данных.
 
 ## Google My Maps snapshots
 
@@ -141,6 +162,7 @@ Pilot MID:
 - не добавлять scheduled refresh;
 - не выполнять Overpass-запросы в production build;
 - не выполнять Overpass-запросы у конечного пользователя;
+- не поддерживать дополнительные city packs без практической необходимости;
 - не заменять last-known-good при неудачной или подозрительно маленькой выгрузке;
 - не кэшировать сторонние Google/OpenStreetMap tile responses как first-party данные;
 - не менять формат GeoJSON без синхронного изменения и проверки engine-контракта в `Antiokh/rslive.ru`.
