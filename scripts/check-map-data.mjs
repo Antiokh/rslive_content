@@ -67,12 +67,9 @@ async function checkSerbia() {
   return { features: document.features.length, roads, rivers, labels };
 }
 
-async function checkCity(id, { required = false } = {}) {
+async function checkCity(id) {
   const file = path.join(mapRoot, `packs/cities/${id}.geojson`);
-  if (!(await exists(file))) {
-    if (required) fail(`Обязательный городской snapshot отсутствует: map-data/packs/cities/${id}.geojson`);
-    return { present: false };
-  }
+  if (!(await exists(file))) fail(`Обязательный городской snapshot отсутствует: map-data/packs/cities/${id}.geojson`);
   const document = await readJson(file, `Городской snapshot ${id}`);
   checkFeatureCollection(document, `Городской snapshot ${id}`);
   if (document.properties?.regionId !== id) fail(`${id}: regionId должен быть ${id}`);
@@ -139,7 +136,7 @@ const result = {
   serbia: await checkSerbia(),
   belgradeLite: await checkLegacyBelgradeLite(),
   cities: {
-    belgrade: await checkCity('belgrade', { required: true }),
+    belgrade: await checkCity('belgrade'),
     'novi-sad': await checkCity('novi-sad'),
     nis: await checkCity('nis'),
     subotica: await checkCity('subotica'),
