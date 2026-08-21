@@ -303,7 +303,13 @@ title?: string = "Карта"
 caption?: string
 aspect?: string = "16 / 10"
 height?: string
+offlineSrc?: string
+regions?: string[]
+debug?: boolean = false
+debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-map"
 ```
+
+Обычная карта без first-party региональных данных:
 
 ```mdx
 <MapEmbed
@@ -313,7 +319,47 @@ height?: string
 />
 ```
 
-Карта должна дополнять текстовый адрес, а не заменять его.
+Карта, которой нужна детализация только Белграда:
+
+```mdx
+<MapEmbed
+  src="https://www.google.com/maps/d/embed?mid=..."
+  title="Объекты в Белграде"
+  regions={['belgrade']}
+/>
+```
+
+Карта с несколькими явно выбранными слоями:
+
+```mdx
+<MapEmbed
+  src="https://www.google.com/maps/d/embed?mid=..."
+  title="Объекты в нескольких городах"
+  regions={['serbia-overview', 'belgrade', 'novi-sad']}
+/>
+```
+
+Поддерживаемые region id проверяйте по актуальному `Antiokh/rslive.ru: astro/config/map-regions.config.mjs`. На текущей ветке регионального компонента предусмотрены:
+
+```text
+serbia-overview
+belgrade
+novi-sad
+nis
+subotica
+```
+
+Правила:
+
+- `regions` — явное разрешение конкретному экземпляру карты выбрать и сохранить перечисленные first-party GeoJSON. Не добавляйте регион «на всякий случай».
+- Если `regions` отсутствует или пуст, компонент не выбирает ни Сербию, ни городские snapshots автоматически.
+- Один выбранный регион может ограничивать renderer его границами. При двух и более регионах движение не должно ограничиваться первым городом: общий предел — Сербия.
+- Регистрация региона в engine не означает, что его snapshot уже опубликован. Для отсутствующего файла не создавайте пустую заглушку.
+- `offlineSrc` задаёт same-origin offline renderer/fallback URL и не заменяет `regions`: эти props решают разные задачи.
+- `debug` и `debugState` предназначены для диагностических страниц, а не для обычных публикаций.
+- Карта должна дополнять текстовый адрес, а не заменять его.
+
+Картографические snapshots лежат в `map-data/**` и обновляются вручную по инструкции `map-data/README.md`. Наличие файла в репозитории не означает автоматическую загрузку в PWA.
 
 ## YouTube
 
