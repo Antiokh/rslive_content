@@ -4,14 +4,24 @@
 
 `Antiokh/rslive_content` — публичный контентный репозиторий и источник истины для энциклопедии [rslive.ru](https://rslive.ru) о переезде, легализации, адаптации и жизни в Сербии.
 
-Контент синхронизируется с основным приложением:
+Репозиторий хранит два вида публикуемых материалов:
+
+- статьи и связанную с ними редакционную структуру в `src/content/docs/**`;
+- редко меняющиеся first-party картографические snapshots в `map-data/**`.
+
+Синхронизация с основным приложением выполняется по явным зеркалам:
 
 ```text
-Antiokh/rslive.ru:      astro/src/content/docs
-Antiokh/rslive_content: src/content/docs
+Antiokh/rslive_content: src/content/docs/     -> Antiokh/rslive.ru: astro/src/content/docs/
+Antiokh/rslive_content: map-data/core/        -> Antiokh/rslive.ru: astro/public/maps/core/
+Antiokh/rslive_content: map-data/basemaps/    -> Antiokh/rslive.ru: astro/public/maps/basemaps/
+Antiokh/rslive_content: map-data/packs/       -> Antiokh/rslive.ru: astro/public/maps/packs/
+Antiokh/rslive_content: map-data/snapshots/   -> Antiokh/rslive.ru: astro/public/maps/snapshots/
 ```
 
-Основной сайт построен на Astro + Starlight. Этот репозиторий предназначен для работы со статьями, навигацией и связанными контентными правилами без раскрытия остальной части приватного приложения.
+Root-level файлы `map-data/`, включая `map-data/README.md`, не публикуются в `astro/public/maps/`.
+
+Основной сайт построен на Astro + Starlight. В публичном репозитории находятся публикуемый контент, картографические данные и относящиеся к ним правила; реализация движка остаётся в приватном приложении.
 
 ## Источники истины и приоритет
 
@@ -51,7 +61,12 @@ Antiokh/rslive_content: src/content/docs
 - frontmatter;
 - внутренних ссылок;
 - `src/content/docs/CONTENT_INDEX.yml`;
+- картографических source/LKG snapshots и ручных инструкций в `map-data/**`;
 - правил контентной работы, находящихся в корне и `docs/` этого репозитория.
+
+Картографические snapshots обновляются вручную, когда есть реальная необходимость. Наличие файла в `map-data/**` не определяет PWA-политику и не означает, что браузер должен скачать его автоматически.
+
+Перед destructive mirror workflow запускает `node scripts/check-map-data.mjs`. Неполный обязательный snapshot-набор не должен удалять последний рабочий mirror в engine.
 
 ### `Antiokh/rslive.ru`
 
@@ -61,6 +76,7 @@ Antiokh/rslive_content: src/content/docs
 - глобального автоимпорта MDX-компонентов;
 - реализации компонентов в `astro/src/components/`;
 - схем данных и динамических источников;
+- city region registry, `SerbiaMap`, renderer, Cache Storage manager и PWA-политики карт;
 - сборки Astro;
 - sidebar-конфигурации;
 - редиректов `astro/public/_redirects`;
@@ -68,6 +84,29 @@ Antiokh/rslive_content: src/content/docs
 - `astro/CUSTOMIZATION_INVENTORY.md`.
 
 Не копируйте реализацию компонента в контентный репозиторий. Здесь должна находиться документация по использованию, а код компонента — в основном репозитории.
+
+## Картографические данные
+
+`map-data/**` хранит подготовленные first-party snapshots, а не runtime-код. Источник истины для ручной процедуры обновления — `map-data/README.md`.
+
+Основные правила:
+
+- не добавляйте scheduled refresh для редко меняющихся OSM/KML snapshots;
+- не обращайтесь к Overpass из production build или из браузера пользователя;
+- городские OSM-выгрузки делайте по административной области, а не по renderer bbox;
+- сохраняйте предыдущий last-known-good snapshot при ошибке источника;
+- перед коммитом запускайте `node scripts/check-map-data.mjs`;
+- не создавайте пустые заглушки для зарегистрированного, но ещё не выгруженного города;
+- MapLibre, renderer, service worker, manifest и логика выбора данных принадлежат `Antiokh/rslive.ru`, а не `map-data/**`.
+
+Текущий engine contract:
+
+- `SerbiaMap` — отдельный country-level слой; не является значением `regions`;
+- `regions` содержит только `belgrade`, `novi-sad`, `nis`, `subotica`;
+- при отсутствии выбранных городов продуктовый default — Serbia + Belgrade;
+- при явном выборе города Serbia добавляется только через `SerbiaMap`.
+
+Фактическое наличие snapshot проверяйте по дереву `map-data/**`, а не по одному engine registry.
 
 ## Маршруты и файлы
 
@@ -91,6 +130,8 @@ src/content/docs/arrival/index.mdx -> /arrival/
 
 Не делайте вывод о существовании страницы по одному `CONTENT_INDEX.yml`: сверяйте индекс с фактическим деревом файлов. Индекс предназначен для семантической навигации и перелинковки, но не заменяет дерево репозитория.
 
+`CONTENT_INDEX.yml` индексирует страницы сайта, а не GeoJSON/KML-артефакты. Изменения только в `map-data/**` сами по себе не требуют записи карты в `CONTENT_INDEX.yml` и не считаются содержательным обновлением опубликованной статьи.
+
 ## Обязательные файлы перед работой
 
 Перед изменением статей прочитайте:
@@ -101,6 +142,8 @@ src/content/docs/arrival/index.mdx -> /arrival/
 - `src/content/docs/CONTENT_INDEX.yml`;
 - `docs/EDITORIAL_POLICY.md`;
 - `docs/MDX_COMPONENTS.md`.
+
+Перед изменением `map-data/**` дополнительно прочитайте `map-data/README.md`, запустите текущий `scripts/check-map-data.mjs` и проверьте engine map contract в `Antiokh/rslive.ru`.
 
 Перед использованием или изменением компонентного паттерна дополнительно прочитайте в `Antiokh/rslive.ru`:
 

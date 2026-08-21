@@ -305,7 +305,14 @@ title?: string = "Карта"
 caption?: string
 aspect?: string = "16 / 10"
 height?: string
+offlineSrc?: string
+regions?: string[]
+SerbiaMap?: boolean
+debug?: boolean = false
+debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-map"
 ```
+
+Если `regions` отсутствует или пуст, действует продуктовый дефолт: **Белград + карта Сербии**.
 
 ```mdx
 <MapEmbed
@@ -315,7 +322,51 @@ height?: string
 />
 ```
 
-Карта должна дополнять текстовый адрес, а не заменять его.
+Чтобы выбрать только конкретный город, укажите его явно:
+
+```mdx
+<MapEmbed
+  src="https://www.google.com/maps/d/embed?mid=..."
+  title="Объекты в Нише"
+  regions={['nis']}
+/>
+```
+
+Чтобы к явно выбранным городам добавить обзор Сербии, используйте отдельный булевый prop `SerbiaMap`:
+
+```mdx
+<MapEmbed
+  src="https://www.google.com/maps/d/embed?mid=..."
+  title="Объекты в нескольких городах"
+  regions={['belgrade', 'novi-sad']}
+  SerbiaMap
+/>
+```
+
+Допустимые значения `regions`:
+
+```text
+belgrade
+novi-sad
+nis
+subotica
+```
+
+`serbia`, `serbia-overview` и другие country aliases не передаются через `regions`. Карта страны управляется только `SerbiaMap`.
+
+Правила:
+
+- Без выбранного города компонент подготавливает `belgrade` и `SerbiaMap=true`.
+- Как только указан хотя бы один город, автоматический country layer отключается: Сербия добавляется только через `SerbiaMap`.
+- `SerbiaMap={false}` можно использовать, чтобы подавить карту страны и при дефолтном Белграде.
+- Один город без `SerbiaMap` может ограничивать renderer его bounds. При двух и более городах общий `maxBounds` — Сербия, чтобы пользователь не был заперт в первом городе.
+- Неизвестный city id должен ломать сборку, а не тихо игнорироваться.
+- Регистрация города в engine не означает, что его snapshot уже опубликован. Для отсутствующего файла не создавайте пустую заглушку.
+- `offlineSrc` задаёт same-origin offline renderer/fallback URL; компонент передаёт ему эффективные `regions` и `serbia=1`.
+- `debug` и `debugState` предназначены для диагностических страниц, а не для обычных публикаций.
+- Карта должна дополнять текстовый адрес, а не заменять его.
+
+Картографические snapshots лежат в `map-data/**`. Полный ручной цикл выгрузки, нормализации, проверки и обновления описан в `map-data/README.md`. Наличие файла на сервере не включает его в transactional PWA corpus автоматически.
 
 ## YouTube
 
