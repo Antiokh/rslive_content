@@ -1,0 +1,131 @@
+name: humanizer_russian editorial review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  HUMANIZER_SHA: ad90c24b8a5705f455fc387b2cd5b77a17959257
+
+jobs:
+  humanizer:
+    name: humanizer_russian advisory
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout trusted review tooling
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Checkout proposed content
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: head
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Collect changed MDX files
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            const fs = require('fs');
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              per_page: 100,
+            });
+            const mdx = files
+              .filter(file =>
+                file.status !== 'removed' &&
+                file.filename.startsWith('src/content/docs/') &&
+                file.filename.endsWith('.mdx')
+              )
+              .map(file => file.filename);
+            fs.writeFileSync('/tmp/humanizer-files.txt', mdx.join('\n'));
+
+      - name: Fetch pinned humanizer_russian
+        run: |
+          git init /tmp/humanizer_russian
+          git -C /tmp/humanizer_russian remote add origin https://github.com/Antiokh/humanizer_russian.git
+          git -C /tmp/humanizer_russian fetch --depth=1 origin "$HUMANIZER_SHA"
+          git -C /tmp/humanizer_russian checkout --detach FETCH_HEAD
+          test "$(git -C /tmp/humanizer_russian rev-parse HEAD)" = "$HUMANIZER_SHA"
+          python3 /tmp/humanizer_russian/scripts/lint.py --self-test
+
+      - name: Smoke-test extended Editorial Board integration
+        run: |
+          python3 base/.github/scripts/humanizer_pr_review.py \
+            --humanizer-root /tmp/humanizer_russian \
+            --self-test | tee /tmp/humanizer-self-test.json
+          python3 - <<'PY'
+          import json
+          data = json.load(open('/tmp/humanizer-self-test.json', encoding='utf-8'))
+          assert data['mode'] == 'editorial_board'
+          assert data['style'] == 'rslive_content'
+          assert data['register'] == 'general'
+          assert data['evidence_request'] == 'auto'
+          assert len(data['libraries']) == 8
+          assert data['detected_rule'] == 'ILY-M01'
+          print('humanizer_russian editorial smoke: OK')
+          PY
+
+      - name: Build humanizer_russian review
+        run: |
+          python3 base/.github/scripts/humanizer_pr_review.py \
+            --humanizer-root /tmp/humanizer_russian \
+            --base-root base \
+            --head-root head \
+            --files /tmp/humanizer-files.txt \
+            --output /tmp/humanizer-comment.md
+
+      - name: Add review to job summary
+        run: cat /tmp/humanizer-comment.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Create or update PR comment
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          COMMENT_PATH: /tmp/humanizer-comment.md
+        with:
+          script: |
+            const fs = require('fs');
+            const markers = [
+              '<!-- humanizer-russian-review -->',
+              '<!-- humanizer-ru-review -->',
+            ];
+            const body = fs.readFileSync(process.env.COMMENT_PATH, 'utf8');
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const existing = comments.find(comment =>
+              comment.body && markers.some(marker => comment.body.includes(marker))
+            );
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
