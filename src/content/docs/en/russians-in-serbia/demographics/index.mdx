@@ -14,35 +14,37 @@ These numbers do not mean that there were exactly 61,949 “Russians in Serbia�
 
 ## Residence statistics by year
 
-| Year | Russian citizens with valid temporary residence | Russian citizens with permanent residence |
-|---:|---:|---:|
-| 2011 | 1,398 | 834 |
-| 2012 | 1,743 | 806 |
-| 2013 | 2,005 | 803 |
-| 2014 | 2,429 | 562 |
-| 2015 | 3,430 | 554 |
-| 2016 | 2,677 | 620 |
-| 2017 | 2,795 | 684 |
-| 2018 | 2,976 | 785 |
-| 2019 | 4,125 | 943 |
-| 2020 | 3,887 | 824 |
-| 2021 | 3,538 | 1,264 |
-| 2022 | 22,351 | 1,355 |
-| 2023 | 41,644 | 1,749 |
-| 2024 | 51,203 | 2,700 |
-| 2025 | 54,917 | 7,032 |
-
-The sharp break after 2021 reflects the post-2022 migration wave. In 2025 the stock of temporary residents continued to grow, but much more slowly than in 2022–2024, while the number of permanent residents increased sharply. The timing is consistent with part of the post-2022 population reaching the three-year residence threshold introduced by the amended Foreigners Act, but this is an interpretation of the timing rather than a published individual-level causal analysis.[^1]
-
-<MermaidGraph
-  code={`xychart-beta
-    title "Russian citizens: temporary and permanent residence"
-    x-axis [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
-    y-axis "People" 0 --> 60000
-    bar "Temporary residence" [1398, 1743, 2005, 2429, 3430, 2677, 2795, 2976, 4125, 3887, 3538, 22351, 41644, 51203, 54917]
-    bar "Permanent residence" [834, 806, 803, 562, 554, 620, 684, 785, 943, 824, 1264, 1355, 1749, 2700, 7032]
+<DataChart
+  type="bar"
+  x="Year"
+  title="Russian citizens: temporary and permanent residence"
+  locale="en-US"
+  tableOpen={false}
+  series={[
+    { key: 'Temporary residence', format: 'integer' },
+    { key: 'Permanent residence', format: 'integer' },
+  ]}
+  data={`
+    ["Year" "Temporary residence" "Permanent residence"]
+    {{2011}{1398}{834}}
+    {{2012}{1743}{806}}
+    {{2013}{2005}{803}}
+    {{2014}{2429}{562}}
+    {{2015}{3430}{554}}
+    {{2016}{2677}{620}}
+    {{2017}{2795}{684}}
+    {{2018}{2976}{785}}
+    {{2019}{4125}{943}}
+    {{2020}{3887}{824}}
+    {{2021}{3538}{1264}}
+    {{2022}{22351}{1355}}
+    {{2023}{41644}{1749}}
+    {{2024}{51203}{2700}}
+    {{2025}{54917}{7032}}
   `}
 />
+
+The sharp break after 2021 reflects the post-2022 migration wave. In 2025 the stock of temporary residents continued to grow, but much more slowly than in 2022–2024, while the number of permanent residents increased sharply. The timing is consistent with part of the post-2022 population reaching the three-year residence threshold introduced by the amended Foreigners Act, but this is an interpretation of the timing rather than a published individual-level causal analysis.[^1]
 
 ## First temporary-residence permits in 2025
 
@@ -56,52 +58,51 @@ The report states that the displayed 2025 residence data were generated on **25 
 
 The annual migration profiles published a separate number for former Russian citizens who acquired Serbian citizenship through 2024:
 
-| Year | Persons recorded as former Russian citizens acquiring Serbian citizenship |
-|---:|---:|
-| 2011 | 47 |
-| 2012 | 166 |
-| 2013 | 52 |
-| 2014 | 89 |
-| 2015 | 99 |
-| 2016 | 67 |
-| 2017 | 82 |
-| 2018 | 145 |
-| 2019 | 135 |
-| 2020 | 174 |
-| 2021 | 197 |
-| 2022 | 275 |
-| 2023 | 532 |
-| 2024 | 191 |
-
-The 2025 Migration Profile does **not** publish Russia as a separate row in the citizenship table; Russia is included in “Other”. A Russia-specific 2025 citizenship number therefore cannot be derived from that report without another official source.[^1][^2]
-
-<MermaidGraph
-  code={`xychart-beta
-    title "Serbian citizenship acquired by former Russian citizens"
-    x-axis [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
-    y-axis "People" 0 --> 600
-    bar "Citizenship" [47, 166, 52, 89, 99, 67, 82, 145, 135, 174, 197, 275, 532, 191]
+<DataChart
+  type="bar"
+  x="Year"
+  title="Serbian citizenship acquired by former Russian citizens"
+  locale="en-US"
+  tableOpen={false}
+  series={[{ key: 'Citizenship', format: 'integer' }]}
+  data={`
+    ["Year" "Citizenship"]
+    {{2011}{47}}
+    {{2012}{166}}
+    {{2013}{52}}
+    {{2014}{89}}
+    {{2015}{99}}
+    {{2016}{67}}
+    {{2017}{82}}
+    {{2018}{145}}
+    {{2019}{135}}
+    {{2020}{174}}
+    {{2021}{197}}
+    {{2022}{275}}
+    {{2023}{532}}
+    {{2024}{191}}
   `}
 />
+
+The 2025 Migration Profile does **not** publish Russia as a separate row in the citizenship table; Russia is included in “Other”. A Russia-specific 2025 citizenship number therefore cannot be derived from that report without another official source.[^1][^2]
 
 ## Geographic distribution
 
 The 2023 migration data used by RSLive recorded the following distribution of Russian citizens in the main cities:
 
-| Area | Russian citizens |
-|---|---:|
-| Belgrade | 28,989 |
-| Novi Sad | 3,953 |
-| Niš | 3,514 |
-| Other municipalities | 7,469 |
-
-<MermaidGraph
-  code={`pie showData
-    title Distribution by area, 2023
-    "Belgrade" : 28989
-    "Novi Sad" : 3953
-    "Niš" : 3514
-    "Other" : 7469
+<DataChart
+  type="pie"
+  x="Area"
+  title="Distribution by area, 2023"
+  locale="en-US"
+  tableOpen={false}
+  series={[{ key: 'Russian citizens', format: 'integer' }]}
+  data={`
+    ["Area" "Russian citizens"]
+    {{Belgrade}{28989}}
+    {{Novi Sad}{3953}}
+    {{Niš}{3514}}
+    {{Other municipalities}{7469}}
   `}
 />
 
