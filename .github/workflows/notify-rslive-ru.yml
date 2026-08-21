@@ -33,11 +33,15 @@ jobs:
           path: rslive-engine
           fetch-depth: 0
 
-      - name: Copy public content and sticker sources
+      - name: Copy public content, sticker sources, and map data
         run: |
           set -euo pipefail
           test -d src/content/docs
           test -d src/content/docs/about/stickers/assets/svg
+          test -d map-data/core
+          test -d map-data/basemaps
+          test -d map-data/packs
+          test -d map-data/snapshots
           test -d rslive-engine/astro/src/content/docs
 
           rsync -a --delete \
@@ -47,6 +51,18 @@ jobs:
           mkdir -p rslive-engine/astro/src/assets/stickers
           rsync -a \
             src/content/docs/about/stickers/assets/svg/ rslive-engine/astro/src/assets/stickers/
+
+          # These four destination subtrees are content-owned mirrors of map-data/**.
+          # Engine-owned map manifests, scripts and runtime files live outside them.
+          mkdir -p \
+            rslive-engine/astro/public/maps/core \
+            rslive-engine/astro/public/maps/basemaps \
+            rslive-engine/astro/public/maps/packs \
+            rslive-engine/astro/public/maps/snapshots
+          rsync -a --delete map-data/core/ rslive-engine/astro/public/maps/core/
+          rsync -a --delete map-data/basemaps/ rslive-engine/astro/public/maps/basemaps/
+          rsync -a --delete map-data/packs/ rslive-engine/astro/public/maps/packs/
+          rsync -a --delete map-data/snapshots/ rslive-engine/astro/public/maps/snapshots/
 
       - name: Commit and push synced changes
         id: sync_commit
@@ -65,8 +81,8 @@ jobs:
           git config user.name "rslive content sync"
           git config user.email "actions@github.com"
 
-          if [ -z "$(git status --porcelain astro/src/content/docs astro/src/assets/stickers)" ]; then
-            echo "No content or sticker changes to sync."
+          if [ -z "$(git status --porcelain astro/src/content/docs astro/src/assets/stickers astro/public/maps/core astro/public/maps/basemaps astro/public/maps/packs astro/public/maps/snapshots)" ]; then
+            echo "No content, sticker, or map changes to sync."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "content_sha=$CONTENT_SHA" >> "$GITHUB_OUTPUT"
             exit 0
@@ -89,7 +105,13 @@ jobs:
             preview_url="https://rslive.ru/${route}"
           fi
 
-          git add astro/src/content/docs astro/src/assets/stickers
+          git add \
+            astro/src/content/docs \
+            astro/src/assets/stickers \
+            astro/public/maps/core \
+            astro/public/maps/basemaps \
+            astro/public/maps/packs \
+            astro/public/maps/snapshots
           subject="$(printf '%s\n' "$CONTENT_MESSAGE" | sed -n '1p')"
           if [ -z "$subject" ]; then
             subject="Sync docs from rslive_content"
