@@ -24,12 +24,8 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Validate map sources and build runtime gzip
-        run: |
-          set -euo pipefail
-          node scripts/check-map-data.mjs
-          node scripts/build-map-data.mjs
-          node scripts/build-map-data.mjs --check
+      - name: Validate map sources before destructive sync
+        run: node scripts/check-map-data.mjs
 
       - name: Check out private rslive.ru
         uses: actions/checkout@v4
@@ -59,10 +55,9 @@ jobs:
           rsync -a \
             src/content/docs/about/stickers/assets/svg/ rslive-engine/astro/src/assets/stickers/
 
-          # Runtime map payloads use an explicit allowlist. The content repository may also keep
-          # acquisition/intermediate GeoJSON (for example belgrade-ext); those files must never
-          # become production payloads merely because they share a map-data directory. Gzip files
-          # below are generated ephemerally by build-map-data.mjs and are not content source files.
+          # Runtime map payloads use an explicit allowlist. Gzip is deliberately manual: when a
+          # validated sibling .geojson.gz exists it is mirrored, otherwise runtime uses raw GeoJSON.
+          # This workflow never acquires OSM/Google data and never compresses map resources.
           mkdir -p \
             rslive-engine/astro/public/maps/core \
             rslive-engine/astro/public/maps/basemaps \
@@ -80,6 +75,8 @@ jobs:
           rsync -a --delete --delete-excluded \
             --include='belgrade.geojson' \
             --include='belgrade.geojson.gz' \
+            --include='belgrade-ext.geojson' \
+            --include='belgrade-ext.geojson.gz' \
             --include='novi-sad.geojson' \
             --include='novi-sad.geojson.gz' \
             --include='nis.geojson' \
