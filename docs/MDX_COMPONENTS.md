@@ -305,11 +305,12 @@ aspect?: string = "16 / 10"
 height?: string
 offlineSrc?: string
 regions?: string[]
+SerbiaMap?: boolean
 debug?: boolean = false
 debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-map"
 ```
 
-Обычная карта без first-party региональных данных:
+Если `regions` отсутствует или пуст, действует продуктовый дефолт: **Белград + карта Сербии**.
 
 ```mdx
 <MapEmbed
@@ -319,47 +320,51 @@ debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-ma
 />
 ```
 
-Карта, которой нужна детализация только Белграда:
+Чтобы выбрать только конкретный город, укажите его явно:
 
 ```mdx
 <MapEmbed
   src="https://www.google.com/maps/d/embed?mid=..."
-  title="Объекты в Белграде"
-  regions={['belgrade']}
+  title="Объекты в Нише"
+  regions={['nis']}
 />
 ```
 
-Карта с несколькими явно выбранными слоями:
+Чтобы к явно выбранным городам добавить обзор Сербии, используйте отдельный булевый prop `SerbiaMap`:
 
 ```mdx
 <MapEmbed
   src="https://www.google.com/maps/d/embed?mid=..."
   title="Объекты в нескольких городах"
-  regions={['serbia-overview', 'belgrade', 'novi-sad']}
+  regions={['belgrade', 'novi-sad']}
+  SerbiaMap
 />
 ```
 
-Поддерживаемые region id проверяйте по актуальному `Antiokh/rslive.ru: astro/config/map-regions.config.mjs`. На текущей ветке регионального компонента предусмотрены:
+Допустимые значения `regions`:
 
 ```text
-serbia-overview
 belgrade
 novi-sad
 nis
 subotica
 ```
 
+`serbia`, `serbia-overview` и другие country aliases не передаются через `regions`. Карта страны управляется только `SerbiaMap`.
+
 Правила:
 
-- `regions` — явное разрешение конкретному экземпляру карты выбрать и сохранить перечисленные first-party GeoJSON. Не добавляйте регион «на всякий случай».
-- Если `regions` отсутствует или пуст, компонент не выбирает ни Сербию, ни городские snapshots автоматически.
-- Один выбранный регион может ограничивать renderer его границами. При двух и более регионах движение не должно ограничиваться первым городом: общий предел — Сербия.
-- Регистрация региона в engine не означает, что его snapshot уже опубликован. Для отсутствующего файла не создавайте пустую заглушку.
-- `offlineSrc` задаёт same-origin offline renderer/fallback URL и не заменяет `regions`: эти props решают разные задачи.
+- Без выбранного города компонент подготавливает `belgrade` и `SerbiaMap=true`.
+- Как только указан хотя бы один город, автоматический country layer отключается: Сербия добавляется только через `SerbiaMap`.
+- `SerbiaMap={false}` можно использовать, чтобы подавить карту страны и при дефолтном Белграде.
+- Один город без `SerbiaMap` может ограничивать renderer его bounds. При двух и более городах общий `maxBounds` — Сербия, чтобы пользователь не был заперт в первом городе.
+- Неизвестный city id должен ломать сборку, а не тихо игнорироваться.
+- Регистрация города в engine не означает, что его snapshot уже опубликован. Для отсутствующего файла не создавайте пустую заглушку.
+- `offlineSrc` задаёт same-origin offline renderer/fallback URL; компонент передаёт ему эффективные `regions` и `serbia=1`.
 - `debug` и `debugState` предназначены для диагностических страниц, а не для обычных публикаций.
 - Карта должна дополнять текстовый адрес, а не заменять его.
 
-Картографические snapshots лежат в `map-data/**` и обновляются вручную по инструкции `map-data/README.md`. Наличие файла в репозитории не означает автоматическую загрузку в PWA.
+Картографические snapshots лежат в `map-data/**`. Полный ручной цикл выгрузки, нормализации, проверки и обновления описан в `map-data/README.md`. Наличие файла на сервере не включает его в transactional PWA corpus автоматически.
 
 ## YouTube
 
