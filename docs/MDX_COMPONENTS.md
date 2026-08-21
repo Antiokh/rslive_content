@@ -45,6 +45,7 @@ MapEmbed
 MermaidGraph
 SanityTable
 SmartTable
+StickerGallery
 Spoiler
 StructTable
 SupabaseChart
@@ -322,6 +323,22 @@ debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-ma
 />
 ```
 
+### Автоматический first-party renderer
+
+Для зарегистрированного `src` обычный вызов в статье не требует `offlineSrc`. На сборке `MapEmbed` нормализует `src` через engine registry (`config/maps.config.mjs`). Если источник известен, компонент автоматически связывает его с same-origin `/map-renderer/` и first-party thematic snapshot.
+
+Реальный production-пример — страница [`/map/dance/`](../src/content/docs/map/dance/index.mdx):
+
+```mdx
+<MapEmbed
+  src="https://www.google.com/maps/d/u/0/embed?mid=1mxkFBhCULwjecdQUWUIfE1BAQahFG6I&ehbc=2E312F"
+  title="Танцевальные залы"
+  caption="Пользовательская карта танцевальных залов"
+/>
+```
+
+Для незарегистрированного `src` локальный renderer не придумывается: карта продолжает работать онлайн, а при cold offline получает штатную заглушку, если автор явно не задал `offlineSrc`. `offlineSrc` используйте только как проверенный same-origin override.
+
 Чтобы выбрать только конкретный регион, укажите его явно:
 
 ```mdx
@@ -373,8 +390,11 @@ subotica
 - Один регион без `SerbiaMap` может ограничивать renderer его bounds. При двух и более регионах общий `maxBounds` — Сербия, чтобы пользователь не был заперт в первом регионе.
 - Неизвестный region id должен ломать сборку, а не тихо игнорироваться.
 - Регистрация региона в engine не означает, что его snapshot уже опубликован. Для отсутствующего файла не создавайте пустую заглушку.
-- `offlineSrc` задаёт same-origin offline renderer/fallback URL; компонент передаёт ему эффективные `regions` и `serbia=1`.
-- `debug` и `debugState` предназначены для диагностических страниц, а не для обычных публикаций.
+- `regions` и `SerbiaMap` управляют базовыми geographic packs независимо от registry тематического `src`.
+- Для зарегистрированного `src` first-party renderer и thematic snapshot разрешаются автоматически; не дублируйте их через `offlineSrc`.
+- `offlineSrc` — только явный same-origin override; он имеет приоритет над автоматически разрешённым renderer URL.
+- Для незарегистрированного `src` локальное соответствие не угадывается.
+- `debug` и `debugState` предназначены только для диагностических страниц, а не для обычных публикаций.
 - Карта должна дополнять текстовый адрес, а не заменять его.
 
 Картографические snapshots лежат в `map-data/**`. Полный ручной цикл выгрузки, нормализации, проверки и обновления описан в `map-data/README.md`. Наличие файла на сервере не включает его в transactional PWA corpus автоматически.
@@ -516,6 +536,15 @@ debug?: boolean = false
 - `sourceUrl` должен быть внутренним путём `/.../` либо абсолютным `http(s)` URL;
 - `debug` предназначен только для диагностических страниц и не нужен в обычных статьях.
 
+### Реальные примеры в контенте
+
+Перед новым вызовом полезно свериться с уже опубликованными примерами:
+
+- [`/adaptation/russians/count/`](../src/content/docs/adaptation/russians/count/index.mdx) — `bar` и `pie`, human table, несколько серий и `integer`;
+- [`/en/russians-in-serbia/demographics/`](../src/content/docs/en/russians-in-serbia/demographics/index.mdx) — англоязычный `DataChart` с `locale="en-US"`;
+- [`/sr/rusi-u-srbiji/demografija/`](../src/content/docs/sr/rusi-u-srbiji/demografija/index.mdx) — сербский `DataChart` с `locale="sr-RS"`;
+- [`/integration/properties/`](../src/content/docs/integration/properties/index.mdx) — формат `currency` с единицей `€/м²`.
+
 ## SupabaseChart
 
 Исходник: `astro/src/components/SupabaseChart.astro`.
@@ -535,9 +564,11 @@ ascending?: boolean = true
 
 Остальные props (`type`, `series`, `unit`, `title`, `description`, `sourceLabel`, `sourceUrl`, `sourcePeriod`, `locale`, `tableOpen`, `engine`, `loading`, `debug`) совпадают с `DataChart`.
 
+В опубликованном `rslive_content` пока нет production-вызова `SupabaseChart`. Поэтому ниже показан только шаблон синтаксиса: `YOUR_PUBLIC_TABLE`, `period` и `value` нужно заменить на реально существующую публичную таблицу и проверенные поля перед использованием.
+
 ```mdx
 <SupabaseChart
-  table="statistics"
+  table="YOUR_PUBLIC_TABLE"
   select="period,value"
   x="period"
   order="period"
@@ -707,6 +738,24 @@ stretchColumn?: string
 ```
 
 Используйте только существующий `tableId`. Не переносите данные из Sanity вручную в статью, если таблица должна оставаться управляемой.
+
+## StickerGallery
+
+Исходник: `astro/src/components/StickerGallery.astro`.
+
+Текущая реализация не принимает props. Компонент автоматически строит каталог доступных стикеров из ресурсов движка, локализует подписи по URL страницы и даёт скопировать техническое имя стикера для `ogSticker`.
+
+```mdx
+<StickerGallery />
+```
+
+Используйте его для служебных страниц каталога стикеров, а не как универсальную галерею изображений. Не добавляйте локальный импорт.
+
+Реальные production-примеры:
+
+- [`/about/stickers/`](../src/content/docs/about/stickers/index.mdx);
+- [`/en/about/stickers/`](../src/content/docs/en/about/stickers/index.mdx);
+- [`/sr/about/stickers/`](../src/content/docs/sr/about/stickers/index.mdx).
 
 ## Card, CardGrid, Badge, FileTree, Icon, LinkButton, LinkCard, Tabs, TabItem
 
