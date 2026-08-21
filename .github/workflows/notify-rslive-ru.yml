@@ -24,10 +24,12 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Validate map snapshots before destructive sync
+      - name: Validate map sources and build runtime gzip
         run: |
-          node scripts/build-map-data.mjs --check
+          set -euo pipefail
           node scripts/check-map-data.mjs
+          node scripts/build-map-data.mjs
+          node scripts/build-map-data.mjs --check
 
       - name: Check out private rslive.ru
         uses: actions/checkout@v4
@@ -58,8 +60,9 @@ jobs:
             src/content/docs/about/stickers/assets/svg/ rslive-engine/astro/src/assets/stickers/
 
           # Runtime map payloads use an explicit allowlist. The content repository may also keep
-          # acquisition/intermediate GeoJSON (for example extended/raw exports); those files must
-          # never become production payloads merely because they share a map-data directory.
+          # acquisition/intermediate GeoJSON (for example belgrade-ext); those files must never
+          # become production payloads merely because they share a map-data directory. Gzip files
+          # below are generated ephemerally by build-map-data.mjs and are not content source files.
           mkdir -p \
             rslive-engine/astro/public/maps/core \
             rslive-engine/astro/public/maps/basemaps \
