@@ -2,7 +2,19 @@
 
 Этот каталог хранит публикуемые first-party snapshots карт для `rslive.ru`.
 
-Карты **не обновляются автоматически**. Это редко меняющиеся данные: новый snapshot делается вручную только тогда, когда есть практическая причина обновить покрытие или источник.
+Карты **не обновляются автоматически**. Это редко меняющиеся данные: новый snapshot делается вручную только тогда, когда есть практическая причина обновить покрытие, исправить ошибку или заменить источник.
+
+## Главное правило
+
+`map-data/**` — last-known-good данные. Не заменяйте рабочий snapshot неполной или непроверенной выгрузкой.
+
+Перед публикацией всегда запускайте:
+
+```bash
+node scripts/check-map-data.mjs
+```
+
+Тот же validator запускается в content-sync workflow **до** любого `rsync --delete`. Если обязательный snapshot или sidecar отсутствует, синхронизация останавливается и рабочее зеркало в `rslive.ru` не удаляется.
 
 ## Что здесь хранится
 
@@ -25,31 +37,120 @@ map-data/
       <mid>.json
 ```
 
-Файлы `novi-sad.geojson`, `nis.geojson` и `subotica.geojson` появляются здесь после отдельной ручной выгрузки. Пустые заглушки вместо реальных данных не создавайте.
+`novi-sad.geojson`, `nis.geojson` и `subotica.geojson` могут отсутствовать до первой реальной выгрузки. Пустые GeoJSON-заглушки не создавайте.
 
-После публикации данные зеркалируются движком в `astro/public/maps/**`. Реализация renderer, PWA, Cache Storage и MapLibre находится в `Antiokh/rslive.ru`.
+`basemaps/belgrade-lite.geojson` — legacy pilot artifact. Новые городские карты добавляются в `packs/cities/`.
 
-Важно: каталог `core/` — историческое имя слоя уровня страны, а не указание на автоматическое включение в PWA. И `serbia-overview`, и все городские паки в движке являются **явно выбираемыми** данными. Наличие файла в репозитории само по себе не должно заставлять браузер его скачивать.
+## Что означает MapEmbed
 
-## Общее правило обновления
+Engine contract находится в `Antiokh/rslive.ru`.
 
-1. Не обновляйте карту «по расписанию».
-2. Сначала сохраните текущий файл как last-known-good в Git.
-3. Получите новую выгрузку вручную из исходного источника.
-4. Проверьте, что выгрузка покрывает нужную территорию и содержит ожидаемые классы объектов.
-5. Сохраните RSLive metadata и структуру свойств существующего файла. Сырой экспорт Overpass Turbo нельзя просто подменить вместо готового RSLive GeoJSON, если у него нет нужных `category`, `regionId`, `bbox` и других полей контракта.
-6. После замены сравните размер и количество объектов с предыдущей версией. Резкое уменьшение обычно означает неполную выгрузку.
-7. Закоммитьте изменение отдельным PR. При ошибке источника оставьте предыдущий snapshot.
+У `MapEmbed` два независимых селектора:
 
-## Serbia Overview
+```text
+regions    -> городские паки
+SerbiaMap  -> карта Сербии
+```
 
-Источник — OpenStreetMap. Для ручной выгрузки используйте [Overpass Turbo](https://overpass-turbo.eu/).
+В `regions` разрешены только:
 
-Текущий обзор содержит:
+```text
+belgrade
+novi-sad
+nis
+subotica
+```
 
-- дороги `motorway`, `trunk`, `primary` с `ref`;
+`serbia-overview` не является публичным id компонента. Country layer включается prop `SerbiaMap`.
+
+Продуктовый дефолт: если ни один город не выбран, MapEmbed использует:
+
+```text
+Belgrade + SerbiaMap
+```
+
+Если город указан явно, например `regions={['nis']}`, страна автоматически не добавляется. Для неё нужен `SerbiaMap`.
+
+Наличие файла в `map-data/**` само по себе не означает, что браузер скачает его.
+
+## Что зеркалируется в engine
+
+Публикуются только четыре content-owned subtree:
+
+```text
+map-data/core/      -> rslive.ru/astro/public/maps/core/
+map-data/basemaps/  -> rslive.ru/astro/public/maps/basemaps/
+map-data/packs/     -> rslive.ru/astro/public/maps/packs/
+map-data/snapshots/ -> rslive.ru/astro/public/maps/snapshots/
+```
+
+`map-data/README.md` и другие root-level файлы в `astro/public/maps/` не копируются.
+
+## Безопасный рабочий цикл
+
+1. Обновите `main` и создайте отдельную ветку.
+2. Запустите baseline-проверку:
+
+   ```bash
+   node scripts/check-map-data.mjs
+   ```
+
+3. Получите новый raw export во временный каталог **вне** `map-data/`.
+4. Визуально проверьте охват территории и состав объектов.
+5. Нормализуйте raw export в RSLive GeoJSON contract.
+6. Замените только целевой snapshot/sidecar set.
+7. Повторно запустите validator.
+8. Сравните размер и количество объектов с предыдущей версией:
+
+   ```bash
+   git diff --stat
+   git diff -- map-data/
+   ```
+
+9. Если размер резко уменьшился, перепроверьте выгрузку до коммита.
+10. Откройте PR. Не обновляйте карты напрямую в `main` без необходимости.
+11. После merge content-sync сначала повторно валидирует map-data, затем зеркалирует их в private engine.
+
+При любой ошибке источника оставляйте предыдущий last-known-good.
+
+## Карта Сербии
+
+Источник — OpenStreetMap через Overpass Turbo.
+
+Публичный компонент использует prop `SerbiaMap`. Файл пока сохраняет историческое имя:
+
+```text
+map-data/core/serbia-overview.geojson
+```
+
+Новые metadata должны использовать:
+
+```text
+regionId: "serbia"
+```
+
+Validator временно принимает старое `regionId: "serbia-overview"`, чтобы существующий snapshot не требовал бессмысленной перегенерации только ради имени.
+
+### Уровень детализации
+
+Country layer должен оставаться лёгким. Включаем только:
+
+- `motorway`, `trunk`, `primary` с `ref`;
 - именованные реки;
-- подписи населённых пунктов `city` и `town`.
+- подписи `city` и `town`.
+
+Не включаем:
+
+- здания;
+- адреса;
+- магазины/рестораны/POI;
+- secondary/tertiary/residential/service дороги;
+- автобусные остановки;
+- маршрутизацию;
+- тайлы, terrain, 3D;
+- подробные квартальные подписи.
+
+### Overpass Turbo
 
 ```overpass
 [out:json][timeout:60];
@@ -64,35 +165,93 @@ out geom;
 
 Порядок:
 
-1. Откройте Overpass Turbo.
-2. Вставьте запрос и запустите его.
-3. Проверьте, что результат покрывает Сербию целиком.
-4. Выберите `Export` → `GeoJSON` и сохраните выгрузку локально.
-5. Нормализуйте её под текущий `map-data/core/serbia-overview.geojson`:
-   - дороги: `category: "road"`, `class` из `highway`, `name`, `ref`;
-   - реки: `category: "water-line"`, `class: "river"`, `name`;
-   - города: `category: "label"`, `class` из `place`, `name`, при наличии `population`;
-   - в корневых `properties` сохраните `regionId: "serbia-overview"`, `bbox`, attribution и дату ручного обновления.
-6. Оставьте только разумное количество подписей городов/посёлков, как в текущем snapshot, чтобы overview не превращался в детальную карту.
+1. Откройте https://overpass-turbo.eu/.
+2. Вставьте запрос и выполните его.
+3. Визуально проверьте, что выборка покрывает Сербию целиком.
+4. `Export` → `GeoJSON`.
+5. Сохраните raw export вне `map-data/`.
+6. Нормализуйте:
+   - road → `category: "road"`, `class` из `highway`, `name`, `ref`;
+   - river → `category: "water-line"`, `class: "river"`, `name`;
+   - city/town → `category: "label"`, `class` из `place`, `name`, при наличии `population`.
+7. Root `properties`:
 
-Поле `core`, если оно осталось в metadata старого snapshot, не определяет PWA-политику и не означает автоматическое скачивание.
+   ```json
+   {
+     "regionId": "serbia",
+     "regionTitle": "Сербия",
+     "kind": "country",
+     "bbox": [18.75, 42.2, 23.05, 46.2],
+     "attribution": "© OpenStreetMap contributors · ODbL",
+     "snapshotAt": "YYYY-MM-DD"
+   }
+   ```
 
-Минимальная проверка текущего engine-контракта: не менее 50 дорог, 2 рек и 8 подписей.
+8. Не увеличивайте число подписей без необходимости: country overview не должен превращаться в подробную карту.
+
+Минимальный validator threshold:
+
+```text
+roads >= 50
+rivers >= 2
+labels >= 8
+```
 
 ## Городские паки
 
-Поддерживаем четыре заранее определённых городских региона:
+Поддерживаются четыре города:
 
-- Белград — `belgrade`;
-- Нови-Сад — `novi-sad`;
-- Ниш — `nis`;
-- Суботица — `subotica`.
+| Город | regionId | renderer bbox |
+| --- | --- | --- |
+| Белград | `belgrade` | `[20.18, 44.68, 20.68, 44.97]` |
+| Нови-Сад | `novi-sad` | `[19.65, 45.15, 20.1, 45.42]` |
+| Ниш | `nis` | `[21.75, 43.2, 22.15, 43.42]` |
+| Суботица | `subotica` | `[19.5, 45.98, 19.86, 46.23]` |
 
-Все четыре региона опциональны. Движок загружает только те слои, которые явно запросил конкретный `MapEmbed`. Наличие городского файла не означает фоновую загрузку и не добавляет его в обычный PWA corpus.
+`bbox` — renderer constraint. **Не используйте его как границу OSM acquisition.**
 
-Городскую карту выгружайте **по административной области**, а не по прямоугольнику renderer. Overpass Turbo через `{{geocodeArea:...}}` находит административную область с помощью Nominatim и использует её как `area`. После запуска обязательно визуально проверьте, что выбрана именно нужная административная территория. Прямоугольный `bounds` в engine остаётся UI-ограничением renderer и не определяет состав исходной OSM-выгрузки.
+### Граница выгрузки
 
-Для всех городов используется один шаблон запроса; меняется только `geocodeArea`:
+Городскую карту получайте по административной области через `geocodeArea`.
+
+Обязательно визуально проверьте найденную область: Nominatim/Overpass может подобрать одноимённую сущность не того уровня.
+
+Используйте названия:
+
+```text
+Belgrade, Serbia
+Novi Sad, Serbia
+Niš, Serbia
+Subotica, Serbia
+```
+
+### Уровень детализации
+
+Для каждого города включаем:
+
+- дороги: `motorway|trunk|primary|secondary|tertiary`;
+- водные линии: `river|canal`;
+- водные площади: `natural=water`;
+- зелёные территории: `leisure=park`, `landuse=forest|recreation_ground`;
+- подписи: `city|town|suburb|quarter`.
+
+Не включаем:
+
+- `residential`, `living_street`, `service`, `track`, `path`, `footway`, `cycleway`;
+- здания;
+- адресные точки;
+- shops, amenity, tourism, craft и другие POI;
+- остановки и полный public transport graph;
+- parking;
+- indoor;
+- routing graph;
+- внешние OSM tiles/sprites/glyphs.
+
+Это сознательная детализация: карта должна давать географический контекст и основные улицы, но не пытаться стать офлайн-навигацией.
+
+### Шаблон Overpass
+
+Для Белграда:
 
 ```overpass
 [out:json][timeout:90];
@@ -108,53 +267,111 @@ out geom;
 out geom;
 ```
 
-Подставляйте:
+Для остальных меняется только первая строка `geocodeArea`.
+
+### Нормализация city GeoJSON
+
+Сырой экспорт Overpass Turbo **не коммитьте вместо готового файла**.
+
+Для каждой Feature:
 
 ```text
-Belgrade, Serbia
-Novi Sad, Serbia
-Niš, Serbia
-Subotica, Serbia
+highway                          -> category="road", class=<highway>
+waterway=river|canal             -> category="water-line", class=<waterway>
+natural=water                    -> category="water-area"
+leisure=park                     -> category="green", class="park"
+landuse=forest                   -> category="green", class="forest"
+landuse=recreation_ground        -> category="green", class="recreation_ground"
+place=city|town|suburb|quarter   -> category="label", class=<place>
 ```
 
-Для каждого города:
+Сохраняйте полезные поля, когда они есть:
 
-1. запустите запрос и визуально проверьте административную область;
-2. `Export` → `GeoJSON`;
-3. нормализуйте свойства по текущему городскому контракту:
-   - дороги → `category: "road"`;
-   - river/canal → `category: "water-line"`;
-   - `natural=water` → `category: "water-area"`;
-   - park/forest/recreation_ground → `category: "green"`;
-   - place nodes → `category: "label"`;
-4. добавьте региональные metadata: `regionId`, `regionTitle`, `kind: "city"`, `parent: "serbia-overview"`, renderer `bbox`, `optionalPack: true`;
-5. проверьте разумный размер и полноту данных перед заменой last-known-good.
+```text
+name
+ref
+population
+```
 
-Минимальная проверка для текущего городского слоя: не менее 20 дорожных объектов и 2 водных объектов.
+OSM service metadata можно сократить до стабильного `osmId`/исходных тегов, если они нужны для диагностики. Не тащите огромные машинные payload в popup data без пользы.
 
-Текущий `map-data/basemaps/belgrade-lite.geojson` — историческое имя pilot-базы. После стабилизации renderer отдельный `basemaps/` слой можно убрать и использовать `packs/cities/belgrade.geojson` как единственный источник городских данных.
+Root `properties`:
 
-Текущий `map-data/packs/cities/belgrade.geojson` был получен до перехода на административную выборку. Считайте его last-known-good pilot; следующая ручная выгрузка Белграда должна использовать административную область.
+```json
+{
+  "regionId": "belgrade",
+  "regionTitle": "Белград",
+  "kind": "city",
+  "country": "serbia",
+  "bbox": [20.18, 44.68, 20.68, 44.97],
+  "optionalPack": true,
+  "attribution": "© OpenStreetMap contributors · ODbL",
+  "snapshotAt": "YYYY-MM-DD"
+}
+```
+
+Для остальных городов замените `regionId`, `regionTitle` и `bbox` по таблице выше.
+
+Не упрощайте геометрию дополнительно на первом проходе. Если конкретный city file станет непрактично большим, сначала измерьте размер и только потом меняйте общий data contract.
+
+Минимальная проверка каждого city pack:
+
+```text
+roads >= 20
+water features >= 2
+```
+
+## Что сейчас надо выгрузить
+
+Для полного текущего набора подготовьте административные snapshots:
+
+```text
+map-data/packs/cities/belgrade.geojson
+map-data/packs/cities/novi-sad.geojson
+map-data/packs/cities/nis.geojson
+map-data/packs/cities/subotica.geojson
+```
+
+Белград тоже лучше перегрузить: текущий файл — старый rectangle-based pilot. Новая версия должна использовать административную область так же, как остальные три города.
+
+Отдельный новый `belgrade-lite.geojson` для этой задачи не нужен.
 
 ## Google My Maps snapshots
 
-Для Google My Maps хранится исходный KML, производный GeoJSON и metadata sidecar.
+Для Google My Maps один логический snapshot всегда состоит из **трёх файлов**:
 
-Для карты с `mid=<MID>` исходный KML можно получить вручную из My Maps либо через best-effort export URL:
+```text
+<MID>.kml
+<MID>.geojson
+<MID>.json
+```
+
+Нельзя обновить только один из трёх.
+
+Best-effort KML URL:
 
 ```text
 https://www.google.com/maps/d/kml?mid=<MID>&forcekml=1
 ```
 
-Этот URL не является гарантированным публичным API, поэтому при любой ошибке не заменяйте рабочий snapshot.
+Это не гарантированный API. При 403/CORS/ошибке/аномально маленьком ответе оставляйте предыдущий snapshot.
 
-После ручного обновления:
+Порядок обновления:
 
-1. сохраните новый `<MID>.kml`;
-2. убедитесь, что он содержит ожидаемые `Placemark` и геометрию;
-3. пересоберите соответствующий `<MID>.geojson` по тому же контракту, что у существующего файла;
-4. обновите `<MID>.json`: `snapshotAt`, размер, SHA-256 и счётчики;
-5. проверьте, что `sourceId` остаётся `google-mymaps:<MID>`.
+1. Получите KML.
+2. Проверьте наличие `<kml>` и реальных `<Placemark>`.
+3. Конвертируйте в GeoJSON по текущему контракту.
+4. Сохраните `sourceId: google-mymaps:<MID>`.
+5. Пересчитайте metadata sidecar:
+   - `sourceKind`;
+   - `sourceId`;
+   - `upstreamId`;
+   - `dataFile`;
+   - `snapshotAt`;
+   - `bytes`;
+   - `sha256` KML;
+   - `counts.placemarks`.
+6. Запустите `node scripts/check-map-data.mjs`.
 
 Pilot MID:
 
@@ -162,12 +379,51 @@ Pilot MID:
 1mxkFBhCULwjecdQUWUIfE1BAQahFG6I
 ```
 
-## Что не делать
+Validator проверяет, что KML/GeoJSON/JSON sidecars существуют комплектом и что `bytes`/SHA-256 metadata совпадают с реальным KML.
+
+## Как добавить новый город
+
+Не кладите произвольный `<city>.geojson` в `packs/cities/` заранее: engine finalizer отклоняет незарегистрированный файл.
+
+Сначала:
+
+1. решите, что city pack реально нужен продукту;
+2. добавьте region config в `Antiokh/rslive.ru/astro/config/map-regions.config.mjs`;
+3. задайте renderer bbox/zoom;
+4. обновите engine tests/manifest contract;
+5. добавьте город в `scripts/check-map-data.mjs` и эту инструкцию;
+6. только затем выгрузите и закоммитьте GeoJSON.
+
+## Как удалить карту
+
+Удаление файла — тоже изменение контракта.
+
+Не удаляйте обязательные `serbia-overview.geojson`, `belgrade.geojson`, Belgrade Lite или Google pilot sidecars без синхронного изменения validator/engine. Иначе sync специально завершится ошибкой до destructive mirror.
+
+Для optional city pack сначала убедитесь, что engine допускает `unavailable`, затем удаляйте файл отдельным PR.
+
+## Атрибуция
+
+OSM-derived GeoJSON должен сохранять:
+
+```text
+© OpenStreetMap contributors · ODbL
+```
+
+Не удаляйте attribution при нормализации.
+
+Google My Maps snapshot сохраняет происхождение в metadata и не даёт права кэшировать сторонние Google tiles, Street View или другие remote assets.
+
+## Чего не делать
 
 - не добавлять scheduled refresh;
 - не выполнять Overpass-запросы в production build;
 - не выполнять Overpass-запросы у конечного пользователя;
-- не считать наличие файла согласием на его автоматическую загрузку;
-- не заменять last-known-good при неудачной или подозрительно маленькой выгрузке;
-- не кэшировать сторонние Google/OpenStreetMap tile responses как first-party данные;
-- не менять формат GeoJSON без синхронного изменения и проверки engine-контракта в `Antiokh/rslive.ru`.
+- не обновлять карты «просто потому что прошёл месяц»;
+- не использовать renderer bbox вместо административной области acquisition;
+- не добавлять buildings/POI/residential/service roads без отдельного решения по размеру и UX;
+- не коммить сырой Overpass export как готовый RSLive GeoJSON;
+- не создавать пустые city placeholders;
+- не заменять last-known-good при ошибке или подозрительно маленькой выгрузке;
+- не кэшировать сторонние Google/OpenStreetMap tile responses как first-party data;
+- не менять GeoJSON contract без синхронного изменения validators и engine.
