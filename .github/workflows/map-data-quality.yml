@@ -1,0 +1,42 @@
+name: Map data quality
+
+on:
+  pull_request:
+    paths:
+      - "map-data/**"
+      - "scripts/check-map-data.mjs"
+      - "scripts/build-map-data.mjs"
+      - ".github/workflows/map-data-quality.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "map-data/**"
+      - "scripts/check-map-data.mjs"
+      - "scripts/build-map-data.mjs"
+      - ".github/workflows/map-data-quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out map data
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate source snapshots
+        run: node scripts/check-map-data.mjs
+
+      - name: Verify committed gzip derivatives
+        run: node scripts/build-map-data.mjs --check
