@@ -38,6 +38,7 @@ Accordion
 AccordionItem
 ContentInclude
 Countdown
+DataChart
 DiasporaChart
 EmbedFrame
 MapEmbed
@@ -46,6 +47,7 @@ SanityTable
 SmartTable
 Spoiler
 StructTable
+SupabaseChart
 SupabaseTable
 UplatnicaGenerator
 YouTube
@@ -359,6 +361,8 @@ code: string
   B --> C[Получить решение]`} />
 ```
 
+Используйте `MermaidGraph` для схем процессов и связей. Для статистических рядов, сравнений и распределений используйте `DataChart`.
+
 Не вставляйте непроверенный Mermaid-код. Компонент использует `securityLevel: strict`.
 
 ## DiasporaChart
@@ -371,7 +375,107 @@ code: string
 <DiasporaChart />
 ```
 
-Не используйте компонент как универсальный график. Данные и годы зашиты в исходник компонента, поэтому страница с графиком должна отдельно указывать источник и дату проверки. Для другого или обновлённого набора данных измените реализацию в `Antiokh/rslive.ru` и синхронно обновите документацию.
+Не используйте компонент как универсальный график. Данные и годы зашиты в исходник компонента, поэтому страница с графиком должна отдельно указывать источник и дату проверки. Для новых и обновляемых статистических визуализаций используйте `DataChart`.
+
+## DataChart
+
+Исходник: `astro/src/components/DataChart.astro`.
+
+Используйте для числовых временных рядов, сравнений и распределений. По умолчанию компонент рисует Chart.js из локального npm bundle; ECharts доступен только как явный альтернативный renderer. Независимо от JavaScript компонент server-renderит исходные данные таблицей.
+
+Основные props:
+
+```text
+data: string | object[]
+x?: string
+type?: "line" | "bar" | "area" | "scatter" | "pie" | "doughnut" = "line"
+series?: Array<{
+  key: string
+  label?: string
+  unit?: string
+  axis?: "left" | "right"
+  format?: "number" | "integer" | "percent" | "currency"
+}>
+unit?: string
+title?: string
+description?: string
+sourceLabel?: string
+sourceUrl?: string
+sourcePeriod?: string
+locale?: string = "ru-RU"
+tableOpen?: boolean = true
+engine?: "chartjs" | "echarts" | "none" = "chartjs"
+loading?: "eager" | "visible" = "visible"
+debug?: boolean = false
+```
+
+`x` условно обязателен: для human-table его можно не указывать — осью X станет первая колонка; для object-array `x` нужно задавать явно.
+
+Для данных, редактируемых человеком в статье, используйте человекочитаемый табличный синтаксис:
+
+```mdx
+<DataChart
+  type="bar"
+  x="Год"
+  title="РВП и ПМЖ граждан России по годам"
+  tableOpen={false}
+  series={[
+    { key: 'РВП', format: 'integer' },
+    { key: 'ПМЖ', format: 'integer' },
+  ]}
+  data={`
+    ["Год" "РВП" "ПМЖ"]
+    {{2024}{51203}{2700}}
+    {{2025}{54917}{7032}}
+  `}
+/>
+```
+
+Правила:
+
+- не добавляйте локальный импорт `DataChart`;
+- для ручных данных предпочитайте human table, а object-array оставляйте generated/advanced случаям;
+- `{2024}` — число; если numeric-looking значение должно остаться строковой категорией, используйте `{"2024"}`;
+- `{null}` — пропуск данных, `{"null"}` — буквальная строка `null`;
+- `pie` / `doughnut` требуют ровно одну числовую серию, непустые строковые категории и не принимают отрицательные значения;
+- `scatter` требует числовую X; у `line` / `bar` / `area` даже числовая X остаётся категориальной;
+- `percent` хранится в percentage points: `15` означает `15%`;
+- `engine` обычно не указывайте: production default — Chart.js; `engine="echarts"` используйте только при конкретной необходимости, `engine="none"` — для server-only fallback;
+- `loading="visible"` — production default и откладывает renderer до приближения графика к viewport;
+- HTML-таблица остаётся в DOM всегда; `tableOpen` меняет только её начальное раскрытие;
+- `sourceUrl` должен быть внутренним путём `/.../` либо абсолютным `http(s)` URL.
+
+## SupabaseChart
+
+Исходник: `astro/src/components/SupabaseChart.astro`.
+
+Используйте, когда набор для `DataChart` хранится в Supabase и должен читаться при сборке сайта. Компонент не делает браузерный запрос к Supabase: он получает строки build-time и передаёт их обычному `DataChart`. Поэтому свежесть графика соответствует последней сборке сайта.
+
+Query props:
+
+```text
+table: string
+x: string
+select?: string = "*"
+limit?: number = 100  # 1..5000
+order?: string
+ascending?: boolean = true
+```
+
+Остальные props (`type`, `series`, `unit`, `title`, `description`, `sourceLabel`, `sourceUrl`, `sourcePeriod`, `locale`, `tableOpen`, `engine`, `loading`, `debug`) совпадают с `DataChart`.
+
+```mdx
+<SupabaseChart
+  table="statistics"
+  select="period,value"
+  x="period"
+  order="period"
+  type="line"
+  series={[{ key: 'value', label: 'Количество', format: 'integer' }]}
+/>
+```
+
+Используйте только существующую таблицу и проверенную схему. Не ставьте `select="*"`, если в таблице есть служебные или приватные поля. Ошибка запроса и пустой набор считаются ошибкой сборки, а не тихим пустым графиком.
 
 ## SmartTable
 

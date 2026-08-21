@@ -73,7 +73,8 @@
 - общий iframe — `EmbedFrame`;
 - YouTube — `YouTube`;
 - включение страницы или раздела — `ContentInclude`;
-- фильтруемая таблица — `SmartTable`, `StructTable`, `SupabaseTable` или `SanityTable` в зависимости от источника данных.
+- фильтруемая таблица — `SmartTable`, `StructTable`, `SupabaseTable` или `SanityTable` в зависимости от источника данных;
+- числовые графики — `DataChart`, а графики из Supabase с build-time загрузкой данных — `SupabaseChart`.
 
 Перед использованием компонента сверяйте его текущие props с `Antiokh/rslive.ru`. Не меняйте названия полей `UplatnicaGenerator` и не преобразовывайте квитанцию в картинку или обычную таблицу.
 
