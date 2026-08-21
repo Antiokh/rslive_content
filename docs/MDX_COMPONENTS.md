@@ -45,6 +45,7 @@ MapEmbed
 MermaidGraph
 SanityTable
 SmartTable
+StickerGallery
 Spoiler
 StructTable
 SupabaseChart
@@ -516,6 +517,15 @@ debug?: boolean = false
 - `sourceUrl` должен быть внутренним путём `/.../` либо абсолютным `http(s)` URL;
 - `debug` предназначен только для диагностических страниц и не нужен в обычных статьях.
 
+### Реальные примеры в контенте
+
+Перед новым вызовом полезно свериться с уже опубликованными примерами:
+
+- [`/adaptation/russians/count/`](../src/content/docs/adaptation/russians/count/index.mdx) — `bar` и `pie`, human table, несколько серий и `integer`;
+- [`/en/russians-in-serbia/demographics/`](../src/content/docs/en/russians-in-serbia/demographics/index.mdx) — англоязычный `DataChart` с `locale="en-US"`;
+- [`/sr/rusi-u-srbiji/demografija/`](../src/content/docs/sr/rusi-u-srbiji/demografija/index.mdx) — сербский `DataChart` с `locale="sr-RS"`;
+- [`/integration/properties/`](../src/content/docs/integration/properties/index.mdx) — формат `currency` с единицей `€/м²`.
+
 ## SupabaseChart
 
 Исходник: `astro/src/components/SupabaseChart.astro`.
@@ -535,9 +545,11 @@ ascending?: boolean = true
 
 Остальные props (`type`, `series`, `unit`, `title`, `description`, `sourceLabel`, `sourceUrl`, `sourcePeriod`, `locale`, `tableOpen`, `engine`, `loading`, `debug`) совпадают с `DataChart`.
 
+В опубликованном `rslive_content` пока нет production-вызова `SupabaseChart`. Поэтому ниже показан только шаблон синтаксиса: `YOUR_PUBLIC_TABLE`, `period` и `value` нужно заменить на реально существующую публичную таблицу и проверенные поля перед использованием.
+
 ```mdx
 <SupabaseChart
-  table="statistics"
+  table="YOUR_PUBLIC_TABLE"
   select="period,value"
   x="period"
   order="period"
@@ -707,6 +719,24 @@ stretchColumn?: string
 ```
 
 Используйте только существующий `tableId`. Не переносите данные из Sanity вручную в статью, если таблица должна оставаться управляемой.
+
+## StickerGallery
+
+Исходник: `astro/src/components/StickerGallery.astro`.
+
+Текущая реализация не принимает props. Компонент автоматически строит каталог доступных стикеров из ресурсов движка, локализует подписи по URL страницы и даёт скопировать техническое имя стикера для `ogSticker`.
+
+```mdx
+<StickerGallery />
+```
+
+Используйте его для служебных страниц каталога стикеров, а не как универсальную галерею изображений. Не добавляйте локальный импорт.
+
+Реальные production-примеры:
+
+- [`/about/stickers/`](../src/content/docs/about/stickers/index.mdx);
+- [`/en/about/stickers/`](../src/content/docs/en/about/stickers/index.mdx);
+- [`/sr/about/stickers/`](../src/content/docs/sr/about/stickers/index.mdx).
 
 ## Card, CardGrid, Badge, FileTree, Icon, LinkButton, LinkCard, Tabs, TabItem
 
