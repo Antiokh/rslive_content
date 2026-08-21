@@ -68,6 +68,8 @@ Root-level файлы `map-data/`, включая `map-data/README.md`, не п�
 
 Перед destructive mirror workflow запускает `node scripts/check-map-data.mjs`. Неполный обязательный snapshot-набор не должен удалять последний рабочий mirror в engine.
 
+Gzip для карт — необязательная ручная оптимизация. Если нужен `.geojson.gz`, его готовят локально вместе с конкретным обновлением карты; GitHub Actions, content-sync и production build его не генерируют.
+
 ### `Antiokh/rslive.ru`
 
 Авторитетен для:
@@ -76,7 +78,7 @@ Root-level файлы `map-data/`, включая `map-data/README.md`, не п�
 - глобального автоимпорта MDX-компонентов;
 - реализации компонентов в `astro/src/components/`;
 - схем данных и динамических источников;
-- city region registry, `SerbiaMap`, renderer, Cache Storage manager и PWA-политики карт;
+- registry целевых регионов, `SerbiaMap`, renderer, Cache Storage manager и PWA-политики карт;
 - сборки Astro;
 - sidebar-конфигурации;
 - редиректов `astro/public/_redirects`;
@@ -93,18 +95,20 @@ Root-level файлы `map-data/`, включая `map-data/README.md`, не п�
 
 - не добавляйте scheduled refresh для редко меняющихся OSM/KML snapshots;
 - не обращайтесь к Overpass из production build или из браузера пользователя;
-- городские OSM-выгрузки делайте по административной области, а не по renderer bbox;
+- обычные городские OSM-выгрузки делайте по административной области, а не по renderer bbox;
 - сохраняйте предыдущий last-known-good snapshot при ошибке источника;
 - перед коммитом запускайте `node scripts/check-map-data.mjs`;
-- не создавайте пустые заглушки для зарегистрированного, но ещё не выгруженного города;
+- gzip создавайте только вручную при необходимости и проверяйте вместе с source;
 - MapLibre, renderer, service worker, manifest и логика выбора данных принадлежат `Antiokh/rslive.ru`, а не `map-data/**`.
 
 Текущий engine contract:
 
 - `SerbiaMap` — отдельный country-level слой; не является значением `regions`;
-- `regions` содержит только `belgrade`, `novi-sad`, `nis`, `subotica`;
-- при отсутствии выбранных городов продуктовый default — Serbia + Belgrade;
-- при явном выборе города Serbia добавляется только через `SerbiaMap`.
+- `regions` принимает `belgrade`, `belgrade-ext`, `novi-sad`, `nis`, `subotica`;
+- `belgrade` и `belgrade-ext` — два независимых target region: обычный Белград и расширенная Белградская зона с пригородами/внешними муниципалитетами;
+- при отсутствии выбранных регионов продуктовый default — Serbia + Belgrade;
+- при явном выборе региона Serbia добавляется только через `SerbiaMap`;
+- при двух и более регионах movement boundary ограничивается Сербией, а не первым выбранным регионом.
 
 Фактическое наличие snapshot проверяйте по дереву `map-data/**`, а не по одному engine registry.
 
