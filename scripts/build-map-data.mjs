@@ -4,14 +4,15 @@ import { gunzipSync, gzipSync } from 'node:zlib';
 
 const root = process.cwd();
 const checkOnly = process.argv.includes('--check');
+const onlyArg = process.argv.find((arg) => arg.startsWith('--only='));
+const onlyId = onlyArg ? onlyArg.slice('--only='.length).trim().toLowerCase() : '';
 
-// Only product/runtime layers belong here. Auxiliary/acquisition GeoJSON may live next to
-// map-data sources but must not gain a production gzip payload merely because it exists.
-// In particular, belgrade-ext.geojson is the wider Belgrade-area reference dataset and is
-// intentionally not a MapEmbed region or a mirrored runtime payload.
+// Manual helper only. GitHub Actions and production builds must not generate map gzip payloads.
+// Run it locally after a rare map refresh, then decide whether to commit the resulting sibling .gz.
 const runtimeGeoJson = [
   { id: 'serbia', path: 'map-data/core/serbia-overview.geojson', required: true },
   { id: 'belgrade', path: 'map-data/packs/cities/belgrade.geojson', required: true },
+  { id: 'belgrade-ext', path: 'map-data/packs/cities/belgrade-ext.geojson', required: true },
   { id: 'novi-sad', path: 'map-data/packs/cities/novi-sad.geojson', required: true },
   { id: 'nis', path: 'map-data/packs/cities/nis.geojson', required: true },
   { id: 'subotica', path: 'map-data/packs/cities/subotica.geojson', required: true },
@@ -43,8 +44,6 @@ async function buildOne(entry) {
   const source = await readFile(sourcePath);
   if (source.byteLength === 0) fail(`source пуст: ${entry.path}`);
 
-  // Semantic GeoJSON validation lives in check-map-data.mjs. Here we only refuse to derive
-  // compressed bytes from malformed JSON.
   try {
     JSON.parse(source.toString('utf8'));
   } catch (error) {
@@ -52,21 +51,19 @@ async function buildOne(entry) {
   }
 
   if (checkOnly) {
-    if (!(await exists(gzipPath))) fail(`derived gzip отсутствует: ${entry.path}.gz`);
+    if (!(await exists(gzipPath))) fail(`gzip отсутствует: ${entry.path}.gz`);
     const committed = await readFile(gzipPath);
-    let committedRoundTrip;
+    let roundTrip;
     try {
-      committedRoundTrip = gunzipSync(committed);
+      roundTrip = gunzipSync(committed);
     } catch (error) {
       fail(`${entry.path}.gz не является валидным gzip: ${error?.message || error}`);
     }
-    if (!committedRoundTrip.equals(source)) fail(`${entry.path}.gz устарел относительно source GeoJSON`);
+    if (!roundTrip.equals(source)) fail(`${entry.path}.gz устарел относительно source GeoJSON`);
     if (committed.byteLength >= source.byteLength) {
       fail(`gzip не уменьшает ${entry.path}: source=${source.byteLength}, gzip=${committed.byteLength}`);
     }
   } else {
-    // gzip level 9 is deliberately boring and widely supported. We validate by round-trip rather
-    // than exact compressed bytes so a harmless zlib-version change cannot break CI.
     const compressed = gzipSync(source, { level: 9 });
     const roundTrip = gunzipSync(compressed);
     if (!roundTrip.equals(source)) fail(`gzip round-trip изменяет байты source: ${entry.path}`);
@@ -87,7 +84,14 @@ async function buildOne(entry) {
   };
 }
 
+const selected = onlyId
+  ? runtimeGeoJson.filter((entry) => entry.id === onlyId)
+  : runtimeGeoJson;
+if (onlyId && selected.length === 0) {
+  fail(`неизвестный --only=${onlyId}; допустимо: ${runtimeGeoJson.map((entry) => entry.id).join(', ')}`);
+}
+
 const results = [];
-for (const entry of runtimeGeoJson) results.push(await buildOne(entry));
+for (const entry of selected) results.push(await buildOne(entry));
 
 console.log(`[map-data:gzip] ${checkOnly ? 'verified' : 'built'}: ${JSON.stringify(results)}`);
