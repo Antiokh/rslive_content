@@ -8,28 +8,33 @@
 
 `map-data/**` — last-known-good source data. Не заменяйте рабочий snapshot неполной или непроверенной выгрузкой.
 
-Региональный runtime использует два представления:
+Для runtime-карт допускаются два представления:
 
-- `*.geojson` — читаемый и коммитящийся **source of truth**;
-- `*.geojson.gz` — производный transport/cache artifact.
+- `*.geojson` — обязательный читаемый source of truth;
+- `*.geojson.gz` — необязательный заранее сжатый transport/cache artifact.
 
-`.geojson.gz` **не коммитится в `rslive_content`**. Content-sync генерирует gzip из проверенного GeoJSON непосредственно перед зеркалированием в `rslive.ru`. Поэтому человеку при обычном обновлении карты надо коммитить только source GeoJSON.
+Gzip **не генерируется в GitHub Actions, content-sync или production build**. Карты меняются редко, поэтому при необходимости сожмите конкретный файл один раз вручную и закоммитьте sibling `.geojson.gz` вместе с обновлённым GeoJSON. Если gzip отсутствует, runtime использует raw GeoJSON.
 
-Локальная проверка после изменения карты:
+Ручной helper находится в этом репозитории:
+
+```bash
+node scripts/build-map-data.mjs --only=belgrade
+node scripts/build-map-data.mjs --only=belgrade --check
+```
+
+Без `--only` helper обрабатывает весь runtime-набор. Это локальная команда; автоматические workflow её не вызывают.
+
+Основная проверка перед публикацией:
 
 ```bash
 node scripts/check-map-data.mjs
-node scripts/build-map-data.mjs
-node scripts/build-map-data.mjs --check
 ```
 
-`build-map-data.mjs` создаёт временные `.geojson.gz` рядом с source. После проверки их можно удалить локально; они не являются редакционным source.
-
-PR workflow `Map data quality` делает те же три шага на чистом checkout. Publish workflow повторяет их **до** destructive sync и только затем копирует source + сгенерированные gzip в private engine.
+Если рядом с source уже лежит `.geojson.gz`, validator дополнительно проверит, что он распаковывается байт-в-байт в исходный GeoJSON и действительно меньше source.
 
 ## Что здесь хранится
 
-Штатные source-файлы runtime:
+Штатные runtime source-файлы:
 
 ```text
 map-data/
@@ -39,6 +44,7 @@ map-data/
   packs/
     cities/
       belgrade.geojson
+      belgrade-ext.geojson
       novi-sad.geojson
       nis.geojson
       subotica.geojson
@@ -53,40 +59,32 @@ map-data/
       <mid>.json
 ```
 
-В каталоге могут быть вспомогательные acquisition/reference datasets. Само наличие GeoJSON **не делает его runtime map layer**. Публикация задаётся явным allowlist в `.github/workflows/notify-rslive-ru.yml` и registry в `Antiokh/rslive.ru`.
-
-## `belgrade-ext.geojson`
-
-`map-data/packs/cities/belgrade-ext.geojson` — **вспомогательная расширенная Белградская зона**: широкий Белград с пригородами и внешними муниципалитетами, которые технически относятся к Белграду. Обреновац — один из примеров покрытия, а не единственная территория этого файла.
-
-Сейчас это не публичный `MapEmbed` region:
-
-- `belgrade-ext` нельзя указывать в `regions`;
-- для него не генерируется production gzip;
-- content-sync не зеркалирует его в runtime city directory;
-- engine manifest его не публикует.
-
-Если расширенная зона понадобится как пользовательский слой, сначала явно меняются engine registry, component contract, tests и sync allowlist. Только после этого dataset становится runtime.
+В каталоге могут быть и вспомогательные acquisition/reference datasets. Само наличие GeoJSON не делает его runtime layer: публикация задаётся явным allowlist в `.github/workflows/notify-rslive-ru.yml` и registry в `Antiokh/rslive.ru`.
 
 ## MapEmbed contract
 
 У `MapEmbed` два селектора:
 
 ```text
-regions    -> городские паки
+regions    -> региональные/городские паки
 SerbiaMap  -> карта Сербии
 ```
 
-В `regions` разрешены только:
+Допустимые target regions:
 
 ```text
 belgrade
+belgrade-ext
 novi-sad
 nis
 subotica
 ```
 
-`serbia-overview` — историческое имя source-файла, а не публичный id компонента.
+`belgrade` — обычная городская карта Белграда.
+
+`belgrade-ext` — расширенная Белградская зона: широкий Белград с пригородами и внешними муниципалитетами; Обреновац — один из примеров покрытия, а не единственная территория файла. Это отдельный target region, который можно явно указать в `regions`.
+
+`serbia-overview` — историческое имя source-файла, а не публичный id компонента. Карта страны включается только через `SerbiaMap`.
 
 Product default:
 
@@ -96,13 +94,13 @@ Product default:
 
 → Serbia + Belgrade.
 
-Явный город отключает автоматическую Serbia:
+Явный регион отключает автоматическую Serbia:
 
 ```mdx
-<MapEmbed src="…" regions={['nis']} />
+<MapEmbed src="…" regions={['belgrade-ext']} />
 ```
 
-→ Niš only.
+→ расширенный Белград без country layer.
 
 ```mdx
 <MapEmbed src="…" regions={['nis']} SerbiaMap />
@@ -110,9 +108,9 @@ Product default:
 
 → Serbia + Niš.
 
-Если указано несколько городов, пользователь может перемещаться между ними; общий `maxBounds` — Сербия.
+Если указано несколько регионов, общий movement boundary — Сербия.
 
-Важно: слово «optional» относится к **загрузке конкретному пользователю**. Source-набор не optional: поддерживаем Serbia + все четыре city GeoJSON.
+Слово «optional» относится к **загрузке конкретному пользователю**, а не к наличию source. Поддерживаемый source-набор включает Serbia и все пять target region GeoJSON.
 
 ## Что зеркалируется в engine
 
@@ -120,26 +118,28 @@ Runtime allowlist:
 
 ```text
 map-data/core/serbia-overview.geojson
-map-data/core/serbia-overview.geojson.gz        # generated during sync
+map-data/core/serbia-overview.geojson.gz        # только если закоммичен вручную
 
 map-data/packs/cities/belgrade.geojson
-map-data/packs/cities/belgrade.geojson.gz       # generated during sync
+map-data/packs/cities/belgrade.geojson.gz       # optional
+map-data/packs/cities/belgrade-ext.geojson
+map-data/packs/cities/belgrade-ext.geojson.gz   # optional
 map-data/packs/cities/novi-sad.geojson
-map-data/packs/cities/novi-sad.geojson.gz       # generated during sync
+map-data/packs/cities/novi-sad.geojson.gz       # optional
 map-data/packs/cities/nis.geojson
-map-data/packs/cities/nis.geojson.gz            # generated during sync
+map-data/packs/cities/nis.geojson.gz             # optional
 map-data/packs/cities/subotica.geojson
-map-data/packs/cities/subotica.geojson.gz       # generated during sync
+map-data/packs/cities/subotica.geojson.gz       # optional
 ```
 
 Legacy `basemaps/` и `snapshots/` синхронизируются отдельно.
 
-`map-data/README.md`, `belgrade-ext.geojson`, `serbia-regions.geojson` и другие auxiliary/reference datasets не должны попадать в runtime автоматически.
+`serbia-regions.geojson` и другие reference/acquisition datasets не должны попадать в runtime автоматически.
 
 ## Безопасный рабочий цикл
 
 1. Обновите `main` и создайте отдельную ветку.
-2. Проверьте текущий source-набор:
+2. Запустите baseline-проверку:
 
    ```bash
    node scripts/check-map-data.mjs
@@ -149,14 +149,7 @@ Legacy `basemaps/` и `snapshots/` синхронизируются отдель
 4. Визуально проверьте выбранную территорию и состав объектов.
 5. Нормализуйте raw export в RSLive GeoJSON contract.
 6. Замените только целевой source `*.geojson`.
-7. Запустите:
-
-   ```bash
-   node scripts/check-map-data.mjs
-   node scripts/build-map-data.mjs
-   node scripts/build-map-data.mjs --check
-   ```
-
+7. Повторно запустите `node scripts/check-map-data.mjs`.
 8. Сравните source с предыдущей версией:
 
    ```bash
@@ -165,9 +158,15 @@ Legacy `basemaps/` и `snapshots/` синхронизируются отдель
    ```
 
 9. Если source резко уменьшился, перепроверьте acquisition: это может быть частичный ответ Overpass.
-10. **Не добавляйте generated `.geojson.gz` в commit.** Коммитьте source GeoJSON и изменённую документацию/metadata.
-11. Откройте PR и дождитесь зелёного `Map data quality`.
-12. После merge publish workflow снова проверит source, сгенерирует gzip в рабочем checkout и зеркалирует runtime allowlist в private engine.
+10. Если нужен gzip, сожмите только изменённый region:
+
+   ```bash
+   node scripts/build-map-data.mjs --only=<region>
+   node scripts/build-map-data.mjs --only=<region> --check
+   ```
+
+11. Закоммитьте GeoJSON и, при наличии, соответствующий `.geojson.gz` одним PR.
+12. После merge content-sync валидирует source и зеркалирует allowlist. Он не запускает acquisition и не расходует Actions-время на сжатие карт.
 
 При любой ошибке источника сохраняйте предыдущий LKG.
 
@@ -197,16 +196,7 @@ Validator временно принимает старое `regionId: "serbia-ov
 - именованные реки;
 - подписи `city` и `town`.
 
-Не включаем:
-
-- buildings;
-- addresses;
-- POI;
-- secondary/tertiary/residential/service roads;
-- stops/public transport graph;
-- routing graph;
-- tiles/terrain/3D;
-- подробные квартальные подписи.
+Не включаем buildings, addresses, POI, secondary/tertiary/residential/service roads, public transport graph, routing graph, tiles, terrain и 3D.
 
 ### Overpass Turbo: Serbia
 
@@ -223,16 +213,15 @@ out geom;
 
 Порядок:
 
-1. Откройте Overpass Turbo.
-2. Вставьте запрос и выполните его.
-3. Визуально проверьте покрытие всей Сербии.
-4. `Export` → `GeoJSON`.
-5. Сохраните raw export вне runtime source path.
-6. Нормализуйте:
+1. Выполните запрос в Overpass Turbo.
+2. Визуально проверьте покрытие всей Сербии.
+3. `Export` → `GeoJSON`.
+4. Сохраните raw export вне runtime source path.
+5. Нормализуйте:
    - road → `category: "road"`, `class` из `highway`, `name`, `ref`;
    - river → `category: "water-line"`, `class: "river"`, `name`;
    - city/town → `category: "label"`, `class` из `place`, `name`, при наличии `population`.
-7. Root `properties`:
+6. Root `properties`:
 
    ```json
    {
@@ -245,8 +234,6 @@ out geom;
    }
    ```
 
-8. Не увеличивайте число labels без продуктовой необходимости.
-
 Минимальный threshold:
 
 ```text
@@ -255,24 +242,23 @@ rivers >= 2
 labels >= 8
 ```
 
-## Городские паки
+## Городские и региональные паки
 
 Штатно поддерживаем:
 
-| Город | regionId | renderer bbox |
+| Регион | regionId | renderer bbox |
 | --- | --- | --- |
 | Белград | `belgrade` | `[20.18, 44.68, 20.68, 44.97]` |
+| Белград и пригороды | `belgrade-ext` | `[19.8, 44.35, 21.0, 45.15]` |
 | Нови-Сад | `novi-sad` | `[19.65, 45.15, 20.1, 45.42]` |
 | Ниш | `nis` | `[21.75, 43.2, 22.15, 43.42]` |
 | Суботица | `subotica` | `[19.5, 45.98, 19.86, 46.23]` |
 
-`bbox` — renderer constraint. **Не используйте его как границу OSM acquisition.**
+`bbox` — только renderer/view constraint. **Не используйте его как границу OSM acquisition.** Для `belgrade-ext` прямоугольник намеренно широкий: он нужен, чтобы не запирать пользователя в центральном Белграде, и не является утверждением об административной границе.
 
 ### Граница выгрузки
 
-Городскую карту получайте по административной области через `geocodeArea`.
-
-Используйте:
+Обычные city snapshots получайте по административной области через `geocodeArea`.
 
 ```text
 Belgrade, Serbia
@@ -283,7 +269,9 @@ Subotica, Serbia
 
 После выполнения обязательно визуально проверьте выбранную административную область: Nominatim/Overpass может подобрать одноимённую сущность другого уровня.
 
-### Детализация города
+`belgrade-ext` — отдельный широкий snapshot. Его текущий LKG сохраняется как самостоятельный target region; при следующем обновлении сначала зафиксируйте и визуально проверьте правило расширенного покрытия, затем нормализуйте новый export под `regionId: "belgrade-ext"`.
+
+### Детализация региона
 
 Включаем:
 
@@ -294,23 +282,13 @@ Subotica, Serbia
 - `landuse=forest|recreation_ground`;
 - `place=city|town|suburb|quarter`.
 
-Не включаем:
-
-- `residential`, `living_street`, `service`, `track`, `path`, `footway`, `cycleway`;
-- buildings;
-- address points;
-- shops, amenity, tourism, craft и другие POI;
-- stops/public transport graph;
-- parking;
-- indoor;
-- routing graph;
-- external OSM tiles/sprites/glyphs.
+Не включаем residential/living_street/service/track/path/footway/cycleway, buildings, addresses, POI, public transport graph, parking, indoor и routing graph.
 
 Карта нужна для географического контекста, а не как офлайн-навигация.
 
 ### Overpass Turbo: city template
 
-Для Белграда:
+Для обычного Белграда:
 
 ```overpass
 [out:json][timeout:90];
@@ -326,11 +304,9 @@ Subotica, Serbia
 out geom;
 ```
 
-Для остальных меняется только `geocodeArea`.
+Для остальных обычных городов меняется только `geocodeArea`.
 
-### Нормализация city GeoJSON
-
-Сырой export Overpass Turbo не коммитьте как готовый RSLive file.
+### Нормализация GeoJSON
 
 Mapping:
 
@@ -344,34 +320,26 @@ landuse=recreation_ground        -> category="green", class="recreation_ground"
 place=city|town|suburb|quarter   -> category="label", class=<place>
 ```
 
-Сохраняйте полезные поля при наличии:
+Сохраняйте `name`, `ref`, `population`, когда они есть.
 
-```text
-name
-ref
-population
-```
-
-Root `properties`:
+Для нового/обновлённого region source root metadata должны соответствовать target id, например:
 
 ```json
 {
-  "regionId": "belgrade",
-  "regionTitle": "Белград",
+  "regionId": "belgrade-ext",
+  "regionTitle": "Белград и пригороды",
   "kind": "city",
   "country": "serbia",
-  "bbox": [20.18, 44.68, 20.68, 44.97],
+  "bbox": [19.8, 44.35, 21.0, 45.15],
   "optionalPack": true,
   "attribution": "© OpenStreetMap contributors · ODbL",
   "snapshotAt": "YYYY-MM-DD"
 }
 ```
 
-Для остальных замените `regionId`, `regionTitle` и `bbox` по таблице.
+Текущий `belgrade-ext` может сохранять старый `regionId: "belgrade"` до следующего ручного refresh; validators временно принимают оба значения, чтобы не переписывать resource только ради metadata.
 
-Не упрощайте geometry дополнительно без отдельного измерения и решения по общему contract.
-
-Минимальный threshold каждого city pack:
+Минимальный threshold каждого target pack:
 
 ```text
 roads >= 20
@@ -380,16 +348,11 @@ water features >= 2
 
 ## Gzip transport/cache
 
-Gzip генерируется из runtime GeoJSON командой:
+Gzip — необязательная ручная оптимизация.
 
 ```bash
-node scripts/build-map-data.mjs
-```
-
-Проверка:
-
-```bash
-node scripts/build-map-data.mjs --check
+node scripts/build-map-data.mjs --only=belgrade-ext
+node scripts/build-map-data.mjs --only=belgrade-ext --check
 ```
 
 Инварианты:
@@ -397,10 +360,10 @@ node scripts/build-map-data.mjs --check
 - gzip level 9;
 - `gunzip(.gz)` должен дать source bytes exactly;
 - gzip должен быть меньше source;
-- `belgrade-ext` и другие auxiliary datasets не входят в production gzip list;
-- generated `.gz` не является content source и не коммитится в public repo.
+- source и его `.gz` обновляются вместе;
+- если `.gz` отсутствует, runtime использует raw GeoJSON.
 
-Во время publish workflow generated gzip зеркалируется в `rslive.ru/astro/public/maps/**`. Engine manifest публикует raw URL и gzip download URL. Клиент предпочитает gzip, хранит compressed bytes в dedicated Cache Storage и распаковывает их при `RSLiveMapPacks.read()`; при отсутствии native gzip stream support используется raw fallback.
+Engine manifest публикует gzip transport только когда sibling-файл реально синхронизирован. Клиент предпочитает gzip при поддержке `DecompressionStream('gzip')`, иначе загружает raw source.
 
 ## Google My Maps snapshots
 
@@ -436,27 +399,23 @@ Pilot MID:
 1mxkFBhCULwjecdQUWUIfE1BAQahFG6I
 ```
 
-## Как добавить новый runtime-город
+## Как добавить новый runtime-region
 
 Наличие нового GeoJSON недостаточно.
 
-Сначала:
-
-1. подтвердите product need;
-2. добавьте city config в `Antiokh/rslive.ru/astro/config/map-regions.config.mjs`;
-3. задайте renderer bbox/zoom;
-4. обновите engine tests/manifest contract;
-5. добавьте город в `scripts/check-map-data.mjs`;
-6. добавьте source в `scripts/build-map-data.mjs`;
-7. добавьте source + generated gzip в content-sync allowlist;
-8. обновите эту инструкцию;
-9. только затем добавляйте новый source GeoJSON.
+1. Подтвердите product need.
+2. Добавьте config в `Antiokh/rslive.ru/astro/config/map-regions.config.mjs`.
+3. Задайте renderer bbox/zoom.
+4. Обновите engine tests/manifest contract.
+5. Добавьте target в `scripts/check-map-data.mjs`.
+6. При необходимости добавьте target в ручной `scripts/build-map-data.mjs`.
+7. Добавьте source и optional gzip в content-sync allowlist.
+8. Обновите эту инструкцию и component docs.
+9. Только затем публикуйте новый source.
 
 ## Как удалить runtime-карту
 
-Удаление source — изменение contract.
-
-Сначала уберите/измените использование и registry в engine, validators, gzip generator list и sync allowlist. Только после этого удаляйте source.
+Удаление source — изменение contract. Сначала уберите использование и registry в engine, validators, manual gzip list и sync allowlist. Только затем удаляйте source.
 
 Не оставляйте runtime entry без source и не создавайте пустые GeoJSON placeholders.
 
@@ -474,12 +433,11 @@ Google My Maps snapshot сохраняет происхождение в metadat
 
 - не добавлять scheduled map refresh;
 - не выполнять Overpass-запросы в production build или браузере пользователя;
+- не сжимать карты в GitHub Actions или production build;
 - не обновлять карту только потому, что прошёл календарный период;
 - не использовать renderer bbox вместо administrative acquisition area;
 - не добавлять buildings/POI/residential/service roads без отдельного решения;
 - не коммить raw Overpass export как готовый RSLive GeoJSON;
-- не коммить generated `.geojson.gz` в public content repo;
-- не превращать auxiliary dataset (`belgrade-ext` и подобные) в runtime из-за самого факта его наличия;
 - не заменять LKG при ошибке или подозрительно маленькой выгрузке;
 - не кэшировать third-party Google/OpenStreetMap tile responses;
 - не менять GeoJSON/gzip contract без синхронного изменения validators, sync и engine.
