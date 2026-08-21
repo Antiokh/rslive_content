@@ -323,6 +323,22 @@ debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-ma
 />
 ```
 
+### Автоматический first-party renderer
+
+Для зарегистрированного `src` обычный вызов в статье не требует `offlineSrc`. На сборке `MapEmbed` нормализует `src` через engine registry (`config/maps.config.mjs`). Если источник известен, компонент автоматически связывает его с same-origin `/map-renderer/` и first-party thematic snapshot.
+
+Реальный production-пример — страница [`/map/dance/`](../src/content/docs/map/dance/index.mdx):
+
+```mdx
+<MapEmbed
+  src="https://www.google.com/maps/d/u/0/embed?mid=1mxkFBhCULwjecdQUWUIfE1BAQahFG6I&ehbc=2E312F"
+  title="Танцевальные залы"
+  caption="Пользовательская карта танцевальных залов"
+/>
+```
+
+Для незарегистрированного `src` локальный renderer не придумывается: карта продолжает работать онлайн, а при cold offline получает штатную заглушку, если автор явно не задал `offlineSrc`. `offlineSrc` используйте только как проверенный same-origin override.
+
 Чтобы выбрать только конкретный регион, укажите его явно:
 
 ```mdx
@@ -374,8 +390,11 @@ subotica
 - Один регион без `SerbiaMap` может ограничивать renderer его bounds. При двух и более регионах общий `maxBounds` — Сербия, чтобы пользователь не был заперт в первом регионе.
 - Неизвестный region id должен ломать сборку, а не тихо игнорироваться.
 - Регистрация региона в engine не означает, что его snapshot уже опубликован. Для отсутствующего файла не создавайте пустую заглушку.
-- `offlineSrc` задаёт same-origin offline renderer/fallback URL; компонент передаёт ему эффективные `regions` и `serbia=1`.
-- `debug` и `debugState` предназначены для диагностических страниц, а не для обычных публикаций.
+- `regions` и `SerbiaMap` управляют базовыми geographic packs независимо от registry тематического `src`.
+- Для зарегистрированного `src` first-party renderer и thematic snapshot разрешаются автоматически; не дублируйте их через `offlineSrc`.
+- `offlineSrc` — только явный same-origin override; он имеет приоритет над автоматически разрешённым renderer URL.
+- Для незарегистрированного `src` локальное соответствие не угадывается.
+- `debug` и `debugState` предназначены только для диагностических страниц, а не для обычных публикаций.
 - Карта должна дополнять текстовый адрес, а не заменять его.
 
 Картографические snapshots лежат в `map-data/**`. Полный ручной цикл выгрузки, нормализации, проверки и обновления описан в `map-data/README.md`. Наличие файла на сервере не включает его в transactional PWA corpus автоматически.
