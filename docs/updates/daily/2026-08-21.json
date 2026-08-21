@@ -1,0 +1,16 @@
+{
+  "date": "2026-08-21",
+  "hours": 24,
+  "generated_at": "2026-08-21T19:39:20+02:00",
+  "commit_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/move/housing/index.mdx",
+      "title": "Поиск жилья",
+      "live_url": "https://rslive.ru/move/housing/",
+      "summaries": [
+        "Добавили rentalNS_bot в список Telegram-ботов и каналов для поиска жилья"
+      ]
+    }
+  ]
+}
