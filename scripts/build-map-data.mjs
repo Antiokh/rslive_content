@@ -5,14 +5,16 @@ import { gunzipSync, gzipSync } from 'node:zlib';
 const root = process.cwd();
 const checkOnly = process.argv.includes('--check');
 
-// Only product/runtime layers belong here. Acquisition/intermediate GeoJSON may live next to
+// Only product/runtime layers belong here. Auxiliary/acquisition GeoJSON may live next to
 // map-data sources but must not gain a production gzip payload merely because it exists.
+// In particular, belgrade-ext.geojson is the wider Belgrade-area reference dataset and is
+// intentionally not a MapEmbed region or a mirrored runtime payload.
 const runtimeGeoJson = [
   { id: 'serbia', path: 'map-data/core/serbia-overview.geojson', required: true },
   { id: 'belgrade', path: 'map-data/packs/cities/belgrade.geojson', required: true },
-  { id: 'novi-sad', path: 'map-data/packs/cities/novi-sad.geojson', required: false },
-  { id: 'nis', path: 'map-data/packs/cities/nis.geojson', required: false },
-  { id: 'subotica', path: 'map-data/packs/cities/subotica.geojson', required: false },
+  { id: 'novi-sad', path: 'map-data/packs/cities/novi-sad.geojson', required: true },
+  { id: 'nis', path: 'map-data/packs/cities/nis.geojson', required: true },
+  { id: 'subotica', path: 'map-data/packs/cities/subotica.geojson', required: true },
 ];
 
 function fail(message) {
