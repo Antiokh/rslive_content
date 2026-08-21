@@ -183,11 +183,13 @@ import Aside from '@astrojs/starlight/components/Aside.astro';
 - `StructTable` — известная схема данных из конфигурации основного приложения;
 - `SupabaseTable` — таблица из Supabase;
 - `SanityTable` — таблица из Sanity;
+- `DataChart` — числовой график с server-rendered таблицей данных; Chart.js используется по умолчанию;
+- `SupabaseChart` — build-time Supabase → `DataChart`, когда график должен получать данные при сборке сайта;
 - `MapEmbed` — карта;
 - `EmbedFrame` — другой iframe;
 - `YouTube` — видео YouTube;
 - `ContentInclude` — включение существующей страницы или раздела;
-- `MermaidGraph` — Mermaid-диаграмма;
+- `MermaidGraph` — Mermaid-диаграмма процессов и связей, а не статистический график;
 - `Countdown` — фиксированный или ежегодный счётчик даты.
 
 Полный синтаксис см. в `docs/MDX_COMPONENTS.md`. Перед использованием редкого компонента проверьте его текущий исходник в `Antiokh/rslive.ru`.
