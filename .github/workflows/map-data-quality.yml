@@ -38,5 +38,8 @@ jobs:
       - name: Validate source snapshots
         run: node scripts/check-map-data.mjs
 
-      - name: Verify committed gzip derivatives
+      - name: Build ephemeral gzip derivatives
+        run: node scripts/build-map-data.mjs
+
+      - name: Verify gzip round-trip and size
         run: node scripts/build-map-data.mjs --check
