@@ -25,7 +25,9 @@ jobs:
           fetch-depth: 1
 
       - name: Validate map snapshots before destructive sync
-        run: node scripts/check-map-data.mjs
+        run: |
+          node scripts/build-map-data.mjs --check
+          node scripts/check-map-data.mjs
 
       - name: Check out private rslive.ru
         uses: actions/checkout@v4
@@ -43,7 +45,7 @@ jobs:
           test -d src/content/docs/about/stickers/assets/svg
           test -d map-data/core
           test -d map-data/basemaps
-          test -d map-data/packs
+          test -d map-data/packs/cities
           test -d map-data/snapshots
           test -d rslive-engine/astro/src/content/docs
 
@@ -55,16 +57,35 @@ jobs:
           rsync -a \
             src/content/docs/about/stickers/assets/svg/ rslive-engine/astro/src/assets/stickers/
 
-          # These four destination subtrees are content-owned mirrors of map-data/**.
-          # Engine-owned map manifests, scripts and runtime files live outside them.
+          # Runtime map payloads use an explicit allowlist. The content repository may also keep
+          # acquisition/intermediate GeoJSON (for example extended/raw exports); those files must
+          # never become production payloads merely because they share a map-data directory.
           mkdir -p \
             rslive-engine/astro/public/maps/core \
             rslive-engine/astro/public/maps/basemaps \
-            rslive-engine/astro/public/maps/packs \
+            rslive-engine/astro/public/maps/packs/cities \
             rslive-engine/astro/public/maps/snapshots
-          rsync -a --delete map-data/core/ rslive-engine/astro/public/maps/core/
+
+          rsync -a --delete --delete-excluded \
+            --include='serbia-overview.geojson' \
+            --include='serbia-overview.geojson.gz' \
+            --exclude='*' \
+            map-data/core/ rslive-engine/astro/public/maps/core/
+
           rsync -a --delete map-data/basemaps/ rslive-engine/astro/public/maps/basemaps/
-          rsync -a --delete map-data/packs/ rslive-engine/astro/public/maps/packs/
+
+          rsync -a --delete --delete-excluded \
+            --include='belgrade.geojson' \
+            --include='belgrade.geojson.gz' \
+            --include='novi-sad.geojson' \
+            --include='novi-sad.geojson.gz' \
+            --include='nis.geojson' \
+            --include='nis.geojson.gz' \
+            --include='subotica.geojson' \
+            --include='subotica.geojson.gz' \
+            --exclude='*' \
+            map-data/packs/cities/ rslive-engine/astro/public/maps/packs/cities/
+
           rsync -a --delete map-data/snapshots/ rslive-engine/astro/public/maps/snapshots/
 
       - name: Commit and push synced changes
@@ -91,17 +112,17 @@ jobs:
             exit 0
           fi
 
-          changed_index_paths="$(git status --porcelain -- astro/src/content/docs | awk '{print $NF}' | grep '/index\.mdx$' || true)"
-          changed_index_paths="$(printf '%s\n' "$changed_index_paths" | while IFS= read -r path; do
+          changed_index_paths="$(git status --porcelain -- astro/src/content/docs | awk '{print $NF}' | grep '/index\\.mdx$' || true)"
+          changed_index_paths="$(printf '%s\\n' "$changed_index_paths" | while IFS= read -r path; do
             if [ -n "$path" ] && [ -f "$path" ]; then
-              printf '%s\n' "$path"
+              printf '%s\\n' "$path"
             fi
           done)"
-          changed_page_count="$(printf '%s\n' "$changed_index_paths" | sed '/^$/d' | wc -l | tr -d ' ')"
+          changed_page_count="$(printf '%s\\n' "$changed_index_paths" | sed '/^$/d' | wc -l | tr -d ' ')"
           preview_url=""
           preview_route=""
           if [ "$changed_page_count" -gt 0 ]; then
-            first_index_path="$(printf '%s\n' "$changed_index_paths" | sed -n '1p')"
+            first_index_path="$(printf '%s\\n' "$changed_index_paths" | sed -n '1p')"
             route="${first_index_path#astro/src/content/docs/}"
             route="${route%index.mdx}"
             preview_route="/${route}"
@@ -115,27 +136,27 @@ jobs:
             astro/public/maps/basemaps \
             astro/public/maps/packs \
             astro/public/maps/snapshots
-          subject="$(printf '%s\n' "$CONTENT_MESSAGE" | sed -n '1p')"
+          subject="$(printf '%s\\n' "$CONTENT_MESSAGE" | sed -n '1p')"
           if [ -z "$subject" ]; then
             subject="Sync docs from rslive_content"
           fi
 
           {
-            printf '%s [skip content-sync]\n\n' "$subject"
-            printf 'Original content commit message:\n\n'
-            printf '%s\n\n' "$CONTENT_MESSAGE"
-            printf 'Sync metadata:\n\n'
-            printf '%s\n' "- Source repository: $CONTENT_REPO"
-            printf '%s\n' "- Source commit: $CONTENT_SHA"
-            printf '%s\n' "- Source URL: $CONTENT_URL"
+            printf '%s [skip content-sync]\\n\\n' "$subject"
+            printf 'Original content commit message:\\n\\n'
+            printf '%s\\n\\n' "$CONTENT_MESSAGE"
+            printf 'Sync metadata:\\n\\n'
+            printf '%s\\n' "- Source repository: $CONTENT_REPO"
+            printf '%s\\n' "- Source commit: $CONTENT_SHA"
+            printf '%s\\n' "- Source URL: $CONTENT_URL"
             if [ -n "$CONTENT_AUTHOR" ]; then
               printf '%s' "- Source author: $CONTENT_AUTHOR"
               if [ -n "$CONTENT_AUTHOR_EMAIL" ]; then
                 printf ' <%s>' "$CONTENT_AUTHOR_EMAIL"
               fi
-              printf '\n'
+              printf '\\n'
             fi
-            printf '%s\n' "- Sync workflow: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            printf '%s\\n' "- Sync workflow: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
           } > /tmp/content-sync-commit-message.txt
 
           git commit -F /tmp/content-sync-commit-message.txt
