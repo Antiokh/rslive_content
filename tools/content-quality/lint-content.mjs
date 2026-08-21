@@ -436,9 +436,38 @@ async function checkContentIndex() {
     if (!url.startsWith('/') || (url !== '/' && !url.endsWith('/'))) {
       report('error', relative, 1, `CONTENT_INDEX URL must be an absolute canonical route: ${url}`);
     }
+
+    const expectedLocale =
+      url === '/sr/' || url.startsWith('/sr/')
+        ? 'sr'
+        : url === '/en/' || url.startsWith('/en/')
+          ? 'en'
+          : null;
+    if (expectedLocale && page?.locale !== expectedLocale) {
+      report(
+        'error',
+        relative,
+        1,
+        `Localized CONTENT_INDEX route ${url} must declare locale: ${expectedLocale}`,
+      );
+    }
   }
 
   return seen;
+}
+
+function checkContentIndexCoverage(mdxFiles, indexUrls) {
+  for (const file of mdxFiles) {
+    const route = routeForFile(file);
+    if (!indexUrls.has(route)) {
+      report(
+        'error',
+        relativeToRoot(file),
+        1,
+        `Content route must be registered in CONTENT_INDEX.yml: ${route}`,
+      );
+    }
+  }
 }
 
 async function checkUpdateJson() {
@@ -618,6 +647,7 @@ async function main() {
   console.log(`Applying delta-aware editorial checks to ${changes.current.size} changed page(s) and ${changes.deleted.length} deleted/renamed route(s).`);
 
   const indexUrls = await checkContentIndex();
+  checkContentIndexCoverage(mdxFiles, indexUrls);
   const knownRoutes = new Set([...routeSet, ...indexUrls]);
   await checkUpdateJson();
 
