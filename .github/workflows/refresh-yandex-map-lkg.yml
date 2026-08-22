@@ -66,12 +66,13 @@ jobs:
         id: changes
         run: |
           set -euo pipefail
-          if git diff --quiet -- map-data/snapshots/yandex-constructor; then
+          changes="$(git status --porcelain -- map-data/snapshots/yandex-constructor)"
+          if [ -z "$changes" ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "Yandex LKG is unchanged."
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
-            git diff --stat -- map-data/snapshots/yandex-constructor
+            printf '%s\n' "$changes"
           fi
 
       - name: Commit refreshed LKG
