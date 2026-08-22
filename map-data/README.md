@@ -2,7 +2,9 @@
 
 Этот каталог хранит first-party snapshots карт для `rslive.ru`.
 
-Карты **не обновляются автоматически**. Это редко меняющиеся данные: новый snapshot делают вручную только тогда, когда есть практическая причина обновить покрытие, исправить ошибку или заменить источник.
+По умолчанию редко меняющиеся OSM/KML snapshots **не обновляются автоматически**: новый snapshot делают вручную только тогда, когда есть практическая причина обновить покрытие, исправить ошибку или заменить источник.
+
+Отдельное исключение — явно allowlisted provider-managed thematic sources, содержимое которых меняется независимо от RSLive. Для таких источников допустим controlled scheduled LKG refresh с тем же fail-closed parser/filter contract, что использует production build. Сейчас это правило применяется только к Blacklist Serbia в Yandex Constructor и описано ниже.
 
 ## Главное правило
 
@@ -40,6 +42,7 @@ node scripts/check-map-data.mjs
 map-data/
   core/
     serbia-overview.geojson
+    serbia-regions.geojson
 
   packs/
     cities/
@@ -57,9 +60,15 @@ map-data/
       <mid>.kml
       <mid>.geojson
       <mid>.json
+
+    yandex-constructor/
+      <constructor-id>.geojson
+      <constructor-id>.json
 ```
 
 В каталоге могут быть и вспомогательные acquisition/reference datasets. Само наличие GeoJSON не делает его runtime layer: публикация задаётся явным allowlist в `.github/workflows/notify-rslive-ru.yml` и registry в `Antiokh/rslive.ru`.
+
+`serbia-regions.geojson` — build-only административная геометрия для точного country filter; content-sync зеркалит её в `astro/data/map-boundaries/`, а не как selectable runtime layer в `/maps/**`.
 
 ## MapEmbed contract
 
@@ -132,11 +141,13 @@ map-data/packs/cities/subotica.geojson
 map-data/packs/cities/subotica.geojson.gz       # optional
 ```
 
-Legacy `basemaps/` и `snapshots/` синхронизируются отдельно.
+Legacy `basemaps/` и `snapshots/` синхронизируются отдельно. Поэтому validated Yandex LKG из `map-data/snapshots/yandex-constructor/` после обычного content-sync становится engine snapshot fallback.
 
 `serbia-regions.geojson` и другие reference/acquisition datasets не должны попадать в runtime автоматически.
 
 ## Безопасный рабочий цикл
+
+Для вручную обслуживаемых OSM/Google snapshots:
 
 1. Обновите `main` и создайте отдельную ветку.
 2. Запустите baseline-проверку:
@@ -399,6 +410,53 @@ Pilot MID:
 1mxkFBhCULwjecdQUWUIfE1BAQahFG6I
 ```
 
+## Yandex Constructor LKG
+
+Yandex Constructor используется как provider-managed thematic source: владельцы Blacklist Serbia могут менять точки независимо от репозитория. Поэтому для явно allowlisted Constructor действует controlled daily LKG refresh.
+
+Source of truth для acquisition/parser/filter contract остаётся в engine `Antiokh/rslive.ru`:
+
+```text
+astro/config/maps.config.mjs
+astro/scripts/lib/yandex-constructor-snapshot.mjs
+```
+
+Content workflow не копирует parser. `.github/workflows/refresh-yandex-map-lkg.yml` checkout'ит текущий engine `main` и запускает `scripts/refresh-yandex-lkg.mjs`, который использует engine allowlist и parser непосредственно.
+
+Текущий LKG хранится парой:
+
+```text
+map-data/snapshots/yandex-constructor/<constructor-id>.geojson
+map-data/snapshots/yandex-constructor/<constructor-id>.json
+```
+
+Инварианты scheduled refresh:
+
+- provider HTML загружается только в GitHub Actions/build/maintenance, не в браузере пользователя;
+- Constructor ID обязан совпасть с allowlist и в request, и в response;
+- карта должна оставаться public;
+- принимаются только placemark с валидными WGS84 coordinates;
+- `SERBIA_BOUNDS` — только быстрый prefilter;
+- окончательное решение принимает point-in-polygon по `map-data/core/serbia-regions.geojson`;
+- source не должен упасть ниже engine `minSourceFeatures`;
+- после country filter должно остаться не меньше 50% source features;
+- при существующем LKG новый source/output не должен без ручного вмешательства схлопнуться более чем на 30%;
+- любой network/parser/filter/validation failure завершает workflow с ошибкой **до записи LKG**;
+- старый LKG при ошибке не удаляется и не заменяется;
+- feature order, `snapshotAt` и другое acquisition metadata не создают новый commit сами по себе;
+- изменение координаты, названия или текста отзыва меняет normalized SHA-256 и считается содержательным изменением snapshot.
+
+Перед commit workflow запускает:
+
+```bash
+node scripts/check-yandex-lkg-utils.mjs
+node scripts/check-map-data.mjs
+```
+
+Если normalized snapshot не изменился, commit не создаётся. Если изменился, workflow коммитит только `map-data/snapshots/yandex-constructor/**`; push через repository PAT запускает обычный `notify-rslive-ru.yml`, который повторно валидирует весь map-data и зеркалит LKG в engine.
+
+Scheduled refresh — исключение только для явно allowlisted volatile provider-managed thematic sources. Он не разрешает автоматический Overpass refresh, массовый scraper произвольных Yandex карт или scheduled rebuild обычных OSM/Google snapshots.
+
 ## Как добавить новый runtime-region
 
 Наличие нового GeoJSON недостаточно.
@@ -418,26 +476,3 @@ Pilot MID:
 Удаление source — изменение contract. Сначала уберите использование и registry в engine, validators, manual gzip list и sync allowlist. Только затем удаляйте source.
 
 Не оставляйте runtime entry без source и не создавайте пустые GeoJSON placeholders.
-
-## Атрибуция
-
-OSM-derived GeoJSON должен сохранять:
-
-```text
-© OpenStreetMap contributors · ODbL
-```
-
-Google My Maps snapshot сохраняет происхождение в metadata. Это не даёт права кэшировать Google tiles, Street View или другие remote resources как first-party data.
-
-## Чего не делать
-
-- не добавлять scheduled map refresh;
-- не выполнять Overpass-запросы в production build или браузере пользователя;
-- не сжимать карты в GitHub Actions или production build;
-- не обновлять карту только потому, что прошёл календарный период;
-- не использовать renderer bbox вместо administrative acquisition area;
-- не добавлять buildings/POI/residential/service roads без отдельного решения;
-- не коммить raw Overpass export как готовый RSLive GeoJSON;
-- не заменять LKG при ошибке или подозрительно маленькой выгрузке;
-- не кэшировать third-party Google/OpenStreetMap tile responses;
-- не менять GeoJSON/gzip contract без синхронного изменения validators, sync и engine.
