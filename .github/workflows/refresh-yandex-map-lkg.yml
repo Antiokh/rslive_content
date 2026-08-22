@@ -1,0 +1,86 @@
+name: Refresh Yandex map LKG
+
+on:
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/refresh-yandex-map-lkg.yml"
+      - "scripts/refresh-yandex-lkg.mjs"
+      - "scripts/yandex-lkg-utils.mjs"
+      - "scripts/check-yandex-lkg-utils.mjs"
+      - "map-data/core/serbia-regions.geojson"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-yandex-map-lkg
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out rslive_content
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Use the same repository PAT as content sync. Commits pushed by the default
+          # GITHUB_TOKEN do not trigger downstream workflows, while an LKG change must
+          # run notify-rslive-ru.yml so the snapshot reaches the engine mirror.
+          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+
+      - name: Check out current map engine
+        uses: actions/checkout@v4
+        with:
+          repository: Antiokh/rslive.ru
+          ref: main
+          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          path: rslive-engine
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Check normalized snapshot hashing
+        run: node scripts/check-yandex-lkg-utils.mjs
+
+      - name: Refresh allowlisted Yandex snapshots
+        env:
+          RSLIVE_ENGINE_ASTRO: ${{ github.workspace }}/rslive-engine/astro
+        run: node scripts/refresh-yandex-lkg.mjs
+
+      - name: Validate map data
+        run: node scripts/check-map-data.mjs
+
+      - name: Detect normalized snapshot changes
+        id: changes
+        run: |
+          set -euo pipefail
+          changes="$(git status --porcelain -- map-data/snapshots/yandex-constructor)"
+          if [ -z "$changes" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Yandex LKG is unchanged."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            printf '%s\n' "$changes"
+          fi
+
+      - name: Commit refreshed LKG
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
+          git add map-data/snapshots/yandex-constructor
+          git commit -m "Refresh Yandex map snapshots"
+          git push origin HEAD:main

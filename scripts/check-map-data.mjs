@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { access, readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { gunzipSync } from 'node:zlib';
+import { isSha256, normalizedYandexSnapshotSha256 } from './yandex-lkg-utils.mjs';
 
 const root = process.cwd();
 const mapRoot = path.join(root, 'map-data');
@@ -212,6 +213,63 @@ async function checkAllGoogleSidecars() {
   }
 }
 
+async function checkYandexSet(id) {
+  const dir = path.join(mapRoot, 'snapshots/yandex-constructor');
+  const geojsonFile = path.join(dir, `${id}.geojson`);
+  const metadataFile = path.join(dir, `${id}.json`);
+  const sourceId = `yandex-constructor:${id}`;
+
+  const geojson = await readJson(geojsonFile, `Yandex Constructor GeoJSON ${id}`);
+  checkFeatureCollection(geojson, `Yandex Constructor GeoJSON ${id}`);
+  if (geojson.properties?.sourceKind !== 'yandex-embed') fail(`${id}: GeoJSON sourceKind должен быть yandex-embed`);
+  if (geojson.properties?.sourceId !== sourceId) fail(`${id}: GeoJSON sourceId должен быть ${sourceId}`);
+  if (geojson.properties?.filter !== 'serbia-regions') fail(`${id}: GeoJSON filter должен быть serbia-regions`);
+  const normalizedSha256 = normalizedYandexSnapshotSha256(geojson);
+
+  const metadata = await readJson(metadataFile, `Yandex Constructor metadata ${id}`);
+  if (metadata?.sourceKind !== 'yandex-embed') fail(`${id}: metadata sourceKind должен быть yandex-embed`);
+  if (metadata?.sourceId !== sourceId) fail(`${id}: metadata sourceId должен быть ${sourceId}`);
+  if (metadata?.upstreamId !== id) fail(`${id}: upstreamId должен быть ${id}`);
+  if (metadata?.dataFile !== `${id}.geojson`) fail(`${id}: dataFile должен ссылаться на ${id}.geojson`);
+  if (metadata?.filter !== 'serbia-regions') fail(`${id}: metadata filter должен быть serbia-regions`);
+  if (metadata?.boundaryFile !== 'map-data/core/serbia-regions.geojson') fail(`${id}: metadata boundaryFile должен ссылаться на serbia-regions.geojson`);
+  if (!isSha256(metadata?.htmlSha256)) fail(`${id}: metadata.htmlSha256 должен быть SHA-256`);
+  if (!isSha256(metadata?.normalizedSha256)) fail(`${id}: metadata.normalizedSha256 должен быть SHA-256`);
+  if (metadata.normalizedSha256 !== normalizedSha256) fail(`${id}: normalizedSha256 не совпадает с GeoJSON`);
+
+  const sourceFeatureCount = Number(metadata?.sourceFeatureCount);
+  const geojsonFeatures = Number(metadata?.geojsonFeatures);
+  const excludedOutsideSerbia = Number(metadata?.excludedOutsideSerbia);
+  if (!Number.isInteger(sourceFeatureCount) || sourceFeatureCount <= 0) fail(`${id}: sourceFeatureCount должен быть > 0`);
+  if (!Number.isInteger(geojsonFeatures) || geojsonFeatures !== geojson.features.length) fail(`${id}: geojsonFeatures не совпадает с GeoJSON`);
+  if (!Number.isInteger(excludedOutsideSerbia) || excludedOutsideSerbia !== sourceFeatureCount - geojsonFeatures) {
+    fail(`${id}: excludedOutsideSerbia не совпадает с sourceFeatureCount - geojsonFeatures`);
+  }
+  if (Number(geojson.properties?.sourceFeatureCount) !== sourceFeatureCount) fail(`${id}: sourceFeatureCount metadata/GeoJSON расходятся`);
+  if (Number(geojson.properties?.includedFeatureCount) !== geojsonFeatures) fail(`${id}: includedFeatureCount metadata/GeoJSON расходятся`);
+  if (Number(geojson.properties?.excludedOutsideSerbia) !== excludedOutsideSerbia) fail(`${id}: excludedOutsideSerbia metadata/GeoJSON расходятся`);
+
+  return { sourceFeatureCount, geojsonFeatures, excludedOutsideSerbia, normalizedSha256 };
+}
+
+async function checkAllYandexSidecars() {
+  const dir = path.join(mapRoot, 'snapshots/yandex-constructor');
+  const files = await readdir(dir).catch(() => []);
+  if (files.length === 0) return [];
+  const unexpected = files.filter((name) => !/\.(?:geojson|json)$/i.test(name));
+  if (unexpected.length > 0) fail(`Yandex snapshot directory содержит неожиданные файлы: ${unexpected.join(', ')}`);
+
+  const ids = new Set(files.map((name) => name.replace(/\.(?:geojson|json)$/i, '')).filter(Boolean));
+  const result = [];
+  for (const id of ids) {
+    for (const filename of [`${id}.geojson`, `${id}.json`]) {
+      if (!files.includes(filename)) fail(`${id}: Yandex snapshot-набор неполный, отсутствует ${filename}`);
+    }
+    result.push({ id, ...(await checkYandexSet(id)) });
+  }
+  return result;
+}
+
 await checkAllGoogleSidecars();
 const result = {
   serbia: await checkSerbia(),
@@ -230,6 +288,7 @@ const result = {
     subotica: await checkCity('subotica'),
   },
   googlePilot: await checkGoogleSet(pilotMid),
+  yandex: await checkAllYandexSidecars(),
 };
 
 console.log(`[map-data] snapshots verified: ${JSON.stringify(result)}`);
