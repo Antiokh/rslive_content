@@ -11,6 +11,7 @@ on:
       - ".github/workflows/refresh-yandex-map-lkg.yml"
       - "scripts/refresh-yandex-lkg.mjs"
       - "scripts/yandex-lkg-utils.mjs"
+      - "scripts/check-yandex-lkg-utils.mjs"
       - "map-data/core/serbia-regions.geojson"
 
 permissions:
@@ -30,6 +31,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # Use the same repository PAT as content sync. Commits pushed by the default
+          # GITHUB_TOKEN do not trigger downstream workflows, while an LKG change must
+          # run notify-rslive-ru.yml so the snapshot reaches the engine mirror.
+          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
 
       - name: Check out current map engine
         uses: actions/checkout@v4
@@ -45,6 +50,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+
+      - name: Check normalized snapshot hashing
+        run: node scripts/check-yandex-lkg-utils.mjs
 
       - name: Refresh allowlisted Yandex snapshots
         env:
