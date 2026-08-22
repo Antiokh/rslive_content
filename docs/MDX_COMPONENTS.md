@@ -298,14 +298,26 @@ allow?: string
 
 Исходник: `astro/src/components/MapEmbed.astro`.
 
-Props:
+Подробная редакторская инструкция с decision tree, point contract, renderer modes, provider normalization, offline-поведением и готовыми примерами находится в [`docs/MAPEMBED.md`](MAPEMBED.md).
+
+Актуальный public contract:
 
 ```text
-src: string
+src?: string
+point?: {
+  longitude: number
+  latitude: number
+  title?: string
+  description?: string
+  markerColor?: "#RRGGBB"
+  markerIcon?: "place" | "office" | "home" | "food" | "culture" | "warning"
+  provenanceUrl?: string
+}
 title?: string = "Карта"
 caption?: string
 aspect?: string = "16 / 10"
 height?: string
+renderer?: "auto" | "maplibre" | "embed" = "auto"
 offlineSrc?: string
 regions?: string[]
 SerbiaMap?: boolean
@@ -313,21 +325,9 @@ debug?: boolean = false
 debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-map"
 ```
 
-Если `regions` отсутствует или пуст, действует продуктовый дефолт: **Белград + карта Сербии**.
+Нужен `src`, `point` или оба.
 
-```mdx
-<MapEmbed
-  src="https://www.google.com/maps/d/embed?mid=..."
-  title="Подразделения МВД"
-  caption="Проверьте адрес и часы работы перед визитом."
-/>
-```
-
-### Автоматический first-party renderer
-
-Для зарегистрированного `src` обычный вызов в статье не требует `offlineSrc`. На сборке `MapEmbed` нормализует `src` через engine registry (`config/maps.config.mjs`). Если источник известен, компонент автоматически связывает его с same-origin `/map-renderer/` и first-party thematic snapshot.
-
-Реальный production-пример — страница [`/map/dance/`](../src/content/docs/map/dance/index.mdx):
+Обычный provider-вызов:
 
 ```mdx
 <MapEmbed
@@ -337,67 +337,40 @@ debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-ma
 />
 ```
 
-Для незарегистрированного `src` локальный renderer не придумывается: карта продолжает работать онлайн, а при cold offline получает штатную заглушку, если автор явно не задал `offlineSrc`. `offlineSrc` используйте только как проверенный same-origin override.
-
-Чтобы выбрать только конкретный регион, укажите его явно:
+First-party point:
 
 ```mdx
 <MapEmbed
-  src="https://www.google.com/maps/d/embed?mid=..."
-  title="Объекты в Нише"
-  regions={['nis']}
+  point={{
+    longitude: 20.4117708,
+    latitude: 44.8225635,
+    title: 'Uprava za strance Beograd',
+    description: 'Omladinskih brigada 1',
+    markerColor: '#e05252',
+    markerIcon: 'office',
+  }}
+  title="Uprava za strance Beograd"
 />
 ```
 
-Для расширенной Белградской зоны с пригородами используйте отдельный target `belgrade-ext`:
+Ключевые правила:
 
-```mdx
-<MapEmbed
-  src="https://www.google.com/maps/d/embed?mid=..."
-  title="Объекты в Белграде и пригородах"
-  regions={['belgrade-ext']}
-/>
-```
-
-Чтобы к явно выбранным регионам добавить обзор Сербии, используйте отдельный булевый prop `SerbiaMap`:
-
-```mdx
-<MapEmbed
-  src="https://www.google.com/maps/d/embed?mid=..."
-  title="Объекты в нескольких регионах"
-  regions={['belgrade', 'novi-sad']}
-  SerbiaMap
-/>
-```
-
-Допустимые значения `regions`:
-
-```text
-belgrade
-belgrade-ext
-novi-sad
-nis
-subotica
-```
-
-`belgrade` — обычная городская карта Белграда. `belgrade-ext` — отдельный расширенный target: широкий Белград с пригородами и внешними муниципалитетами. `serbia`, `serbia-overview` и другие country aliases не передаются через `regions`: карта страны управляется только `SerbiaMap`.
-
-Правила:
-
-- Без выбранного региона компонент подготавливает `belgrade` и `SerbiaMap=true`.
-- Как только указан хотя бы один регион, автоматический country layer отключается: Сербия добавляется только через `SerbiaMap`.
-- `SerbiaMap={false}` можно использовать, чтобы подавить карту страны и при дефолтном Белграде.
-- Один регион без `SerbiaMap` может ограничивать renderer его bounds. При двух и более регионах общий `maxBounds` — Сербия, чтобы пользователь не был заперт в первом регионе.
-- Неизвестный region id должен ломать сборку, а не тихо игнорироваться.
-- Регистрация региона в engine не означает, что его snapshot уже опубликован. Для отсутствующего файла не создавайте пустую заглушку.
-- `regions` и `SerbiaMap` управляют базовыми geographic packs независимо от registry тематического `src`.
-- Для зарегистрированного `src` first-party renderer и thematic snapshot разрешаются автоматически; не дублируйте их через `offlineSrc`.
-- `offlineSrc` — только явный same-origin override; он имеет приоритет над автоматически разрешённым renderer URL.
-- Для незарегистрированного `src` локальное соответствие не угадывается.
-- `debug` и `debugState` предназначены только для диагностических страниц, а не для обычных публикаций.
+- `renderer` описывает presentation, а Google / PlanPlus / Yandex — provider/source; не используйте `renderer="google"` и подобные значения.
+- `renderer="auto"` — обычный default. Trusted first-party point использует MapLibre online/offline. Registry-backed external source пока сохраняет provider embed online и first-party `/map-renderer-v2/` как cold-offline companion до отдельного browser/mobile rollout gate.
+- `renderer="maplibre"` допустим только при существующем trustworthy first-party renderer/data contract.
+- `renderer="embed"` требует `src` и фиксирует provider iframe online.
+- Для зарегистрированного source не придумывайте `offlineSrc`: registry движка сам выдаёт `/map-renderer-v2/`.
+- `point` предпочтительнее guessing координат из provider ID. Автоматически извлекается только Google `q=`/`query=`, если значение целиком является точной парой `lat,lng`.
+- Google `pb`, text address, PlanPlus object ID, Yandex `ll`, frame/constructor ID не считаются geometry contract.
+- `markerColor` и `markerIcon` задаются внутри `point`, не top-level.
+- Допустимые `markerIcon`: `place`, `office`, `home`, `food`, `culture`, `warning`. Remote icon URLs запрещены.
+- Допустимые `regions`: `belgrade`, `belgrade-ext`, `novi-sad`, `nis`, `subotica`.
+- Без explicit `regions` действует product default: Belgrade + `SerbiaMap`. При explicit region country layer добавляется только через `SerbiaMap`.
+- `serbia` и `serbia-overview` не являются значениями `regions`.
+- `debug` и `debugState` предназначены для diagnostics, а не для обычных статей.
 - Карта должна дополнять текстовый адрес, а не заменять его.
 
-Картографические snapshots лежат в `map-data/**`. Полный ручной цикл выгрузки, нормализации, проверки и обновления описан в `map-data/README.md`. Наличие файла на сервере не включает его в transactional PWA corpus автоматически.
+Картографические snapshots лежат в `map-data/**`; ручной цикл их обновления описан в `map-data/README.md`. Полный usage guide для автора статьи — [`docs/MAPEMBED.md`](MAPEMBED.md).
 
 ## YouTube
 
