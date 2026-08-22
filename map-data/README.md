@@ -476,3 +476,28 @@ Scheduled refresh — исключение только для явно allowlis
 Удаление source — изменение contract. Сначала уберите использование и registry в engine, validators, manual gzip list и sync allowlist. Только затем удаляйте source.
 
 Не оставляйте runtime entry без source и не создавайте пустые GeoJSON placeholders.
+
+## Атрибуция
+
+OSM-derived GeoJSON должен сохранять:
+
+```text
+© OpenStreetMap contributors · ODbL
+```
+
+Google My Maps snapshot сохраняет происхождение в metadata. Это не даёт права кэшировать Google tiles, Street View или другие remote resources как first-party data.
+
+Yandex Constructor snapshot также сохраняет provider/source provenance в metadata. Это разрешение относится только к нормализованным данным явно allowlisted пользовательской карты и не превращает Yandex tiles, assets или другие provider resources в first-party data.
+
+## Чего не делать
+
+- не добавлять scheduled map refresh для OSM/Google или произвольных provider sources; исключение допускается только для явно allowlisted volatile thematic LKG с отдельным fail-closed contract;
+- не выполнять Overpass-запросы в production build или браузере пользователя;
+- не сжимать карты в GitHub Actions или production build;
+- не обновлять вручную обслуживаемые OSM/Google snapshots только потому, что прошёл календарный период;
+- не использовать renderer bbox вместо administrative acquisition area;
+- не добавлять buildings/POI/residential/service roads без отдельного решения;
+- не коммить raw Overpass export как готовый RSLive GeoJSON;
+- не заменять LKG при ошибке или подозрительно маленькой выгрузке;
+- не кэшировать third-party Google/OpenStreetMap/Yandex tile responses;
+- не менять GeoJSON/gzip contract без синхронного изменения validators, sync и engine.
