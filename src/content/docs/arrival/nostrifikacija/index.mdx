@@ -77,30 +77,34 @@ live: "https://rslive.ru/arrival/nostrifikacija/"
 
    Оплата производится по официальной квитанции AZK.
 
-   [Образец квитанции AZK](https://azk.gov.rs/dokument.php?tip=1&token=2q2d0t7u8r6s8gg.pdf)
+   [Актуальный образец квитанции AZK](https://azk.gov.rs/dokument.php?tip=1&token=87sz2ftzlt8ow0g.pdf)
 
    <Spoiler title="Показать пример заполнения квитанции">
 
    <UplatnicaGenerator
      payer="Ваше имя и адрес (как в Сербии)"
-     subject="Републичка административна такса"
-     recipient={"Агенција за квалификације\nБеоград"}
-     code="153"
-     sum="13150.00"
-     account="840-1620-21"
+     subject="taksa - isprava visoko obrazovanje"
+     recipient={`Agencija za kvalifikacije
+Beograd, Majke Jevrosime 51`}
+     code="253"
+     sum="11000.00"
+     account="840-0000001096668-73"
      model="97"
      target="20696847422000403"
    />
 
    </Spoiler>
 
-   Параметры оплаты:
+   По актуальному образцу AZK сумма и реквизиты следующие.[^3]
 
-   - Šifra plaćanja: 153
+   - Šifra plaćanja: 253
    - Valuta: RSD
-   - Iznos: 13 150,00 RSD
+   - Iznos: 11 000,00 RSD
+   - Račun primaoca: 840-0000001096668-73
    - Model: 97
    - Poziv na broj: 20696847422000403
+
+   Если платит не сам заявитель, в поле `svrha uplate` укажите имя и фамилию человека, за которого производится оплата.[^3]
 
    <Aside type="caution">
    Перед оплатой обязательно сверяйте реквизиты с актуальной квитанцией AZK.
@@ -313,12 +317,12 @@ live: "https://rslive.ru/arrival/nostrifikacija/"
 
 [^1]: [ENIC/NARIC Serbia — виды признания](https://azk.gov.rs/stranica.php?id=95) — профессиональное признание иностранного высшего образования для трудоустройства; AZK также ведёт отдельную процедуру признания иностранного среднего образования.
 [^2]: [Министарство правде — Судски тумачи](https://www.mpravde.gov.rs/tekst/24795/sudski-tumaci-i-prevodioci.php)
-[^3]: [Uputstvo AZK](https://azk.gov.rs/dokument.php?tip=1&token=cuxy00ccfhcgkss.pdf)
+[^3]: Agencija za kvalifikacije: [актуальный образец платёжного поручения для профессионального признания иностранного высшего образования](https://azk.gov.rs/dokument.php?tip=1&token=87sz2ftzlt8ow0g.pdf) — сумма 11 000 RSD и платёжные реквизиты; [Uputstvo AZK](https://azk.gov.rs/dokument.php?tip=1&token=cuxy00ccfhcgkss.pdf) — онлайн-подача, документы и подтверждение оплаты.
 [^4]: [FAQ AZK](https://azk.gov.rs/stranica.php?id=106)
 [^5]: [Uputstvo AZK](https://azk.gov.rs/dokument.php?tip=1&token=cuxy00ccfhcgkss.pdf)
 [^6]: Министерство здравоохранения Республики Сербия: [Закон о здравоохранении](https://www.zdravlje.gov.rs/tekst/350498/zakon-o-zdravstvenoj-zastiti.php), в частности ст. 153–154, 165, 168–169, 179 и 182 — самостоятельная медицинская деятельность, требования к иностранным работникам, временная лицензия, стаж, профессиональный экзамен и признание иностранной специализации.
 [^7]: [Правилник о ближим условима за издавање, обнављање или одузимање лиценце члановима комора здравствених радника](https://www.paragraf.rs/propisi/pravilnik_o_blizim_uslovima_za_izdavanje_obnavljanje_ili_oduzimanje_licence.html), «Службени гласник РС» 76/2022 — заявление на лицензию через отделение палаты, условия выдачи и семилетний срок лицензии.
-[^8]: [Закон о палатах медицинских работников](https://www.paragraf.rs/propisi/zakon_o_komorama_zdravstvenih_radnika.html), ст. 2–4 — пять профессиональных палат, территориальные отделения и членство медицинских работников.
+[^8]: [Закон о палатах медицинских работников](https://slgl.pravno-informacioni-sistem.rs/api/Prins/viewAct/699081), ст. 2–4 — пять профессиональных палат, территориальные отделения и членство медицинских работников.
 [^9]: Министерство здравоохранения Республики Сербия: [`Stručni ispiti`](https://www.zdravlje.gov.rs/tekst/333408/strucni-ispiti.php) — иностранный `stručni ispit` не признаётся; зарубежный приправничкий стаж может быть признан полностью или частично при соответствии программы; для кандидата с иностранным дипломом требуется решение AZK.
 [^10]: Lekarska komora Srbije: [`Upis lekara`](https://www.lks.org.rs/aktivnosti/licence/upis-lekara) — регистрация врача в соответствующей региональной палате по месту постоянного проживания.
 [^11]: Lekarska komora Srbije: [региональные врачебные палаты](https://www.lks.org.rs/o-komori/regionalne-lekarske-komore) — перечень пяти региональных палат и территориальная компетенция.
