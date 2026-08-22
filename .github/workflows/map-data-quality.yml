@@ -1,0 +1,51 @@
+name: Map data quality
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - "map-data/**"
+      - "scripts/check-map-data.mjs"
+      - "scripts/yandex-lkg-utils.mjs"
+      - "scripts/refresh-yandex-lkg.mjs"
+      - "scripts/check-yandex-lkg-utils.mjs"
+      - ".github/workflows/map-data-quality.yml"
+      - ".github/workflows/refresh-yandex-map-lkg.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "map-data/**"
+      - "scripts/check-map-data.mjs"
+      - "scripts/yandex-lkg-utils.mjs"
+      - "scripts/refresh-yandex-lkg.mjs"
+      - "scripts/check-yandex-lkg-utils.mjs"
+      - ".github/workflows/map-data-quality.yml"
+      - ".github/workflows/refresh-yandex-map-lkg.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out map data
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Check normalized Yandex snapshot hashing
+        run: node scripts/check-yandex-lkg-utils.mjs
+
+      - name: Validate committed map data
+        run: node scripts/check-map-data.mjs
