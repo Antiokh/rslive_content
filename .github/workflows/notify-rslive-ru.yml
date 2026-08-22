@@ -57,18 +57,26 @@ jobs:
 
           # Runtime map payloads use an explicit allowlist. Gzip is deliberately manual: when a
           # validated sibling .geojson.gz exists it is mirrored, otherwise runtime uses raw GeoJSON.
-          # This workflow never acquires OSM/Google data and never compresses map resources.
+          # This workflow never acquires upstream map data and never compresses map resources.
           mkdir -p \
             rslive-engine/astro/public/maps/core \
             rslive-engine/astro/public/maps/basemaps \
             rslive-engine/astro/public/maps/packs/cities \
-            rslive-engine/astro/public/maps/snapshots
+            rslive-engine/astro/public/maps/snapshots \
+            rslive-engine/astro/data/map-boundaries
 
           rsync -a --delete --delete-excluded \
             --include='serbia-overview.geojson' \
             --include='serbia-overview.geojson.gz' \
             --exclude='*' \
             map-data/core/ rslive-engine/astro/public/maps/core/
+
+          # Build-only administrative geometry for deterministic country filtering of external
+          # thematic sources. It is not a selectable runtime map layer.
+          rsync -a --delete --delete-excluded \
+            --include='serbia-regions.geojson' \
+            --exclude='*' \
+            map-data/core/ rslive-engine/astro/data/map-boundaries/
 
           rsync -a --delete map-data/basemaps/ rslive-engine/astro/public/maps/basemaps/
 
@@ -105,7 +113,7 @@ jobs:
           git config user.name "rslive content sync"
           git config user.email "actions@github.com"
 
-          if [ -z "$(git status --porcelain astro/src/content/docs astro/src/assets/stickers astro/public/maps/core astro/public/maps/basemaps astro/public/maps/packs astro/public/maps/snapshots)" ]; then
+          if [ -z "$(git status --porcelain astro/src/content/docs astro/src/assets/stickers astro/public/maps/core astro/public/maps/basemaps astro/public/maps/packs astro/public/maps/snapshots astro/data/map-boundaries)" ]; then
             echo "No content, sticker, or map changes to sync."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "content_sha=$CONTENT_SHA" >> "$GITHUB_OUTPUT"
@@ -135,7 +143,8 @@ jobs:
             astro/public/maps/core \
             astro/public/maps/basemaps \
             astro/public/maps/packs \
-            astro/public/maps/snapshots
+            astro/public/maps/snapshots \
+            astro/data/map-boundaries
           subject="$(printf '%s\\n' "$CONTENT_MESSAGE" | sed -n '1p')"
           if [ -z "$subject" ]; then
             subject="Sync docs from rslive_content"
