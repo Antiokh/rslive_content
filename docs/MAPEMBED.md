@@ -40,7 +40,8 @@
 
 Есть provider URL и точные координаты
   -> <MapEmbed src="..." point={{ ... }} />
-     src сохраняется как provenance/direct-open link
+     src остаётся direct-open provider link
+     point используется как first-party geometry
 
 Нужно обязательно показать provider iframe
   -> renderer="embed"
@@ -147,6 +148,8 @@ Point проходит build-time validation:
 
 Не передавайте `lat/lng` строкой одного поля и не меняйте порядок: публичный object использует отдельные `longitude` и `latitude`.
 
+Если point находится не в Белграде, обычно явно задайте подходящий `regions`, иначе сработает продуктовый default Belgrade + Serbia.
+
 ### Point + внешний источник
 
 Если у объекта есть внешний provider URL, передайте `src` вместе с `point`:
@@ -165,7 +168,9 @@ Point проходит build-time validation:
 />
 ```
 
-В этом случае first-party point может рисоваться MapLibre, а исходный `src` сохраняется как provenance/direct-open URL. Если внутри `point` явно указан `provenanceUrl`, используется он; иначе при наличии `src` компонент подставляет `src` как provenance автоматически.
+В этом случае first-party point рисуется тем же MapLibre renderer, а внешний `src` остаётся direct-open provider URL у `MapEmbed`.
+
+Для popup внутри first-party renderer действует отдельная provenance-ссылка: если `point.provenanceUrl` задан явно, используется он; если не задан, при наличии `src` компонент подставляет `src` как provenance автоматически. Если `src` отсутствует, direct-open ведёт на `point.provenanceUrl`, а при отсутствии и его — на same-origin renderer.
 
 Это предпочтительнее попытки извлечь координаты из opaque provider ID.
 
@@ -208,11 +213,14 @@ auto -> MapLibre online и offline
 **Registry-backed external source, например allowlisted Google My Maps:**
 
 ```text
-online       -> provider embed
-offline-cold -> first-party MapLibre v2 companion
+online                         -> provider embed
+offline после online-загрузки  -> уже загруженный provider iframe сохраняется
+cold offline                   -> first-party MapLibre v2 companion
 ```
 
 Глобальный `auto -> MapLibre` для registry-backed external sources пока выключен release guard в движке (`MAP_RENDERER_AUTO_POLICY.registryFirstParty = false`) до отдельной browser/mobile QA. Автор статьи не должен обходить этот guard вручную без причины.
+
+Для внешнего source без first-party companion уже загруженный provider iframe также не уничтожается только из-за события `offline`; при cold offline компонент показывает штатную локальную заглушку.
 
 ### `renderer="maplibre"`
 
