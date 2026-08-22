@@ -44,6 +44,9 @@ jobs:
         with:
           node-version: 24
 
+      - name: Syntax check scheduled refresher
+        run: node --check scripts/refresh-yandex-lkg.mjs
+
       - name: Check normalized Yandex snapshot hashing
         run: node scripts/check-yandex-lkg-utils.mjs
 
