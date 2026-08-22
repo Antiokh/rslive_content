@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-18
+# Last updated: 2026-08-22
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -2354,4 +2354,25 @@ pages:
     link_when:
       - "запрос связан с темой: Генератор сербской платёжной квитанции Uplatnica с QR-кодом для печати и оплаты"
       - "нужна информация по теме «Форма платёжки (Uplatnica)»"
+    anchors: []
+
+  - url: /move/travel/turkey/
+    title: 'Пересадка через Турцию: аэропорты IST и SAW'
+    tags: [Турция, Стамбул, IST, SAW, пересадка, аэропорт, Wi-Fi, метро, Havaist, офлайн]
+    aliases: [пересадка в Стамбуле, Istanbul Airport, Sabiha Gökçen, IST SAW, аэропорты Стамбула]
+    link_when:
+      - пересадка по пути в Сербию проходит через Стамбул
+      - нужно сменить аэропорты IST и SAW
+      - в аэропорту Стамбула нет интернета или не работает оплата
+      - нужен запасной маршрут при сбое Havaist или метро
+    anchors: []
+
+  - url: /sr/provera-stana-pre-najma/
+    locale: sr
+    title: Контролна листа за преглед стана пре закупа
+    tags: [сербский, аренда, квартира, собственник, иностранный арендатор, чек-лист]
+    aliases: [provera stana pre najma, kontrolna lista za zakup, pitanja vlasniku stana]
+    link_when:
+      - сербскому владельцу или агенту нужно показать вопросы иностранного арендатора
+      - русскоязычный арендатор идёт на просмотр без знания сербского
     anchors: []
