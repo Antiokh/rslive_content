@@ -100,6 +100,46 @@ async function checkSerbia() {
   };
 }
 
+function checkBoundaryRing(ring, label) {
+  if (!Array.isArray(ring) || ring.length < 4) fail(`${label}: boundary ring должен содержать минимум 4 координаты`);
+  for (const [index, coordinate] of ring.entries()) {
+    if (!Array.isArray(coordinate) || coordinate.length < 2) fail(`${label}: coordinate ${index} не является [lon, lat]`);
+    const longitude = Number(coordinate[0]);
+    const latitude = Number(coordinate[1]);
+    if (!Number.isFinite(longitude) || longitude < -180 || longitude > 180 || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) {
+      fail(`${label}: coordinate ${index} выходит за пределы WGS84`);
+    }
+  }
+}
+
+async function checkSerbiaRegions() {
+  const file = path.join(mapRoot, 'core/serbia-regions.geojson');
+  const document = await readJson(file, 'Границы регионов Сербии');
+  checkFeatureCollection(document, 'Границы регионов Сербии');
+  if (document.features.length < 20) {
+    fail(`Границы регионов Сербии выглядят неполными: features=${document.features.length}, ожидается минимум 20`);
+  }
+
+  let polygons = 0;
+  for (const [featureIndex, feature] of document.features.entries()) {
+    const geometry = feature?.geometry;
+    if (feature?.type !== 'Feature' || !['Polygon', 'MultiPolygon'].includes(geometry?.type)) {
+      fail(`Границы регионов Сербии: feature ${featureIndex} должен быть Polygon или MultiPolygon`);
+    }
+    const polygonSet = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
+    if (!Array.isArray(polygonSet) || polygonSet.length === 0) fail(`Границы регионов Сербии: feature ${featureIndex} не содержит polygon`);
+    for (const [polygonIndex, polygon] of polygonSet.entries()) {
+      if (!Array.isArray(polygon) || polygon.length === 0) fail(`Границы регионов Сербии: feature ${featureIndex}, polygon ${polygonIndex} не содержит rings`);
+      polygons += 1;
+      for (const [ringIndex, ring] of polygon.entries()) {
+        checkBoundaryRing(ring, `Границы регионов Сербии: feature ${featureIndex}, polygon ${polygonIndex}, ring ${ringIndex}`);
+      }
+    }
+  }
+
+  return { features: document.features.length, polygons };
+}
+
 async function checkCity(id, { acceptedRegionIds = [id], requireOptionalPack = true } = {}) {
   const file = path.join(mapRoot, `packs/cities/${id}.geojson`);
   if (!(await exists(file))) fail(`Обязательный городской snapshot отсутствует: map-data/packs/cities/${id}.geojson`);
@@ -175,6 +215,7 @@ async function checkAllGoogleSidecars() {
 await checkAllGoogleSidecars();
 const result = {
   serbia: await checkSerbia(),
+  serbiaRegions: await checkSerbiaRegions(),
   belgradeLite: await checkLegacyBelgradeLite(),
   cities: {
     belgrade: await checkCity('belgrade'),
