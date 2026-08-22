@@ -78,8 +78,8 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         run: |
           set -euo pipefail
-          git config user.name "rslive map refresh"
-          git config user.email "actions@github.com"
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
           git add map-data/snapshots/yandex-constructor
           git commit -m "Refresh Yandex map snapshots"
           git push origin HEAD:main
