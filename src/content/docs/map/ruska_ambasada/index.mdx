@@ -68,12 +68,15 @@ live: "https://rslive.ru/map/ruska_ambasada/"
 <div className="grid gap-4 md:grid-cols-2">
   <MapEmbed
     src="https://www.google.com/maps/embed?pb=!4v1734665839121!6m8!1m7!1s_wZEhIqU6kropxCvTQo0Yg!2m2!1d44.79965572065834!2d20.46192730147481!3f55.42236919397052!4f6.725343179253358!5f0.7820865974627469"
+    renderer="embed"
+    regions={['belgrade']}
     title="Посольство России в Белграде — Google Maps"
     caption="Панорама входа"
   />
 
   <MapEmbed
     src="https://www.planplus.rs/mapa/objekat/2281"
+    regions={['belgrade']}
     title="Посольство России в Белграде — PlanPlus"
     caption="Карта объекта"
   />
@@ -99,6 +102,7 @@ live: "https://rslive.ru/map/ruska_ambasada/"
 
 <MapEmbed
   src="https://www.google.com/maps?q=Branka%20Baji%C4%87a%202%2C%20Novi%20Sad&output=embed"
+  regions={['novi-sad']}
   title="Почётное консульство России в Нови-Саде"
   caption="Бранка Байича, 2"
 />
