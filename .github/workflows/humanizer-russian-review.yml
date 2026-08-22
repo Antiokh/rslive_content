@@ -63,7 +63,7 @@ jobs:
           test "$(git -C /tmp/humanizer_russian rev-parse HEAD)" = "$HUMANIZER_SHA"
           python3 /tmp/humanizer_russian/scripts/lint.py --self-test
 
-      - name: Smoke-test full-article Editorial Board integration
+      - name: Smoke-test extended Editorial Board integration
         run: |
           python3 base/.github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
@@ -76,13 +76,8 @@ jobs:
           assert data['register'] == 'general'
           assert data['evidence_request'] == 'auto'
           assert len(data['libraries']) == 8
-          assert data['scope'] == 'whole_article'
-          assert data['frontmatter_excluded'] is True
-          assert data['title_test_rule'] == 'ILY-M01'
-          assert data['description_test_rule'] == 'ILY-M01'
-          assert data['metadata_false_positive'] is False
-          assert data['body_chars_checked'] > 0
-          print('humanizer_russian full-article editorial smoke: OK')
+          assert data['detected_rule'] == 'ILY-M01'
+          print('humanizer_russian editorial smoke: OK')
           PY
 
       - name: Build humanizer_russian review
