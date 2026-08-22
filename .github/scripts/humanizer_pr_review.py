@@ -19,6 +19,7 @@ REGISTER = "general"
 EVIDENCE_REQUEST = "auto"
 MAX_ITEMS_TOTAL = 40
 MAX_ITEMS_PER_FILE = 12
+FRONTMATTER_DELIMITER = "---"
 
 
 def load_humanizer(root: Path):
@@ -51,10 +52,90 @@ def finding_signature(finding: dict) -> tuple[str, ...]:
     )
 
 
-def is_russian_page(path: str, text: str) -> bool:
+def split_frontmatter(raw: str) -> tuple[str, str, bool]:
+    """Return front matter payload, body, and whether a YAML block was present."""
+    lines = raw.splitlines()
+    if not lines or lines[0].strip() != FRONTMATTER_DELIMITER:
+        return "", raw, False
+    for index in range(1, len(lines)):
+        if lines[index].strip() == FRONTMATTER_DELIMITER:
+            frontmatter = "\n".join(lines[1:index])
+            body = "\n".join(lines[index + 1 :]).lstrip("\n")
+            return frontmatter, body, True
+    return "", raw, False
+
+
+def _decode_scalar(value: str) -> str:
+    value = value.strip()
+    if not value:
+        return ""
+    if value.startswith('"') and value.endswith('"'):
+        try:
+            return json.loads(value)
+        except json.JSONDecodeError:
+            return value[1:-1]
+    if value.startswith("'") and value.endswith("'"):
+        return value[1:-1].replace("''", "'")
+    return value
+
+
+def extract_frontmatter_text(frontmatter: str, key: str) -> str:
+    """Extract one top-level YAML text scalar without importing a YAML runtime."""
+    lines = frontmatter.splitlines()
+    pattern = re.compile(rf"^{re.escape(key)}:\s*(.*)$")
+    for index, line in enumerate(lines):
+        match = pattern.match(line)
+        if not match:
+            continue
+        tail = match.group(1).strip()
+        if tail not in {"|", "|-", "|+", ">", ">-", ">+"}:
+            return _decode_scalar(tail)
+
+        block: list[str] = []
+        for following in lines[index + 1 :]:
+            if following and not following[0].isspace():
+                break
+            if not following.strip():
+                block.append("")
+                continue
+            block.append(following.lstrip())
+        if tail.startswith(">"):
+            return re.sub(r"\s+", " ", " ".join(block)).strip()
+        return "\n".join(block).strip()
+    return ""
+
+
+def editorial_input(raw: str) -> tuple[str, dict]:
+    """Build the review input: title + description + complete MDX body, no other front matter."""
+    frontmatter, body, had_frontmatter = split_frontmatter(raw)
+    title = extract_frontmatter_text(frontmatter, "title") if had_frontmatter else ""
+    description = extract_frontmatter_text(frontmatter, "description") if had_frontmatter else ""
+
+    parts: list[str] = []
+    if title:
+        parts.extend([title, ""])
+    if description:
+        parts.extend([description, ""])
+    parts.append(body.rstrip())
+    text = "\n".join(parts).strip() + "\n"
+
+    return text, {
+        "scope": "whole_article",
+        "frontmatter_excluded": had_frontmatter,
+        "title_included": bool(title),
+        "description_included": bool(description),
+        "title_chars": len(title),
+        "description_chars": len(description),
+        "body_chars": len(body),
+        "review_chars": len(text),
+    }
+
+
+def is_russian_page(path: str, raw: str) -> bool:
     normalized = path.replace("\\", "/")
     if normalized.startswith("src/content/docs/en/") or normalized.startswith("src/content/docs/sr/"):
         return False
+    text, _scope = editorial_input(raw)
     return len(CYRILLIC.findall(text)) >= 20
 
 
@@ -113,8 +194,6 @@ def delta_findings(head_report: dict, base_report: dict | None) -> list[dict]:
 
 
 def build_delta_board(humanizer, head_report: dict, findings: list[dict]) -> dict:
-    # Evidence remains data, not an extra reviewer vote. Attaching head evidence to the
-    # delta board is safe because groups themselves are built only from new findings.
     return humanizer.build_board(
         findings,
         head_report["style"],
@@ -153,10 +232,14 @@ def render_group(group: dict, report: dict) -> list[str]:
         verdicts.append(f"{reviewer_name(report, reviewer_id)} — {verdict}")
     if verdicts:
         lines.append("  - Редакторы: " + "; ".join(verdicts))
+
     reasons: list[str] = []
     for finding in group.get("findings", []):
         reason = safe_inline(finding.get("reason") or finding.get("rule_id"), 220)
-        label = reviewer_name(report, finding.get("reviewer_id") or finding.get("library_id") or "source")
+        label = reviewer_name(
+            report,
+            finding.get("reviewer_id") or finding.get("library_id") or "source",
+        )
         row = f"{label}: {reason}"
         if row not in reasons:
             reasons.append(row)
@@ -177,18 +260,33 @@ def summarize_board(board: dict) -> Counter:
     return counts
 
 
+def scope_line(scope: dict) -> str:
+    return (
+        "Review scope: **вся статья**; "
+        f"title {'✓' if scope['title_included'] else '—'}, "
+        f"description {'✓' if scope['description_included'] else '—'}, "
+        f"body {scope['body_chars']} символов, "
+        f"всего в редакторе {scope['review_chars']} символов; "
+        f"остальной front matter {'исключён' if scope['frontmatter_excluded'] else 'не обнаружен'}."
+    )
+
+
 def render_file_section(
     rel: str,
     report: dict,
     board: dict,
+    scope: dict,
     global_budget: list[int],
 ) -> tuple[str, int]:
     guardrails = board.get("guardrails", [])
     groups = board.get("groups", [])
     items = [("guardrail", item) for item in guardrails] + [("group", item) for item in groups]
+    scope_note = scope_line(scope)
+
     if not items:
         return (
             f"<details><summary><code>{rel}</code> — clean delta</summary>\n\n"
+            f"{scope_note}\n\n"
             "Новых deterministic editorial findings относительно base-версии нет.\n\n</details>",
             0,
         )
@@ -196,6 +294,8 @@ def render_file_section(
     summary = summarize_board(board)
     lines = [
         f"<details open><summary><code>{rel}</code> — {summary['guardrails']} guardrails, {summary['groups']} editorial groups</summary>",
+        "",
+        scope_note,
         "",
     ]
     omitted = 0
@@ -235,23 +335,33 @@ def build_comment(
         head_path = head_root / rel
         if not head_path.is_file():
             continue
-        head_text = head_path.read_text(encoding="utf-8")
-        if not is_russian_page(rel, head_text):
+        head_raw = head_path.read_text(encoding="utf-8")
+        if not is_russian_page(rel, head_raw):
             skipped.append(rel)
             continue
 
         checked.append(rel)
+        head_text, head_scope = editorial_input(head_raw)
         head_report = run_report(humanizer, head_text)
         libraries_seen.update(head_report.get("metrics", {}).keys())
+
         base_path = base_root / rel
         base_report = None
         if base_path.is_file():
-            base_report = run_report(humanizer, base_path.read_text(encoding="utf-8"))
+            base_raw = base_path.read_text(encoding="utf-8")
+            base_text, _base_scope = editorial_input(base_raw)
+            base_report = run_report(humanizer, base_text)
 
         new_findings = delta_findings(head_report, base_report)
         board = build_delta_board(humanizer, head_report, new_findings)
         total.update(summarize_board(board))
-        section, omitted = render_file_section(rel, head_report, board, global_budget)
+        section, omitted = render_file_section(
+            rel,
+            head_report,
+            board,
+            head_scope,
+            global_budget,
+        )
         omitted_total += omitted
         sections.append(section)
 
@@ -263,6 +373,7 @@ def build_comment(
         "",
         f"Проверено по [`Antiokh/humanizer_russian@{sha[:7]}`]({commit_link}).",
         f"Режим: `editorial_board`, стиль `{STYLE_ID}`, register `{REGISTER}`, evidence `{EVIDENCE_REQUEST}`.",
+        "Для каждого изменённого MDX анализируется вся статья, а не diff: `title` + `description` + полный body. Остальной YAML front matter в редактор не передаётся.",
         "Редколлегия получает полный deterministic output всех включённых knowledge libraries; в отличие от Compact, здесь нет фильтра только по DEFAULT mechanical findings.",
         "Model-only правила и LLM-семантическая правка в GitHub runner не выполняются. Evidence со статусом `PROJECT` режим `auto` не включает.",
         "**Это редакторская проверка, а не AI-detector и не оценка вероятности авторства.**",
@@ -285,7 +396,7 @@ def build_comment(
                 f"**Delta:** {total['guardrails']} guardrails, {total['groups']} editorial groups; "
                 f"CHANGE {total['recommendation:CHANGE']}, KEEP {total['recommendation:KEEP']}, "
                 f"REVIEW {total['recommendation:REVIEW']}, alternatives {total['recommendation:SHOW_ALTERNATIVES']}.",
-                "Сравнение идёт с base-версией страницы, поэтому старый редакционный долг не приписывается текущему PR.",
+                "Сравнение идёт с base-версией полной статьи, поэтому старый редакционный долг не приписывается текущему PR.",
                 "",
             ]
         )
@@ -314,28 +425,101 @@ def build_comment(
 
 
 def self_test(humanizer, root: Path) -> dict:
-    base = "Команда проводит проверку документов. Результат публикуют после проверки фактов."
-    head = "Командой осуществляется проведение проверки документов. Результат публикуют после проверки фактов."
-    base_report = run_report(humanizer, base)
-    head_report = run_report(humanizer, head)
-    assert head_report.get("mode") == "editorial_board"
-    assert head_report.get("style", {}).get("id") == STYLE_ID
-    assert head_report.get("evidence_request") == EVIDENCE_REQUEST
-    libraries = sorted(head_report.get("metrics", {}).keys())
+    clean_body = "Команда проводит проверку документов. Результат публикуют после проверки фактов."
+    title_case = f"""---
+title: "Командой осуществляется проведение проверки документов."
+description: "Краткое описание."
+ogSticker: "passport"
+sidebar:
+  order: 99
+live: "https://example.invalid/"
+---
+
+{clean_body}
+"""
+    description_case = f"""---
+title: "Проверка документов"
+description: "Командой осуществляется проведение проверки документов."
+ogSticker: "passport"
+sidebar:
+  order: 99
+---
+
+{clean_body}
+"""
+    metadata_case = f"""---
+title: "Проверка документов"
+description: "Краткое описание."
+hiddenNote: "Командой осуществляется проведение проверки документов."
+ogSticker: "passport"
+---
+
+{clean_body}
+"""
+
+    title_text, title_scope = editorial_input(title_case)
+    description_text, description_scope = editorial_input(description_case)
+    metadata_text, metadata_scope = editorial_input(metadata_case)
+
+    assert "title:" not in title_text
+    assert "description:" not in title_text
+    assert "ogSticker" not in title_text
+    assert "sidebar" not in title_text
+    assert "live:" not in title_text
+    assert "hiddenNote" not in metadata_text
+    assert title_scope["scope"] == "whole_article"
+    assert title_scope["frontmatter_excluded"]
+    assert title_scope["title_included"]
+    assert title_scope["description_included"]
+    assert title_scope["body_chars"] == len(clean_body)
+    assert description_scope["body_chars"] == len(clean_body)
+    assert metadata_scope["body_chars"] == len(clean_body)
+
+    clean_report = run_report(
+        humanizer,
+        editorial_input(
+            f"""---
+title: "Проверка документов"
+description: "Краткое описание."
+ogSticker: "Командой осуществляется проведение проверки документов."
+---
+
+{clean_body}
+"""
+        )[0],
+    )
+    title_report = run_report(humanizer, title_text)
+    description_report = run_report(humanizer, description_text)
+    metadata_report = run_report(humanizer, metadata_text)
+
+    assert title_report.get("mode") == "editorial_board"
+    assert title_report.get("style", {}).get("id") == STYLE_ID
+    assert title_report.get("evidence_request") == EVIDENCE_REQUEST
+    libraries = sorted(title_report.get("metrics", {}).keys())
     assert len(libraries) == 8, libraries
-    findings = delta_findings(head_report, base_report)
-    assert any(item.get("rule_id") == "ILY-M01" for item in findings), findings
-    board = build_delta_board(humanizer, head_report, findings)
-    assert board.get("groups") or board.get("guardrails")
+
+    title_delta = delta_findings(title_report, clean_report)
+    description_delta = delta_findings(description_report, clean_report)
+    metadata_delta = delta_findings(metadata_report, clean_report)
+
+    assert any(item.get("rule_id") == "ILY-M01" for item in title_delta), title_delta
+    assert any(item.get("rule_id") == "ILY-M01" for item in description_delta), description_delta
+    assert not any(item.get("rule_id") == "ILY-M01" for item in metadata_delta), metadata_delta
+
     return {
         "humanizer_sha": humanizer_sha(root),
-        "mode": head_report.get("mode"),
-        "style": head_report.get("style", {}).get("id"),
-        "register": head_report.get("register"),
-        "evidence_request": head_report.get("evidence_request"),
+        "mode": title_report.get("mode"),
+        "style": title_report.get("style", {}).get("id"),
+        "register": title_report.get("register"),
+        "evidence_request": title_report.get("evidence_request"),
         "libraries": libraries,
-        "delta_findings": len(findings),
+        "scope": title_scope["scope"],
+        "frontmatter_excluded": title_scope["frontmatter_excluded"],
         "detected_rule": "ILY-M01",
+        "title_test_rule": "ILY-M01",
+        "description_test_rule": "ILY-M01",
+        "metadata_false_positive": False,
+        "body_chars_checked": title_scope["body_chars"],
     }
 
 
@@ -360,7 +544,10 @@ def main() -> int:
         if getattr(args, name) is None
     ]
     if missing:
-        parser.error("required outside --self-test: " + ", ".join("--" + name.replace("_", "-") for name in missing))
+        parser.error(
+            "required outside --self-test: "
+            + ", ".join("--" + name.replace("_", "-") for name in missing)
+        )
 
     comment = build_comment(
         humanizer,
