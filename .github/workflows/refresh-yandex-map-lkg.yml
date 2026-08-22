@@ -1,0 +1,77 @@
+name: Refresh Yandex map LKG
+
+on:
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/refresh-yandex-map-lkg.yml"
+      - "scripts/refresh-yandex-lkg.mjs"
+      - "scripts/yandex-lkg-utils.mjs"
+      - "map-data/core/serbia-regions.geojson"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-yandex-map-lkg
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out rslive_content
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check out current map engine
+        uses: actions/checkout@v4
+        with:
+          repository: Antiokh/rslive.ru
+          ref: main
+          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          path: rslive-engine
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Refresh allowlisted Yandex snapshots
+        env:
+          RSLIVE_ENGINE_ASTRO: ${{ github.workspace }}/rslive-engine/astro
+        run: node scripts/refresh-yandex-lkg.mjs
+
+      - name: Validate map data
+        run: node scripts/check-map-data.mjs
+
+      - name: Detect normalized snapshot changes
+        id: changes
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- map-data/snapshots/yandex-constructor; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Yandex LKG is unchanged."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat -- map-data/snapshots/yandex-constructor
+          fi
+
+      - name: Commit refreshed LKG
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "rslive map refresh"
+          git config user.email "actions@github.com"
+          git add map-data/snapshots/yandex-constructor
+          git commit -m "Refresh Yandex map snapshots"
+          git push origin HEAD:main
