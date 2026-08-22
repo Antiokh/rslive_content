@@ -48,6 +48,12 @@ function featureSortKey(feature) {
   ]);
 }
 
+function compareFeatureKeys(left, right) {
+  const leftKey = featureSortKey(left);
+  const rightKey = featureSortKey(right);
+  return leftKey < rightKey ? -1 : leftKey > rightKey ? 1 : 0;
+}
+
 export function normalizedYandexSnapshot(document) {
   if (document?.type !== 'FeatureCollection' || !Array.isArray(document.features) || document.features.length === 0) {
     throw new Error('[yandex-lkg] snapshot должен быть непустым GeoJSON FeatureCollection');
@@ -59,7 +65,7 @@ export function normalizedYandexSnapshot(document) {
 
   const features = document.features
     .map(canonicalPointFeature)
-    .sort((left, right) => featureSortKey(left).localeCompare(featureSortKey(right), 'en'));
+    .sort(compareFeatureKeys);
 
   return { sourceId, features };
 }
