@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "sourceKind": "yandex-embed",
+  "sourceId": "yandex-constructor:ab67700748d2c5449653db08fcc0a3946570a0efc02fcb5a987ec32c3acdb215",
+  "upstreamId": "ab67700748d2c5449653db08fcc0a3946570a0efc02fcb5a987ec32c3acdb215",
+  "upstreamUrl": "https://yandex.com/maps/?um=constructor%3Aab67700748d2c5449653db08fcc0a3946570a0efc02fcb5a987ec32c3acdb215",
+  "acquisition": "scheduled-yandex-constructor-state-view",
+  "snapshotAt": "2026-08-22T12:50:42.310Z",
+  "sourceLastUpdated": 1785134632,
+  "contentType": "text/html; charset=utf-8",
+  "finalUrl": "https://yandex.com/maps/?um=constructor%3Aab67700748d2c5449653db08fcc0a3946570a0efc02fcb5a987ec32c3acdb215",
+  "htmlBytes": 3464591,
+  "htmlSha256": "605d283c36aedb25aa73c6cd5269f4a6bfeb79d37fa26c3851333865ea8de8ed",
+  "normalizedSha256": "03182e9b248ff455269a34861a282c1417d16f7cc541495bdc8f4070004662a9",
+  "sourceFeatureCount": 307,
+  "geojsonFeatures": 305,
+  "excludedOutsideSerbia": 2,
+  "filter": "serbia-regions",
+  "boundaryFile": "map-data/core/serbia-regions.geojson",
+  "dataFile": "ab67700748d2c5449653db08fcc0a3946570a0efc02fcb5a987ec32c3acdb215.geojson"
+}
