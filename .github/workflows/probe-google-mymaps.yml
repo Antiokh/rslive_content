@@ -1,0 +1,69 @@
+name: Probe blocked Google My Maps
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    if: github.head_ref == 'agent/google-mymaps-lkg'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mid:
+          - 19YcKmasJpwHsfB9kvpoSmRA_qD22yhw
+          - 1qkp5VjmSJBjdaRRnxEtv0gZEaL2Dpk4
+          - 1kjRg87uMqwqNh0re4t7vw9XE79DLx7w
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Probe public Google endpoints
+        env:
+          MID: ${{ matrix.mid }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { mkdir, writeFile } from 'node:fs/promises';
+          const mid = process.env.MID;
+          const urls = [
+            `https://www.google.com/maps/d/kml?mid=${encodeURIComponent(mid)}&forcekml=1`,
+            `https://www.google.com/maps/d/u/0/kml?mid=${encodeURIComponent(mid)}&forcekml=1`,
+            `https://www.google.com/maps/d/kml?mid=${encodeURIComponent(mid)}&forcekml=0`,
+            `https://www.google.com/maps/d/u/0/kml?mid=${encodeURIComponent(mid)}&forcekml=0`,
+            `https://www.google.com/maps/d/viewer?mid=${encodeURIComponent(mid)}`,
+            `https://www.google.com/maps/d/u/0/viewer?mid=${encodeURIComponent(mid)}`,
+            `https://www.google.com/maps/d/u/0/embed?mid=${encodeURIComponent(mid)}&ehbc=2E312F`,
+          ];
+          await mkdir('/tmp/probe', { recursive: true });
+          const summary = [];
+          for (let i = 0; i < urls.length; i += 1) {
+            const url = urls[i];
+            try {
+              const response = await fetch(url, { redirect: 'follow', headers: { 'user-agent': 'Mozilla/5.0 RSLive probe', accept: '*/*' } });
+              const body = new Uint8Array(await response.arrayBuffer());
+              const item = { i, url, status: response.status, contentType: response.headers.get('content-type'), bytes: body.byteLength, finalUrl: response.url };
+              summary.push(item);
+              console.log(JSON.stringify(item));
+              if (response.ok && body.byteLength > 0) await writeFile(`/tmp/probe/${i}.bin`, body);
+            } catch (error) {
+              const item = { i, url, error: error?.message || String(error) };
+              summary.push(item);
+              console.log(JSON.stringify(item));
+            }
+          }
+          await writeFile('/tmp/probe/summary.json', JSON.stringify(summary, null, 2));
+          NODE
+
+      - name: Upload probe responses
+        uses: actions/upload-artifact@v4
+        with:
+          name: google-probe-${{ matrix.mid }}
+          path: /tmp/probe/
+          if-no-files-found: error
+          retention-days: 1
