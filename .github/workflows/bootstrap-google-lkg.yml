@@ -17,18 +17,25 @@ jobs:
           ref: agent/google-mymaps-lkg
           fetch-depth: 0
 
-      - name: Prepare acquisition helper for active sources
+      - name: Prepare direct-KML helper for active geometry sources
         run: |
           python - <<'PY'
           path = 'scripts/bootstrap-google-lkg.mjs'
           text = open(path, encoding='utf-8').read()
-          text = text.replace("  { mid: '19YcKmasJpwHsfB9kvpoSmRA_qD22yhw', bounds: SERBIA_BOUNDS },\n", '')
-          text = text.replace("'user-agent': 'RSLive LKG bootstrap/1.0 (+https://rslive.ru)'", "'user-agent': 'Mozilla/5.0 RSLive LKG bootstrap'" )
+          for line in [
+              "  { mid: '19YcKmasJpwHsfB9kvpoSmRA_qD22yhw', bounds: SERBIA_BOUNDS },\n",
+              "  { mid: '1qkp5VjmSJBjdaRRnxEtv0gZEaL2Dpk4', bounds: SERBIA_BOUNDS },\n",
+          ]:
+              text = text.replace(line, '')
+          text = text.replace("'user-agent': 'RSLive LKG bootstrap/1.0 (+https://rslive.ru)'", "'user-agent': 'Mozilla/5.0 RSLive LKG bootstrap'")
           open(path, 'w', encoding='utf-8').write(text)
           PY
 
-      - name: Fetch and normalize active Google My Maps snapshots
+      - name: Fetch direct-KML snapshots
         run: node scripts/bootstrap-google-lkg.mjs
+
+      - name: Fetch translator KML and viewer coordinates
+        run: node scripts/bootstrap-prevodioci-viewer.mjs
 
       - name: Validate map data
         run: node scripts/check-map-data.mjs
