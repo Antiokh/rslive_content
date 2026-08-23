@@ -6,7 +6,14 @@ import { isSha256, normalizedYandexSnapshotSha256 } from './yandex-lkg-utils.mjs
 
 const root = process.cwd();
 const mapRoot = path.join(root, 'map-data');
-const pilotMid = '1mxkFBhCULwjecdQUWUIfE1BAQahFG6I';
+const requiredGoogleMids = Object.freeze([
+  '1mxkFBhCULwjecdQUWUIfE1BAQahFG6I',
+  '12l4BVYg_FV0d9CMeEWEtnJDQioL9804',
+  '1qkPRUNRiCqA-uFugbcuVy9INXgw',
+  '1GobqFwJp0QiRJcMYpBKIusIVxUI43kE',
+  '1qkp5VjmSJBjdaRRnxEtv0gZEaL2Dpk4',
+  '1kjRg87uMqwqNh0re4t7vw9XE79DLx7w',
+]);
 
 function fail(message) {
   throw new Error(`[map-data] ${message}`);
@@ -287,7 +294,9 @@ const result = {
     nis: await checkCity('nis'),
     subotica: await checkCity('subotica'),
   },
-  googlePilot: await checkGoogleSet(pilotMid),
+  google: Object.fromEntries(
+    await Promise.all(requiredGoogleMids.map(async (mid) => [mid, await checkGoogleSet(mid)])),
+  ),
   yandex: await checkAllYandexSidecars(),
 };
 
