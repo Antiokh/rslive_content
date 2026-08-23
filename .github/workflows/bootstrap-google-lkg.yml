@@ -25,6 +25,7 @@ jobs:
           for line in [
               "  { mid: '19YcKmasJpwHsfB9kvpoSmRA_qD22yhw', bounds: SERBIA_BOUNDS },\n",
               "  { mid: '1qkp5VjmSJBjdaRRnxEtv0gZEaL2Dpk4', bounds: SERBIA_BOUNDS },\n",
+              "  { mid: '1kjRg87uMqwqNh0re4t7vw9XE79DLx7w', bounds: BELGRADE_NOVI_SAD_BOUNDS },\n",
           ]:
               text = text.replace(line, '')
           text = text.replace("'user-agent': 'RSLive LKG bootstrap/1.0 (+https://rslive.ru)'", "'user-agent': 'Mozilla/5.0 RSLive LKG bootstrap'")
@@ -36,6 +37,9 @@ jobs:
 
       - name: Fetch translator KML and viewer coordinates
         run: node scripts/bootstrap-prevodioci-viewer.mjs
+
+      - name: Fetch history-map KML and viewer coordinates
+        run: node scripts/bootstrap-history-viewer.mjs
 
       - name: Validate map data
         run: node scripts/check-map-data.mjs
