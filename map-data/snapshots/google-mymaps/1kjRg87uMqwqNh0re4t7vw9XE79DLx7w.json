@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "sourceKind": "google-mymaps",
+  "sourceId": "google-mymaps:1kjRg87uMqwqNh0re4t7vw9XE79DLx7w",
+  "upstreamId": "1kjRg87uMqwqNh0re4t7vw9XE79DLx7w",
+  "upstreamUrl": "https://www.google.com/maps/d/viewer?mid=1kjRg87uMqwqNh0re4t7vw9XE79DLx7w",
+  "acquisition": "google-kml-plus-viewer-coordinates",
+  "exportUrl": "https://www.google.com/maps/d/kml?mid=1kjRg87uMqwqNh0re4t7vw9XE79DLx7w&forcekml=1",
+  "viewerUrl": "https://www.google.com/maps/d/viewer?mid=1kjRg87uMqwqNh0re4t7vw9XE79DLx7w",
+  "snapshotAt": "2026-08-23T07:46:03.539Z",
+  "contentType": "text/xml; charset=utf-8",
+  "bytes": 58811,
+  "sha256": "fd749af8a11f5dbd679600a1f7838d5575e76cd251e54340536a4666dfc5f61f",
+  "counts": {
+    "placemarks": 32,
+    "folders": 1,
+    "points": 0,
+    "lineStrings": 0,
+    "polygons": 0,
+    "multiGeometries": 0,
+    "geometries": 32,
+    "viewerPoints": 32
+  },
+  "dataFile": "1kjRg87uMqwqNh0re4t7vw9XE79DLx7w.kml"
+}

@@ -1,0 +1,1136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Маршрут памяти</name>
+    <description/>
+    <Style id="icon-1598-01579B-normal">
+      <IconStyle>
+        <color>ff9b5701</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1598-01579B-highlight">
+      <IconStyle>
+        <color>ff9b5701</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1598-01579B">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1598-01579B-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1598-01579B-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1598-7CB342-normal">
+      <IconStyle>
+        <color>ff42b37c</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1598-7CB342-highlight">
+      <IconStyle>
+        <color>ff42b37c</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1598-7CB342">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1598-7CB342-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1598-7CB342-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1598-C2185B-normal">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1598-C2185B-highlight">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1598-C2185B">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1598-C2185B-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1598-C2185B-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Исторические места</name>
+      <Placemark>
+        <name>Национальный музей Сербии</name>
+        <address>Trg Republike 1a, 11000 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Trg Republike 1a, 11000 Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: древность и Средневековье<br>Period: От древности до XX века<br>Category: Museum<br>Why visit: Главная стартовая точка для истории Сербии: археология, античность, Средневековье, искусство.<br>Official URL: https://www.narodnimuzej.rs/permanent-exhibition?lang=en<br>Notes: Начать маршрут здесь]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Trg Republike 1a, 11000 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: древность и Средневековье</value>
+          </Data>
+          <Data name="Period">
+            <value>От древности до XX века</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Главная стартовая точка для истории Сербии: археология, античность, Средневековье, искусство.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.narodnimuzej.rs/permanent-exhibition?lang=en</value>
+          </Data>
+          <Data name="Notes">
+            <value>Начать маршрут здесь</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Галерея фресок</name>
+        <address>Cara Uroša 20, 11000 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Cara Uroša 20, 11000 Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: древность и Средневековье<br>Period: Средневековье<br>Category: Museum<br>Why visit: Копии сербских и византийских фресок, средневековая скульптура и эпиграфика.<br>Official URL: https://www.narodnimuzej.rs/visit-us/gallery-of-frescoes?lang=en<br>Notes: Проверить статус перед визитом]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Cara Uroša 20, 11000 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: древность и Средневековье</value>
+          </Data>
+          <Data name="Period">
+            <value>Средневековье</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Копии сербских и византийских фресок, средневековая скульптура и эпиграфика.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.narodnimuzej.rs/visit-us/gallery-of-frescoes?lang=en</value>
+          </Data>
+          <Data name="Notes">
+            <value>Проверить статус перед визитом</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Военный музей</name>
+        <address>Kalemegdan bb, 11158 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Kalemegdan bb, 11158 Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: древность и Средневековье<br>Period: Средневековье — XX век<br>Category: Museum<br>Why visit: Военная история Сербии и Югославии, от ранних периодов до 1990-х.<br>Official URL: https://www.muzej.mod.gov.rs/eng/35/stalna-postavka-35<br>Notes: На территории Калемегдана]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Kalemegdan bb, 11158 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: древность и Средневековье</value>
+          </Data>
+          <Data name="Period">
+            <value>Средневековье — XX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Военная история Сербии и Югославии, от ранних периодов до 1990-х.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.muzej.mod.gov.rs/eng/35/stalna-postavka-35</value>
+          </Data>
+          <Data name="Notes">
+            <value>На территории Калемегдана</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Белградская крепость</name>
+        <address>Belgrade Fortress, Kalemegdan, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Belgrade Fortress, Kalemegdan, Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: древность и Средневековье<br>Period: Римский период — Османский период<br>Category: Fortress<br>Why visit: Главное историческое место Белграда: римские, средневековые, османские и австрийские слои.<br>Official URL: https://www.beogradskatvrdjava.co.rs/?lang=en<br>Notes: Лучше идти пешком через Калемегдан]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Belgrade Fortress, Kalemegdan, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: древность и Средневековье</value>
+          </Data>
+          <Data name="Period">
+            <value>Римский период — Османский период</value>
+          </Data>
+          <Data name="Category">
+            <value>Fortress</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Главное историческое место Белграда: римские, средневековые, османские и австрийские слои.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.beogradskatvrdjava.co.rs/?lang=en</value>
+          </Data>
+          <Data name="Notes">
+            <value>Лучше идти пешком через Калемегдан</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Башня Небойша</name>
+        <address>Nebojsa Tower, Belgrade Fortress, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Nebojsa Tower, Belgrade Fortress, Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: древность и Средневековье<br>Period: XV век, Османский период<br>Category: Historic site<br>Why visit: Оборонительная башня Нижнего города, позднее тюрьма османского периода.<br>Official URL: https://www.beogradskatvrdjava.co.rs/%D0%BA%D1%83%D0%BB%D0%B0-%D0%BD%D0%B5%D0%B1%D0%BE%D1%98%D1%88%D0%B0/?lang=en<br>Notes: Проверить часы работы]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Nebojsa Tower, Belgrade Fortress, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: древность и Средневековье</value>
+          </Data>
+          <Data name="Period">
+            <value>XV век, Османский период</value>
+          </Data>
+          <Data name="Category">
+            <value>Historic site</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Оборонительная башня Нижнего города, позднее тюрьма османского периода.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.beogradskatvrdjava.co.rs/%D0%BA%D1%83%D0%BB%D0%B0-%D0%BD%D0%B5%D0%B1%D0%BE%D1%98%D1%88%D0%B0/?lang=en</value>
+          </Data>
+          <Data name="Notes">
+            <value>Проверить часы работы</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Этнографический музей</name>
+        <address>Studentski trg 13, 11000 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Studentski trg 13, 11000 Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: османский и городской быт<br>Period: XIX–XX век<br>Category: Museum<br>Why visit: Быт, одежда, хозяйство, традиционная культура и переход от османского к европейскому городу.<br>Official URL: https://etnografskimuzej.rs/en/<br>Notes: Хорошо совмещается с Дорчолом]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Studentski trg 13, 11000 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: османский и городской быт</value>
+          </Data>
+          <Data name="Period">
+            <value>XIX–XX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Быт, одежда, хозяйство, традиционная культура и переход от османского к европейскому городу.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://etnografskimuzej.rs/en/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Хорошо совмещается с Дорчолом</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Дорчол</name>
+        <address>Dorćol, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Dorćol, Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: османский и городской быт<br>Period: Османский и многоэтничный Белград<br>Category: District<br>Why visit: Исторический район старого Белграда: османский, еврейский, торговый и городской слой.<br>Official URL: <br>Notes: Маршрут пешком]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Dorćol, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: османский и городской быт</value>
+          </Data>
+          <Data name="Period">
+            <value>Османский и многоэтничный Белград</value>
+          </Data>
+          <Data name="Category">
+            <value>District</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Исторический район старого Белграда: османский, еврейский, торговый и городской слой.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Маршрут пешком</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Земун</name>
+        <address>Zemun, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Zemun, Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: османский и городской быт<br>Period: Габсбургская монархия<br>Category: District<br>Why visit: Центральноевропейский слой Белграда, бывший пограничный город Австро-Венгрии.<br>Official URL: <br>Notes: Подняться к Гардошу]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Zemun, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: османский и городской быт</value>
+          </Data>
+          <Data name="Period">
+            <value>Габсбургская монархия</value>
+          </Data>
+          <Data name="Category">
+            <value>District</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Центральноевропейский слой Белграда, бывший пограничный город Австро-Венгрии.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Подняться к Гардошу</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Башня Гардош</name>
+        <address>Gardoš Tower, Zemun, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Gardoš Tower, Zemun, Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: османский и городской быт<br>Period: Австро-Венгрия<br>Category: Historic site<br>Why visit: Хорошая точка для понимания Земуна как отдельного исторического города.<br>Official URL: <br>Notes: Вид на Дунай и Земун]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Gardoš Tower, Zemun, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: османский и городской быт</value>
+          </Data>
+          <Data name="Period">
+            <value>Австро-Венгрия</value>
+          </Data>
+          <Data name="Category">
+            <value>Historic site</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Хорошая точка для понимания Земуна как отдельного исторического города.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Вид на Дунай и Земун</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Резиденция князя Милоша</name>
+        <address>Bulevar Patrijarha Pavla 2, Topčider, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Bulevar Patrijarha Pavla 2, Topčider, Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: XIX век<br>Period: Сербская революция, XIX век<br>Category: Museum<br>Why visit: Экспозиция о Сербии 1804–1903, восстаниях, Карагеоргии, Милоше Обреновиче и формировании государства.<br>Official URL: https://imus.org.rs/en/konak-kneza-milosa/<br>Notes: Топчидер]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Bulevar Patrijarha Pavla 2, Topčider, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: XIX век</value>
+          </Data>
+          <Data name="Period">
+            <value>Сербская революция, XIX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Экспозиция о Сербии 1804–1903, восстаниях, Карагеоргии, Милоше Обреновиче и формировании государства.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://imus.org.rs/en/konak-kneza-milosa/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Топчидер</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Конак княгини Любицы</name>
+        <address>Kneza Sime Markovića 8, 11000 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Kneza Sime Markovića 8, 11000 Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: XIX век<br>Period: XIX век<br>Category: Museum<br>Why visit: Городской быт первой половины XIX века и переход от османского к европейскому Белграду.<br>Official URL: https://www.mgb.org.rs/visit/details/25<br>Notes: Рядом с центром]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Kneza Sime Markovića 8, 11000 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: XIX век</value>
+          </Data>
+          <Data name="Period">
+            <value>XIX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Городской быт первой половины XIX века и переход от османского к европейскому Белграду.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.mgb.org.rs/visit/details/25</value>
+          </Data>
+          <Data name="Notes">
+            <value>Рядом с центром</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Музей Вука и Доситея</name>
+        <address>Gospodar Jevremova 21, 11000 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Gospodar Jevremova 21, 11000 Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: XIX век<br>Period: Просвещение, язык, XIX век<br>Category: Museum<br>Why visit: Вук Караджич, Доситей Обрадович, реформа языка и сербское просвещение.<br>Official URL: https://www.narodnimuzej.rs/visit-us/museum-of-vuk-and-dositej-visit?lang=en<br>Notes: Дорчол]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Gospodar Jevremova 21, 11000 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: XIX век</value>
+          </Data>
+          <Data name="Period">
+            <value>Просвещение, язык, XIX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Вук Караджич, Доситей Обрадович, реформа языка и сербское просвещение.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.narodnimuzej.rs/visit-us/museum-of-vuk-and-dositej-visit?lang=en</value>
+          </Data>
+          <Data name="Notes">
+            <value>Дорчол</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Топчидерский парк</name>
+        <address>Topčider Park, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Topčider Park, Belgrade, Serbia<br>City: Belgrade<br>Layer: Белград: XIX век<br>Period: XIX век<br>Category: Park / Historic area<br>Why visit: Историческая зона Обреновичей рядом с резиденцией князя Милоша.<br>Official URL: <br>Notes: Совместить с резиденцией]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Topčider Park, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Белград: XIX век</value>
+          </Data>
+          <Data name="Period">
+            <value>XIX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Park / Historic area</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Историческая зона Обреновичей рядом с резиденцией князя Милоша.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Совместить с резиденцией</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Музей Югославии</name>
+        <address>Mihaila Mike Jankovića 6, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Mihaila Mike Jankovića 6, Belgrade, Serbia<br>City: Belgrade<br>Layer: Югославия и XX век<br>Period: XX век, Югославия<br>Category: Museum<br>Why visit: Главный музей по истории Югославии, Тито и памяти о федерации.<br>Official URL: https://muzej-jugoslavije.org/en/posetite-nas/<br>Notes: Комплекс: Музей 25 мая, Старый музей, Дом цветов]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Mihaila Mike Jankovića 6, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Югославия и XX век</value>
+          </Data>
+          <Data name="Period">
+            <value>XX век, Югославия</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Главный музей по истории Югославии, Тито и памяти о федерации.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://muzej-jugoslavije.org/en/posetite-nas/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Комплекс: Музей 25 мая, Старый музей, Дом цветов</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Дом цветов</name>
+        <address>House of Flowers, Mihaila Mike Jankovića 6, Belgrade, Serbia</address>
+        <description><![CDATA[Address: House of Flowers, Mihaila Mike Jankovića 6, Belgrade, Serbia<br>City: Belgrade<br>Layer: Югославия и XX век<br>Period: Социалистическая Югославия<br>Category: Memorial<br>Why visit: Место захоронения Иосипа Броза Тито, часть Музея Югославии.<br>Official URL: https://muzej-jugoslavije.org/en/posetite-nas/<br>Notes: В составе Музея Югославии]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>House of Flowers, Mihaila Mike Jankovića 6, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Югославия и XX век</value>
+          </Data>
+          <Data name="Period">
+            <value>Социалистическая Югославия</value>
+          </Data>
+          <Data name="Category">
+            <value>Memorial</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Место захоронения Иосипа Броза Тито, часть Музея Югославии.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://muzej-jugoslavije.org/en/posetite-nas/</value>
+          </Data>
+          <Data name="Notes">
+            <value>В составе Музея Югославии</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Новый Белград</name>
+        <address>Novi Beograd, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Novi Beograd, Belgrade, Serbia<br>City: Belgrade<br>Layer: Югославия и XX век<br>Period: Социалистическая Югославия<br>Category: District<br>Why visit: Городской проект социалистического модернизма: блоки, широкие проспекты, административные здания.<br>Official URL: <br>Notes: Маршрут по району]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Novi Beograd, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Югославия и XX век</value>
+          </Data>
+          <Data name="Period">
+            <value>Социалистическая Югославия</value>
+          </Data>
+          <Data name="Category">
+            <value>District</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Городской проект социалистического модернизма: блоки, широкие проспекты, административные здания.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Маршрут по району</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Палата Сербии / SIV</name>
+        <address>Bulevar Mihajla Pupina 2, 11070 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Bulevar Mihajla Pupina 2, 11070 Belgrade, Serbia<br>City: Belgrade<br>Layer: Югославия и XX век<br>Period: Социалистическая Югославия<br>Category: Architecture<br>Why visit: Ключевое административное здание югославского периода и Нового Белграда.<br>Official URL: <br>Notes: Смотреть снаружи]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Bulevar Mihajla Pupina 2, 11070 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Югославия и XX век</value>
+          </Data>
+          <Data name="Period">
+            <value>Социалистическая Югославия</value>
+          </Data>
+          <Data name="Category">
+            <value>Architecture</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Ключевое административное здание югославского периода и Нового Белграда.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Смотреть снаружи</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Genex Tower</name>
+        <address>Genex Tower, Narodnih heroja 43, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Genex Tower, Narodnih heroja 43, Belgrade, Serbia<br>City: Belgrade<br>Layer: Югославия и XX век<br>Period: Югославский модернизм<br>Category: Architecture<br>Why visit: Один из самых узнаваемых символов югославского брутализма и Нового Белграда.<br>Official URL: <br>Notes: Смотреть снаружи]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Genex Tower, Narodnih heroja 43, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Югославия и XX век</value>
+          </Data>
+          <Data name="Period">
+            <value>Югославский модернизм</value>
+          </Data>
+          <Data name="Category">
+            <value>Architecture</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Один из самых узнаваемых символов югославского брутализма и Нового Белграда.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Смотреть снаружи</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Музей современного искусства</name>
+        <address>Ušće 10, Blok 15, 11070 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Ušće 10, Blok 15, 11070 Belgrade, Serbia<br>City: Belgrade<br>Layer: Югославия и XX век<br>Period: XX век, искусство Югославии и Сербии<br>Category: Museum<br>Why visit: Искусство Югославии и Сербии XX века, здание — важный пример модернизма.<br>Official URL: https://msub.org.rs/<br>Notes: Ушће, рядом с Новым Белградом]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Ušće 10, Blok 15, 11070 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Югославия и XX век</value>
+          </Data>
+          <Data name="Period">
+            <value>XX век, искусство Югославии и Сербии</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Искусство Югославии и Сербии XX века, здание — важный пример модернизма.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://msub.org.rs/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Ушће, рядом с Новым Белградом</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Здание Генштаба</name>
+        <address>Kneza Miloša 33, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Kneza Miloša 33, Belgrade, Serbia<br>City: Belgrade<br>Layer: Югославия и XX век<br>Period: 1999 год<br>Category: Memory site<br>Why visit: Один из наиболее заметных городских следов бомбардировок 1999 года.<br>Official URL: <br>Notes: Смотреть снаружи, чувствительная тема]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Kneza Miloša 33, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Югославия и XX век</value>
+          </Data>
+          <Data name="Period">
+            <value>1999 год</value>
+          </Data>
+          <Data name="Category">
+            <value>Memory site</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Один из наиболее заметных городских следов бомбардировок 1999 года.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Смотреть снаружи, чувствительная тема</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Русский дом</name>
+        <address>Kraljice Natalije 33, 11000 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Kraljice Natalije 33, 11000 Belgrade, Serbia<br>City: Belgrade<br>Layer: Русский Белград<br>Period: Русская эмиграция после 1917 года<br>Category: Cultural center<br>Why visit: Главный культурный центр русской эмиграции в межвоенном Белграде.<br>Official URL: https://ruskidom.rs/<br>Notes: История русской общины]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Kraljice Natalije 33, 11000 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Русский Белград</value>
+          </Data>
+          <Data name="Period">
+            <value>Русская эмиграция после 1917 года</value>
+          </Data>
+          <Data name="Category">
+            <value>Cultural center</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Главный культурный центр русской эмиграции в межвоенном Белграде.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://ruskidom.rs/</value>
+          </Data>
+          <Data name="Notes">
+            <value>История русской общины</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Исторический архив Белграда</name>
+        <address>Palmira Toljatija 1, 11070 Belgrade, Serbia</address>
+        <description><![CDATA[Address: Palmira Toljatija 1, 11070 Belgrade, Serbia<br>City: Belgrade<br>Layer: Русский Белград<br>Period: Русская эмиграция, XX век<br>Category: Archive<br>Why visit: Архивные материалы и выставки, включая тему русской эмиграции в Белграде 1920–1950.<br>Official URL: https://www.arhiv-beograda.org/en/<br>Notes: Проверять текущие выставки]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Palmira Toljatija 1, 11070 Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Русский Белград</value>
+          </Data>
+          <Data name="Period">
+            <value>Русская эмиграция, XX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Archive</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Архивные материалы и выставки, включая тему русской эмиграции в Белграде 1920–1950.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.arhiv-beograda.org/en/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Проверять текущие выставки</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Новое кладбище</name>
+        <address>Ruzveltova 50, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Ruzveltova 50, Belgrade, Serbia<br>City: Belgrade<br>Layer: Русский Белград<br>Period: Русская эмиграция, XX век<br>Category: Cemetery / Memorial<br>Why visit: Русский некрополь, места памяти русской эмиграции, военных, учёных, духовенства и деятелей культуры.<br>Official URL: https://ruskidom.rs/%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%BC-%D0%BD%D0%B5%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BB%D0%B5-%D0%B2-%D0%B1%D0%B5%D0%BB%D0%B3%D1%80%D0%B0%D0%B4%D0%B5/<br>Notes: Маршрут памяти]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Ruzveltova 50, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Русский Белград</value>
+          </Data>
+          <Data name="Period">
+            <value>Русская эмиграция, XX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Cemetery / Memorial</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Русский некрополь, места памяти русской эмиграции, военных, учёных, духовенства и деятелей культуры.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://ruskidom.rs/%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%BC-%D0%BD%D0%B5%D0%BA%D1%80%D0%BE%D0%BF%D0%BE%D0%BB%D0%B5-%D0%B2-%D0%B1%D0%B5%D0%BB%D0%B3%D1%80%D0%B0%D0%B4%D0%B5/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Маршрут памяти</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Церковь Святой Троицы</name>
+        <address>Russian Church, Tašmajdan Park, Belgrade, Serbia</address>
+        <description><![CDATA[Address: Russian Church, Tašmajdan Park, Belgrade, Serbia<br>City: Belgrade<br>Layer: Русский Белград<br>Period: Русская эмиграция, православие<br>Category: Church<br>Why visit: Русская церковь на Ташмайдане, связанная с русской эмиграцией.<br>Official URL: <br>Notes: Рядом с церковью Святого Марка]]></description>
+        <styleUrl>#icon-1598-C2185B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Russian Church, Tašmajdan Park, Belgrade, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Belgrade</value>
+          </Data>
+          <Data name="Layer">
+            <value>Русский Белград</value>
+          </Data>
+          <Data name="Period">
+            <value>Русская эмиграция, православие</value>
+          </Data>
+          <Data name="Category">
+            <value>Church</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Русская церковь на Ташмайдане, связанная с русской эмиграцией.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Рядом с церковью Святого Марка</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Музей Воеводины</name>
+        <address>Dunavska 35-37, 21101 Novi Sad, Serbia</address>
+        <description><![CDATA[Address: Dunavska 35-37, 21101 Novi Sad, Serbia<br>City: Novi Sad<br>Layer: Нови-Сад и Воеводина<br>Period: От древности до XX века<br>Category: Museum<br>Why visit: Главный музей Воеводины: археология, история, этнология, античность, Средневековье, Австро-Венгрия.<br>Official URL: https://www.muzejvojvodine.org.rs/en/contacts/<br>Notes: Ключевая точка для Нови-Сада]]></description>
+        <styleUrl>#icon-1598-01579B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Dunavska 35-37, 21101 Novi Sad, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Novi Sad</value>
+          </Data>
+          <Data name="Layer">
+            <value>Нови-Сад и Воеводина</value>
+          </Data>
+          <Data name="Period">
+            <value>От древности до XX века</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Главный музей Воеводины: археология, история, этнология, античность, Средневековье, Австро-Венгрия.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.muzejvojvodine.org.rs/en/contacts/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Ключевая точка для Нови-Сада</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Музей присоединения 1918</name>
+        <address>Dunavska 35-37, 21101 Novi Sad, Serbia</address>
+        <description><![CDATA[Address: Dunavska 35-37, 21101 Novi Sad, Serbia<br>City: Novi Sad<br>Layer: Нови-Сад и Воеводина<br>Period: 1918 год<br>Category: Museum<br>Why visit: История присоединения Баната, Бачки, Барани и Срема к Королевству Сербия.<br>Official URL: https://www.muzejvojvodine.org.rs/en/<br>Notes: Часть музейного маршрута Воеводины]]></description>
+        <styleUrl>#icon-1598-01579B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Dunavska 35-37, 21101 Novi Sad, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Novi Sad</value>
+          </Data>
+          <Data name="Layer">
+            <value>Нови-Сад и Воеводина</value>
+          </Data>
+          <Data name="Period">
+            <value>1918 год</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum</value>
+          </Data>
+          <Data name="Why visit">
+            <value>История присоединения Баната, Бачки, Барани и Срема к Королевству Сербия.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.muzejvojvodine.org.rs/en/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Часть музейного маршрута Воеводины</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Петроварадинская крепость</name>
+        <address>Petrovaradin Fortress, Novi Sad, Serbia</address>
+        <description><![CDATA[Address: Petrovaradin Fortress, Novi Sad, Serbia<br>City: Novi Sad<br>Layer: Нови-Сад и Воеводина<br>Period: Габсбургская военная граница<br>Category: Fortress<br>Why visit: Габсбургская крепость на Дунае, ключ к пониманию Нови-Сада и Воеводины.<br>Official URL: <br>Notes: Лучше идти на закате]]></description>
+        <styleUrl>#icon-1598-01579B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Petrovaradin Fortress, Novi Sad, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Novi Sad</value>
+          </Data>
+          <Data name="Layer">
+            <value>Нови-Сад и Воеводина</value>
+          </Data>
+          <Data name="Period">
+            <value>Габсбургская военная граница</value>
+          </Data>
+          <Data name="Category">
+            <value>Fortress</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Габсбургская крепость на Дунае, ключ к пониманию Нови-Сада и Воеводины.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Лучше идти на закате</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Старый центр Нови-Сада</name>
+        <address>Trg Slobode, Novi Sad, Serbia</address>
+        <description><![CDATA[Address: Trg Slobode, Novi Sad, Serbia<br>City: Novi Sad<br>Layer: Нови-Сад и Воеводина<br>Period: XIX век, Сербские Афины<br>Category: District<br>Why visit: Исторический центр Нови-Сада: городская культура, архитектура, сербское просвещение.<br>Official URL: <br>Notes: Пеший маршрут]]></description>
+        <styleUrl>#icon-1598-01579B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Trg Slobode, Novi Sad, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Novi Sad</value>
+          </Data>
+          <Data name="Layer">
+            <value>Нови-Сад и Воеводина</value>
+          </Data>
+          <Data name="Period">
+            <value>XIX век, Сербские Афины</value>
+          </Data>
+          <Data name="Category">
+            <value>District</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Исторический центр Нови-Сада: городская культура, архитектура, сербское просвещение.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Пеший маршрут</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Дунавска улица</name>
+        <address>Dunavska ulica, Novi Sad, Serbia</address>
+        <description><![CDATA[Address: Dunavska ulica, Novi Sad, Serbia<br>City: Novi Sad<br>Layer: Нови-Сад и Воеводина<br>Period: XIX–XX век<br>Category: Street / District<br>Why visit: Одна из главных исторических улиц Нови-Сада, рядом с музеями и Дунайским парком.<br>Official URL: <br>Notes: Совместить с Музеем Воеводины]]></description>
+        <styleUrl>#icon-1598-01579B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Dunavska ulica, Novi Sad, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Novi Sad</value>
+          </Data>
+          <Data name="Layer">
+            <value>Нови-Сад и Воеводина</value>
+          </Data>
+          <Data name="Period">
+            <value>XIX–XX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Street / District</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Одна из главных исторических улиц Нови-Сада, рядом с музеями и Дунайским парком.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Совместить с Музеем Воеводины</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Матица сербская</name>
+        <address>Matica srpska, Matice srpske 1, Novi Sad, Serbia</address>
+        <description><![CDATA[Address: Matica srpska, Matice srpske 1, Novi Sad, Serbia<br>City: Novi Sad<br>Layer: Нови-Сад и Воеводина<br>Period: Сербское просвещение, XIX век<br>Category: Institution<br>Why visit: Одна из ключевых институций сербской культуры и просвещения.<br>Official URL: https://www.maticasrpska.org.rs/<br>Notes: Проверять доступность для посещения]]></description>
+        <styleUrl>#icon-1598-01579B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Matica srpska, Matice srpske 1, Novi Sad, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Novi Sad</value>
+          </Data>
+          <Data name="Layer">
+            <value>Нови-Сад и Воеводина</value>
+          </Data>
+          <Data name="Period">
+            <value>Сербское просвещение, XIX век</value>
+          </Data>
+          <Data name="Category">
+            <value>Institution</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Одна из ключевых институций сербской культуры и просвещения.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.maticasrpska.org.rs/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Проверять доступность для посещения</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Галерея Матицы сербской</name>
+        <address>Trg Galerija 1, 21000 Novi Sad, Serbia</address>
+        <description><![CDATA[Address: Trg Galerija 1, 21000 Novi Sad, Serbia<br>City: Novi Sad<br>Layer: Нови-Сад и Воеводина<br>Period: Искусство XVIII–XX веков<br>Category: Museum / Gallery<br>Why visit: Сербское искусство и культурная история, хорошее дополнение к Музею Воеводины.<br>Official URL: https://www.galerijamaticesrpske.rs/en/<br>Notes: Центр Нови-Сада]]></description>
+        <styleUrl>#icon-1598-01579B</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Trg Galerija 1, 21000 Novi Sad, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Novi Sad</value>
+          </Data>
+          <Data name="Layer">
+            <value>Нови-Сад и Воеводина</value>
+          </Data>
+          <Data name="Period">
+            <value>Искусство XVIII–XX веков</value>
+          </Data>
+          <Data name="Category">
+            <value>Museum / Gallery</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Сербское искусство и культурная история, хорошее дополнение к Музею Воеводины.</value>
+          </Data>
+          <Data name="Official URL">
+            <value>https://www.galerijamaticesrpske.rs/en/</value>
+          </Data>
+          <Data name="Notes">
+            <value>Центр Нови-Сада</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>Сремски-Карловци</name>
+        <address>Sremski Karlovci, Serbia</address>
+        <description><![CDATA[Address: Sremski Karlovci, Serbia<br>City: Sremski Karlovci<br>Layer: Нови-Сад и Воеводина<br>Period: Сербская церковная и культурная история<br>Category: Town / Historic area<br>Why visit: Исторический город рядом с Нови-Садом, важный для сербской церковной, образовательной и культурной истории.<br>Official URL: <br>Notes: Хорошая поездка на полдня]]></description>
+        <styleUrl>#icon-1598-7CB342</styleUrl>
+        <ExtendedData>
+          <Data name="Address">
+            <value>Sremski Karlovci, Serbia</value>
+          </Data>
+          <Data name="City">
+            <value>Sremski Karlovci</value>
+          </Data>
+          <Data name="Layer">
+            <value>Нови-Сад и Воеводина</value>
+          </Data>
+          <Data name="Period">
+            <value>Сербская церковная и культурная история</value>
+          </Data>
+          <Data name="Category">
+            <value>Town / Historic area</value>
+          </Data>
+          <Data name="Why visit">
+            <value>Исторический город рядом с Нови-Садом, важный для сербской церковной, образовательной и культурной истории.</value>
+          </Data>
+          <Data name="Official URL">
+            <value/>
+          </Data>
+          <Data name="Notes">
+            <value>Хорошая поездка на полдня</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
