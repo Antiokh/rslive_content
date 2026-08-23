@@ -23,6 +23,12 @@
 
 Правила: [`docs/CONTRIBUTOR_ATTRIBUTION.md`](../docs/CONTRIBUTOR_ATTRIBUTION.md).
 
+## Лицензия вклада
+
+- [ ] Отправляя этот pull request, я предоставляю собственный вклад на условиях `GPL-3.0-only` и разрешаю сохранять для него обязательную атрибуцию «Инструкция по Сербии — RSLive.ru» в соответствии с GPLv3 §7(b); сторонние материалы и их отдельные условия я явно отметил.
+
+Полные условия и границы применения: [`NOTICE.md`](../NOTICE.md).
+
 ## Проверка
 
 - [ ] Прочитаны `AGENTS.md`, `PROJECT_CONTEXT.md`, `CONTRIBUTING.md` и `docs/CONTRIBUTOR_ATTRIBUTION.md`.
