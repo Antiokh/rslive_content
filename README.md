@@ -8,6 +8,26 @@
 
 Движок, компоненты, стили, сборка и деплой находятся в приватном репозитории [`Antiokh/rslive.ru`](https://github.com/Antiokh/rslive.ru). Здесь хранятся только материалы энциклопедии и относящаяся к ним редакционная документация.
 
+## Лицензия редакционного контента
+
+First-party редакционный контент в `src/content/docs/**`, если для конкретного материала не указаны другие условия, распространяется по **Creative Commons Attribution-ShareAlike 4.0 International (`CC-BY-SA-4.0`)**.
+
+Материал можно свободно копировать, распространять и адаптировать, в том числе коммерчески, при соблюдении Attribution и ShareAlike. Предоставленная RSLive общая атрибуция:
+
+> **Инструкция по Сербии — RSLive.ru**  
+> https://rslive.ru/
+
+Для конкретной статьи сохраняйте также её канонический URL, насколько это практически возможно, и отмечайте изменения в соответствии с CC BY-SA 4.0.
+
+Почему здесь CC BY-SA, а не прежняя GPLv3: `rslive_content` фактически является контентным репозиторием, а основная программная реализация вынесена в `Antiokh/rslive.ru`. GPLv3 юридически может применяться и к не-программным произведениям, но её software/source-code модель плохо выражала нужные энциклопедии Attribution + ShareAlike и требовала лишних пояснений. CC BY-SA 4.0 задаёт эти условия непосредственно и понятнее для текстового коллективного корпуса.
+
+Лицензии разделены по типу материала:
+
+- [`LICENSE-CONTENT.md`](LICENSE-CONTENT.md) — редакционный контент CC BY-SA 4.0;
+- [`NOTICE.md`](NOTICE.md) — атрибуция, scope, исключения и переход с прежней GPLv3;
+- [`LICENSE-CODE`](LICENSE-CODE) — полный текст GPLv3 для небольшого first-party программного слоя;
+- `map-data/**`, сторонние материалы и provider snapshots — по собственным provenance/licensing rules.
+
 ## Где редактировать
 
 Редактируйте статьи только здесь:
@@ -631,6 +651,9 @@ npm run check
 
 ## Связанная документация
 
+- [`LICENSE-CONTENT.md`](LICENSE-CONTENT.md) — лицензия редакционного корпуса CC BY-SA 4.0;
+- [`NOTICE.md`](NOTICE.md) — scope, атрибуция и переход с прежней GPLv3;
+- [`docs/CONTRIBUTOR_ATTRIBUTION.md`](docs/CONTRIBUTOR_ATTRIBUTION.md) — авторство и лицензирование вкладов;
 - [`CONTENT_INDEX.yml`](src/content/docs/CONTENT_INDEX.yml) — карта страниц и перелинковки;
 - [`Antiokh/rslive.ru/README.md`](https://github.com/Antiokh/rslive.ru/blob/main/README.md) — стартовая документация движка;
 - [`Antiokh/rslive.ru/astro/CUSTOMIZATION_INVENTORY.md`](https://github.com/Antiokh/rslive.ru/blob/main/astro/CUSTOMIZATION_INVENTORY.md) — компоненты и кастомизации;
