@@ -1,0 +1,48 @@
+{
+  "date": "2026-08-23",
+  "hours": 24,
+  "generated_at": "2026-08-23T07:10:00+02:00",
+  "commit_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/map/index.mdx",
+      "title": "Карты",
+      "live_url": "https://rslive.ru/map/",
+      "summaries": [
+        "Сократили раздел до каталога карт и картографических подборок: убрали разросшиеся обзоры сервисов и оставили быстрый выбор нужной карты"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/sud/index.mdx",
+      "title": "Первый основной суд в Белграде",
+      "live_url": "https://rslive.ru/map/sud/",
+      "summaries": [
+        "Оставили в картографическом разделе только адрес и две карты суда; подробный материал о судебной системе вынесли в раздел государства и бюрократии"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/courts/index.mdx",
+      "title": "Суды Сербии",
+      "live_url": "https://rslive.ru/gov/courts/",
+      "summaries": [
+        "Перенесли подробный материал о судебной системе, компетенции судов, жалобах, разумном сроке, апостиле и признании иностранных решений из картографического раздела без потери содержания"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/ruska_ambasada/index.mdx",
+      "title": "Посольство России в Сербии: адреса и карты",
+      "live_url": "https://rslive.ru/map/ruska_ambasada/",
+      "summaries": [
+        "Сократили страницу до адресов и карт Белграда и Нови-Сада; консульские процедуры вынесли в отдельный материал"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/russians/embassy/index.mdx",
+      "title": "Посольство России в Сербии",
+      "live_url": "https://rslive.ru/adaptation/russians/embassy/",
+      "summaries": [
+        "Перенесли подробную консульскую инструкцию, запись, уведомление после ПМЖ и истребование документов из картографического раздела без потери содержания"
+      ]
+    }
+  ]
+}
