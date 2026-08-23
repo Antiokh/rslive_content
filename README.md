@@ -21,11 +21,11 @@ First-party редакционный контент в `src/content/docs/**`, е
 
 Почему здесь CC BY-SA, а не прежняя GPLv3: `rslive_content` фактически является контентным репозиторием, а основная программная реализация вынесена в `Antiokh/rslive.ru`. GPLv3 юридически может применяться и к не-программным произведениям, но её software/source-code модель плохо выражала нужные энциклопедии Attribution + ShareAlike и требовала лишних пояснений. CC BY-SA 4.0 задаёт эти условия непосредственно и понятнее для текстового коллективного корпуса.
 
-Лицензии разделены по типу материала:
+Лицензии разделены по типу материала, но GitHub намеренно видит только одну основную root-level лицензию:
 
-- [`LICENSE-CONTENT.md`](LICENSE-CONTENT.md) — редакционный контент CC BY-SA 4.0;
+- [`LICENSE`](LICENSE) — стандартный текст CC BY-SA 4.0, чтобы GitHub однозначно показывал эту лицензию как основную;
 - [`NOTICE.md`](NOTICE.md) — атрибуция, scope, исключения и переход с прежней GPLv3;
-- [`LICENSE-CODE`](LICENSE-CODE) — полный текст GPLv3 для небольшого first-party программного слоя;
+- [`docs/licensing/gpl-3.0-only.txt`](docs/licensing/gpl-3.0-only.txt) — полный текст GPLv3 для небольшого first-party программного слоя;
 - `map-data/**`, сторонние материалы и provider snapshots — по собственным provenance/licensing rules.
 
 ## Где редактировать
@@ -651,7 +651,7 @@ npm run check
 
 ## Связанная документация
 
-- [`LICENSE-CONTENT.md`](LICENSE-CONTENT.md) — лицензия редакционного корпуса CC BY-SA 4.0;
+- [`LICENSE`](LICENSE) — стандартный текст лицензии редакционного корпуса CC BY-SA 4.0;
 - [`NOTICE.md`](NOTICE.md) — scope, атрибуция и переход с прежней GPLv3;
 - [`docs/CONTRIBUTOR_ATTRIBUTION.md`](docs/CONTRIBUTOR_ATTRIBUTION.md) — авторство и лицензирование вкладов;
 - [`CONTENT_INDEX.yml`](src/content/docs/CONTENT_INDEX.yml) — карта страниц и перелинковки;

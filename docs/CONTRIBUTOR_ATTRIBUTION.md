@@ -69,7 +69,7 @@ git log --format='%h %an <%ae>%n%B%n---' origin/main..HEAD
 
 При распространении материала с конкретной страницы также сохраняется её канонический URL, насколько это практически возможно. Эти сведения не заменяют историю конкретных человеческих авторов в Git.
 
-Полные условия и scope: [`../LICENSE-CONTENT.md`](../LICENSE-CONTENT.md) и [`../NOTICE.md`](../NOTICE.md).
+Полные условия и scope: [`../LICENSE`](../LICENSE) и [`../NOTICE.md`](../NOTICE.md).
 
 ## Исправление до merge
 

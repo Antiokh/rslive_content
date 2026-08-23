@@ -16,7 +16,7 @@ First-party редакционный контент RSLive в `src/content/docs/
 
 Полные условия и границы применения:
 
-- [`LICENSE-CONTENT.md`](LICENSE-CONTENT.md);
+- [`LICENSE`](LICENSE);
 - [`NOTICE.md`](NOTICE.md);
 - [`docs/CONTRIBUTOR_ATTRIBUTION.md`](docs/CONTRIBUTOR_ATTRIBUTION.md).
 
