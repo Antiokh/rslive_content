@@ -11,13 +11,53 @@ jobs:
   bootstrap:
     if: github.head_ref == 'agent/google-mymaps-lkg'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - key: map-12l4
+            mid: 12l4BVYg_FV0d9CMeEWEtnJDQioL9804
+            bounds: BELGRADE_BOUNDS
+          - key: map-1qkpr
+            mid: 1qkPRUNRiCqA-uFugbcuVy9INXgw
+            bounds: BELGRADE_BOUNDS
+          - key: map-19yc
+            mid: 19YcKmasJpwHsfB9kvpoSmRA_qD22yhw
+            bounds: SERBIA_BOUNDS
+          - key: map-1gob
+            mid: 1GobqFwJp0QiRJcMYpBKIusIVxUI43kE
+            bounds: SERBIA_BOUNDS
+          - key: map-prevodioci
+            mid: 1qkp5VjmSJBjdaRRnxEtv0gZEaL2Dpk4
+            bounds: SERBIA_BOUNDS
+          - key: map-1kjr
+            mid: 1kjRg87uMqwqNh0re4t7vw9XE79DLx7w
+            bounds: BELGRADE_NOVI_SAD_BOUNDS
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
 
-      - name: Fetch and normalize missing Google My Maps snapshots
+      - name: Select one source for this matrix job
+        env:
+          TARGET_MID: ${{ matrix.mid }}
+          TARGET_BOUNDS: ${{ matrix.bounds }}
+        run: |
+          python - <<'PY'
+          import os, re
+          path = 'scripts/bootstrap-google-lkg.mjs'
+          text = open(path, encoding='utf-8').read()
+          replacement = "const candidates = [\n  { mid: '%s', bounds: %s },\n];" % (
+              os.environ['TARGET_MID'], os.environ['TARGET_BOUNDS']
+          )
+          updated, count = re.subn(r"const candidates = \[\n.*?\n\];", replacement, text, count=1, flags=re.S)
+          if count != 1:
+              raise SystemExit('candidate block not found')
+          open(path, 'w', encoding='utf-8').write(updated)
+          PY
+
+      - name: Fetch and normalize Google My Maps snapshot
         run: node scripts/bootstrap-google-lkg.mjs
 
       - name: Validate map data
@@ -26,9 +66,11 @@ jobs:
       - name: Upload generated LKG files
         uses: actions/upload-artifact@v4
         with:
-          name: google-mymaps-lkg
+          name: google-mymaps-lkg-${{ matrix.key }}
           path: |
-            map-data/snapshots/google-mymaps/
+            map-data/snapshots/google-mymaps/${{ matrix.mid }}.kml
+            map-data/snapshots/google-mymaps/${{ matrix.mid }}.geojson
+            map-data/snapshots/google-mymaps/${{ matrix.mid }}.json
             /tmp/google-lkg-summary.json
           if-no-files-found: error
           retention-days: 1
