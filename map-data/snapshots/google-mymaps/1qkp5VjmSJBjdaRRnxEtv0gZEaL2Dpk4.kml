@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>СУДСКИ ТУМАЧИ ЗА РУСКИ ЈЕЗИК</name>
+    <description/>
+    <Style id="icon-seq2-0-0-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-1.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-1-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-2.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-10-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-11.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-11-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-12.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-12-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-13.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-13-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-14.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-14-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-15.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-15-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-16.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-16-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-17.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-17-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-18.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-18-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-19.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-19-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-20.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-2-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-3.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-20-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-21.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-21-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-22.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-22-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-23.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-23-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-24.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-24-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-25.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-25-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-26.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-26-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-27.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-27-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-28.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-28-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-29.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-29-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-30.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-3-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-4.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-30-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-31.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-31-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-32.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-32-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-33.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-33-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-34.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-34-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-35.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-4-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-5.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-5-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-6.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-6-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-7.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-7-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-8.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-8-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-9.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Style id="icon-seq2-0-9-C2185B-labelson">
+      <IconStyle>
+        <color>ff5b18c2</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-10.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Folder>
+      <name>СУДСКИ ТУМАЧИ ЗА РУСКИ ЈЕЗИК</name>
+      <Placemark>
+        <name>АНА АЛЕКСИЋ</name>
+        <address>Београд, ул. Кнегиње Зорке 11</address>
+        <description><![CDATA[адреса: Београд, ул. Кнегиње Зорке 11<br>тел / факс / е-маил.1: 011/2453-432<br>тел / факс / е-маил.2: 063/164-33-49<br>﻿р.бр.: 1]]></description>
+        <styleUrl>#icon-seq2-0-0-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Кнегиње Зорке 11</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/2453-432</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/164-33-49</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>1.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>БОЈАНА ЗАЈИЋ</name>
+        <address>Београд, ул. Бул. краља Александра 261</address>
+        <description><![CDATA[адреса: Београд, ул. Бул. краља Александра 261<br>тел / факс / е-маил.1: 011/2421-621<br>тел / факс / е-маил.2: 063/88-00-567<br>﻿р.бр.: 2]]></description>
+        <styleUrl>#icon-seq2-0-1-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Бул. краља Александра 261</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/2421-621</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/88-00-567</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>2.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>РАДЕ ВОЈВОДИЋ</name>
+        <address>Београд, ул. Димитрија Туцовића 24/ст. 63</address>
+        <description><![CDATA[адреса: Београд, ул. Димитрија Туцовића 24/ст. 63<br>тел / факс / е-маил.1: 011/2409-518<br>тел / факс / е-маил.2: 064/130-54-64<br>﻿р.бр.: 3]]></description>
+        <styleUrl>#icon-seq2-0-2-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Димитрија Туцовића 24/ст. 63</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/2409-518</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>064/130-54-64</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>3.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ДРАГАНА МАРИА ВИСКОНТИ</name>
+        <address>Београд, Булевар кнеза Александра Карађорђевића 72</address>
+        <description><![CDATA[адреса: Београд, Булевар кнеза Александра Карађорђевића 72<br>тел / факс / е-маил.1: <br>тел / факс / е-маил.2: 063/690-744<br>﻿р.бр.: 4]]></description>
+        <styleUrl>#icon-seq2-0-3-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, Булевар кнеза Александра Карађорђевића 72</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value/>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/690-744</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>4.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ТАЊА КОВАЧЕВИЋ</name>
+        <address>Београд, ул. Смиљанићева 11/9</address>
+        <description><![CDATA[адреса: Београд, ул. Смиљанићева 11/9<br>тел / факс / е-маил.1: 011/344-27-58<br>тел / факс / е-маил.2: 064/168-13-61<br>﻿р.бр.: 5]]></description>
+        <styleUrl>#icon-seq2-0-4-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Смиљанићева 11/9</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/344-27-58</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>064/168-13-61</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>5.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ВЕСНА ОБРАДОВИЋ</name>
+        <address>Београд, ул. Мике Аласа 44/1</address>
+        <description><![CDATA[адреса: Београд, ул. Мике Аласа 44/1<br>тел / факс / е-маил.1: 011/30-33-527<br>тел / факс / е-маил.2: 064730-73-777<br>﻿р.бр.: 7]]></description>
+        <styleUrl>#icon-seq2-0-5-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Мике Аласа 44/1</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/30-33-527</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>064730-73-777</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>7.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ТАТЈАНА ДЕКЛЕВА КОЉЕНОВИЋ</name>
+        <address>Београд, ул. Хиландарска 23/II</address>
+        <description><![CDATA[адреса: Београд, ул. Хиландарска 23/II<br>тел / факс / е-маил.1: 011/30-33-649<br>тел / факс / е-маил.2: 064/1970198<br>﻿р.бр.: 8]]></description>
+        <styleUrl>#icon-seq2-0-6-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Хиландарска 23/II</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/30-33-649</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>064/1970198</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>8.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ЛЕПОСАВА ПАВЛОВИЋ</name>
+        <address>Београд, ул. Бул. Зорана Ђинђића 215/13/II</address>
+        <description><![CDATA[адреса: Београд, ул. Бул. Зорана Ђинђића 215/13/II<br>тел / факс / е-маил.1: 011/66-97-146<br>тел / факс / е-маил.2: 064/22-29-379<br>﻿р.бр.: 9]]></description>
+        <styleUrl>#icon-seq2-0-7-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Бул. Зорана Ђинђића 215/13/II</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/66-97-146</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>064/22-29-379</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>9.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>САЊА БОЛКОВИЋ</name>
+        <address>Београд. ул. Милутина Миланковића 120Д</address>
+        <description><![CDATA[адреса: Београд. ул. Милутина Миланковића 120Д<br>тел / факс / е-маил.1: 011/2135-380<br>тел / факс / е-маил.2: 065/2135-380<br>﻿р.бр.: 10]]></description>
+        <styleUrl>#icon-seq2-0-8-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд. ул. Милутина Миланковића 120Д</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/2135-380</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>065/2135-380</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>10.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>СЛАЂАНА ВОЈНОВИЋ</name>
+        <address>Београд, ул. Растка Поповића 30 </address>
+        <description><![CDATA[адреса: Београд, ул. Растка Поповића 30 <br>тел / факс / е-маил.1: 011/2460-919<br>тел / факс / е-маил.2: 063/8941-837<br>﻿р.бр.: 11]]></description>
+        <styleUrl>#icon-seq2-0-9-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Растка Поповића 30 </value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/2460-919</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/8941-837</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>11.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>МАЈА ТЕШИЋ</name>
+        <address>Београд, ул. Јурија Гагарина 146/21</address>
+        <description><![CDATA[адреса: Београд, ул. Јурија Гагарина 146/21<br>тел / факс / е-маил.1: 011/717-3859<br>тел / факс / е-маил.2: 063/770-3574<br>﻿р.бр.: 12]]></description>
+        <styleUrl>#icon-seq2-0-10-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Јурија Гагарина 146/21</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/717-3859</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/770-3574</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>12.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ЈОВАН ГАГИЋ</name>
+        <address>Београд, ул. Др. Ивана Рибара 57/19</address>
+        <description><![CDATA[адреса: Београд, ул. Др. Ивана Рибара 57/19<br>тел / факс / е-маил.1: 011/3177-964<br>тел / факс / е-маил.2: 065/664-21-48<br>﻿р.бр.: 13]]></description>
+        <styleUrl>#icon-seq2-0-11-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Др. Ивана Рибара 57/19</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/3177-964</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>065/664-21-48</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>13.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>МИЛЕНА ТОМАШЕВИЋ</name>
+        <address>Београд, ул. Гандијева 114/7</address>
+        <description><![CDATA[адреса: Београд, ул. Гандијева 114/7<br>тел / факс / е-маил.1: 011/318-43-10<br>тел / факс / е-маил.2: <br>﻿р.бр.: 14]]></description>
+        <styleUrl>#icon-seq2-0-12-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Гандијева 114/7</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/318-43-10</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value/>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>14.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ТАТЈАНА ЛЕСКОВАЦ</name>
+        <address>Београд, ул. Браће Грим 4</address>
+        <description><![CDATA[адреса: Београд, ул. Браће Грим 4<br>тел / факс / е-маил.1: 011/276-40-28<br>тел / факс / е-маил.2: 064/295-96-71<br>﻿р.бр.: 15]]></description>
+        <styleUrl>#icon-seq2-0-13-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Браће Грим 4</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/276-40-28</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>064/295-96-71</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>15.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ВЕСНА ИВАНОВИЋ</name>
+        <address>Београд, ул. Светозара Пашића 5/54 </address>
+        <description><![CDATA[адреса: Београд, ул. Светозара Пашића 5/54 <br>тел / факс / е-маил.1: 011/33-42-237<br>тел / факс / е-маил.2: 063/80-435-19<br>﻿р.бр.: 16]]></description>
+        <styleUrl>#icon-seq2-0-14-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Светозара Пашића 5/54 </value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/33-42-237</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/80-435-19</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>16.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ВЕСНА ТОМИЋ</name>
+        <address>Београд, ул. Студентска 27/12</address>
+        <description><![CDATA[адреса: Београд, ул. Студентска 27/12<br>тел / факс / е-маил.1: 011/2697-024<br>тел / факс / е-маил.2: 062/302-909<br>﻿р.бр.: 17]]></description>
+        <styleUrl>#icon-seq2-0-15-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Студентска 27/12</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/2697-024</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>062/302-909</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>17.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ТАЊА ГАЕВ</name>
+        <address>Београд. ул. Отона Жупанчића 35/27</address>
+        <description><![CDATA[адреса: Београд. ул. Отона Жупанчића 35/27<br>тел / факс / е-маил.1: 011/30-17-289<br>тел / факс / е-маил.2: 063/39-29-20<br>﻿р.бр.: 18]]></description>
+        <styleUrl>#icon-seq2-0-16-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд. ул. Отона Жупанчића 35/27</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/30-17-289</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/39-29-20</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>18.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ЗОРИЦА САВИЋ</name>
+        <address>Београд, ул. Милентија Поповића 35</address>
+        <description><![CDATA[адреса: Београд, ул. Милентија Поповића 35<br>тел / факс / е-маил.1: 011/713-23-44<br>тел / факс / е-маил.2: 064/157-66-93<br>﻿р.бр.: 19]]></description>
+        <styleUrl>#icon-seq2-0-17-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Милентија Поповића 35</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/713-23-44</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>064/157-66-93</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>19.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>СЛАВОЉУБ ПЕТРОВИЋ</name>
+        <address>Београд, ул. Врбаска 11 </address>
+        <description><![CDATA[адреса: Београд, ул. Врбаска 11 <br>тел / факс / е-маил.1: 011/80-43-218, 321-66-00<br>тел / факс / е-маил.2: 0637366-577<br>﻿р.бр.: 20]]></description>
+        <styleUrl>#icon-seq2-0-18-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Врбаска 11 </value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/80-43-218, 321-66-00</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>0637366-577</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>20.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>МАРИЈА АЛЕКСИЋ</name>
+        <address>Београд, ул. Јурија Гагарина 39/23</address>
+        <description><![CDATA[адреса: Београд, ул. Јурија Гагарина 39/23<br>тел / факс / е-маил.1: 011/217-60-14<br>тел / факс / е-маил.2: 063/20-03-31<br>﻿р.бр.: 21]]></description>
+        <styleUrl>#icon-seq2-0-19-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Јурија Гагарина 39/23</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/217-60-14</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/20-03-31</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>21.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>МЕЛИТА МИЋИЋ</name>
+        <address>Београд, ул. 27 марта бр. 36/15/61</address>
+        <description><![CDATA[адреса: Београд, ул. 27 марта бр. 36/15/61<br>тел / факс / е-маил.1: 065/2600-505<br>тел / факс / е-маил.2: 064/136-30-82<br>﻿р.бр.: 22]]></description>
+        <styleUrl>#icon-seq2-0-20-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. 27 марта бр. 36/15/61</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>065/2600-505</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>064/136-30-82</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>22.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>МИЛОШ КИЦЕВСКИ</name>
+        <address>Београд, ул. Париске комуне 2/26</address>
+        <description><![CDATA[адреса: Београд, ул. Париске комуне 2/26<br>тел / факс / е-маил.1: 011/6673-506<br>тел / факс / е-маил.2: 063/80-25-174<br>﻿р.бр.: 23]]></description>
+        <styleUrl>#icon-seq2-0-21-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Париске комуне 2/26</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/6673-506</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/80-25-174</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>23.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>СВЕТЛАНА МИШИЋ</name>
+        <address>Београд, ул. Јурија Гагарина 118</address>
+        <description><![CDATA[адреса: Београд, ул. Јурија Гагарина 118<br>тел / факс / е-маил.1: 011/616-66-72<br>тел / факс / е-маил.2: 060/3184-938<br>﻿р.бр.: 24]]></description>
+        <styleUrl>#icon-seq2-0-22-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Јурија Гагарина 118</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/616-66-72</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>060/3184-938</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>24.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ВЕРА ИЛИЋ</name>
+        <address>Београд, ул. М. Миланковића140/15</address>
+        <description><![CDATA[адреса: Београд, ул. М. Миланковића140/15<br>тел / факс / е-маил.1: 011/613-29-29<br>тел / факс / е-маил.2: 063/871-22-79<br>﻿р.бр.: 25]]></description>
+        <styleUrl>#icon-seq2-0-23-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. М. Миланковића140/15</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/613-29-29</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>063/871-22-79</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>25.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>РУЖИЦА ПАНТИЋ</name>
+        <address>Београд, ул. Јеленка Михајловића 15/9</address>
+        <description><![CDATA[адреса: Београд, ул. Јеленка Михајловића 15/9<br>тел / факс / е-маил.1: 063/75-06-874<br>тел / факс / е-маил.2: 011/29-72-933<br>﻿р.бр.: 27]]></description>
+        <styleUrl>#icon-seq2-0-24-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Јеленка Михајловића 15/9</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>063/75-06-874</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>011/29-72-933</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>27.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ТАТЈАНА РАКОВИЋ</name>
+        <address>Београд, ул. Молерова 15</address>
+        <description><![CDATA[адреса: Београд, ул. Молерова 15<br>тел / факс / е-маил.1: 063/80-89-063<br>тел / факс / е-маил.2: <br>﻿р.бр.: 28]]></description>
+        <styleUrl>#icon-seq2-0-25-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Молерова 15</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>063/80-89-063</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value/>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>28.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ДАНИЈЕЛА ДЕВЧИЋ ВУКОВИЋ</name>
+        <address>Београд, ул. Краља Милутина 57</address>
+        <description><![CDATA[адреса: Београд, ул. Краља Милутина 57<br>тел / факс / е-маил.1: 011/30-67-942<br>тел / факс / е-маил.2: 011/3617-614<br>﻿р.бр.: 29]]></description>
+        <styleUrl>#icon-seq2-0-26-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Краља Милутина 57</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/30-67-942</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>011/3617-614</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>29.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ЂОРЂЕ ЈОЈИЋ</name>
+        <address>Београд, ул. Светозара Радића 7а</address>
+        <description><![CDATA[адреса: Београд, ул. Светозара Радића 7а<br>тел / факс / е-маил.1: 065/329-72-73<br>тел / факс / е-маил.2: 0611/306-79-52<br>﻿р.бр.: 30]]></description>
+        <styleUrl>#icon-seq2-0-27-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Светозара Радића 7а</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>065/329-72-73</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>0611/306-79-52</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>30.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>СЛАВИЦА ГРАХОВАЦ</name>
+        <address>Београд, ул. Војводе Миленка 34</address>
+        <description><![CDATA[адреса: Београд, ул. Војводе Миленка 34<br>тел / факс / е-маил.1: 063/20-99-99<br>тел / факс / е-маил.2: <br>﻿р.бр.: 31]]></description>
+        <styleUrl>#icon-seq2-0-28-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Војводе Миленка 34</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>063/20-99-99</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value/>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>31.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>СВЕТЛАНА СИМОНОВИЋ</name>
+        <address>Београд, ул. Макензијева 46/10</address>
+        <description><![CDATA[адреса: Београд, ул. Макензијева 46/10<br>тел / факс / е-маил.1: 063/83-94-401<br>тел / факс / е-маил.2: 011/24-58-010<br>﻿р.бр.: 33]]></description>
+        <styleUrl>#icon-seq2-0-29-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Макензијева 46/10</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>063/83-94-401</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>011/24-58-010</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>33.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>СЕЛЕНА ПЈЕШИВАЦ</name>
+        <address>Београд, ул. Браће Срнић 21/23</address>
+        <description><![CDATA[адреса: Београд, ул. Браће Срнић 21/23<br>тел / факс / е-маил.1: 063/394-418<br>тел / факс / е-маил.2: 011/68-83-684<br>﻿р.бр.: 34]]></description>
+        <styleUrl>#icon-seq2-0-30-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Браће Срнић 21/23</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>063/394-418</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>011/68-83-684</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>34.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>МАЈА ВРАНИЋ</name>
+        <address>Београд. ул. Омладинских бригада 67/3</address>
+        <description><![CDATA[адреса: Београд. ул. Омладинских бригада 67/3<br>тел / факс / е-маил.1: 064/155-65-92<br>тел / факс / е-маил.2: 062/82-88-368<br>﻿р.бр.: 35]]></description>
+        <styleUrl>#icon-seq2-0-31-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд. ул. Омладинских бригада 67/3</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>064/155-65-92</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value>062/82-88-368</value>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>35.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>МИЛЕНА МИЛЕНКОВИЋ</name>
+        <address>Београд. ул. Гандијева 114</address>
+        <description><![CDATA[адреса: Београд. ул. Гандијева 114<br>тел / факс / е-маил.1: 011/318-43-10<br>тел / факс / е-маил.2: <br>﻿р.бр.: 36]]></description>
+        <styleUrl>#icon-seq2-0-32-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд. ул. Гандијева 114</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>011/318-43-10</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value/>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>36.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>НАТАША ПАВЛИЧИЋ</name>
+        <address>Београд,  ул. Јурија Гагарина 39/19</address>
+        <description><![CDATA[адреса: Београд,  ул. Јурија Гагарина 39/19<br>тел / факс / е-маил.1: 065/322-66-86<br>тел / факс / е-маил.2: <br>﻿р.бр.: 37]]></description>
+        <styleUrl>#icon-seq2-0-33-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд,  ул. Јурија Гагарина 39/19</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>065/322-66-86</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value/>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value>37.0</value>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+      <Placemark>
+        <name>ВАНJА СЛАДОJЕ</name>
+        <address>Београд, ул. Кнеза Милоша 9. Спрат I Канцеларија 102</address>
+        <description><![CDATA[адреса: Београд, ул. Кнеза Милоша 9. Спрат I Канцеларија 102<br>тел / факс / е-маил.1: +381 65 8302345<br>тел / факс / е-маил.2: <br>﻿р.бр.: ]]></description>
+        <styleUrl>#icon-seq2-0-34-C2185B-labelson</styleUrl>
+        <ExtendedData>
+          <Data name="адреса">
+            <value>Београд, ул. Кнеза Милоша 9. Спрат I Канцеларија 102</value>
+          </Data>
+          <Data name="тел / факс / е-маил.1">
+            <value>+381 65 8302345</value>
+          </Data>
+          <Data name="тел / факс / е-маил.2">
+            <value/>
+          </Data>
+          <Data name="﻿р.бр.">
+            <value/>
+          </Data>
+        </ExtendedData>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
