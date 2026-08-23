@@ -1,4 +1,4 @@
-name: Bootstrap Google My Maps LKG
+name: Finalize Google My Maps LKG guard
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  bootstrap:
+  finalize:
     if: github.head_ref == 'agent/google-mymaps-lkg'
     runs-on: ubuntu-latest
     steps:
@@ -17,42 +17,35 @@ jobs:
           ref: agent/google-mymaps-lkg
           fetch-depth: 0
 
-      - name: Prepare direct-KML helper for active geometry sources
+      - name: Require every active Google My Maps LKG
         run: |
           python - <<'PY'
-          path = 'scripts/bootstrap-google-lkg.mjs'
+          path = 'scripts/check-map-data.mjs'
           text = open(path, encoding='utf-8').read()
-          for line in [
-              "  { mid: '19YcKmasJpwHsfB9kvpoSmRA_qD22yhw', bounds: SERBIA_BOUNDS },\n",
-              "  { mid: '1qkp5VjmSJBjdaRRnxEtv0gZEaL2Dpk4', bounds: SERBIA_BOUNDS },\n",
-              "  { mid: '1kjRg87uMqwqNh0re4t7vw9XE79DLx7w', bounds: BELGRADE_NOVI_SAD_BOUNDS },\n",
-          ]:
-              text = text.replace(line, '')
-          text = text.replace("'user-agent': 'RSLive LKG bootstrap/1.0 (+https://rslive.ru)'", "'user-agent': 'Mozilla/5.0 RSLive LKG bootstrap'")
+          old = "const pilotMid = '1mxkFBhCULwjecdQUWUIfE1BAQahFG6I';"
+          new = """const requiredGoogleMids = Object.freeze([\n  '1mxkFBhCULwjecdQUWUIfE1BAQahFG6I',\n  '12l4BVYg_FV0d9CMeEWEtnJDQioL9804',\n  '1qkPRUNRiCqA-uFugbcuVy9INXgw',\n  '1GobqFwJp0QiRJcMYpBKIusIVxUI43kE',\n  '1qkp5VjmSJBjdaRRnxEtv0gZEaL2Dpk4',\n  '1kjRg87uMqwqNh0re4t7vw9XE79DLx7w',\n]);"""
+          if old not in text:
+              raise SystemExit('pilotMid declaration not found')
+          text = text.replace(old, new, 1)
+          old_result = "  googlePilot: await checkGoogleSet(pilotMid),"
+          new_result = """  google: Object.fromEntries(\n    await Promise.all(requiredGoogleMids.map(async (mid) => [mid, await checkGoogleSet(mid)])),\n  ),"""
+          if old_result not in text:
+              raise SystemExit('googlePilot result line not found')
+          text = text.replace(old_result, new_result, 1)
           open(path, 'w', encoding='utf-8').write(text)
           PY
 
-      - name: Fetch direct-KML snapshots
-        run: node scripts/bootstrap-google-lkg.mjs
-
-      - name: Fetch translator KML and viewer coordinates
-        run: node scripts/bootstrap-prevodioci-viewer.mjs
-
-      - name: Fetch history-map KML and viewer coordinates
-        run: node scripts/bootstrap-history-viewer.mjs
-
-      - name: Validate map data
+      - name: Validate all map data
         run: node scripts/check-map-data.mjs
 
-      - name: Commit snapshots to PR branch
+      - name: Commit permanent guard to PR branch
         run: |
-          git restore scripts/bootstrap-google-lkg.mjs
-          git add map-data/snapshots/google-mymaps/
+          git add scripts/check-map-data.mjs
           if git diff --cached --quiet; then
-            echo "No snapshot changes"
+            echo "No guard changes"
             exit 0
           fi
           git config user.name "Anton Nazarov"
           git config user.email "antiokh@yandex.ru"
-          git commit -m "Add committed Google My Maps LKG snapshots"
+          git commit -m "Require LKG for active Google My Maps"
           git push origin HEAD:agent/google-mymaps-lkg
