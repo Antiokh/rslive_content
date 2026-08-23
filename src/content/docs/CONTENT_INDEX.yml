@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-18
+# Last updated: 2026-08-23
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -452,6 +452,17 @@ pages:
     link_when:
       - нужно понять как добраться
       - вопросы о маршрутах
+    anchors: []
+
+  - url: /move/travel/turkey/
+    title: 'Пересадка через Турцию: IST, SAW и прилёт в Белград'
+    tags: [Турция, Стамбул, пересадка, аэропорт, IST, SAW, BEG, Havaist, офлайн]
+    aliases: [пересадка в Стамбуле, Istanbul Airport, Sabiha Gokcen, смена аэропорта IST SAW, перелёт через Турцию]
+    link_when:
+      - маршрут в Сербию проходит через Стамбул
+      - нужна офлайн-инструкция по IST или SAW
+      - нужно сменить аэропорт IST и SAW
+      - нужны схема BEG и действия после прилёта
     anchors: []
 
   - url: /move/prepare/
@@ -1994,7 +2005,7 @@ pages:
     anchors: []
   - url: /blog/kak_v_serbii_otnosjatsja_k_russkim/
     title: "Как в Сербии относятся к русским?"
-    tags: ["блог", "Сербия", "Как в Сербии относятся к русским?"]
+    tags: ["блог", "Сербия", "Как в Сербии относятся к русским?", "Россия"]
     aliases: ["Как в Сербии относятся к русским?"]
     link_when:
       - "запрос связан с темой: В последние годы, особенно с увеличением миграции россиян в Сербию, интерес к тому, как местное население относится к русским, значительно возрос. Сербы и русские разделяют общие культурные, религиозные и исторические св"
