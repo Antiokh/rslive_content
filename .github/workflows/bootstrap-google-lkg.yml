@@ -1,0 +1,34 @@
+name: Bootstrap Google My Maps LKG
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap:
+    if: github.head_ref == 'agent/google-mymaps-lkg'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Fetch and normalize missing Google My Maps snapshots
+        run: node scripts/bootstrap-google-lkg.mjs
+
+      - name: Validate map data
+        run: node scripts/check-map-data.mjs
+
+      - name: Upload generated LKG files
+        uses: actions/upload-artifact@v4
+        with:
+          name: google-mymaps-lkg
+          path: |
+            map-data/snapshots/google-mymaps/
+            /tmp/google-lkg-summary.json
+          if-no-files-found: error
+          retention-days: 1
