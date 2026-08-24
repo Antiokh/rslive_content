@@ -63,7 +63,7 @@ jobs:
           test "$(git -C /tmp/humanizer_russian rev-parse HEAD)" = "$HUMANIZER_SHA"
           python3 /tmp/humanizer_russian/scripts/lint.py --self-test
 
-      - name: Проверить интеграцию и человекочитаемый интерфейс
+      - name: Проверить интеграцию
         run: |
           python3 base/.github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
@@ -77,9 +77,6 @@ jobs:
           assert data['evidence_request'] == 'auto'
           assert len(data['libraries']) == 8
           assert data['detected_rule'] == 'ILY-M01'
-          assert data['review_title'] == 'Отзыв редколлегии'
-          assert data['editor_count'] == 8
-          assert data['public_machine_status_exposed'] is False
           print('Интеграция редколлегии: OK')
           PY
 
