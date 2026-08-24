@@ -37,7 +37,7 @@ Root-level файлы `map-data/`, включая `map-data/README.md`, не п�
 Для поведения приложения и MDX-компонентов:
 
 1. текущий исходный код в `Antiokh/rslive.ru`;
-2. `astro/astro.config.mjs` и `astro/CUSTOMIZATION_INVENTORY.md`;
+2. `astro/config/mdx-components.config.mjs`, `astro/astro.config.mjs` и `astro/CUSTOMIZATION_INVENTORY.md`;
 3. документация по компонентам в `Antiokh/rslive_content`.
 
 Для юридических, налоговых, медицинских, миграционных, административных и других внешних фактов:
@@ -75,7 +75,7 @@ Gzip для карт — необязательная ручная оптими�
 Авторитетен для:
 
 - `astro/astro.config.mjs`;
-- глобального автоимпорта MDX-компонентов;
+- machine-readable registry публичных MDX-компонентов и автоимпортов в `astro/config/mdx-components.config.mjs`;
 - реализации компонентов в `astro/src/components/`;
 - схем данных и динамических источников;
 - registry целевых регионов, `SerbiaMap`, renderer, Cache Storage manager и PWA-политики карт;
@@ -151,6 +151,7 @@ src/content/docs/arrival/index.mdx -> /arrival/
 
 Перед использованием или изменением компонентного паттерна дополнительно прочитайте в `Antiokh/rslive.ru`:
 
+- `astro/config/mdx-components.config.mjs`;
 - `astro/astro.config.mjs`;
 - исходник нужного компонента в `astro/src/components/`;
 - `astro/CUSTOMIZATION_INVENTORY.md`.
@@ -191,9 +192,7 @@ src/content/docs/arrival/index.mdx -> /arrival/
 
 ## Компонентная модель
 
-Общие компоненты автоимпортируются для MDX. Не добавляйте локальные импорты без технической необходимости.
-
-Текущий список компонентов определяется только `Antiokh/rslive.ru: astro/astro.config.mjs`. Документация по использованию находится в `docs/MDX_COMPONENTS.md`.
+Canonical MDX surface определяется `Antiokh/rslive.ru: astro/config/mdx-components.config.mjs`. Записи с `autoImport: true` доступны без локального импорта; запись с `autoImport: false` обозначает намеренное исключение. `astro.config.mjs` только подключает autoimport integration и не является списком компонентов. Документация по использованию находится в `docs/MDX_COMPONENTS.md`.
 
 Особенно сохраняйте:
 
@@ -207,12 +206,13 @@ src/content/docs/arrival/index.mdx -> /arrival/
 
 ## Изменение правил
 
-Если в `Antiokh/rslive.ru` добавлен, удалён или изменён автоимпортируемый компонент:
+Если в `Antiokh/rslive.ru` добавлен, удалён или изменён публичный MDX-компонент либо его autoimport policy:
 
-1. обновите `docs/MDX_COMPONENTS.md`;
-2. при необходимости обновите `CONTRIBUTING.md` и `AGENTS.md`;
-3. добавьте изменение в тот же PR или связанный PR в контентном репозитории;
-4. не оставляйте документацию с неподтверждёнными props.
+1. обновите `astro/config/mdx-components.config.mjs`;
+2. обновите соответствующую methodology и `docs/MDX_COMPONENTS.md`, если меняется редакторский API;
+3. выполните engine-проверки registry и production build;
+4. при необходимости обновите `CONTRIBUTING.md` и `AGENTS.md`;
+5. добавьте изменение в тот же PR или связанный PR в контентном репозитории и не оставляйте документацию с неподтверждёнными props.
 
 Если изменена структура контента:
 
@@ -225,4 +225,4 @@ src/content/docs/arrival/index.mdx -> /arrival/
 
 В инструкциях проекта укажите:
 
-> Перед любой работой с RSLive получай через GitHub актуальные `AGENTS.md`, `PROJECT_CONTEXT.md`, `README.md`, `CONTRIBUTING.md`, `docs/EDITORIAL_POLICY.md` и `src/content/docs/CONTENT_INDEX.yml` из ветки `main` репозитория `Antiokh/rslive_content`. Для компонентов получай актуальные `astro/astro.config.mjs`, `astro/CUSTOMIZATION_INVENTORY.md` и исходники нужных компонентов из ветки `main` репозитория `Antiokh/rslive.ru`. Не используй загруженные статические копии этих файлов как источник истины.
+> Перед любой работой с RSLive получай через GitHub актуальные `AGENTS.md`, `PROJECT_CONTEXT.md`, `README.md`, `CONTRIBUTING.md`, `docs/EDITORIAL_POLICY.md` и `src/content/docs/CONTENT_INDEX.yml` из ветки `main` репозитория `Antiokh/rslive_content`. Для компонентов получай актуальные `astro/config/mdx-components.config.mjs`, `astro/astro.config.mjs`, `astro/CUSTOMIZATION_INVENTORY.md` и исходники нужных компонентов из ветки `main` репозитория `Antiokh/rslive.ru`. Не используй загруженные статические копии этих файлов как источник истины.
