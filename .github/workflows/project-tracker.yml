@@ -36,7 +36,7 @@ jobs:
       EVENT_NAME: ${{ github.event_name }}
       PR_NODE_ID: ${{ github.event.pull_request.node_id }}
       PR_ACTION: ${{ github.event.action }}
-      GH_TOKEN: ${{ secrets.RSLIVE_PROJECT_TOKEN }}
+      GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
 
     steps:
       - name: Synchronize project items
@@ -45,8 +45,7 @@ jobs:
           set -euo pipefail
 
           if [ -z "${GH_TOKEN:-}" ]; then
-            echo "RSLIVE_PROJECT_TOKEN is not available to this workflow." >&2
-            echo "Create a dedicated token with only the permissions required for Project V2 and store it as this repository secret." >&2
+            echo "RSLIVE_CONTENT_SYNC_TOKEN is not available to this workflow." >&2
             exit 1
           fi
 
