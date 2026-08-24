@@ -180,7 +180,7 @@ arrival/boravak
 
 ## Компоненты
 
-Компоненты автоимпортируются. Не добавляйте повторяющиеся импорты вида:
+Компоненты с `autoImport: true` в canonical registry доступны без локального импорта. Не добавляйте повторяющиеся импорты вида:
 
 ```mdx
 import Aside from '@astrojs/starlight/components/Aside.astro';
@@ -206,7 +206,7 @@ import Aside from '@astrojs/starlight/components/Aside.astro';
 - `MermaidGraph` — Mermaid-диаграмма процессов и связей, а не статистический график;
 - `Countdown` — фиксированный или ежегодный счётчик даты.
 
-Полный синтаксис см. в `docs/MDX_COMPONENTS.md`. Перед использованием редкого компонента проверьте его текущий исходник в `Antiokh/rslive.ru`.
+Полный синтаксис см. в `docs/MDX_COMPONENTS.md`. Перед использованием редкого компонента проверьте `Antiokh/rslive.ru: astro/config/mdx-components.config.mjs` и текущий исходник компонента.
 
 ## Таблицы
 
@@ -239,9 +239,9 @@ import Aside from '@astrojs/starlight/components/Aside.astro';
 Если задача требует нового компонента или изменения props существующего:
 
 1. Вносите реализацию в `Antiokh/rslive.ru`.
-2. Обновите `astro/astro.config.mjs`, если нужен автоимпорт.
-3. Обновите `astro/CUSTOMIZATION_INVENTORY.md`.
-4. Обновите `docs/MDX_COMPONENTS.md` в этом репозитории.
+2. Обновите `astro/config/mdx-components.config.mjs`, если меняется публичный MDX surface или autoimport policy.
+3. Обновите соответствующую methodology и при необходимости `astro/CUSTOMIZATION_INVENTORY.md`.
+4. Обновите `docs/MDX_COMPONENTS.md` в этом репозитории, если меняется редакторский API.
 5. Не используйте новый синтаксис в контенте до появления реализации в основной ветке или согласованной связанной ветке.
 
 ## Update stack
