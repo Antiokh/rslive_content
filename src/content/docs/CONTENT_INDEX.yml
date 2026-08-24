@@ -1024,6 +1024,15 @@ pages:
       - англоязычному читателю нужно объяснить что такое RSLive
       - нужны редакционные принципы проекта на английском
     anchors: []
+  - url: /en/about/privacy/
+    locale: en
+    title: "Privacy Policy"
+    tags: ["английский", "RSLive", "privacy", "cookies", "local storage", "offline"]
+    aliases: ["RSLive Privacy Policy", "RSLive cookies", "RSLive local storage"]
+    link_when:
+      - "англоязычному читателю нужна политика конфиденциальности RSLive"
+      - "нужна информация о cookies, local storage, analytics или offline data на английском"
+    anchors: []
 
   - url: /en/about/stickers/
     locale: en
@@ -1123,6 +1132,15 @@ pages:
     link_when:
       - сербскому читателю нужно объяснить что такое RSLive
       - нужны принципы проекта на сербском
+    anchors: []
+  - url: /sr/about/privacy/
+    locale: sr
+    title: "Политика приватности"
+    tags: ["сербский", "RSLive", "приватност", "cookies", "локално складиштење", "офлајн"]
+    aliases: ["RSLive политика приватности", "RSLive cookies", "локално складиштење RSLive"]
+    link_when:
+      - "сербскому читателю нужна политика приватности RSLive"
+      - "нужна информация о cookies, локалном складиштењу, аналитици или офлајн подацима на сербском"
     anchors: []
 
   - url: /sr/about/stickers/
@@ -1708,6 +1726,14 @@ pages:
       - "нужно понять, как установить RSLive как приложение"
       - "нужно скачать, обновить или удалить офлайн-копию"
     anchors: []
+  - url: /about/privacy/
+    title: "Политика конфиденциальности"
+    tags: ["RSLive", "о проекте", "конфиденциальность", "cookies", "локальное хранение", "офлайн"]
+    aliases: ["политика конфиденциальности RSLive", "cookies RSLive", "хранение данных RSLive"]
+    link_when:
+      - "нужно понять, какие данные RSLive обрабатывает и хранит в браузере"
+      - "нужна информация о cookies, аналитике, локальном хранении или удалении данных"
+    anchors: []
   - url: /about/stickers/
     title: "Стикеры RSLive"
     tags: ["RSLive", "о проекте", "Стикеры RSLive"]
@@ -2137,38 +2163,6 @@ pages:
       - "запрос связан с темой: Навигационная страница к материалам о школе и зачислении ребёнка в Сербии"
       - "нужна информация по теме «Среднее образование»"
     anchors: []
-  - url: /cookie/banner/
-    title: "Cookies и хранение данных"
-    tags: ["cookies", "баннер", "локальное хранение", "уведомление"]
-    aliases: ["cookie banner", "уведомление cookies", "уведомление о хранении данных"]
-    link_when:
-      - "нужен текст уведомления о cookies и локальном хранении"
-      - "нужно понять, почему уведомление показывается на каждой странице до подтверждения"
-    anchors: []
-  - url: /cookie/delete/
-    title: "Удаление данных RSLive"
-    tags: ["политика сайта", "конфиденциальность", "cookies", "локальные данные", "офлайн-копия"]
-    aliases: ["удалить данные RSLive", "удалить cookies", "удалить офлайн-копию"]
-    link_when:
-      - "нужно удалить локальные данные, cookies или офлайн-копию RSLive"
-      - "нужно обратиться по поводу удаления персональных данных"
-    anchors: []
-  - url: /cookie/
-    title: "Cookies и хранение данных"
-    tags: ["cookies", "политика сайта", "конфиденциальность", "локальное хранение"]
-    aliases: ["cookie settings", "настройки cookies", "хранение данных RSLive"]
-    link_when:
-      - "нужно понять, какие данные RSLive хранит в браузере"
-      - "нужна навигация по privacy, cookies и локальному хранению"
-    anchors: []
-  - url: /cookie/policy/
-    title: "Политика конфиденциальности"
-    tags: ["политика сайта", "конфиденциальность", "cookies", "localStorage", "офлайн", "аналитика"]
-    aliases: ["Политика конфиденциальности", "privacy RSLive", "cookies RSLive"]
-    link_when:
-      - "нужно понять обработку технических данных, cookies и локального хранения RSLive"
-      - "нужны сведения о Google Analytics, Яндекс Метрике или правах по персональным данным"
-    anchors: []
   - url: /drive/buy/
     title: "Покупка автомобиля"
     tags: ["автомобиль", "транспорт", "покупка"]
@@ -2190,23 +2184,6 @@ pages:
     aliases: ["Регистрация автомобиля"]
     link_when:
       - "нужна информация по теме «Регистрация автомобиля»"
-    anchors: []
-  - url: /en/cookie/
-    locale: en
-    title: "Cookies"
-    tags: ["английский", "English"]
-    aliases: ["Cookies"]
-    link_when:
-      - "нужна информация по теме «Cookies»"
-    anchors: []
-  - url: /en/cookie/policy/
-    locale: en
-    title: "Privacy Policy"
-    tags: ["английский", "English", "политика"]
-    aliases: ["Privacy Policy"]
-    link_when:
-      - "запрос связан с темой: How RSLive processes technical data and website traffic statistics"
-      - "нужна информация по теме «Privacy Policy»"
     anchors: []
   - url: /gov/consul_prime/
     title: "Сервисное бюро «Консул Прайм»"
