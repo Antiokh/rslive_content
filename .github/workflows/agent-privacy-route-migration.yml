@@ -114,3 +114,5 @@ jobs:
           git add src/content/docs/CONTENT_INDEX.yml docs/updates/monthly/2026-08.md .github/workflows/agent-privacy-route-migration.yml
           git commit -m 'Finish privacy route migration'
           git push origin HEAD:agent/pwa-offline-guide
+
+# One-shot trigger refresh.
