@@ -1,4 +1,4 @@
-name: humanizer_russian editorial review
+name: Отзыв редколлегии
 
 on:
   pull_request:
@@ -9,15 +9,15 @@ permissions:
   pull-requests: write
 
 env:
-  HUMANIZER_SHA: ad90c24b8a5705f455fc387b2cd5b77a17959257
+  HUMANIZER_SHA: 81af17bcb18ae9364a9f94f4e2f849a68d3b1eee
 
 jobs:
   humanizer:
-    name: humanizer_russian advisory
+    name: Отзыв редколлегии
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout trusted review tooling
+      - name: Получить доверенный код проверки
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ github.event.pull_request.base.sha }}
@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Checkout proposed content
+      - name: Получить предложенный контент
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Collect changed MDX files
+      - name: Собрать список изменённых MDX-файлов
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         with:
           script: |
@@ -54,7 +54,7 @@ jobs:
               .map(file => file.filename);
             fs.writeFileSync('/tmp/humanizer-files.txt', mdx.join('\n'));
 
-      - name: Fetch pinned humanizer_russian
+      - name: Получить зафиксированную версию редколлегии
         run: |
           git init /tmp/humanizer_russian
           git -C /tmp/humanizer_russian remote add origin https://github.com/Antiokh/humanizer_russian.git
@@ -63,7 +63,7 @@ jobs:
           test "$(git -C /tmp/humanizer_russian rev-parse HEAD)" = "$HUMANIZER_SHA"
           python3 /tmp/humanizer_russian/scripts/lint.py --self-test
 
-      - name: Smoke-test extended Editorial Board integration
+      - name: Проверить интеграцию
         run: |
           python3 base/.github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
@@ -77,10 +77,10 @@ jobs:
           assert data['evidence_request'] == 'auto'
           assert len(data['libraries']) == 8
           assert data['detected_rule'] == 'ILY-M01'
-          print('humanizer_russian editorial smoke: OK')
+          print('Интеграция редколлегии: OK')
           PY
 
-      - name: Build humanizer_russian review
+      - name: Сформировать отзыв редколлегии
         run: |
           python3 base/.github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
@@ -89,10 +89,10 @@ jobs:
             --files /tmp/humanizer-files.txt \
             --output /tmp/humanizer-comment.md
 
-      - name: Add review to job summary
+      - name: Добавить отзыв в сводку запуска
         run: cat /tmp/humanizer-comment.md >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Create or update PR comment
+      - name: Создать или обновить комментарий
         if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build one advisory PR comment from humanizer_russian editorial-board findings."""
+"""Формирует человекочитаемый отзыв редколлегии для pull request."""
 
 from __future__ import annotations
 
@@ -13,24 +13,55 @@ from collections import Counter
 from pathlib import Path
 
 MARKER = "<!-- humanizer-russian-review -->"
+PUBLIC_TITLE = "Отзыв редколлегии"
 CYRILLIC = re.compile(r"[А-Яа-яЁё]")
 STYLE_ID = "rslive_content"
 REGISTER = "general"
 EVIDENCE_REQUEST = "auto"
 MAX_ITEMS_TOTAL = 40
-MAX_ITEMS_PER_FILE = 12
 FRONTMATTER_DELIMITER = "---"
+
+EDITORS = (
+    ("russian", "📚", "Русский язык", "Замечание по русскому языку"),
+    ("native", "💬", "Живой русский", "Замечание по живому русскому"),
+    ("chukovsky", "🪶", "Корней Чуковский", "Стилистическое замечание"),
+    ("gal", "✒️", "Нора Галь", "Стилистическое замечание"),
+    ("ilyakhov", "✂️", "Максим Ильяхов и Людмила Сарычева", "Редакторское замечание"),
+    ("visson", "🌍", "Линн Виссон", "Замечание по естественности русской речи"),
+    ("rosenthal", "📐", "Д. Э. Розенталь", "Замечание по русскому языку и стилю"),
+    ("golub", "🔎", "И. Б. Голуб", "Стилистическое замечание"),
+)
+EDITOR_INDEX = {editor_id: item for item in EDITORS for editor_id in [item[0]]}
+
+KNOWN_TITLES = {
+    "russian.foreign_word_in_russian_prose": "Иностранное слово в русском тексте",
+    "russian.unmarked_heading_candidate": "Возможный неразмеченный заголовок",
+    "russian.list_case_punctuation_alignment": "Пунктуация в списке",
+    "editing.action_hidden_in_nominalization": "Тяжёлая конструкция",
+    "native.context_undercompression": "Повтор уже названной информации",
+}
+
+KNOWN_REASONS = {
+    "editing.action_hidden_in_nominalization": (
+        "В предложении несколько существительных, обозначающих действия. "
+        "Проверьте, не станет ли фраза легче, если вернуть часть действий в глаголы."
+    ),
+    "native.context_undercompression": (
+        "Соседние предложения повторяют одни и те же смысловые слова. "
+        "Проверьте, можно ли сделать повтор компактнее, опираясь на уже сказанное."
+    ),
+}
 
 
 def load_humanizer(root: Path):
     scripts = root / "scripts"
     review_path = scripts / "review.py"
     if not review_path.is_file():
-        raise RuntimeError(f"Cannot find humanizer_russian review.py under {root}")
+        raise RuntimeError(f"Не найден humanizer_russian review.py в {root}")
     sys.path.insert(0, str(scripts))
     spec = importlib.util.spec_from_file_location("humanizer_russian_review", review_path)
     if spec is None or spec.loader is None:
-        raise RuntimeError(f"Cannot import humanizer_russian review from {review_path}")
+        raise RuntimeError(f"Не удалось загрузить humanizer_russian из {review_path}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -53,7 +84,7 @@ def finding_signature(finding: dict) -> tuple[str, ...]:
 
 
 def split_frontmatter(raw: str) -> tuple[str, str, bool]:
-    """Return front matter payload, body, and whether a YAML block was present."""
+    """Возвращает служебный YAML, основной текст и признак наличия YAML-блока."""
     lines = raw.splitlines()
     if not lines or lines[0].strip() != FRONTMATTER_DELIMITER:
         return "", raw, False
@@ -80,7 +111,7 @@ def _decode_scalar(value: str) -> str:
 
 
 def extract_frontmatter_text(frontmatter: str, key: str) -> str:
-    """Extract one top-level YAML text scalar without importing a YAML runtime."""
+    """Извлекает одно текстовое поле верхнего уровня без YAML-зависимости."""
     lines = frontmatter.splitlines()
     pattern = re.compile(rf"^{re.escape(key)}:\s*(.*)$")
     for index, line in enumerate(lines):
@@ -106,10 +137,12 @@ def extract_frontmatter_text(frontmatter: str, key: str) -> str:
 
 
 def editorial_input(raw: str) -> tuple[str, dict]:
-    """Build the review input: title + description + complete MDX body, no other front matter."""
+    """Готовит для проверки заголовок, описание и полный основной текст MDX."""
     frontmatter, body, had_frontmatter = split_frontmatter(raw)
     title = extract_frontmatter_text(frontmatter, "title") if had_frontmatter else ""
-    description = extract_frontmatter_text(frontmatter, "description") if had_frontmatter else ""
+    description = (
+        extract_frontmatter_text(frontmatter, "description") if had_frontmatter else ""
+    )
 
     parts: list[str] = []
     if title:
@@ -133,17 +166,24 @@ def editorial_input(raw: str) -> tuple[str, dict]:
 
 def is_russian_page(path: str, raw: str) -> bool:
     normalized = path.replace("\\", "/")
-    if normalized.startswith("src/content/docs/en/") or normalized.startswith("src/content/docs/sr/"):
+    if normalized.startswith("src/content/docs/en/") or normalized.startswith(
+        "src/content/docs/sr/"
+    ):
         return False
     text, _scope = editorial_input(raw)
     return len(CYRILLIC.findall(text)) >= 20
 
 
-def safe_inline(text: str, limit: int = 180) -> str:
+def safe_inline(text: str, limit: int = 220) -> str:
     value = re.sub(r"\s+", " ", str(text).strip()).replace("`", "ˋ")
     if len(value) > limit:
         value = value[: limit - 1].rstrip() + "…"
     return value
+
+
+def quote(text: str, limit: int = 360) -> list[str]:
+    value = safe_inline(text, limit)
+    return [f"> {value}"] if value else []
 
 
 def humanizer_sha(root: Path) -> str:
@@ -193,125 +233,95 @@ def delta_findings(head_report: dict, base_report: dict | None) -> list[dict]:
     return result
 
 
-def build_delta_board(humanizer, head_report: dict, findings: list[dict]) -> dict:
-    return humanizer.build_board(
-        findings,
-        head_report["style"],
-        evidence=head_report.get("evidence", []),
+def plural(number: int, forms: tuple[str, str, str]) -> str:
+    n = abs(number) % 100
+    n1 = n % 10
+    if 10 < n < 20:
+        return forms[2]
+    if n1 == 1:
+        return forms[0]
+    if 2 <= n1 <= 4:
+        return forms[1]
+    return forms[2]
+
+
+def finding_editor_id(finding: dict) -> str:
+    return str(finding.get("reviewer_id") or finding.get("library_id") or "")
+
+
+def visible_title(finding: dict, editor_id: str) -> str:
+    title = str(finding.get("display_rule_ru") or "").strip()
+    if title and CYRILLIC.search(title):
+        return safe_inline(title, 140)
+    phenomenon = str(finding.get("phenomenon_id") or "")
+    if phenomenon in KNOWN_TITLES:
+        return KNOWN_TITLES[phenomenon]
+    return EDITOR_INDEX.get(editor_id, ("", "", "", "Редакторское замечание"))[3]
+
+
+def visible_reason(finding: dict) -> str:
+    phenomenon = str(finding.get("phenomenon_id") or "")
+    if phenomenon in KNOWN_REASONS:
+        return KNOWN_REASONS[phenomenon]
+    reason = str(finding.get("reason") or "").strip()
+    if reason and CYRILLIC.search(reason):
+        return safe_inline(reason, 420)
+    return "Перечитайте этот фрагмент в контексте и решите, делает ли правка текст точнее или легче."
+
+
+def render_finding(record: dict, editor_id: str, show_path: bool) -> list[str]:
+    finding = record["finding"]
+    lines = [f"**{visible_title(finding, editor_id)}**", ""]
+    if show_path:
+        lines.extend([f"_Файл: `{record['path']}`_", ""])
+    line = int(finding.get("line", 0) or 0)
+    if line:
+        lines.extend([f"_Строка: {line}_", ""])
+    lines.extend(quote(finding.get("excerpt", "")))
+    if finding.get("excerpt"):
+        lines.append("")
+    lines.append(visible_reason(finding))
+    return lines
+
+
+def render_editor_section(
+    number: int,
+    editor: tuple[str, str, str, str],
+    records: list[dict],
+    total_count: int,
+    show_path: bool,
+) -> str:
+    editor_id, emoji, name, _fallback = editor
+    lines = [f"### {number}. {emoji} {name}", ""]
+    if total_count == 0:
+        lines.append("Замечаний нет. ✅")
+        return "\n".join(lines)
+
+    lines.append(
+        f"Найдено {total_count} {plural(total_count, ('замечание', 'замечания', 'замечаний'))}."
     )
+    if len(records) < total_count:
+        lines.append(f"Ниже показаны первые {len(records)}.")
+    lines.append("")
+
+    for index, record in enumerate(records, 1):
+        if total_count > 1:
+            lines.extend([f"#### {index}", ""])
+        lines.extend(render_finding(record, editor_id, show_path))
+        lines.append("")
+    return "\n".join(lines).rstrip()
 
 
-def reviewer_name(report: dict, reviewer_id: str) -> str:
-    return report.get("reviewers", {}).get(reviewer_id, {}).get("display_name", reviewer_id)
-
-
-def location(item: dict) -> str:
-    line = int(item.get("line", 0) or 0)
-    return f"строка {line}" if line else "метрика/весь текст"
-
-
-def render_guardrail(item: dict) -> list[str]:
-    lines = [
-        f"- **{item.get('project_class')} · `{safe_inline(item.get('rule_id'), 90)}` · {location(item)} · `{item.get('library_id')}`**",
-        f"  - Фрагмент: `{safe_inline(item.get('excerpt', ''))}`",
-    ]
-    if item.get("reason"):
-        lines.append(f"  - Основание: {safe_inline(item['reason'], 260)}")
-    if item.get("operation"):
-        lines.append(f"  - Операция: `{safe_inline(item['operation'], 120)}`")
-    return lines
-
-
-def render_group(group: dict, report: dict) -> list[str]:
-    lines = [
-        f"- **`{safe_inline(group.get('phenomenon_id'), 90)}` · {group.get('status')} → {group.get('recommendation')}**",
-        f"  - Фрагмент: `{safe_inline(group.get('excerpt', ''))}`",
-    ]
-    verdicts = []
-    for reviewer_id, verdict in sorted(group.get("reviewer_verdicts", {}).items()):
-        verdicts.append(f"{reviewer_name(report, reviewer_id)} — {verdict}")
-    if verdicts:
-        lines.append("  - Редакторы: " + "; ".join(verdicts))
-
-    reasons: list[str] = []
-    for finding in group.get("findings", []):
-        reason = safe_inline(finding.get("reason") or finding.get("rule_id"), 220)
-        label = reviewer_name(
-            report,
-            finding.get("reviewer_id") or finding.get("library_id") or "source",
-        )
-        row = f"{label}: {reason}"
-        if row not in reasons:
-            reasons.append(row)
-    for reason in reasons[:4]:
-        lines.append(f"  - {reason}")
-    if group.get("evidence"):
-        lines.append(f"  - Evidence: {len(group['evidence'])} item(s), не голоса редколлегии")
-    return lines
-
-
-def summarize_board(board: dict) -> Counter:
-    counts = Counter()
-    counts["guardrails"] = len(board.get("guardrails", []))
-    counts["groups"] = len(board.get("groups", []))
-    for group in board.get("groups", []):
-        counts[f"recommendation:{group.get('recommendation', 'REVIEW')}"] += 1
-        counts[f"status:{group.get('status', 'REVIEW')}"] += 1
-    return counts
-
-
-def scope_line(scope: dict) -> str:
+def scope_line(path: str, scope: dict) -> str:
+    title = "да" if scope["title_included"] else "нет"
+    description = "да" if scope["description_included"] else "нет"
+    yaml_note = "исключены" if scope["frontmatter_excluded"] else "не обнаружены"
     return (
-        "Review scope: **вся статья**; "
-        f"title {'✓' if scope['title_included'] else '—'}, "
-        f"description {'✓' if scope['description_included'] else '—'}, "
-        f"body {scope['body_chars']} символов, "
-        f"всего в редакторе {scope['review_chars']} символов; "
-        f"остальной front matter {'исключён' if scope['frontmatter_excluded'] else 'не обнаружен'}."
+        f"- `{path}` — заголовок: {title}; описание: {description}; "
+        f"основной текст: {scope['body_chars']} символов; "
+        f"всего проверено: {scope['review_chars']} символов; "
+        f"прочие служебные поля YAML: {yaml_note}."
     )
-
-
-def render_file_section(
-    rel: str,
-    report: dict,
-    board: dict,
-    scope: dict,
-    global_budget: list[int],
-) -> tuple[str, int]:
-    guardrails = board.get("guardrails", [])
-    groups = board.get("groups", [])
-    items = [("guardrail", item) for item in guardrails] + [("group", item) for item in groups]
-    scope_note = scope_line(scope)
-
-    if not items:
-        return (
-            f"<details><summary><code>{rel}</code> — clean delta</summary>\n\n"
-            f"{scope_note}\n\n"
-            "Новых deterministic editorial findings относительно base-версии нет.\n\n</details>",
-            0,
-        )
-
-    summary = summarize_board(board)
-    lines = [
-        f"<details open><summary><code>{rel}</code> — {summary['guardrails']} guardrails, {summary['groups']} editorial groups</summary>",
-        "",
-        scope_note,
-        "",
-    ]
-    omitted = 0
-    for kind, item in items[:MAX_ITEMS_PER_FILE]:
-        if global_budget[0] >= MAX_ITEMS_TOTAL:
-            omitted += 1
-            continue
-        global_budget[0] += 1
-        if kind == "guardrail":
-            lines.extend(render_guardrail(item))
-        else:
-            lines.extend(render_group(item, report))
-    if len(items) > MAX_ITEMS_PER_FILE:
-        omitted += len(items) - MAX_ITEMS_PER_FILE
-    lines.extend(["", "</details>"])
-    return "\n".join(lines), omitted
 
 
 def build_comment(
@@ -325,11 +335,10 @@ def build_comment(
     sha = humanizer_sha(humanizer_root)
     checked: list[str] = []
     skipped: list[str] = []
-    sections: list[str] = []
-    total = Counter()
-    omitted_total = 0
-    global_budget = [0]
+    scopes: dict[str, dict] = {}
     libraries_seen: set[str] = set()
+    records: list[dict] = []
+    board_summaries: list[dict] = []
 
     for rel in files:
         head_path = head_root / rel
@@ -342,6 +351,7 @@ def build_comment(
 
         checked.append(rel)
         head_text, head_scope = editorial_input(head_raw)
+        scopes[rel] = head_scope
         head_report = run_report(humanizer, head_text)
         libraries_seen.update(head_report.get("metrics", {}).keys())
 
@@ -353,79 +363,185 @@ def build_comment(
             base_report = run_report(humanizer, base_text)
 
         new_findings = delta_findings(head_report, base_report)
-        board = build_delta_board(humanizer, head_report, new_findings)
-        total.update(summarize_board(board))
-        section, omitted = render_file_section(
-            rel,
-            head_report,
-            board,
-            head_scope,
-            global_budget,
+        board = humanizer.build_board(
+            new_findings,
+            head_report["style"],
+            evidence=head_report.get("evidence", []),
         )
-        omitted_total += omitted
-        sections.append(section)
-
-    repo_link = "https://github.com/Antiokh/humanizer_russian"
-    commit_link = f"{repo_link}/commit/{sha}"
-    body = [
-        MARKER,
-        "## humanizer_russian — расширенная редколлегия",
-        "",
-        f"Проверено по [`Antiokh/humanizer_russian@{sha[:7]}`]({commit_link}).",
-        f"Режим: `editorial_board`, стиль `{STYLE_ID}`, register `{REGISTER}`, evidence `{EVIDENCE_REQUEST}`.",
-        "Для каждого изменённого MDX анализируется вся статья, а не diff: `title` + `description` + полный body. Остальной YAML front matter в редактор не передаётся.",
-        "Редколлегия получает полный deterministic output всех включённых knowledge libraries; в отличие от Compact, здесь нет фильтра только по DEFAULT mechanical findings.",
-        "Model-only правила и LLM-семантическая правка в GitHub runner не выполняются. Evidence со статусом `PROJECT` режим `auto` не включает.",
-        "**Это редакторская проверка, а не AI-detector и не оценка вероятности авторства.**",
-        "",
-    ]
-
-    if libraries_seen:
-        body.append(
-            f"Активные библиотеки ({len(libraries_seen)}): "
-            + ", ".join(f"`{item}`" for item in sorted(libraries_seen))
-            + "."
+        board_summaries.append(
+            {
+                "path": rel,
+                "guardrails": len(board.get("guardrails", [])),
+                "groups": len(board.get("groups", [])),
+                "board": board,
+            }
         )
-        body.append("")
+        for finding in new_findings:
+            records.append({"path": rel, "finding": finding})
+
+    body = [MARKER, f"## 📝 {PUBLIC_TITLE}", ""]
 
     if not checked:
-        body.extend(["Изменённых русскоязычных MDX-страниц для проверки нет.", ""])
-    else:
         body.extend(
             [
-                f"**Delta:** {total['guardrails']} guardrails, {total['groups']} editorial groups; "
-                f"CHANGE {total['recommendation:CHANGE']}, KEEP {total['recommendation:KEEP']}, "
-                f"REVIEW {total['recommendation:REVIEW']}, alternatives {total['recommendation:SHOW_ALTERNATIVES']}.",
-                "Сравнение идёт с base-версией полной статьи, поэтому старый редакционный долг не приписывается текущему PR.",
+                "Изменённых русскоязычных MDX-страниц для проверки нет.",
+                "",
+                "<details>",
+                "<summary>🔧 Технические сведения о проверке</summary>",
+                "",
+                f"Версия: [`Antiokh/humanizer_russian@{sha[:7]}`](https://github.com/Antiokh/humanizer_russian/commit/{sha}).",
+                "",
+                "</details>",
+            ]
+        )
+        return "\n".join(body).rstrip() + "\n"
+
+    counts = Counter(finding_editor_id(record["finding"]) for record in records)
+    active_editors = sum(1 for editor_id, *_rest in EDITORS if counts[editor_id])
+    total_findings = sum(counts[editor_id] for editor_id, *_rest in EDITORS)
+
+    if len(checked) == 1:
+        body.append("Редколлегия проверила всю изменённую русскоязычную статью.")
+    else:
+        body.append(
+            f"Редколлегия проверила все изменённые русскоязычные страницы ({len(checked)})."
+        )
+    body.append(
+        f"Замечания оставили {active_editors} из {len(EDITORS)} редакторов. "
+        f"Всего — {total_findings} "
+        f"{plural(total_findings, ('замечание', 'замечания', 'замечаний'))}."
+    )
+    body.append("")
+
+    for number, editor in enumerate(EDITORS, 1):
+        editor_id, emoji, name, _fallback = editor
+        count = counts[editor_id]
+        status = (
+            f"{count} {plural(count, ('замечание', 'замечания', 'замечаний'))}"
+            if count
+            else "замечаний нет"
+        )
+        body.append(f"{number}. {emoji} **{name}** — {status}.")
+    body.append("")
+
+    visible_records = records[:MAX_ITEMS_TOTAL]
+    records_by_editor: dict[str, list[dict]] = {editor_id: [] for editor_id, *_ in EDITORS}
+    for record in visible_records:
+        editor_id = finding_editor_id(record["finding"])
+        if editor_id in records_by_editor:
+            records_by_editor[editor_id].append(record)
+
+    show_path = len(checked) > 1
+    for number, editor in enumerate(EDITORS, 1):
+        editor_id = editor[0]
+        body.extend(
+            [
+                render_editor_section(
+                    number,
+                    editor,
+                    records_by_editor[editor_id],
+                    counts[editor_id],
+                    show_path,
+                ),
                 "",
             ]
         )
-        body.extend(sections)
-        body.append("")
+
+    omitted = max(0, len(records) - len(visible_records))
+    if omitted:
+        body.extend(
+            [
+                f"Ещё {omitted} {plural(omitted, ('замечание', 'замечания', 'замечаний'))} "
+                "не показано, чтобы комментарий оставался читаемым.",
+                "",
+            ]
+        )
+
+    repo_link = "https://github.com/Antiokh/humanizer_russian"
+    body.extend(
+        [
+            "<details>",
+            "<summary>🔧 Технические сведения о проверке</summary>",
+            "",
+            f"Проверено по [`Antiokh/humanizer_russian@{sha[:7]}`]({repo_link}/commit/{sha}).",
+            f"Внутренний режим: `{STYLE_ID}` / `editorial_board`; регистр: `{REGISTER}`; дополнительные данные: `{EVIDENCE_REQUEST}`.",
+            "Для каждого изменённого MDX отдельно проверяются полные версии до и после изменения. "
+            "В отзыв попадают только новые находки, поэтому старый редакционный долг не приписывается текущему PR.",
+            "",
+            "**Область проверки:**",
+            "",
+        ]
+    )
+    body.extend(scope_line(path, scopes[path]) for path in checked)
+
+    if libraries_seen:
+        body.extend(
+            [
+                "",
+                "**Активные внутренние библиотеки:** "
+                + ", ".join(f"`{item}`" for item in sorted(libraries_seen))
+                + ".",
+            ]
+        )
 
     if skipped:
-        body.append(
-            f"Пропущено {len(skipped)} EN/SR или нерусских MDX-файлов: "
-            + ", ".join(f"`{path}`" for path in skipped[:8])
-            + ("…" if len(skipped) > 8 else "")
+        body.extend(
+            [
+                "",
+                "Пропущены английские, сербские или нерусские MDX-файлы: "
+                + ", ".join(f"`{path}`" for path in skipped[:8])
+                + ("…" if len(skipped) > 8 else "")
+                + ".",
+            ]
         )
-        body.append("")
-    if omitted_total:
-        body.append(f"Ещё {omitted_total} пунктов скрыто, чтобы комментарий не превращался в простыню.")
-        body.append("")
 
-    if total["guardrails"]:
-        body.append("**Рекомендация:** сначала разберите `NORM`/`ARTIFACT` guardrails, затем решения редколлегии по стилю и употреблению.")
-    elif total["recommendation:CHANGE"] or total["recommendation:SHOW_ALTERNATIVES"]:
-        body.append("**Рекомендация:** применяйте CHANGE только после проверки фрагмента в контексте; конфликт источников сохраняйте как альтернативы, а не усредняйте.")
-    elif checked:
-        body.append("Новых actionable findings в изменённых русскоязычных страницах нет.")
+    body.extend(["", "**Машинные идентификаторы находок:**", ""])
+    if not records:
+        body.append("Новых машинных находок относительно базовой версии нет.")
+    else:
+        for record in records[:MAX_ITEMS_TOTAL]:
+            finding = record["finding"]
+            body.append(
+                "- "
+                f"`{record['path']}` · "
+                f"`{finding.get('library_id')}` · "
+                f"`{finding.get('rule_id')}` · "
+                f"`{finding.get('phenomenon_id')}` · "
+                f"`{finding.get('project_class')}` · "
+                f"`{finding.get('verdict')}`"
+            )
 
+    body.extend(["", "**Внутренние решения коллегии:**", ""])
+    any_groups = False
+    for summary in board_summaries:
+        board = summary["board"]
+        for group in board.get("groups", [])[:MAX_ITEMS_TOTAL]:
+            any_groups = True
+            body.append(
+                "- "
+                f"`{summary['path']}` · "
+                f"`{group.get('phenomenon_id')}` · "
+                f"`{group.get('status')}` → `{group.get('recommendation')}`"
+            )
+    if not any_groups:
+        body.append("Новых редакционных групп относительно базовой версии нет.")
+
+    body.extend(
+        [
+            "",
+            "Это редакторская проверка текста. Она не определяет авторство и не оценивает вероятность использования ИИ.",
+            "",
+            "</details>",
+        ]
+    )
     return "\n".join(body).rstrip() + "\n"
 
 
 def self_test(humanizer, root: Path) -> dict:
-    clean_body = "Команда проводит проверку документов. Результат публикуют после проверки фактов."
+    clean_body = (
+        "Команда проводит проверку документов. "
+        "Результат публикуют после проверки фактов."
+    )
     title_case = f"""---
 title: "Командой осуществляется проведение проверки документов."
 description: "Краткое описание."
@@ -503,8 +619,37 @@ ogSticker: "Командой осуществляется проведение �
     metadata_delta = delta_findings(metadata_report, clean_report)
 
     assert any(item.get("rule_id") == "ILY-M01" for item in title_delta), title_delta
-    assert any(item.get("rule_id") == "ILY-M01" for item in description_delta), description_delta
-    assert not any(item.get("rule_id") == "ILY-M01" for item in metadata_delta), metadata_delta
+    assert any(
+        item.get("rule_id") == "ILY-M01" for item in description_delta
+    ), description_delta
+    assert not any(
+        item.get("rule_id") == "ILY-M01" for item in metadata_delta
+    ), metadata_delta
+
+    sample = {
+        "path": "src/content/docs/test/index.mdx",
+        "finding": {
+            "reviewer_id": "chukovsky",
+            "library_id": "chukovsky",
+            "rule_id": "CHUK-TEST",
+            "phenomenon_id": "editing.action_hidden_in_nominalization",
+            "display_rule_ru": "Тяжёлая конструкция",
+            "excerpt": "Проведение проверки осуществляется комиссией.",
+            "reason": "Проверьте, можно ли заменить существительное действием.",
+            "verdict": "REVIEW",
+        },
+    }
+    rendered = render_editor_section(
+        3,
+        EDITOR_INDEX["chukovsky"],
+        [sample],
+        1,
+        False,
+    )
+    assert "### 3. 🪶 Корней Чуковский" in rendered
+    assert "Тяжёлая конструкция" in rendered
+    assert "SINGLE_REVIEW" not in rendered
+    assert "→ REVIEW" not in rendered
 
     return {
         "humanizer_sha": humanizer_sha(root),
@@ -520,6 +665,9 @@ ogSticker: "Командой осуществляется проведение �
         "description_test_rule": "ILY-M01",
         "metadata_false_positive": False,
         "body_chars_checked": title_scope["body_chars"],
+        "review_title": PUBLIC_TITLE,
+        "editor_count": len(EDITORS),
+        "public_machine_status_exposed": False,
     }
 
 
@@ -545,7 +693,7 @@ def main() -> int:
     ]
     if missing:
         parser.error(
-            "required outside --self-test: "
+            "обязательные параметры вне --self-test: "
             + ", ".join("--" + name.replace("_", "-") for name in missing)
         )
 
