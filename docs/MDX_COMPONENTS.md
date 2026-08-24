@@ -1,60 +1,23 @@
 # MDX-компоненты RSLive
 
-Этот файл описывает компоненты, доступные в статьях `src/content/docs/**/*.mdx` без локальных импортов.
+Этот файл описывает редакторский синтаксис компонентов, используемых в статьях `src/content/docs/**/*.mdx`. Большинство публичных компонентов доступны без локальных импортов; намеренные исключения явно отмечаются в registry движка.
 
 ## Источник истины
 
 Перед использованием или изменением компонента проверяйте актуальную ветку `main` репозитория `Antiokh/rslive.ru`:
 
-- список автоимпортов: `astro/astro.config.mjs`;
+- machine-readable registry публичного MDX surface и автоимпортов: `astro/config/mdx-components.config.mjs`;
 - исходники кастомных компонентов: `astro/src/components/`;
 - реестр кастомизаций: `astro/CUSTOMIZATION_INVENTORY.md`;
 - общие рабочие решения: `astro/README.md`.
 
-При расхождении этого файла с кодом приоритет имеет текущий код компонента.
+При расхождении этого файла с registry или кодом приоритет имеет текущий код движка. Не поддерживайте здесь второй полный список компонентов: точный набор, тип источника и `autoImport` принадлежат registry.
 
 ## Автоимпорт
 
-Текущий список Starlight-компонентов:
+Запись registry с `autoImport: true` доступна в обычной статье без локального `import`. Не добавляйте ручные импорты для таких компонентов.
 
-```text
-Aside
-Badge
-Card
-CardGrid
-FileTree
-Icon
-LinkButton
-LinkCard
-Steps
-Tabs
-TabItem
-```
-
-Текущий список RSLive-компонентов:
-
-```text
-Accordion
-AccordionItem
-ContentInclude
-Countdown
-DataChart
-DiasporaChart
-EmbedFrame
-MapEmbed
-MermaidGraph
-SanityTable
-SmartTable
-StickerGallery
-Spoiler
-StructTable
-SupabaseChart
-SupabaseTable
-UplatnicaGenerator
-YouTube
-```
-
-Не добавляйте локальные `import` для этих компонентов в обычную статью.
+`TaxCalculator` — намеренное production-исключение с `autoImport: false`: существующие статьи с налоговым калькулятором сохраняют явный импорт. Не переносите этот паттерн на другие компоненты без изменения canonical registry и проверки сборки.
 
 ## Aside
 
@@ -552,6 +515,14 @@ ascending?: boolean = true
 
 Используйте только существующую таблицу и проверенную схему. Не ставьте `select="*"`, если в таблице есть служебные или приватные поля. Ошибка запроса и пустой набор считаются ошибкой сборки, а не тихим пустым графиком.
 
+## TaxCalculator
+
+Исходник: `astro/src/components/TaxCalculator.astro`.
+
+`TaxCalculator` зарегистрирован как публичный MDX-компонент с `autoImport: false`. Существующие production-страницы используют явный относительный импорт, потому что калькулятор намеренно не входит в глобальный autoimport set. Сохраняйте этот импорт при редактировании таких страниц; не копируйте его на другие компоненты, у которых registry задаёт `autoImport: true`.
+
+Публичная методика расчётов и контракт модели: `/methodology/tax-calculator/`. Перед изменением props, режимов или расчётной модели проверяйте текущий исходник и методику в движке.
+
 ## SmartTable
 
 Исходник: `astro/src/components/SmartTable.astro`.
@@ -745,10 +716,10 @@ stretchColumn?: string
 
 Новый компонент считается доступным для статей только после того, как в `Antiokh/rslive.ru`:
 
-1. добавлен исходник в `astro/src/components/`;
-2. компонент включён в `localMdxComponents` в `astro/astro.config.mjs` либо предусмотрен явный импорт;
-3. обновлён `astro/CUSTOMIZATION_INVENTORY.md`;
-4. выполнена сборка;
-5. обновлён этот файл.
+1. добавлен или выбран реальный источник компонента;
+2. добавлена запись в `astro/config/mdx-components.config.mjs` с публичным именем, source type, `autoImport` и документацией; для local-компонента также указываются `sourcePath` и methodology;
+3. обновлена соответствующая методика и, если нужно, `astro/CUSTOMIZATION_INVENTORY.md`;
+4. выполнены `npm run docs:mdx-registry`, `npm run test:config` и production build;
+5. обновлён этот usage guide, если новый компонент предназначен для редакторов статей.
 
-Не используйте предполагаемый компонент в контенте заранее.
+Не используйте предполагаемый компонент в контенте заранее. Явный local import допустим только как намеренное исключение с `autoImport: false` в canonical registry.

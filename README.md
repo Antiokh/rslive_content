@@ -360,22 +360,9 @@ MDX может принять Markdown-autolink за JSX.
 
 ## Компоненты MDX
 
-Движок автоматически импортирует общие компоненты. Не добавляйте локальные `import` для перечисленных компонентов.
+Точный публичный MDX surface определяется движком в `Antiokh/rslive.ru: astro/config/mdx-components.config.mjs`. Запись с `autoImport: true` доступна в обычной статье без локального `import`; исключения с `autoImport: false` сохраняют явный импорт. Не поддерживайте второй полный список компонентов в этом README.
 
-### Starlight
-
-```text
-Aside, Badge, Card, CardGrid, FileTree, Icon, LinkButton, LinkCard,
-Steps, Tabs, TabItem
-```
-
-### RSLive
-
-```text
-Accordion, AccordionItem, ContentInclude, Countdown, DiasporaChart,
-EmbedFrame, MapEmbed, MermaidGraph, SanityTable, SmartTable, StickerGallery,
-Spoiler, StructTable, SupabaseTable, UplatnicaGenerator, YouTube
-```
+Подробный синтаксис и редакторские правила находятся в [`docs/MDX_COMPONENTS.md`](docs/MDX_COMPONENTS.md). Перед использованием редкого компонента сверяйте registry и текущий исходник компонента в движке.
 
 ### Aside
 
