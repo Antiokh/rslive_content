@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-23
+# Last updated: 2026-08-24
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -1024,6 +1024,15 @@ pages:
       - англоязычному читателю нужно объяснить что такое RSLive
       - нужны редакционные принципы проекта на английском
     anchors: []
+  - url: /en/about/privacy/
+    locale: en
+    title: "Privacy Policy"
+    tags: ["английский", "RSLive", "privacy", "cookies", "local storage", "offline"]
+    aliases: ["RSLive Privacy Policy", "RSLive cookies", "RSLive local storage"]
+    link_when:
+      - "англоязычному читателю нужна политика конфиденциальности RSLive"
+      - "нужна информация о cookies, local storage, analytics или offline data на английском"
+    anchors: []
 
   - url: /en/about/stickers/
     locale: en
@@ -1123,6 +1132,15 @@ pages:
     link_when:
       - сербскому читателю нужно объяснить что такое RSLive
       - нужны принципы проекта на сербском
+    anchors: []
+  - url: /sr/about/privacy/
+    locale: sr
+    title: "Политика приватности"
+    tags: ["сербский", "RSLive", "приватност", "cookies", "локално складиштење", "офлајн"]
+    aliases: ["RSLive политика приватности", "RSLive cookies", "локално складиштење RSLive"]
+    link_when:
+      - "сербскому читателю нужна политика приватности RSLive"
+      - "нужна информация о cookies, локалном складиштењу, аналитици или офлајн подацима на сербском"
     anchors: []
 
   - url: /sr/about/stickers/
@@ -1700,6 +1718,22 @@ pages:
       - "запрос связан с темой: Кто развивает «Инструкцию по Сербии», как устроена редакционная работа и как предложить исправление или новый материал"
       - "нужна информация по теме «О проекте RSLive»"
     anchors: []
+  - url: /about/app/
+    title: "Приложение и офлайн-режим"
+    tags: ["RSLive", "приложение", "офлайн", "PWA", "автообновление"]
+    aliases: ["приложение RSLive", "RSLive офлайн", "офлайн-копия"]
+    link_when:
+      - "нужно понять, как установить RSLive как приложение"
+      - "нужно скачать, обновить или удалить офлайн-копию"
+    anchors: []
+  - url: /about/privacy/
+    title: "Политика конфиденциальности"
+    tags: ["RSLive", "о проекте", "конфиденциальность", "cookies", "локальное хранение", "офлайн"]
+    aliases: ["политика конфиденциальности RSLive", "cookies RSLive", "хранение данных RSLive"]
+    link_when:
+      - "нужно понять, какие данные RSLive обрабатывает и хранит в браузере"
+      - "нужна информация о cookies, аналитике, локальном хранении или удалении данных"
+    anchors: []
   - url: /about/stickers/
     title: "Стикеры RSLive"
     tags: ["RSLive", "о проекте", "Стикеры RSLive"]
@@ -2129,36 +2163,6 @@ pages:
       - "запрос связан с темой: Навигационная страница к материалам о школе и зачислении ребёнка в Сербии"
       - "нужна информация по теме «Среднее образование»"
     anchors: []
-  - url: /cookie/banner/
-    title: "banner"
-    tags: ["cookies", "баннер", "согласие"]
-    aliases: ["cookie banner", "баннер cookies"]
-    link_when:
-      - "нужна информация о баннере cookies и согласии пользователя"
-    anchors: []
-  - url: /cookie/delete/
-    title: "Политика удаления учётной записи"
-    tags: ["политика сайта", "конфиденциальность", "Политика удаления учётной записи"]
-    aliases: ["Политика удаления учётной записи"]
-    link_when:
-      - "запрос связан с темой: Мы уважаем право пользователей на контроль над своей личной информацией и предоставляем возможность удаления учётной записи по запросу. Если вы хотите удалить свою учётную запись, пожалуйста, свяжитесь с нами через Teleg"
-      - "нужна информация по теме «Политика удаления учётной записи»"
-    anchors: []
-  - url: /cookie/
-    title: "start"
-    tags: ["cookies", "политика сайта", "конфиденциальность"]
-    aliases: ["cookie settings", "настройки cookies"]
-    link_when:
-      - "нужна служебная страница раздела cookies"
-    anchors: []
-  - url: /cookie/policy/
-    title: "Политика конфиденциальности"
-    tags: ["политика сайта", "конфиденциальность", "политика"]
-    aliases: ["Политика конфиденциальности"]
-    link_when:
-      - "запрос связан с темой: Как RSLive обрабатывает технические данные и статистику посещений сайта"
-      - "нужна информация по теме «Политика конфиденциальности»"
-    anchors: []
   - url: /drive/buy/
     title: "Покупка автомобиля"
     tags: ["автомобиль", "транспорт", "покупка"]
@@ -2180,23 +2184,6 @@ pages:
     aliases: ["Регистрация автомобиля"]
     link_when:
       - "нужна информация по теме «Регистрация автомобиля»"
-    anchors: []
-  - url: /en/cookie/
-    locale: en
-    title: "Cookies"
-    tags: ["английский", "English"]
-    aliases: ["Cookies"]
-    link_when:
-      - "нужна информация по теме «Cookies»"
-    anchors: []
-  - url: /en/cookie/policy/
-    locale: en
-    title: "Privacy Policy"
-    tags: ["английский", "English", "политика"]
-    aliases: ["Privacy Policy"]
-    link_when:
-      - "запрос связан с темой: How RSLive processes technical data and website traffic statistics"
-      - "нужна информация по теме «Privacy Policy»"
     anchors: []
   - url: /gov/consul_prime/
     title: "Сервисное бюро «Консул Прайм»"

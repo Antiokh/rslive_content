@@ -1,0 +1,42 @@
+{
+  "date": "2026-08-24",
+  "hours": 24,
+  "generated_at": "2026-08-24T12:41:00+02:00",
+  "commit_count": 1,
+  "article_count": 4,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/about/app/index.mdx",
+      "title": "Приложение и офлайн-режим",
+      "live_url": "https://rslive.ru/about/app/",
+      "summaries": [
+        "Добавили простое объяснение установки RSLive как приложения, отдельного скачивания офлайн-копии, экономного обновления только изменившихся файлов, автообновления, работы без сети и удаления офлайн-данных"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/about/privacy/index.mdx",
+      "title": "Политика конфиденциальности",
+      "live_url": "https://rslive.ru/about/privacy/",
+      "summaries": [
+        "Перенесли сведения о конфиденциальности из отдельного /cookie/ в раздел «О проекте» и собрали на одной странице cookies, localStorage, sessionStorage, Cache Storage, настройки приложения и офлайн-копии, внешнюю аналитику, сроки хранения, удаление локальных данных и обращения по персональным данным",
+        "Убрали устаревшую модель пользовательской авторизации и отдельные страницы banner/delete; старые URL сохраняются через совместимые редиректы на единую политику"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/about/privacy/index.mdx",
+      "title": "Privacy Policy",
+      "live_url": "https://rslive.ru/en/about/privacy/",
+      "summaries": [
+        "Added a full English privacy page covering cookies, local browser storage, offline data, analytics, retention, removal of local data and data-subject requests"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/about/privacy/index.mdx",
+      "title": "Политика приватности",
+      "live_url": "https://rslive.ru/sr/about/privacy/",
+      "summaries": [
+        "Додата је пуна српска страница о приватности, cookies, локалном складиштењу, офлајн подацима, аналитици, роковима чувања, брисању локалних података и правима лица на које се подаци односе"
+      ]
+    }
+  ]
+}
