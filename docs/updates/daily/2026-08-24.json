@@ -1,9 +1,9 @@
 {
   "date": "2026-08-24",
   "hours": 24,
-  "generated_at": "2026-08-24T12:16:00+02:00",
+  "generated_at": "2026-08-24T12:41:00+02:00",
   "commit_count": 1,
-  "article_count": 5,
+  "article_count": 4,
   "articles": [
     {
       "repo_path": "src/content/docs/about/app/index.mdx",
@@ -14,35 +14,28 @@
       ]
     },
     {
-      "repo_path": "src/content/docs/cookie/index.mdx",
-      "title": "Cookies и хранение данных",
-      "live_url": "https://rslive.ru/cookie/",
-      "summaries": [
-        "Заменили пустую служебную страницу на понятную навигацию по cookies, локальному хранению, конфиденциальности, приложению и удалению данных; отдельно зафиксировали, что на сайте нет пользовательской авторизации"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/cookie/banner/index.mdx",
-      "title": "Cookies и хранение данных",
-      "live_url": "https://rslive.ru/cookie/banner/",
-      "summaries": [
-        "Убрали устаревшее утверждение о хранении данных авторизации и описали блокирующее уведомление: до подтверждения оно показывается на каждой странице и не допускает install/offline/update-предложения"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/cookie/policy/index.mdx",
+      "repo_path": "src/content/docs/about/privacy/index.mdx",
       "title": "Политика конфиденциальности",
-      "live_url": "https://rslive.ru/cookie/policy/",
+      "live_url": "https://rslive.ru/about/privacy/",
       "summaries": [
-        "Расширили политику фактическим локальным хранением RSLive: тема, состояние меню, подтверждение уведомления, дневные PWA-предложения, standalone-запуски, настройка автообновления и полная офлайн-копия; отдельно описали Google Analytics и Яндекс Метрику и добавили актуальные официальные источники по защите данных"
+        "Перенесли сведения о конфиденциальности из отдельного /cookie/ в раздел «О проекте» и собрали на одной странице cookies, localStorage, sessionStorage, Cache Storage, настройки приложения и офлайн-копии, внешнюю аналитику, сроки хранения, удаление локальных данных и обращения по персональным данным",
+        "Убрали устаревшую модель пользовательской авторизации и отдельные страницы banner/delete; старые URL сохраняются через совместимые редиректы на единую политику"
       ]
     },
     {
-      "repo_path": "src/content/docs/cookie/delete/index.mdx",
-      "title": "Удаление данных RSLive",
-      "live_url": "https://rslive.ru/cookie/delete/",
+      "repo_path": "src/content/docs/en/about/privacy/index.mdx",
+      "title": "Privacy Policy",
+      "live_url": "https://rslive.ru/en/about/privacy/",
       "summaries": [
-        "Убрали несуществующий сценарий удаления аккаунта и заменили его реальным порядком удаления офлайн-копии, cookies и локальных данных, сохранив отдельный маршрут для запросов по персональным данным"
+        "Added a full English privacy page covering cookies, local browser storage, offline data, analytics, retention, removal of local data and data-subject requests"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/about/privacy/index.mdx",
+      "title": "Политика приватности",
+      "live_url": "https://rslive.ru/sr/about/privacy/",
+      "summaries": [
+        "Додата је пуна српска страница о приватности, cookies, локалном складиштењу, офлајн подацима, аналитици, роковима чувања, брисању локалних података и правима лица на које се подаци односе"
       ]
     }
   ]
