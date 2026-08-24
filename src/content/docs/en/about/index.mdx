@@ -1,6 +1,6 @@
 ---
 title: "About RSLive"
-description: "The history of RSLive: from DokuWiki in 2024 to Astro/Starlight, a public content repository, offline access and the current editorial model."
+description: "The history of RSLive: from the first wiki in 2024 to the current site, offline access, language editions and an open editorial model."
 ogSticker: logo
 live: "https://rslive.ru/en/about/"
 ---
@@ -9,7 +9,7 @@ RSLive, the “Guide to Serbia”, is an open practical knowledge base about rel
 
 We started the project in October 2024 as a wiki. The goal was straightforward: collect useful information that was scattered across chats, personal guides, spreadsheets and official websites, and update it in one place instead of creating another parallel guide.
 
-Since then we have changed the engine, separated editorial content from the technical code, added automated checks, offline access and separate language editions. The core principle remains the same: knowledge should accumulate, be checked and be corrected while preserving its revision history.
+Since then the site, editing process and available features have changed. The core principle has not: we collect information, check it, correct errors and preserve the history of changes.
 
 ## How it began: not another guide
 
@@ -17,7 +17,7 @@ The first recorded page of what became RSLive was created on **3 October 2024**.
 
 On **13 October 2024**, a separate page titled “Why another guide?” recorded the original idea behind the project.[^1]
 
-By October 2024 there was already a large amount of information about life in Serbia: Telegram chats and channels, personal guides, blogs, spreadsheets, translations of rules, government websites and user experience. The main problem was not scarcity. The information was scattered and became outdated at different speeds.
+By then there was already a large amount of information about life in Serbia: Telegram chats and channels, personal guides, blogs, spreadsheets, translations of rules, government websites and user experience. The problem was not scarcity. The information was scattered and became outdated at different speeds.
 
 A personal guide records the situation at the time of publication. Later a law changes, a bank updates its requirements, an office moves or a link stops working. The old post continues to circulate, and correcting it may be impossible. Several versions of the same instruction then coexist.
 
@@ -31,11 +31,11 @@ RSLive was not designed as a personal blog. The early plan already included sect
 
 ## DokuWiki: the first version of the site
 
-We chose **DokuWiki** as the first engine. It provided the core wiki functions immediately: page creation and editing, internal links and revision history. That allowed us to collect material before building a custom publishing system.
+We chose **DokuWiki** as the first engine. It provided the basic things we needed immediately: pages, internal links, editing and revision history. That let us focus on the material instead of building a custom site from scratch.
 
-During autumn 2024 we added plugins for tables, presentation, approval workflows, address data and other tasks. On **5 November 2024**, RSLive opened a public DokuWiki bug report because the installation running on `rslive.ru` could not contact the plugin repository.[^2] The issue confirms that RSLive was already operating as a DokuWiki site and extending the standard system.
+As the project grew, we added tables, presentation tools and other functions. A public DokuWiki issue from **5 November 2024** confirms that RSLive was already running as a working wiki on `rslive.ru`.[^2]
 
-In January 2025 we moved the project to a new server. The technical Git history records **6 January 2025** with the commit message `new server! happy new year! temporary dokuwiki-test for combo plugin test`.[^3] The editorial corpus itself remained in place.
+In January 2025 we moved the project to a new server. The encyclopedia itself remained the same.[^3]
 
 At the same time we were moving material from thematic communities and personal notes into the common wiki. On **14 April 2025**, the author of the Telegram channel “Птичьи перелеты: Сербия” publicly wrote that she had joined “the project of a common WIKI about life in Serbia” and was moving her articles into RSLive.[^4]
 
@@ -43,35 +43,27 @@ This was the original model in practice: collect material from different authors
 
 ## Why we replaced DokuWiki
 
-As the corpus grew, the site depended increasingly on a live server and a collection of plugins. Tables, collapsible blocks, maps, forms, navigation and approval tools worked as separate extensions that had to be maintained together.
+As the encyclopedia grew, we needed a better mobile experience, fast search, stable links, useful previews for messaging apps, maps, interactive elements, language editions and offline access.
 
-At the same time we needed a better mobile interface, fast search, stable URLs, previews for messaging apps, more capable maps and tables, language editions and offline access.
-
-We decided to preserve the wiki model while replacing its technical implementation. For us, the wiki model means editable pages, revision history, linked material and collaborative work. It does not require one specific engine.
+DokuWiki had served the first stage well, but further development became increasingly difficult. We decided to preserve the wiki principle — editable pages, revision history, linked material and collaborative work — while changing the technical foundation.
 
 ## Spring 2026: migration to Astro and Starlight
 
-The major migration began on **30 April 2026**. The Git history shows us preparing the move, importing the DokuWiki corpus into MDX, configuring the new site, restoring required interface behaviour, checking old syntax and adding redirects from legacy addresses.[^5]
+The major migration began on **30 April 2026**. We moved the articles to **Astro and Starlight**, restored the functions people relied on and preserved old page addresses.[^5]
 
-The new foundation became **Astro and Starlight**, with publication through **Cloudflare Pages**. Most pages are now built in advance and published as ready files. This reduced dependence on one server having to assemble each page at request time.
+The migration was not just a copy of the text. The old articles already contained tables, step-by-step instructions, notes, maps, images and interactive elements. The replacement pages had to keep serving the same practical purpose.
 
-We did not migrate text alone. The old articles already contained tables, steps, notes, collapsible blocks, maps, images, internal links and specialised elements. The replacement pages had to preserve those practical functions.
+We also preserved old links. By then RSLive addresses already appeared in chats, bookmarks and other guides, so the move was not supposed to break them.[^5]
 
-We also preserved legacy URLs. RSLive links were already present in chats, bookmarks and other guides, so redirects were added for old routes.[^5]
+The new site replaced DokuWiki in early May. We kept the old version as an archive and continued using it to check that useful material had not disappeared during the move.[^5]
 
-The active DokuWiki was removed from the new engine in early May. We kept the old corpus as a historical archive and used it to check the completeness of the migration.[^5]
+## May 2026: open editing
 
-## 22 May 2026: a separate public content repository
+On **22 May 2026**, we opened the project texts for public editing through GitHub.[^6]
 
-On **22 May 2026**, we created the public `Antiokh/rslive_content` repository and moved the editorial corpus out of the site's technical repository.[^6]
+Proposed changes can now be inspected before publication: it is possible to see what is being corrected, who proposed it and what comments appeared during review. Accepted changes are then published on the site.[^7]
 
-After that, content and engine development became separate. Articles and editorial data live in the public repository. Astro, components, builds, search, maps and other implementation details remain in `Antiokh/rslive.ru`.
-
-A text correction can now be proposed without server access. GitHub shows the diff, the author of the change, review comments and the version that is ultimately accepted.
-
-A public RSLive announcement described the workflow directly: GitHub can be used to correct errors, update instructions, add material and submit changes for review; after acceptance, the site rebuilds automatically.[^7]
-
-The contribution workflow changed, but the original principle of a shared and correctable knowledge base remained.
+The editing method changed, but the original principle of a shared and correctable knowledge base remained.
 
 ## Migration review after launch
 
@@ -81,39 +73,37 @@ On **23 August 2026**, one such review of the old childbirth guide restored prac
 
 At the same time we formalised an editorial rule: the absence of an official source does not automatically make a practical observation useless. When information helps with preparation and does not contradict established facts, we preserve it as institutional practice or user experience and keep it separate from law and official procedure.[^9]
 
-By late August the historical DokuWiki corpus had been moved out of the site's working tree into a separate project archive. We use it to check provenance and recover useful details that may have disappeared in later edits.[^5]
+We keep the old DokuWiki as a historical archive. It helps us check where material came from and recover useful details that may disappear in later edits.[^5]
 
 ## Offline access, language editions and an open licence
 
-On **6 May 2026**, we added PWA support so RSLive could be installed as a web application. During August we expanded offline support into a complete local copy of first-party material. On **16 August 2026**, the project gained a complete first-party offline precache; later changes also included first-party map data in the offline copy.[^10]
-
-The offline copy makes it possible to save instructions in advance and open them without a network connection, for example while travelling, at an airport or inside an office.
+On **6 May 2026**, we added the ability to install RSLive as a web application. During August we expanded offline access so that material could be saved in advance and opened without a network connection, including while travelling, at an airport or inside an office.[^10]
 
 During summer 2026 we also began developing **selective English and Serbian editions**. We do not automatically translate the entire Russian encyclopedia. We create a separate language page when the material needs to work independently in that language. The English “About RSLive” and Serbian “О RSLive” pages were added on **8 August 2026**.[^11]
 
-On **23 August 2026**, we relicensed the editorial content under **Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)**.[^12] The licence allows covered text to be reused and adapted while preserving attribution and the ShareAlike terms.
+On **23 August 2026**, the editorial content moved to **Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)**.[^12] The licence allows covered text to be reused and adapted while preserving attribution and the same ShareAlike terms for derivative work.
 
 ## What changed, and what did not
 
-In less than two years we changed servers and engines, separated content from code, and added automated checks, language editions, an updates log, offline access and first-party map data. The main project rules remained stable.
+In less than two years we changed servers and engines, opened public editing, and added automated checks, language editions and offline access. The main project rules remained stable.
 
 - **Accumulate instead of starting over.** When we update material, we preserve useful information and correct what has become outdated.
 - **Correct errors openly.** We do not treat an article as a final version; we review corrections and preserve revision history.
 - **Separate levels of evidence.** We describe law, official procedure, institutional practice and user experience separately.
-- **Treat the engine as a tool.** DokuWiki helped us start quickly; Astro, Starlight, GitHub and offline support became necessary as the corpus and site requirements grew.
+- **Treat technology as a tool.** We change it when doing so helps us store, check and publish knowledge better.
 
 ## A short timeline
 
-- **3 October 2024:** the first start page of the future RSLive appears in the DokuWiki archive.[^1]
-- **13 October 2024:** we record the idea of a shared accumulating knowledge base instead of “another guide”.[^1]
-- **5 November 2024:** a public DokuWiki bug report records the live wiki at `rslive.ru`.[^2]
-- **6 January 2025:** the project is running on a new server.[^3]
-- **14 April 2025:** a public post records an independent author moving her material into RSLive.[^4]
-- **30 April to early May 2026:** we move the main corpus from DokuWiki to Astro/Starlight and Cloudflare Pages and restore required functions and legacy routes.[^5]
-- **22 May 2026:** we separate editorial content from the technical engine and create the public `rslive_content` repository.[^6]
-- **7–8 August 2026:** we expand the selective Serbian and English editions.[^11]
-- **16 August 2026:** we expand offline support into a complete local copy of core first-party material.[^10]
-- **23 August 2026:** we move editorial content to CC BY-SA 4.0 and continue auditing the old migration.[^8][^12]
+- **3 October 2024.** The first page of the future RSLive appears.[^1]
+- **13 October 2024.** We record the idea of a shared accumulating knowledge base instead of “another guide”.[^1]
+- **5 November 2024.** Public evidence records RSLive running on DokuWiki.[^2]
+- **6 January 2025.** The project moves to a new server.[^3]
+- **14 April 2025.** A public post records an independent author moving her material into RSLive.[^4]
+- **30 April to early May 2026.** We move the encyclopedia from DokuWiki to Astro and Starlight and preserve old links.[^5]
+- **22 May 2026.** We open the texts for public editing through GitHub.[^6]
+- **7–8 August 2026.** We expand the selective Serbian and English editions.[^11]
+- **August 2026.** We expand offline access.[^10]
+- **23 August 2026.** We move editorial content to CC BY-SA 4.0 and continue checking the old migration.[^8][^12]
 
 ## Editorial principles
 
@@ -122,15 +112,15 @@ In less than two years we changed servers and engines, separated content from co
 - **Practical value is preserved.** We do not remove a useful sequence of actions or dated user experience only because an official instruction does not mention it; we identify its evidential level instead.
 - **Currency.** We show the latest substantive change date and recheck time-sensitive information when editing.
 - **Correctability.** We preserve revision history. If you find an error, report it or propose a correction.
-- **Openness.** We publish the encyclopedia's texts in a [public repository](https://github.com/Antiokh/rslive_content) and distribute covered editorial content under CC BY-SA 4.0.
+- **Openness.** Project texts are open for review and proposed changes and are distributed under CC BY-SA 4.0.
 
 ## Who is responsible for the articles
 
-When an article has a named author, the author's name is displayed with the publication and included in structured metadata. For encyclopedic pages without personal authorship, the responsible publisher is the RSLive editorial project.
+When an article has a named author, the name is shown with the publication. For encyclopedic pages without personal authorship, the responsible publisher is the RSLive editorial project.
 
 An author profile identifies editorial authorship or contribution. It does not replace advice from a licensed lawyer, accountant, doctor or other regulated professional when such advice is required.
 
-During substantive review, current law and current primary sources take priority over an archived RSLive version. We use the archive to check provenance and preserve useful practical details.
+During substantive review, current law and current primary sources take priority over an archived RSLive version. We use the archive to check provenance and avoid losing useful practical details.
 
 ## How to propose a change
 
@@ -141,15 +131,15 @@ During substantive review, current law and current primary sources take priority
 
 See also [RSLive stickers](/en/about/stickers/) and [Pig Peter and the RSLive mascot](/en/pig-peter/).
 
-[^1]: The internal archive of the former RSLive DokuWiki is stored in `Antiokh/rslive_spy`: `sources/old/meta/start.changes`, `sources/old/pages/wiki/why.txt`, `sources/old/meta/wiki/why.changes` and `sources/old/pages/wiki/plan.txt`. The first start-page entry is dated 3 October 2024; the page explaining the project's purpose appeared on 13 October 2024.
-[^2]: DokuWiki GitHub issue [#4344](https://github.com/dokuwiki/dokuwiki/issues/4344), opened by Antiokh on 5 November 2024. The diagnostic information identifies the live `rslive.ru/doku.php` installation and DokuWiki 2024-02-06b “Kaos”.
-[^3]: Internal Git history of `Antiokh/rslive.ru`, commit `e133fbf27df36e191771aef886a2df54a9d62202`, 6 January 2025: `new server! happy new year! temporary dokuwiki-test for combo plugin test`.
+[^1]: The former RSLive DokuWiki archive records the first page on 3 October 2024 and the project-purpose page on 13 October 2024.
+[^2]: DokuWiki GitHub issue [#4344](https://github.com/dokuwiki/dokuwiki/issues/4344), opened on 5 November 2024, identifies the live RSLive DokuWiki site.
+[^3]: RSLive's internal change history records the move to a new server on 6 January 2025.
 [^4]: In a Telegram post dated 14 April 2025, the author of “Птичьи перелеты: Сербия” writes that she joined the “common WIKI about life in Serbia” and was moving her material there: [public channel archive](https://t.me/s/ptica_story/507).
-[^5]: Internal Git history of `Antiokh/rslive.ru` records the migration series from 30 April to 7 May 2026, including `Migrate DokuWiki corpus into Astro MDX`, restoration of site functions and legacy DokuWiki redirects. The historical corpus was later preserved under `Antiokh/rslive_spy: sources/old/`.
-[^6]: The public [`Antiokh/rslive_content`](https://github.com/Antiokh/rslive_content) repository was created on 22 May 2026. Commit [`c0f5ed45`](https://github.com/Antiokh/rslive_content/commit/c0f5ed45d9380dde515d544b3015413af603c5a4) records the initial synchronisation from `rslive.ru`.
-[^7]: The public RSLive LinkedIn page describes the move to a public content repository and the GitHub contribution workflow: [Instructions for Serbia](https://rs.linkedin.com/company/rslive-ru).
-[^8]: Public `rslive_content` Git history, commit [`d253adb`](https://github.com/Antiokh/rslive_content/commit/d253adb711aa8fe4e317b2013465b71105bd396e), 23 August 2026: a review of the legacy childbirth guide restored practical shopping categories and shops partly lost during the first migration.
+[^5]: RSLive's internal change history records the migration from DokuWiki to the new engine in late April and early May 2026, restoration of site functions, preservation of old addresses and later archiving of the old corpus.
+[^6]: RSLive's public GitHub history records the opening of a separate public space for project texts on 22 May 2026: [RSLive Content](https://github.com/Antiokh/rslive_content).
+[^7]: RSLive's public LinkedIn page announced that changes to the material could be proposed through GitHub: [Instructions for Serbia](https://rs.linkedin.com/company/rslive-ru).
+[^8]: A [23 August 2026 change](https://github.com/Antiokh/rslive_content/commit/d253adb711aa8fe4e317b2013465b71105bd396e) records the restoration of practical information partly lost during the first migration of the childbirth guide.
 [^9]: The [RSLive editorial policy](/about/editorial-policy/) requires law, official procedure, institutional practice and user experience to be separated and useful practical context to be preserved during fact-checking.
-[^10]: Internal Git history of `Antiokh/rslive.ru`: PWA support was added on 6 May 2026; commit `7fcb0f8a3887d30f2b1a5599c30ccdf7afd5407a` on 16 August 2026 added a complete first-party offline precache. Later changes included first-party map data in the complete offline copy.
-[^11]: Public `rslive_content` Git history: the [English About RSLive page](https://github.com/Antiokh/rslive_content/commit/cd2cba30177ffb6b4f57f564a6fc64135f6222a0) and the [Serbian О RSLive page](https://github.com/Antiokh/rslive_content/commit/66e6085417d022cbd8ca707276e4e11b8f6d06a6) were added on 8 August 2026. The Serbian edition also contains purpose-built practical pages rather than an automatic translation of the entire encyclopedia.
-[^12]: Public `rslive_content` Git history, merge commit [`5ad1083`](https://github.com/Antiokh/rslive_content/commit/5ad10830583a512aa9847bcb682ea8db80a64a76), 23 August 2026: RSLive editorial content was relicensed under CC BY-SA 4.0.
+[^10]: RSLive's internal change history records the installable web application in May 2026 and the expansion of offline access in August.
+[^11]: Public GitHub history records the English and Serbian About pages appearing on 8 August 2026: [English version](https://github.com/Antiokh/rslive_content/commit/cd2cba30177ffb6b4f57f564a6fc64135f6222a0), [Serbian version](https://github.com/Antiokh/rslive_content/commit/66e6085417d022cbd8ca707276e4e11b8f6d06a6).
+[^12]: The [licensing change](https://github.com/Antiokh/rslive_content/commit/5ad10830583a512aa9847bcb682ea8db80a64a76) records the move of editorial content to CC BY-SA 4.0 on 23 August 2026.
