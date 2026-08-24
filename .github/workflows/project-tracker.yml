@@ -6,12 +6,22 @@ on:
       - opened
       - reopened
       - closed
+      - ready_for_review
+      - converted_to_draft
+      - synchronize
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/project-tracker.yml
+  workflow_dispatch:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
-  group: rslive-project-pr-${{ github.event.pull_request.number }}
+  group: rslive-project-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: false
 
 jobs:
@@ -21,33 +31,24 @@ jobs:
     env:
       PROJECT_OWNER: Antiokh
       PROJECT_NUMBER: "1"
+      REPOSITORY_OWNER: ${{ github.repository_owner }}
+      REPOSITORY_NAME: ${{ github.event.repository.name }}
+      EVENT_NAME: ${{ github.event_name }}
       PR_NODE_ID: ${{ github.event.pull_request.node_id }}
       PR_ACTION: ${{ github.event.action }}
-      GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+      GH_TOKEN: ${{ secrets.RSLIVE_PROJECT_TOKEN }}
 
     steps:
-      - name: Add PR to project and update Status
+      - name: Synchronize project items
         shell: bash
         run: |
           set -euo pipefail
 
           if [ -z "${GH_TOKEN:-}" ]; then
-            echo "RSLIVE_CONTENT_SYNC_TOKEN is not available to this workflow." >&2
+            echo "RSLIVE_PROJECT_TOKEN is not available to this workflow." >&2
+            echo "Create a dedicated token with only the permissions required for Project V2 and store it as this repository secret." >&2
             exit 1
           fi
-
-          case "$PR_ACTION" in
-            opened|reopened)
-              target_status="In Progress"
-              ;;
-            closed)
-              target_status="Done"
-              ;;
-            *)
-              echo "Unsupported pull request action: $PR_ACTION" >&2
-              exit 1
-              ;;
-          esac
 
           metadata="$(gh api graphql \
             -f query='query($login: String!, $number: Int!) {
@@ -71,11 +72,6 @@ jobs:
 
           project_id="$(jq -r '.data.user.projectV2.id // empty' <<<"$metadata")"
           status_field_id="$(jq -r '.data.user.projectV2.field.id // empty' <<<"$metadata")"
-          status_option_id="$(jq -r --arg wanted "$target_status" '
-            .data.user.projectV2.field.options[]?
-            | select((.name | ascii_downcase) == ($wanted | ascii_downcase))
-            | .id
-          ' <<<"$metadata" | head -n 1)"
 
           if [ -z "$project_id" ]; then
             echo "Could not resolve user project $PROJECT_OWNER/$PROJECT_NUMBER." >&2
@@ -87,114 +83,210 @@ jobs:
             exit 1
           fi
 
-          if [ -z "$status_option_id" ]; then
-            echo "Status option '$target_status' was not found. Available options:" >&2
-            jq -r '.data.user.projectV2.field.options[]?.name' <<<"$metadata" >&2
-            exit 1
+          status_option_id() {
+            local wanted="$1"
+            local option_id
+
+            option_id="$(jq -r --arg wanted "$wanted" '
+              .data.user.projectV2.field.options[]?
+              | select((.name | ascii_downcase) == ($wanted | ascii_downcase))
+              | .id
+            ' <<<"$metadata" | head -n 1)"
+
+            if [ -z "$option_id" ]; then
+              echo "Status option '$wanted' was not found. Available options:" >&2
+              jq -r '.data.user.projectV2.field.options[]?.name' <<<"$metadata" >&2
+              exit 1
+            fi
+
+            printf '%s\n' "$option_id"
+          }
+
+          in_progress_option_id="$(status_option_id "In Progress")"
+          done_option_id="$(status_option_id "Done")"
+
+          find_project_item_id() {
+            local content_id="$1"
+            local cursor=""
+            local page=""
+            local item_id=""
+            local has_next=""
+
+            while :; do
+              if [ -z "$cursor" ]; then
+                page="$(gh api graphql \
+                  -f query='query($login: String!, $number: Int!) {
+                    user(login: $login) {
+                      projectV2(number: $number) {
+                        items(first: 100) {
+                          nodes {
+                            id
+                            content {
+                              ... on PullRequest { id }
+                              ... on Issue { id }
+                            }
+                          }
+                          pageInfo {
+                            hasNextPage
+                            endCursor
+                          }
+                        }
+                      }
+                    }
+                  }' \
+                  -f login="$PROJECT_OWNER" \
+                  -F number="$PROJECT_NUMBER")"
+              else
+                page="$(gh api graphql \
+                  -f query='query($login: String!, $number: Int!, $after: String!) {
+                    user(login: $login) {
+                      projectV2(number: $number) {
+                        items(first: 100, after: $after) {
+                          nodes {
+                            id
+                            content {
+                              ... on PullRequest { id }
+                              ... on Issue { id }
+                            }
+                          }
+                          pageInfo {
+                            hasNextPage
+                            endCursor
+                          }
+                        }
+                      }
+                    }
+                  }' \
+                  -f login="$PROJECT_OWNER" \
+                  -F number="$PROJECT_NUMBER" \
+                  -f after="$cursor")"
+              fi
+
+              item_id="$(jq -r --arg content "$content_id" '
+                .data.user.projectV2.items.nodes[]?
+                | select(.content.id == $content)
+                | .id
+              ' <<<"$page" | head -n 1)"
+
+              if [ -n "$item_id" ]; then
+                printf '%s\n' "$item_id"
+                return 0
+              fi
+
+              has_next="$(jq -r '.data.user.projectV2.items.pageInfo.hasNextPage' <<<"$page")"
+              if [ "$has_next" != "true" ]; then
+                return 0
+              fi
+
+              cursor="$(jq -r '.data.user.projectV2.items.pageInfo.endCursor // empty' <<<"$page")"
+              if [ -z "$cursor" ]; then
+                echo "Project pagination reported another page without an end cursor." >&2
+                exit 1
+              fi
+            done
+          }
+
+          sync_content() {
+            local content_id="$1"
+            local target_status="$2"
+            local option_id="$3"
+            local item_id=""
+
+            item_id="$(find_project_item_id "$content_id")"
+
+            if [ -z "$item_id" ]; then
+              item_id="$(gh api graphql \
+                -f query='mutation($project: ID!, $content: ID!) {
+                  addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
+                    item { id }
+                  }
+                }' \
+                -f project="$project_id" \
+                -f content="$content_id" \
+                --jq '.data.addProjectV2ItemById.item.id')"
+            fi
+
+            gh api graphql \
+              -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+                updateProjectV2ItemFieldValue(input: {
+                  projectId: $project
+                  itemId: $item
+                  fieldId: $field
+                  value: {singleSelectOptionId: $option}
+                }) {
+                  projectV2Item { id }
+                }
+              }' \
+              -f project="$project_id" \
+              -f item="$item_id" \
+              -f field="$status_field_id" \
+              -f option="$option_id" \
+              --silent
+
+            echo "Synchronized $content_id with Status='$target_status'."
+          }
+
+          if [ "$EVENT_NAME" = "pull_request_target" ]; then
+            case "$PR_ACTION" in
+              closed)
+                sync_content "$PR_NODE_ID" "Done" "$done_option_id"
+                ;;
+              opened|reopened|ready_for_review|converted_to_draft|synchronize)
+                sync_content "$PR_NODE_ID" "In Progress" "$in_progress_option_id"
+                ;;
+              *)
+                echo "Unsupported pull request action: $PR_ACTION" >&2
+                exit 1
+                ;;
+            esac
+            exit 0
           fi
 
-          item_id=""
-          cursor=""
+          echo "Backfilling all open pull requests from $REPOSITORY_OWNER/$REPOSITORY_NAME."
 
+          cursor=""
           while :; do
             if [ -z "$cursor" ]; then
               page="$(gh api graphql \
-                -f query='query($login: String!, $number: Int!) {
-                  user(login: $login) {
-                    projectV2(number: $number) {
-                      items(first: 100) {
-                        nodes {
-                          id
-                          content {
-                            ... on PullRequest { id }
-                            ... on Issue { id }
-                          }
-                        }
-                        pageInfo {
-                          hasNextPage
-                          endCursor
-                        }
-                      }
+                -f query='query($owner: String!, $name: String!) {
+                  repository(owner: $owner, name: $name) {
+                    pullRequests(states: OPEN, first: 100, orderBy: {field: CREATED_AT, direction: ASC}) {
+                      nodes { id number }
+                      pageInfo { hasNextPage endCursor }
                     }
                   }
                 }' \
-                -f login="$PROJECT_OWNER" \
-                -F number="$PROJECT_NUMBER")"
+                -f owner="$REPOSITORY_OWNER" \
+                -f name="$REPOSITORY_NAME")"
             else
               page="$(gh api graphql \
-                -f query='query($login: String!, $number: Int!, $after: String!) {
-                  user(login: $login) {
-                    projectV2(number: $number) {
-                      items(first: 100, after: $after) {
-                        nodes {
-                          id
-                          content {
-                            ... on PullRequest { id }
-                            ... on Issue { id }
-                          }
-                        }
-                        pageInfo {
-                          hasNextPage
-                          endCursor
-                        }
-                      }
+                -f query='query($owner: String!, $name: String!, $after: String!) {
+                  repository(owner: $owner, name: $name) {
+                    pullRequests(states: OPEN, first: 100, after: $after, orderBy: {field: CREATED_AT, direction: ASC}) {
+                      nodes { id number }
+                      pageInfo { hasNextPage endCursor }
                     }
                   }
                 }' \
-                -f login="$PROJECT_OWNER" \
-                -F number="$PROJECT_NUMBER" \
+                -f owner="$REPOSITORY_OWNER" \
+                -f name="$REPOSITORY_NAME" \
                 -f after="$cursor")"
             fi
 
-            item_id="$(jq -r --arg pr "$PR_NODE_ID" '
-              .data.user.projectV2.items.nodes[]?
-              | select(.content.id == $pr)
-              | .id
-            ' <<<"$page" | head -n 1)"
+            while IFS=$'\t' read -r pr_id pr_number; do
+              [ -n "$pr_id" ] || continue
+              echo "Backfill PR #$pr_number."
+              sync_content "$pr_id" "In Progress" "$in_progress_option_id"
+            done < <(jq -r '.data.repository.pullRequests.nodes[]? | [.id, (.number | tostring)] | @tsv' <<<"$page")
 
-            if [ -n "$item_id" ]; then
-              break
-            fi
-
-            has_next="$(jq -r '.data.user.projectV2.items.pageInfo.hasNextPage' <<<"$page")"
+            has_next="$(jq -r '.data.repository.pullRequests.pageInfo.hasNextPage' <<<"$page")"
             if [ "$has_next" != "true" ]; then
               break
             fi
 
-            cursor="$(jq -r '.data.user.projectV2.items.pageInfo.endCursor // empty' <<<"$page")"
+            cursor="$(jq -r '.data.repository.pullRequests.pageInfo.endCursor // empty' <<<"$page")"
             if [ -z "$cursor" ]; then
-              echo "Project pagination reported another page without an end cursor." >&2
+              echo "Pull request pagination reported another page without an end cursor." >&2
               exit 1
             fi
           done
-
-          if [ -z "$item_id" ]; then
-            item_id="$(gh api graphql \
-              -f query='mutation($project: ID!, $content: ID!) {
-                addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
-                  item { id }
-                }
-              }' \
-              -f project="$project_id" \
-              -f content="$PR_NODE_ID" \
-              --jq '.data.addProjectV2ItemById.item.id')"
-          fi
-
-          gh api graphql \
-            -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
-              updateProjectV2ItemFieldValue(input: {
-                projectId: $project
-                itemId: $item
-                fieldId: $field
-                value: {singleSelectOptionId: $option}
-              }) {
-                projectV2Item { id }
-              }
-            }' \
-            -f project="$project_id" \
-            -f item="$item_id" \
-            -f field="$status_field_id" \
-            -f option="$status_option_id" \
-            --silent
-
-          echo "PR synchronized to RSLive project with Status='$target_status'."
