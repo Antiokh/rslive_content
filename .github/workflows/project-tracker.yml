@@ -1,0 +1,200 @@
+name: Sync pull requests to RSLive project
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - closed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rslive-project-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  sync-project:
+    name: Sync PR status to RSLive project
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_OWNER: Antiokh
+      PROJECT_NUMBER: "1"
+      PR_NODE_ID: ${{ github.event.pull_request.node_id }}
+      PR_ACTION: ${{ github.event.action }}
+      GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+
+    steps:
+      - name: Add PR to project and update Status
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "RSLIVE_CONTENT_SYNC_TOKEN is not available to this workflow." >&2
+            exit 1
+          fi
+
+          case "$PR_ACTION" in
+            opened|reopened)
+              target_status="In Progress"
+              ;;
+            closed)
+              target_status="Done"
+              ;;
+            *)
+              echo "Unsupported pull request action: $PR_ACTION" >&2
+              exit 1
+              ;;
+          esac
+
+          metadata="$(gh api graphql \
+            -f query='query($login: String!, $number: Int!) {
+              user(login: $login) {
+                projectV2(number: $number) {
+                  id
+                  field(name: "Status") {
+                    ... on ProjectV2SingleSelectField {
+                      id
+                      options {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }' \
+            -f login="$PROJECT_OWNER" \
+            -F number="$PROJECT_NUMBER")"
+
+          project_id="$(jq -r '.data.user.projectV2.id // empty' <<<"$metadata")"
+          status_field_id="$(jq -r '.data.user.projectV2.field.id // empty' <<<"$metadata")"
+          status_option_id="$(jq -r --arg wanted "$target_status" '
+            .data.user.projectV2.field.options[]?
+            | select((.name | ascii_downcase) == ($wanted | ascii_downcase))
+            | .id
+          ' <<<"$metadata" | head -n 1)"
+
+          if [ -z "$project_id" ]; then
+            echo "Could not resolve user project $PROJECT_OWNER/$PROJECT_NUMBER." >&2
+            exit 1
+          fi
+
+          if [ -z "$status_field_id" ]; then
+            echo "Project does not expose a single-select field named Status." >&2
+            exit 1
+          fi
+
+          if [ -z "$status_option_id" ]; then
+            echo "Status option '$target_status' was not found. Available options:" >&2
+            jq -r '.data.user.projectV2.field.options[]?.name' <<<"$metadata" >&2
+            exit 1
+          fi
+
+          item_id=""
+          cursor=""
+
+          while :; do
+            if [ -z "$cursor" ]; then
+              page="$(gh api graphql \
+                -f query='query($login: String!, $number: Int!) {
+                  user(login: $login) {
+                    projectV2(number: $number) {
+                      items(first: 100) {
+                        nodes {
+                          id
+                          content {
+                            ... on PullRequest { id }
+                            ... on Issue { id }
+                          }
+                        }
+                        pageInfo {
+                          hasNextPage
+                          endCursor
+                        }
+                      }
+                    }
+                  }
+                }' \
+                -f login="$PROJECT_OWNER" \
+                -F number="$PROJECT_NUMBER")"
+            else
+              page="$(gh api graphql \
+                -f query='query($login: String!, $number: Int!, $after: String!) {
+                  user(login: $login) {
+                    projectV2(number: $number) {
+                      items(first: 100, after: $after) {
+                        nodes {
+                          id
+                          content {
+                            ... on PullRequest { id }
+                            ... on Issue { id }
+                          }
+                        }
+                        pageInfo {
+                          hasNextPage
+                          endCursor
+                        }
+                      }
+                    }
+                  }
+                }' \
+                -f login="$PROJECT_OWNER" \
+                -F number="$PROJECT_NUMBER" \
+                -f after="$cursor")"
+            fi
+
+            item_id="$(jq -r --arg pr "$PR_NODE_ID" '
+              .data.user.projectV2.items.nodes[]?
+              | select(.content.id == $pr)
+              | .id
+            ' <<<"$page" | head -n 1)"
+
+            if [ -n "$item_id" ]; then
+              break
+            fi
+
+            has_next="$(jq -r '.data.user.projectV2.items.pageInfo.hasNextPage' <<<"$page")"
+            if [ "$has_next" != "true" ]; then
+              break
+            fi
+
+            cursor="$(jq -r '.data.user.projectV2.items.pageInfo.endCursor // empty' <<<"$page")"
+            if [ -z "$cursor" ]; then
+              echo "Project pagination reported another page without an end cursor." >&2
+              exit 1
+            fi
+          done
+
+          if [ -z "$item_id" ]; then
+            item_id="$(gh api graphql \
+              -f query='mutation($project: ID!, $content: ID!) {
+                addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
+                  item { id }
+                }
+              }' \
+              -f project="$project_id" \
+              -f content="$PR_NODE_ID" \
+              --jq '.data.addProjectV2ItemById.item.id')"
+          fi
+
+          gh api graphql \
+            -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: $project
+                itemId: $item
+                fieldId: $field
+                value: {singleSelectOptionId: $option}
+              }) {
+                projectV2Item { id }
+              }
+            }' \
+            -f project="$project_id" \
+            -f item="$item_id" \
+            -f field="$status_field_id" \
+            -f option="$status_option_id" \
+            --silent
+
+          echo "PR synchronized to RSLive project with Status='$target_status'."
