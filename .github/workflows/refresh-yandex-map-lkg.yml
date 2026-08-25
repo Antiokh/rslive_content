@@ -1,4 +1,4 @@
-name: Refresh Yandex map LKG
+name: Подготовить офлайн-пакет для Яндекс карт
 
 on:
   schedule:
