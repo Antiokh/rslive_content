@@ -1,4 +1,4 @@
-name: Content quality
+name: Проверка качества контента
 
 on:
   pull_request_target:
