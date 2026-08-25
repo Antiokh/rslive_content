@@ -1,4 +1,4 @@
-name: Проверка качества контента
+name: Контент
 
 on:
   pull_request:
@@ -27,7 +27,7 @@ permissions:
 
 jobs:
   lint:
-    name: Проверка качества контента
+    name: Проверка качества
     runs-on: ubuntu-latest
     env:
       QC_BASE_SHA: ${{ github.event.before }}

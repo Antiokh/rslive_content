@@ -1,4 +1,4 @@
-name: Контракт входных данных редколлегии
+name: Редколлегия
 
 on:
   pull_request:
@@ -16,15 +16,15 @@ env:
 
 jobs:
   contract:
-    name: Контракт редколлегии
+    name: Оценка всей статьи
     runs-on: ubuntu-latest
     steps:
-      - name: Получить предложенный код интеграции
+      - name: Получение предложенного кода интеграции
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
 
-      - name: Получить зафиксированную версию редколлегии
+      - name: Получение зафиксированной версии редколлегии
         run: |
           git init /tmp/humanizer_russian
           git -C /tmp/humanizer_russian remote add origin https://github.com/Antiokh/humanizer_russian.git
@@ -32,10 +32,10 @@ jobs:
           git -C /tmp/humanizer_russian checkout --detach FETCH_HEAD
           test "$(git -C /tmp/humanizer_russian rev-parse HEAD)" = "$HUMANIZER_SHA"
 
-      - name: Проверить синтаксис адаптера
+      - name: Проверка синтаксиса адаптера
         run: python3 -m py_compile .github/scripts/humanizer_pr_review.py
 
-      - name: Проверить контракт полной статьи и интерфейс
+      - name: Оценка всей статьи проверена
         run: |
           python3 .github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
@@ -54,5 +54,5 @@ jobs:
           assert data['review_title'] == 'Отзыв редколлегии'
           assert data['editor_count'] == 8
           assert data['public_machine_status_exposed'] is False
-          print('Контракт редколлегии: OK')
+          print('Оценка всей статьи: OK')
           PY

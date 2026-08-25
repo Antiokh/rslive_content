@@ -1,4 +1,4 @@
-name: Проверка атрибуции
+name: Авторство
 
 on:
   pull_request:
