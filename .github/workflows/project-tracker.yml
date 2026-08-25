@@ -26,7 +26,7 @@ concurrency:
 
 jobs:
   sync-project:
-    name: Sync PR status to RSLive project
+    name: Синхронизация PR с проект-трекером
     runs-on: ubuntu-latest
     env:
       PROJECT_OWNER: Antiokh
@@ -39,7 +39,7 @@ jobs:
       GH_TOKEN: ${{ secrets.RSLIVE_PROJECT_TOKEN }}
 
     steps:
-      - name: Synchronize project items
+      - name: Синхронизировать PR с проект-трекером
         shell: bash
         run: |
           set -euo pipefail

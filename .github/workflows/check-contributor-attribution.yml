@@ -14,10 +14,11 @@ permissions:
 
 jobs:
   attribution:
+    name: Проверка атрибуции
     runs-on: ubuntu-latest
 
     steps:
-      - name: Reject AI tools in authorship metadata
+      - name: Проверить авторство коммитов
         uses: actions/github-script@v7
         with:
           script: |
