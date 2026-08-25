@@ -535,7 +535,7 @@ telegram | whatsapp | website | facebook | email | link
 
 ## Синхронизация и автодеплой
 
-Основной поток публикации:
+Основной поток публикации при наличии изменений в зеркалируемых путях:
 
 ```text
 push в Antiokh/rslive_content:main
@@ -549,6 +549,8 @@ push в Antiokh/rslive_content:main
 → статус rslive.ru / Cloudflare Pages на исходном контентном коммите
 ```
 
+Если после `rsync` в зеркалируемых путях нет фактических изменений, workflow не создаёт sync-коммит и не ждёт Cloudflare Pages. Вместо этого исходный content-коммит сразу получает успешный status `rslive.ru / Cloudflare Pages` с описанием `No mirrored content changes to deploy`.
+
 Несмотря на legacy-имя `notify-rslive-ru.yml`, workflow **не отправляет `repository_dispatch`**. Он сам выполняет полный public-runner publication flow и является действующим production workflow.
 
 Синхронизируются, в частности:
@@ -560,13 +562,17 @@ rslive_content/src/content/docs/
 rslive_content/src/content/docs/about/stickers/assets/svg/
 → rslive.ru/astro/src/assets/stickers/
 
-rslive_content/map-data/core/**
-→ rslive.ru/astro/public/maps/core/** и build-only map boundaries
+allowlisted файлы из rslive_content/map-data/core/
+→ rslive.ru/astro/public/maps/core/ и build-only map boundaries
 
 rslive_content/map-data/basemaps/**
-rslive_content/map-data/packs/cities/**
+→ rslive.ru/astro/public/maps/basemaps/
+
+allowlisted файлы из rslive_content/map-data/packs/cities/
+→ rslive.ru/astro/public/maps/packs/cities/
+
 rslive_content/map-data/snapshots/**
-→ соответствующие runtime map paths в rslive.ru/astro/
+→ rslive.ru/astro/public/maps/snapshots/
 ```
 
 Точный allowlist map-data и правила `--delete` определяет актуальный `.github/workflows/notify-rslive-ru.yml`; не дублируйте их по памяти в других документах.
@@ -591,11 +597,11 @@ RSLIVE_CONTENT_SYNC_TOKEN
 
 Если публикация не произошла, проверьте:
 
-1. workflow `Publish content to rslive.ru` в этом репозитории;
+1. workflow `Публикация в rslive.ru` в этом репозитории;
 2. `RSLIVE_CONTENT_SYNC_TOKEN` и его permissions;
 3. validation map-data в начале workflow;
-4. появился ли sync-коммит в `rslive.ru/main`;
-5. check run `Cloudflare Pages` на engine-коммите;
+4. если зеркалируемые пути изменились — появился ли sync-коммит в `rslive.ru/main`; если изменений нет — получил ли исходный commit success-status с описанием `No mirrored content changes to deploy`;
+5. для созданного engine-коммита — check run `Cloudflare Pages`;
 6. commit status `rslive.ru / Cloudflare Pages` на исходном content-коммите;
 7. MDX/build-ошибку в изменённых материалах;
 8. конфликтующий push в `rslive.ru/main` во время retry/rebase.
