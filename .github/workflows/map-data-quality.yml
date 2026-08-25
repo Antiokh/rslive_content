@@ -1,4 +1,4 @@
-name: Map data quality
+name: Проверка картографических данных
 
 on:
   pull_request:
