@@ -34,22 +34,22 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - name: Получить картографические данные
+      - name: Получение картографических данных
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Подготовить Node.js
+      - name: Подготовка Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
 
-      - name: Проверить синтаксис обновления снимков
+      - name: Проверка синтаксиса обновления снимков
         run: node --check scripts/refresh-yandex-lkg.mjs
 
-      - name: Проверить хеширование снимков Яндекса
+      - name: Проверка хеширования снимков Яндекса
         run: node scripts/check-yandex-lkg-utils.mjs
 
-      - name: Проверить сохранённые картографические данные
+      - name: Картографические данные проверены
         run: node scripts/check-map-data.mjs

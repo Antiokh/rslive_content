@@ -29,7 +29,7 @@ jobs:
     steps:
       # pull_request_target intentionally keeps the workflow itself on trusted main.
       # The PR checkout below is data-only: nothing from it is executed on the runner.
-      - name: Получить предложенный контент
+      - name: Получение предложенного контента
         uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
@@ -38,7 +38,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Получить текущий движок rslive.ru
+      - name: Получение текущего движка rslive.ru
         uses: actions/checkout@v4
         with:
           repository: Antiokh/rslive.ru
@@ -47,7 +47,7 @@ jobs:
           path: rslive-engine
           fetch-depth: 0
 
-      - name: Подготовить превью-ветку
+      - name: Подготовка превью-ветки
         id: mirror
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -132,7 +132,7 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
           echo "private_sha=$private_sha" >> "$GITHUB_OUTPUT"
 
-      - name: Дождаться публикации Cloudflare Pages
+      - name: Ожидание публикации Cloudflare Pages
         id: cloudflare
         if: steps.mirror.outputs.changed == 'true'
         env:
@@ -186,7 +186,7 @@ jobs:
           echo "conclusion=$conclusion" >> "$GITHUB_OUTPUT"
           echo "logs_url=$logs_url" >> "$GITHUB_OUTPUT"
 
-      - name: Создать или обновить отчёт о превью
+      - name: Обновление отчёта о превью
         if: always()
         env:
           GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
@@ -266,7 +266,7 @@ jobs:
               -f body="$(cat /tmp/preview-comment.md)" >/dev/null
           fi
 
-      - name: Завершить с ошибкой, если превью не опубликовано
+      - name: Результат публикации превью проверен
         if: steps.mirror.outputs.changed == 'true' && steps.cloudflare.outputs.state != 'success'
         run: exit 1
 
@@ -279,7 +279,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Удалить превью-ветку
+      - name: Удаление превью-ветки
         env:
           GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -288,7 +288,7 @@ jobs:
           preview_branch="content-pr-${PR_NUMBER}"
           gh api --method DELETE "repos/${ENGINE_REPO}/git/refs/heads/${preview_branch}" >/dev/null 2>&1 || true
 
-      - name: Отметить отчёт о превью как закрытый
+      - name: Отчёт о превью закрыт
         env:
           GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}

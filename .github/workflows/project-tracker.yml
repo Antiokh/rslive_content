@@ -39,7 +39,7 @@ jobs:
       GH_TOKEN: ${{ secrets.RSLIVE_PROJECT_TOKEN }}
 
     steps:
-      - name: Синхронизировать PR с проект-трекером
+      - name: Статусы PR синхронизированы с проект-трекером
         shell: bash
         run: |
           set -euo pipefail
