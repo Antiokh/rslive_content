@@ -1,4 +1,4 @@
-name: Check contributor attribution
+name: Проверка атрибуции
 
 on:
   pull_request:
