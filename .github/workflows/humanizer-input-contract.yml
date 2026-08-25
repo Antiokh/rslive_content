@@ -1,4 +1,4 @@
-name: Редколлегия · контракт
+name: Редколлегия
 
 on:
   pull_request:
@@ -16,7 +16,7 @@ env:
 
 jobs:
   contract:
-    name: Проверка входных данных
+    name: Оценка всей статьи
     runs-on: ubuntu-latest
     steps:
       - name: Получение предложенного кода интеграции
@@ -35,7 +35,7 @@ jobs:
       - name: Проверка синтаксиса адаптера
         run: python3 -m py_compile .github/scripts/humanizer_pr_review.py
 
-      - name: Контракт полной статьи и интерфейса проверен
+      - name: Оценка всей статьи проверена
         run: |
           python3 .github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
@@ -54,5 +54,5 @@ jobs:
           assert data['review_title'] == 'Отзыв редколлегии'
           assert data['editor_count'] == 8
           assert data['public_machine_status_exposed'] is False
-          print('Контракт редколлегии: OK')
+          print('Оценка всей статьи: OK')
           PY
