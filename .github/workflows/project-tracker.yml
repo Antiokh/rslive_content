@@ -1,4 +1,4 @@
-name: Sync pull requests to RSLive project
+name: Синхронизация в проект-трекер
 
 on:
   pull_request_target:
