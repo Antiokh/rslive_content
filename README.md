@@ -1,6 +1,6 @@
 # RSLive Content — контент энциклопедии «Инструкция по Сербии»
 
-[![Публикация rslive.ru](https://img.shields.io/github/actions/workflow/status/Antiokh/rslive_content/notify-rslive-ru.yml?branch=main&event=push&label=Публикация%20rslive.ru)](https://rslive.ru)
+[![Статус rslive.ru](https://img.shields.io/github/actions/workflow/status/Antiokh/rslive_content/notify-rslive-ru.yml?branch=main&event=push&label=Публикация%20rslive.ru)](https://rslive.ru)
 [![Статьи](https://rslive.ru/badges/articles.svg)](https://github.com/Antiokh/rslive_content/tree/main/src/content/docs)
 [![Стикеры](https://img.shields.io/github/directory-file-count/Antiokh/rslive_content/src/content/docs/about/stickers/assets/svg?type=file&extension=svg&label=%D1%81%D1%82%D0%B8%D0%BA%D0%B5%D1%80%D1%8B&color=7048e8)](https://rslive.ru/about/stickers/)
 [![Контрибьюторы](https://img.shields.io/github/contributors/Antiokh/rslive_content?label=%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%B8%D0%B1%D1%8C%D1%8E%D1%82%D0%BE%D1%80%D1%8B&color=2f9e44)](https://github.com/Antiokh/rslive_content/graphs/contributors)
