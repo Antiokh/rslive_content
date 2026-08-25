@@ -121,17 +121,17 @@ jobs:
             exit 0
           fi
 
-          changed_index_paths="$(git status --porcelain -- astro/src/content/docs | awk '{print $NF}' | grep '/index\\.mdx$' || true)"
-          changed_index_paths="$(printf '%s\\n' "$changed_index_paths" | while IFS= read -r path; do
+          changed_index_paths="$(git status --porcelain -- astro/src/content/docs | awk '{print $NF}' | grep '/index\.mdx$' || true)"
+          changed_index_paths="$(printf '%s\n' "$changed_index_paths" | while IFS= read -r path; do
             if [ -n "$path" ] && [ -f "$path" ]; then
-              printf '%s\\n' "$path"
+              printf '%s\n' "$path"
             fi
           done)"
-          changed_page_count="$(printf '%s\\n' "$changed_index_paths" | sed '/^$/d' | wc -l | tr -d ' ')"
+          changed_page_count="$(printf '%s\n' "$changed_index_paths" | sed '/^$/d' | wc -l | tr -d ' ')"
           preview_url=""
           preview_route=""
           if [ "$changed_page_count" -gt 0 ]; then
-            first_index_path="$(printf '%s\\n' "$changed_index_paths" | sed -n '1p')"
+            first_index_path="$(printf '%s\n' "$changed_index_paths" | sed -n '1p')"
             route="${first_index_path#astro/src/content/docs/}"
             route="${route%index.mdx}"
             preview_route="/${route}"
@@ -146,27 +146,40 @@ jobs:
             astro/public/maps/packs \
             astro/public/maps/snapshots \
             astro/data/map-boundaries
-          subject="$(printf '%s\\n' "$CONTENT_MESSAGE" | sed -n '1p')"
+
+          subject="$(printf '%s\n' "$CONTENT_MESSAGE" | sed -n '1p')"
           if [ -z "$subject" ]; then
             subject="Sync docs from rslive_content"
           fi
 
+          sync_subject="⇄ Content Sync. \"$subject\""
+          pr_number="$(printf '%s\n' "$subject" | sed -nE 's/^Merge pull request #([0-9]+) from .*/\1/p')"
+          if [ -n "$pr_number" ]; then
+            pr_title="$(printf '%s\n' "$CONTENT_MESSAGE" | sed -n '1d; /^[[:space:]]*$/d; p; q')"
+            if [ -n "$pr_title" ]; then
+              sync_subject="⇄ Content Sync. Merge PR #${pr_number} \"${pr_title}\""
+            else
+              sync_subject="⇄ Content Sync. Merge PR #${pr_number}"
+            fi
+          fi
+
           {
-            printf '%s [skip content-sync]\\n\\n' "$subject"
-            printf 'Original content commit message:\\n\\n'
-            printf '%s\\n\\n' "$CONTENT_MESSAGE"
-            printf 'Sync metadata:\\n\\n'
-            printf '%s\\n' "- Source repository: $CONTENT_REPO"
-            printf '%s\\n' "- Source commit: $CONTENT_SHA"
-            printf '%s\\n' "- Source URL: $CONTENT_URL"
+            printf '%s\n\n' "$sync_subject"
+            printf '[skip content-sync]\n\n'
+            printf 'Original content commit message:\n\n'
+            printf '%s\n\n' "$CONTENT_MESSAGE"
+            printf 'Sync metadata:\n\n'
+            printf '%s\n' "- Source repository: $CONTENT_REPO"
+            printf '%s\n' "- Source commit: $CONTENT_SHA"
+            printf '%s\n' "- Source URL: $CONTENT_URL"
             if [ -n "$CONTENT_AUTHOR" ]; then
               printf '%s' "- Source author: $CONTENT_AUTHOR"
               if [ -n "$CONTENT_AUTHOR_EMAIL" ]; then
                 printf ' <%s>' "$CONTENT_AUTHOR_EMAIL"
               fi
-              printf '\\n'
+              printf '\n'
             fi
-            printf '%s\\n' "- Sync workflow: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            printf '%s\n' "- Sync workflow: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
           } > /tmp/content-sync-commit-message.txt
 
           git commit -F /tmp/content-sync-commit-message.txt
