@@ -29,26 +29,27 @@ permissions:
 
 jobs:
   validate:
+    name: Проверка картографических данных
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
-      - name: Check out map data
+      - name: Получение картографических данных
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Set up Node.js
+      - name: Подготовка Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
 
-      - name: Syntax check scheduled refresher
+      - name: Проверка синтаксиса обновления снимков
         run: node --check scripts/refresh-yandex-lkg.mjs
 
-      - name: Check normalized Yandex snapshot hashing
+      - name: Проверка хеширования снимков Яндекса
         run: node scripts/check-yandex-lkg-utils.mjs
 
-      - name: Validate committed map data
+      - name: Картографические данные проверены
         run: node scripts/check-map-data.mjs

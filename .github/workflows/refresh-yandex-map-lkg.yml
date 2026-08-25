@@ -1,4 +1,4 @@
-name: Подготовить офлайн-пакет для Яндекс карт
+name: Обновление офлайн-пакета Яндекс Карт
 
 on:
   schedule:
@@ -23,11 +23,12 @@ concurrency:
 
 jobs:
   refresh:
+    name: Обновление офлайн-пакета Яндекс Карт
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
-      - name: Check out rslive_content
+      - name: Получение rslive_content
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -36,7 +37,7 @@ jobs:
           # run notify-rslive-ru.yml so the snapshot reaches the engine mirror.
           token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
 
-      - name: Check out current map engine
+      - name: Получение текущего движка карт
         uses: actions/checkout@v4
         with:
           repository: Antiokh/rslive.ru
@@ -46,23 +47,23 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Set up Node.js
+      - name: Подготовка Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
 
-      - name: Check normalized snapshot hashing
+      - name: Проверка хеширования снимков
         run: node scripts/check-yandex-lkg-utils.mjs
 
-      - name: Refresh allowlisted Yandex snapshots
+      - name: Обновление снимков Яндекс Карт
         env:
           RSLIVE_ENGINE_ASTRO: ${{ github.workspace }}/rslive-engine/astro
         run: node scripts/refresh-yandex-lkg.mjs
 
-      - name: Validate map data
+      - name: Проверка картографических данных
         run: node scripts/check-map-data.mjs
 
-      - name: Detect normalized snapshot changes
+      - name: Проверка изменений снимков
         id: changes
         run: |
           set -euo pipefail
@@ -75,7 +76,7 @@ jobs:
             printf '%s\n' "$changes"
           fi
 
-      - name: Commit refreshed LKG
+      - name: Обновлённые снимки сохранены в репозитории
         if: steps.changes.outputs.changed == 'true'
         run: |
           set -euo pipefail
