@@ -1,4 +1,4 @@
-name: Синхронизация в проект-трекер
+name: Проект-трекер
 
 on:
   pull_request_target:
@@ -26,7 +26,7 @@ concurrency:
 
 jobs:
   sync-project:
-    name: Синхронизация PR с проект-трекером
+    name: Синхронизация PR
     runs-on: ubuntu-latest
     env:
       PROJECT_OWNER: Antiokh

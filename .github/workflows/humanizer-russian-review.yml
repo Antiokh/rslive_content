@@ -1,4 +1,4 @@
-name: Отзыв редколлегии
+name: Редколлегия
 
 on:
   pull_request:
@@ -13,11 +13,11 @@ env:
 
 jobs:
   humanizer:
-    name: Отзыв редколлегии
+    name: Отзыв
     runs-on: ubuntu-latest
 
     steps:
-      - name: Получить доверенный код проверки
+      - name: Получение доверенного кода проверки
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ github.event.pull_request.base.sha }}
@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Получить предложенный контент
+      - name: Получение предложенного контента
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Собрать список изменённых MDX-файлов
+      - name: Сбор списка изменённых MDX-файлов
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         with:
           script: |
@@ -54,7 +54,7 @@ jobs:
               .map(file => file.filename);
             fs.writeFileSync('/tmp/humanizer-files.txt', mdx.join('\n'));
 
-      - name: Получить зафиксированную версию редколлегии
+      - name: Получение зафиксированной версии редколлегии
         run: |
           git init /tmp/humanizer_russian
           git -C /tmp/humanizer_russian remote add origin https://github.com/Antiokh/humanizer_russian.git
@@ -63,7 +63,7 @@ jobs:
           test "$(git -C /tmp/humanizer_russian rev-parse HEAD)" = "$HUMANIZER_SHA"
           python3 /tmp/humanizer_russian/scripts/lint.py --self-test
 
-      - name: Проверить интеграцию
+      - name: Проверка интеграции
         run: |
           python3 base/.github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
@@ -80,7 +80,7 @@ jobs:
           print('Интеграция редколлегии: OK')
           PY
 
-      - name: Сформировать отзыв редколлегии
+      - name: Формирование отзыва редколлегии
         run: |
           python3 base/.github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
@@ -89,10 +89,10 @@ jobs:
             --files /tmp/humanizer-files.txt \
             --output /tmp/humanizer-comment.md
 
-      - name: Добавить отзыв в сводку запуска
+      - name: Добавление отзыва в сводку запуска
         run: cat /tmp/humanizer-comment.md >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Создать или обновить комментарий
+      - name: Обновление комментария редколлегии
         if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:

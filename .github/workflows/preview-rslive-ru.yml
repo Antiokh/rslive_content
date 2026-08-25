@@ -1,4 +1,4 @@
-name: Подготовка превью для rslive.ru
+name: Превью rslive.ru
 
 on:
   pull_request_target:
@@ -18,7 +18,7 @@ env:
 
 jobs:
   deploy:
-    name: Подготовка превью
+    name: Подготовка
     if: >-
       github.event.action != 'closed' &&
       github.actor == github.repository_owner &&
@@ -271,7 +271,7 @@ jobs:
         run: exit 1
 
   cleanup:
-    name: Очистка превью
+    name: Очистка
     if: >-
       github.event.action == 'closed' &&
       github.event.pull_request.head.repo.full_name == github.repository &&
@@ -309,7 +309,7 @@ jobs:
             echo
             echo 'Служебная preview-ветка удалена и больше не обновляется.'
             if [ "$MERGED" = "true" ]; then
-              echo 'После merge публикацию отслеживает production-синхронизация `rslive.ru / Cloudflare Pages`.'
+              echo 'После merge публикацию отслеживает production-синхронизация `rslive.ru / Публикация`.'
             fi
           } > /tmp/preview-closed.md
 

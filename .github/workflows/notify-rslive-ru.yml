@@ -1,4 +1,4 @@
-name: Публикация в rslive.ru
+name: rslive.ru
 
 on:
   push:
@@ -15,11 +15,12 @@ concurrency:
 
 jobs:
   publish:
+    name: Синхронизация
     if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[skip content-sync]')
     runs-on: ubuntu-latest
 
     steps:
-      - name: Проверка rslive_content
+      - name: Получение rslive_content
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
@@ -27,7 +28,7 @@ jobs:
       - name: Проверка картографических данных
         run: node scripts/check-map-data.mjs
 
-      - name: Проверка выгрузки в rslive.ru
+      - name: Получение движка rslive.ru
         uses: actions/checkout@v4
         with:
           repository: Antiokh/rslive.ru
@@ -114,7 +115,7 @@ jobs:
           git config user.email "actions@github.com"
 
           if [ -z "$(git status --porcelain astro/src/content/docs astro/src/assets/stickers astro/public/maps/core astro/public/maps/basemaps astro/public/maps/packs astro/public/maps/snapshots astro/data/map-boundaries)" ]; then
-            echo "No content, sticker, or map changes to sync."
+            echo "Изменений контента, стикеров или карт для синхронизации нет."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "content_sha=$CONTENT_SHA" >> "$GITHUB_OUTPUT"
             exit 0
@@ -191,7 +192,7 @@ jobs:
           echo "preview_route=$preview_route" >> "$GITHUB_OUTPUT"
           echo "changed_page_count=$changed_page_count" >> "$GITHUB_OUTPUT"
 
-      - name: Отметка успешного прохождения выгрузки
+      - name: Публикация не требуется
         if: steps.sync_commit.outputs.changed == 'false'
         env:
           GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
@@ -200,8 +201,8 @@ jobs:
           set -euo pipefail
           gh api --method POST repos/Antiokh/rslive_content/statuses/"$CONTENT_SHA" \
             -f state="success" \
-            -f context="rslive.ru / Cloudflare Pages" \
-            -f description="No mirrored content changes to deploy" \
+            -f context="rslive.ru / Публикация" \
+            -f description="Публикация не требуется: изменений для сайта нет" \
             -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
       - name: Ожидание статуса сборки и выгрузки на Cloudflare
@@ -219,8 +220,8 @@ jobs:
           run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
           gh api --method POST repos/Antiokh/rslive_content/statuses/"$CONTENT_SHA" \
             -f state="pending" \
-            -f context="rslive.ru / Cloudflare Pages" \
-            -f description="Waiting for rslive.ru Cloudflare Pages deploy" \
+            -f context="rslive.ru / Публикация" \
+            -f description="Ожидание публикации сайта" \
             -f target_url="$run_url"
 
           cloudflare_json=""
@@ -235,13 +236,13 @@ jobs:
               fi
             fi
 
-            echo "Waiting for Cloudflare Pages check for $PRIVATE_SHA ($attempt/60)..."
+            echo "Ожидание Cloudflare Pages для $PRIVATE_SHA ($attempt/60)..."
             sleep 15
           done
 
           if [ -z "$cloudflare_json" ]; then
             state="error"
-            description="rslive.ru Cloudflare Pages check was not found"
+            description="Статус публикации Cloudflare Pages не найден"
             target_url="$run_url"
           else
             conclusion="$(printf '%s' "$cloudflare_json" | jq -r '.conclusion // ""')"
@@ -249,23 +250,23 @@ jobs:
             case "$conclusion" in
               success)
                 state="success"
-                description="rslive.ru Cloudflare Pages deploy succeeded"
+                description="Сайт опубликован"
                 if [ -n "$PREVIEW_URL" ]; then
                   target_url="$PREVIEW_URL"
                   if [ "${CHANGED_PAGE_COUNT:-0}" = "1" ]; then
-                    description="Deploy succeeded: $PREVIEW_ROUTE"
+                    description="Опубликована страница: $PREVIEW_ROUTE"
                   else
-                    description="Deploy succeeded: ${CHANGED_PAGE_COUNT:-multiple} pages changed"
+                    description="Опубликовано страниц: ${CHANGED_PAGE_COUNT:-несколько}"
                   fi
                 fi
                 ;;
               failure|timed_out|cancelled|action_required)
                 state="failure"
-                description="rslive.ru Cloudflare Pages deploy failed"
+                description="Публикация сайта завершилась ошибкой"
                 ;;
               *)
                 state="error"
-                description="rslive.ru Cloudflare Pages deploy ended: ${conclusion:-unknown}"
+                description="Публикация сайта завершена со статусом: ${conclusion:-неизвестно}"
                 ;;
             esac
           fi
@@ -273,7 +274,7 @@ jobs:
           args=(
             repos/Antiokh/rslive_content/statuses/"$CONTENT_SHA"
             -f state="$state"
-            -f context="rslive.ru / Cloudflare Pages"
+            -f context="rslive.ru / Публикация"
             -f description="$description"
           )
           if [ -n "${target_url:-}" ]; then

@@ -1,4 +1,4 @@
-name: Обновление офлайн-пакета Яндекс Карт
+name: Яндекс Карты
 
 on:
   schedule:
@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   refresh:
-    name: Обновление офлайн-пакета Яндекс Карт
+    name: Обновление офлайн-пакета
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
