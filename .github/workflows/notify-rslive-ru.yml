@@ -19,15 +19,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out rslive_content
+      - name: Проверка rslive_content
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - name: Validate map sources before destructive sync
+      - name: Проверка картографических данных
         run: node scripts/check-map-data.mjs
 
-      - name: Check out private rslive.ru
+      - name: Проверка выгрузки в rslive.ru
         uses: actions/checkout@v4
         with:
           repository: Antiokh/rslive.ru
@@ -36,7 +36,7 @@ jobs:
           path: rslive-engine
           fetch-depth: 0
 
-      - name: Copy public content, sticker sources, and map data
+      - name: Копирование контента, стикеров и карт
         run: |
           set -euo pipefail
           test -d src/content/docs
@@ -96,7 +96,7 @@ jobs:
 
           rsync -a --delete map-data/snapshots/ rslive-engine/astro/public/maps/snapshots/
 
-      - name: Commit and push synced changes
+      - name: Синхронизация и регистрация обновлений
         id: sync_commit
         working-directory: rslive-engine
         env:
@@ -191,7 +191,7 @@ jobs:
           echo "preview_route=$preview_route" >> "$GITHUB_OUTPUT"
           echo "changed_page_count=$changed_page_count" >> "$GITHUB_OUTPUT"
 
-      - name: Mark source commit when no mirror changes are needed
+      - name: Отметка успешного прохождения выгрузки
         if: steps.sync_commit.outputs.changed == 'false'
         env:
           GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
@@ -204,7 +204,7 @@ jobs:
             -f description="No mirrored content changes to deploy" \
             -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
-      - name: Wait for Cloudflare Pages and publish status
+      - name: Ожидание статуса сборки и выгрузки на Cloudflare
         if: steps.sync_commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
