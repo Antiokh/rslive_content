@@ -111,7 +111,7 @@ jobs:
           CONTENT_AUTHOR="$(git -C "$GITHUB_WORKSPACE" show -s --format=%an "$CONTENT_SHA")"
           CONTENT_AUTHOR_EMAIL="$(git -C "$GITHUB_WORKSPACE" show -s --format=%ae "$CONTENT_SHA")"
 
-          git config user.name "rslive_content sync"
+          git config user.name "rslive_content"
           git config user.email "actions@github.com"
 
           if [ -z "$(git status --porcelain astro/src/content/docs astro/src/assets/stickers astro/public/maps/core astro/public/maps/basemaps astro/public/maps/packs astro/public/maps/snapshots astro/data/map-boundaries)" ]; then
@@ -152,14 +152,14 @@ jobs:
             subject="Sync docs from rslive_content"
           fi
 
-          sync_subject="⇄ rslive_content sync. \"$subject\""
+          sync_subject="⇄ rslive_content: \"$subject\""
           pr_number="$(printf '%s\n' "$subject" | sed -nE 's/^Merge pull request #([0-9]+) from .*/\1/p')"
           if [ -n "$pr_number" ]; then
             pr_title="$(printf '%s\n' "$CONTENT_MESSAGE" | sed -n '1d; /^[[:space:]]*$/d; p; q')"
             if [ -n "$pr_title" ]; then
-              sync_subject="⇄ rslive_content sync. Merge PR #${pr_number} \"${pr_title}\""
+              sync_subject="⇄ rslive_content: Merge PR #${pr_number} \"${pr_title}\""
             else
-              sync_subject="⇄ rslive_content sync. Merge PR #${pr_number}"
+              sync_subject="⇄ rslive_content: Merge PR #${pr_number}"
             fi
           fi
 
