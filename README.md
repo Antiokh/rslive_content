@@ -44,7 +44,7 @@ Antiokh/rslive.ru: astro/src/content/docs/
 
 — синхронизируемое зеркало. Не используйте его как штатную точку редактирования: импорт из этого репозитория выполняется через `rsync --delete`, поэтому несогласованные изменения в зеркале могут быть перезаписаны.
 
-Обратная синхронизация из `rslive.ru` существует для совместимости и аварийных случаев, но обычная редакционная работа должна оставаться в `rslive_content`.
+Автоматической обратной синхронизации из `rslive.ru` в `rslive_content` нет. Это намеренно: публичный репозиторий является source of truth, а зеркало в движке — только runtime-копией.
 
 ## Быстрый старт для агента
 
@@ -120,7 +120,7 @@ RSLive — веб-энциклопедия по переезду и жизни �
 
 ```text
 .github/workflows/
-  notify-rslive-ru.yml       # уведомляет движок об изменениях контента
+  notify-rslive-ru.yml       # публикует content/stickers/map-data в движок и возвращает статус Cloudflare
 
 src/content/docs/
   CONTENT_INDEX.yml          # семантический индекс и карта перелинковки
@@ -535,27 +535,49 @@ telegram | whatsapp | website | facebook | email | link
 
 ## Синхронизация и автодеплой
 
-Основной поток публикации:
+Основной поток публикации при наличии изменений в зеркалируемых путях:
 
 ```text
 push в Antiokh/rslive_content:main
-→ .github/workflows/notify-rslive-ru.yml
-→ repository_dispatch: rslive-content-updated
-→ Antiokh/rslive.ru/.github/workflows/sync-docs-from-rslive-content.yml
-→ rsync src/content/docs/ в astro/src/content/docs/
-→ коммит в Antiokh/rslive.ru:main
-→ Cloudflare Pages build
+→ .github/workflows/notify-rslive-ru.yml (public GitHub Actions runner)
+→ validation map-data
+→ checkout Antiokh/rslive.ru:main с RSLIVE_CONTENT_SYNC_TOKEN
+→ rsync content + sticker SVG + allowlisted map-data в runtime-пути движка
+→ sync-коммит в Antiokh/rslive.ru:main
+→ Cloudflare Pages Git integration / npm run build
+→ public workflow ждёт check run Cloudflare Pages
 → статус rslive.ru / Cloudflare Pages на исходном контентном коммите
 ```
 
-Синхронизируется только:
+Если после `rsync` в зеркалируемых путях нет фактических изменений, workflow не создаёт sync-коммит и не ждёт Cloudflare Pages. Вместо этого исходный content-коммит сразу получает успешный status `rslive.ru / Cloudflare Pages` с описанием `No mirrored content changes to deploy`.
+
+Несмотря на legacy-имя `notify-rslive-ru.yml`, workflow **не отправляет `repository_dispatch`**. Он сам выполняет полный public-runner publication flow и является действующим production workflow.
+
+Синхронизируются, в частности:
 
 ```text
 rslive_content/src/content/docs/
 → rslive.ru/astro/src/content/docs/
+
+rslive_content/src/content/docs/about/stickers/assets/svg/
+→ rslive.ru/astro/src/assets/stickers/
+
+allowlisted файлы из rslive_content/map-data/core/
+→ rslive.ru/astro/public/maps/core/ и build-only map boundaries
+
+rslive_content/map-data/basemaps/**
+→ rslive.ru/astro/public/maps/basemaps/
+
+allowlisted файлы из rslive_content/map-data/packs/cities/
+→ rslive.ru/astro/public/maps/packs/cities/
+
+rslive_content/map-data/snapshots/**
+→ rslive.ru/astro/public/maps/snapshots/
 ```
 
-Файлы уровня репозитория — `README.md`, `LICENSE`, `.gitignore`, `.github/` и другие — не копируются в движок.
+Точный allowlist map-data и правила `--delete` определяет актуальный `.github/workflows/notify-rslive-ru.yml`; не дублируйте их по памяти в других документах.
+
+Файлы уровня репозитория — `README.md`, `LICENSE`, `.gitignore`, `.github/` и другие — в движок не копируются.
 
 Синхронизационные коммиты содержат:
 
@@ -563,23 +585,26 @@ rslive_content/src/content/docs/
 [skip content-sync]
 ```
 
-Маркер предотвращает бесконечный цикл между репозиториями. Не удаляйте эту проверку из workflow и не используйте маркер в обычных редакционных коммитах.
+Маркер сохраняется для совместимости и явной маркировки generated sync-коммитов. Не используйте его в обычных редакционных коммитах.
 
-Для синхронизации в обоих репозиториях используется Actions secret:
+Активный Actions secret находится в **этом публичном репозитории**:
 
 ```text
 RSLIVE_CONTENT_SYNC_TOKEN
 ```
 
+Он должен позволять workflow читать и изменять приватный `rslive.ru`, читать checks созданных engine-коммитов и публиковать commit statuses в `rslive_content`. Routine publication не зависит от одноимённого secret в приватном репозитории.
+
 Если публикация не произошла, проверьте:
 
-1. workflow `Notify rslive.ru about content changes` в этом репозитории;
-2. workflow `Sync docs from rslive_content` в `rslive.ru`;
-3. наличие и permissions `RSLIVE_CONTENT_SYNC_TOKEN`;
-4. commit status `rslive.ru / Cloudflare Pages`;
-5. лог Cloudflare Pages;
-6. MDX-ошибку в изменённой статье;
-7. конфликтующий push в `main` во время синхронизации.
+1. workflow `Публикация в rslive.ru` в этом репозитории;
+2. `RSLIVE_CONTENT_SYNC_TOKEN` и его permissions;
+3. validation map-data в начале workflow;
+4. если зеркалируемые пути изменились — появился ли sync-коммит в `rslive.ru/main`; если изменений нет — получил ли исходный commit success-status с описанием `No mirrored content changes to deploy`;
+5. для созданного engine-коммита — check run `Cloudflare Pages`;
+6. commit status `rslive.ru / Cloudflare Pages` на исходном content-коммите;
+7. MDX/build-ошибку в изменённых материалах;
+8. конфликтующий push в `rslive.ru/main` во время retry/rebase.
 
 ## Проверка сборки
 
