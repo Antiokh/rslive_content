@@ -1,7 +1,7 @@
 name: Проверка качества контента
 
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
       - synchronize
@@ -51,7 +51,7 @@ jobs:
           persist-credentials: false
 
       - name: Resolve pull request merge base
-        if: github.event_name == 'pull_request_target'
+        if: github.event_name == 'pull_request'
         working-directory: candidate
         env:
           BASE_REPOSITORY: ${{ github.repository }}
