@@ -1,4 +1,4 @@
-name: Publish content to rslive.ru
+name: Публикация в rslive.ru
 
 on:
   push:
