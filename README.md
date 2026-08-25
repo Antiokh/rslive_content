@@ -1,6 +1,7 @@
 # RSLive Content — контент энциклопедии «Инструкция по Сербии»
 
 [![Статьи](https://rslive.ru/badges/articles.svg)](https://github.com/Antiokh/rslive_content/tree/main/src/content/docs)
+[![Публикация rslive.ru](https://github.com/Antiokh/rslive_content/actions/workflows/notify-rslive-ru.yml/badge.svg?branch=main&event=push)](https://github.com/Antiokh/rslive_content/actions/workflows/notify-rslive-ru.yml?query=branch%3Amain+event%3Apush)
 [![Стикеры](https://img.shields.io/github/directory-file-count/Antiokh/rslive_content/src/content/docs/about/stickers/assets/svg?type=file&extension=svg&label=%D1%81%D1%82%D0%B8%D0%BA%D0%B5%D1%80%D1%8B&color=7048e8)](https://rslive.ru/about/stickers/)
 [![Контрибьюторы](https://img.shields.io/github/contributors/Antiokh/rslive_content?label=%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%B8%D0%B1%D1%8C%D1%8E%D1%82%D0%BE%D1%80%D1%8B&color=2f9e44)](https://github.com/Antiokh/rslive_content/graphs/contributors)
 
@@ -57,7 +58,7 @@ Antiokh/rslive.ru: astro/src/content/docs/
 5. Внесите минимальное связное изменение в `src/content/docs/**`.
 6. Обновите `CONTENT_INDEX.yml`, если изменились страницы, маршруты или контекст перелинковки.
 7. Проверьте MDX-синтаксис, сноски, ссылки и компоненты.
-8. После push в `main` дождитесь статуса `rslive.ru / Cloudflare Pages` на исходном коммите.
+8. После push в `main` дождитесь статуса `rslive.ru / Публикация` на исходном коммите.
 
 Если задача касается компонента, CSS, sidebar, поиска, API, PWA, редиректа, сборки или Cloudflare — это задача для [`Antiokh/rslive.ru`](https://github.com/Antiokh/rslive.ru), а не для этого репозитория.
 
@@ -546,10 +547,10 @@ push в Antiokh/rslive_content:main
 → sync-коммит в Antiokh/rslive.ru:main
 → Cloudflare Pages Git integration / npm run build
 → public workflow ждёт check run Cloudflare Pages
-→ статус rslive.ru / Cloudflare Pages на исходном контентном коммите
+→ статус rslive.ru / Публикация на исходном контентном коммите
 ```
 
-Если после `rsync` в зеркалируемых путях нет фактических изменений, workflow не создаёт sync-коммит и не ждёт Cloudflare Pages. Вместо этого исходный content-коммит сразу получает успешный status `rslive.ru / Cloudflare Pages` с описанием `No mirrored content changes to deploy`.
+Если после `rsync` в зеркалируемых путях нет фактических изменений, workflow не создаёт sync-коммит и не ждёт Cloudflare Pages. Вместо этого исходный content-коммит сразу получает успешный status `rslive.ru / Публикация` с описанием `Публикация не требуется: изменений для сайта нет`.
 
 Несмотря на legacy-имя `notify-rslive-ru.yml`, workflow **не отправляет `repository_dispatch`**. Он сам выполняет полный public-runner publication flow и является действующим production workflow.
 
@@ -597,12 +598,12 @@ RSLIVE_CONTENT_SYNC_TOKEN
 
 Если публикация не произошла, проверьте:
 
-1. workflow `Публикация в rslive.ru` в этом репозитории;
+1. workflow `rslive.ru` в этом репозитории;
 2. `RSLIVE_CONTENT_SYNC_TOKEN` и его permissions;
 3. validation map-data в начале workflow;
-4. если зеркалируемые пути изменились — появился ли sync-коммит в `rslive.ru/main`; если изменений нет — получил ли исходный commit success-status с описанием `No mirrored content changes to deploy`;
+4. если зеркалируемые пути изменились — появился ли sync-коммит в `rslive.ru/main`; если изменений нет — получил ли исходный commit success-status с описанием `Публикация не требуется: изменений для сайта нет`;
 5. для созданного engine-коммита — check run `Cloudflare Pages`;
-6. commit status `rslive.ru / Cloudflare Pages` на исходном content-коммите;
+6. commit status `rslive.ru / Публикация` на исходном content-коммите;
 7. MDX/build-ошибку в изменённых материалах;
 8. конфликтующий push в `rslive.ru/main` во время retry/rebase.
 
@@ -613,7 +614,7 @@ RSLIVE_CONTENT_SYNC_TOKEN
 Обычная удалённая проверка выполняется автоматически после push через `rslive.ru` и Cloudflare Pages. Результат возвращается в исходный коммит как:
 
 ```text
-rslive.ru / Cloudflare Pages
+rslive.ru / Публикация
 ```
 
 Для локальной полной проверки нужен приватный репозиторий движка. Если оба репозитория клонированы рядом:
@@ -659,7 +660,7 @@ npm run check
 - legacy DokuWiki-синтаксис не добавлен;
 - component props проверены по существующим примерам или коду движка;
 - новая страница связана с соседними статьями;
-- после push получен результат `rslive.ru / Cloudflare Pages`.
+- после push получен результат `rslive.ru / Публикация`.
 
 ## Связанная документация
 
