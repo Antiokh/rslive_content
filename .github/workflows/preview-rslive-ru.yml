@@ -1,4 +1,4 @@
-name: Preview content on rslive.ru
+name: Подготовка превью для rslive.ru
 
 on:
   pull_request_target:
