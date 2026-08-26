@@ -383,6 +383,26 @@ code: string
 
 Не вставляйте непроверенный Mermaid-код. Компонент использует `securityLevel: strict`.
 
+## RelocationWizard
+
+Исходник: `astro/src/components/RelocationWizard.astro`.
+
+`RelocationWizard` — персональный навигатор по уже существующим статьям RSLive. Компонент не принимает props: вопросы, фазы и правила рекомендаций принадлежат конфигурации движка.
+
+```mdx
+<RelocationWizard />
+```
+
+Правила:
+
+- компонент зарегистрирован с `autoImport: true`; локальный `import` не добавляйте;
+- используйте его как навигационный вход в энциклопедию, а не как замену юридическому, административному или медицинскому содержанию статьи;
+- не дублируйте в MDX вопросы и recommendation matrix: source of truth находится в `Antiokh/rslive.ru: astro/config/relocation-wizard.config.mjs`;
+- текущий runtime хранит ответы и отметки о прочтении только в browser `localStorage` в пределах текущего локального календарного дня и не отправляет собственные события с ответами в аналитику или API;
+- сохраняйте статическую навигацию страницы как доступный альтернативный путь. На главной мастер размещён сразу после блока «С чего начать», а обычные разделы и сценарии остаются ниже.
+
+Внутренняя методика, QA-контракт и правила расширения находятся в `Antiokh/rslive.ru: astro/docs/components/relocation-wizard.md` и `relocation-wizard-qa.md`.
+
 ## DiasporaChart
 
 Исходник: `astro/src/components/DiasporaChart.astro`.
