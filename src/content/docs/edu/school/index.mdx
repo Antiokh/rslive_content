@@ -80,6 +80,33 @@ live: "https://rslive.ru/edu/school/"
 
 Единого официального «рейтинга школ Белграда» по качеству нет. Проходные баллы, результаты экзаменов и статистика могут быть полезны как косвенные ориентиры, но не измеряют все стороны конкретной школы. Сравнивайте школы по нескольким признакам — территории, сменам, языкам, программе, результатам и собственным впечатлениям после общения со школой — а не по одному среднему баллу.
 
+## Каталог школ
+
+Ниже — рабочий каталог школ и образовательных проектов, собранный RSLive по официальным сайтам учреждений и материалам родительских сообществ. В него входят государственные, частные, международные и русскоязычные варианты Белграда и Нови-Сада; отдельные позиции помечены как неполностью подтверждённые. Это не официальный реестр и не рейтинг: перед поступлением проверяйте актуальные условия, юридический статус и документ об окончании непосредственно у школы. Отзывы в таблице — пользовательский опыт, а не подтверждение качества всей школы.
+
+<SupabaseTable
+  table="data_schools"
+  title="Школы"
+  showTitle={false}
+  select="name,website,label,city_area,address,tuition,age_mode,features,reviews_comments,status,sources"
+  order="name"
+  limit={500}
+  pageSize={25}
+  stretchColumn="features"
+  columns={[
+    { key: 'name', label: 'Название', link: true, hrefKey: 'website' },
+    { key: 'label', label: 'Языки' },
+    { key: 'city_area', label: 'Город / район' },
+    { key: 'address', label: 'Адрес' },
+    { key: 'tuition', label: 'Стоимость', longText: true },
+    { key: 'age_mode', label: 'Возраст / режим', longText: true },
+    { key: 'features', label: 'Особенности', stretch: true, longText: true },
+    { key: 'reviews_comments', label: 'Отзывы и комментарии', longText: true },
+    { key: 'status', label: 'Статус', longText: true },
+    { key: 'sources', label: 'Источники', longText: true },
+  ]}
+/>
+
 ## Обучение не на сербском
 
 В Белграде работают частные и международные школы с российскими, британскими, Cambridge и другими программами. Юридический статус у них разный: **сербская верификация**, иностранная аккредитация и заявление самой школы о программе — не одно и то же. Перед оплатой проверяйте, какой документ ребёнок получит и кем он будет признан. Проверенный список и оговорки собраны на странице [Школы с несербскими программами](/edu/school/international/).
@@ -141,5 +168,5 @@ live: "https://rslive.ru/edu/school/"
 [^7]: `Pravilnik o upisu učenika u srednju školu`, в частности ст. 4 и 7. [Сводный PDF, опубликованный Министерством для цикла 2025/26](https://prosveta.gov.rs/wp-content/uploads/2024/11/Pravilnik-o-upisu-ucenika-u-srednju-skolu-2025-2026.pdf); для фактического набора **2026/27** используйте текущие [документы конкурса на Moja srednja škola](https://www.mojasrednjaskola.gov.rs/Docs) и [раздел выпускного экзамена Министерства](https://prosveta.gov.rs/zavrsni-ispit/?pismo=lat), где публикуются календарь и документы текущего цикла.
 [^8]: Министерство образования Сербии: [механизмы и меры инклюзивного образования](https://prosveta.gov.rs/prosveta/sistem-inkluzivnog-obrazovanja/mehanizm-i-mere-inkluzivnog-obrazovanjavanja/?pismo=lat) — виды IOP, состав команды, адаптации обучения и экзаменов.
 [^9]: `Pravilnik o bližim uputstvima za utvrđivanje prava na individualni obrazovni plan, njegovu primenu i vrednovanje`, «Službeni glasnik RS» № 74/2018; актуальность акта подтверждена [перечнем релевантных нормативных актов ЗУОВ](https://portal.zuov.gov.rs/mod/page/view.php?forceview=1&id=597), обновлённым 9 мая 2025 года.
-[^10]: [eUprava — образование: «Школа рекомендует IOP для моего ребёнка, должен ли я его принять?»](https://euprava.gov.rs/obrazovanje).
+[^10]: [eUprava — образование: «Школа рекомендует IOP для моего ребёнка, должен ли я его принять?»](https://euprava.gov.rs/obrazovanie).
 [^11]: Министерство образования Сербии: [каталог адаптированных учебников на 2026/27 учебный год](https://prosveta.gov.rs/inkluzija/katalog-prilagodjenih-udzbenika-za-skolsku-2026-2027-godinu/).
