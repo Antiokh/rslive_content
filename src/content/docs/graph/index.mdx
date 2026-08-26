@@ -5,84 +5,72 @@ ogSticker: map
 live: "https://rslive.ru/graph/"
 ---
 
-<MermaidGraph
-  code={`graph TD
-    A["Подготовка к переезду"] --> B1["Подготовка документов"]
-    B1 --> B2["Сделать карту UnionPay"]
-    B2 --> B3["Сделать Шенген"]
-    B3 --> B4["Купить билет на самолёт"]
-    B4 --> B5["Забронировать гостиницу"]
-    B5 --> B6["Аренда авто"]
+Эта страница — навигация по основным разделам, а не обязательная последовательность действий. Откройте этап, который соответствует вашей ситуации.
 
-    C["Первые шаги"] --> D1["После прилёта"]
-    D1 --> D2["Купить сим-карту"]
-    D2 --> D3["Заказать такси"]
-    D3 --> D4["Общественный транспорт"]
-    D4 --> D5["Открыть карту"]
-    D5 --> D6["Оформить ДМС"]
-    D6 --> D7["Перевод денег"]
+<CardGrid>
+  <Card title="Подготовка к переезду">
 
-    E["Адаптация"] --> F1["Поиск квартиры"]
-    F1 --> F2["Купить продукты"]
-    F2 --> F3["Открытие бизнеса"]
-    F3 --> F4["Визаран"]
-    F4 --> F5["Документы на РВП"]
-    F5 --> F6["Сербский язык"]
-    F6 --> F7["Замена прав"]
+- [Общий раздел подготовки](/move/)
+- [Что подготовить до переезда](/move/prepare/)
+- [Визы и документы для въезда](/move/visa/)
+- [Как добраться до Сербии](/move/travel/)
+- [Жильё и аренда](/move/housing/)
+- [Переезд с питомцами](/move/pets/)
 
-    G["Интеграция"] --> H1["Продление РВП"]
-    H1 --> H2["Резидентский счёт"]
-    H2 --> H3["Покупка машины"]
-    H3 --> H4["Визы из Сербии"]
-    H4 --> H5["Получение ПМЖ"]
-    H5 --> H6["Получение гражданства"]
+  </Card>
 
-    I["Дети"] --> J1["Рождение детей"]
-    J1 --> J2["Детские сады"]
-    J2 --> J3["Школьное образование"]
+  <Card title="Первые шаги после приезда">
 
-    K["Образование"] --> K1["Высшее образование"]
+- [Что сделать после приезда](/arrival/)
+- [Белый картон](/arrival/beli-karton/)
+- [Мобильная связь и интернет](/arrival/mobile/)
+- [Транспорт](/arrival/prevoz/)
+- [Банки и финансы](/arrival/bank/)
+- [Здравоохранение и страхование](/arrival/zdravlje/)
 
-    click A "/move/"
-    click B1 "/move/visa/"
-    click B2 "/move/finance/"
-    click B3 "/move/travel/"
-    click B4 "/move/travel/"
-    click B5 "/move/travel/"
-    click B6 "/arrival/rentacar/"
+  </Card>
 
-    click C "/arrival/"
-    click D1 "/arrival/beli-karton/"
-    click D2 "/arrival/mobile/"
-    click D3 "/arrival/prevoz/"
-    click D4 "/arrival/prevoz/"
-    click D5 "/arrival/banks/"
-    click D6 "/arrival/zdravlje/"
-    click D7 "/move/finance/"
+  <Card title="Адаптация">
 
-    click E "/adaptation/"
-    click F1 "/move/housing/"
-    click F2 "/arrival/shops/"
-    click F3 "/arrival/business/"
-    click F4 "/arrival/visarun/"
-    click F5 "/arrival/boravak/"
-    click F6 "/adaptation/srpski/"
-    click F7 "/integration/driver_license/"
+- [Общий раздел адаптации](/adaptation/)
+- [Покупки и товары первой необходимости](/arrival/shops/)
+- [Открытие бизнеса](/arrival/business/)
+- [Визаран](/arrival/visarun/)
+- [РВП и ВНЖ](/arrival/boravak/)
+- [Сербский язык](/adaptation/srpski/)
 
-    click G "/integration/"
-    click H1 "/arrival/boravak/"
-    click H2 "/arrival/banks/"
-    click H3 "/drive/buy/"
-    click H4 "/integration/visas/"
-    click H5 "/integration/stalni/"
-    click H6 "/integration/passport/"
+  </Card>
 
-    click I "/children/"
-    click J1 "/children/birth/"
-    click J2 "/children/kindergarten/"
-    click J3 "/children/school/"
+  <Card title="Долгосрочная интеграция">
 
-    click K "/edu/"
-    click K1 "/edu/university/"
-  `}
-/>
+- [Общий раздел интеграции](/integration/)
+- [Замена водительских прав](/integration/driver_license/)
+- [Покупка автомобиля](/drive/buy/)
+- [Визы в другие страны](/integration/visas/)
+- [Постоянное проживание](/integration/stalni/)
+- [Гражданство и паспорт](/integration/passport/)
+
+  </Card>
+
+  <Card title="Дети и образование">
+
+- [Дети](/children/)
+- [Рождение ребёнка](/children/birth/)
+- [Детские сады](/children/kindergarten/)
+- [Школьное образование](/children/school/)
+- [Образование в Сербии](/edu/)
+- [Высшее образование](/edu/university/)
+
+  </Card>
+
+  <Card title="Справочные разделы">
+
+- [Государство и бюрократия](/gov/)
+- [Налоги и пошлины](/gov/taxes/)
+- [Медицина](/med/)
+- [Карты](/map/)
+- [Источники](/sources/)
+- [Блог RSLive](/blog/)
+
+  </Card>
+</CardGrid>
