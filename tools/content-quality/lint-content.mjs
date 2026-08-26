@@ -14,6 +14,18 @@ const contentIndexPath = path.join(docsRoot, 'CONTENT_INDEX.yml');
 const stickerRoot = path.join(docsRoot, 'about', 'stickers', 'assets', 'svg');
 const docsPrefix = 'src/content/docs/';
 
+const navigatorPhases = new Set(['now', 'next', 'situation', 'later']);
+const navigatorTags = new Set([
+  'planning', 'traveling', 'arrived', 'settled',
+  'before-arrival', 'after-arrival', 'not-settled',
+  'stay-short', 'stay-temporary', 'stay-permanent', 'stay-unsure', 'long-stay',
+  'housing-searching', 'housing-temporary', 'housing-stable', 'housing-buying',
+  'job-search', 'employee', 'freelance', 'business', 'student', 'not-working', 'work-unsure',
+  'adults-only', 'preschool-age', 'school-age',
+  'pets', 'no-pets',
+  'no-car', 'foreign-license', 'foreign-car', 'buy-car', 'car', 'driving',
+]);
+
 let errorCount = 0;
 let warningCount = 0;
 
@@ -330,6 +342,73 @@ function collectLinkIssues(body, bodyStartLine, knownRoutes) {
   return result;
 }
 
+function collectNavigatorIssues(data, route) {
+  const result = [];
+  if (!Object.hasOwn(data, 'navigator')) return result;
+
+  const navigator = data.navigator;
+  if (!navigator || typeof navigator !== 'object' || Array.isArray(navigator)) {
+    return [issue('error', 'navigator-type', 2, 'Frontmatter navigator must be a mapping/object.')];
+  }
+
+  if (route === '/en/' || route.startsWith('/en/') || route === '/sr/' || route.startsWith('/sr/')) {
+    result.push(issue('error', 'navigator-locale', 2, 'Localized /en/ and /sr/ pages are not connected to the Russian RelocationWizard.'));
+  }
+
+  if (typeof data.description !== 'string' || data.description.trim() === '') {
+    result.push(issue('error', 'navigator-description', 2, 'A page with navigator must have a non-empty description for the recommendation card.'));
+  }
+
+  const phases = Object.entries(navigator);
+  if (phases.length === 0) {
+    result.push(issue('error', 'navigator-empty', 2, 'Frontmatter navigator must contain at least one phase.'));
+    return result;
+  }
+
+  for (const [phase, value] of phases) {
+    if (!navigatorPhases.has(phase)) {
+      result.push(issue('error', `navigator-phase:${phase}`, 2, `Unknown navigator phase: ${phase}.`));
+      continue;
+    }
+
+    let clauses = null;
+    if (Array.isArray(value) && value.every((item) => typeof item === 'string')) clauses = [value];
+    else if (Array.isArray(value) && value.every((item) => Array.isArray(item))) clauses = value;
+
+    if (!clauses || clauses.length === 0) {
+      result.push(issue('error', `navigator-shape:${phase}`, 2, `navigator.${phase} must be [tag, ...] or [[tag, ...], [tag, ...]].`));
+      continue;
+    }
+
+    const seenClauses = new Set();
+    for (const [clauseIndex, clause] of clauses.entries()) {
+      if (!Array.isArray(clause) || clause.length === 0 || !clause.every((tag) => typeof tag === 'string' && tag.trim() !== '')) {
+        result.push(issue('error', `navigator-clause:${phase}:${clauseIndex}`, 2, `navigator.${phase} contains an empty or invalid AND-clause.`));
+        continue;
+      }
+
+      const seenTags = new Set();
+      for (const tag of clause) {
+        if (!navigatorTags.has(tag)) {
+          result.push(issue('error', `navigator-tag:${tag}`, 2, `Unknown navigator tag: ${tag}. Update the engine tag registry before using a new tag.`));
+        }
+        if (seenTags.has(tag)) {
+          result.push(issue('error', `navigator-duplicate-tag:${phase}:${tag}`, 2, `navigator.${phase} repeats tag ${tag} inside one AND-clause.`));
+        }
+        seenTags.add(tag);
+      }
+
+      const signature = [...seenTags].sort().join('|');
+      if (seenClauses.has(signature)) {
+        result.push(issue('error', `navigator-duplicate-clause:${phase}:${signature}`, 2, `navigator.${phase} contains the same OR-clause more than once.`));
+      }
+      seenClauses.add(signature);
+    }
+  }
+
+  return result;
+}
+
 function collectEditorialIssues(parsed, relative, knownRoutes, stickerNames) {
   const result = [];
   const { data, body, bodyStartLine } = parsed;
@@ -383,6 +462,10 @@ async function checkGlobalMdxFile(file) {
   if (parsed.errors.length === 0) {
     if (typeof parsed.data.title !== 'string' || parsed.data.title.trim() === '') {
       report('error', relative, 2, 'Frontmatter must contain a non-empty title.');
+    }
+
+    for (const item of collectNavigatorIssues(parsed.data, routeForRelativeFile(relative))) {
+      report(item.level, relative, item.line, item.message);
     }
   }
 
