@@ -1,0 +1,17 @@
+{
+  "date": "2026-08-26",
+  "hours": 24,
+  "generated_at": "2026-08-26T10:04:00+02:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/index.mdx",
+      "title": "Добродошли!",
+      "live_url": "https://rslive.ru/",
+      "summaries": [
+        "Добавили под блок «С чего начать» персональный навигатор по существующим материалам RSLive, сохранив ниже полную статическую навигацию главной"
+      ]
+    }
+  ]
+}
