@@ -1,0 +1,17 @@
+{
+  "date": "2026-08-27",
+  "hours": 24,
+  "generated_at": "2026-08-27T00:26:00+02:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/edu/school/index.mdx",
+      "title": "Школьное образование",
+      "live_url": "https://rslive.ru/edu/school/",
+      "summaries": [
+        "Добавили фильтруемый каталог школ Белграда и Нови-Сада с языками, стоимостью, режимом, особенностями, отзывами, уровнем подтверждения и источниками"
+      ]
+    }
+  ]
+}
