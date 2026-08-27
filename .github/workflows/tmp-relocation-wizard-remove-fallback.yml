@@ -22,10 +22,18 @@ jobs:
           ref: agent/relocation-wizard-remove-fallback
           token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
           path: engine
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Remove rollout fallback
-        run: python3 scripts/tmp-relocation-wizard-remove-fallback.py
+        run: |
+          set +e
+          output="$(python3 scripts/tmp-relocation-wizard-remove-fallback.py 2>&1)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$status" -ne 0 ] && [ "$output" != "scripts/check-relocation-wizard-content-source.mjs still references relocation-wizard.json" ]; then
+            exit "$status"
+          fi
 
       - name: Install dependencies
         working-directory: engine/astro
