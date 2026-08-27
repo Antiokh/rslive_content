@@ -1,4 +1,4 @@
-name: Temporary RelocationWizard fallback cleanup
+name: Temporary RelocationWizard content cleanup
 
 on:
   push:
@@ -6,57 +6,72 @@ on:
       - agent/relocation-wizard-remove-fallback
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout helper branch
-        uses: actions/checkout@v4
-
-      - name: Checkout engine cleanup branch
+      - name: Checkout content cleanup branch
         uses: actions/checkout@v4
         with:
-          repository: Antiokh/rslive.ru
-          ref: agent/relocation-wizard-remove-fallback
-          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
-          path: engine
           fetch-depth: 1
 
-      - name: Remove rollout fallback
+      - name: Remove legacy content matrix and rollout wording
         run: |
-          set +e
-          output="$(python3 scripts/tmp-relocation-wizard-remove-fallback.py 2>&1)"
-          status=$?
-          set -e
-          printf '%s\n' "$output"
-          if [ "$status" -ne 0 ] && [ "$output" != "scripts/check-relocation-wizard-content-source.mjs still references relocation-wizard.json" ]; then
-            exit "$status"
-          fi
+          python3 - <<'PY'
+          from pathlib import Path
 
-      - name: Install dependencies
-        working-directory: engine/astro
-        run: npm ci
+          agents = Path('AGENTS.md')
+          text = agents.read_text(encoding='utf-8')
+          old = '- Не редактируйте `src/content/docs/_data/relocation-wizard.json` как источник правил: после миграции source of truth — frontmatter самих статей; JSON сохраняется только как временная совместимость на период rollout.'
+          new = '- Единственный источник правил показа статьи — её `navigator` frontmatter. Не создавайте отдельные JSON-матрицы, ручные `href`, `title`, `summary`, `reason`, `progressId` или order-списки для навигатора.'
+          if text.count(old) != 1:
+              raise SystemExit('AGENTS navigator rollout wording not found exactly once')
+          agents.write_text(text.replace(old, new, 1), encoding='utf-8')
 
-      - name: Test RelocationWizard
-        working-directory: engine/astro
-        run: npm run test:relocation-wizard
+          doc = Path('docs/RELOCATION_WIZARD.md')
+          text = doc.read_text(encoding='utf-8')
+          old = 'Файл `src/content/docs/_data/relocation-wizard.json` после этой миграции не является редакционной точкой входа. Он временно сохраняется только для совместимости с уже опубликованной версией движка на период согласованного rollout двух репозиториев. Не вносите в него новые правила.'
+          new = 'Отдельной recommendation-матрицы больше нет. Не дублируйте `navigator` в JSON, route-списках или других служебных файлах: классификация статьи должна оставаться рядом с самой статьёй.'
+          if text.count(old) != 1:
+              raise SystemExit('RELOCATION_WIZARD source wording not found exactly once')
+          text = text.replace(old, new, 1)
+          old = 'Движок дополнительно проверяет frontmatter через Astro schema и прогоняет контракт RelocationWizard по всем комбинациям ответов. Во время rollout engine сохраняет legacy JSON fallback только для ещё не мигрировавших маршрутов; frontmatter конкретной статьи имеет приоритет над legacy-правилами этой статьи.'
+          new = 'Движок дополнительно проверяет frontmatter через Astro schema. При Astro build он собирает фактический список рекомендаций только из `navigator` и перебирает все 14 336 комбинаций ответов: персональный план не должен быть пустым и одна статья не должна одновременно появляться в нескольких фазах.'
+          if text.count(old) != 1:
+              raise SystemExit('RELOCATION_WIZARD rollout validation wording not found exactly once')
+          doc.write_text(text.replace(old, new, 1), encoding='utf-8')
 
-      - name: Commit engine cleanup
-        working-directory: engine
+          for path in [
+              Path('src/content/docs/_data/relocation-wizard.json'),
+              Path('scripts/tmp-relocation-wizard-remove-fallback.py'),
+              Path('.tmp-relocation-wizard-trigger'),
+              Path('.github/workflows/tmp-relocation-wizard-remove-fallback.yml'),
+          ]:
+              if path.exists():
+                  path.unlink()
+          PY
+
+      - name: Install content-quality dependencies
+        run: npm install --prefix tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
+
+      - name: Validate content frontmatter
+        run: node tools/content-quality/lint-content.mjs
+
+      - name: Verify cleanup diff
+        run: |
+          set -euo pipefail
+          test ! -e src/content/docs/_data/relocation-wizard.json
+          ! grep -R "relocation-wizard.json" AGENTS.md docs/RELOCATION_WIZARD.md
+          ! grep -R "rollout fallback" AGENTS.md docs/RELOCATION_WIZARD.md
+          git diff --check
+
+      - name: Commit content cleanup
         run: |
           set -euo pipefail
           git config user.name "Anton Nazarov"
           git config user.email "antiokh@yandex.ru"
-          git add astro/config/relocation-wizard.config.mjs \
-            astro/src/lib/relocation-wizard-recommendations.mjs \
-            astro/src/components/RelocationWizard.astro \
-            astro/src/pages/playground/relocation-wizard.astro \
-            astro/scripts/check-relocation-wizard.mjs \
-            astro/scripts/check-relocation-wizard-content-source.mjs \
-            astro/scripts/check-relocation-wizard-behavior.mjs \
-            astro/docs/components/relocation-wizard.md
-          git diff --cached --check
-          git commit -m "Удалить legacy fallback RelocationWizard"
+          git add -A
+          git commit -m "Удалить legacy матрицу RelocationWizard"
           git push origin HEAD:agent/relocation-wizard-remove-fallback
