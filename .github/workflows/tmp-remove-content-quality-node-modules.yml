@@ -1,0 +1,28 @@
+name: Temporary cleanup generated dependencies
+
+on:
+  push:
+    branches:
+      - agent/relocation-wizard-remove-fallback
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Remove generated dependencies and helper workflow
+        run: |
+          rm -rf tools/content-quality/node_modules
+          rm -f .github/workflows/tmp-remove-content-quality-node-modules.yml
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
+          git add -A
+          git diff --cached --check
+          git commit -m "Убрать сгенерированные зависимости проверки"
+          git push origin HEAD:agent/relocation-wizard-remove-fallback
