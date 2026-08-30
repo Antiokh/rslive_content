@@ -1,0 +1,17 @@
+{
+  "date": "2026-08-30",
+  "hours": 24,
+  "generated_at": "2026-08-30T12:22:00+02:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/map/cuisine/index.mdx",
+      "title": "Национальные кухни Белграда",
+      "live_url": "https://rslive.ru/map/cuisine/",
+      "summaries": [
+        "Добавили карту ресторанов разных национальных кухонь Белграда на собственном MapLibre-рендерере RSLive без внешнего provider iframe"
+      ]
+    }
+  ]
+}
