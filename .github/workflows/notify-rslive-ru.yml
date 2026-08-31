@@ -45,6 +45,7 @@ jobs:
           test -d map-data/core
           test -d map-data/basemaps
           test -d map-data/packs/cities
+          test -d map-data/packs/poi
           test -d map-data/snapshots
           test -d rslive-engine/astro/src/content/docs
 
@@ -63,6 +64,7 @@ jobs:
             rslive-engine/astro/public/maps/core \
             rslive-engine/astro/public/maps/basemaps \
             rslive-engine/astro/public/maps/packs/cities \
+            rslive-engine/astro/public/maps/packs/poi \
             rslive-engine/astro/public/maps/snapshots \
             rslive-engine/astro/data/map-boundaries
 
@@ -95,6 +97,7 @@ jobs:
             --exclude='*' \
             map-data/packs/cities/ rslive-engine/astro/public/maps/packs/cities/
 
+          rsync -a --delete map-data/packs/poi/ rslive-engine/astro/public/maps/packs/poi/
           rsync -a --delete map-data/snapshots/ rslive-engine/astro/public/maps/snapshots/
 
       - name: Синхронизация и регистрация обновлений
