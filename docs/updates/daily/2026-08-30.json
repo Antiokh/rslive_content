@@ -1,16 +1,16 @@
 {
   "date": "2026-08-30",
   "hours": 24,
-  "generated_at": "2026-08-30T08:09:00+02:00",
+  "generated_at": "2026-08-30T12:22:00+02:00",
   "commit_count": 1,
   "article_count": 1,
   "articles": [
     {
-      "repo_path": "src/content/docs/arrival/jedinstvena-dozvola/index.mdx",
-      "title": "Единое разрешение на проживание и работу",
-      "live_url": "https://rslive.ru/arrival/jedinstvena-dozvola/",
+      "repo_path": "src/content/docs/map/cuisine/index.mdx",
+      "title": "Национальные кухни Белграда",
+      "live_url": "https://rslive.ru/map/cuisine/",
       "summaries": [
-        "Развели право на работу по разным основаниям РВП с точки зрения работодателя, уточнили учёбу, волонтёрство и специальные основания, добавили практический end-to-end ориентир оформления и точные штрафы за незаконное трудоустройство"
+        "Добавили карту ресторанов разных национальных кухонь Белграда на собственном MapLibre-рендерере RSLive без внешнего provider iframe"
       ]
     }
   ]
