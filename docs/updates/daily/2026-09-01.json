@@ -1,10 +1,18 @@
 {
   "date": "2026-09-01",
   "hours": 24,
-  "generated_at": "2026-09-01T09:20:00+02:00",
-  "commit_count": 1,
-  "article_count": 2,
+  "generated_at": "2026-09-01T13:59:00+02:00",
+  "commit_count": 2,
+  "article_count": 3,
   "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/prevoz/index.mdx",
+      "title": "Общественный транспорт и поезда в Сербии",
+      "live_url": "https://rslive.ru/arrival/prevoz/",
+      "summaries": [
+        "Вернули обзорную схему линий общественного транспорта Белграда: на странице показывается сжатое локальное превью, по нажатию открывается полноразмерная карта GSP"
+      ]
+    },
     {
       "repo_path": "src/content/docs/lifestyle/familiar-foods/index.mdx",
       "title": "Привычные продукты в Сербии: чем заменить и где купить",
