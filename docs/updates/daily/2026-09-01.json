@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-01",
+  "hours": 24,
+  "generated_at": "2026-09-01T09:33:00+02:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/prevoz/index.mdx",
+      "title": "Общественный транспорт и поезда в Сербии",
+      "live_url": "https://rslive.ru/arrival/prevoz/",
+      "summaries": [
+        "Вернули обзорную схему линий общественного транспорта Белграда: на странице показывается сжатое локальное превью, по нажатию открывается полноразмерная карта GSP"
+      ]
+    }
+  ]
+}
