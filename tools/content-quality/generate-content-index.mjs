@@ -123,21 +123,22 @@ function strictStringList(value, field, relative) {
 }
 
 function normalizeLinking(value, relative) {
-  if (value === undefined) return { aliases: [], when: [] };
+  if (value === undefined) return { tags: [], aliases: [], when: [] };
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     throw new Error(`${relative}: linking must be a mapping/object.`);
   }
 
-  const allowed = new Set(['aliases', 'when']);
+  const allowed = new Set(['tags', 'aliases', 'when']);
   const unknown = Object.keys(value).filter((key) => !allowed.has(key));
   if (unknown.length > 0) throw new Error(`${relative}: unknown linking field(s): ${unknown.join(', ')}.`);
 
+  const tags = strictStringList(value.tags, 'linking.tags', relative);
   const aliases = strictStringList(value.aliases, 'linking.aliases', relative);
   const when = strictStringList(value.when, 'linking.when', relative);
-  if (aliases.length === 0 && when.length === 0) {
-    throw new Error(`${relative}: linking must contain aliases or when.`);
+  if (tags.length === 0 && aliases.length === 0 && when.length === 0) {
+    throw new Error(`${relative}: linking must contain tags, aliases or when.`);
   }
-  return { aliases, when };
+  return { tags, aliases, when };
 }
 
 function localeForRoute(route) {
@@ -205,7 +206,7 @@ function buildPage({ route, data, relative }) {
   const page = {
     url: route,
     title,
-    tags: normalizeStringList([...routeTags(route), ...keywords, ...explicitTags]),
+    tags: normalizeStringList([...routeTags(route), ...keywords, ...linking.tags, ...explicitTags]),
     aliases: normalizeStringList([...linking.aliases, ...explicitAliases]),
     link_when: normalizeStringList([
       ...linking.when,
