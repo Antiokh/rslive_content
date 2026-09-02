@@ -1,0 +1,64 @@
+name: Индекс контента
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/content/docs/**/*.md"
+      - "src/content/docs/**/*.mdx"
+      - "tools/content-quality/generate-content-index.mjs"
+      - ".github/workflows/content-index.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: content-index-main
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    name: Обновление CONTENT_INDEX.yml
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Получение main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Подготовка Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Установка YAML-парсера
+        run: npm install --prefix tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
+
+      - name: Генерация индекса
+        run: node tools/content-quality/generate-content-index.mjs
+
+      - name: Запись индекса в main
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- src/content/docs/CONTENT_INDEX.yml; then
+            echo "CONTENT_INDEX.yml уже актуален."
+            exit 0
+          fi
+
+          remote_sha="$(git ls-remote origin refs/heads/main | cut -f1)"
+          if [ "$remote_sha" != "$SOURCE_SHA" ]; then
+            echo "main уже продвинулся до ${remote_sha}; этот запуск устарел, индекс построит новый запуск."
+            exit 0
+          fi
+
+          git config user.name "rslive-content-index"
+          git config user.email "actions@github.com"
+          git add src/content/docs/CONTENT_INDEX.yml
+          git commit -m "chore: regenerate CONTENT_INDEX.yml [skip content-sync]"
+          git push origin HEAD:main
