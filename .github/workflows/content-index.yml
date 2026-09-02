@@ -8,6 +8,7 @@ on:
       - "src/content/docs/**/*.md"
       - "src/content/docs/**/*.mdx"
       - "tools/content-quality/generate-content-index.mjs"
+      - "tools/content-quality/content-index-static-pages.yml"
       - ".github/workflows/content-index.yml"
   workflow_dispatch:
 
