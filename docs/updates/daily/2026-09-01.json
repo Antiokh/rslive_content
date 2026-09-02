@@ -1,56 +1,40 @@
 {
   "date": "2026-09-01",
   "hours": 24,
-  "generated_at": "2026-09-01T00:39:58+02:00",
-  "commit_count": 1,
-  "article_count": 6,
+  "generated_at": "2026-09-01T13:59:00+02:00",
+  "commit_count": 3,
+  "article_count": 4,
   "articles": [
     {
-      "repo_path": "src/content/docs/lifestyle/travel/resava/index.mdx",
-      "title": "Ресава: Манасия, Ресавская пещера и Лисине",
-      "live_url": "https://rslive.ru/lifestyle/travel/resava/",
+      "repo_path": "src/content/docs/arrival/prevoz/index.mdx",
+      "title": "Общественный транспорт и поезда в Сербии",
+      "live_url": "https://rslive.ru/arrival/prevoz/",
       "summaries": [
-        "Добавили маршрут по Ресаве на один день через Манасию, Ресавскую пещеру и Лисине и отдельный второй день на Белянице; проверили текущие часы, билеты, дорожное ограничение и официальный маршрут PSS"
+        "Вернули обзорную схему линий общественного транспорта Белграда: на странице показывается сжатое локальное превью, по нажатию открывается полноразмерная карта GSP"
       ]
     },
     {
-      "repo_path": "src/content/docs/lifestyle/travel/rtanj/index.mdx",
-      "title": "Ртань: маршруты на вершину Шиляк",
-      "live_url": "https://rslive.ru/lifestyle/travel/rtanj/",
+      "repo_path": "src/content/docs/lifestyle/familiar-foods/index.mdx",
+      "title": "Привычные продукты в Сербии: чем заменить и где купить",
+      "live_url": "https://rslive.ru/lifestyle/familiar-foods/",
       "summaries": [
-        "Добавили два официально описанных маршрута PSS на Шиляк с длиной, набором высоты, сложностью, водой, GPX и практической подготовкой к подъёму"
+        "Добавили единый практический справочник по привычным продуктам и местным аналогам; расширили раздел чёрного чая и чая с добавками до специализированных чайных, интернет-магазинов, восточноевропейских магазинов и вариантов в Нови-Саде"
       ]
     },
     {
-      "repo_path": "src/content/docs/lifestyle/travel/banje/index.mdx",
-      "title": "Бани Сербии: куда ехать за термами и спокойным отдыхом",
-      "live_url": "https://rslive.ru/lifestyle/travel/banje/",
+      "repo_path": "src/content/docs/move/myths/index.mdx",
+      "title": "Мифы о жизни в Сербии: что правда, а что преувеличено?",
+      "live_url": "https://rslive.ru/move/myths/",
       "summaries": [
-        "Добавили обзор сербских бань как туристических направлений: Vrnjačka Banja, Sokobanja, Banja Koviljača, Bukovička Banja, Gornja Trepča, Lukovska Banja, Jošanička Banja и Pačir; лечебные утверждения отделены от туристической инфраструктуры"
+        "Сократили продуктовые мифы до ответов по существу и заменили быстро устаревающие списки конкретных магазинов ссылками на единый справочник привычных продуктов"
       ]
     },
     {
-      "repo_path": "src/content/docs/lifestyle/fishing/index.mdx",
-      "title": "Любительская рыбалка в Сербии",
-      "live_url": "https://rslive.ru/lifestyle/fishing/",
+      "repo_path": "src/content/docs/arrival/visarun/index.mdx",
+      "title": "Визаран",
+      "live_url": "https://rslive.ru/arrival/visarun/",
       "summaries": [
-        "Добавили гайд по любительской рыбалке: территориальность разрешений, исключение для охраняемых территорий, цены 2026 года, локальные ограничения, lovostaj, проверку документов и обязательный учёт улова"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/gov/taxes/tax-free/index.mdx",
-      "title": "Tax Free: возврат НДС при выезде из Сербии",
-      "live_url": "https://rslive.ru/gov/taxes/tax-free/",
-      "summaries": [
-        "Добавили официальную процедуру Tax Free: критерий отсутствия prebivalište и boravište вместо гражданства, порог 6000 RSD, календарный срок вывоза, ZPPPDV, исключения и возврат через продавца или оператора"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/lifestyle/travel/fruska-gora-sremski-karlovci/index.mdx",
-      "title": "Фрушка-гора и Сремски-Карловци",
-      "live_url": "https://rslive.ru/lifestyle/travel/fruska-gora-sremski-karlovci/",
-      "summaries": [
-        "Добавили маршрут по Сремским-Карловцам и Фрушке-горе: исторический центр, Стражилово, официальные кольцевые пешеходные трассы национального парка, GPX и варианты на один или два дня"
+        "Добавили Dobri Visarun и Stark Travel как проверенные варианты визарана через Боснию и Герцеговину, где автобус проходит оба пограничных контроля вместе с пассажирами"
       ]
     }
   ]
