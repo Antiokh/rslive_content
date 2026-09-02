@@ -1,6 +1,6 @@
 # CONTENT_INDEX.yml
 # Semantic index mapping pages → tags → aliases → anchors → linking context
-# Last updated: 2026-08-30
+# Last updated: 2026-09-01
 # Only verified routes are included. Keep anchors empty unless checked against generated Astro heading IDs.
 pages:
   # ==== ROOT / LANDING PAGES ====
@@ -524,6 +524,15 @@ pages:
     link_when:
       - хочешь понять местную культуру
       - интересуешься досугом
+    anchors: []
+  - url: /lifestyle/familiar-foods/
+    title: 'Привычные продукты в Сербии: чем заменить и где купить'
+    tags: [продукты, еда, магазины, творог, гречка, селёдка, чай, квас, пельмени]
+    aliases: [привычные продукты в Сербии, русские продукты в Сербии, где купить творог, где купить гречку, где купить селёдку, чёрный чай с добавками]
+    link_when:
+      - ищешь привычный продукт или его сербский аналог
+      - нужно понять сербское название продукта
+      - нужно найти восточноевропейский магазин или конкретный импортный продукт
     anchors: []
   - url: /lifestyle/ecology/
     title: Экология и экологическое волонтёрство
