@@ -212,10 +212,11 @@ async function main() {
   }
 
   if (args.manifest) {
-    await writeFile(args.manifest, JSON.stringify({
+    const payload = {
       summary: { migratedPages, migratedTags, migratedAliases, migratedWhen },
       files: manifest,
-    }), null, 2) + '\n', 'utf8');
+    };
+    await writeFile(args.manifest, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
   }
 
   console.log(
