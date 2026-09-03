@@ -1,0 +1,48 @@
+name: Bootstrap CONTENT_INDEX migration
+
+on:
+  push:
+    branches:
+      - agent/generated-content-index
+    paths:
+      - ".github/workflows/content-index-bootstrap-migration.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v7
+        with:
+          ref: agent/generated-content-index
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Install content tooling
+        run: npm install --prefix tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
+
+      - name: Migrate legacy semantic metadata
+        run: node tools/content-quality/migrate-content-index-linking.mjs
+
+      - name: Verify generated index preserves legacy semantics
+        run: node tools/content-quality/generate-content-index.mjs --audit-legacy
+
+      - name: Commit migrated frontmatter
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- src/content/docs; then
+            echo "No migration changes are required."
+            exit 0
+          fi
+          git config user.name "rslive-content-index"
+          git config user.email "actions@github.com"
+          git add src/content/docs
+          git commit -m "chore: migrate CONTENT_INDEX semantics to frontmatter"
+          git push origin HEAD:agent/generated-content-index
