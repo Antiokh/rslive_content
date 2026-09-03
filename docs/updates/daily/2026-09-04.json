@@ -1,0 +1,89 @@
+{
+  "date": "2026-09-04",
+  "hours": 24,
+  "generated_at": "2026-09-04T00:48:00+02:00",
+  "commit_count": 1,
+  "article_count": 10,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/ovcar-kablar-cacak/index.mdx",
+      "title": "Овчарско-Кабларское ущелье и Чачак",
+      "live_url": "https://rslive.ru/lifestyle/travel/ovcar-kablar-cacak/",
+      "summaries": [
+        "Добавили маршрут по Чачаку и Овчарско-Кабларскому ущелью с проверенными трассами PSS на Каблар, Овчар и Debela gora, GPX, водой, монастырями и предупреждением о неактивной трансверзале"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/south-banate/index.mdx",
+      "title": "Южный Банат: Вршац, Бела-Црква и Делиблатская песчара",
+      "live_url": "https://rslive.ru/lifestyle/travel/south-banate/",
+      "summaries": [
+        "Добавили маршруты по Вршацу и озёрам Бела-Црквы; Делиблатская песчара отделена как условная часть поездки, поскольку по сообщению Vojvodinašume от 3 сентября пожар ещё не был потушен и продолжались круглосуточные дежурства"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/vojvodina-cities/index.mdx",
+      "title": "Города Воеводины на один день",
+      "live_url": "https://rslive.ru/lifestyle/travel/vojvodina-cities/",
+      "summaries": [
+        "Добавили практические однодневные маршруты по Вршацу, Кикинде, Зренянину, Суботице и Сремским-Карловцам с компактным порядком прогулки и необязательными пригородными продолжениями"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/fortresses/index.mdx",
+      "title": "Крепости Сербии: куда ехать и с чем совмещать",
+      "live_url": "https://rslive.ru/lifestyle/travel/fortresses/",
+      "summaries": [
+        "Добавили обзор крепостей Сербии по региональным маршрутам: Голубац, Смедерево, Рам, Петроварадин, Белград, Ниш, Пирот, Маглич, Стари-Рас и Bač с правилами проверки доступа"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/yugoslav-spomenici/index.mdx",
+      "title": "Споменики Югославии: мемориальная архитектура Сербии",
+      "live_url": "https://rslive.ru/lifestyle/travel/yugoslav-spomenici/",
+      "summaries": [
+        "Добавили стартовый каталог мемориальной архитектуры XX века с авторами, датами, историческим контекстом и практикой посещения Чачака, Кадинячи, Авалы и Старого Саймишта"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/wine-regions/index.mdx",
+      "title": "Винные регионы Сербии: как планировать дегустации",
+      "live_url": "https://rslive.ru/lifestyle/travel/wine-regions/",
+      "summaries": [
+        "Добавили обзор Срема и Фрушки-горы, Шумадии, Жупы, Неготинской-Краины и Подунавья с местными сортами, записью на дегустации и безопасной логистикой без вождения после алкоголя"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/winter-serbia/index.mdx",
+      "title": "Зимняя Сербия: куда ехать за снегом и лыжами",
+      "live_url": "https://rslive.ru/lifestyle/travel/winter-serbia/",
+      "summaries": [
+        "Добавили практический выбор между Копаоником, Торником, Дивчибаре и Старой-Планиной; работа меньших центров привязана к снежным условиям, а решение о поездке — к текущему Ski info и состоянию трасс"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/short-nature-trips/index.mdx",
+      "title": "Короткие природные поездки по Сербии",
+      "live_url": "https://rslive.ru/lifestyle/travel/short-nature-trips/",
+      "summaries": [
+        "Добавили компактные поездки к Завойскому озеру, Петницкой пещере, Вуяну, озёрам Бела-Црквы, Сирогойно и Шарганской осмице с проверкой доступа, расписаний и рыболовного режима"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/events-calendar/index.mdx",
+      "title": "Календарь крупных событий в Сербии",
+      "live_url": "https://rslive.ru/lifestyle/travel/events-calendar/",
+      "summaries": [
+        "Добавили календарь крупных событий с официальными источниками; для Nišville 2026 учтена поздняя корректировка основной программы на 13–16 августа и отдельные сопутствующие программы с 8 августа"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/local-goods/index.mdx",
+      "title": "Что привезти из Сербии: местные ремёсла и продукты",
+      "live_url": "https://rslive.ru/lifestyle/local-goods/",
+      "summaries": [
+        "Добавили справочник по пиротскому килиму, злакусской керамике, наивной живописи Ковачицы, ремёслам Сирогойно, пиротским продуктам и традиции šljivovica без рекламных подборок магазинов"
+      ]
+    }
+  ]
+}
