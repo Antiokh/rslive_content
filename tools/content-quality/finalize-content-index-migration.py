@@ -115,6 +115,7 @@ workflow.write_text(text.replace(artifact_block, ""))
 for path in [
     ".github/workflows/content-index-bootstrap-migration.yml",
     ".github/workflows/content-index-finalize.yml",
+    ".github/workflows/content-index-finalize-run.yml",
     "tools/content-quality/migrate-content-index-linking.mjs",
     "tools/content-quality/finalize-content-index-migration.py",
 ]:
