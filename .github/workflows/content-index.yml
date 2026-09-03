@@ -4,12 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "src/content/docs/**/*.md"
-      - "src/content/docs/**/*.mdx"
-      - "tools/content-quality/generate-content-index.mjs"
-      - "tools/content-quality/content-index-static-pages.yml"
-      - ".github/workflows/content-index.yml"
   workflow_dispatch:
 
 permissions:
@@ -25,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Получение main
+      - name: Получение triggering commit
         uses: actions/checkout@v7
         with:
-          ref: main
+          ref: ${{ github.sha }}
           fetch-depth: 1
 
       - name: Подготовка Node.js
