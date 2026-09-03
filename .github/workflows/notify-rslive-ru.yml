@@ -25,6 +25,17 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Подготовка Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Установка парсера индекса
+        run: npm install --prefix tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
+
+      - name: Построение индекса для публикуемого SHA
+        run: node tools/content-quality/generate-content-index.mjs
+
       - name: Проверка картографических данных
         run: node scripts/check-map-data.mjs
 

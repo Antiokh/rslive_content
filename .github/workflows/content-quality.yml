@@ -70,6 +70,15 @@ jobs:
       - name: Установка парсера контента
         run: npm install --prefix trusted/tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
 
+      - name: Построение временного индекса
+        run: |
+          set -euo pipefail
+          if [ -f trusted/tools/content-quality/generate-content-index.mjs ]; then
+            node trusted/tools/content-quality/generate-content-index.mjs --root candidate
+          else
+            echo "Bootstrap: trusted generator is not in main yet; use the committed legacy index for this one migration PR."
+          fi
+
       - name: Контент проверен
         working-directory: candidate
         run: node ../trusted/tools/content-quality/lint-content.mjs

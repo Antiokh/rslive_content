@@ -132,7 +132,7 @@ src/content/docs/arrival/boravak/index.mdx
 src/content/docs/arrival/index.mdx -> /arrival/
 ```
 
-Не делайте вывод о существовании страницы по одному `CONTENT_INDEX.yml`: сверяйте индекс с фактическим деревом файлов. Индекс предназначен для семантической навигации и перелинковки, но не заменяет дерево репозитория.
+`CONTENT_INDEX.yml` генерируется из фактического дерева файлов и frontmatter. Не редактируйте его вручную и не используйте как первичный источник существования страницы: маршруты проверяйте по дереву, а generated-индекс используйте для семантической навигации и перелинковки.
 
 `CONTENT_INDEX.yml` индексирует страницы сайта, а не GeoJSON/KML-артефакты. Изменения только в `map-data/**` сами по себе не требуют записи карты в `CONTENT_INDEX.yml` и не считаются содержательным обновлением опубликованной статьи.
 
@@ -143,7 +143,7 @@ src/content/docs/arrival/index.mdx -> /arrival/
 - `AGENTS.md`;
 - `README.md`;
 - `CONTRIBUTING.md`;
-- `src/content/docs/CONTENT_INDEX.yml`;
+- `docs/CONTENT_INDEX.md` и generated `src/content/docs/CONTENT_INDEX.yml`;
 - `docs/EDITORIAL_POLICY.md`;
 - `docs/MDX_COMPONENTS.md`.
 

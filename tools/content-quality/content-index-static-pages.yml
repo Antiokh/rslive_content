@@ -1,0 +1,18 @@
+# Public routes that are not backed by src/content/docs MD/MDX files.
+# Keep this list intentionally small: only engine-owned legacy/static routes belong here.
+pages:
+  - url: /addressbook/
+    title: Адресная книга
+    description: Справочник адресов, контактов и организаций в Сербии.
+    keywords: [адрес, контакты, справочник, организация]
+    aliases: [контакты, справочник, организации, жёлтые страницы]
+    link_when:
+      - ищешь контакты организации или специалиста
+      - нужен телефон или адрес
+  - url: /addressbook/add/
+    title: Добавить контакт в адресную книгу
+    description: Форма добавления контакта в справочник RSLive.
+    keywords: [адресная книга, добавить контакт, справочник]
+    aliases: [добавить контакт, добавить организацию]
+    link_when:
+      - нужно добавить контакт или организацию в справочник

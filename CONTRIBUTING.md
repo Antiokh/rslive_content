@@ -2,7 +2,7 @@
 
 ## Перед началом
 
-Прочитайте `AGENTS.md`, `PROJECT_CONTEXT.md`, `README.md`, `src/content/docs/CONTENT_INDEX.yml`, `docs/EDITORIAL_POLICY.md`, `docs/MDX_COMPONENTS.md` и `docs/updates/README.md`.
+Прочитайте `AGENTS.md`, `PROJECT_CONTEXT.md`, `README.md`, `docs/CONTENT_INDEX.md`, generated `src/content/docs/CONTENT_INDEX.yml`, `docs/EDITORIAL_POLICY.md`, `docs/MDX_COMPONENTS.md` и `docs/updates/README.md`.
 
 Получите актуальную версию статьи из GitHub непосредственно перед редактированием. Не работайте по копии из истории чата или старому вложению.
 
@@ -170,7 +170,7 @@ arrival/boravak
 3. Для ссылки на раздел проверьте фактический Astro heading ID.
 4. Не создавайте ссылку на будущую или предполагаемую страницу.
 
-При создании, удалении, переносе или переименовании страницы обновите `CONTENT_INDEX.yml`. Для переноса дополнительно проверьте `astro/public/_redirects` в `Antiokh/rslive.ru`.
+При создании, удалении, переносе или переименовании страницы не редактируйте `CONTENT_INDEX.yml` вручную: измените дерево и frontmatter, а для дополнительной семантики используйте `linking`. Для переноса дополнительно проверьте `astro/public/_redirects` в `Antiokh/rslive.ru`.
 
 ## Markdown и MDX
 
