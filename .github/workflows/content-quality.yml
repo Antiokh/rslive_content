@@ -78,32 +78,9 @@ jobs:
           else
             echo "Bootstrap migration: проверяем новый генератор против старого ручного индекса."
             npm install --prefix candidate/tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
-            audit_status=0
-            node candidate/tools/content-quality/generate-content-index.mjs --root candidate --audit-legacy || audit_status=$?
-            if [ "$audit_status" -ne 0 ]; then
-              node candidate/tools/content-quality/migrate-content-index-linking.mjs \
-                --root candidate \
-                --manifest content-index-migration.json
-              node candidate/tools/content-quality/generate-content-index.mjs --root candidate --audit-legacy
-              echo "CONTENT_INDEX_MIGRATION_REQUIRED=true" >> "$GITHUB_ENV"
-            fi
+            node candidate/tools/content-quality/generate-content-index.mjs --root candidate --audit-legacy
             node candidate/tools/content-quality/generate-content-index.mjs --root candidate
           fi
-
-      - name: Сохранение миграции семантики
-        if: env.CONTENT_INDEX_MIGRATION_REQUIRED == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: content-index-linking-migration
-          path: content-index-migration.json
-          if-no-files-found: error
-          retention-days: 1
-
-      - name: Миграцию нужно закоммитить
-        if: env.CONTENT_INDEX_MIGRATION_REQUIRED == 'true'
-        run: |
-          echo "Legacy semantic metadata migrated in the runner; commit the uploaded artifact before this check can pass."
-          exit 1
 
       - name: Контент проверен
         working-directory: candidate
