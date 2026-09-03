@@ -1,14 +1,11 @@
 import { execFileSync } from 'node:child_process';
-import { readFile, readdir } from 'node:fs/promises';
-import path from 'node:path';
+import { readFile, writeFile } from 'node:fs/promises';
 import process from 'node:process';
 
-import GithubSlugger from 'github-slugger';
 import YAML from 'yaml';
 
 const LEGACY_REF = process.env.LEGACY_REF || '01a48adab04c28e12f7e06648d615af21b3cb3e2';
 const INDEX_PATH = 'src/content/docs/CONTENT_INDEX.yml';
-const DOCS_ROOT = path.resolve('src/content/docs');
 
 const stopWords = new Set([
   'для', 'или', 'как', 'что', 'это', 'при', 'про', 'под', 'над', 'без', 'после', 'перед', 'между', 'через',
@@ -67,94 +64,45 @@ function semanticStrings(page) {
   ].filter((value) => typeof value === 'string' && value.trim());
 }
 
-function tokenCoverage(value, candidateStrings) {
-  const legacyTokens = [...new Set(tokens(value))];
-  const candidateTokens = new Set(tokens(candidateStrings.join(' ')));
-  const missing = legacyTokens.filter((token) => !candidateTokens.has(token));
+function coverage(value, candidateStrings) {
+  const source = [...new Set(tokens(value))];
+  const candidate = new Set(tokens(candidateStrings.join(' ')));
+  const missing = source.filter((token) => !candidate.has(token));
   return {
-    total: legacyTokens.length,
-    covered: legacyTokens.length - missing.length,
-    ratio: legacyTokens.length === 0 ? 1 : (legacyTokens.length - missing.length) / legacyTokens.length,
+    total: source.length,
+    covered: source.length - missing.length,
+    ratio: source.length === 0 ? 1 : (source.length - missing.length) / source.length,
     missing,
   };
 }
 
-function fieldAudit(legacyPage, currentPage, field) {
-  const currentField = list(currentPage?.[field]);
-  const currentNormalized = new Set(currentField.map(normalize));
-  const currentAnyNormalized = new Set(semanticStrings(currentPage).map(normalize));
-  return list(legacyPage?.[field]).map((value) => {
-    const normalized = normalize(value);
-    const exactSameField = currentNormalized.has(normalized);
-    const exactAnywhere = currentAnyNormalized.has(normalized);
-    const coverage = tokenCoverage(value, semanticStrings(currentPage));
-    return { value, exactSameField, exactAnywhere, ...coverage };
-  });
-}
-
-async function walk(dir) {
-  const result = [];
-  for (const entry of await readdir(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) result.push(...(await walk(full)));
-    else if (entry.isFile() && /\.(?:md|mdx)$/i.test(entry.name) && entry.name.toLowerCase() !== 'readme.md') result.push(full);
-  }
-  return result;
-}
-
-function routeForFile(file) {
-  const relative = path.relative(DOCS_ROOT, file).split(path.sep).join('/').replace(/\.(?:md|mdx)$/i, '');
-  if (relative === 'index') return '/';
-  if (relative.endsWith('/index')) return `/${relative.slice(0, -'/index'.length)}/`;
-  return `/${relative}/`;
-}
-
-function stripInlineMarkup(value) {
-  return value
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-    .replace(/<[^>]+>/g, '')
-    .replace(/[\\*_~]/g, '')
-    .trim();
-}
-
-function headingsFromSource(source) {
-  const slugger = new GithubSlugger();
-  const headings = [];
-  let inFence = false;
-  let fenceMarker = null;
-  for (const line of source.split(/\r?\n/)) {
-    const fence = line.match(/^\s*(```+|~~~+)/);
-    if (fence) {
-      const marker = fence[1][0];
-      if (!inFence) {
-        inFence = true;
-        fenceMarker = marker;
-      } else if (marker === fenceMarker) {
-        inFence = false;
-        fenceMarker = null;
-      }
-      continue;
+function bestSingleCoverage(value, candidateStrings) {
+  let best = { ratio: 0, covered: 0, total: [...new Set(tokens(value))].length, missing: [], candidate: null };
+  for (const candidate of candidateStrings) {
+    const result = coverage(value, [candidate]);
+    if (result.ratio > best.ratio || (result.ratio === best.ratio && result.covered > best.covered)) {
+      best = { ...result, candidate };
     }
-    if (inFence) continue;
-    const match = line.match(/^\s{0,3}#{1,6}\s+(.+?)\s*#*\s*$/);
-    if (!match) continue;
-    const text = stripInlineMarkup(match[1]);
-    if (!text) continue;
-    headings.push({ text, id: slugger.slug(text) });
   }
-  return headings;
+  if (candidateStrings.length === 0) best = { ...coverage(value, []), candidate: null };
+  return best;
 }
 
-async function buildHeadingMap() {
-  const map = new Map();
-  for (const file of await walk(DOCS_ROOT)) {
-    const route = routeForFile(file);
-    const source = await readFile(file, 'utf8');
-    map.set(route, headingsFromSource(source));
-  }
-  return map;
+function phraseAudit(value, currentPage, sameFieldValues = []) {
+  const normalized = normalize(value);
+  const currentSemantic = semanticStrings(currentPage);
+  const global = coverage(value, currentSemantic);
+  const single = bestSingleCoverage(value, currentSemantic);
+  return {
+    value,
+    exactSameField: sameFieldValues.some((item) => normalize(item) === normalized),
+    exactAnywhere: currentSemantic.some((item) => normalize(item) === normalized),
+    globalRatio: global.ratio,
+    globalMissing: global.missing,
+    bestSingleRatio: single.ratio,
+    bestSingleCandidate: single.candidate,
+    bestSingleMissing: single.missing,
+  };
 }
 
 function parseIndex(source, label) {
@@ -168,17 +116,15 @@ const currentSource = await readFile(INDEX_PATH, 'utf8');
 const legacyPages = parseIndex(legacySource, 'legacy');
 const currentPages = parseIndex(currentSource, 'current');
 const currentByUrl = new Map(currentPages.map((page) => [page.url, page]));
-const headingMap = await buildHeadingMap();
 
 const report = {
   legacyRef: LEGACY_REF,
   legacyRoutes: legacyPages.length,
   currentRoutes: currentPages.length,
   missingRoutes: [],
-  changedTitles: [],
-  missingDescriptions: [],
+  anchors: { legacyCount: 0 },
+  titles: [],
   fields: { tags: [], aliases: [], link_when: [] },
-  anchors: { legacyCount: 0, exactGenerated: 0, missing: [] },
 };
 
 for (const legacyPage of legacyPages) {
@@ -188,71 +134,59 @@ for (const legacyPage of legacyPages) {
     continue;
   }
 
+  for (const anchor of list(legacyPage.anchors)) report.anchors.legacyCount += 1;
+
   if (legacyPage.title && normalize(legacyPage.title) !== normalize(current.title)) {
-    report.changedTitles.push({ url: legacyPage.url, legacy: legacyPage.title, current: current.title });
-  }
-  if (legacyPage.description && !current.description) {
-    report.missingDescriptions.push({ url: legacyPage.url, legacy: legacyPage.description });
+    report.titles.push({ url: legacyPage.url, currentTitle: current.title, ...phraseAudit(legacyPage.title, current) });
   }
 
   for (const field of ['tags', 'aliases', 'link_when']) {
-    for (const item of fieldAudit(legacyPage, current, field)) {
+    const currentField = list(current[field]);
+    for (const value of list(legacyPage[field])) {
+      const item = phraseAudit(value, current, currentField);
       if (!item.exactSameField) report.fields[field].push({ url: legacyPage.url, ...item });
     }
   }
-
-  const currentHeadings = headingMap.get(legacyPage.url) ?? [];
-  const currentHeadingIds = new Set(currentHeadings.map((heading) => heading.id));
-  for (const anchor of list(legacyPage.anchors)) {
-    report.anchors.legacyCount += 1;
-    if (currentHeadingIds.has(anchor)) {
-      report.anchors.exactGenerated += 1;
-    } else {
-      report.anchors.missing.push({
-        url: legacyPage.url,
-        anchor,
-        headings: currentHeadings.slice(0, 30),
-      });
-    }
-  }
-}
-
-for (const field of ['tags', 'aliases', 'link_when']) {
-  report.fields[field].sort((a, b) => a.ratio - b.ratio || a.url.localeCompare(b.url) || a.value.localeCompare(b.value));
 }
 
 const summary = {};
 for (const field of ['tags', 'aliases', 'link_when']) {
   const items = report.fields[field];
   summary[field] = {
-    legacyItemsAbsentFromSameField: items.length,
+    absentFromSameField: items.length,
     exactElsewhere: items.filter((item) => item.exactAnywhere).length,
-    fullTokenCoverage: items.filter((item) => item.ratio === 1).length,
-    partialTokenCoverage: items.filter((item) => item.ratio > 0 && item.ratio < 1).length,
-    zeroTokenCoverage: items.filter((item) => item.ratio === 0).length,
-    below80Percent: items.filter((item) => item.ratio < 0.8).length,
+    globalFullCoverage: items.filter((item) => item.globalRatio === 1).length,
+    singleFieldFullCoverage: items.filter((item) => item.bestSingleRatio === 1).length,
+    singleFieldPartialCoverage: items.filter((item) => item.bestSingleRatio > 0 && item.bestSingleRatio < 1).length,
+    singleFieldZeroCoverage: items.filter((item) => item.bestSingleRatio === 0).length,
   };
 }
+summary.titles = {
+  changed: report.titles.length,
+  exactElsewhere: report.titles.filter((item) => item.exactAnywhere).length,
+  singleFieldFullCoverage: report.titles.filter((item) => item.bestSingleRatio === 1).length,
+  singleFieldPartialCoverage: report.titles.filter((item) => item.bestSingleRatio > 0 && item.bestSingleRatio < 1).length,
+  singleFieldZeroCoverage: report.titles.filter((item) => item.bestSingleRatio === 0).length,
+};
 report.summary = summary;
 
-await import('node:fs/promises').then(({ writeFile }) => writeFile('/tmp/content-index-full-audit.json', `${JSON.stringify(report, null, 2)}\n`, 'utf8'));
+await writeFile('/tmp/content-index-full-audit.json', `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 
 console.log(JSON.stringify({
   legacyRef: report.legacyRef,
   legacyRoutes: report.legacyRoutes,
   currentRoutes: report.currentRoutes,
   missingRoutes: report.missingRoutes.length,
-  changedTitles: report.changedTitles.length,
-  missingDescriptions: report.missingDescriptions.length,
-  anchors: report.anchors,
+  legacyAnchors: report.anchors.legacyCount,
   summary,
 }, null, 2));
 
-for (const field of ['tags', 'aliases', 'link_when']) {
-  const weak = report.fields[field].filter((item) => item.ratio < 1);
-  console.log(`\n=== ${field}: ${weak.length} legacy values with incomplete semantic token coverage ===`);
-  for (const item of weak.slice(0, 500)) {
-    console.log(`${item.url}\t${item.ratio.toFixed(3)}\tmissing=[${item.missing.join(', ')}]\t${item.value}`);
+for (const category of ['titles', 'tags', 'aliases', 'link_when']) {
+  const items = category === 'titles' ? report.titles : report.fields[category];
+  const weak = items.filter((item) => item.bestSingleRatio < 1);
+  console.log(`\n=== ${category}: ${weak.length} phrases not fully represented in any single current metadata value ===`);
+  for (const item of weak) {
+    console.log(`${item.url}\t${item.bestSingleRatio.toFixed(3)}\tlegacy=${item.value}\tbest=${item.bestSingleCandidate ?? ''}\tmissing=[${item.bestSingleMissing.join(', ')}]`);
   }
 }
 
