@@ -96,7 +96,7 @@ async function walk(dir) {
   const result = [];
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) result.push(...(await walk(full));
+    if (entry.isDirectory()) result.push(...(await walk(full)));
     else if (entry.isFile() && /\.(?:md|mdx)$/i.test(entry.name) && entry.name.toLowerCase() !== 'readme.md') result.push(full);
   }
   return result;
