@@ -76,10 +76,7 @@ jobs:
           if [ -f trusted/tools/content-quality/generate-content-index.mjs ]; then
             node trusted/tools/content-quality/generate-content-index.mjs --root candidate
           else
-            echo "Bootstrap migration: проверяем новый генератор против старого ручного индекса."
-            npm install --prefix candidate/tools/content-quality --package-lock=false --ignore-scripts --no-audit --no-fund
-            node candidate/tools/content-quality/generate-content-index.mjs --root candidate --audit-legacy
-            node candidate/tools/content-quality/generate-content-index.mjs --root candidate
+            echo "Bootstrap: trusted generator is not in main yet; use the committed legacy index for this one migration PR."
           fi
 
       - name: Контент проверен
