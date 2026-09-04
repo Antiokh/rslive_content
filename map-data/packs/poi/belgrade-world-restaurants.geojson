@@ -3,6 +3,9 @@
   "rules": {
     "validation": "The restaurant should not be closed or paused",
     "json": "Use pretty-print style instead of minification to work per-line",
+    "dishNames": "In Russian descriptions, use Russian-language dish names even when the source spells them in Latin script; keep the original or transliteration only after the Russian name when it is useful for identification.",
+    "officialWebsite": "If the restaurant has an official website, prefer it over delivery services, directories and aggregators as the primary venue link/source.",
+    "mapLink": "For Open on map, prefer the restaurant's canonical Google Maps place URL; use coordinates only as a fallback when no reliable Google Maps place URL is available.",
     "issueNum": 284,
     "researchBranch": "belgrade-restorant-research",
     "PRNum": 292
