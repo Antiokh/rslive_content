@@ -2,7 +2,10 @@
   "type": "FeatureCollection",
   "rules": {
     "validation": "The restaurant should not be closed or paused",
-    "json": "Use pretty-print style instead of minification to work per-line"
+    "json": "Use pretty-print style instead of minification to work per-line",
+    "issueNum": 284,
+    "researchBranch": "belgrade-restorant-research",
+    "PRNum": 292
   },
   "properties": {
     "schema": 1,
