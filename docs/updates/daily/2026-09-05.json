@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-05",
+  "hours": 24,
+  "generated_at": "2026-09-05T19:34:00+02:00",
+  "commit_count": 1,
+  "article_count": 2,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/jobs/index.mdx",
+      "title": "Поиск работы в Сербии",
+      "live_url": "https://rslive.ru/arrival/jobs/",
+      "summaries": [
+        "Добавили SerbiaHub в список площадок для поиска вакансий в Сербии"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/index.mdx",
+      "title": "Поиск жилья",
+      "live_url": "https://rslive.ru/move/housing/",
+      "summaries": [
+        "Добавили SerbiaHub в список сервисов для поиска аренды и покупки жилья в Сербии"
+      ]
+    }
+  ]
+}
