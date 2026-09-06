@@ -2,64 +2,32 @@
   "date": "2026-09-06",
   "hours": 24,
   "generated_at": "2026-09-06T11:08:00+02:00",
-  "commit_count": 11,
-  "article_count": 10,
+  "commit_count": 1,
+  "article_count": 6,
   "articles": [
     {
       "repo_path": "src/content/docs/med/dms/index.mdx",
-      "title": "ДМС в Сербии: сравнение страховщиков",
+      "title": "ДМС в Сербии для граждан России: Wiener и DDOR",
       "live_url": "https://rslive.ru/med/dms/",
       "summaries": [
-        "Добавили обзорную таблицу Generali, Dunav, Wiener, Triglav, UNIQA и DDOR с договорными отличиями",
-        "Добавили отдельное сравнение беременности и родов, типовые причины доплаты, проблемы на стыке страховой и клиники и порядок жалобы"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/med/generali/index.mdx",
-      "title": "ДМС Generali Total Medic",
-      "live_url": "https://rslive.ru/med/generali/",
-      "summaries": [
-        "Добавили подробный разбор Total Medic: андеррайтинг, авторизация, лечение вне сети, беременность, роды, новорождённый и продление"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/med/dunav/index.mdx",
-      "title": "ДМС Dunav Osiguranje",
-      "live_url": "https://rslive.ru/med/dunav/",
-      "summaries": [
-        "Добавили разбор 15% участия пациента, уровней сети, refundacija, ранее существовавших заболеваний и maternity-каренцы"
+        "Добавили сравнение ДМС, отфильтрованное по доступности гражданам России и практически доступному русскому языку",
+        "Оставили Wiener и DDOR и добавили отдельные таблицы по русскому языку, договорным условиям, беременности и родам"
       ]
     },
     {
       "repo_path": "src/content/docs/med/wiener/index.mdx",
-      "title": "ДМС Wiener Städtische",
+      "title": "ДМС Wiener Städtische для граждан России",
       "live_url": "https://rslive.ru/med/wiener/",
       "summaries": [
-        "Добавили индивидуальный полис, preautorizacija, лечение вне сети, refundacija, беременность, роды и новорождённого"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/med/triglav/index.mdx",
-      "title": "ДМС Triglav",
-      "live_url": "https://rslive.ru/med/triglav/",
-      "summaries": [
-        "Добавили документы для нерезидента, обязательный контакт перед визитом, 70% refundacija вне сети и maternity-подлимиты"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/med/uniqa/index.mdx",
-      "title": "ДМС UNIQA / MedUNIQA",
-      "live_url": "https://rslive.ru/med/uniqa/",
-      "summaries": [
-        "Развели актуальную корпоративную линейку и индивидуальный microsite со старыми публичными условиями и добавили правила проверки оферты"
+        "Добавили официальные русские условия Wiener, требования к пребыванию, проверку русскоязычного медицинского call-центра, preautorizacija, refundacija, беременность и роды"
       ]
     },
     {
       "repo_path": "src/content/docs/med/ddor/index.mdx",
-      "title": "Добровольное медицинское страхование DDOR",
+      "title": "ДМС DDOR Zdravo da ste для граждан России",
       "live_url": "https://rslive.ru/med/ddor/",
       "summaries": [
-        "Обновили Zdravo da ste, participacija, каренцу, pre-existing conditions, refundacija, беременность, роды и новорождённого"
+        "Подтвердили доступность иностранцам с временным пребыванием, отделили русскоязычное сопровождение через представителя от официальной языковой политики и обновили договорные условия"
       ]
     },
     {
@@ -67,7 +35,7 @@
       "title": "Здравоохранение и медицинское страхование в Сербии",
       "live_url": "https://rslive.ru/arrival/zdravlje/",
       "summaries": [
-        "Подключили канонические сравнительные таблицы ДМС и maternity-покрытия и подробные внутренние разборы страховщиков"
+        "Подключили канонические таблицы ДМС для граждан России и убрали варианты без подтверждённого актуального русскоязычного маршрута"
       ]
     },
     {
@@ -75,7 +43,7 @@
       "title": "Беременность и медицинское наблюдение",
       "live_url": "https://rslive.ru/adaptation/birth/med/",
       "summaries": [
-        "Добавили сравнение ДМС для беременности и чеклист каренцы, maternity-подлимита, participacija и новорождённого"
+        "Ограничили maternity-сравнение Wiener и DDOR и добавили проверку доступности россиянину, русского медицинского канала, подлимитов и participacija"
       ]
     },
     {
@@ -83,7 +51,7 @@
       "title": "Роды в Сербии: выбор роддома и экстренная помощь",
       "live_url": "https://rslive.ru/adaptation/birth/clinics/",
       "summaries": [
-        "Добавили порядок согласования и оплаты частных родов по ДМС, гарантийное письмо, прямой расчёт, доплату пациента и экстренный сценарий"
+        "Добавили порядок согласования и оплаты частных родов по Wiener и DDOR, включая русский канал связи, авторизацию, доплату пациента и экстренный сценарий"
       ]
     }
   ]
