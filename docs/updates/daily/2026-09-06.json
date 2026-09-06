@@ -1,8 +1,8 @@
 {
   "date": "2026-09-06",
   "hours": 24,
-  "generated_at": "2026-09-06T21:37:00+02:00",
-  "commit_count": 2,
+  "generated_at": "2026-09-06T21:48:49+02:00",
+  "commit_count": 3,
   "article_count": 11,
   "articles": [
     {
@@ -103,7 +103,8 @@
       "title": "Поиск работы в Сербии",
       "live_url": "https://rslive.ru/arrival/jobs/",
       "summaries": [
-        "Добавили практическое использование LinkedIn для профессиональных контактов, Glassdoor для проверки работодателя, Jobscan для ATS, Resume.io для сборки CV и Aced для подготовки к технологическим интервью"
+        "Добавили практическое использование LinkedIn для профессиональных контактов, Glassdoor для проверки работодателя, Jobscan для ATS, Resume.io для сборки CV и Aced для подготовки к технологическим интервью",
+        "Добавили Radim.rs и Telegram-канал Radim Serbia в список источников поиска работы"
       ]
     }
   ]
