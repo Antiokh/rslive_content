@@ -1,0 +1,154 @@
+---
+title: "Национальные кухни Белграда"
+description: "Карта и списки ресторанов разных национальных кухонь в Белграде по данным RSLive и PlanPlus."
+keywords: ["национальные кухни Белград", "рестораны Белград", "русская кухня Белград", "японская кухня Белград", "китайская кухня Белград", "индийская кухня Белград", "турецкая кухня Белград"]
+sourceCheckedAt: 2026-09-08
+live: "https://rslive.ru/map/cuisine/"
+linking:
+  when:
+    - "ищешь ресторан определённой национальной кухни в Белграде"
+    - "нужна карта русской, японской, китайской и других кухонь"
+---
+
+Карта показывает независимо проверенные RSLive заведения. Ниже собраны каталоги PlanPlus по национальным кухням: они полезны для поиска дополнительных мест, но сама рубрика каталога не считается подтверждением кухни или актуального статуса ресторана.
+
+<MapEmbed
+  src="/map-renderer-v2/?source=rslive-static%3Abelgrade-world-restaurants&basemap=local"
+  offlineSrc="/map-renderer-v2/?source=rslive-static%3Abelgrade-world-restaurants&basemap=local"
+  renderer="maplibre"
+  title="Национальные кухни Белграда"
+  height="70vh"
+  regions={['belgrade']}
+/>
+
+## Списки ресторанов по кухням
+
+<Aside type="note" title="Как читать эти списки">
+В 15 национальных рубриках PlanPlus на дату проверки было 277 строк до дедупликации. Списки ниже — discovery-каталог, а не рекомендации RSLive. Закрытые точки, смешанные кухни, филиалы и ошибки классификации перепроверяются перед добавлением на карту.
+</Aside>
+
+<Accordion title="Каталоги PlanPlus по национальным кухням">
+  <AccordionItem title="Бразильская — 1">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/brazilski-restorani)
+
+    Restoran Rodizio.
+
+    **RSLive:** на карте уже есть Pastel de Nata Belgrade как португальско-бразильское кафе; Rodizio остаётся отдельным кандидатом на проверку.
+  </AccordionItem>
+
+  <AccordionItem title="Французская — 12">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/francuski-restorani)
+
+    Bistro Tri; Cafe Baguette; Egoiste Deli & Bistro; Restoran & bar 49; Casa Nova; Chez Olivera; Homa Central bistro; Jelena Anžujska; Maison Boho; Mali Pariz; Pastis bistro; Salon 5a.
+
+    **RSLive:** отдельно проверены Puter Bistro, Casa Nova и Le Coin Bistrot. Casa Nova — смешанная итальянско-французская кухня, поэтому PlanPlus-категория не превращается автоматически во французский флаг.
+  </AccordionItem>
+
+  <AccordionItem title="Греческая — 8">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/grcki-restorani)
+
+    Grčki restoran Ploio; Meze by Elliniko; A la Grekos; Mezestoran Dvorište; O'brock; Piatakia; Taverna Piatakia; Taverna Piatakia Novi Beograd.
+
+    **RSLive:** Meze by Elliniko уже есть на карте. Дополнительно обследуются Mr. Greek Downtown, Stubal Gyros, Gyros In City, Gyropolis, GYROS BOX, Elephants gyros house, Gyro by Paprika Novi Beograd и Gurmania Food.
+  </AccordionItem>
+
+  <AccordionItem title="Индийская — 15">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/indijski-restorani)
+
+    Cafe Lavash; Indijski restoran Arab; Maikhana; Ariana Yummy; Biryani Central; Curry & Curry; Diwali; Diwali Mahal; Indian Arab; Indian Punjabi Cuisine; Indo Food; Mumbai; Spice; Swad; Thyme Indian Street Food.
+
+    **RSLive:** Maikhana уже есть на карте. Biryani Central и Indian Punjabi Cuisine — сильные кандидаты. Ariana Yummy ранее подтверждалась как афганская, Indian Arab — смешанная индийско-арабская, а Curry & Curry требует повторной проверки классификации.
+  </AccordionItem>
+
+  <AccordionItem title="Иранская / персидская — 1">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/iranski-restorani)
+
+    Persijski princ.
+
+    **RSLive:** сильный кандидат на отдельную персидскую кухню; перед картой нужны свежая независимая проверка меню, статуса и координат.
+  </AccordionItem>
+
+  <AccordionItem title="Итальянская — 96">
+    [PlanPlus: страница 1](https://www.planplus.rs/beograd/italijanski-restorani) · [2](https://www.planplus.rs/beograd/italijanski-restorani/2) · [3](https://www.planplus.rs/beograd/italijanski-restorani/3) · [4](https://www.planplus.rs/beograd/italijanski-restorani/4)
+
+    Arlecchino pizzeria; Burger Bar & Pasta Bar; Cafe pizzeria Snežana; Stivale; Cross Lavina; Cucina d'autore Pescatore; Gastro bar Saturnus; Gastrobar Frak; Gelato Bar; Green Panetteria & Pizzeria; All Italian; Gallo Nero; Italiano Da Pippo; La Cucina; Prana Brunch & More; Margherita & Gelato; MIO Ristorante; Pasta bar Bulevar; Don Vitorre; Dva puta Dva; Pasta Caffe Lupo; Piccolo Mediteraneo Cuicine; Majstor i Margarita; Pomodoro Vidin; Tutto Bene; Pizza bar Novi Beograd; Amici; Aperto; Balkon; Barinello; Baštino; Bella Italia; Bella Napoli; Bella Via; Boutique 1; Broker; Buon Appetito; Campania Trattoria; Castello Bianco; Cinecitta; Comunale; Constantin; Cortina; Cuoco; Da Giorgio; Dolcino; Druga Piazza; Duomo; Eatalian Dorćol; Fabrika Pizze; Fenjer; Giulia; Golub; Grazia; Insolita; Italiano dassa; Jamie's Italian; Kitchen bar 27; Klopizza; La Luna; La Taverna; La Tavernetta; La Trattoria Verde; Little Italy; Lonče; Lorenzo & Kakalamba; Mamma Mia; Mozzarella Osteria; New York New York; Pane e Vino; Pastino; Pastoteka; Per Tutti; Piano Loco; Piatto Saruna; Galla; Portofino; Rustique; Šansa; Sapori Di Casa; Saporibelli; Špageterija; Strada Kitchen and Bar; Table; Tipico; Trag; Trattoria Pepe; Tricolore; Ultimatum; Via del Gusto; Status Caffe E Pizza; Taurunum pogled pizza bar; Trattoria Cicciolina; Trattoria Sette Nani; Urban Lounge Bar; Vapiano.
+
+    **RSLive:** Pane E Vino уже есть на карте. Среди сильных кандидатов — Osteria Mozzarella, Trattoria Campania и Casa Nova. Lorenzo & Kakalamba остаётся mixed Serbian/Italian.
+  </AccordionItem>
+
+  <AccordionItem title="Японская — 30">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/japanski-restorani)
+
+    Sushidream; Caviar Sushi Bar; Fine Sushi Bar — Hadži Đerina; Fine Sushi Bar — Uroša Martinovića; Fusion Cuisine Restoran; Kissa10 Asian Fusion; MOON Sushi — Novi Beograd; MOON Sushi — centar; Pro-eat sushi bar; Bizu; Angry Monk; Contemporary Japanese Cuisine; Dorćoleta; Ebisu; Extra Sushi; Fat Cat; Ima Sushi; Love Sushi; Marukoshi; Shangri La sushi; Sushi Hero; Sushi room; Zen by SushiCo; Boketto; Sushi Factory; Sushi king; Sushirrito — Belville; Sushirrito — Vračar; Suši boks; UMAMI Cocktail & Sushi Bar.
+
+    **RSLive:** Marukoshi уже есть на карте; ANGRY MONK, MOON и Ebisu независимо подтверждены как сильные кандидаты. Fusion Cuisine Restoran PlanPlus помечает как временно закрытый; fusion-точки проверяются отдельно.
+  </AccordionItem>
+
+  <AccordionItem title="Китайская — 52">
+    [PlanPlus: страница 1](https://www.planplus.rs/beograd/kineski-restorani) · [2](https://www.planplus.rs/beograd/kineski-restorani/2)
+
+    IDOL; Chuan Chuan Xiang; Golden Wok; Panda; Yxlanzh; Zrno pirinča; Good Appetite; Black & White; Black White; Devet zmajeva; Eleven; Flamingo — Kneza Miloša; Flamingo — Obilićev venac; Gangnam; Jin Yuan; K24; Mister Wang; Panda 011; Peace; WangJiao; Xiao la jiao; Yipin Hot Pot; Kuća kineske hrane Asia; Asia Food; Wok 'n' stix; Azija; Bamboo; Chaos; Chin Chin Quan Ju De; Dorćoleta; Dva Štapića; Hong Kong; Mister Li; Lee; Li Xia; Lucky Lee; Makao i žuto more; Mala kineska rikša; Mi Đa House; Mister Wok; Oh Dumpling; Pandica; Shangri La; Soya Sos; Spring Belgrade; Stari Shanghai; Wang Fu; Wok Republic; Wu Ming; X.Wang's; Kung Fu.
+
+    **RSLive:** IDOL, X.WANG'S KITCHEN и R-tiam уже есть на карте; Golden Wok, YXlanzh и Super Vok независимо подтверждены как сильные кандидаты. Mi Đa House по актуальному меню скорее корейская точка и в китайский слой автоматически не переносится.
+  </AccordionItem>
+
+  <AccordionItem title="Ливанская — 7">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/libanski-restorani)
+
+    Ararat; Natura bar falafel house; Byblos; Hanan; Hanan Food; Zein; Zuwar.
+
+    **RSLive:** Byblos уже есть на карте, Hanan — сильный кандидат. Для Zein и части филиалов есть конфликтующие адреса; Ararat требует проверки смешанной армяно-ливанской идентичности.
+  </AccordionItem>
+
+  <AccordionItem title="Мексиканская — 19">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/meksicki-restorani)
+
+    Amigos Mexican grill; Food & bar Crveni rak; Hacienda Makondo; La Chona; Buena Vida; Cypress Tacos — Rige od Fere; Cypress Tacos — Balkanska; Cypress Tacos — Makedonska; Dobola; Amigo; Burrito Madre; La casa del Burrito; La Gitana; La Taqueria; Nachos; Parapata; Square Burgers and Tortillas; Zapata Ciudad; Tortilla Casa Mexican Grill.
+
+    **RSLive:** Burrito Madre уже есть на карте. Cypress Tacos на Makedonska PlanPlus помечает как временно закрытый; Nachos требует отдельного решения как Tex-Mex. Google Maps дополнительно дал Zapata Pozo.
+  </AccordionItem>
+
+  <AccordionItem title="Немецкая — 4">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/nemacki-restorani)
+
+    Berliner; Laudon bistro; Pivo i kobaja; Stari gurman.
+
+    **RSLive:** у Pivo i kobaja подтверждается заметный немецко-пивной профиль, но остальные записи нельзя считать немецкой кухней только по рубрике PlanPlus.
+  </AccordionItem>
+
+  <AccordionItem title="Русская — 11">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/ruski-restorani)
+
+    Gastroport; Kapetanija 1908; Patriki; Sibirska noć; Mishka Cafe; Shaurmagedon Shawarma Bar; TT Bistro Kalemegdan; URA! — Kraljevića Marka; URA! — Bulevar kralja Aleksandra; URA! — Kolubarska; Yellow — dostava pice.
+
+    **RSLive:** на карте уже есть Mala Moskva, Ruske Palačinke Zemun, Samovarrs, STROGANOV FAMILY и URA!. Kapetanija 1908, Shaurmagedon и Yellow требуют особенно внимательной проверки, а адрес Patriki в PlanPlus конфликтует с более свежими данными RSLive.
+  </AccordionItem>
+
+  <AccordionItem title="Испанская — 4">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/spanski-restorani)
+
+    Cantina de Frida; Milagro; Toro Latin Gastrobar; Tapas Bar.
+
+    **RSLive:** Milagro уже есть на карте. Cantina de Frida и Toro — pan-Latin, поэтому испанский флаг был бы неточным; Tapas Bar требует свежего меню.
+  </AccordionItem>
+
+  <AccordionItem title="Тайская — 8">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/tajlandski-restorani)
+
+    Mi Đa House; Pad Thai; Thai Fazon; Buda Spicy; Istok Outpost; Tao Thai; Thai Zone; Tuk Tuk Thai Food.
+
+    **RSLive:** THAI ZONE уже есть на карте; TAO Thai и Tuk Tuk независимо подтверждены как сильные кандидаты. Mi Đa House по актуальному меню не считаем тайским.
+  </AccordionItem>
+
+  <AccordionItem title="Турецкая — 9">
+    [Открыть рубрику PlanPlus](https://www.planplus.rs/beograd/turski-restorani)
+
+    Cafe Lavash; Afifa Halal Food; Cveće Zla; Gurme; KJ Hayal; Istanbul House; Kultura — Kralja Petra; Kultura — Cara Lazara; Meze.
+
+    **RSLive:** Turkuaz уже есть на карте; Kultura, Anadolija и Gurme — сильные кандидаты. Cafe Lavash одновременно встречается в индийской рубрике PlanPlus, поэтому требует отдельной классификации.
+  </AccordionItem>
+</Accordion>
+
+## Другие каталоги PlanPlus
+
+Для дополнительного поиска используются и более широкие рубрики PlanPlus: [интернациональные рестораны](https://www.planplus.rs/beograd/internacionalni-restorani), [средиземноморские рестораны](https://www.planplus.rs/beograd/mediteranski-restorani), [национальные рестораны](https://www.planplus.rs/beograd/nacionalni-restorani) и [общий каталог ресторанов](https://www.planplus.rs/beograd/restorani). Они не дают национальный `countryCode` сами по себе; например, из средиземноморской рубрики отдельно найден Miradouro как кандидат на португальскую кухню.
