@@ -1,9 +1,9 @@
 {
   "date": "2026-09-08",
   "hours": 24,
-  "generated_at": "2026-09-08T23:20:00+02:00",
+  "generated_at": "2026-09-08T23:35:00+02:00",
   "commit_count": 2,
-  "article_count": 21,
+  "article_count": 6,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/jobs/index.mdx",
@@ -51,127 +51,7 @@
       "title": "Национальные кухни Белграда",
       "live_url": "https://rslive.ru/map/cuisine/",
       "summaries": [
-        "Добавили отдельные списки по 15 национальным рубрикам PlanPlus и связали их с картой; каталог используется как discovery-слой, а не как автоматическая рекомендация"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/brazilian/index.mdx",
-      "title": "Бразильские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/brazilian/",
-      "summaries": [
-        "Добавили бразильскую рубрику PlanPlus с Rodizio и правилами независимой проверки перед включением на карту"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/chinese/index.mdx",
-      "title": "Китайские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/chinese/",
-      "summaries": [
-        "Добавили большой каталог китайских ресторанов PlanPlus и отделили уже проверенные точки от очереди на проверку адресов, меню, сетей и смешанных концепций"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/french/index.mdx",
-      "title": "Французские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/french/",
-      "summaries": [
-        "Добавили все 12 записей французской рубрики PlanPlus и отдельно отметили проверенные Puter Bistro, Casa Nova и Le Coin Bistrot"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/german/index.mdx",
-      "title": "Немецкие рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/german/",
-      "summaries": [
-        "Добавили немецкую рубрику PlanPlus с четырьмя заведениями и пометками о необходимости подтвердить национальную специализацию меню"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/greek/index.mdx",
-      "title": "Греческие рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/greek/",
-      "summaries": [
-        "Добавили все восемь греческих записей PlanPlus, существующую Meze by Elliniko и дополнительные кандидаты из Google Maps"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/indian/index.mdx",
-      "title": "Индийские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/indian/",
-      "summaries": [
-        "Добавили полный PlanPlus-каталог индийской рубрики и выделили конфликты классификации для Ariana Yummy, Cafe Lavash и mixed Indian-Arab точек"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/iranian/index.mdx",
-      "title": "Иранские и персидские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/iranian/",
-      "summaries": [
-        "Добавили Persijski princ как отдельного кандидата на персидскую кухню с требованием перепроверить действующий статус, меню и координаты"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/italian/index.mdx",
-      "title": "Итальянские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/italian/",
-      "summaries": [
-        "Добавили полный каталог из 96 записей PlanPlus и отдельно выделили проверенные и сильные итальянские кандидаты"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/japanese/index.mdx",
-      "title": "Японские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/japanese/",
-      "summaries": [
-        "Добавили 30 записей японской рубрики PlanPlus с отдельной проверкой fusion-заведений, филиалов и временно закрытых точек"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/lebanese/index.mdx",
-      "title": "Ливанские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/lebanese/",
-      "summaries": [
-        "Добавили семь записей ливанской рубрики PlanPlus, включая Hanan, Zuwar, Zein и смешанную армяно-ливанскую Ararat"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/mexican/index.mdx",
-      "title": "Мексиканские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/mexican/",
-      "summaries": [
-        "Добавили все 19 мексиканских записей PlanPlus, отметили временно закрытый Cypress Tacos и отдельный вопрос классификации Tex-Mex"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/russian/index.mdx",
-      "title": "Русские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/russian/",
-      "summaries": [
-        "Добавили все 11 записей русской рубрики PlanPlus и выделили спорные Kapetanija 1908, Shaurmagedon, Yellow и конфликтующий адрес Patriki"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/spanish/index.mdx",
-      "title": "Испанские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/spanish/",
-      "summaries": [
-        "Добавили испанскую рубрику PlanPlus и отделили подтверждённый Milagro от pan-Latin и tapas-точек, которым нельзя автоматически назначать испанский флаг"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/thai/index.mdx",
-      "title": "Тайские рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/thai/",
-      "summaries": [
-        "Добавили восемь записей тайской рубрики PlanPlus и зафиксировали конфликт Mi Đa House, который требует перепроверки как корейская, а не тайская точка"
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/map/cuisine/turkish/index.mdx",
-      "title": "Турецкие рестораны Белграда",
-      "live_url": "https://rslive.ru/map/cuisine/turkish/",
-      "summaries": [
-        "Добавили девять записей турецкой рубрики PlanPlus и выделили спорные cross-category точки Cafe Lavash, Afifa Halal Food и Cveće Zla"
+        "Добавили на страницу карты единый аккордеон с полными списками 15 национальных рубрик PlanPlus, прямыми ссылками на источники и редакционными пометками по спорным классификациям"
       ]
     }
   ]
