@@ -2,64 +2,62 @@
   "date": "2026-09-11",
   "hours": 24,
   "generated_at": "2026-09-11T19:23:00+02:00",
-  "commit_count": 4,
-  "article_count": 7,
+  "commit_count": 5,
+  "article_count": 9,
   "articles": [
     {
       "repo_path": "src/content/docs/about/advertising/index.mdx",
       "title": "Реклама и кураторство",
       "live_url": "https://rslive.ru/about/advertising/",
-      "summaries": [
-        "Зафиксировали рекламную политику RSLive: платного приоритета, скрытых рекомендаций и покупки мест в списках нет; единственный допустимый формат коммерческого присутствия — открытое кураторство статьи при реальном вкладе в её проверку и актуализацию"
-      ]
+      "summaries": ["Зафиксировали рекламную политику RSLive: платного приоритета, скрытых рекомендаций и покупки мест в списках нет; единственный допустимый формат коммерческого присутствия — открытое кураторство статьи при реальном вкладе в её проверку и актуализацию"]
     },
     {
       "repo_path": "src/content/docs/en/about/advertising/index.mdx",
       "title": "Advertising and article curation",
       "live_url": "https://rslive.ru/en/about/advertising/",
-      "summaries": [
-        "Добавили английскую версию политики рекламы и кураторства с теми же ограничениями на платный приоритет, скрытые рекомендации и влияние куратора на редакционные выводы"
-      ]
+      "summaries": ["Добавили английскую версию политики рекламы и кураторства с теми же ограничениями на платный приоритет, скрытые рекомендации и влияние куратора на редакционные выводы"]
     },
     {
       "repo_path": "src/content/docs/sr/about/advertising/index.mdx",
       "title": "Оглашавање и кураторство чланака",
       "live_url": "https://rslive.ru/sr/about/advertising/",
-      "summaries": [
-        "Добавили сербскую версию политики рекламы и кураторства с теми же правилами редакционной независимости и открытой маркировки участия куратора"
-      ]
+      "summaries": ["Добавили сербскую версию политики рекламы и кураторства с теми же правилами редакционной независимости и открытой маркировки участия куратора"]
     },
     {
       "repo_path": "src/content/docs/arrival/jobs/index.mdx",
       "title": "Поиск работы в Сербии",
       "live_url": "https://rslive.ru/arrival/jobs/",
-      "summaries": [
-        "Добавили GetMatch и Эйч для международного и русскоязычного поиска работы; уточнили возможности HireHi и отдельные подборки Hirify по Сербии и релокации в Сербию"
-      ]
+      "summaries": ["Добавили GetMatch и Эйч для международного и русскоязычного поиска работы; уточнили возможности HireHi и отдельные подборки Hirify по Сербии и релокации в Сербию"]
     },
     {
       "repo_path": "src/content/docs/move/visa/index.mdx",
       "title": "Визы и документы",
       "live_url": "https://rslive.ru/move/visa/",
-      "summaries": [
-        "Добавили переход к отдельному офлайн-гайду по оформлению виз других стран из Сербии и к живой базе WikiLayer"
-      ]
+      "summaries": ["Добавили переход к отдельному офлайн-гайду по оформлению виз других стран из Сербии и к живой базе WikiLayer"]
     },
     {
       "repo_path": "src/content/docs/move/visa/other-countries/index.mdx",
       "title": "Визы других стран из Сербии",
       "live_url": "https://rslive.ru/move/visa/other-countries/",
-      "summaries": [
-        "Добавили офлайн-справочник по визам других стран из Сербии: консульская компетенция, Шенген, страховка, банковские справки, EES и ETIAS, ограничения паспорта и навигация по WikiLayer"
-      ]
+      "summaries": ["Добавили офлайн-справочник по визам других стран из Сербии: консульская компетенция, Шенген, страховка, банковские справки, EES и ETIAS, ограничения паспорта и навигация по WikiLayer"]
     },
     {
       "repo_path": "src/content/docs/med/familiar-medicines/index.mdx",
       "title": "Привычные лекарства в Сербии: что искать в аптеке",
       "live_url": "https://rslive.ru/med/familiar-medicines/",
-      "summaries": [
-        "Добавили короткий справочник по привычным лекарствам: знакомое название, INN, сербское написание и поиск через ALIMS; для редких позиций дали ссылку на Serbia Pharma Guide с обязательной официальной перепроверкой"
-      ]
+      "summaries": ["Добавили короткий справочник по привычным лекарствам: знакомое название, INN, сербское написание и поиск через ALIMS; для редких позиций дали ссылку на Serbia Pharma Guide с обязательной официальной перепроверкой"]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/suspend/index.mdx",
+      "title": "Заморозка ИП в Сербии",
+      "live_url": "https://rslive.ru/arrival/business/suspend/",
+      "summaries": ["Вынесли заморозку preduzetnik в отдельную пошаговую инструкцию: Dodatak 06, eRegistracija, оплата, облачная подпись через ConsentID, действия после решения APR, ePorezi, Konsolidovani upit stanja, LPA, CROSO/RFZO и nastavak; добавили фактические скриншоты маршрута электронной подачи"]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/close/index.mdx",
+      "title": "Закрытие предпринимателя",
+      "live_url": "https://rslive.ru/arrival/business/close/",
+      "summaries": ["Отделили окончательное закрытие предпринимателя от временного prekid: статья теперь сфокусирована на brisanje preduzetnika и ведёт в отдельную инструкцию по заморозке, сохраняя прежний заголовок раздела для существующих ссылок"]
     }
   ]
 }
