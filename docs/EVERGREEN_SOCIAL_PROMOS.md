@@ -2,7 +2,7 @@
 
 Этот документ задаёт редакционный контракт для регулярного повторного продвижения существующих статей RSLive через evergreen promo-каталог в Supabase.
 
-Implementation tracker: [#310](https://github.com/Antiokh/rslive_content/issues/310).
+Технический implementation tracker [#310](https://github.com/Antiokh/rslive_content/issues/310) завершён; текущая актуализация и постепенная активация корпуса ведутся в [#321](https://github.com/Antiokh/rslive_content/issues/321).
 
 Runtime-схема, selector и публикационный lifecycle принадлежат `Antiokh/rslive.ru`; подробная техническая методика находится там в `docs/SOCIAL_EVERGREEN_PROMOS.md`.
 
