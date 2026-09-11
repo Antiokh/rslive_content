@@ -37,6 +37,18 @@ pages:
       - "запрос связан с темой: История «Инструкции по Сербии»: зачем появилась RSLive, как менялась энциклопедия и какие принципы сохранились."
       - "нужна информация по теме «О проекте RSLive»"
     anchors: []
+  - url: "/about/advertising/"
+    title: "Реклама и кураторство"
+    description: "Как RSLive относится к рекламе, платным размещениям и кураторству статей профильными специалистами и компаниями."
+    keywords: ["реклама RSLive", "разместить рекламу RSLive", "кураторство статьи", "партнёрство RSLive", "спонсорство статьи"]
+    tags: ["реклама RSLive", "разместить рекламу RSLive", "кураторство статьи", "партнёрство RSLive", "спонсорство статьи", "о проекте", "редакционная независимость"]
+    aliases: ["реклама на RSLive", "как разместить рекламу в Инструкции по Сербии"]
+    link_when:
+      - "нужно понять, можно ли купить рекламу или приоритетное размещение на RSLive"
+      - "компания или специалист хочет стать куратором статьи"
+      - "запрос связан с темой: Как RSLive относится к рекламе, платным размещениям и кураторству статей профильными специалистами и компаниями."
+      - "нужна информация по теме «Реклама и кураторство»"
+    anchors: []
   - url: "/about/app/"
     title: "Приложение и офлайн-режим"
     description: "Как установить RSLive, читать материалы без интернета, экономно обновлять и удалять сохранённую копию."
@@ -1278,6 +1290,19 @@ pages:
       - "нужны редакционные принципы проекта на английском"
       - "the request is about: The history of RSLive: why the project appeared, how the encyclopedia changed, and which principles remained."
       - "information is needed about “About RSLive”"
+    anchors: []
+  - url: "/en/about/advertising/"
+    title: "Advertising and article curation"
+    locale: "en"
+    description: "How RSLive handles advertising, paid placement and article curation by subject-matter experts and organizations."
+    keywords: ["RSLive advertising", "advertise on RSLive", "article curation", "RSLive partnership", "sponsored article"]
+    tags: ["английский", "RSLive advertising", "advertise on RSLive", "article curation", "RSLive partnership", "sponsored article", "о проекте", "редакционная независимость"]
+    aliases: ["advertising on RSLive", "how to advertise in Guide to Serbia"]
+    link_when:
+      - "англоязычному читателю нужно понять, можно ли купить рекламу или приоритетное размещение на RSLive"
+      - "англоязычная компания или специалист хочет стать куратором статьи"
+      - "the request is about: How RSLive handles advertising, paid placement and article curation by subject-matter experts and organizations."
+      - "information is needed about “Advertising and article curation”"
     anchors: []
   - url: "/en/about/privacy/"
     title: "Privacy Policy"
@@ -2997,6 +3022,19 @@ pages:
       - "нужны принципы проекта на сербском"
       - "упит је о теми: Историја RSLive: зашто је пројекат настао, како се енциклопедија мењала и који су принципи остали исти."
       - "потребне су информације о теми „О RSLive“"
+    anchors: []
+  - url: "/sr/about/advertising/"
+    title: "Оглашавање и кураторство чланака"
+    locale: "sr"
+    description: "Како RSLive приступа оглашавању, плаћеном позиционирању и кураторству чланака од стране стручњака и организација."
+    keywords: ["RSLive оглашавање", "реклама на RSLive", "кураторство чланка", "RSLive партнерство", "спонзорисани чланак"]
+    tags: ["сербский", "RSLive оглашавање", "реклама на RSLive", "кураторство чланка", "RSLive партнерство", "спонзорисани чланак", "о проекте", "редакционная независимость"]
+    aliases: ["реклама на RSLive", "како поставити рекламу у Инструкцији по Србији"]
+    link_when:
+      - "сербскому читателю нужно понять, можно ли купить рекламу или приоритетное размещение на RSLive"
+      - "сербская компания или специалист хочет стать куратором статьи"
+      - "упит је о теми: Како RSLive приступа оглашавању, плаћеном позиционирању и кураторству чланака од стране стручњака и организација."
+      - "потребне су информације о теми „Оглашавање и кураторство чланака“"
     anchors: []
   - url: "/sr/about/privacy/"
     title: "Политика приватности"
