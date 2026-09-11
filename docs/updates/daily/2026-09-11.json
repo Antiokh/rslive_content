@@ -2,8 +2,8 @@
   "date": "2026-09-11",
   "hours": 24,
   "generated_at": "2026-09-11T19:23:00+02:00",
-  "commit_count": 2,
-  "article_count": 4,
+  "commit_count": 3,
+  "article_count": 6,
   "articles": [
     {
       "repo_path": "src/content/docs/about/advertising/index.mdx",
@@ -35,6 +35,22 @@
       "live_url": "https://rslive.ru/arrival/jobs/",
       "summaries": [
         "Добавили GetMatch и Эйч для международного и русскоязычного поиска работы; уточнили возможности HireHi и отдельные подборки Hirify по Сербии и релокации в Сербию"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/visa/index.mdx",
+      "title": "Визы и документы",
+      "live_url": "https://rslive.ru/move/visa/",
+      "summaries": [
+        "Добавили переход к отдельному офлайн-гайду по оформлению виз других стран из Сербии и к живой базе WikiLayer"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/visa/other-countries/index.mdx",
+      "title": "Визы других стран из Сербии",
+      "live_url": "https://rslive.ru/move/visa/other-countries/",
+      "summaries": [
+        "Добавили офлайн-справочник по визам других стран из Сербии: консульская компетенция, Шенген, страховка, банковские справки, EES и ETIAS, ограничения паспорта и навигация по WikiLayer"
       ]
     }
   ]
