@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-12",
+  "hours": 24,
+  "generated_at": "2026-09-12T00:38:00+02:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/adaptation/srpski/index.mdx",
+      "title": "Изучение сербского языка",
+      "live_url": "https://rslive.ru/adaptation/srpski/",
+      "summaries": [
+        "Добавили Langlisto — виртуальный класс по сербскому со встроенным созвоном, интерактивными упражнениями, домашними заданиями и словарём"
+      ]
+    }
+  ]
+}
