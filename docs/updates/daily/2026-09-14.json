@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-14",
+  "hours": 24,
+  "generated_at": "2026-09-14T12:22:00+02:00",
+  "commit_count": 1,
+  "article_count": 2,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/drive/register_auto/index.mdx",
+      "title": "Регистрация автомобиля",
+      "live_url": "https://rslive.ru/drive/register_auto/",
+      "summaries": [
+        "Разделили смену владельца, первую регистрацию, импорт и ежегодное продление; добавили документы, налоги, AO, правила для иностранных номеров и сроки 15/30/60 дней, сохранив примеры saobraćajna dozvola и registraciona nalepnica"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/drive/buy/index.mdx",
+      "title": "Покупка автомобиля",
+      "live_url": "https://rslive.ru/drive/buy/",
+      "summaries": [
+        "Исправили ошибочное ограничение покупки автомобиля без РВП: иностранец может приобрести машину в собственность, а требование к статусу пребывания относится к её регистрации; добавили переход к подробной инструкции"
+      ]
+    }
+  ]
+}
