@@ -53,6 +53,7 @@ jobs:
           set -euo pipefail
           test -d src/content/docs
           test -d src/content/docs/about/stickers/assets/svg
+          test -d src/content/docs/about/stickers/assets/webp
           test -d map-data/core
           test -d map-data/basemaps
           test -d map-data/packs/cities
@@ -65,8 +66,13 @@ jobs:
             src/content/docs/ rslive-engine/astro/src/content/docs/
 
           mkdir -p rslive-engine/astro/src/assets/stickers
+          # Transitional contract: keep SVG beside WebP in the engine source so either merge order
+          # remains deployable. Runtime components use only WebP after the engine migration; OG reads
+          # the high-resolution SVG masters from the synchronized content mirror.
           rsync -a \
             src/content/docs/about/stickers/assets/svg/ rslive-engine/astro/src/assets/stickers/
+          rsync -a \
+            src/content/docs/about/stickers/assets/webp/ rslive-engine/astro/src/assets/stickers/
 
           # Runtime map payloads use an explicit allowlist. Gzip is deliberately manual: when a
           # validated sibling .geojson.gz exists it is mirrored, otherwise runtime uses raw GeoJSON.
