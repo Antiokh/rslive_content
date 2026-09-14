@@ -1,0 +1,87 @@
+{
+  "date": "2026-09-14",
+  "hours": 24,
+  "generated_at": "2026-09-14T10:45:00+02:00",
+  "commit_count": 1,
+  "article_count": 13,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/prevoz/index.mdx",
+      "title": "Общественный транспорт и поезда в Сербии",
+      "live_url": "https://rslive.ru/arrival/prevoz/",
+      "summaries": ["Добавили актуальный порядок официального такси из аэропорта Белграда с фиксированной квитанцией и обновили ориентиры по городскому приложению Beograd Plus"]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/coffee-bakeries-desserts/index.mdx",
+      "title": "Кофе, пекарни и десерты в Белграде",
+      "live_url": "https://rslive.ru/lifestyle/coffee-bakeries-desserts/",
+      "summaries": ["Добавили справочник по форматам pekara, poslastičarnica, specialty coffee, knedle и gelato; примеры заведений оставлены только при подтверждении первичными источниками"]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/culture/belgrade-neighborhoods/index.mdx",
+      "title": "Архитектура Белграда: четыре прогулки по районам",
+      "live_url": "https://rslive.ru/lifestyle/culture/belgrade-neighborhoods/",
+      "summaries": ["Добавили четыре архитектурные прогулки по историческому центру и Дорчолу, Земуну, Сеняку–Топчидеру–Дединью и модернистскому Новому Белграду"]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/culture/events/index.mdx",
+      "title": "Культурные события Белграда: где искать афишу",
+      "live_url": "https://rslive.ru/lifestyle/culture/events/",
+      "summaries": ["Добавили устойчивый маршрут поиска культурных событий через официальные календари TOB, KCB, театров, филармонии, фестивалей и Дней европейского наследия"]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/culture/museums/index.mdx",
+      "title": "Музеи Белграда: что смотреть и куда идти",
+      "live_url": "https://rslive.ru/lifestyle/culture/museums/",
+      "summaries": ["Добавили практический выбор музеев Белграда по теме: археология и искусство, Югославия, этнография, техника, Тесла, Африка и еврейская история"]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/ecology/recycling/index.mdx",
+      "title": "Сортировка и переработка отходов",
+      "live_url": "https://rslive.ru/lifestyle/ecology/recycling/",
+      "summaries": ["Добавили практический порядок для обычных отходов, бумаги, пластика, стекла, батареек, электроники и крупногабаритного мусора с отдельными белградскими правилами"]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/holidays/index.mdx",
+      "title": "Государственные праздники и нерабочие дни",
+      "live_url": "https://rslive.ru/lifestyle/holidays/",
+      "summaries": ["Добавили разбор официальных нерабочих дней Сербии, переноса воскресных праздников, индивидуальных религиозных прав и рабочих памятных дат"]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/serbian-food/index.mdx",
+      "title": "Сербская еда: что заказывать и как читать меню",
+      "live_url": "https://rslive.ru/lifestyle/serbian-food/",
+      "summaries": ["Добавили практический словарь сербской кухни с burek, gibanica, komplet lepinja, kajmak, ajvar, ćevapi, pljeskavica, pršuta, knedle и региональными различиями"]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/world-cuisines-belgrade/index.mdx",
+      "title": "Кухни мира в Белграде: где знакомиться с разными гастрономическими традициями",
+      "live_url": "https://rslive.ru/lifestyle/world-cuisines-belgrade/",
+      "summaries": ["Добавили проверяемый справочник по мексиканской, сычуаньской, японской, ближневосточной, индийской и итальянской кухне; агрегаторы не используются как единственное подтверждение работы заведения"]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/electricity/index.mdx",
+      "title": "Электроэнергия: тарифы, зоны и счётчик",
+      "live_url": "https://rslive.ru/move/housing/electricity/",
+      "summaries": ["Добавили актуальный разбор зелёной, синей и красной зон, высокого и низкого тарифа, показаний счётчика, самостоятельного считывания EDS и скидок EPS"]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/handover/index.mdx",
+      "title": "Приём и возврат арендованной квартиры",
+      "live_url": "https://rslive.ru/move/housing/handover/",
+      "summaries": ["Добавили порядок заселения и выезда: письменный договор по ст. 70 жилищного закона, акт и опись, показания, текущий saldo коммуналки, ремонт, визиты владельца и возврат депозита"]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/quiet-hours/index.mdx",
+      "title": "Тишина и kućni red",
+      "live_url": "https://rslive.ru/move/housing/quiet-hours/",
+      "summaries": ["Добавили объяснение муниципальных правил kućni red с конкретными часами для Белграда, ремонтом, музыкой, бытовым шумом и порядком жалобы"]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/utilities/index.mdx",
+      "title": "Коммунальные услуги и счета",
+      "live_url": "https://rslive.ru/move/housing/utilities/",
+      "summaries": ["Добавили практическую инструкцию по EPS, белградскому Infostan, воде, задолженности, фиксации показаний и передаче квартиры при аренде"]
+    }
+  ]
+}
