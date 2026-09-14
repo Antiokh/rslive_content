@@ -6,7 +6,7 @@
 
 - `astro/src/components/MapEmbed.astro` — публичный MDX API и выбор renderer;
 - `astro/config/map-renderers.config.mjs` — `auto | maplibre | embed` и staged rollout policy;
-- `astro/config/maps.config.mjs` — Google / PlanPlus / Yandex normalization и registry first-party sources;
+- `astro/config/maps.config.mjs` — Google / PlanPlus / Yandex normalization, registry first-party sources и opt-in table contracts;
 - `astro/config/map-points.config.mjs` — first-party point contract и консервативное извлечение координат;
 - `astro/config/map-marker-icons.config.mjs` — допустимые semantic marker icons;
 - `astro/config/map-regions.config.mjs` — допустимые `regions` и `SerbiaMap`;
@@ -48,6 +48,9 @@
 
 Нужно обязательно использовать существующий first-party renderer
   -> renderer="maplibre"
+
+Для зарегистрированного dataset отдельно согласован табличный fallback
+  -> showTable
 ```
 
 Не превращайте provider ID, адресную строку или центр viewport в координаты объекта без достоверного источника.
@@ -75,6 +78,7 @@ renderer?: "auto" | "maplibre" | "embed" = "auto"
 offlineSrc?: string
 regions?: string[]
 SerbiaMap?: boolean
+showTable?: boolean = false
 debug?: boolean = false
 debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-map"
 ```
@@ -85,6 +89,8 @@ debugState?: "auto" | "online" | "offline-loaded" | "offline-cold" | "offline-ma
 - `point`.
 
 `renderer="embed"` требует настоящий `src`: first-party point без внешнего provider нельзя принудительно превратить в external iframe.
+
+`showTable` — отдельный opt-in presentation. По умолчанию он выключен и не меняет поведение остальных карт.
 
 ## `src`: внешний provider/source
 
@@ -406,6 +412,27 @@ Yandex и PlanPlus можно использовать как обычный `sr
 
 Внешний `offlineSrc` не является допустимым fallback: offline renderer должен быть same-origin.
 
+## `showTable`: раскрывающийся список объектов
+
+`showTable` включайте только для registered source, у которого engine уже определил explicit table contract. Этот prop предназначен для постепенного rollout и **по умолчанию выключен**.
+
+```mdx
+<MapEmbed
+  src="/map-renderer-v2/?source=rslive-static%3Abelgrade-markets&basemap=local"
+  offlineSrc="/map-renderer-v2/?source=rslive-static%3Abelgrade-markets&basemap=local"
+  renderer="maplibre"
+  title="Рынки Белграда"
+  regions={['belgrade']}
+  showTable
+/>
+```
+
+Компонент server-renderит закрытый `<details>` из того же registered GeoJSON. Поэтому в статье не нужно вручную поддерживать вторую таблицу и нельзя передавать список columns через MDX. Reader-facing столбцы задаёт engine registry; технические `sourceId`, provenance и coordinate-quality поля не выгружаются автоматически.
+
+Если `showTable` включён у незарегистрированной карты или у source без table contract, сборка должна завершиться ошибкой. Не используйте prop «на пробу» на произвольных provider maps.
+
+Сейчас пилот — рынки Белграда. Для остальных карт таблица остаётся выключенной, пока их schema и UX не проверены отдельно.
+
 ## `title`, `caption`, `aspect`, `height`
 
 Всегда задавайте осмысленный `title`, даже если технически есть default. Он нужен для accessibility iframe и используется renderer в fullscreen UI.
@@ -440,6 +467,7 @@ offline-map
 
 Перед новым вызовом полезно свериться с существующими страницами:
 
+- `src/content/docs/arrival/shops/index.mdx` — first-party markets map с opt-in `showTable` pilot;
 - `src/content/docs/map/dance/index.mdx` — registry-backed Google My Maps;
 - `src/content/docs/map/blacklist/index.mdx` — ещё одна registry-backed Google My Maps;
 - `src/content/docs/map/upravazastrance/index.mdx` — PlanPlus и Google Street View provider embeds рядом с текстовыми адресами.
@@ -460,6 +488,8 @@ offline-map
 - проверяйте `node scripts/check-map-data.mjs`;
 - не считайте наличие файла автоматическим включением в renderer registry/PWA.
 
+Если для existing first-party dataset нужно включить `showTable`, сначала добавьте и проверьте table contract в engine registry; MDX сам не определяет schema таблицы.
+
 ## Что не делать
 
 Не делайте следующие вещи:
@@ -472,6 +502,8 @@ offline-map
 - не используйте `serbia` в `regions`;
 - не угадывайте координаты из адреса, PlanPlus ID, Yandex `ll`, frame ID или Google `pb` payload;
 - не придумывайте `offlineSrc`, `sourceId`, renderer route или region id;
+- не включайте `showTable` без explicit table contract в engine registry;
+- не дублируйте GeoJSON вручную отдельной MDX-таблицей только ради `showTable`;
 - не включайте `debug` в обычную статью;
 - не удаляйте текстовый адрес только потому, что появилась карта.
 
@@ -489,6 +521,7 @@ offline-map
 - [ ] `renderer="maplibre"` выбран только при существующем first-party contract;
 - [ ] `renderer="embed"` имеет provider `src`;
 - [ ] `offlineSrc` не придуман вручную;
+- [ ] `showTable` используется только для source с engine table contract;
 - [ ] в обычной статье нет `debug`/`debugState`;
 - [ ] рядом с картой остаётся текстовая информация, необходимая читателю без JS/iframe;
 - [ ] при новом snapshot отдельно выполнены проверки из `map-data/README.md`.
