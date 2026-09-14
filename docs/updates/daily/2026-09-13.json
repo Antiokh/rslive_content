@@ -1,0 +1,154 @@
+{
+  "date": "2026-09-13",
+  "hours": 24,
+  "generated_at": "2026-09-13T18:43:00+02:00",
+  "commit_count": 6,
+  "article_count": 18,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/banje/index.mdx",
+      "title": "Бани Сербии: куда ехать за термами и спокойным отдыхом",
+      "live_url": "https://rslive.ru/lifestyle/travel/banje/",
+      "summaries": [
+        "Добавили встроенную карту RSLive с 32 банями, термальными, wellness-, климатическими и реабилитационными направлениями по всей Сербии; карточки ведут на официальный источник и во внешнюю карту"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/banje/index.mdx",
+      "title": "Бани и термальные курорты Сербии",
+      "live_url": "https://rslive.ru/map/banje/",
+      "summaries": [
+        "Добавили отдельную страновую карту бань и термальных курортов на собственном GeoJSON-слое RSLive; разграничили туристические курорты, реабилитационные места, климатическую Ivanjica, термальное озеро Pačir и развивающуюся Bruska banja"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/fun/index.mdx",
+      "title": "Развлечения",
+      "live_url": "https://rslive.ru/lifestyle/fun/",
+      "summaries": [
+        "Добавили практический обзор афиш Белграда: русскоязычные Telegram-каналы и агрегаторы, официальные городские и туристические календари, Культурный центр Белграда и билетные площадки",
+        "Добавили EventsList как отдельный Telegram-бот для поиска мероприятий и подписки на интересующие категории с уведомлениями; бот не смешивается с таблицами Telegram-каналов и групп"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/dobro_pozhalovat_v_instrukciju_po_serbii/index.mdx",
+      "title": "Добро пожаловать в \"Инструкцию по Сербии\"",
+      "live_url": "https://rslive.ru/blog/dobro_pozhalovat_v_instrukciju_po_serbii/",
+      "summaries": [
+        "Пометили публикацию как исторический анонс 2024 года, добавили переходы к актуальному описанию проекта и редакционной политике и исправили сломанную ссылку в сноске"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/gde_dorozhe_v_rossii_ili_v_serbii/index.mdx",
+      "title": "Где дороже: в России или в Сербии?",
+      "live_url": "https://rslive.ru/blog/gde_dorozhe_v_rossii_ili_v_serbii/",
+      "summaries": [
+        "Пометили цены как снимок 2024 года и отдельно предупредили, что старые тарифы белградского транспорта устарели: с 1 января 2025 года городской общественный транспорт бесплатный"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/javljaetsja_li_serbija_bezopasnoj_stranoj/index.mdx",
+      "title": "Является ли Сербия безопасной страной?",
+      "live_url": "https://rslive.ru/blog/javljaetsja_li_serbija_bezopasnoj_stranoj/",
+      "summaries": [
+        "Пометили неснабжённые источниками оценки преступности и коррупции как архивные обобщения и убрали неподтверждённое утверждение о национальности правонарушителей"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/javljaetsja_li_serbija_xoroshej_stranoj_dlja_pereezda/index.mdx",
+      "title": "Является ли Сербия хорошей страной для переезда?",
+      "live_url": "https://rslive.ru/blog/javljaetsja_li_serbija_xoroshej_stranoj_dlja_pereezda/",
+      "summaries": [
+        "Исправили устаревший тезис о гражданстве после трёх лет проживания и направили читателя к актуальным статьям о визах, РВП, постоянном проживании и гражданстве"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/kak_otnosjatsja_k_lgbt_v_serbii/index.mdx",
+      "title": "Как относятся к ЛГБТ в Сербии?",
+      "live_url": "https://rslive.ru/blog/kak_otnosjatsja_k_lgbt_v_serbii/",
+      "summaries": [
+        "Пометили правовую и общественную часть как датированный обзор 2024 года и направили к актуальным официальным источникам законодательства и защиты от дискриминации"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/kak_v_serbii_otnosjatsja_k_russkim/index.mdx",
+      "title": "Как в Сербии относятся к русским?",
+      "live_url": "https://rslive.ru/blog/kak_v_serbii_otnosjatsja_k_russkim/",
+      "summaries": [
+        "Отделили впечатления 2024 года от текущего общественного мнения, убрали вывод о позиции большинства и добавили ссылки на актуальную инфраструктуру, демографию и пользовательский опыт"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/kakaja_srednjaja_zarplata_v_serbii/index.mdx",
+      "title": "Какая средняя зарплата в Сербии?",
+      "live_url": "https://rslive.ru/blog/kakaja_srednjaja_zarplata_v_serbii/",
+      "summaries": [
+        "Явно обозначили цифры средней и медианной зарплаты как исторические данные августа 2024 года и направили к ежемесячной статистике RZS"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/kogda_serbija_budet_v_es/index.mdx",
+      "title": "Когда Сербия будет в ЕС?",
+      "live_url": "https://rslive.ru/blog/kogda_serbija_budet_v_es/",
+      "summaries": [
+        "Пометили прогнозы 2024 года о сроках вступления в ЕС как неофициальные и добавили текущий официальный статус переговоров со ссылкой на Европейскую комиссию"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/kogo_podderzhala_serbija_v_vojne_s_ukrainoj/index.mdx",
+      "title": "Кого поддержала Сербия в войне с Украиной?",
+      "live_url": "https://rslive.ru/blog/kogo_podderzhala_serbija_v_vojne_s_ukrainoj/",
+      "summaries": [
+        "Пометили внешнеполитические оценки как снимок октября 2024 года и добавили ссылки на текущие заявления МИД Сербии и материалы Еврокомиссии"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/osnovnye_nalogovye_objazatelstva_do_konca_goda_v_serbii/index.mdx",
+      "title": "Основные налоговые обязательства до конца года в Сербии",
+      "live_url": "https://rslive.ru/blog/osnovnye_nalogovye_objazatelstva_do_konca_goda_v_serbii/",
+      "summaries": [
+        "Добавили явное предупреждение не использовать декабрьские сроки 2024 года для текущих платежей и направили к актуальному налоговому разделу и календарю Пореске управе"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/pochemu_russkie_edut_v_serbiju/index.mdx",
+      "title": "Почему русские едут в Сербию?",
+      "live_url": "https://rslive.ru/blog/pochemu_russkie_edut_v_serbiju/",
+      "summaries": [
+        "Обновили миграционные и налоговые оговорки: сохранили подтверждённый 30-дневный безвиз для граждан РФ, убрали универсальную ставку налога для ИП и направили к актуальным РВП, единому разрешению и налогам preduzetnik"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/pochemu_serbija_byla_pod_sankcijami/index.mdx",
+      "title": "Почему Сербия была под санкциями?",
+      "live_url": "https://rslive.ru/blog/pochemu_serbija_byla_pod_sankcijami/",
+      "summaries": [
+        "Явно обозначили архивный текст как смесь исторических событий, распространённых интерпретаций и неподтверждённых причинных выводов и направили к проверяемым статьям об истории Югославии"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/pochemu_serbija_ljubit_rossiju/index.mdx",
+      "title": "Почему Сербия любит Россию?",
+      "live_url": "https://rslive.ru/blog/pochemu_serbija_ljubit_rossiju/",
+      "summaries": [
+        "Отделили устойчивый исторический контекст от меняющихся торговых, политических и общественных оценок 2024 года и убрали некорректную формулировку про обход европейских санкций"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/pochemu_serbija_luchshaja_strana_dlja_immigracii_russkix/index.mdx",
+      "title": "Почему Сербия — лучшая страна для иммиграции русских?",
+      "live_url": "https://rslive.ru/blog/pochemu_serbija_luchshaja_strana_dlja_immigracii_russkix/",
+      "summaries": [
+        "Исправили устаревший тезис о гражданстве после трёх лет проживания, подтвердили текущий 30-дневный безвиз для граждан РФ и добавили ссылки на актуальные миграционные статьи"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/serbija_samaja_dinamichno_rastuschaja_ehkonomika_evropy/index.mdx",
+      "title": "Сербия — самая динамично растущая экономика Европы по росту ВВП",
+      "live_url": "https://rslive.ru/blog/serbija_samaja_dinamichno_rastuschaja_ehkonomika_evropy/",
+      "summaries": [
+        "Пометили показатели ВВП, инфляции, зарплат и занятости как снимок 2024 года и направили к актуальной официальной статистике RZS"
+      ]
+    }
+  ]
+}
