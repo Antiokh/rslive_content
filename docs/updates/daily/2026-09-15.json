@@ -1,0 +1,87 @@
+{
+  "date": "2026-09-15",
+  "hours": 24,
+  "generated_at": "2026-09-15T00:35:14+02:00",
+  "commit_count": 1,
+  "article_count": 13,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/prevoz/index.mdx",
+      "summaries": [
+        "Добавили актуальный порядок официального такси из аэропорта Белграда с фиксированной квитанцией и обновили ориентиры по городскому приложению Beograd Plus"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/coffee-bakeries-desserts/index.mdx",
+      "summaries": [
+        "Добавили справочник по форматам pekara, poslastičarnica, specialty coffee, knedle и gelato; примеры заведений оставлены только при подтверждении первичными источниками"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/culture/belgrade-neighborhoods/index.mdx",
+      "summaries": [
+        "Добавили четыре архитектурные прогулки по историческому центру и Дорчолу, Земуну, Сеняку–Топчидеру–Дединью и модернистскому Новому Белграду"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/culture/events/index.mdx",
+      "summaries": [
+        "Добавили устойчивый маршрут поиска культурных событий через официальные календари TOB, KCB, театров, филармонии, фестивалей и Дней европейского наследия"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/culture/museums/index.mdx",
+      "summaries": [
+        "Добавили практический выбор музеев Белграда по теме: археология и искусство, Югославия, этнография, техника, Тесла, Африка и еврейская история"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/ecology/recycling/index.mdx",
+      "summaries": [
+        "Добавили практический порядок для обычных отходов, бумаги, пластика, стекла, батареек, электроники и крупногабаритного мусора с отдельными белградскими правилами"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/holidays/index.mdx",
+      "summaries": [
+        "Добавили разбор официальных нерабочих дней Сербии, переноса воскресных праздников, индивидуальных религиозных прав и рабочих памятных дат"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/serbian-food/index.mdx",
+      "summaries": [
+        "Добавили практический словарь сербской кухни с burek, gibanica, komplet lepinja, kajmak, ajvar, ćevapi, pljeskavica, pršuta, knedle и региональными различиями"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/world-cuisines-belgrade/index.mdx",
+      "summaries": [
+        "Добавили проверяемый справочник по мексиканской, сычуаньской, японской, ближневосточной, индийской и итальянской кухне; агрегаторы не используются как единственное подтверждение работы заведения"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/electricity/index.mdx",
+      "summaries": [
+        "Добавили актуальный разбор зелёной, синей и красной зон, высокого и низкого тарифа, показаний счётчика, самостоятельного считывания EDS и скидок EPS"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/handover/index.mdx",
+      "summaries": [
+        "Добавили порядок заселения и выезда: письменный договор по ст. 70 жилищного закона, акт и опись, показания, текущий saldo коммуналки, ремонт, визиты владельца и возврат депозита"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/quiet-hours/index.mdx",
+      "summaries": [
+        "Добавили объяснение муниципальных правил kućni red с конкретными часами для Белграда, ремонтом, музыкой, бытовым шумом и порядком жалобы"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/utilities/index.mdx",
+      "summaries": [
+        "Добавили практическую инструкцию по EPS, белградскому Infostan, воде, задолженности, фиксации показаний и передаче квартиры при аренде"
+      ]
+    }
+  ]
+}
