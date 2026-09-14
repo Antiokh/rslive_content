@@ -1,0 +1,47 @@
+name: Agent sticker guidance patch
+
+on:
+  push:
+    branches:
+      - agent/add-new-stickers
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/add-new-stickers
+          fetch-depth: 0
+
+      - name: Document semantic ogSticker selection
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('AGENTS.md')
+          text = path.read_text()
+          anchor = '\n\n### Frontmatter `navigator`\n'
+          if anchor not in text:
+              raise SystemExit('AGENTS ogSticker insertion anchor not found')
+          section = '''\n\n### Frontmatter `ogSticker`\n\n- `ogSticker` — extensionless canonical slug стикера; не добавляйте `.svg`, `.webp` или `.png` во frontmatter.\n- При выборе стикера не делайте вывод по filename или короткому title. Получите актуальный `Antiokh/rslive.ru: astro/config/sticker-semantics.mjs` и сопоставьте тему статьи с `concepts`/`useFor`; `avoidFor` имеет приоритет над поверхностным совпадением по ключевым словам.\n- Проверьте alias/status в семантическом каталоге и используйте canonical active slug. Service/hidden/legacy assets не выбирайте без отдельной причины.\n- После выбора проверьте наличие соответствующих assets в актуальном каталоге: WebP используется browser runtime, SVG master — Open Graph renderer. `pig-in-bushes` является документированным WebP-only legacy-исключением и не должен считаться обычным SVG-backed OG sticker.\n- Если ни один активный стикер семантически не подходит, не выдумывайте slug и не подбирайте картинку только по названию файла; оставьте существующее значение или используйте штатный fallback согласно текущему движку.\n'''
+          if '### Frontmatter `ogSticker`' not in text:
+              text = text.replace(anchor, section + anchor, 1)
+          path.write_text(text)
+          PY
+
+          git add AGENTS.md
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git diff --cached --quiet; then
+            echo 'Guidance already present.'
+            exit 0
+          fi
+          git commit -m 'Уточнить выбор ogSticker по семантическому каталогу'
+          git push origin HEAD:agent/add-new-stickers
