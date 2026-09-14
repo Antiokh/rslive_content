@@ -46,9 +46,9 @@ For a fuller explanation of the character, see [Pig Peter and the RSLive mascot]
 
 ## What the collection contains
 
-The stickers cover administrative and everyday topics: passports and residence documents, housing, work, public transport, travel, medicine, food, holidays and common situations in Serbia. Most stickers exist as SVG and prepared PNG files.
+The stickers cover administrative and everyday topics: passports and residence documents, housing, work, public transport, travel, medicine, food, holidays and common situations in Serbia. Most stickers now have two formats: **SVG** as the high-quality master artwork and **WebP** as a lightweight preview used by the site's interface.
 
-The Telegram set is called **«Инструкция по Сербии (rslive.ru)»**. The gallery below contains the stickers that are also available to the site's Open Graph image generator. Internal service illustrations are not included.
+The Telegram set is called **«Инструкция по Сербии (rslive.ru)»**. The gallery below contains published stickers. Internal service illustrations are not included.
 
 Each entry has two identifiers:
 
@@ -61,9 +61,9 @@ For example, to use the passport illustration on an Open Graph card:
 ogSticker: passport
 ```
 
-Copy the technical name exactly and omit `.svg` or `.png`.
+Copy the technical name exactly and omit the file extension.
 
-The source files are available in the [public content repository](https://github.com/Antiokh/rslive_content/tree/main/src/content/docs/about/stickers/assets). Most stickers have both PNG and SVG sources; `pig-in-bushes` is retained only as PNG.
+The source files are available in the [public content repository](https://github.com/Antiokh/rslive_content/tree/main/src/content/docs/about/stickers/assets). SVG files are master sources, including the high-resolution source used to generate Open Graph images; compact WebP files are used for the header and sticker gallery. PNG copies are no longer maintained. The legacy `pig-in-bushes` sticker has only a WebP preview, so it can appear in the gallery but is not treated as a full OG master until a high-quality source is available.
 
 <StickerGallery />
 
@@ -84,9 +84,11 @@ The first public announcement of the packs is preserved in a [Facebook post](htt
 
 RSLive can select a thematic illustration for a wide Open Graph card from the `ogSticker` field in frontmatter. For example, `passport` can be used for document articles, `javni-prevoz` for public transport and `building-a-house` for housing.
 
-If `ogSticker` is absent or the requested illustration is unavailable to the renderer, the generator uses a fallback image. Choose a technical name from the gallery above.
+If `ogSticker` is absent or no suitable SVG master exists for the requested slug, the generator uses a fallback image. Choose a technical name from the gallery above.
 
-A full sticker is shown only when the title leaves enough room. With long titles the text takes the full width of the card. The square image used by services with square previews keeps only a small pig-head favicon in the corner so the illustration does not compete with the text.
+The same `ogSticker` also controls the small article-header mascot, but the browser receives the compact WebP rendition instead of the heavy SVG. This reduces transfer and offline-storage cost without lowering the quality of the large Open Graph render.
+
+A full sticker is shown on the Open Graph card only when the title leaves enough room. With long titles the text takes the full width of the card. The square image used by services with square previews keeps only a small pig-head favicon in the corner so the illustration does not compete with the text.
 
 ## Can the stickers be reused?
 

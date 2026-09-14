@@ -1,0 +1,691 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "schema": 1,
+    "datasetId": "belgrade-markets",
+    "title": "Рынки Белграда",
+    "kind": "poi",
+    "regionId": "belgrade",
+    "snapshotAt": "2026-09-14",
+    "sources": [
+      {
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "label": "JKP Beogradske pijace — официальный список рынков, адреса, типы, муниципалитеты и режим работы",
+        "url": "https://www.bgpijace.rs/?cat=66&l=lat"
+      },
+      {
+        "sourceId": "openstreetmap-crosscheck:2026-09-14",
+        "label": "OpenStreetMap-derived и локальные картографические данные — геометрия точек; координаты не являются координатами JKP",
+        "url": "https://www.openstreetmap.org/copyright",
+        "attribution": "© OpenStreetMap contributors"
+      }
+    ],
+    "attribution": "RSLive first-party thematic dataset. Market facts: JKP Beogradske pijace. Coordinates: © OpenStreetMap contributors and local map cross-checks."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "banovo-brdo",
+        "name": "Banovo brdo",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Čukarica",
+        "address": "Požeška 41",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Čukarica · Požeška 41 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Po%C5%BEe%C5%A1ka%2041%2C%20Beograd%2C%20Serbia",
+        "phone": "2541 667, 3555 835"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.418651, 44.781638]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "blok-44",
+        "name": "Blok 44",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Novi Beograd",
+        "address": "Nehruova 49",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Novi Beograd · Nehruova 49 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Nehruova%2049%2C%20Beograd%2C%20Serbia",
+        "phone": "2158 232"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.38343, 44.80163]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bezanija",
+        "name": "Bežanija",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Novi Beograd",
+        "address": "Vojvođanska 54",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Novi Beograd · Vojvođanska 54 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Vojvo%C4%91anska%2054%2C%20Beograd%2C%20Serbia",
+        "phone": "2277 287"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.37673, 44.80842]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "brace-jerkovic",
+        "name": "Braće Jerković",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Voždovac",
+        "address": "Braće Jerković 88A",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Voždovac · Braće Jerković 88A · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Bra%C4%87e%20Jerkovi%C4%87%2088A%2C%20Beograd%2C%20Serbia",
+        "phone": "3974 981"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.48897, 44.76925]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "banjica",
+        "name": "Banjica",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Voždovac",
+        "address": "Saše Simeunovića 14",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Voždovac · Saše Simeunovića 14 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Sa%C5%A1e%20Simeunovi%C4%87a%2014%2C%20Beograd%2C%20Serbia",
+        "phone": "3671 727"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.47521, 44.76055]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bele-vode",
+        "name": "Bele vode",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Čukarica",
+        "address": "Crveno barjače 6",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Čukarica · Crveno barjače 6 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Crveno%20barja%C4%8De%206%2C%20Beograd%2C%20Serbia",
+        "phone": "2571 191"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.40717, 44.75168]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "borca",
+        "name": "Borča",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Palilula",
+        "address": "Koste Manojlovića 6D",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Palilula · Koste Manojlovića 6D · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "local-crosscheck",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Koste%20Manojlovi%C4%87a%206D%2C%20Beograd%2C%20Serbia",
+        "phone": "3327 019"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.456561, 44.881135]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "vidikovac",
+        "name": "Vidikovac",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Rakovica",
+        "address": "Vidikovački venac 92",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Rakovica · Vidikovački venac 92 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Vidikova%C4%8Dki%20venac%2092%2C%20Beograd%2C%20Serbia",
+        "phone": "233 59 37"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.41948, 44.74206]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "vozdovac",
+        "name": "Voždovac",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Voždovac",
+        "address": "Jove Ilića 72",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Voždovac · Jove Ilića 72 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Jove%20Ili%C4%87a%2072%2C%20Beograd%2C%20Serbia",
+        "phone": "2463 327"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.47128, 44.77946]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "gornja-varos",
+        "name": "Gornja varoš",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Zemun",
+        "address": "Ugrinovačka 227V",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Zemun · Ugrinovačka 227V · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ugrinova%C4%8Dka%20227V%2C%20Beograd%2C%20Serbia",
+        "phone": "775 06 10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.37373, 44.84739]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "dusanovac",
+        "name": "Dušanovac",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Voždovac",
+        "address": "Ljube Nedića 43",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Voždovac · Ljube Nedića 43 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ljube%20Nedi%C4%87a%2043%2C%20Beograd%2C%20Serbia",
+        "phone": "2496 276"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.47887, 44.78488]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "zeleznik",
+        "name": "Železnik",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Čukarica",
+        "address": "Radnih akcija 75",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Čukarica · Radnih akcija 75 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Radnih%20akcija%2075%2C%20Beograd%2C%20Serbia",
+        "phone": "2571 191"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.37375, 44.72672]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "zvezdara",
+        "name": "Zvezdara",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Zvezdara",
+        "address": "Bulevar kralja Aleksandra 293",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Zvezdara · Bulevar kralja Aleksandra 293 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Bulevar%20kralja%20Aleksandra%20293%2C%20Beograd%2C%20Serbia",
+        "phone": "3809 823"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.50559, 44.79353]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "zeleni-venac",
+        "name": "Zeleni venac",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Savski venac",
+        "address": "Zeleni venac 2",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Savski venac · Zeleni venac 2 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Zeleni%20venac%202%2C%20Beograd%2C%20Serbia",
+        "phone": "7857 970, 7857 971"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.45745, 44.81336]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "zemun",
+        "name": "Zemun",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Zemun",
+        "address": "Masarikov trg 17",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Zemun · Masarikov trg 17 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Masarikov%20trg%2017%2C%20Beograd%2C%20Serbia",
+        "phone": "219 89 48"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.41411, 44.84496]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "kalenic",
+        "name": "Kalenić",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Vračar",
+        "address": "Maksima Gorkog 2B",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Vračar · Maksima Gorkog 2B · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Maksima%20Gorkog%202B%2C%20Beograd%2C%20Serbia",
+        "phone": "2450 350, 2430 957"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.47541, 44.80014]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "karaburma",
+        "name": "Karaburma",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Palilula",
+        "address": "Uralska 9",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Palilula · Uralska 9 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Uralska%209%2C%20Beograd%2C%20Serbia",
+        "phone": "2757 744"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.51777, 44.8159]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "konjarnik",
+        "name": "Konjarnik",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Zvezdara",
+        "address": "Ustanička 205",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Zvezdara · Ustanička 205 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ustani%C4%8Dka%20205%2C%20Beograd%2C%20Serbia",
+        "phone": "2887 640"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.51484, 44.78363]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "kosutnjak",
+        "name": "Košutnjak",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Rakovica",
+        "address": "Pere Velimirovića 15A",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Rakovica · Pere Velimirovića 15A · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "address-local-crosscheck",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Pere%20Velimirovi%C4%87a%2015A%2C%20Beograd%2C%20Serbia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.4527, 44.7577]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mali-mokri-lug",
+        "name": "Mali mokri lug",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Zvezdara",
+        "address": "Bulevar kralja Aleksandra 536",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Zvezdara · Bulevar kralja Aleksandra 536 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "address-local-crosscheck",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Bulevar%20kralja%20Aleksandra%20536%2C%20Beograd%2C%20Serbia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.52365, 44.78235]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "otc-miljakovac",
+        "name": "OTC Miljakovac „Beogradski buvljak”",
+        "category": "market",
+        "profile": "robna",
+        "municipality": "Rakovica",
+        "address": "Vareška 2A",
+        "hours": "08:00–19:00; ponedeljkom ne radi",
+        "description": "Товарный рынок · Rakovica · Vareška 2A · 08:00–19:00; ponedeljkom ne radi",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Vare%C5%A1ka%202A%2C%20Beograd%2C%20Serbia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.44826, 44.74996]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mirijevo",
+        "name": "Mirijevo",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Zvezdara",
+        "address": "Matice srpske 43",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Zvezdara · Matice srpske 43 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Matice%20srpske%2043%2C%20Beograd%2C%20Serbia",
+        "phone": "3426 545"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.5382, 44.7903]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "novo-kijevo",
+        "name": "Novo Kijevo",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Rakovica",
+        "address": "Jagodinska 2",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Rakovica · Jagodinska 2 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Jagodinska%202%2C%20Beograd%2C%20Serbia",
+        "phone": "2330 342"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.41966, 44.72242]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "palilula",
+        "name": "Palilula",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Palilula",
+        "address": "Ilije Garašanina 5A",
+        "hours": "07:00–21:00",
+        "description": "Зелёный рынок · Palilula · Ilije Garašanina 5A · 07:00–21:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ilije%20Gara%C5%A1anina%205A%2C%20Beograd%2C%20Serbia",
+        "phone": "324 15 74"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.47214, 44.8116]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "senjak",
+        "name": "Senjak",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Savski venac",
+        "address": "Koste Glavinića 6",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Savski venac · Koste Glavinića 6 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Koste%20Glavini%C4%87a%206%2C%20Beograd%2C%20Serbia",
+        "phone": "2653 656"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.44239, 44.79557]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "skadarlija",
+        "name": "Skadarlija",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Stari grad",
+        "address": "Džordža Vašingtona 1B",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Stari grad · Džordža Vašingtona 1B · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=D%C5%BEord%C5%BEa%20Va%C5%A1ingtona%201B%2C%20Beograd%2C%20Serbia",
+        "phone": "3223 472, 3224 331"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.46742, 44.81885]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "smederevski-djeram",
+        "name": "Smederevski đeram",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Zvezdara",
+        "address": "Živka Karabiberovića 3",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Zvezdara · Živka Karabiberovića 3 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=%C5%BDivka%20Karabiberovi%C4%87a%203%2C%20Beograd%2C%20Serbia",
+        "phone": "7857 956, 7857 957"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.48725, 44.80133]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tc-krnjaca",
+        "name": "TC Krnjača",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Palilula",
+        "address": "Zrenjaninski put 28",
+        "hours": "08:00–20:00; nedeljom 08:00–19:00",
+        "description": "Зелёный рынок · Palilula · Zrenjaninski put 28 · 08:00–20:00; nedeljom 08:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Zrenjaninski%20put%2028%2C%20Beograd%2C%20Serbia",
+        "phone": "2711 919"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.49207, 44.84049]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tc-novi-beograd",
+        "name": "TC Novi Beograd",
+        "category": "market",
+        "profile": "zelena",
+        "municipality": "Novi Beograd",
+        "address": "Aleksinačkih rudara 34",
+        "hours": "06:00–19:00",
+        "description": "Зелёный рынок · Novi Beograd · Aleksinačkih rudara 34 · 06:00–19:00",
+        "sourceId": "jkp-beogradske-pijace:2026-09-14",
+        "provenanceUrl": "https://www.bgpijace.rs/?cat=66&l=lat",
+        "coordinateSourceId": "openstreetmap-crosscheck:2026-09-14",
+        "coordinateQuality": "osm-marketplace",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Aleksina%C4%8Dkih%20rudara%2034%2C%20Beograd%2C%20Serbia",
+        "phone": "2692 736"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [20.41271, 44.82801]
+      }
+    }
+  ]
+}

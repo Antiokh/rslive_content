@@ -46,6 +46,15 @@
 - При переносе страницы проверяйте необходимость 301-редиректа в `Antiokh/rslive.ru: astro/public/_redirects`.
 
 
+### Frontmatter `ogSticker`
+
+- `ogSticker` — extensionless canonical slug стикера; не добавляйте `.svg`, `.webp` или `.png` во frontmatter.
+- При выборе стикера не делайте вывод по filename или короткому title. Получите актуальный `Antiokh/rslive.ru: astro/config/sticker-semantics.mjs` и сопоставьте тему статьи с `concepts`/`useFor`; `avoidFor` имеет приоритет над поверхностным совпадением по ключевым словам.
+- Проверьте alias/status в семантическом каталоге и используйте canonical active slug. Service/hidden/legacy assets не выбирайте без отдельной причины.
+- После выбора проверьте наличие соответствующих assets в актуальном каталоге: WebP используется browser runtime, SVG master — Open Graph renderer. `pig-in-bushes` является документированным WebP-only legacy-исключением и не должен считаться обычным SVG-backed OG sticker.
+- Если ни один активный стикер семантически не подходит, не выдумывайте slug и не подбирайте картинку только по названию файла; оставьте существующее значение или используйте штатный fallback согласно текущему движку.
+
+
 ### Frontmatter `navigator`
 
 - `navigator` — опциональная классификация статьи для персонального навигатора. Канонический синтаксис и словарь тегов находятся в `docs/RELOCATION_WIZARD.md`.
