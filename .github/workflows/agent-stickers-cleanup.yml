@@ -1,0 +1,75 @@
+name: Agent sticker format cleanup
+
+on:
+  push:
+    branches:
+      - agent/add-new-stickers
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/add-new-stickers
+          fetch-depth: 0
+
+      - name: Finish SVG/WebP migration
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf src/content/docs/about/stickers/assets/png
+
+          python - <<'PY'
+          from pathlib import Path
+
+          paths = [
+              Path('.github/workflows/notify-rslive-ru.yml'),
+              Path('.github/workflows/preview-rslive-ru.yml'),
+          ]
+          for path in paths:
+              text = path.read_text()
+              old = """          mkdir -p rslive-engine/astro/src/assets/stickers\n"""
+              replacement = """          mkdir -p rslive-engine/astro/src/assets/stickers\n          # Sticker runtime is WebP-only; OG generation keeps SVG masters. Remove obsolete PNG\n          # copies from the engine mirror so they cannot remain in the runtime/build chain.\n          rm -f rslive-engine/astro/src/assets/stickers/*.png\n"""
+              if replacement not in text:
+                  if old not in text:
+                      raise SystemExit(f'anchor not found in {path}')
+                  text = text.replace(old, replacement, 1)
+
+              text = text.replace(
+                  "          # Transitional contract: keep SVG beside WebP in the engine source so either merge order\n"
+                  "          # remains deployable. Runtime components use only WebP after the engine migration; OG reads\n"
+                  "          # the high-resolution SVG masters from the synchronized content mirror.\n",
+                  "          # Keep SVG masters beside WebP previews: browser components load WebP, while OG generation\n"
+                  "          # reads only the high-resolution SVG masters.\n",
+              )
+              text = text.replace(
+                  "          # Copy both formats during the migration so previews remain compatible with both the\n"
+                  "          # current SVG runtime and the WebP-only runtime introduced by the engine PR.\n",
+                  "          # Preview mirrors the final format split: WebP for browser runtime, SVG masters for OG.\n",
+              )
+              path.write_text(text)
+          PY
+
+          test ! -d src/content/docs/about/stickers/assets/png
+          test -d src/content/docs/about/stickers/assets/svg
+          test -d src/content/docs/about/stickers/assets/webp
+          ! find src/content/docs/about/stickers/assets -type f -name '*.png' -print -quit | grep -q .
+
+          git rm --ignore-unmatch .github/workflows/agent-stickers-cleanup.yml
+          git add .github/workflows/notify-rslive-ru.yml .github/workflows/preview-rslive-ru.yml src/content/docs/about/stickers/assets
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          if git diff --cached --quiet; then
+            echo 'No cleanup changes required.'
+            exit 0
+          fi
+
+          git commit -m 'Завершить переход стикеров на SVG и WebP'
+          git push origin HEAD:agent/add-new-stickers
