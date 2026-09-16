@@ -90,10 +90,10 @@ jobs:
               route = route_of(line)
               if route in (old_proposals - approved) and line.startswith('| '):
                   parts = line.split(' | ')
-                  if len(parts) != 4:
+                  if len(parts) != 3:
                       raise SystemExit(f'Unexpected table row shape for {route}: {len(parts)} parts')
                   parts[1] = re.sub(r'<br><br>\*\*Почему предлагается замена:\*\*.*$', '', parts[1])
-                  parts[2] = parts[0][2:]
+                  parts[2] = parts[0][2:] + ' |'
                   line = ' | '.join(parts)
               out.append(line)
           inv = '\n'.join(out) + '\n\n'
