@@ -1,0 +1,124 @@
+name: Temporary OG sticker review batch 3
+
+on:
+  push:
+    branches:
+      - agent/og-sticker-review
+
+permissions:
+  contents: write
+
+jobs:
+  apply-review:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/og-sticker-review
+          fetch-depth: 1
+
+      - name: Apply reviewed sticker choices and locale parity
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          report = Path('docs/OG_STICKER_REVIEW.md')
+          text = report.read_text(encoding='utf-8')
+
+          choices = {
+              '/lifestyle/culture/slava/': ('fireworks', 'Для славы по ревью выбран `fireworks`: праздничный образ вместо пасхального стикера.'),
+              '/lifestyle/holidays/': ('fireworks', 'Для общего раздела праздников выбран `fireworks` как прямой праздничный образ.'),
+              '/lifestyle/travel/yugoslav-spomenici/': ('mir-trud-maj', 'Для спомеников Югославии выбран `mir-trud-maj`: стикер прямо отсылает к общему социалистическому прошлому.'),
+              '/move/housing/quiet-hours/': ('jebote', 'Для статьи о кућном реду и тихих часах по ревью выбран `jebote` как характерный сербский бытовой образ.'),
+              '/move/myths/': ('willy-wonka', 'Для разбора мифов выбран `willy-wonka`: саркастический образ недоверия точнее общего исследовательского стикера.'),
+              '/move/visa/other-countries/': ('travel', 'Для виз в другие страны выбран `travel` как прямой образ международных поездок.'),
+              '/about/privacy/': ('investigation', 'Для политики конфиденциальности выбран `investigation` как образ проверки и работы с данными.'),
+              '/en/about/privacy/': ('investigation', 'English privacy page follows the Russian sticker choice: `investigation`.'),
+              '/sr/about/privacy/': ('investigation', 'Српска верзија политике приватности прати избор руске странице: `investigation`.'),
+              '/sr/prijava-boravista-stranca/': ('eid', 'Для сербской инструкции по электронной регистрации иностранца выбран `eid`: статья прямо построена вокруг eID, ConsentID и квалифицированного электронного сертификата.'),
+              '/en/foreigner-residence-registration/': ('eid', 'English version of the same eUprava/eID procedure is aligned with the Serbian page and uses `eid`.'),
+
+              # Locale parity for existing Russian-page review decisions.
+              '/en/russians-in-serbia/demographics/': ('calculation', 'English counterpart of `/adaptation/russians/count/` follows the Russian review choice: `calculation`.'),
+              '/sr/rusi-u-srbiji/demografija/': ('calculation', 'Српски пандан `/adaptation/russians/count/` прати руски избор: `calculation`.'),
+              '/en/russians-in-serbia/ksors/': ('balalajka', 'English KSORS page follows the Russian KSORS review choice: `balalajka`.'),
+              '/sr/rusi-u-srbiji/ksors/': ('balalajka', 'Српска страница КСОРС-а прати руски избор: `balalajka`.'),
+              '/en/russians-in-serbia/national-council/': ('russian-flag', 'English National Council page follows the Russian review choice: `russian-flag`.'),
+              '/sr/rusi-u-srbiji/nacionalni-savet/': ('russian-flag', 'Српска страница Националног савета прати руски избор: `russian-flag`.'),
+              '/en/russians-in-serbia/russian-house/': ('russian-flag', 'English Russian House page follows the Russian review choice: `russian-flag`.'),
+              '/sr/rusi-u-srbiji/ruski-dom/': ('russian-flag', 'Српска страница Руског дома прати руски избор: `russian-flag`.'),
+          }
+
+          for slug in sorted({slug for slug, _ in choices.values()}):
+              webp = Path(f'src/content/docs/about/stickers/assets/webp/{slug}.webp')
+              svg = Path(f'src/content/docs/about/stickers/assets/svg/{slug}.svg')
+              if not webp.is_file():
+                  raise SystemExit(f'missing webp: {webp}')
+              if not svg.is_file():
+                  raise SystemExit(f'missing svg: {svg}')
+
+          change_heading = '## Предложения, отличающиеся от текущего OG'
+          inventory_heading = '## Полный инвентарь'
+          comment_heading = '## Как комментировать'
+          if change_heading not in text or inventory_heading not in text or comment_heading not in text:
+              raise SystemExit('expected report sections not found')
+
+          prefix, rest = text.split(change_heading, 1)
+          _, rest = rest.split(inventory_heading, 1)
+          inventory_body, suffix = rest.split(comment_heading, 1)
+
+          rows = []
+          seen = set()
+          for line in inventory_body.strip().splitlines():
+              if not line.startswith('| ') or line.startswith('| Текущий стикер') or line.startswith('|---'):
+                  continue
+              body = line[2:-2] if line.endswith(' |') else line[2:]
+              parts = body.split(' | ', 2)
+              if len(parts) != 3:
+                  raise SystemExit(f'cannot parse row: {line[:160]}')
+              current, middle, target = parts
+              m = re.match(r'`([^`]+)`<br><br>(.*)', middle)
+              if not m:
+                  raise SystemExit(f'cannot parse route/reason: {middle[:160]}')
+              route, reason = m.groups()
+              if route in choices:
+                  slug, reason = choices[route]
+                  target = f'<img src="../src/content/docs/about/stickers/assets/webp/{slug}.webp" alt="{slug}" width="120"><br><code>{slug}</code>'
+                  seen.add(route)
+              rows.append((current, route, reason, target))
+
+          missing = sorted(set(choices) - seen)
+          if missing:
+              raise SystemExit('routes missing from inventory: ' + ', '.join(missing))
+
+          changes = [row for row in rows if row[0] != row[3]]
+          table_head = [
+              '| Текущий стикер | Страница и объяснение | Предлагаемый стикер |',
+              '|---|---|---|',
+          ]
+
+          def render(items):
+              out = table_head.copy()
+              for current, route, reason, target in items:
+                  out.append(f'| {current} | `{route}`<br><br>{reason} | {target} |')
+              return '\n'.join(out)
+
+          new_text = (
+              prefix.rstrip() + '\n\n'
+              + change_heading + '\n\n'
+              + render(changes) + '\n\n'
+              + inventory_heading + '\n\n'
+              + render(rows) + '\n\n'
+              + comment_heading + suffix
+          )
+          report.write_text(new_text, encoding='utf-8')
+
+      - name: Commit review decisions
+        run: |
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
+          git add docs/OG_STICKER_REVIEW.md
+          git commit -m "docs: apply locale-aware OG sticker review choices"
+          git push origin HEAD:agent/og-sticker-review
