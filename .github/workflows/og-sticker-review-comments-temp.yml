@@ -1,0 +1,188 @@
+name: Temporary OG sticker review comments
+
+on:
+  push:
+    branches:
+      - agent/og-sticker-review
+
+permissions:
+  contents: write
+
+jobs:
+  apply-review:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/og-sticker-review
+          fetch-depth: 1
+
+      - name: Apply reviewer sticker choices
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          report = Path('docs/OG_STICKER_REVIEW.md')
+          text = report.read_text(encoding='utf-8')
+
+          overrides = {
+              '/404/': 'bara-luzha',
+              '/adaptation/cef/': 'eid',
+              '/adaptation/russians/': 'russian-flag',
+              '/adaptation/russians/russian-house/': 'russian-flag',
+              '/adaptation/russians/officials/': 'russian-flag',
+              '/adaptation/russians/national-council/': 'russian-flag',
+              '/adaptation/russians/count/': 'calculation',
+              '/adaptation/russians/embassy/': 'passport',
+              '/adaptation/russians/ksors/': 'balalajka',
+              '/arrival/': 'tractor',
+              '/arrival/beli-karton/': 'wizard',
+              '/arrival/business/doo/': 'don-carleone',
+              '/arrival/boravak/volontiranje/': 'volunteer-help',
+              '/arrival/boravak/volontiranje/nof/': 'volunteer-help',
+              '/arrival/boravak/volontiranje/adra-serbia/': 'volunteer-help',
+              '/arrival/boravak/volontiranje/caritas-sabac/': 'volunteer-help',
+              '/arrival/boravak/volontiranje/udruzenje-svetlost/': 'volunteer-help',
+              '/arrival/boravak/volontiranje/mladi-istrazivaci-srbije/': 'volunteer-ecology',
+              '/arrival/boravak/volontiranje/volonterski-centar-vojvodine/': 'volunteer-help',
+              '/arrival/boravak/volontiranje/russian-diaspora/': 'volunteer-help',
+              '/arrival/freelance/': 'freelancer',
+              '/arrival/jedinstvena-dozvola/': 'id',
+              '/arrival/zdravlje/': 'medical-morpheus',
+              '/blog/kakaja_srednjaja_zarplata_v_serbii/': 'calculation',
+              '/blog/pochemu_russkie_edut_v_serbiju/': 'tractor',
+              '/lifestyle/familiar-foods/': 'russian-food',
+              '/map/familiar-foods/': 'russian-food',
+              '/map/cuisine/': 'kafana',
+          }
+
+          reasons = {
+              '/404/': 'По ревью для тупикового 404 используем `bara-luzha`: юмористическая «лужа» лучше передаёт ситуацию «пришли не туда», чем общий fallback.',
+              '/adaptation/cef/': 'Страница про электронную идентификацию, ЭЦП и работу с электронными картицами; `eid` точнее текущего `smartphone`.',
+              '/adaptation/russians/': 'Корневой раздел о русских в Сербии маркируем `russian-flag`; это прямой и единообразный образ для раздела.',
+              '/adaptation/russians/russian-house/': 'Страница относится к инфраструктуре русского сообщества в Сербии; по общему решению раздела используем `russian-flag`.',
+              '/adaptation/russians/officials/': 'Страница о представителях и структурах русского сообщества; по общему решению раздела используем `russian-flag`.',
+              '/adaptation/russians/national-council/': 'Национальный совет русского меньшинства относится к разделу о русском сообществе; используем `russian-flag`.',
+              '/adaptation/russians/count/': 'Здесь главное — численность, статистика и динамика; `calculation` со счётами точнее исследовательского общего стикера.',
+              '/adaptation/russians/embassy/': 'Посольство и консульский раздел тесно связаны с паспортными и консульскими документами; `passport` точнее `id`.',
+              '/adaptation/russians/ksors/': 'Для КСОРС по ревью выбран `balalajka` как узнаваемый культурный русский образ вместо безличного административного стикера.',
+              '/arrival/': 'Корень «первых шагов после переезда» получает `tractor`: это намеренная визуальная метафора самого переезда и прибытия.',
+              '/arrival/beli-karton/': 'Для белого картона выбран `wizard`: намеренно ироничный образ «магии документов» для бюрократической процедуры.',
+              '/arrival/business/doo/': 'Для DOO по ревью выбран `don-carleone`: характерный иронический корпоративный образ вместо нейтрального `businessman`.',
+              '/arrival/boravak/volontiranje/': 'Общий раздел о волонтёрском основании РВП маркируем `volunteer-help` как основной стикер волонтёрской помощи.',
+              '/arrival/boravak/volontiranje/nof/': 'NOF — молодёжная волонтёрская организация; для общего общественного волонтёрства подходит `volunteer-help`.',
+              '/arrival/boravak/volontiranje/adra-serbia/': 'ADRA занимается гуманитарной помощью, поддержкой уязвимых групп и общественными проектами; используем `volunteer-help`.',
+              '/arrival/boravak/volontiranje/caritas-sabac/': 'Caritas Šabac работает в социальной защите и гуманитарной помощи; `volunteer-help` прямо соответствует характеру программ.',
+              '/arrival/boravak/volontiranje/udruzenje-svetlost/': 'Svetlost занимается молодёжью, социальной интеграцией и общественными программами; используем общий `volunteer-help`.',
+              '/arrival/boravak/volontiranje/mladi-istrazivaci-srbije/': 'Mladi istraživači Srbije прямо работает с экологическим образованием и волонтёрскими проектами; здесь точнее `volunteer-ecology`.',
+              '/arrival/boravak/volontiranje/volonterski-centar-vojvodine/': 'VCV организует местные акции, лагеря и международные обмены; это общее волонтёрство, поэтому `volunteer-help`.',
+              '/arrival/boravak/volontiranje/russian-diaspora/': 'Несмотря на русскую тематику организации, страница в этом подразделе прежде всего разбирает волонтёрскую программу; используем `volunteer-help`.',
+              '/arrival/freelance/': 'Есть прямой канонический стикер `freelancer`; он точнее текущего общего образа работы и зарплаты.',
+              '/arrival/jedinstvena-dozvola/': 'Единое разрешение — документ/карточка статуса и права на работу; по ревью используем `id` вместо общего `approve`.',
+              '/arrival/zdravlje/': 'По ревью для раздела здравоохранения используем `medical-morpheus` как яркий медицинский образ вместо идентификационного `id`.',
+              '/blog/kakaja_srednjaja_zarplata_v_serbii/': 'Статья построена вокруг цифр и расчётов зарплаты; `calculation` со счётами визуально передаёт это точнее `looking-for-salary`.',
+              '/blog/pochemu_russkie_edut_v_serbiju/': 'Для материала о переезде россиян выбран `tractor` как более характерная визуальная метафора миграции, чем общий `move-stuff`.',
+              '/lifestyle/familiar-foods/': 'Привычные русскоязычной аудитории продукты напрямую соответствуют `russian-food`.',
+              '/map/familiar-foods/': 'Хотя это карта, её предмет — привычные русские продукты; тематический `russian-food` полезнее generic `map`.',
+              '/map/cuisine/': 'Для карты заведений и кухонь используем `kafana`: поросёнок в кафане сразу задаёт гастрономический контекст лучше generic `map`.',
+          }
+
+          webp_dir = Path('src/content/docs/about/stickers/assets/webp')
+          svg_dir = Path('src/content/docs/about/stickers/assets/svg')
+          for route, slug in overrides.items():
+              if not (webp_dir / f'{slug}.webp').is_file():
+                  raise SystemExit(f'missing WebP for {route}: {slug}')
+              if not (svg_dir / f'{slug}.svg').is_file():
+                  raise SystemExit(f'missing SVG for {route}: {slug}')
+
+          change_heading = '## Предложения, отличающиеся от текущего OG'
+          inventory_heading = '## Полный инвентарь'
+          comment_heading = '## Как комментировать'
+          if change_heading not in text or inventory_heading not in text or comment_heading not in text:
+              raise SystemExit('expected report sections not found')
+
+          prefix, rest = text.split(change_heading, 1)
+          _, rest = rest.split(inventory_heading, 1)
+          inventory_body, suffix = rest.split(comment_heading, 1)
+
+          lines = inventory_body.strip().splitlines()
+          row_lines = [line for line in lines if line.startswith('| ') and not line.startswith('| Текущий стикер') and not line.startswith('|---')]
+
+          def parse_row(line):
+              body = line[2:-2] if line.endswith(' |') else line[2:]
+              parts = body.split(' | ', 2)
+              if len(parts) != 3:
+                  raise ValueError(f'cannot parse row: {line[:160]}')
+              current, middle, target = parts
+              m = re.match(r'`([^`]+)`<br><br>(.*)', middle)
+              if not m:
+                  raise ValueError(f'cannot parse route/reason: {middle[:160]}')
+              return current, m.group(1), m.group(2), target
+
+          def cell_slug(cell):
+              m = re.search(r'alt="([^"]+)"', cell)
+              return m.group(1) if m else None
+
+          def cell_label(cell):
+              m = re.search(r'<code>(.*?)</code>', cell)
+              return m.group(1) if m else None
+
+          def sticker_cell(slug, label=None):
+              label = label or slug
+              return f'<img src="../src/content/docs/about/stickers/assets/webp/{slug}.webp" alt="{slug}" width="120"><br><code>{label}</code>'
+
+          def normalize_cell(cell):
+              slug = cell_slug(cell)
+              if not slug:
+                  return cell
+              return sticker_cell(slug, cell_label(cell) or slug)
+
+          inventory = []
+          seen = set()
+          for line in row_lines:
+              current, route, reason, target = parse_row(line)
+              current = normalize_cell(current)
+              target = normalize_cell(target)
+              if route in overrides:
+                  target = sticker_cell(overrides[route])
+                  reason = reasons[route]
+                  seen.add(route)
+              inventory.append((current, route, reason, target))
+
+          missing_routes = sorted(set(overrides) - seen)
+          if missing_routes:
+              raise SystemExit('override routes missing from inventory: ' + ', '.join(missing_routes))
+
+          changes = [row for row in inventory if row[0] != row[3]]
+
+          table_head = [
+              '| Текущий стикер | Страница и объяснение | Предлагаемый стикер |',
+              '|---|---|---|',
+          ]
+          def render(rows):
+              out = table_head.copy()
+              for current, route, reason, target in rows:
+                  out.append(f'| {current} | `{route}`<br><br>{reason} | {target} |')
+              return '\n'.join(out)
+
+          prefix = re.sub(r'- Snapshot content: `[^`]+`', '- Snapshot content: `4a5c853bc9445225af4964dcf57c3f0fef33c788`', prefix)
+          prefix = prefix.rstrip() + '\n\n'
+          new_text = (
+              prefix
+              + change_heading + '\n\n'
+              + render(changes) + '\n\n'
+              + inventory_heading + '\n\n'
+              + render(inventory) + '\n\n'
+              + comment_heading + suffix
+          )
+          report.write_text(new_text, encoding='utf-8')
+
+      - name: Commit review decisions
+        run: |
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
+          git add docs/OG_STICKER_REVIEW.md
+          git commit -m "docs: incorporate OG sticker review choices"
+          git push origin HEAD:agent/og-sticker-review
