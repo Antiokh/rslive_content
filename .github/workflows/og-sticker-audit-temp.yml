@@ -23,6 +23,7 @@ jobs:
         run: |
           from pathlib import Path
           import re
+          import subprocess
 
           root = Path('src/content/docs')
           index_text = (root / 'CONTENT_INDEX.yml').read_text(encoding='utf-8')
@@ -54,6 +55,15 @@ jobs:
               by_route[route] = {'path': rel, 'og': og}
 
           proposed = {
+              '/about/advertising/': 'logo',
+              '/about/app/': 'smartphone',
+              '/adaptation/birth/clinics/': 'doctor',
+              '/adaptation/birth/med/': 'doctor',
+              '/arrival/business/codes/': 'letter-list',
+              '/arrival/business/doo/': 'businessman',
+              '/arrival/business/e-comm/': 'businessman',
+              '/arrival/business/efaktura/': 'businessman',
+              '/arrival/shops/': 'shopping-lidl',
               '/blog/dobro_pozhalovat_v_instrukciju_po_serbii/': 'logo',
               '/blog/kogda_serbija_budet_v_es/': 'internet-research',
               '/blog/kakaja_srednjaja_zarplata_v_serbii/': 'looking-for-salary',
@@ -70,11 +80,48 @@ jobs:
               '/blog/serbija_samaja_dinamichno_rastuschaja_ehkonomika_evropy/': 'investments-stock',
               '/blog/javljaetsja_li_serbija_xoroshej_stranoj_dlja_pereezda/': 'move-stuff',
               '/blog/pochemu_serbija_luchshaja_strana_dlja_immigracii_russkix/': 'move-stuff',
+              '/children/': 'child',
+              '/children/birth/': 'child',
+              '/children/school/': 'schoolchild',
+              '/en/about/advertising/': 'logo',
+              '/en/russians-in-serbia/': 'russian-flag',
+              '/lifestyle/coffee-bakeries-desserts/': 'kafa-coffee',
+              '/lifestyle/culture/belgrade-neighborhoods/': 'map',
+              '/lifestyle/culture/books/': 'book-reader',
+              '/lifestyle/culture/events/': 'calendar',
+              '/lifestyle/culture/museums/': 'book-reader',
+              '/lifestyle/ecology/recycling/': 'volunteer-ecology',
+              '/lifestyle/familiar-foods/': 'russian-food',
+              '/lifestyle/holidays/': 'calendar',
+              '/lifestyle/local-goods/': 'checkout',
+              '/lifestyle/serbian-food/': 'pecenje',
+              '/lifestyle/travel/events-calendar/': 'calendar',
+              '/lifestyle/world-cuisines-belgrade/': 'menu-restorant',
+              '/map/cuisine/': 'map',
+              '/map/familiar-foods/': 'map',
               '/map/nosmoke/': 'gas-smoke-gray',
+              '/med/': 'doctor',
+              '/med/blood-donation/': 'doctor',
               '/move/exchange/': 'exchange',
+              '/move/housing/electricity/': 'uplatnica',
+              '/move/housing/handover/': 'house-keys',
+              '/move/housing/utilities/': 'uplatnica',
+              '/move/myths/': 'internet-research',
+              '/sources/': 'internet-research',
+              '/sr/about/advertising/': 'logo',
+              '/sr/rusi-u-srbiji/': 'russian-flag',
           }
 
           explanations = {
+              '/about/advertising/': 'Страница о рекламе внутри RSLive; `logo` связывает OG с самим проектом и лучше безликой книги-fallback.',
+              '/about/app/': 'Страница посвящена приложению; `smartphone` точнее общего списка.',
+              '/adaptation/birth/clinics/': 'Страница про медицинские учреждения; `doctor` точнее идентификационного `id`.',
+              '/adaptation/birth/med/': 'Медицинское наблюдение беременности — прямая медицинская тема; `doctor` точнее `id`.',
+              '/arrival/business/codes/': 'Это справочник кодов деятельности; `letter-list` соответствует структуре и содержанию лучше fallback.',
+              '/arrival/business/doo/': 'Регистрация и ведение компании — бизнес-тема; `businessman` точнее стикера про поиск зарплаты.',
+              '/arrival/business/e-comm/': 'Электронная коммерция — бизнес-инфраструктура; `businessman` лучше generic fallback.',
+              '/arrival/business/efaktura/': 'SEF/eFaktura — операционная часть бизнеса; `businessman` точнее стикера про зарплату.',
+              '/arrival/shops/': 'Страница о магазинах и повседневных покупках; `shopping-lidl` — канонический shopping-сюжет.',
               '/blog/dobro_pozhalovat_v_instrukciju_po_serbii/': 'Материал о самом RSLive; `logo` описывает проект, а `blogerka` — сатиру на блогеров.',
               '/blog/kogda_serbija_budet_v_es/': 'Фактологический разбор переговоров и условий вступления; нейтральный исследовательский OG.',
               '/blog/kakaja_srednjaja_zarplata_v_serbii/': 'Тема страницы — зарплата и доходы; есть прямой тематический стикер.',
@@ -91,8 +138,36 @@ jobs:
               '/blog/serbija_samaja_dinamichno_rastuschaja_ehkonomika_evropy/': 'Экономический рост и показатели; инвестиционно-экономическая метафора точнее.',
               '/blog/javljaetsja_li_serbija_xoroshej_stranoj_dlja_pereezda/': 'Материал оценивает практические условия переезда; миграционный OG соответствует теме.',
               '/blog/pochemu_serbija_luchshaja_strana_dlja_immigracii_russkix/': 'Основной предмет — иммиграция и переезд; `move-stuff` соответствует содержанию без блогерской сатиры.',
+              '/children/': 'Раздел целиком о детях; `child` прямее общего `giant-book`.',
+              '/children/birth/': 'Рождение ребёнка — прямой сюжет `child`; сейчас страница уходит в generic fallback.',
+              '/children/school/': 'Школьный раздел; `schoolchild` точнее общего `giant-book`.',
+              '/en/about/advertising/': 'Английская версия страницы о рекламе RSLive; `logo` логично связывает её с проектом.',
+              '/en/russians-in-serbia/': 'Энциклопедический раздел о русских в Сербии; `russian-flag` точнее `party`, который означает вечеринку.',
+              '/lifestyle/coffee-bakeries-desserts/': 'Кофейни, пекарни и десерты; `kafa-coffee` даёт прямой тематический образ вместо fallback.',
+              '/lifestyle/culture/belgrade-neighborhoods/': 'Районы Белграда — пространственная/городская тема; `map` точнее fallback.',
+              '/lifestyle/culture/books/': 'Книги и чтение; `book-reader` — прямой канонический сюжет.',
+              '/lifestyle/culture/events/': 'Культурные события завязаны на даты; `calendar` точнее fallback.',
+              '/lifestyle/culture/museums/': 'Музеи — культурно-образовательная тема; `book-reader` ближе generic fallback.',
+              '/lifestyle/ecology/recycling/': 'Переработка — экологическая тема; `volunteer-ecology` точнее generic fallback.',
+              '/lifestyle/familiar-foods/': 'Страница про привычные русскоязычной аудитории продукты; `russian-food` передаёт предмет лучше fallback.',
+              '/lifestyle/holidays/': 'Праздники привязаны к датам; `calendar` — нейтральный и прямой вариант.',
+              '/lifestyle/local-goods/': 'Страница о покупке местных товаров; `checkout` обозначает покупки без привязки к конкретной сети.',
+              '/lifestyle/serbian-food/': 'Сербская еда; `pecenje` — узнаваемый канонический гастрономический образ.',
+              '/lifestyle/travel/events-calendar/': 'Это календарь событий; `calendar` точнее fallback.',
+              '/lifestyle/world-cuisines-belgrade/': 'Рестораны и кухни мира; `menu-restorant` передаёт ресторанную тему.',
+              '/map/cuisine/': 'Это именно карта гастрономических мест; `map` точнее generic fallback.',
+              '/map/familiar-foods/': 'Это картографический раздел с точками; `map` лучше generic fallback.',
               '/map/nosmoke/': '`no-drinking` семантически про алкоголь; канонический `gas-smoke-gray` прямо предназначен для дыма и некурящих мест.',
+              '/med/': 'Корневой медицинский раздел; `doctor` точнее идентификационного `id`.',
+              '/med/blood-donation/': 'Донорство крови — медицинская тема; `doctor` точнее `id`.',
               '/move/exchange/': '`exchange` прямо обозначает обмен валюты и обменные пункты; точнее общего `payment-card`.',
+              '/move/housing/electricity/': 'Электричество в жилье связано с коммунальными начислениями и оплатой; `uplatnica` точнее generic fallback.',
+              '/move/housing/handover/': 'Приём-передача жилья и ключей; `house-keys` — прямой сюжет.',
+              '/move/housing/utilities/': 'Коммунальные услуги и счета; `uplatnica` точнее generic fallback.',
+              '/move/myths/': 'Разбор мифов — проверка утверждений и источников; `internet-research` точнее общей карты.',
+              '/sources/': 'Страница источников и проверки информации; `internet-research` — прямой канонический сюжет.',
+              '/sr/about/advertising/': 'Сербская версия страницы о рекламе RSLive; `logo` логично связывает её с проектом.',
+              '/sr/rusi-u-srbiji/': 'Энциклопедический раздел о русских в Сербии; `russian-flag` точнее `party`, который означает вечеринку.',
           }
 
           lines = [
@@ -100,7 +175,7 @@ jobs:
               '',
               '> Review-only: этот файл фиксирует предложения. Frontmatter статей в этом PR не меняется.',
               '',
-              f'- Snapshot content: `{__import__("subprocess").check_output(["git", "rev-parse", "HEAD"], text=True).strip()}`',
+              f'- Snapshot content: `{subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()}`',
               f'- Маршрутов в `CONTENT_INDEX.yml`: **{len(routes)}**',
               '- Если у MD/MDX нет `ogSticker`, движок использует fallback `giant-book.svg`.',
               '- `blogerka` по канонической семантике — сатирический образ Instagram-блогеров/монетизации аудитории; это не нейтральный маркер раздела «Блог».',
@@ -122,7 +197,7 @@ jobs:
                   current = 'engine-owned / без MDX frontmatter'
                   source = 'engine-owned'
               target = proposed.get(route, current)
-              reason = explanations.get(route, 'Оставить: текущее назначение сохраняется; явного смыслового конфликта в этом проходе не отмечено.')
+              reason = explanations.get(route, 'Предлагается оставить: отдельного основания для замены по теме страницы и канонической семантике не найдено.')
               row = (route, current, target, reason, source)
               inventory.append(row)
               if target != current:
@@ -164,5 +239,5 @@ jobs:
           git config user.name "rslive-og-audit"
           git config user.email "actions@github.com"
           git add docs/OG_STICKER_REVIEW.md
-          git commit -m "docs: add OG sticker review inventory"
+          git commit -m "docs: update OG sticker review inventory"
           git push origin HEAD:agent/og-sticker-review
