@@ -22,7 +22,6 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re
 
           changes = {
               'src/content/docs/edu/index.mdx': ('giant-book', 'book-reader'),
@@ -41,6 +40,9 @@ jobs:
               'src/content/docs/med/oms/index.mdx': ('id', 'doctor'),
           }
 
+          if len(changes) != 14:
+              raise SystemExit(f'Expected 14 changes, got {len(changes)}')
+
           slugs = {new for _, new in changes.values()}
           for slug in sorted(slugs):
               for ext in ('webp', 'svg'):
@@ -48,27 +50,30 @@ jobs:
                   if not asset.is_file():
                       raise SystemExit(f'Missing sticker asset: {asset}')
 
-          pattern = re.compile(r'(?m)^ogSticker:\s*([^\n#]+?)\s*$')
           for file_name, (expected_old, new) in changes.items():
               path = Path(file_name)
-              text = path.read_text(encoding='utf-8')
-              if not text.startswith('---\n'):
+              lines = path.read_text(encoding='utf-8').splitlines(keepends=True)
+              if not lines or lines[0].lstrip('\ufeff').strip() != '---':
                   raise SystemExit(f'No frontmatter start: {file_name}')
-              end = text.find('\n---\n', 4)
-              if end == -1:
+              try:
+                  fm_end = next(i for i, line in enumerate(lines[1:], 1) if line.strip() == '---')
+              except StopIteration:
                   raise SystemExit(f'No frontmatter end: {file_name}')
-              frontmatter = text[4:end]
-              matches = list(pattern.finditer(frontmatter))
-              if len(matches) != 1:
-                  raise SystemExit(f'Expected one ogSticker in {file_name}, got {len(matches)}')
-              actual = matches[0].group(1).strip()
-              if actual != expected_old:
-                  raise SystemExit(f'{file_name}: expected {expected_old}, got {actual}')
-              updated_frontmatter = pattern.sub(f'ogSticker: {new}', frontmatter, count=1)
-              path.write_text(text[:4] + updated_frontmatter + text[end:], encoding='utf-8')
 
-          if len(changes) != 14:
-              raise SystemExit(f'Expected 14 changes, got {len(changes)}')
+              found = []
+              for i in range(1, fm_end):
+                  stripped = lines[i].strip()
+                  if stripped.startswith('ogSticker:'):
+                      found.append((i, stripped))
+              expected_line = f'ogSticker: {expected_old}'
+              if len(found) != 1 or found[0][1] != expected_line:
+                  raise SystemExit(f'{file_name}: expected {expected_line!r}; found {[x[1] for x in found]!r}')
+
+              i = found[0][0]
+              ending = '\r\n' if lines[i].endswith('\r\n') else '\n' if lines[i].endswith('\n') else ''
+              lines[i] = f'ogSticker: {new}{ending}'
+              path.write_text(''.join(lines), encoding='utf-8')
+              print(f'{file_name}: {expected_old} -> {new}')
           PY
           git diff --check
           python3 - <<'PY'
