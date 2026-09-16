@@ -1,0 +1,117 @@
+name: Temporary apply OG sticker review approvals
+
+on:
+  push:
+    branches: [agent/og-sticker-recheck-current]
+    paths: [.github/workflows/og-sticker-recheck-approval-temp.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/og-sticker-recheck-current
+          fetch-depth: 0
+      - name: Keep only approved proposals
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path('docs/OG_STICKER_RECHECK.md')
+          text = path.read_text(encoding='utf-8')
+
+          approved = {
+              '/edu/',
+              '/edu/school/daily-life/',
+              '/edu/school/enrollment/',
+              '/edu/school/international/',
+              '/edu/school/resources/',
+              '/edu/school/secondary-admission/',
+              '/gov/taxes/borovak/',
+              '/gov/taxes/codes/',
+              '/gov/taxes/marketplace/',
+              '/gov/taxes/residency/',
+              '/gov/taxes/tax-free/',
+              '/gov/uverenje_boravak/',
+              '/map/ruskadusa/',
+              '/med/oms/',
+          }
+
+          proposal_start = text.index('## Новые предложения после повторного прохода')
+          proposal_end = text.index('## Что после повторной проверки оставлено как есть')
+          old_block = text[proposal_start:proposal_end]
+          old_rows = [line for line in old_block.splitlines() if line.startswith('| <img')]
+
+          def route_of(line):
+              m = re.search(r'`(/[^`]*?)`', line)
+              return m.group(1) if m else None
+
+          old_proposals = {route_of(line) for line in old_rows}
+          old_proposals.discard(None)
+          missing = approved - old_proposals
+          if missing:
+              raise SystemExit(f'Approved routes missing from proposal table: {sorted(missing)}')
+
+          kept_rows = [line for line in old_rows if route_of(line) in approved]
+          if len(kept_rows) != len(approved):
+              raise SystemExit(f'Expected {len(approved)} approved rows, got {len(kept_rows)}')
+
+          new_block = '\n'.join([
+              '## Согласованные предложения после ревью',
+              '',
+              '| Текущий стикер | Страница и объяснение | Согласованный стикер |',
+              '|---|---|---|',
+              *kept_rows,
+              '',
+              'Остальные предложения повторного прохода сняты: для них сохраняется текущий `ogSticker`.',
+              '',
+          ])
+          text = text[:proposal_start] + new_block + text[proposal_end:]
+          text = re.sub(
+              r'- Новых предложений после повторного прохода: \*\*\d+\*\*',
+              f'- Согласованных предложений после ревью: **{len(approved)}**',
+              text,
+              count=1,
+          )
+
+          inv_start = text.index('## Полный текущий инвентарь + предложения')
+          inv_end = text.index('## Распределение текущих стикеров')
+          before = text[:inv_start]
+          inv = text[inv_start:inv_end]
+          after = text[inv_end:]
+
+          out = []
+          for line in inv.splitlines():
+              route = route_of(line)
+              if route in (old_proposals - approved) and line.startswith('| '):
+                  parts = line.split(' | ')
+                  if len(parts) != 4:
+                      raise SystemExit(f'Unexpected table row shape for {route}: {len(parts)} parts')
+                  parts[1] = re.sub(r'<br><br>\*\*Почему предлагается замена:\*\*.*$', '', parts[1])
+                  parts[2] = parts[0][2:]
+                  line = ' | '.join(parts)
+              out.append(line)
+          inv = '\n'.join(out) + '\n\n'
+          text = before + inv + after
+          text = text.replace('## Полный текущий инвентарь + предложения', '## Полный текущий инвентарь + согласованные предложения', 1)
+          text = text.replace('| Текущий стикер | Страница | Предлагаемый стикер |', '| Текущий стикер | Страница | Согласованный стикер |', 1)
+          text = text.replace('Пишите маршрут и желаемый slug. До отдельного подтверждения этот файл остаётся review-only; статьи не меняются.', 'Согласованы только строки из раздела выше. Остальные страницы сохраняют текущий `ogSticker`. Этот файл остаётся review-only; статьи в этом PR не меняются.', 1)
+
+          path.write_text(text, encoding='utf-8')
+          print(f'approved={len(approved)}; removed={len(old_proposals-approved)}')
+      - name: Verify and commit
+        run: |
+          git diff --check
+          changed="$(git diff --name-only)"
+          test "$changed" = "docs/OG_STICKER_RECHECK.md" || { echo "Unexpected diff:"; echo "$changed"; exit 1; }
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
+          git rm .github/workflows/og-sticker-recheck-approval-temp.yml
+          git add docs/OG_STICKER_RECHECK.md
+          git commit -m "docs: record approved OG sticker proposals"
+          git push origin HEAD:agent/og-sticker-recheck-current
