@@ -1,0 +1,41 @@
+name: Temporary copy OG sticker recheck
+
+on:
+  push:
+    branches:
+      - agent/og-sticker-recheck-current
+
+permissions:
+  contents: write
+
+jobs:
+  copy:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/og-sticker-recheck-current
+          fetch-depth: 0
+      - name: Copy reviewed report onto current main base
+        run: |
+          git fetch origin agent/og-sticker-recheck:refs/remotes/origin/agent/og-sticker-recheck
+          git show origin/agent/og-sticker-recheck:docs/OG_STICKER_RECHECK.md > docs/OG_STICKER_RECHECK.md
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess, re
+          p = Path('docs/OG_STICKER_RECHECK.md')
+          text = p.read_text(encoding='utf-8')
+          main = subprocess.check_output(['git','rev-parse','origin/main'], text=True).strip()
+          text = re.sub(r'- Snapshot `main`: `[^`]+`', f'- Snapshot `main`: `{main}`', text, count=1)
+          p.write_text(text, encoding='utf-8')
+          PY
+      - name: Verify and commit
+        run: |
+          git diff --check
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
+          git rm .github/workflows/copy-og-sticker-recheck-temp.yml
+          git add docs/OG_STICKER_RECHECK.md
+          git commit -m "docs: add fresh OG sticker recheck"
+          git push origin HEAD:agent/og-sticker-recheck-current
