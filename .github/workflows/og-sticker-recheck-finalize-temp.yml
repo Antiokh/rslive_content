@@ -1,0 +1,212 @@
+name: Temporary finalize fresh OG sticker review
+
+on:
+  push:
+    branches:
+      - agent/og-sticker-recheck
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/og-sticker-recheck
+          fetch-depth: 0
+
+      - name: Regenerate review with fresh proposals
+        shell: python
+        run: |
+          from pathlib import Path
+          import re, subprocess
+          from collections import Counter
+
+          root = Path('src/content/docs')
+          snapshot = subprocess.check_output(['git','rev-parse','origin/main'], text=True).strip()
+
+          proposals = {
+            '/blog/osnovnye_nalogovye_objazatelstva_do_konca_goda_v_serbii/': ('calendar', 'Статья буквально является календарём налоговых сроков. `calendar` канонически предназначен для дат, дедлайнов и сроков; мем `its-ok-on-fire` менее точен.'),
+            '/edu/': ('book-reader', 'Корень раздела — образование в широком смысле. `book-reader` канонически допускает общее образование, тогда как `giant-book` остаётся слишком общим.'),
+            '/edu/school/daily-life/': ('schoolchild', 'Страница целиком про школьный быт; `schoolchild` точнее общего учебного `giant-book` и согласуется с корнем школьного раздела.'),
+            '/edu/school/enrollment/': ('schoolchild', 'Зачисление ребёнка в школу — конкретная школьная процедура; `schoolchild` точнее общего `giant-book`.'),
+            '/edu/school/international/': ('schoolchild', 'Это справочник именно школ и школьных программ; `schoolchild` точнее общего `giant-book`.'),
+            '/edu/school/resources/': ('schoolchild', 'Ресурсы, экзамены, учебники и школьные процедуры относятся к школьной теме; `schoolchild` точнее общего `giant-book`.'),
+            '/edu/school/secondary-admission/': ('schoolchild', 'Поступление в среднюю школу — конкретная школьная тема; `schoolchild` точнее общего `giant-book`.'),
+            '/en/': ('logo', 'Языковой лендинг RSLive лучше маркировать брендом проекта, а не общим учебным `giant-book`.'),
+            '/ru/': ('logo', 'Русский языковой лендинг/переход к основной редакции лучше маркировать брендом RSLive, а не общим `giant-book`.'),
+            '/sr/': ('logo', 'Языковой лендинг RSLive лучше маркировать брендом проекта, а не общим учебным `giant-book`.'),
+            '/gov/law/license/tourist/': ('approve', 'Страница про лицензирование и реестр туристических агентств. `approve` передаёт разрешительный характер точнее транспортного `bus`.'),
+            '/gov/notguilty/': ('paperwork', 'Это обычная административная справка. `wizard` по канонической семантике связан с «магией документов» и посредниками; `paperwork` нейтральнее и точнее.'),
+            '/gov/taxes/borovak/': ('uplatnica', 'Главная задача страницы — сформировать и оплатить госпошлины по реквизитам. `uplatnica` точнее общего налогового `calculation`.'),
+            '/gov/taxes/codes/': ('uplatnica', 'Страница посвящена полям и кодам платёжной квитанции; `uplatnica` — прямое тематическое соответствие.'),
+            '/gov/taxes/marketplace/': ('delivery-unpacking', 'Статья про покупки в интернет-магазинах, посылки, AliExpress/Temu и ввозные платежи. `delivery-unpacking` канонически предназначен для маркетплейсов и посылок.'),
+            '/gov/taxes/residency/': ('paperwork', 'ПОР-1 — официальная справка о налоговом резидентстве. Здесь важнее получение документа, чем расчёт налога; `paperwork` точнее `calculation`.'),
+            '/gov/taxes/tax-free/': ('checkout', 'Страница про возврат НДС за покупки при выезде. `checkout` визуально ближе к покупке и возврату Tax Free, чем общий расчётный стикер.'),
+            '/gov/uverenje_boravak/': ('paperwork', 'Это официальная справка МВД о статусе проживания. `paperwork` точнее нейтральной административной процедуры, чем ироничный `wizard`.'),
+            '/integration/apostil/': ('paperwork', 'Апостиль — легализация документа. `paperwork` соответствует документной процедуре; `wizard` канонически лучше оставлять для иронии над «магическим» оформлением/посредниками.'),
+            '/integration/stalni/change-address/': ('map', 'Тема — изменение зарегистрированного адреса. `map` соответствует месту/адресу и унифицирует страницу с `/arrival/boravak/change-address/`; `move-stuff` буквально про перевозку вещей.'),
+            '/lifestyle/': ('kafana', 'Нейтральный корень про повседневную жизнь, культуру и досуг не содержит темы снобизма. `white-coat-snob` канонически означает моральное превосходство; `kafana` лучше работает как локальный бытовой/культурный образ.'),
+            '/lifestyle/culture/belgrade-neighborhoods/': ('map', 'Статья построена как четыре прогулочных маршрута по районам. `map` точнее маршрутов и географии, чем `white-coat-snob`, который означает снобизм.'),
+            '/lifestyle/culture/museums/': ('book-reader', 'Это образовательный культурный гид по музеям. `book-reader` допускает образование в широком смысле и точнее буквальной `guitar`.'),
+            '/lifestyle/history/yugoslavia/': ('mir-trud-maj', '`mir-trud-maj` канонически предназначен для социалистического прошлого; для обзорной статьи о Югославии он содержательнее нейтрального `giant-book`.'),
+            '/map/ruskadusa/': ('russian-flag', 'Страница — карта русского культурного наследия в Сербии. `russian-flag` точнее темы русского сообщества/наследия, чем ресторанно-культурная `kafana`.'),
+            '/med/oms/': ('doctor', 'Основная тема — обязательное медицинское страхование и доступ к государственной медицине. `doctor` точнее общего `id`, который переакцентирует пластиковую карту.'),
+            '/move/army/': ('serbian-flag', 'Статья посвящена воинской обязанности Сербии. `russia-is-hearing` канонически относится к политической активности, осторожности и ощущению наблюдения; `serbian-flag` нейтральнее и тематически точнее.'),
+          }
+
+          def route_for(path: Path):
+              rel = path.relative_to(root)
+              if rel.name in ('index.mdx', 'index.md'):
+                  parent = rel.parent.as_posix()
+                  return '/' if parent == '.' else f'/{parent}/'
+              return '/' + rel.with_suffix('').as_posix() + '/'
+
+          def fm_value(fm, key):
+              m = re.search(rf'(?m)^{re.escape(key)}:\s*(.+?)\s*$', fm)
+              if not m:
+                  return None
+              v = m.group(1).strip()
+              if len(v) >= 2 and v[0] == v[-1] and v[0] in {'"', "'"}:
+                  v = v[1:-1]
+              return v
+
+          pages = {}
+          for pat in ('*.mdx', '*.md'):
+              for path in root.rglob(pat):
+                  text = path.read_text(encoding='utf-8')
+                  if not text.startswith('---\n'):
+                      continue
+                  end = text.find('\n---\n', 4)
+                  if end < 0:
+                      continue
+                  fm = text[4:end]
+                  explicit = fm_value(fm, 'ogSticker')
+                  pages[route_for(path)] = {
+                      'path': path.as_posix(),
+                      'title': fm_value(fm, 'title') or route_for(path),
+                      'description': fm_value(fm, 'description') or '',
+                      'sticker': explicit or 'giant-book',
+                      'fallback': explicit is None,
+                  }
+
+          idx = (root / 'CONTENT_INDEX.yml').read_text(encoding='utf-8')
+          indexed = []
+          cur = None
+          for line in idx.splitlines():
+              m = re.match(r'  - url: "([^"]+)"$', line)
+              if m:
+                  if cur:
+                      indexed.append(cur)
+                  cur = {'url': m.group(1), 'title': '', 'description': ''}
+                  continue
+              if cur:
+                  mt = re.match(r'    title: "(.*)"$', line)
+                  md = re.match(r'    description: "(.*)"$', line)
+                  if mt and not cur['title']:
+                      cur['title'] = mt.group(1)
+                  if md and not cur['description']:
+                      cur['description'] = md.group(1)
+          if cur:
+              indexed.append(cur)
+          for item in indexed:
+              if item['url'] not in pages:
+                  pages[item['url']] = {'path': None, 'title': item['title'] or item['url'], 'description': item['description'], 'sticker': None, 'fallback': False}
+
+          for route in proposals:
+              if route not in pages:
+                  raise SystemExit(f'proposal route missing: {route}')
+
+          target_slugs = sorted({v[0] for v in proposals.values()})
+          for slug in target_slugs:
+              webp = root / 'about/stickers/assets/webp' / f'{slug}.webp'
+              svg = root / 'about/stickers/assets/svg' / f'{slug}.svg'
+              if not webp.is_file() or (slug != 'pig-in-bushes' and not svg.is_file()):
+                  raise SystemExit(f'missing proposed asset set: {slug}')
+
+          def img(slug, fallback=False):
+              if not slug:
+                  return '—'
+              label = f'fallback → {slug}' if fallback else slug
+              return f'<img src="../src/content/docs/about/stickers/assets/webp/{slug}.webp" alt="{slug}" width="110"><br><code>{label}</code>'
+
+          routes = sorted(pages)
+          counts = Counter(p['sticker'] for p in pages.values() if p['sticker'])
+          fallback_routes = [r for r,p in pages.items() if p['fallback']]
+          engine = sum(1 for p in pages.values() if not p['path'])
+
+          out = [
+              '# Повторный аудит OG-стикеров', '',
+              '> Review-only. Повторный полный проход после merge PR #346. Frontmatter статей в этом PR не меняется.', '',
+              f'- Snapshot `main`: `{snapshot}`',
+              '- Семантика стикеров: `Antiokh/rslive.ru`, `astro/config/sticker-semantics.mjs` (актуальный `main` на момент ревью).',
+              f'- Всего маршрутов: **{len(routes)}**',
+              f'- MD/MDX-страниц: **{len(routes)-engine}**',
+              f'- Engine-owned маршрутов без MD/MDX: **{engine}**',
+              f'- Страниц без явного `ogSticker`: **{len(fallback_routes)}** — `{fallback_routes[0]}`' if len(fallback_routes) == 1 else f'- Страниц без явного `ogSticker`: **{len(fallback_routes)}**',
+              f'- Новых предложений после повторного прохода: **{len(proposals)}**', '',
+              '## Новые предложения после повторного прохода', '',
+              '| Текущий стикер | Страница и объяснение | Предлагаемый стикер |',
+              '|---|---|---|',
+          ]
+
+          for route in sorted(proposals):
+              p = pages[route]
+              target, reason = proposals[route]
+              title = p['title'].replace('|', '\\|')
+              reason = reason.replace('|', '\\|')
+              out.append(f'| {img(p["sticker"], p["fallback"])} | `{route}`<br><br>**{title}**<br><br>{reason} | {img(target)} |')
+
+          out += [
+              '', '## Что после повторной проверки оставлено как есть', '',
+              '- `giant-book` на чувствительных исторических страницах (`NATO`, `Oluja`, `Srebrenica` и общий исторический раздел) оставлен как нейтральный вариант: более тематичные мемные стикеры добавляли бы лишнюю оценочную окраску.',
+              '- `/lifestyle/culture/crafts/` — единственная страница на runtime fallback. В текущем каноническом наборе нет чистого стикера именно для ремесла/мастерской, поэтому новый slug не выдумывается.',
+              '- Сохраняются явные редакционные решения предыдущего ревью: `/arrival/beli-karton/` → `wizard`, `/arrival/business/doo/` → `don-carleone`, `/arrival/zdravlje/` → `medical-morpheus`, `/integration/social/` → `heisenberg`.', '',
+              '## Полный текущий инвентарь + предложения', '',
+              '| Текущий стикер | Страница | Предлагаемый стикер |',
+              '|---|---|---|',
+          ]
+
+          for route in routes:
+              p = pages[route]
+              title = p['title'].replace('|', '\\|')
+              desc = p['description'].replace('|', '\\|')
+              if p['path']:
+                  current = img(p['sticker'], p['fallback'])
+                  target = proposals.get(route, (p['sticker'], ''))[0]
+                  proposed = img(target)
+                  page_cell = f'`{route}`<br><br>**{title}**'
+                  if desc:
+                      page_cell += f'<br><br>{desc}'
+                  if route in proposals:
+                      page_cell += f'<br><br>**Почему предлагается замена:** {proposals[route][1].replace("|", "\\|")}'
+              else:
+                  current = '—'
+                  proposed = '—'
+                  page_cell = f'`{route}`<br><br>**{title}**<br><br>Engine-owned route'
+                  if desc:
+                      page_cell += f'<br><br>{desc}'
+              out.append(f'| {current} | {page_cell} | {proposed} |')
+
+          out += ['', '## Распределение текущих стикеров', '', '| Slug | Страниц |', '|---|---:|']
+          for slug, n in sorted(counts.items(), key=lambda x: (-x[1], x[0])):
+              out.append(f'| `{slug}` | {n} |')
+          out += ['', '## Как комментировать', '', 'Пишите маршрут и желаемый slug. До отдельного подтверждения этот файл остаётся review-only; статьи не меняются.']
+
+          Path('docs/OG_STICKER_RECHECK.md').write_text('\n'.join(out) + '\n', encoding='utf-8')
+          print(f'Routes: {len(routes)}; proposals: {len(proposals)}; actual fallback: {fallback_routes}; engine-owned: {engine}')
+
+      - name: Verify report-only diff and commit
+        run: |
+          git diff --check
+          changed="$(git diff --name-only)"
+          test "$changed" = "docs/OG_STICKER_RECHECK.md" || { echo "Unexpected diff:"; echo "$changed"; exit 1; }
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
+          git rm .github/workflows/og-sticker-recheck-finalize-temp.yml
+          git add docs/OG_STICKER_RECHECK.md
+          git commit -m "docs: add fresh OG sticker proposals"
+          git push origin HEAD:agent/og-sticker-recheck
