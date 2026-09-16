@@ -1,0 +1,53 @@
+name: Temporary sync social OG review
+
+on:
+  push:
+    branches:
+      - agent/og-sticker-review
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/og-sticker-review
+      - name: Update social decision in both review tables
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('docs/OG_STICKER_REVIEW.md')
+          lines = p.read_text(encoding='utf-8').splitlines()
+          out = []
+          count = 0
+          for line in lines:
+              if '`/integration/social/`<br><br>' not in line:
+                  out.append(line)
+                  continue
+              body = line[2:-2] if line.startswith('| ') and line.endswith(' |') else None
+              if body is None:
+                  raise SystemExit('unexpected social row shape')
+              parts = body.split(' | ', 2)
+              if len(parts) != 3:
+                  raise SystemExit('cannot parse social row')
+              current = parts[0]
+              middle = '`/integration/social/`<br><br>Для раздела о социальной защите и пенсионной системе по последнему ревью выбран `heisenberg` — обычный Хайзенберг с усами, не стикер `breaking-bad-crystals` с кристаллами.'
+              target = '<img src="../src/content/docs/about/stickers/assets/webp/heisenberg.webp" alt="heisenberg" width="120"><br><code>heisenberg</code>'
+              out.append(f'| {current} | {middle} | {target} |')
+              count += 1
+          if count != 2:
+              raise SystemExit(f'expected 2 social rows, got {count}')
+          p.write_text('\n'.join(out) + '\n', encoding='utf-8')
+      - name: Commit review sync
+        run: |
+          git diff --check
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
+          git rm .github/workflows/og-review-social-temp.yml
+          git add docs/OG_STICKER_REVIEW.md
+          git commit -m "docs: set social OG review to heisenberg"
+          git push origin HEAD:agent/og-sticker-review
