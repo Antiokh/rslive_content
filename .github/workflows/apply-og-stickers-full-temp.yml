@@ -103,9 +103,9 @@ jobs:
               if mm:
                   fm2 = re.sub(r'(?m)^ogSticker:\s*.*$', f'ogSticker: {target}', fm, count=1)
               else:
-                  fm2 = fm.rstrip('\n') + f'\nogSticker: {target}\n'
+                  fm2 = fm.rstrip('\n') + f'\nogSticker: {target}'
 
-              new_text = '---\n' + fm2 + '\n---\n' + body
+              new_text = '---\n' + fm2.rstrip('\n') + '\n---\n' + body
               path.write_text(new_text, encoding='utf-8')
               changed.append((route, explicit or '(fallback giant-book)', target, str(path)))
 
@@ -134,7 +134,7 @@ jobs:
           out = subprocess.check_output(['git','diff','--numstat','--','src/content/docs'], text=True)
           for line in out.splitlines():
               a, d, path = line.split('\t', 2)
-              if not ((a == '1' and d in {'0','1'})):
+              if not (a == '1' and d in {'0','1'}):
                   bad.append(line)
           if bad:
               raise SystemExit('Unexpected non-metadata diff shape:\n' + '\n'.join(bad))
