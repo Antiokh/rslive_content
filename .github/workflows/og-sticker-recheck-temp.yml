@@ -1,0 +1,162 @@
+name: Temporary fresh OG sticker inventory
+
+on:
+  push:
+    branches:
+      - agent/og-sticker-recheck
+
+permissions:
+  contents: write
+
+jobs:
+  inventory:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/og-sticker-recheck
+          fetch-depth: 0
+
+      - name: Generate current inventory
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          from collections import Counter
+
+          root = Path('src/content/docs')
+          snapshot = __import__('subprocess').check_output(['git','rev-parse','origin/main'], text=True).strip()
+
+          def route_for(path: Path):
+              rel = path.relative_to(root)
+              if rel.name in ('index.mdx', 'index.md'):
+                  parent = rel.parent.as_posix()
+                  return '/' if parent == '.' else f'/{parent}/'
+              return '/' + rel.with_suffix('').as_posix() + '/'
+
+          def fm_value(fm, key):
+              m = re.search(rf'(?m)^{re.escape(key)}:\s*(.+?)\s*$', fm)
+              if not m:
+                  return None
+              v = m.group(1).strip()
+              if len(v) >= 2 and v[0] == v[-1] and v[0] in {'"', "'"}:
+                  v = v[1:-1]
+              return v
+
+          pages = {}
+          for pat in ('*.mdx', '*.md'):
+              for path in root.rglob(pat):
+                  if path.name == 'CONTENT_INDEX.yml':
+                      continue
+                  text = path.read_text(encoding='utf-8')
+                  if not text.startswith('---\n'):
+                      continue
+                  end = text.find('\n---\n', 4)
+                  if end < 0:
+                      continue
+                  fm = text[4:end]
+                  route = route_for(path)
+                  pages[route] = {
+                      'path': path.as_posix(),
+                      'title': fm_value(fm, 'title') or route,
+                      'description': fm_value(fm, 'description') or '',
+                      'sticker': fm_value(fm, 'ogSticker') or 'giant-book',
+                      'fallback': fm_value(fm, 'ogSticker') is None,
+                  }
+
+          # Generated index is used only to include engine-owned routes without MD/MDX.
+          idx = (root / 'CONTENT_INDEX.yml').read_text(encoding='utf-8')
+          indexed = []
+          current = None
+          for line in idx.splitlines():
+              m = re.match(r'  - url: "([^"]+)"$', line)
+              if m:
+                  if current:
+                      indexed.append(current)
+                  current = {'url': m.group(1), 'title': '', 'description': ''}
+                  continue
+              if current:
+                  mt = re.match(r'    title: "(.*)"$', line)
+                  md = re.match(r'    description: "(.*)"$', line)
+                  if mt and not current['title']:
+                      current['title'] = mt.group(1)
+                  if md and not current['description']:
+                      current['description'] = md.group(1)
+          if current:
+              indexed.append(current)
+
+          for item in indexed:
+              if item['url'] not in pages:
+                  pages[item['url']] = {
+                      'path': None,
+                      'title': item['title'] or item['url'],
+                      'description': item['description'],
+                      'sticker': None,
+                      'fallback': False,
+                  }
+
+          def img(slug):
+              if not slug:
+                  return '—'
+              shown = f'fallback → {slug}' if slug == 'giant-book' else slug
+              return f'<img src="../src/content/docs/about/stickers/assets/webp/{slug}.webp" alt="{slug}" width="110"><br><code>{shown}</code>'
+
+          routes = sorted(pages)
+          counts = Counter(p['sticker'] for p in pages.values() if p['sticker'])
+          fallback = sum(1 for p in pages.values() if p['fallback'])
+          engine = sum(1 for p in pages.values() if not p['path'])
+
+          out = []
+          out += [
+              '# Повторный аудит OG-стикеров', '',
+              '> Review-only. Снимок после merge PR #346; frontmatter статей в этом PR не меняется.', '',
+              f'- Snapshot `main`: `{snapshot}`',
+              f'- Всего маршрутов: **{len(routes)}**',
+              f'- MD/MDX-страниц: **{len(routes)-engine}**',
+              f'- Engine-owned маршрутов без MD/MDX: **{engine}**',
+              f'- Страниц без явного `ogSticker` (runtime fallback `giant-book`): **{fallback}**', '',
+              '## Новые предложения после повторного прохода', '',
+              '_Будет заполнено после повторной семантической сверки всего списка._', '',
+              '## Текущий инвентарь', '',
+              '| Текущий стикер | Страница | Предлагаемый стикер |',
+              '|---|---|---|',
+          ]
+
+          for route in routes:
+              p = pages[route]
+              if p['path']:
+                  current_cell = img(p['sticker'])
+                  proposed_cell = current_cell
+                  desc = p['description'].replace('|', '\\|')
+                  title = p['title'].replace('|', '\\|')
+                  page_cell = f'`{route}`<br><br>**{title}**'
+                  if desc:
+                      page_cell += f'<br><br>{desc}'
+              else:
+                  current_cell = '—'
+                  proposed_cell = '—'
+                  title = p['title'].replace('|', '\\|')
+                  desc = p['description'].replace('|', '\\|')
+                  page_cell = f'`{route}`<br><br>**{title}**<br><br>Engine-owned route'
+                  if desc:
+                      page_cell += f'<br><br>{desc}'
+              out.append(f'| {current_cell} | {page_cell} | {proposed_cell} |')
+
+          out += ['', '## Распределение текущих стикеров', '', '| Slug | Страниц |', '|---|---:|']
+          for slug, n in sorted(counts.items(), key=lambda x: (-x[1], x[0])):
+              out.append(f'| `{slug}` | {n} |')
+          out += ['', '## Как комментировать', '', 'Пишите маршрут и желаемый slug. До отдельного подтверждения этот файл остаётся review-only.']
+
+          Path('docs/OG_STICKER_RECHECK.md').write_text('\n'.join(out) + '\n', encoding='utf-8')
+          print(f'Generated {len(routes)} routes, {fallback} fallbacks, {engine} engine-owned')
+
+      - name: Verify and commit
+        run: |
+          git diff --check
+          git config user.name "Anton Nazarov"
+          git config user.email "antiokh@yandex.ru"
+          git rm .github/workflows/og-sticker-recheck-temp.yml
+          git add docs/OG_STICKER_RECHECK.md
+          git commit -m "docs: refresh full OG sticker inventory"
+          git push origin HEAD:agent/og-sticker-recheck
