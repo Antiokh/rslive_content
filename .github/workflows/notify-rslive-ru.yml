@@ -258,7 +258,9 @@ jobs:
             -f target_url="$run_url"
 
           cloudflare_json=""
-          for attempt in $(seq 1 60); do
+          # Cloudflare production builds can take noticeably longer than 15 minutes.
+          # Poll for up to 30 minutes before treating the deployment as non-terminal.
+          for attempt in $(seq 1 120); do
             cloudflare_json="$(gh api "repos/Antiokh/rslive.ru/commits/$PRIVATE_SHA/check-runs" \
               --jq '[.check_runs[] | select(.name == "Cloudflare Pages")] | sort_by(.started_at) | last | if . == null then empty else {status, conclusion, details_url, html_url} end' || true)"
 
@@ -269,7 +271,7 @@ jobs:
               fi
             fi
 
-            echo "Ожидание Cloudflare Pages для $PRIVATE_SHA ($attempt/60)..."
+            echo "Ожидание Cloudflare Pages для $PRIVATE_SHA ($attempt/120)..."
             sleep 15
           done
 
