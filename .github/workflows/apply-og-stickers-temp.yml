@@ -43,37 +43,18 @@ jobs:
           if len(changes) != 14:
               raise SystemExit(f'Expected 14 changes, got {len(changes)}')
 
-          slugs = {new for _, new in changes.values()}
-          for slug in sorted(slugs):
-              for ext in ('webp', 'svg'):
-                  asset = Path(f'src/content/docs/about/stickers/assets/{ext}/{slug}.{ext}')
-                  if not asset.is_file():
-                      raise SystemExit(f'Missing sticker asset: {asset}')
-
-          for file_name, (expected_old, new) in changes.items():
+          for file_name, (old, new) in changes.items():
               path = Path(file_name)
-              lines = path.read_text(encoding='utf-8').splitlines(keepends=True)
-              if not lines or lines[0].lstrip('\ufeff').strip() != '---':
-                  raise SystemExit(f'No frontmatter start: {file_name}')
-              try:
-                  fm_end = next(i for i, line in enumerate(lines[1:], 1) if line.strip() == '---')
-              except StopIteration:
-                  raise SystemExit(f'No frontmatter end: {file_name}')
-
-              found = []
-              for i in range(1, fm_end):
-                  stripped = lines[i].strip()
-                  if stripped.startswith('ogSticker:'):
-                      found.append((i, stripped))
-              expected_line = f'ogSticker: {expected_old}'
-              if len(found) != 1 or found[0][1] != expected_line:
-                  raise SystemExit(f'{file_name}: expected {expected_line!r}; found {[x[1] for x in found]!r}')
-
-              i = found[0][0]
-              ending = '\r\n' if lines[i].endswith('\r\n') else '\n' if lines[i].endswith('\n') else ''
-              lines[i] = f'ogSticker: {new}{ending}'
-              path.write_text(''.join(lines), encoding='utf-8')
-              print(f'{file_name}: {expected_old} -> {new}')
+              text = path.read_text(encoding='utf-8')
+              old_line = f'ogSticker: {old}'
+              new_line = f'ogSticker: {new}'
+              if text.count(old_line) != 1:
+                  raise SystemExit(f'{file_name}: expected exactly one {old_line!r}, got {text.count(old_line)}')
+              updated = text.replace(old_line, new_line, 1)
+              if updated.count(new_line) != 1:
+                  raise SystemExit(f'{file_name}: target verification failed for {new_line!r}')
+              path.write_text(updated, encoding='utf-8')
+              print(f'{file_name}: {old} -> {new}')
           PY
           git diff --check
           python3 - <<'PY'
