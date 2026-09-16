@@ -1,9 +1,9 @@
 {
   "date": "2026-09-16",
   "hours": 24,
-  "generated_at": "2026-09-16T14:36:00+02:00",
-  "commit_count": 1,
-  "article_count": 1,
+  "generated_at": "2026-09-16T19:38:00+02:00",
+  "commit_count": 2,
+  "article_count": 2,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/index.mdx",
@@ -11,6 +11,15 @@
       "live_url": "https://rslive.ru/lifestyle/fun/",
       "summaries": [
         "Добавили «Музейный Белград» и фильтруемый каталог основных первичных источников культурных событий: полный городской контур, республиканские учреждения, музеи, театры, галереи, культурные центры, концертные площадки и зарубежные институты с официальными сайтами и подтверждёнными Instagram"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/uverenje_boravak/index.mdx",
+      "title": "Уверење о боравку",
+      "live_url": "https://rslive.ru/gov/uverenje_boravak/",
+      "summaries": [
+        "Полностью перепроверили справку uverenje o odobrenom privremenom boravku ili stalnom nastanjenju: отделили её от карточки ВНЖ и белого картона, убрали устаревшие абсолютные списки «нужна/не нужна» и неверную форму заявления на РВП",
+        "Уточнили банковский сценарий по действующим правилам NBS, белградскую запись, ePlati, EBS/JMBG и практический запрос справки с предыдущими периодами пребывания"
       ]
     }
   ]
