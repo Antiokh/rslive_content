@@ -1,9 +1,9 @@
 {
   "date": "2026-09-16",
   "hours": 24,
-  "generated_at": "2026-09-16T14:36:00+02:00",
-  "commit_count": 1,
-  "article_count": 1,
+  "generated_at": "2026-09-16T19:39:00+02:00",
+  "commit_count": 2,
+  "article_count": 2,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/index.mdx",
@@ -11,6 +11,14 @@
       "live_url": "https://rslive.ru/lifestyle/fun/",
       "summaries": [
         "Добавили «Музейный Белград» и фильтруемый каталог основных первичных источников культурных событий: полный городской контур, республиканские учреждения, музеи, театры, галереи, культурные центры, концертные площадки и зарубежные институты с официальными сайтами и подтверждёнными Instagram"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/business/preduzetnik/index.mdx",
+      "title": "Налоги preduzetnik",
+      "live_url": "https://rslive.ru/gov/taxes/business/preduzetnik/",
+      "summaries": [
+        "Добавили простой вводный пример на цифрах, который до таблиц и лимитов показывает разницу между paušal, knjigaš и lična zarada"
       ]
     }
   ]
