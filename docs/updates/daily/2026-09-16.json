@@ -2,8 +2,8 @@
   "date": "2026-09-16",
   "hours": 24,
   "generated_at": "2026-09-16T22:33:00+02:00",
-  "commit_count": 5,
-  "article_count": 5,
+  "commit_count": 6,
+  "article_count": 9,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/index.mdx",
@@ -43,6 +43,38 @@
       "live_url": "https://rslive.ru/lifestyle/culture/crafts/",
       "summaries": [
         "Добавили практический гид по старым ремёслам Белграда: официальный реестр сертифицированных мастеров, программы Манаковой кући и действующие мастерские опанков, керамики и традиционных сладостей"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/kogda_serbija_budet_v_es/index.mdx",
+      "title": "Когда Сербия будет в ЕС?",
+      "live_url": "https://rslive.ru/blog/kogda_serbija_budet_v_es/",
+      "summaries": [
+        "Перепроверили путь Сербии в ЕС: зафиксировали текущий статус переговоров, отделили технические критерии от даты членства, уточнили кластер 3, БРИКС и сырьевое партнёрство"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/kogo_podderzhala_serbija_v_vojne_s_ukrainoj/index.mdx",
+      "title": "Кого поддержала Сербия в войне с Украиной?",
+      "live_url": "https://rslive.ru/blog/kogo_podderzhala_serbija_v_vojne_s_ukrainoj/",
+      "summaries": [
+        "Перепроверили позицию Сербии по войне в Украине: отдельно описали поддержку территориальной целостности Украины и голосование в ООН, неприсоединение к санкциям против России, отношения с Россией и Украиной и датированные опросы"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/pochemu_serbija_byla_pod_sankcijami/index.mdx",
+      "title": "Почему Сербия была под санкциями?",
+      "live_url": "https://rslive.ru/blog/pochemu_serbija_byla_pod_sankcijami/",
+      "summaries": [
+        "Переписали историю санкций 1990-х по резолюциям ООН: отделили режим против СР Югославии 1992–1996 годов от кризиса 1999 года, убрали неподтверждённые причинные версии и добавили данные ICTY и НБС"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/blog/pochemu_serbija_ljubit_rossiju/index.mdx",
+      "title": "Почему Сербия любит Россию?",
+      "live_url": "https://rslive.ru/blog/pochemu_serbija_ljubit_rossiju/",
+      "summaries": [
+        "Уточнили причины пророссийских симпатий у части сербского общества: отделили исторические и культурные факторы от текущей политики, добавили структуру внешней торговли, позицию по Косово и датированные исследования"
       ]
     }
   ]
