@@ -99,21 +99,23 @@ jobs:
           if missing:
               raise SystemExit('routes missing: ' + ', '.join(missing))
 
+          expected_changed = set()
           for route, slug in sorted(decisions.items()):
               path = route_to_path[route]
               source = from_main(path)
               rebuilt = replace_og(source, slug)
               if without_og(rebuilt) != without_og(source):
                   raise SystemExit(f'non-og content differs after rebuild: {route}')
+              if rebuilt != source:
+                  expected_changed.add(path.as_posix())
               path.write_text(rebuilt, encoding='utf-8')
 
-          # Verify every changed article is byte-for-byte main except the ogSticker line.
+          # Verify every actual article diff is expected and differs from main only by ogSticker.
           changed = subprocess.check_output(['git', 'diff', '--name-only', 'origin/main', '--', 'src/content/docs'], text=True).splitlines()
-          expected = {route_to_path[r].as_posix() for r in decisions}
           actual = set(changed)
-          if actual != expected:
-              extra = sorted(actual - expected)
-              absent = sorted(expected - actual)
+          if actual != expected_changed:
+              extra = sorted(actual - expected_changed)
+              absent = sorted(expected_changed - actual)
               raise SystemExit(f'changed set mismatch; extra={extra}; absent={absent}')
 
           for route, slug in decisions.items():
@@ -122,17 +124,22 @@ jobs:
               branch = path.read_text(encoding='utf-8')
               if without_og(branch) != without_og(main):
                   raise SystemExit(f'non-og difference remains: {route}')
-              fm = branch.split('\n---\n', 1)[0]
-              if not re.search(rf'(?m)^ogSticker:\s*{re.escape(slug)}\s*$', fm):
-                  raise SystemExit(f'wrong ogSticker for {route}: expected {slug}')
+              lines = branch.splitlines()
+              close = next(i for i in range(1, len(lines)) if lines[i].strip() == '---')
+              values = [line.split(':', 1)[1].strip() for line in lines[1:close] if re.match(r'^ogSticker\s*:', line)]
+              if values != [slug]:
+                  raise SystemExit(f'wrong ogSticker for {route}: got {values}, expected {slug}')
 
           social = route_to_path['/integration/social/'].read_text(encoding='utf-8')
-          if 'ogSticker: heisenberg\n' not in social.split('\n---\n', 1)[0] + '\n':
+          social_lines = social.splitlines()
+          social_close = next(i for i in range(1, len(social_lines)) if social_lines[i].strip() == '---')
+          social_front = '\n'.join(social_lines[1:social_close])
+          if not re.search(r'(?m)^ogSticker:\s*heisenberg\s*$', social_front):
               raise SystemExit('social is not heisenberg')
-          if 'breaking-bad-crystals' in social.split('\n---\n', 1)[0]:
+          if 'breaking-bad-crystals' in social_front:
               raise SystemExit('social incorrectly references breaking-bad-crystals')
 
-          print(f'validated {len(decisions)} approved OG changes')
+          print(f'validated {len(decisions)} decisions; {len(expected_changed)} produce changes vs main')
 
       - name: Verify and commit repair
         run: |
