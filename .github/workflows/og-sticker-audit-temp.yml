@@ -1,0 +1,168 @@
+name: Temporary OG sticker audit
+
+on:
+  push:
+    branches:
+      - agent/og-sticker-review
+
+permissions:
+  contents: write
+
+jobs:
+  inventory:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/og-sticker-review
+          fetch-depth: 1
+
+      - name: Generate OG sticker review
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          root = Path('src/content/docs')
+          index_text = (root / 'CONTENT_INDEX.yml').read_text(encoding='utf-8')
+          routes = re.findall(r'^  - url: "([^"]+)"', index_text, flags=re.M)
+
+          by_route = {}
+          for path in sorted(root.rglob('*')):
+              if not path.is_file() or path.suffix not in {'.md', '.mdx'}:
+                  continue
+              text = path.read_text(encoding='utf-8')
+              fm = ''
+              if text.startswith('---'):
+                  parts = text.split('---', 2)
+                  if len(parts) >= 3:
+                      fm = parts[1]
+              rel = path.relative_to(root).as_posix()
+              if rel in {'index.md', 'index.mdx'}:
+                  route = '/'
+              elif rel in {'404.md', '404.mdx'}:
+                  route = '/404/'
+              elif rel.endswith('/index.mdx'):
+                  route = '/' + rel[:-len('index.mdx')]
+              elif rel.endswith('/index.md'):
+                  route = '/' + rel[:-len('index.md')]
+              else:
+                  route = '/' + re.sub(r'\.(md|mdx)$', '/', rel)
+              m = re.search(r'^ogSticker:\s*["\']?([^"\'\s#]+)', fm, flags=re.M)
+              og = m.group(1) if m else None
+              by_route[route] = {'path': rel, 'og': og}
+
+          proposed = {
+              '/blog/dobro_pozhalovat_v_instrukciju_po_serbii/': 'logo',
+              '/blog/kogda_serbija_budet_v_es/': 'internet-research',
+              '/blog/kakaja_srednjaja_zarplata_v_serbii/': 'looking-for-salary',
+              '/blog/pochemu_serbija_ljubit_rossiju/': 'internet-research',
+              '/blog/pochemu_russkie_edut_v_serbiju/': 'move-stuff',
+              '/blog/kak_otnosjatsja_k_lgbt_v_serbii/': 'internet-research',
+              '/blog/javljaetsja_li_serbija_bezopasnoj_stranoj/': 'internet-research',
+              '/blog/kak_v_serbii_otnosjatsja_k_russkim/': 'internet-research',
+              '/blog/gde_dorozhe_v_rossii_ili_v_serbii/': 'payment-card',
+              '/blog/pochemu_serbija_byla_pod_sankcijami/': 'internet-research',
+              '/blog/kogo_podderzhala_serbija_v_vojne_s_ukrainoj/': 'internet-research',
+              '/blog/chto_izmenilos_v_rslive_za_mesjac/': 'logo',
+              '/blog/osnovnye_nalogovye_objazatelstva_do_konca_goda_v_serbii/': 'calendar',
+              '/blog/serbija_samaja_dinamichno_rastuschaja_ehkonomika_evropy/': 'investments-stock',
+              '/blog/javljaetsja_li_serbija_xoroshej_stranoj_dlja_pereezda/': 'move-stuff',
+              '/blog/pochemu_serbija_luchshaja_strana_dlja_immigracii_russkix/': 'move-stuff',
+              '/map/nosmoke/': 'gas-smoke-gray',
+              '/move/exchange/': 'exchange',
+          }
+
+          explanations = {
+              '/blog/dobro_pozhalovat_v_instrukciju_po_serbii/': 'Материал о самом RSLive; `logo` описывает проект, а `blogerka` — сатиру на блогеров.',
+              '/blog/kogda_serbija_budet_v_es/': 'Фактологический разбор переговоров и условий вступления; нейтральный исследовательский OG.',
+              '/blog/kakaja_srednjaja_zarplata_v_serbii/': 'Тема страницы — зарплата и доходы; есть прямой тематический стикер.',
+              '/blog/pochemu_serbija_ljubit_rossiju/': 'Историко-социальный разбор; исследовательская метафора точнее сатирической «блогерки».',
+              '/blog/pochemu_russkie_edut_v_serbiju/': 'Основной сюжет — переезд и миграция.',
+              '/blog/kak_otnosjatsja_k_lgbt_v_serbii/': 'Фактологический обзор права и общественных данных; нужен нейтральный исследовательский OG.',
+              '/blog/javljaetsja_li_serbija_bezopasnoj_stranoj/': 'Страница сопоставляет данные о безопасности и рисках; исследовательский OG точнее.',
+              '/blog/kak_v_serbii_otnosjatsja_k_russkim/': 'Обзор исторических, социальных и политических факторов; исследовательский OG без сатирического оттенка.',
+              '/blog/gde_dorozhe_v_rossii_ili_v_serbii/': 'Сравнение расходов и стоимости жизни; финансовый OG соответствует предмету.',
+              '/blog/pochemu_serbija_byla_pod_sankcijami/': 'Историко-политический справочный материал; нейтральный исследовательский OG.',
+              '/blog/kogo_podderzhala_serbija_v_vojne_s_ukrainoj/': 'Фактологический разбор внешнеполитических решений; нейтральный исследовательский OG.',
+              '/blog/chto_izmenilos_v_rslive_za_mesjac/': 'Материал об изменениях самого проекта; `logo` является прямой семантической привязкой.',
+              '/blog/osnovnye_nalogovye_objazatelstva_do_konca_goda_v_serbii/': 'Ключевой смысл — календарные налоговые сроки до конца года.',
+              '/blog/serbija_samaja_dinamichno_rastuschaja_ehkonomika_evropy/': 'Экономический рост и показатели; инвестиционно-экономическая метафора точнее.',
+              '/blog/javljaetsja_li_serbija_xoroshej_stranoj_dlja_pereezda/': 'Материал оценивает практические условия переезда; миграционный OG соответствует теме.',
+              '/blog/pochemu_serbija_luchshaja_strana_dlja_immigracii_russkix/': 'Основной предмет — иммиграция и переезд; `move-stuff` соответствует содержанию без блогерской сатиры.',
+              '/map/nosmoke/': '`no-drinking` семантически про алкоголь; канонический `gas-smoke-gray` прямо предназначен для дыма и некурящих мест.',
+              '/move/exchange/': '`exchange` прямо обозначает обмен валюты и обменные пункты; точнее общего `payment-card`.',
+          }
+
+          lines = [
+              '# Аудит OG-стикеров',
+              '',
+              '> Review-only: этот файл фиксирует предложения. Frontmatter статей в этом PR не меняется.',
+              '',
+              f'- Snapshot content: `{__import__("subprocess").check_output(["git", "rev-parse", "HEAD"], text=True).strip()}`',
+              f'- Маршрутов в `CONTENT_INDEX.yml`: **{len(routes)}**',
+              '- Если у MD/MDX нет `ogSticker`, движок использует fallback `giant-book.svg`.',
+              '- `blogerka` по канонической семантике — сатирический образ Instagram-блогеров/монетизации аудитории; это не нейтральный маркер раздела «Блог».',
+              '',
+              '## Предложения, отличающиеся от текущего OG',
+              '',
+              '| Страница | Текущий OG | Предлагается | Объяснение |',
+              '|---|---|---|---|',
+          ]
+
+          changes = []
+          inventory = []
+          for route in routes:
+              info = by_route.get(route)
+              if info:
+                  current = info['og'] if info['og'] else 'fallback: giant-book.svg'
+                  source = f"`{info['path']}`"
+              else:
+                  current = 'engine-owned / без MDX frontmatter'
+                  source = 'engine-owned'
+              target = proposed.get(route, current)
+              reason = explanations.get(route, 'Оставить: текущее назначение сохраняется; явного смыслового конфликта в этом проходе не отмечено.')
+              row = (route, current, target, reason, source)
+              inventory.append(row)
+              if target != current:
+                  changes.append(row)
+
+          def esc(s):
+              return str(s).replace('|', '\\|').replace('\n', ' ')
+
+          for route, current, target, reason, source in changes:
+              lines.append(f'| `{esc(route)}` | `{esc(current)}` | `{esc(target)}` | {esc(reason)} |')
+
+          lines += [
+              '',
+              '## Полный инвентарь',
+              '',
+              '| # | Страница | Источник | Текущий OG | Предлагается | Объяснение |',
+              '|---:|---|---|---|---|---|',
+          ]
+          for i, (route, current, target, reason, source) in enumerate(inventory, 1):
+              lines.append(f'| {i} | `{esc(route)}` | {source} | `{esc(current)}` | `{esc(target)}` | {esc(reason)} |')
+
+          lines += [
+              '',
+              '## Как комментировать',
+              '',
+              'Оставляйте комментарий к конкретной строке: какой стикер выбрать вместо предложенного или почему текущий лучше. После согласования изменения `ogSticker` будут сделаны отдельным проходом.',
+              '',
+              '## Ограничения',
+              '',
+              '- Инвентарь MD/MDX и текущие значения `ogSticker` собраны автоматически из snapshot выше.',
+              '- Engine-owned маршруты без MDX помечены отдельно: этот файл не приписывает им выдуманный frontmatter.',
+              '- Семантика предложений сверяется с каноническим `astro/config/sticker-semantics.mjs` в `Antiokh/rslive.ru`.',
+          ]
+
+          Path('docs/OG_STICKER_REVIEW.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+
+      - name: Commit generated inventory
+        run: |
+          git config user.name "rslive-og-audit"
+          git config user.email "actions@github.com"
+          git add docs/OG_STICKER_REVIEW.md
+          git commit -m "docs: add OG sticker review inventory"
+          git push origin HEAD:agent/og-sticker-review
