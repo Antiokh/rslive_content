@@ -2,8 +2,8 @@
 title: "Развлечения"
 description: "Где искать развлечения и мероприятия в Белграде и Сербии: русскоязычные афиши, Telegram-каналы, официальные городские источники, концерты, фестивали, выставки и другие события."
 ogSticker: party
-keywords: ["развлечения в Белграде", "афиша Белграда", "мероприятия Белграда", "куда сходить в Белграде", "события Белграда", "развлечения Сербия"]
-sourceCheckedAt: 2026-09-13
+keywords: ["развлечения в Белграде", "афиша Белграда", "мероприятия Белграда", "куда сходить в Белграде", "события Белграда", "развлечения Сербия", "музеи Белграда", "культурные институции Белграда"]
+sourceCheckedAt: 2026-09-15
 live: "https://rslive.ru/lifestyle/fun/"
 linking:
   tags:
@@ -39,6 +39,7 @@ linking:
 - [«Встречи в Белграде»](https://t.me/vstrechi_v_belgrade) — афиша событий, ориентированных на русскоговорящее сообщество: лекций, квизов, концертов, фестивалей, встреч и поездок.
 - [«Жарко Тусић»](https://t.me/zarko_tusic) — альтернативная афиша Белграда с менее массовыми и локальными событиями.
 - [PROstyle Belgrade](https://t.me/prostylebelgrade) — Telegram-источник с анонсами мероприятий в Белграде.
+- [«Музейный Белград» `@muzejiubeogradu`](https://t.me/muzejiubeogradu) — русскоязычный канал о музейной и культурной жизни города: анонсы, обзоры и подборки. Автор канала указывает, что следит более чем за двадцатью музеями столицы.[^2]
 
 Telegram-каналы из этого списка и другие русскоязычные источники собраны также в общей таблице на странице [русского комьюнити](/adaptation/russians/). EventsList туда не включён: это бот, а таблицы разделяют каналы и группы.
 
@@ -50,7 +51,98 @@ Telegram-каналы из этого списка и другие русско�
 - [Serbia Travel — Things to do](https://serbian.travel/events/things-to-do) — официальный календарь Туристической организации Сербии; полезен для событий по всей стране и позволяет смотреть Белград вместе с другими городами.
 - [GoOut / Tickets.rs](https://goout.tickets.rs/) — билетная афиша концертов, фестивалей и других платных событий. Используйте её прежде всего как календарь коммерческих мероприятий и площадку покупки билетов, а не как полный список городской культурной жизни.
 
-Для конкретного театра, музея, клуба или культурного центра дополнительно проверяйте его собственную программу: агрегаторы могут публиковать событие позже организатора или не включить бесплатное мероприятие вовсе.
+### Культурные институции: первичные источники
+
+Агрегаторы могут опубликовать событие позже организатора или пропустить бесплатную экскурсию, лекцию, открытие выставки или камерный концерт. Для более полного охвата следите непосредственно за институциями. Город Белград публикует официальный перечень городских учреждений культуры,[^3] а Министерство культуры — программы республиканских учреждений.[^4] Ниже эти источники дополнены крупными белградскими площадками и зарубежными культурными институтами, которые регулярно проводят публичные программы.
+
+<SmartTable
+  id="belgrade-cultural-institutions"
+  title="Культурные институции Белграда"
+  stretchColumn="name"
+  pageSize={100}
+  columns={[
+    { key: 'name', label: 'Институция', stretch: true },
+    { key: 'group', label: 'Контур' },
+    { key: 'type', label: 'Тип' },
+    { key: 'website', label: 'Сайт', icon: 'website', iconOnly: true },
+    { key: 'instagram', label: 'Instagram', link: true, hrefKey: 'instagramUrl' },
+  ]}
+  rows={[
+    { name: 'Beogradsko dramsko pozorište', group: 'городская', type: 'театр', website: 'https://www.bdp.rs/', instagram: '@beogradskodramskopozoriste', instagramUrl: 'https://www.instagram.com/beogradskodramskopozoriste/' },
+    { name: 'Jugoslovensko dramsko pozorište', group: 'городская', type: 'театр', website: 'https://www.jdp.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Atelje 212', group: 'городская', type: 'театр', website: 'https://atelje212.rs/', instagram: '@atelje212', instagramUrl: 'https://www.instagram.com/atelje212/' },
+    { name: 'Zvezdara teatar', group: 'городская', type: 'театр', website: 'https://zvezdarateatar.rs/', instagram: '@zvezdarateatar', instagramUrl: 'https://www.instagram.com/zvezdarateatar/' },
+    { name: 'BITEF teatar', group: 'городская', type: 'театр', website: 'https://teatar.bitef.rs/rs', instagram: '@bitefteatar', instagramUrl: 'https://www.instagram.com/bitefteatar/' },
+    { name: 'Pozorište na Terazijama', group: 'городская', type: 'театр', website: 'https://pozoristeterazije.com/', instagram: '@pozoristeterazije', instagramUrl: 'https://www.instagram.com/pozoristeterazije/' },
+    { name: 'Pozorište KPGT', group: 'городская', type: 'театр', website: 'https://kpgtyu.com/', instagram: '', instagramUrl: '' },
+    { name: 'Teatar Vuk', group: 'городская', type: 'театр / культурный центр', website: 'https://teatarvuk.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Prvo prigradsko pozorište Lazarevac — Puls teatar', group: 'городская', type: 'театр', website: 'https://www.pulsteatar.org.rs/', instagram: '', instagramUrl: '' },
+    { name: 'DADOV', group: 'городская', type: 'молодёжный театр', website: 'https://dadov.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Malo pozorište „Duško Radović“', group: 'городская', type: 'театр', website: 'https://malopozoriste.co.rs/', instagram: '@malopozoriste1948', instagramUrl: 'https://www.instagram.com/malopozoriste1948/' },
+    { name: 'Pozorište „Boško Buha“', group: 'городская', type: 'театр', website: 'https://www.buha.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Pozorište lutaka „Pinokio“', group: 'городская', type: 'кукольный театр', website: 'https://www.pinokio.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Pozorište „Puž“', group: 'городская', type: 'детский театр', website: 'https://pozoristancepuz.com/', instagram: '', instagramUrl: '' },
+    { name: 'Kulturni centar Beograda', group: 'городская', type: 'культурный центр / галереи / кино', website: 'https://www.kcb.org.rs/', instagram: '@kulturni_centar_beograda', instagramUrl: 'https://www.instagram.com/kulturni_centar_beograda/' },
+    { name: 'Dom omladine Beograda', group: 'городская', type: 'культурный центр / концерты', website: 'https://domomladine.org/', instagram: '', instagramUrl: '' },
+    { name: 'Dečji kulturni centar Beograd', group: 'городская', type: 'детский культурный центр', website: 'https://www.dkcb.rs/', instagram: '@dkcb.rs', instagramUrl: 'https://www.instagram.com/dkcb.rs/' },
+    { name: 'CEBEF', group: 'городская', type: 'фестивали', website: 'https://www.cebef.rs/rs/', instagram: '', instagramUrl: '' },
+    { name: 'Muzej grada Beograda', group: 'городская', type: 'музей', website: 'https://mgb.org.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Muzej automobila – zbirka Bratislava Petkovića', group: 'городская', type: 'музей — экспозиция недоступна публике', website: 'https://www.automuseumbgd.com/', instagram: '', instagramUrl: '' },
+    { name: 'Pedagoški muzej', group: 'городская', type: 'музей', website: 'https://pedagoskimuzej.org.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Kuća legata', group: 'городская', type: 'музей / галереи', website: 'https://kucalegata.org/', instagram: '', instagramUrl: '' },
+    { name: 'Zavod za zaštitu spomenika kulture grada Beograda', group: 'городская', type: 'наследие / выставки', website: 'https://www.belgradeheritage.com/', instagram: '', instagramUrl: '' },
+    { name: 'Istorijski arhiv Beograda', group: 'городская', type: 'архив / выставки', website: 'https://www.arhiv-beograda.org/', instagram: '@ist_arhiv_bgd', instagramUrl: 'https://www.instagram.com/ist_arhiv_bgd/' },
+    { name: 'Prodajna galerija „Beograd“', group: 'городская', type: 'галерея', website: 'https://www.galerijabeograd.org/', instagram: '@prodajnagalerijabeograd', instagramUrl: 'https://www.instagram.com/prodajnagalerijabeograd/' },
+    { name: 'Šumatovačka – Centar za likovno obrazovanje', group: 'городская', type: 'искусство / образование', website: 'https://sumatovacka.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Biblioteka grada Beograda', group: 'городская', type: 'библиотека / события', website: 'https://bgb.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Biblioteka „Milutin Bojić“', group: 'городская', type: 'библиотека / события', website: 'https://www.milutinbojic.org.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Biblioteka „Vlada Aksentijević“', group: 'городская', type: 'библиотека / события', website: 'https://bibliotekaobrenovac.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Biblioteka „Dimitrije Tucović“', group: 'городская', type: 'библиотека / события', website: 'https://www.bibliotekalazarevac.org.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Centar lepih umetnosti Guarnerius', group: 'городская', type: 'концертная площадка', website: 'https://guarnerius.rs/', instagram: '', instagramUrl: '' },
+
+    { name: 'Narodno pozorište u Beogradu', group: 'республиканская', type: 'театр / опера / балет', website: 'https://www.narodnopozoriste.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Jugoslovenska kinoteka', group: 'республиканская', type: 'кино / архив / выставки', website: 'https://www.kinoteka.org.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Memorijalni centar Staro sajmište', group: 'республиканская', type: 'мемориальный центр', website: 'https://memorijalnicentar.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Narodni muzej Srbije', group: 'республиканская', type: 'музей', website: 'https://www.narodnimuzej.rs/', instagram: '@narodnimuzej', instagramUrl: 'https://www.instagram.com/narodnimuzej/' },
+    { name: 'Etnografski muzej', group: 'республиканская', type: 'музей', website: 'https://etnografskimuzej.rs/', instagram: '@etnografskimuzejbeograd', instagramUrl: 'https://www.instagram.com/etnografskimuzejbeograd/' },
+    { name: 'Istorijski muzej Srbije', group: 'республиканская', type: 'музей', website: 'https://imus.org.rs/', instagram: '@istorijskimuzej', instagramUrl: 'https://www.instagram.com/istorijskimuzej/' },
+    { name: 'Muzej savremene umetnosti', group: 'республиканская', type: 'музей / галереи', website: 'https://msub.org.rs/', instagram: '@msub_mocab', instagramUrl: 'https://www.instagram.com/msub_mocab/' },
+    { name: 'Muzej primenjene umetnosti', group: 'республиканская', type: 'музей', website: 'https://mpu.rs/', instagram: '@mpu.rs', instagramUrl: 'https://www.instagram.com/mpu.rs/' },
+    { name: 'Muzej pozorišne umetnosti Srbije', group: 'республиканская', type: 'музей', website: 'https://mpus.org.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Prirodnjački muzej', group: 'республиканская', type: 'музей', website: 'https://nhmbeo.rs/', instagram: '@prirodnjacki_muzej', instagramUrl: 'https://www.instagram.com/prirodnjacki_muzej/' },
+    { name: 'Muzej nauke i tehnike', group: 'республиканская', type: 'музей', website: 'https://www.muzejnt.rs/', instagram: '@muzejnaukeitehnike', instagramUrl: 'https://www.instagram.com/muzejnaukeitehnike/' },
+    { name: 'Muzej žrtava genocida', group: 'республиканская', type: 'музей / мемориальная культура', website: 'https://www.muzejgenocida.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Muzej Jugoslavije', group: 'республиканская', type: 'музей', website: 'https://muzej-jugoslavije.org/', instagram: '@muzej_jugoslavije', instagramUrl: 'https://www.instagram.com/muzej_jugoslavije/' },
+    { name: 'Muzej afričke umetnosti', group: 'республиканская', type: 'музей', website: 'https://mau.rs/', instagram: '@museumofafricanartbelgrade', instagramUrl: 'https://www.instagram.com/museumofafricanartbelgrade/' },
+    { name: 'Muzej Nikole Tesle', group: 'республиканская', type: 'музей', website: 'https://tesla-museum.org/', instagram: '@teslamuzej', instagramUrl: 'https://www.instagram.com/teslamuzej/' },
+    { name: 'Državni arhiv Srbije', group: 'республиканская', type: 'архив / выставки', website: 'https://www.archives.org.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Arhiv Jugoslavije', group: 'республиканская', type: 'архив / выставки', website: 'https://www.arhivyu.gov.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Narodna biblioteka Srbije', group: 'республиканская', type: 'библиотека / выставки / лекции', website: 'https://nb.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Beogradska filharmonija', group: 'республиканская / публичная', type: 'концерты', website: 'https://www.bgf.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Filmski centar Srbije', group: 'республиканская', type: 'кино / программы', website: 'https://www.fcs.rs/', instagram: '', instagramUrl: '' },
+
+    { name: 'Kolarčeva zadužbina — Kolarac', group: 'дополнительная', type: 'концерты / лекции', website: 'https://www.kolarac.rs/', instagram: '@kolarac_kolarceva_zaduzbina', instagramUrl: 'https://www.instagram.com/kolarac_kolarceva_zaduzbina/' },
+    { name: 'Studentski kulturni centar Beograd', group: 'дополнительная', type: 'культурный центр', website: 'https://www.skc.org.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Galerija SANU', group: 'дополнительная', type: 'галерея', website: 'https://www.sanu.ac.rs/jedinice/galerija-sanu/', instagram: '@sanu_beograd', instagramUrl: 'https://www.instagram.com/sanu_beograd/' },
+    { name: 'UK Parobrod', group: 'дополнительная', type: 'культурный центр', website: 'https://ukparobrod.rs/', instagram: '', instagramUrl: '' },
+    { name: 'ULUS / Umetnički paviljon „Cvijeta Zuzorić“', group: 'дополнительная', type: 'галерея / выставки', website: 'https://ulus.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Ložionica', group: 'дополнительная', type: 'креативный / культурный центр', website: 'https://lozionica.rs/', instagram: '', instagramUrl: '' },
+    { name: 'KC Grad', group: 'дополнительная', type: 'культурный центр', website: 'https://www.kcgrad.rs/', instagram: '', instagramUrl: '' },
+
+    { name: 'Institut français de Serbie', group: 'зарубежная', type: 'культурный институт', website: 'https://www.institutfrancais.rs/', instagram: '', instagramUrl: '' },
+    { name: 'Goethe-Institut Belgrad', group: 'зарубежная', type: 'культурный институт', website: 'https://www.goethe.de/ins/cs/sr/index.html', instagram: '', instagramUrl: '' },
+    { name: 'Istituto Italiano di Cultura di Belgrado', group: 'зарубежная', type: 'культурный институт', website: 'https://iicbelgrado.esteri.it/sr/', instagram: '', instagramUrl: '' },
+    { name: 'Instituto Cervantes de Belgrado', group: 'зарубежная', type: 'культурный институт', website: 'https://belgrado.cervantes.es/', instagram: '', instagramUrl: '' },
+    { name: 'Austrijski kulturni forum Beograd', group: 'зарубежная', type: 'культурный институт', website: 'https://www.bmeia.gv.at/sr/kf-belgrad', instagram: '@austrijskikulturniforum', instagramUrl: 'https://www.instagram.com/austrijskikulturniforum/' },
+    { name: 'Ruski dom u Beogradu', group: 'зарубежная', type: 'культурный центр', website: 'https://ruskidom.rs/', instagram: '', instagramUrl: '' },
+    { name: 'British Council Serbia', group: 'зарубежная', type: 'культурная организация', website: 'https://www.britishcouncil.rs/', instagram: '', instagramUrl: '' },
+  ]}
+  note="Пустая ячейка Instagram означает только то, что официальный аккаунт не удалось надёжно подтвердить при проверке; это не означает, что у институции нет Instagram."
+/>
+
+Автомобильный музей сохранён в каталоге, потому что он остаётся в официальном перечне учреждений культуры Белграда; при этом его официальный сайт сообщает, что после выселения из здания коллекция недоступна публике.[^5]
+
+Для планирования конкретной недели сначала смотрите готовые подборки, а затем проверяйте первичные источники нужной категории: музеи и галереи часто анонсируют открытия и экскурсии, театры — новый репертуар, культурные центры — лекции, концерты и разовые программы. У зарубежных культурных институтов особенно много событий, которые проходят не в их собственных зданиях, а на площадках партнёров.
 
 #### Что есть интересного
   * Квизы
@@ -66,3 +158,7 @@ Telegram-каналы из этого списка и другие русско�
 Другие места и организации ищите в разделе [Карта](/map/). Культурный контекст мероприятий и семейных праздников описан в разделе [Культура и традиции](/lifestyle/culture/).
 
 [^1]: [EventsList_Bot — описание проекта и функций](https://vc.ru/tribuna/436928-eventslist-bot-pomozhet-vam-naiti-interesnoe-meropriyatie-ili-sobrat-na-nego-lyudei).
+[^2]: [«Музейный Белград» — Telegram](https://t.me/muzejiubeogradu).
+[^3]: [Город Белград — предприятия и учреждения: учреждения культуры](https://www.beograd.rs/lat/gradska-vlast/a87951/preduzeca-i-ustanove.html); [Гражданский путеводитель по бюджету Белграда на 2026 год — перечень городских учреждений культуры](https://static.beograd.rs/Binary/11338/Gradjanski-vodic-kroz-budzet-Grada-Beograda-za-2026.-godinu.pdf).
+[^4]: [Министерство культуры Сербии — программа республиканских учреждений культуры](https://www.kultura.gov.rs/vest/sr/26298/bogat-program-republickih-ustanova-kulture-povodom-sretenja-dana-drzavnosti-srbije-.php).
+[^5]: [Музей автомобилей Белграда — коллекция недоступна публике](https://www.automuseumbgd.com/).
