@@ -1,0 +1,102 @@
+name: Temporary apply approved OG stickers
+
+on:
+  push:
+    branches:
+      - agent/apply-og-sticker-recheck
+    paths:
+      - .github/workflows/apply-og-stickers-temp.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Apply approved frontmatter changes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          changes = {
+              'src/content/docs/edu/index.mdx': ('giant-book', 'book-reader'),
+              'src/content/docs/edu/school/daily-life/index.mdx': ('giant-book', 'schoolchild'),
+              'src/content/docs/edu/school/enrollment/index.mdx': ('paperwork', 'schoolchild'),
+              'src/content/docs/edu/school/international/index.mdx': ('globe', 'schoolchild'),
+              'src/content/docs/edu/school/resources/index.mdx': ('internet-research', 'schoolchild'),
+              'src/content/docs/edu/school/secondary-admission/index.mdx': ('diploma', 'schoolchild'),
+              'src/content/docs/gov/taxes/borovak/index.mdx': ('calculation', 'uplatnica'),
+              'src/content/docs/gov/taxes/codes/index.mdx': ('calculation', 'uplatnica'),
+              'src/content/docs/gov/taxes/marketplace/index.mdx': ('calculation', 'delivery-unpacking'),
+              'src/content/docs/gov/taxes/residency/index.mdx': ('calculation', 'paperwork'),
+              'src/content/docs/gov/taxes/tax-free/index.mdx': ('calculation', 'checkout'),
+              'src/content/docs/gov/uverenje_boravak/index.mdx': ('wizard', 'paperwork'),
+              'src/content/docs/map/ruskadusa/index.mdx': ('kafana', 'russian-flag'),
+              'src/content/docs/med/oms/index.mdx': ('id', 'doctor'),
+          }
+
+          slugs = {new for _, new in changes.values()}
+          for slug in sorted(slugs):
+              for ext in ('webp', 'svg'):
+                  asset = Path(f'src/content/docs/about/stickers/assets/{ext}/{slug}.{ext}')
+                  if not asset.is_file():
+                      raise SystemExit(f'Missing sticker asset: {asset}')
+
+          pattern = re.compile(r'(?m)^ogSticker:\s*([^\n#]+?)\s*$')
+          for file_name, (expected_old, new) in changes.items():
+              path = Path(file_name)
+              text = path.read_text(encoding='utf-8')
+              if not text.startswith('---\n'):
+                  raise SystemExit(f'No frontmatter start: {file_name}')
+              end = text.find('\n---\n', 4)
+              if end == -1:
+                  raise SystemExit(f'No frontmatter end: {file_name}')
+              frontmatter = text[4:end]
+              matches = list(pattern.finditer(frontmatter))
+              if len(matches) != 1:
+                  raise SystemExit(f'Expected one ogSticker in {file_name}, got {len(matches)}')
+              actual = matches[0].group(1).strip()
+              if actual != expected_old:
+                  raise SystemExit(f'{file_name}: expected {expected_old}, got {actual}')
+              updated_frontmatter = pattern.sub(f'ogSticker: {new}', frontmatter, count=1)
+              path.write_text(text[:4] + updated_frontmatter + text[end:], encoding='utf-8')
+
+          if len(changes) != 14:
+              raise SystemExit(f'Expected 14 changes, got {len(changes)}')
+          PY
+          git diff --check
+          python3 - <<'PY'
+          import subprocess
+          expected = {
+              'src/content/docs/edu/index.mdx',
+              'src/content/docs/edu/school/daily-life/index.mdx',
+              'src/content/docs/edu/school/enrollment/index.mdx',
+              'src/content/docs/edu/school/international/index.mdx',
+              'src/content/docs/edu/school/resources/index.mdx',
+              'src/content/docs/edu/school/secondary-admission/index.mdx',
+              'src/content/docs/gov/taxes/borovak/index.mdx',
+              'src/content/docs/gov/taxes/codes/index.mdx',
+              'src/content/docs/gov/taxes/marketplace/index.mdx',
+              'src/content/docs/gov/taxes/residency/index.mdx',
+              'src/content/docs/gov/taxes/tax-free/index.mdx',
+              'src/content/docs/gov/uverenje_boravak/index.mdx',
+              'src/content/docs/map/ruskadusa/index.mdx',
+              'src/content/docs/med/oms/index.mdx',
+          }
+          actual = set(subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines())
+          if actual != expected:
+              raise SystemExit(f'Unexpected changed files: {sorted(actual ^ expected)}')
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/docs
+          git commit -m "content: применить согласованные OG-стикеры"
+          git push origin HEAD:${{ github.ref_name }}
