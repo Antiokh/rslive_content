@@ -1,0 +1,41 @@
+{
+  "date": "2026-09-17",
+  "hours": 24,
+  "generated_at": "2026-09-17T18:58:23+02:00",
+  "commit_count": 1,
+  "article_count": 4,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/beli-karton/index.mdx",
+      "title": "Белый картон: регистрация иностранца в Сербии",
+      "live_url": "https://rslive.ru/arrival/beli-karton/",
+      "summaries": [
+        "Добавили законные штрафы за неподачу регистрации принимающей стороной и самостоятельную неподачу иностранцем; отдельно уточнили ответственность за отказ показать полиции документ о личности и не смешивали её с бумажным белым картоном"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/integration/prijavastranca/index.mdx",
+      "title": "Регистрация иностранца через eUprava",
+      "live_url": "https://rslive.ru/integration/prijavastranca/",
+      "summaries": [
+        "Добавили владельцу жилья заметное предупреждение о законной обязанности регистрации и диапазонах штрафов; отдельно объяснили границы ответственности иностранца"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/prijava-boravista-stranca/index.mdx",
+      "title": "Како пријавити боравиште странца преко еУправе",
+      "live_url": "https://rslive.ru/sr/prijava-boravista-stranca/",
+      "summaries": [
+        "Додали јасно упозорење о законској обавези домаћина, казнама и разлици између пријаве боравишта и показивања исправе о идентитету"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/foreigner-residence-registration/index.mdx",
+      "title": "How to register a foreigner's stay through eUprava",
+      "live_url": "https://rslive.ru/en/foreigner-residence-registration/",
+      "summaries": [
+        "Added a concise legal warning for hosts and foreigners, with current statutory fine ranges and the distinction between stay registration and showing an identity document"
+      ]
+    }
+  ]
+}
