@@ -1350,6 +1350,19 @@ pages:
       - "the request is about: The pig mascot sticker pack: where to install it, how the illustrations are used on RSLive and how technical sticker names work."
       - "information is needed about “RSLive stickers”"
     anchors: []
+  - url: "/en/beli-karton/"
+    title: "Beli karton: registering a foreigner's stay in Serbia"
+    locale: "en"
+    description: "How a foreigner's stay is registered in Serbia: police, eUprava and eTurista, electronic confirmation, the paper beli karton and registration after a new entry."
+    keywords: ["beli karton Serbia", "foreigner registration Serbia", "prijava boravista stranca", "eUprava", "eTurista", "white card Serbia", "landlord Serbia", "tourist registration Serbia"]
+    tags: ["английский", "beli karton Serbia", "foreigner registration Serbia", "prijava boravista stranca", "eUprava", "eTurista", "white card Serbia", "landlord Serbia", "tourist registration Serbia", "foreigner registration", "beli karton", "address", "official document"]
+    aliases: ["white card Serbia", "registration of stay Serbia"]
+    link_when:
+      - "an English-speaking visitor or host needs to understand the beli karton procedure"
+      - "a host and a foreign guest need the same explanation of stay registration"
+      - "the request is about: How a foreigner's stay is registered in Serbia: police, eUprava and eTurista, electronic confirmation, the paper beli karton and registration after a new entry."
+      - "information is needed about “Beli karton: registering a foreigner's stay in Serbia”"
+    anchors: []
   - url: "/en/foreigner-residence-registration/"
     title: "How to register a foreigner's stay through eUprava"
     locale: "en"
@@ -3278,6 +3291,19 @@ pages:
       - "нужно объяснить технические имена ogSticker"
       - "упит је о теми: Стикерпак са прасетом — маскотом RSLive: где га инсталирати, како се илустрације користе на сајту и како раде техничка имена стикера."
       - "потребне су информације о теми „RSLive стикери“"
+    anchors: []
+  - url: "/sr/beli-karton/"
+    title: "Бели картон: пријава боравишта странца у Србији"
+    locale: "sr"
+    description: "Како се пријављује боравиште странца у Србији: полиција, еУправа и еТуриста, електронска потврда, папирни бели картон и поновна пријава после новог уласка."
+    keywords: ["бели картон", "пријава боравишта странца", "Србија", "еУправа", "еТуриста", "власник стана", "странац", "пријава госта"]
+    tags: ["сербский", "бели картон", "пријава боравишта странца", "Србија", "еУправа", "еТуриста", "власник стана", "странац", "пријава госта", "пријава странца", "адреса", "службени документ"]
+    aliases: ["пријава боравишта", "потврда о боравку странца"]
+    link_when:
+      - "српски домаћин и страни гост треба да разумеју исту процедуру пријаве"
+      - "потребно је објаснити бели картон и домаћину и странцу"
+      - "упит је о теми: Како се пријављује боравиште странца у Србији: полиција, еУправа и еТуриста, електронска потврда, папирни бели картон и поновна пријава после новог уласка."
+      - "потребне су информације о теми „Бели картон: пријава боравишта странца у Србији“"
     anchors: []
   - url: "/sr/prase-petar/"
     title: "Прасе Петар и маскота RSLive"
