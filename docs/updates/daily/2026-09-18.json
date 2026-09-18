@@ -1,9 +1,9 @@
 {
   "date": "2026-09-18",
   "hours": 24,
-  "generated_at": "2026-09-18T14:39:00+02:00",
+  "generated_at": "2026-09-18T22:06:00+02:00",
   "commit_count": 1,
-  "article_count": 1,
+  "article_count": 2,
   "articles": [
     {
       "repo_path": "src/content/docs/adaptation/consentid/index.mdx",
@@ -11,6 +11,14 @@
       "live_url": "https://rslive.ru/adaptation/consentid/",
       "summaries": [
         "Расширили ConsentID до практической инструкции: способы получения параметров и активация, EBS вместо JMBG для иностранцев, выпуск и управление облачным КЭП, подписание PDF и отдельный разбор macOS"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/psy/index.mdx",
+      "title": "Психологическая помощь при эмиграции",
+      "live_url": "https://rslive.ru/adaptation/psy/",
+      "summaries": [
+        "Добавили актуальные проекты психологической поддержки в эмиграции: PsyBalkans, PEREEHAL и PsyEmigracia как каталоги и профессиональные сообщества, а REFORUM HELP — как бесплатную онлайн-помощь при вынужденной эмиграции"
       ]
     }
   ]
