@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-18",
+  "hours": 24,
+  "generated_at": "2026-09-18T14:39:00+02:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/adaptation/consentid/index.mdx",
+      "title": "Приложение ConsentID",
+      "live_url": "https://rslive.ru/adaptation/consentid/",
+      "summaries": [
+        "Расширили ConsentID до практической инструкции: способы получения параметров и активация, EBS вместо JMBG для иностранцев, выпуск и управление облачным КЭП, подписание PDF и отдельный разбор macOS"
+      ]
+    }
+  ]
+}
