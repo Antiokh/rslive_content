@@ -259,6 +259,16 @@ async function checkYandexSet(id) {
   return { sourceFeatureCount, geojsonFeatures, excludedOutsideSerbia, normalizedSha256 };
 }
 
+async function checkRentalBlacklistPoi() {
+  const file = path.join(mapRoot, 'packs/poi/serbia-rental-blacklist.geojson');
+  const document = await readJson(file, 'Черный список аренды');
+  checkFeatureCollection(document, 'Черный список аренды');
+  if (document.properties?.sourceId) {
+    fail(`Черный список аренды: root properties.sourceId не должен содержать provider sourceId в first-party runtime copy; найден ${document.properties.sourceId}`);
+  }
+  return { features: document.features.length };
+}
+
 async function checkAllYandexSidecars() {
   const dir = path.join(mapRoot, 'snapshots/yandex-constructor');
   const files = await readdir(dir).catch(() => []);
@@ -298,6 +308,9 @@ const result = {
     await Promise.all(requiredGoogleMids.map(async (mid) => [mid, await checkGoogleSet(mid)])),
   ),
   yandex: await checkAllYandexSidecars(),
+  poi: {
+    rentalBlacklist: await checkRentalBlacklistPoi(),
+  },
 };
 
 console.log(`[map-data] snapshots verified: ${JSON.stringify(result)}`);
