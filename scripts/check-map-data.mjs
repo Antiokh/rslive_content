@@ -263,6 +263,10 @@ async function checkRentalBlacklistPoi() {
   const file = path.join(mapRoot, 'packs/poi/serbia-rental-blacklist.geojson');
   const document = await readJson(file, 'Черный список аренды');
   checkFeatureCollection(document, 'Черный список аренды');
+  const includedFeatureCount = Number(document.properties?.includedFeatureCount);
+  if (!Number.isInteger(includedFeatureCount) || document.features.length !== includedFeatureCount) {
+    fail(`Черный список аренды: features не совпадает с includedFeatureCount`);
+  }
   if (document.properties?.sourceId) {
     fail(`Черный список аренды: root properties.sourceId не должен содержать provider sourceId в first-party runtime copy; найден ${document.properties.sourceId}`);
   }
