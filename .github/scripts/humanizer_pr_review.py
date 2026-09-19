@@ -136,25 +136,527 @@ def extract_frontmatter_text(frontmatter: str, key: str) -> str:
     return ""
 
 
+DEFAULT_VISIBLE_PROPS = frozenset(
+    {"title", "label", "caption", "description", "note", "alt", "aria-label"}
+)
+COMPONENT_VISIBLE_PROPS = {
+    "SmartTable": frozenset({"loadingLabel", "emptyLabel"}),
+    "UplatnicaGenerator": frozenset({"payer", "address", "subject", "recipient"}),
+    "DataChart": frozenset({"x", "unit", "sourceLabel", "sourcePeriod"}),
+    "Countdown": frozenset({"doneLabel"}),
+}
+STRUCTURED_VISIBLE_PROPS = {
+    ("SmartTable", "columns"): "smarttable_columns",
+    ("SmartTable", "rows"): "smarttable_rows",
+    ("DataChart", "series"): "property_values",
+    ("DataChart", "data"): "strings",
+    ("MapEmbed", "point"): "point_text",
+}
+
+
+def _mask_span(chars: list[str], start: int, end: int) -> None:
+    """Маскирует технический MDX-фрагмент, сохраняя переносы строк."""
+    for index in range(start, min(end, len(chars))):
+        if chars[index] != "\n":
+            chars[index] = " "
+
+
+def _restore_ranges(
+    chars: list[str],
+    source: str,
+    ranges: list[tuple[int, int]],
+) -> int:
+    """Возвращает статический читательский текст в уже замаскированный диапазон."""
+    restored = 0
+    for start, end in ranges:
+        if start < 0 or end <= start or start >= len(chars):
+            continue
+        end = min(end, len(chars))
+        chars[start:end] = source[start:end]
+        restored += end - start
+    return restored
+
+
+def _scan_braced_expression(text: str, start: int) -> int:
+    """Возвращает позицию после сбалансированного MDX/JS-выражения { ... }."""
+    depth = 0
+    quote_char = ""
+    escaped = False
+    index = start
+
+    while index < len(text):
+        char = text[index]
+
+        if quote_char:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == quote_char:
+                quote_char = ""
+            index += 1
+            continue
+
+        if text.startswith("//", index):
+            newline = text.find("\n", index + 2)
+            if newline == -1:
+                return len(text)
+            index = newline
+            continue
+
+        if text.startswith("/*", index):
+            closing = text.find("*/", index + 2)
+            if closing == -1:
+                return start + 1
+            index = closing + 2
+            continue
+
+        if char in {"'", '"', chr(96)}:
+            quote_char = char
+        elif char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return index + 1
+
+        index += 1
+
+    return start + 1
+
+
+def _looks_like_mdx_tag(text: str, start: int) -> bool:
+    if text.startswith("<>", start) or text.startswith("</>", start):
+        return True
+    return bool(
+        re.match(
+            r"</?[A-Za-z][A-Za-z0-9_.:-]*(?=[\s/>])",
+            text[start:],
+        )
+    )
+
+
+def _scan_mdx_tag(text: str, start: int) -> int:
+    """Возвращает позицию после MDX/JSX-тега, не путаясь в props и строках."""
+    quote_char = ""
+    escaped = False
+    index = start + 1
+
+    while index < len(text):
+        char = text[index]
+
+        if quote_char:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == quote_char:
+                quote_char = ""
+            index += 1
+            continue
+
+        if char in {"'", '"', chr(96)}:
+            quote_char = char
+            index += 1
+            continue
+
+        if char == "{":
+            expression_end = _scan_braced_expression(text, index)
+            if expression_end > index + 1:
+                index = expression_end
+                continue
+
+        if char == ">":
+            return index + 1
+
+        index += 1
+
+    return start + 1
+
+
+def _tag_name(text: str, start: int, end: int) -> str:
+    match = re.match(r"</?([A-Za-z][A-Za-z0-9_.:-]*)", text[start:end])
+    return match.group(1) if match else ""
+
+
+def _tag_attributes(
+    text: str,
+    start: int,
+    end: int,
+) -> list[tuple[str, int | None, int | None, str]]:
+    """Разбирает только границы атрибутов; JS внутри выражений не вычисляется."""
+    fragment = text[start:end]
+    head = re.match(r"</?[A-Za-z][A-Za-z0-9_.:-]*", fragment)
+    if head is None or fragment.startswith("</"):
+        return []
+
+    result: list[tuple[str, int | None, int | None, str]] = []
+    index = start + head.end()
+
+    while index < end:
+        while index < end and text[index].isspace():
+            index += 1
+        if index >= end or text.startswith("/>", index) or text[index] == ">":
+            break
+
+        name_match = re.match(r"[A-Za-z_:][A-Za-z0-9_.:-]*", text[index:end])
+        if name_match is None:
+            index += 1
+            continue
+
+        name = name_match.group(0)
+        index += len(name)
+
+        while index < end and text[index].isspace():
+            index += 1
+        if index >= end or text[index] != "=":
+            result.append((name, None, None, "boolean"))
+            continue
+
+        index += 1
+        while index < end and text[index].isspace():
+            index += 1
+        if index >= end:
+            break
+
+        if text[index] in {"'", '"'}:
+            quote_char = text[index]
+            value_start = index + 1
+            index += 1
+            escaped = False
+            while index < end:
+                char = text[index]
+                if escaped:
+                    escaped = False
+                elif char == "\\":
+                    escaped = True
+                elif char == quote_char:
+                    break
+                index += 1
+            value_end = index
+            if index < end:
+                index += 1
+            result.append((name, value_start, value_end, "quoted"))
+            continue
+
+        if text[index] == "{":
+            value_start = index
+            value_end = _scan_braced_expression(text, index)
+            result.append((name, value_start, value_end, "expression"))
+            index = value_end
+            continue
+
+        value_start = index
+        while (
+            index < end
+            and not text[index].isspace()
+            and text[index] not in "/>"
+        ):
+            index += 1
+        result.append((name, value_start, index, "bare"))
+
+    return result
+
+
+def _static_string_ranges(
+    text: str,
+    start: int,
+    end: int,
+    *,
+    require_cyrillic: bool = True,
+) -> list[tuple[int, int]]:
+    """Находит содержимое статических JS-строк без вычисления выражения."""
+    result: list[tuple[int, int]] = []
+    index = start
+
+    while index < end:
+        if text[index] not in {"'", '"', chr(96)}:
+            index += 1
+            continue
+
+        quote_char = text[index]
+        value_start = index + 1
+        index += 1
+        escaped = False
+
+        while index < end:
+            char = text[index]
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == quote_char:
+                break
+            index += 1
+
+        value_end = index
+        value = text[value_start:value_end]
+        if value and (not require_cyrillic or CYRILLIC.search(value)):
+            result.append((value_start, value_end))
+
+        if index < end:
+            index += 1
+
+    return result
+
+
+def _property_literal_ranges(
+    text: str,
+    start: int,
+    end: int,
+    names: set[str] | frozenset[str] | None = None,
+    *,
+    require_cyrillic: bool = True,
+) -> list[tuple[str, int, int]]:
+    """Находит статические строковые значения свойств JS-object literal."""
+    result: list[tuple[str, int, int]] = []
+    index = start
+
+    while index < end:
+        key = ""
+        key_end = index
+
+        if text[index] in {"'", '"'}:
+            quote_char = text[index]
+            key_start = index + 1
+            cursor = key_start
+            escaped = False
+            while cursor < end:
+                char = text[cursor]
+                if escaped:
+                    escaped = False
+                elif char == "\\":
+                    escaped = True
+                elif char == quote_char:
+                    break
+                cursor += 1
+            key = text[key_start:cursor]
+            key_end = min(cursor + 1, end)
+        else:
+            match = re.match(r"[A-Za-z_$][A-Za-z0-9_$-]*", text[index:end])
+            if match is None:
+                index += 1
+                continue
+            key = match.group(0)
+            key_end = index + len(key)
+
+        cursor = key_end
+        while cursor < end and text[cursor].isspace():
+            cursor += 1
+        if cursor >= end or text[cursor] != ":":
+            index = max(key_end, index + 1)
+            continue
+
+        cursor += 1
+        while cursor < end and text[cursor].isspace():
+            cursor += 1
+
+        if names is not None and key not in names:
+            index = max(cursor, index + 1)
+            continue
+        if cursor >= end or text[cursor] not in {"'", '"', chr(96)}:
+            index = max(cursor, index + 1)
+            continue
+
+        quote_char = text[cursor]
+        value_start = cursor + 1
+        cursor += 1
+        escaped = False
+
+        while cursor < end:
+            char = text[cursor]
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == quote_char:
+                break
+            cursor += 1
+
+        value_end = cursor
+        value = text[value_start:value_end]
+        if value and (not require_cyrillic or CYRILLIC.search(value)):
+            result.append((key, value_start, value_end))
+
+        index = min(cursor + 1, end)
+
+    return result
+
+
+def _attribute_text_ranges(
+    text: str,
+    value_start: int | None,
+    value_end: int | None,
+    kind: str,
+) -> list[tuple[int, int]]:
+    if value_start is None or value_end is None:
+        return []
+    if kind == "quoted":
+        value = text[value_start:value_end]
+        return [(value_start, value_end)] if CYRILLIC.search(value) else []
+    if kind == "expression":
+        return _static_string_ranges(text, value_start, value_end)
+    return []
+
+
+def _visible_prop_ranges(
+    text: str,
+    component: str,
+    attributes: list[tuple[str, int | None, int | None, str]],
+) -> list[tuple[int, int]]:
+    """Возвращает только статический текст props, который реально видит читатель."""
+    result: list[tuple[int, int]] = []
+    visible_props = DEFAULT_VISIBLE_PROPS | COMPONENT_VISIBLE_PROPS.get(
+        component, frozenset()
+    )
+    by_name = {item[0]: item for item in attributes}
+
+    for name, value_start, value_end, kind in attributes:
+        if name in visible_props:
+            result.extend(
+                _attribute_text_ranges(text, value_start, value_end, kind)
+            )
+
+    columns = by_name.get("columns")
+    if component == "SmartTable" and columns and columns[3] == "expression":
+        _name, start, end, _kind = columns
+        if start is not None and end is not None:
+            result.extend(
+                (value_start, value_end)
+                for _key, value_start, value_end in _property_literal_ranges(
+                    text,
+                    start,
+                    end,
+                    frozenset({"label"}),
+                )
+            )
+
+    rows = by_name.get("rows")
+    if component == "SmartTable" and rows and rows[3] == "expression":
+        visible_keys: set[str] = set()
+        if columns and columns[3] == "expression":
+            _name, start, end, _kind = columns
+            if start is not None and end is not None:
+                visible_keys.update(
+                    text[value_start:value_end]
+                    for _key, value_start, value_end in _property_literal_ranges(
+                        text,
+                        start,
+                        end,
+                        frozenset({"key"}),
+                        require_cyrillic=False,
+                    )
+                )
+        _name, start, end, _kind = rows
+        if start is not None and end is not None and visible_keys:
+            result.extend(
+                (value_start, value_end)
+                for _key, value_start, value_end in _property_literal_ranges(
+                    text,
+                    start,
+                    end,
+                    visible_keys,
+                )
+            )
+
+    series = by_name.get("series")
+    if component == "DataChart" and series and series[3] == "expression":
+        _name, start, end, _kind = series
+        if start is not None and end is not None:
+            result.extend(
+                (value_start, value_end)
+                for _key, value_start, value_end in _property_literal_ranges(
+                    text,
+                    start,
+                    end,
+                )
+            )
+
+    data = by_name.get("data")
+    if component == "DataChart" and data:
+        _name, start, end, kind = data
+        if start is not None and end is not None:
+            if kind == "quoted":
+                if CYRILLIC.search(text[start:end]):
+                    result.append((start, end))
+            elif kind == "expression":
+                result.extend(_static_string_ranges(text, start, end))
+
+    point = by_name.get("point")
+    if component == "MapEmbed" and point and point[3] == "expression":
+        _name, start, end, _kind = point
+        if start is not None and end is not None:
+            result.extend(
+                (value_start, value_end)
+                for _key, value_start, value_end in _property_literal_ranges(
+                    text,
+                    start,
+                    end,
+                    frozenset({"title", "description"}),
+                )
+            )
+
+    return sorted(set(result))
+
+
+def editorial_mdx_text(text: str) -> tuple[str, int]:
+    """Маскирует MDX/JSX-код, сохраняя видимый статический текст компонентов."""
+    chars = list(text)
+    visible_prop_chars = 0
+    index = 0
+
+    while index < len(text):
+        if text.startswith("<!--", index):
+            closing = text.find("-->", index + 4)
+            end = closing + 3 if closing != -1 else index + 1
+            _mask_span(chars, index, end)
+            index = end
+            continue
+
+        if text[index] == "<" and _looks_like_mdx_tag(text, index):
+            end = _scan_mdx_tag(text, index)
+            component = _tag_name(text, index, end)
+            attributes = _tag_attributes(text, index, end)
+            keep = _visible_prop_ranges(text, component, attributes)
+            _mask_span(chars, index, end)
+            visible_prop_chars += _restore_ranges(chars, text, keep)
+            index = end
+            continue
+
+        if text[index] == "{":
+            end = _scan_braced_expression(text, index)
+            _mask_span(chars, index, end)
+            index = end
+            continue
+
+        index += 1
+
+    return "".join(chars), visible_prop_chars
+
+
 def editorial_input(raw: str) -> tuple[str, dict]:
-    """Готовит для проверки заголовок, описание и полный основной текст MDX."""
+    """Готовит title, description и читательский текст MDX без технического синтаксиса."""
     frontmatter, body, had_frontmatter = split_frontmatter(raw)
     title = extract_frontmatter_text(frontmatter, "title") if had_frontmatter else ""
     description = (
         extract_frontmatter_text(frontmatter, "description") if had_frontmatter else ""
     )
 
+    review_body, visible_prop_chars = editorial_mdx_text(body)
+
     parts: list[str] = []
     if title:
         parts.extend([title, ""])
     if description:
         parts.extend([description, ""])
-    parts.append(body.rstrip())
+    parts.append(review_body.rstrip())
     text = "\n".join(parts).strip() + "\n"
 
     return text, {
         "scope": "whole_article",
         "frontmatter_excluded": had_frontmatter,
+        "mdx_syntax_excluded": review_body != body,
+        "visible_prop_chars": visible_prop_chars,
         "title_included": bool(title),
         "description_included": bool(description),
         "title_chars": len(title),
@@ -316,11 +818,14 @@ def scope_line(path: str, scope: dict) -> str:
     title = "да" if scope["title_included"] else "нет"
     description = "да" if scope["description_included"] else "нет"
     yaml_note = "исключены" if scope["frontmatter_excluded"] else "не обнаружены"
+    mdx_note = "исключён" if scope["mdx_syntax_excluded"] else "не обнаружен"
     return (
         f"- `{path}` — заголовок: {title}; описание: {description}; "
         f"основной текст: {scope['body_chars']} символов; "
         f"всего проверено: {scope['review_chars']} символов; "
-        f"прочие служебные поля YAML: {yaml_note}."
+        f"прочие служебные поля YAML: {yaml_note}; "
+        f"MDX/JSX-синтаксис: {mdx_note}; "
+        f"видимый текст props: {scope['visible_prop_chars']} символов."
     )
 
 
@@ -573,9 +1078,67 @@ ogSticker: "passport"
 {clean_body}
 """
 
+    trigger = "Командой осуществляется проведение проверки документов."
+    technical_props_case = """---
+title: "Проверка документов"
+description: "Краткое описание."
+---
+
+<MapEmbed
+  src="https://example.invalid/map"
+  title="Карта"
+  regions={['__TRIGGER__']}
+/>
+
+<SmartTable
+  id="test"
+  columns={[
+    { key: '__TRIGGER__', label: 'Название' },
+  ]}
+  rows={[
+    { hidden: '__TRIGGER__' },
+  ]}
+/>
+
+__BODY__
+""".replace("__TRIGGER__", trigger).replace("__BODY__", clean_body)
+
+    visible_props_case = """---
+title: "Проверка документов"
+description: "Краткое описание."
+---
+
+<AccordionItem title="__TRIGGER__">
+Видимый дочерний текст компонента.
+</AccordionItem>
+
+<SmartTable
+  id="test"
+  title="Видимая таблица"
+  columns={[
+    { key: 'name', label: 'Видимая колонка' },
+  ]}
+  rows={[
+    { name: 'Видимая ячейка таблицы', hidden: 'Скрытая служебная строка' },
+  ]}
+/>
+
+<UplatnicaGenerator
+  payer="Иван Иванов"
+  subject="Видимое назначение платежа"
+  recipient={`Министарство
+Видимый получатель`}
+  account="000000000000000000"
+/>
+
+__BODY__
+""".replace("__TRIGGER__", trigger).replace("__BODY__", clean_body)
+
     title_text, title_scope = editorial_input(title_case)
     description_text, description_scope = editorial_input(description_case)
     metadata_text, metadata_scope = editorial_input(metadata_case)
+    technical_props_text, technical_props_scope = editorial_input(technical_props_case)
+    visible_props_text, visible_props_scope = editorial_input(visible_props_case)
 
     assert "title:" not in title_text
     assert "description:" not in title_text
@@ -583,6 +1146,18 @@ ogSticker: "passport"
     assert "sidebar" not in title_text
     assert "live:" not in title_text
     assert "hiddenNote" not in metadata_text
+    assert trigger not in technical_props_text
+    assert "MapEmbed" not in technical_props_text
+    assert "regions" not in technical_props_text
+    assert trigger in visible_props_text
+    assert "Видимый дочерний текст компонента." in visible_props_text
+    assert "Видимая колонка" in visible_props_text
+    assert "Видимая ячейка таблицы" in visible_props_text
+    assert "Скрытая служебная строка" not in visible_props_text
+    assert "Видимое назначение платежа" in visible_props_text
+    assert "Видимый получатель" in visible_props_text
+    assert "AccordionItem" not in visible_props_text
+    assert "{ key:" not in visible_props_text
     assert title_scope["scope"] == "whole_article"
     assert title_scope["frontmatter_excluded"]
     assert title_scope["title_included"]
@@ -590,6 +1165,10 @@ ogSticker: "passport"
     assert title_scope["body_chars"] == len(clean_body)
     assert description_scope["body_chars"] == len(clean_body)
     assert metadata_scope["body_chars"] == len(clean_body)
+    assert technical_props_scope["mdx_syntax_excluded"]
+    assert visible_props_scope["mdx_syntax_excluded"]
+    assert technical_props_scope["visible_prop_chars"] > 0
+    assert visible_props_scope["visible_prop_chars"] > 0
 
     clean_report = run_report(
         humanizer,
@@ -607,6 +1186,8 @@ ogSticker: "Командой осуществляется проведение �
     title_report = run_report(humanizer, title_text)
     description_report = run_report(humanizer, description_text)
     metadata_report = run_report(humanizer, metadata_text)
+    technical_props_report = run_report(humanizer, technical_props_text)
+    visible_props_report = run_report(humanizer, visible_props_text)
 
     assert title_report.get("mode") == "editorial_board"
     assert title_report.get("style", {}).get("id") == STYLE_ID
@@ -617,6 +1198,8 @@ ogSticker: "Командой осуществляется проведение �
     title_delta = delta_findings(title_report, clean_report)
     description_delta = delta_findings(description_report, clean_report)
     metadata_delta = delta_findings(metadata_report, clean_report)
+    technical_props_delta = delta_findings(technical_props_report, clean_report)
+    visible_props_delta = delta_findings(visible_props_report, clean_report)
 
     assert any(item.get("rule_id") == "ILY-M01" for item in title_delta), title_delta
     assert any(
@@ -625,6 +1208,12 @@ ogSticker: "Командой осуществляется проведение �
     assert not any(
         item.get("rule_id") == "ILY-M01" for item in metadata_delta
     ), metadata_delta
+    assert not any(
+        item.get("rule_id") == "ILY-M01" for item in technical_props_delta
+    ), technical_props_delta
+    assert any(
+        item.get("rule_id") == "ILY-M01" for item in visible_props_delta
+    ), visible_props_delta
 
     sample = {
         "path": "src/content/docs/test/index.mdx",
@@ -664,6 +1253,12 @@ ogSticker: "Командой осуществляется проведение �
         "title_test_rule": "ILY-M01",
         "description_test_rule": "ILY-M01",
         "metadata_false_positive": False,
+        "mdx_syntax_excluded": visible_props_scope["mdx_syntax_excluded"],
+        "technical_props_false_positive": False,
+        "visible_props_included": True,
+        "component_children_included": True,
+        "smarttable_visible_text_included": True,
+        "uplatnica_visible_text_included": True,
         "body_chars_checked": title_scope["body_chars"],
         "review_title": PUBLIC_TITLE,
         "editor_count": len(EDITORS),
