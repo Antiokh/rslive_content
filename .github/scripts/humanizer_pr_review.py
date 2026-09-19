@@ -491,9 +491,20 @@ def _property_literal_ranges(
             cursor += 1
 
         value_end = cursor
-        value = text[value_start:value_end]
-        if value and (not require_cyrillic or CYRILLIC.search(value)):
-            result.append((key, value_start, value_end))
+        if quote_char == chr(96):
+            result.extend(
+                (key, item_start, item_end)
+                for item_start, item_end in _static_string_ranges(
+                    text,
+                    value_start - 1,
+                    min(cursor + 1, end),
+                    require_cyrillic=require_cyrillic,
+                )
+            )
+        else:
+            value = text[value_start:value_end]
+            if value and (not require_cyrillic or CYRILLIC.search(value)):
+                result.append((key, value_start, value_end))
 
         index = min(cursor + 1, end)
 
