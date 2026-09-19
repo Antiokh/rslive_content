@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-19",
+  "hours": 24,
+  "generated_at": "2026-09-19T15:49:07+02:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/lifestyle/belgrade-walks/index.mdx",
+      "title": "Прогулки и зелёный Белград: куда идти пешком",
+      "live_url": "https://rslive.ru/lifestyle/belgrade-walks/",
+      "summaries": [
+        "Добавили практический гид по прогулкам Белграда: Ада Циганлия, Кошутняк, Топчидер, лес Звездара, Ушче, Земунская набережная и Хайд-парк — с маршрутами, транспортом и сезонными оговорками"
+      ]
+    }
+  ]
+}
