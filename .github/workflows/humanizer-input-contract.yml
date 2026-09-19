@@ -49,6 +49,13 @@ jobs:
           assert data['title_test_rule'] == 'ILY-M01'
           assert data['description_test_rule'] == 'ILY-M01'
           assert data['metadata_false_positive'] is False
+          assert data['mdx_syntax_excluded'] is True
+          assert data['technical_props_false_positive'] is False
+          assert data['visible_props_included'] is True
+          assert data['component_children_included'] is True
+          assert data['smarttable_content_excluded'] is True
+          assert data['template_expression_excluded'] is True
+          assert data['js_comments_ignored'] is True
           assert data['body_chars_checked'] > 0
           assert len(data['libraries']) == 8
           assert data['review_title'] == 'Отзыв редколлегии'
