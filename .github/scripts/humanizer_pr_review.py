@@ -145,14 +145,6 @@ COMPONENT_VISIBLE_PROPS = {
     "DataChart": frozenset({"x", "unit", "sourceLabel", "sourcePeriod"}),
     "Countdown": frozenset({"doneLabel"}),
 }
-STRUCTURED_VISIBLE_PROPS = {
-    ("SmartTable", "columns"): "smarttable_columns",
-    ("SmartTable", "rows"): "smarttable_rows",
-    ("DataChart", "series"): "property_values",
-    ("DataChart", "data"): "strings",
-    ("MapEmbed", "point"): "point_text",
-}
-
 
 def _mask_span(chars: list[str], start: int, end: int) -> None:
     """Маскирует технический MDX-фрагмент, сохраняя переносы строк."""
