@@ -53,8 +53,9 @@ jobs:
           assert data['technical_props_false_positive'] is False
           assert data['visible_props_included'] is True
           assert data['component_children_included'] is True
-          assert data['smarttable_visible_text_included'] is True
-          assert data['uplatnica_visible_text_included'] is True
+          assert data['smarttable_content_excluded'] is True
+          assert data['template_expression_excluded'] is True
+          assert data['js_comments_ignored'] is True
           assert data['body_chars_checked'] > 0
           assert len(data['libraries']) == 8
           assert data['review_title'] == 'Отзыв редколлегии'
