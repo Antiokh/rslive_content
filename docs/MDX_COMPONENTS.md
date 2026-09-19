@@ -339,7 +339,7 @@ First-party point:
 
 Исходник: `astro/src/components/StreetViewEmbed.astro`.
 
-Используйте `StreetViewEmbed`, когда в статье нужна **интерактивная панорама Street View online и обязательная статическая картинка offline**. Для обычной карты продолжайте использовать `MapEmbed`.
+Используйте `StreetViewEmbed`, когда в статье нужна **интерактивная панорама Street View online и статическая картинка из подготовленной полной офлайн-копии**. Если полная копия не подготовлена, offline показывается локальная заглушка без запроса screenshot. Для обычной карты продолжайте использовать `MapEmbed`.
 
 Public contract:
 
@@ -352,7 +352,7 @@ caption?: string
 aspect?: string = "16 / 10"
 height?: string
 debug?: boolean = false
-debugState?: "auto" | "online" | "offline"
+debugState?: "auto" | "online" | "offline-ready" | "offline-unavailable"
 ```
 
 Компонент зарегистрирован с `autoImport: true`: **не импортируйте `StreetViewEmbed` вручную**. Локальный `import` нужен только для fallback-изображения.
@@ -402,7 +402,11 @@ import streetViewFallback from './assets/prvi-sud-street-view.webp';
 - внешний HTTP(S) URL нельзя использовать как fallback: он не работает как гарантированный offline asset;
 - `fallbackAlt` обязателен и должен описывать то, что видно на статическом изображении;
 - рекомендуется WebP разумного размера и с тем же ракурсом/ориентацией, ради которых вставлен Street View;
-- online компонент показывает provider iframe; offline iframe отключается и показывается локальная картинка, даже если панорама уже была загружена ранее;
+- online компонент показывает provider iframe и **не назначает screenshot `src`**;
+- при offline provider iframe отключается всегда;
+- screenshot назначается только если PWA уже подтвердил готовую полную transactional offline copy;
+- если полная офлайн-копия не подготовлена, компонент показывает локальную заглушку и не делает отдельный запрос к screenshot;
+- выключение автоматических обновлений не равно удалению офлайн-копии: если существующая копия по PWA contract остаётся ready, screenshot из неё остаётся доступен;
 - не передавайте `regions`, `SerbiaMap`, `renderer`, `offlineSrc` или другие props `MapEmbed`: их у `StreetViewEmbed` нет;
 - `debug` и `debugState` предназначены только для engine diagnostics;
 - при использовании screenshot стороннего сервиса сохраняйте требуемую атрибуцию и отдельно проверяйте допустимость публикации изображения.
