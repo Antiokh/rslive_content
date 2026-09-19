@@ -141,8 +141,6 @@ DEFAULT_VISIBLE_PROPS = frozenset(
 )
 COMPONENT_VISIBLE_PROPS = {
     "SmartTable": frozenset({"loadingLabel", "emptyLabel"}),
-    "UplatnicaGenerator": frozenset({"payer", "address", "subject", "recipient"}),
-    "DataChart": frozenset({"x", "unit", "sourceLabel", "sourcePeriod"}),
     "Countdown": frozenset({"doneLabel"}),
 }
 
@@ -357,9 +355,14 @@ def _static_string_ranges(
     *,
     require_cyrillic: bool = True,
 ) -> list[tuple[int, int]]:
-    """Находит содержимое статических JS-строк без вычисления выражения."""
+    """Находит статические части JS-строк, не включая template-интерполяции."""
     result: list[tuple[int, int]] = []
     index = start
+
+    def append_range(value_start: int, value_end: int) -> None:
+        value = text[value_start:value_end]
+        if value and (not require_cyrillic or CYRILLIC.search(value)):
+            result.append((value_start, value_end))
 
     while index < end:
         if text[index] not in {"'", '"', chr(96)}:
@@ -367,7 +370,7 @@ def _static_string_ranges(
             continue
 
         quote_char = text[index]
-        value_start = index + 1
+        segment_start = index + 1
         index += 1
         escaped = False
 
@@ -375,19 +378,32 @@ def _static_string_ranges(
             char = text[index]
             if escaped:
                 escaped = False
-            elif char == "\\":
+                index += 1
+                continue
+            if char == "\\":
                 escaped = True
-            elif char == quote_char:
+                index += 1
+                continue
+
+            if quote_char == chr(96) and text.startswith("${", index):
+                append_range(segment_start, index)
+                expression_end = _scan_braced_expression(text, index + 1)
+                if expression_end <= index + 2:
+                    index += 2
+                    segment_start = index
+                    continue
+                index = expression_end
+                segment_start = index
+                continue
+
+            if char == quote_char:
+                append_range(segment_start, index)
+                index += 1
                 break
-            index += 1
 
-        value_end = index
-        value = text[value_start:value_end]
-        if value and (not require_cyrillic or CYRILLIC.search(value)):
-            result.append((value_start, value_end))
-
-        if index < end:
             index += 1
+        else:
+            append_range(segment_start, end)
 
     return result
 
@@ -405,6 +421,15 @@ def _property_literal_ranges(
     index = start
 
     while index < end:
+        if text.startswith("//", index):
+            newline = text.find("\n", index + 2, end)
+            index = end if newline == -1 else newline + 1
+            continue
+        if text.startswith("/*", index):
+            closing = text.find("*/", index + 2, end)
+            index = end if closing == -1 else closing + 2
+            continue
+
         key = ""
         key_end = index
 
@@ -508,71 +533,6 @@ def _visible_prop_ranges(
             result.extend(
                 _attribute_text_ranges(text, value_start, value_end, kind)
             )
-
-    columns = by_name.get("columns")
-    if component == "SmartTable" and columns and columns[3] == "expression":
-        _name, start, end, _kind = columns
-        if start is not None and end is not None:
-            result.extend(
-                (value_start, value_end)
-                for _key, value_start, value_end in _property_literal_ranges(
-                    text,
-                    start,
-                    end,
-                    frozenset({"label"}),
-                )
-            )
-
-    rows = by_name.get("rows")
-    if component == "SmartTable" and rows and rows[3] == "expression":
-        visible_keys: set[str] = set()
-        if columns and columns[3] == "expression":
-            _name, start, end, _kind = columns
-            if start is not None and end is not None:
-                visible_keys.update(
-                    text[value_start:value_end]
-                    for _key, value_start, value_end in _property_literal_ranges(
-                        text,
-                        start,
-                        end,
-                        frozenset({"key"}),
-                        require_cyrillic=False,
-                    )
-                )
-        _name, start, end, _kind = rows
-        if start is not None and end is not None and visible_keys:
-            result.extend(
-                (value_start, value_end)
-                for _key, value_start, value_end in _property_literal_ranges(
-                    text,
-                    start,
-                    end,
-                    visible_keys,
-                )
-            )
-
-    series = by_name.get("series")
-    if component == "DataChart" and series and series[3] == "expression":
-        _name, start, end, _kind = series
-        if start is not None and end is not None:
-            result.extend(
-                (value_start, value_end)
-                for _key, value_start, value_end in _property_literal_ranges(
-                    text,
-                    start,
-                    end,
-                )
-            )
-
-    data = by_name.get("data")
-    if component == "DataChart" and data:
-        _name, start, end, kind = data
-        if start is not None and end is not None:
-            if kind == "quoted":
-                if CYRILLIC.search(text[start:end]):
-                    result.append((start, end))
-            elif kind == "expression":
-                result.extend(_static_string_ranges(text, start, end))
 
     point = by_name.get("point")
     if component == "MapEmbed" and point and point[3] == "expression":
@@ -1104,6 +1064,10 @@ description: "Краткое описание."
 Видимый дочерний текст компонента.
 </AccordionItem>
 
+<AccordionItem title={`Видимый ${runtimeLabel} заголовок`}>
+Статический текст под динамическим заголовком.
+</AccordionItem>
+
 <SmartTable
   id="test"
   title="Видимая таблица"
@@ -1115,12 +1079,16 @@ description: "Краткое описание."
   ]}
 />
 
-<UplatnicaGenerator
-  payer="Иван Иванов"
-  subject="Видимое назначение платежа"
-  recipient={`Министарство
-Видимый получатель`}
-  account="000000000000000000"
+<MapEmbed
+  src="https://example.invalid/map"
+  title="Карта"
+  point={{
+    // title: 'Скрытая закомментированная точка',
+    title: 'Видимая точка',
+    description: 'Видимое описание точки',
+    latitude: 44.8,
+    longitude: 20.4,
+  }}
 />
 
 __BODY__
@@ -1143,11 +1111,17 @@ __BODY__
     assert "regions" not in technical_props_text
     assert trigger in visible_props_text
     assert "Видимый дочерний текст компонента." in visible_props_text
-    assert "Видимая колонка" in visible_props_text
-    assert "Видимая ячейка таблицы" in visible_props_text
+    assert "Видимая таблица" in visible_props_text
+    assert "Видимая колонка" not in visible_props_text
+    assert "Видимая ячейка таблицы" not in visible_props_text
     assert "Скрытая служебная строка" not in visible_props_text
-    assert "Видимое назначение платежа" in visible_props_text
-    assert "Видимый получатель" in visible_props_text
+    assert "Видимый " in visible_props_text
+    assert " заголовок" in visible_props_text
+    assert "runtimeLabel" not in visible_props_text
+    assert "${runtimeLabel}" not in visible_props_text
+    assert "Видимая точка" in visible_props_text
+    assert "Видимое описание точки" in visible_props_text
+    assert "Скрытая закомментированная точка" not in visible_props_text
     assert "AccordionItem" not in visible_props_text
     assert "{ key:" not in visible_props_text
     assert title_scope["scope"] == "whole_article"
@@ -1249,8 +1223,9 @@ ogSticker: "Командой осуществляется проведение �
         "technical_props_false_positive": False,
         "visible_props_included": True,
         "component_children_included": True,
-        "smarttable_visible_text_included": True,
-        "uplatnica_visible_text_included": True,
+        "smarttable_content_excluded": True,
+        "template_expression_excluded": True,
+        "js_comments_ignored": True,
         "body_chars_checked": title_scope["body_chars"],
         "review_title": PUBLIC_TITLE,
         "editor_count": len(EDITORS),
