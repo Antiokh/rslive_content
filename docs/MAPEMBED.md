@@ -418,8 +418,7 @@ Yandex и PlanPlus можно использовать как обычный `sr
 
 ```mdx
 <MapEmbed
-  src="/map-renderer-v2/?source=rslive-static%3Abelgrade-markets&basemap=local"
-  offlineSrc="/map-renderer-v2/?source=rslive-static%3Abelgrade-markets&basemap=local"
+  src="/map-renderer-v2/?source=rslive-dataset%3Abelgrade-markets&basemap=local"
   renderer="maplibre"
   title="Рынки Белграда"
   regions={['belgrade']}
