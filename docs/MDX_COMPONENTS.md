@@ -409,6 +409,7 @@ import streetViewFallback from './assets/prvi-sud-street-view.webp';
 - если пользователь имеет старую copy версии N, а текущая страница N+1 ссылается на новый screenshot, компонент увидит exact miss и покажет заглушку;
 - если exact asset отсутствует, компонент не делает отдельный сетевой запрос к screenshot;
 - при `offlinePreference=unset` PWA считает fallback недоступным даже при случайно оставшемся legacy cache: отсутствие согласия на offline flow не обходится;
+- без текущего service-worker controller fallback также считается недоступным, даже если соответствующий cache существует;
 - `offlinePreference=disabled` означает только выключенные автообновления; уже сохранённый exact asset остаётся доступен;
 - не передавайте `regions`, `SerbiaMap`, `renderer`, `offlineSrc` или другие props `MapEmbed`: их у `StreetViewEmbed` нет;
 - `debug` и `debugState` предназначены только для engine diagnostics;
