@@ -339,13 +339,13 @@ First-party point:
 
 Исходник: `astro/src/components/StreetViewEmbed.astro`.
 
-Используйте `StreetViewEmbed`, когда в статье нужна **интерактивная панорама Street View online и статическая картинка из подготовленной полной офлайн-копии**. Если полная копия не подготовлена, offline показывается локальная заглушка без запроса screenshot. Для обычной карты продолжайте использовать `MapEmbed`.
+Используйте `StreetViewEmbed`, когда в статье нужна **интерактивная панорама Street View online и статическая картинка из подготовленной офлайн-копии**. Offline компонент проверяет наличие именно текущего fingerprinted screenshot URL в активной transactional/legacy copy. Если exact asset отсутствует, показывается локальная заглушка без запроса screenshot. Для обычной карты продолжайте использовать `MapEmbed`.
 
 Public contract:
 
 ```text
 src: string
-fallbackSrc: ImageMetadata | string
+fallbackSrc: ImageMetadata
 fallbackAlt: string
 title?: string = "Панорама"
 caption?: string
@@ -398,15 +398,17 @@ import streetViewFallback from './assets/prvi-sud-street-view.webp';
 Правила:
 
 - `src` обязателен и должен быть абсолютным HTTPS URL интерактивной панорамы;
-- `fallbackSrc` обязателен; для нового контента используйте импортированный article-local файл;
-- внешний HTTP(S) URL нельзя использовать как fallback: он не работает как гарантированный offline asset;
+- `fallbackSrc` обязателен и в обычной статье должен быть импортированным article-local файлом (`ImageMetadata`); строковый URL зарезервирован для engine diagnostics;
+- импортированный asset получает fingerprinted emitted URL, поэтому PWA может проверить наличие именно этой версии изображения в активной offline copy;
+- внешний HTTP(S) URL нельзя использовать как fallback;
 - `fallbackAlt` обязателен и должен описывать то, что видно на статическом изображении;
 - рекомендуется WebP разумного размера и с тем же ракурсом/ориентацией, ради которых вставлен Street View;
 - online компонент показывает provider iframe и **не назначает screenshot `src`**;
 - при offline provider iframe отключается всегда;
-- screenshot назначается только если PWA уже подтвердил готовую полную transactional offline copy;
-- если полная офлайн-копия не подготовлена, компонент показывает локальную заглушку и не делает отдельный запрос к screenshot;
-- выключение автоматических обновлений не равно удалению офлайн-копии: если существующая копия по PWA contract остаётся ready, screenshot из неё остаётся доступен;
+- screenshot назначается только после exact cache hit для текущего `fallbackSrc`; глобального признака «офлайн-копия готова» для этого недостаточно;
+- если пользователь имеет старую copy версии N, а текущая страница N+1 ссылается на новый screenshot, компонент увидит exact miss и покажет заглушку;
+- если exact asset отсутствует, компонент не делает отдельный сетевой запрос к screenshot;
+- выключение автоматических обновлений не равно удалению офлайн-копии: уже сохранённый exact asset остаётся доступен;
 - не передавайте `regions`, `SerbiaMap`, `renderer`, `offlineSrc` или другие props `MapEmbed`: их у `StreetViewEmbed` нет;
 - `debug` и `debugState` предназначены только для engine diagnostics;
 - при использовании screenshot стороннего сервиса сохраняйте требуемую атрибуцию и отдельно проверяйте допустимость публикации изображения.
