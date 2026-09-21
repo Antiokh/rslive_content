@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-21",
+  "hours": 24,
+  "generated_at": "2026-09-21T23:40:00+02:00",
+  "commit_count": 1,
+  "article_count": 5,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/map/familiar-foods/index.mdx",
+      "title": "Где искать привычные продукты в Белграде",
+      "live_url": "https://rslive.ru/map/familiar-foods/",
+      "summaries": [
+        "Исправили пустую подложку встроенной карты при первом открытии: при наличии сети используется онлайн-подложка, а локальный пакет остаётся офлайн-резервом."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/cuisine/index.mdx",
+      "title": "Национальные кухни Белграда",
+      "live_url": "https://rslive.ru/map/cuisine/",
+      "summaries": [
+        "Исправили пустую подложку встроенной карты при первом открытии: при наличии сети используется онлайн-подложка, а локальный пакет остаётся офлайн-резервом."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/shops/index.mdx",
+      "title": "Покупка товаров первой необходимости",
+      "live_url": "https://rslive.ru/arrival/shops/",
+      "summaries": [
+        "Исправили пустую подложку встроенной карты при первом открытии: при наличии сети используется онлайн-подложка, а локальный пакет остаётся офлайн-резервом."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/travel/banje/index.mdx",
+      "title": "Бани Сербии: куда ехать за термами и спокойным отдыхом",
+      "live_url": "https://rslive.ru/lifestyle/travel/banje/",
+      "summaries": [
+        "Исправили пустую подложку встроенной карты при первом открытии: при наличии сети используется онлайн-подложка, а локальный пакет остаётся офлайн-резервом."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/familiar-foods/index.mdx",
+      "title": "Привычные продукты в Сербии: чем заменить и где купить",
+      "live_url": "https://rslive.ru/lifestyle/familiar-foods/",
+      "summaries": [
+        "Исправили пустую подложку встроенной карты при первом открытии: при наличии сети используется онлайн-подложка, а локальный пакет остаётся офлайн-резервом."
+      ]
+    }
+  ]
+}
