@@ -2,8 +2,8 @@
   "date": "2026-09-22",
   "hours": 24,
   "generated_at": "2026-09-22T09:21:00+02:00",
-  "commit_count": 1,
-  "article_count": 1,
+  "commit_count": 2,
+  "article_count": 2,
   "articles": [
     {
       "repo_path": "src/content/docs/gov/taxes/codes/index.mdx",
@@ -11,6 +11,14 @@
       "live_url": "https://rslive.ru/gov/taxes/codes/",
       "summaries": [
         "Полностью переписали справочник платёжных кодов: разделили šifru plaćanja, PBO и BOP, уточнили 153/253/254, model 97 и правила poziv na broj для публичных доходов с 2025 года; сохранили специальные правила BOP, основания 40 и полей для асигнации, цессии и перезачисления."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/masljanica/index.mdx",
+      "title": "Русская Масляница",
+      "live_url": "https://rslive.ru/masljanica/",
+      "summaries": [
+        "Перенесли ежегодную Русскую Масляницу на постоянный адрес /masljanica/, вернули объяснение старой формы «Масляница» и обновили программу на 14 марта 2027 года."
       ]
     }
   ]
