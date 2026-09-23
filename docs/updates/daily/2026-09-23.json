@@ -1,9 +1,9 @@
 {
   "date": "2026-09-23",
   "hours": 24,
-  "generated_at": "2026-09-23T15:10:00+02:00",
-  "commit_count": 1,
-  "article_count": 1,
+  "generated_at": "2026-09-23T20:22:00+02:00",
+  "commit_count": 2,
+  "article_count": 3,
   "articles": [
     {
       "repo_path": "src/content/docs/map/prevodioci/index.mdx",
@@ -11,6 +11,22 @@
       "live_url": "https://rslive.ru/map/prevodioci/",
       "summaries": [
         "Добавили табличный каталог судебных переводчиков на базе Supabase; перенесли текущий список и добавили Кристину Мацневу с отдельными реестровым и рабочим адресами и полем родного языка."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/russians/business/index.mdx",
+      "title": "Русский бизнес в Сербии",
+      "live_url": "https://rslive.ru/adaptation/russians/business/",
+      "summaries": [
+        "Добавили практический разбор русскоязычного предпринимательства: отделили продажу готового бизнеса от закрытия, проверили причины свежих продаж по объявлениям, объяснили ограничения платежей с Россией по позиции НБС и собрали due diligence перед покупкой."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/russians/index.mdx",
+      "title": "Русское комьюнити в Сербии",
+      "live_url": "https://rslive.ru/adaptation/russians/",
+      "summaries": [
+        "Добавили смысловые входы в статью о русскоязычном бизнесе и редакционную карту русских заведений в Сербии."
       ]
     }
   ]
