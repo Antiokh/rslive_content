@@ -2,15 +2,24 @@
   "date": "2026-09-24",
   "hours": 24,
   "generated_at": "2026-09-24T14:25:00+02:00",
-  "commit_count": 1,
-  "article_count": 1,
+  "commit_count": 2,
+  "article_count": 2,
   "articles": [
     {
       "repo_path": "src/content/docs/map/cuisine/index.mdx",
       "title": "Национальные кухни Белграда",
       "live_url": "https://rslive.ru/map/cuisine/",
       "summaries": [
-        "Добавили Luigi Pizzeria (Luigi Italian Street Food) в список итальянской кухни и на редакционную карту; адрес, меню и координаты сверили по официальному сайту и актуальной карточке доставки."
+        "Добавили Luigi Pizzeria (Luigi Italian Street Food) в список итальянской кухни и на редакционную карту; адрес, меню и координаты сверили по официальному сайту и актуальной карточке доставки.",
+        "Добавили Cattarissimo Gelato & Cakes в итальянский список и на редакционную карту; итальянское джелато подтверждено официальным сайтом, адрес и координаты — актуальной карточкой Wolt."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/coffee-bakeries-desserts/index.mdx",
+      "title": "Кофе, пекарни и десерты в Белграде",
+      "live_url": "https://rslive.ru/lifestyle/coffee-bakeries-desserts/",
+      "summaries": [
+        "Добавили Cattarissimo в раздел gelato: официальный сайт подтверждает итальянское джелато и белградскую точку у Вуковог споменика; адрес и текущий ассортимент сверили по Wolt."
       ]
     }
   ]
