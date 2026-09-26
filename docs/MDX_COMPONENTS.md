@@ -335,6 +335,86 @@ First-party point:
 
 Картографические snapshots лежат в `map-data/**`; ручной цикл их обновления описан в `map-data/README.md`. Полный usage guide для автора статьи — [`docs/MAPEMBED.md`](MAPEMBED.md).
 
+## StreetViewEmbed
+
+Исходник: `astro/src/components/StreetViewEmbed.astro`.
+
+Используйте `StreetViewEmbed`, когда в статье нужна **интерактивная панорама Street View online и статическая картинка из подготовленной офлайн-копии**. Offline компонент проверяет наличие именно текущего fingerprinted screenshot URL в активной transactional/legacy copy. Если exact asset отсутствует, показывается локальная заглушка без запроса screenshot. Для обычной карты продолжайте использовать `MapEmbed`.
+
+Public contract:
+
+```text
+src: string
+fallbackSrc: ImageMetadata
+fallbackAlt: string
+title?: string = "Панорама"
+caption?: string
+aspect?: string = "16 / 10"
+height?: string
+debug?: boolean = false
+debugState?: "auto" | "online" | "offline-ready" | "offline-unavailable"
+```
+
+Компонент зарегистрирован с `autoImport: true`: **не импортируйте `StreetViewEmbed` вручную**. Локальный `import` нужен только для fallback-изображения.
+
+### Куда класть fallback-изображение
+
+Храните screenshot рядом с конкретной статьёй в её каталоге `assets/`:
+
+```text
+src/content/docs/<путь-статьи>/assets/<понятное-имя>.webp
+```
+
+Например, для `/map/sud/`:
+
+```text
+src/content/docs/map/sud/index.mdx
+src/content/docs/map/sud/assets/prvi-sud-street-view.webp
+```
+
+Для `/map/upravazastrance/` несколько разных панорам лежат в одном article-local каталоге:
+
+```text
+src/content/docs/map/upravazastrance/assets/uprava-beograd-street-view.webp
+src/content/docs/map/upravazastrance/assets/mup-novi-sad-street-view.webp
+```
+
+Не кладите эти screenshots в `map-data/**`, `public/maps/**` или engine assets: это обычные reader-facing assets конкретной статьи, а не картографические данные.
+
+### Как подключать
+
+```mdx
+import streetViewFallback from './assets/prvi-sud-street-view.webp';
+
+<StreetViewEmbed
+  src="https://www.google.com/maps/embed?pb=..."
+  fallbackSrc={streetViewFallback}
+  fallbackAlt="Главный вход в Первый основной суд в Белграде со стороны Bulevar Nikole Tesle"
+  title="Первый основной суд в Белграде — Google Street View"
+  caption="Здание на Bulevar Nikole Tesle 42a"
+/>
+```
+
+Правила:
+
+- `src` обязателен и должен быть абсолютным HTTPS URL интерактивной панорамы;
+- `fallbackSrc` обязателен и в обычной статье должен быть импортированным article-local файлом (`ImageMetadata`); строковый URL зарезервирован для engine diagnostics;
+- импортированный asset получает fingerprinted emitted URL, поэтому PWA может проверить наличие именно этой версии изображения в активной offline copy;
+- внешний HTTP(S) URL нельзя использовать как fallback;
+- `fallbackAlt` обязателен и должен описывать то, что видно на статическом изображении;
+- рекомендуется WebP разумного размера и с тем же ракурсом/ориентацией, ради которых вставлен Street View;
+- online компонент показывает provider iframe и **не назначает screenshot `src`**;
+- при offline provider iframe отключается всегда;
+- screenshot назначается только после exact cache hit для текущего `fallbackSrc`; глобального признака «офлайн-копия готова» для этого недостаточно;
+- если пользователь имеет старую copy версии N, а текущая страница N+1 ссылается на новый screenshot, компонент увидит exact miss и покажет заглушку;
+- если exact asset отсутствует, компонент не делает отдельный сетевой запрос к screenshot;
+- при `offlinePreference=unset` PWA считает fallback недоступным даже при случайно оставшемся legacy cache: отсутствие согласия на offline flow не обходится;
+- без текущего service-worker controller fallback также считается недоступным, даже если соответствующий cache существует;
+- `offlinePreference=disabled` означает только выключенные автообновления; уже сохранённый exact asset остаётся доступен;
+- не передавайте `regions`, `SerbiaMap`, `renderer`, `offlineSrc` или другие props `MapEmbed`: их у `StreetViewEmbed` нет;
+- `debug` и `debugState` предназначены только для engine diagnostics;
+- при использовании screenshot стороннего сервиса сохраняйте требуемую атрибуцию и отдельно проверяйте допустимость публикации изображения.
+
 ## YouTube
 
 Исходник: `astro/src/components/YouTube.astro`.
