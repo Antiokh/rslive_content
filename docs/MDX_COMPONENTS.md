@@ -229,6 +229,68 @@ doneLabel?: string = "дата наступила"
 
 Не используйте `Countdown` как подтверждение юридического срока без текста с точной датой и источником.
 
+## ScoreQuiz
+
+Исходник: `astro/src/components/ScoreQuiz.astro`.
+
+`ScoreQuiz` — общий интерактивный балльный тест. Вопросы, ответы, веса и тексты результата принадлежат статье; компонент только считает сумму и выбирает диапазон.
+
+Основные props:
+
+```text
+title?: string
+intro?: string
+questions: Array<{
+  id: string
+  question: string
+  description?: string
+  answers: Array<{ label: string; score: number; note?: string }>
+}>
+results: Array<{
+  min?: number
+  max?: number
+  title: string
+  body: string
+}>
+submitLabel?: string
+resetLabel?: string
+scoreLabel?: string
+negativeTitle?: string
+showPoints?: boolean = true
+```
+
+Минимальный пример:
+
+```mdx
+<ScoreQuiz
+  title="Быстрая самопроверка"
+  questions={[
+    {
+      id: 'pace',
+      question: 'Как вы относитесь к медленному темпу?',
+      answers: [
+        { label: 'Спокойно', score: 1 },
+        { label: 'Плохо', score: -1 },
+      ],
+    },
+  ]}
+  results={[
+    { min: 1, title: 'Совпадение', body: 'В этом пункте трения немного.' },
+    { max: 0, title: 'Есть трение', body: 'Этому пункту стоит уделить внимание.' },
+  ]}
+/>
+```
+
+Правила:
+
+- не добавляйте локальный import: компонент зарегистрирован в canonical MDX registry движка;
+- `id` вопросов должны быть уникальны внутри теста;
+- каждый вопрос должен иметь минимум два ответа, `score` — конечное число;
+- границы `min/max` включительные; задавайте диапазоны без пересечений и дырок;
+- компонент не хранит ответы и не отправляет их во внешние сервисы;
+- не превращайте субъективный балльный тест в юридическую, медицинскую, финансовую или миграционную рекомендацию;
+- иерархию заголовков страницы задавайте обычными Markdown headings: `title` компонента — только визуальный заголовок внутри блока.
+
 ## EmbedFrame
 
 Исходник: `astro/src/components/EmbedFrame.astro`.
