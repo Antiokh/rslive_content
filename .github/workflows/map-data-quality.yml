@@ -6,6 +6,7 @@ on:
     paths:
       - "map-data/**"
       - "scripts/check-map-data.mjs"
+      - "scripts/check-map-localizations.mjs"
       - "scripts/yandex-lkg-utils.mjs"
       - "scripts/check-yandex-lkg-utils.mjs"
       - ".github/workflows/map-data-quality.yml"
@@ -16,6 +17,7 @@ on:
     paths:
       - "map-data/**"
       - "scripts/check-map-data.mjs"
+      - "scripts/check-map-localizations.mjs"
       - "scripts/yandex-lkg-utils.mjs"
       - "scripts/check-yandex-lkg-utils.mjs"
       - ".github/workflows/map-data-quality.yml"
@@ -48,3 +50,6 @@ jobs:
 
       - name: Картографические данные проверены
         run: node scripts/check-map-data.mjs
+
+      - name: Локализации карт проверены
+        run: node scripts/check-map-localizations.mjs
