@@ -1389,6 +1389,19 @@ pages:
       - "the request is about: A standalone guide for a property owner: eID, ConsentID, a qualified electronic certificate and electronic registration of a foreigner's stay through eUprava."
       - "information is needed about “How to register a foreigner's stay through eUprava”"
     anchors: []
+  - url: "/en/national-cuisines-belgrade/"
+    title: "National cuisines in Belgrade"
+    locale: "en"
+    description: "A map and restaurant lists for different national cuisines in Belgrade."
+    keywords: ["national cuisines Belgrade", "restaurants Belgrade", "Russian cuisine Belgrade", "Japanese cuisine Belgrade", "Chinese cuisine Belgrade", "Indian cuisine Belgrade", "Turkish cuisine Belgrade"]
+    tags: ["английский", "national cuisines Belgrade", "restaurants Belgrade", "Russian cuisine Belgrade", "Japanese cuisine Belgrade", "Chinese cuisine Belgrade", "Indian cuisine Belgrade", "Turkish cuisine Belgrade"]
+    aliases: []
+    link_when:
+      - "англоязычный читатель ищет ресторан определённой национальной кухни в Белграде"
+      - "нужна английская версия карты русской, японской, китайской и других кухонь"
+      - "the request is about: A map and restaurant lists for different national cuisines in Belgrade."
+      - "information is needed about “National cuisines in Belgrade”"
+    anchors: []
   - url: "/en/pig-peter/"
     title: "Pig Peter and the RSLive mascot"
     locale: "en"
@@ -1400,6 +1413,19 @@ pages:
       - "нужно объяснить связь Поросёнка Петра с эмиграционным мемом"
       - "the request is about: Where the Pig Peter meme came from, how it became associated with emigration and why the character appears in the RSLive identity."
       - "information is needed about “Pig Peter and the RSLive mascot”"
+    anchors: []
+  - url: "/en/russian-places-serbia/"
+    title: "Russian-speaking places in Serbia"
+    locale: "en"
+    description: "RSLive's editorial map of Russian-speaking and Russian-community cafés, restaurants, bars and shops in Serbia."
+    keywords: ["Russian places Serbia", "Russian cafes Serbia", "Russian restaurants Serbia", "Russian bars Serbia", "Russian shops Serbia", "Russian places Belgrade", "Russian places Novi Sad"]
+    tags: ["английский", "Russian places Serbia", "Russian cafes Serbia", "Russian restaurants Serbia", "Russian bars Serbia", "Russian shops Serbia", "Russian places Belgrade", "Russian places Novi Sad"]
+    aliases: ["Russian-speaking places in Serbia", "Russian venues in Serbia"]
+    link_when:
+      - "англоязычному читателю нужны русскоязычные кафе, рестораны, бары или магазины в Сербии"
+      - "нужна английская версия редакционной карты русских заведений RSLive"
+      - "the request is about: RSLive's editorial map of Russian-speaking and Russian-community cafés, restaurants, bars and shops in Serbia."
+      - "information is needed about “Russian-speaking places in Serbia”"
     anchors: []
   - url: "/en/russians-in-serbia/"
     title: "Russians in Serbia"
@@ -3340,6 +3366,19 @@ pages:
       - "упит је о теми: Како се пријављује боравиште странца у Србији: полиција, еУправа и еТуриста, електронска потврда, папирни бели картон и поновна пријава после новог уласка."
       - "потребне су информације о теми „Бели картон: пријава боравишта странца у Србији“"
     anchors: []
+  - url: "/sr/nacionalne-kuhinje-beograda/"
+    title: "Националне кухиње Београда"
+    locale: "sr"
+    description: "Мапа и спискови ресторана различитих националних кухиња у Београду."
+    keywords: ["националне кухиње Београд", "ресторани Београд", "руска кухиња Београд", "јапанска кухиња Београд", "кинеска кухиња Београд", "индијска кухиња Београд", "турска кухиња Београд"]
+    tags: ["сербский", "националне кухиње Београд", "ресторани Београд", "руска кухиња Београд", "јапанска кухиња Београд", "кинеска кухиња Београд", "индијска кухиња Београд", "турска кухиња Београд"]
+    aliases: []
+    link_when:
+      - "читаоцу на српском треба ресторан одређене националне кухиње у Београду"
+      - "потребна је српска верзија мапе руске, јапанске, кинеске и других кухиња"
+      - "упит је о теми: Мапа и спискови ресторана различитих националних кухиња у Београду."
+      - "потребне су информације о теми „Националне кухиње Београда“"
+    anchors: []
   - url: "/sr/prase-petar/"
     title: "Прасе Петар и маскота RSLive"
     locale: "sr"
@@ -3441,6 +3480,19 @@ pages:
       - "нужно отличить Русский дом от консульства и общественных организаций"
       - "упит је о теми: Историја, правни и институционални статус, програми и јавне полемике о Руском центру за науку и културу у Београду."
       - "потребне су информације о теми „Руски дом у Београду“"
+    anchors: []
+  - url: "/sr/ruska-mesta-u-srbiji/"
+    title: "Руска и рускојезична места у Србији"
+    locale: "sr"
+    description: "Редакцијска мапа RSLive-а са рускојезичним кафићима, ресторанима, баровима и продавницама у Србији и местима повезаним са рускојезичном заједницом."
+    keywords: ["руска места Србија", "руски кафићи Србија", "руски ресторани Србија", "руски барови Србија", "руске продавнице Србија", "руска места Београд", "руска места Нови Сад"]
+    tags: ["сербский", "руска места Србија", "руски кафићи Србија", "руски ресторани Србија", "руски барови Србија", "руске продавнице Србија", "руска места Београд", "руска места Нови Сад"]
+    aliases: ["Руска места у Србији", "Рускојезична места у Србији"]
+    link_when:
+      - "читаоцу на српском требају рускојезични кафићи, ресторани, барови или продавнице у Србији"
+      - "потребна је српска верзија редакцијске мапе руских места RSLive-а"
+      - "упит је о теми: Редакцијска мапа RSLive-а са рускојезичним кафићима, ресторанима, баровима и продавницама у Србији и местима повезаним са рускојезичном заједницом."
+      - "потребне су информације о теми „Руска и рускојезична места у Србији“"
     anchors: []
   - url: "/sr/user/petro/"
     title: "petro"
