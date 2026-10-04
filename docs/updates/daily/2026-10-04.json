@@ -1,10 +1,26 @@
 {
   "date": "2026-10-04",
   "hours": 24,
-  "generated_at": "2026-10-04T15:23:00+02:00",
-  "commit_count": 1,
-  "article_count": 4,
+  "generated_at": "2026-10-04T15:24:00+02:00",
+  "commit_count": 2,
+  "article_count": 6,
   "articles": [
+    {
+      "repo_path": "src/content/docs/en/index.mdx",
+      "title": "RSLive in English",
+      "live_url": "https://rslive.ru/en/",
+      "summaries": [
+        "Added an invitation for Serbian readers to share recurring mistakes or misunderstandings they see among Russians in Serbia and to suggest topics that would help Serbs understand Russians better; suggestions can be sent in Serbian, English or Russian"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/index.mdx",
+      "title": "RSLive на српском",
+      "live_url": "https://rslive.ru/sr/",
+      "summaries": [
+        "Додали позив српским читаоцима да пријаве типичне грешке и неспоразуме које примећују код Руса у Србији и да предложе теме које би помогле Србима да боље разумеју Русе; предлози могу бити на српском, енглеском или руском"
+      ]
+    },
     {
       "repo_path": "src/content/docs/en/national-cuisines-belgrade/index.mdx",
       "title": "National cuisines in Belgrade",
