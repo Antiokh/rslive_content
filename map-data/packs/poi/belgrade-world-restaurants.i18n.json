@@ -1,0 +1,286 @@
+{
+  "schema": 1,
+  "datasetId": "belgrade-world-restaurants",
+  "sourceSnapshotAt": "2026-09-26",
+  "languages": ["en", "sr"],
+  "descriptions": {
+    "idol-tiki-bar": {
+      "en": "Chinese-Asian food at a tiki bar: Hong Kong-style crispy wontons, pork bao, shoyu, miso and tonkotsu ramen, kung pao chicken, tom yum, fried noodles and rice; the bar specialises in tiki cocktails.",
+      "sr": "Кинеско-азијска кухиња у тики-бару: хрскави вонтони у хонгконшком стилу, бао са свињетином, шојју, мисо и тонкоцу рамен, пилетина гунгбао, том-јам, пржени резанци и пиринач; бар је специјализован за тики-коктеле."
+    },
+    "x-wangs-kitchen": {
+      "en": "Chinese restaurant with a large selection of soups, noodles and dumplings; hot pot is prepared separately. Popular dishes also include fried noodles, rice and sweet-and-sour chicken.",
+      "sr": "Кинески ресторан са великим избором супа, резанаца и кнедли; посебно се припрема хого — кинески hot pot. Популарна су и јела са прженим резанцима, пиринчем и слатко-киселом пилетином."
+    },
+    "kazi-vazi": {
+      "en": "Georgian khinkali bar: Megrelian khachapuri, khinkali with meat or cheese and herbs, beet and spinach pkhali, and satsebeli and tsakhton sauces.",
+      "sr": "Грузијски хинкали-бар: мегрелски хачапури, хинкали са месом или сиром и зеленишем, пхали од цвекле и спанаћа и сосови сацебели и цахтон."
+    },
+    "meze-by-elliniko": {
+      "en": "Greek food designed for sharing: kolokithokeftedes — zucchini croquettes with tzatziki, kebab, orzo with shrimp and squid, grilled octopus, Greek salads and slow-cooked beef.",
+      "sr": "Грчка кухиња са јелима за дељење: колокитокефтедес — крокети од тиквица са цацикијем, кебаб, орзо са шкампима и лигњама, грилована хоботница, грчке салате и споро кувана говедина."
+    },
+    "pane-e-vino-west-65": {
+      "en": "Italian and Mediterranean food in West 65: homemade gnocchi with gorgonzola and tortellini with smoked ricotta, pasta, sea bass, tuna steak and corn-crusted octopus.",
+      "sr": "Италијанска и медитеранска кухиња у West 65: домаће њоке са горгонзолом и тортелини са димљеном рикотом, паста, бранцин, туна стејк и хоботница у кукурузној панади."
+    },
+    "marukoshi": {
+      "en": "Japanese home cooking beyond sushi: miso soup, donburi, ramen and udon with homemade noodles, gyoza, Japanese curry, okonomiyaki, yakitori, tempura and matcha desserts.",
+      "sr": "Јапанска домаћа кухиња, не само суши: мисо супа, донбури, рамен и удон са домаћим резанцима, гиоза, јапански кари, окономијаки, јакитори, темпура и десерти са матчом."
+    },
+    "sushi-wok": {
+      "en": "Asian-Japanese menu: rolls and nigiri, baked rolls, udon wok dishes, ramen, miso soup, tom yum, hot dishes and sushi burgers.",
+      "sr": "Азијско-јапански мени: ролнице и нигири, запечене ролнице, вок са удоном, рамен, мисо супа, том-јам, топла јела и суши-бургери."
+    },
+    "sushi-tempo": {
+      "en": "Sushi and Japanese-Asian hot dishes: rolls, nigiri and gunkan, gyoza, miso soup and tom yum, seafood wok dishes, rice, bowls and edamame.",
+      "sr": "Суши и јапанско-азијска топла јела: ролнице, нигири и гункан, гиоза, мисо супа и том-јам, вок са морским плодовима, пиринач, боулови и едамаме."
+    },
+    "sushi-tempo-vozdovac": {
+      "en": "Voždovac branch of Sushi Tempo with the same menu: rolls, nigiri and gunkan, gyoza, miso soup and tom yum, seafood wok dishes, rice, bowls and edamame.",
+      "sr": "Филијала Sushi Tempo-а на Вождовцу са истим менијем: ролнице, нигири и гункан, гиоза, мисо супа и том-јам, вок са морским плодовима, пиринач, боулови и едамаме."
+    },
+    "sushi-xo": {
+      "en": "Sushi chain with three Belgrade locations: signature and classic rolls, Philadelphia rolls, tempura and baked rolls, maki, nigiri, gunkan, onigiri and soups.",
+      "sr": "Ланац суши-ресторана са три локације у Београду: ауторске и класичне ролнице, „Филаделфија“, темпура и запечене ролнице, маки, нигири, гункан, онигири и супе."
+    },
+    "sushiboks-ada": {
+      "en": "Sushi bar in Ada Mall: rolls with salmon, tuna, shrimp and cream cheese, Philadelphia rolls, tobiko and masago, spicy and baked options.",
+      "sr": "Суши-бар у Ada Mall-у: ролнице са лососом, туњевином, шкампима и крем-сиром, „Филаделфија“, тобико и масаго, љуте и запечене варијанте."
+    },
+    "true-ramen": {
+      "en": "Ramen bar on Brankova: shoyu, miso, shio, tantan and kimchi ramen, chashu, karaage, shrimp gyoza, edamame and beef tataki.",
+      "sr": "Рамен-бар у Бранковој: шојју, мисо, шио, тантан и кимчи рамен, чашу, карааге, гиоза са шкампима, едамаме и говеђи татаки."
+    },
+    "burrito-madre-terazije": {
+      "en": "Mexican fast-casual: burritos and tacos with achiote chicken, barbacoa or carnitas, quesadillas, nachos, guacamole, salsas and churros.",
+      "sr": "Мексички fast-casual: бурито и тако са ачиоте пилетином, барбакоом или карнитасом, кесадиље, начос, гвакамоле, салсе и чуроси."
+    },
+    "mala-moskva": {
+      "en": "Russian food with a meat-focused menu: chicken shawarma, chicken and pork shashlik, beef stroganoff, borscht, okroshka and solyanka; drinks include mors and medovukha.",
+      "sr": "Руска кухиња са нагласком на месо: пилећа шаурма, шашлик од пилетине и свињетине, бифстроганов, боршч, окрошка и сољанка; од пића су у понуди морс и медовуха."
+    },
+    "ruske-palacinke-zemun": {
+      "en": "Crêpe shop using a Russian recipe on Masarikov trg: sweet blini with condensed milk, tvorog, jam and caramel, plus savoury versions with ham and cheese or vegetable fillings.",
+      "sr": "Палачинкарница по руском рецепту на Масариковом тргу: слатке палачинке са кондензованим млеком, творогом, џемом и карамелом, као и слане — са шунком и сиром или поврћем."
+    },
+    "samovarrs-bw": {
+      "en": "Russian home cooking on Karađorđeva: borscht with Borodinsky bread, okroshka, pelmeni and vareniki, syrniki, blini, chicken cutlets and medovik honey cake.",
+      "sr": "Руска домаћа кухиња у Карађорђевој: боршч са бородинским хлебом, окрошка, пелмени и вареники, сирники, палачинке, пилећи котлети и медовик."
+    },
+    "stroganov-family": {
+      "en": "Russian home cooking and prepared food: borscht and okroshka, pork-and-beef pelmeni, homemade cutlets with buckwheat, blini, syrniki, medovik and Napoleon cake.",
+      "sr": "Руска домаћа кухиња и готова јела: боршч и окрошка, пелмени са свињетином и говедином, домаћи котлети са хељдом, палачинке, сирники, медовик и „Наполеон“."
+    },
+    "ura-russian-dumplings": {
+      "en": "Russian food prepared by Russian cooks: pelmeni with pork and beef, chicken, turkey and other fillings, vareniki with potato, tvorog or berries; fried versions, draniki and kvass are also available.",
+      "sr": "Руска кухиња коју припремају руски кувари: пелмени са свињетином и говедином, пилетином, ћуретином и другим пуњењима, вареники са кромпиром, творогом или бобичастим воћем; доступне су и пржене варијанте, драники и квас."
+    },
+    "thai-zone-vracar": {
+      "en": "Family Thai restaurant founded in 2017. Chef La-iad Nikolić prepares pad thai, khao pad, tom yum and tom kha, yam woon sen, spring rolls, wok noodles and Thai curries; the restaurant follows traditional Thai recipes.",
+      "sr": "Породични тајландски ресторан основан 2017. године. Шеф Ла-иад Николић припрема пад-тај, кхао-пад, том-јам и том-кха, јам-вун-сен, spring rolls, вок-резанце и тајландске карије; ресторан се држи традиционалних тајландских рецепата."
+    },
+    "stories-georgian": {
+      "en": "Georgian food at Pjarona de Mondezira 28: khinkali with meat, cheese or mushrooms, Adjarian khachapuri, ojakhuri, satsivi, adjika and tkemali.",
+      "sr": "Грузијска кухиња у Пјарона де Мондезира 28: хинкали са месом, сиром или печуркама, аџарски хачапури, оџахури, сациви, аџика и ткемали."
+    },
+    "cevabdzinica-savcic": {
+      "en": "Sarajevo-style ćevapi restaurant founded in 2013: ćevapi made to a Sarajevo recipe from 70% beef and 30% veal, pljeskavica, veal sudžukica and kajmak.",
+      "sr": "Сарајевска ћевабџиница основана 2013. године: ћевапи по сарајевској рецептури од 70% говедине и 30% телетине, пљескавица, телећа суџукица и кајмак."
+    },
+    "curry-souls-centar": {
+      "en": "Sri Lankan street food: kottu roti, chicken and tuna curries, roti, dal and pol sambol. The Belgrade flagship opened in summer 2023; the founders are Clement Senaratne and Kai Bordel.",
+      "sr": "Шриланканска улична храна: коту-роти, кари са пилетином и туњевином, роти, дал и пол-самбол. Београдски главни локал отворен је у лето 2023; оснивачи су Клемент Сенаратне и Кај Бордел."
+    },
+    "kod-vijetnamca": {
+      "en": "Vietnamese food: phở bò and other rice-noodle soups, fresh and fried spring rolls, rice and noodle dishes; the menu explicitly presents itself as authentic Vietnamese cuisine.",
+      "sr": "Вијетнамска кухиња: phở bò и друге супе са пиринчаним резанцима, свежи и пржени spring rolls, јела са пиринчем и резанцима; мени се изричито представља као аутентична вијетнамска кухиња."
+    },
+    "aigo-mashisoyo": {
+      "en": "Korean food: bibimbap, japchae, tteokbokki, gimbap, jeon, dosirak and jjigae; bulgogi, dak-galbi and dishes with gochujang are also available.",
+      "sr": "Корејска кухиња: бибимбап, чапче, токпоки, кимбап, чон, досирак и чиге; у понуди су и булгоги, такгалби и јела са кочухџангом."
+    },
+    "byblos-vracar": {
+      "en": "Lebanese food: hummus, falafel, tabbouleh and other mezze, shish taouk, manakish and Lebanese pastries. Byblos says it brought Lebanese cuisine to Belgrade more than two decades ago.",
+      "sr": "Либанска кухиња: хумус, фалафел, табуле и други мезе, шиш-таук, манакиш и либанска пецива. Byblos наводи да је либанску кухињу донео у Београд пре више од две деценије."
+    },
+    "maikhana-indian": {
+      "en": "Indian food: samosas with chutney, butter chicken, aloo paratha, dal makhani, chicken or vegetable biryani with basmati rice, matar paneer and lamb curry; vegan dishes are available.",
+      "sr": "Индијска кухиња: самосе са чатнијем, butter chicken, алу-паратха, дал-махани, бирјани са пилетином или поврћем на басмати пиринчу, матар-панир и кари од јагњетине; има и веганских јела."
+    },
+    "milagro-zemun": {
+      "en": "Spanish-Mediterranean restaurant and tapas bar: jamón ibérico, Manchego cheese, padrón peppers, croquettes, Valencian paella, black paella and seafood paella; crema catalana for dessert.",
+      "sr": "Шпанско-медитерански ресторан и тапас-бар: jamón ibérico, манчего сир, падрон паприке, крокети, валенсијска паеља, црна паеља и паеља са морским плодовима; за десерт — crema catalana."
+    },
+    "puter-bistro": {
+      "en": "French bistro with a Balkan accent. Chef Vladimir Popović builds the menu around French technique: Parisian gnocchi, Dauphiné ravioli, duck, rabbit, fish and crème brûlée.",
+      "sr": "Француски бистро са балканским акцентом. Шеф Владимир Поповић заснива мени на француској техници: париске њоке, равиоли Дофине, патка, зец, риба и crème brûlée."
+    },
+    "pastel-de-nata-novi-beograd": {
+      "en": "Portuguese-Brazilian café: pastel de nata, brigadeiro, quindim, passion-fruit mousse, coxinha and empada. The project has two operating locations in Belgrade; this one is in Blok A at Uroša Martinovića 6.",
+      "sr": "Португалско-бразилски кафе: pastel de nata, brigadeiro, quindim, мус од маракује, coxinha и empada. Пројекат има две активне локације у Београду; ова је у Блоку А, Уроша Мартиновића 6."
+    },
+    "r-tiam-uyghur": {
+      "en": "Uyghur cuisine from Xinjiang: lagman, lamb plov, steamed manty, lamb skewers, fried Xinjiang noodles and dapanji (新疆大盘鸡) — spicy Xinjiang-style chicken.",
+      "sr": "Ујгурска кухиња из Синђанга: лагман, плов са јагњетином, манти на пари, ражњићи од јагњетине, пржени синђаншки резанци и дапанџи (新疆大盘鸡) — љута пилетина у синђаншком стилу."
+    },
+    "georgian-supra": {
+      "en": "Georgian food: khinkali, Adjarian, Imeretian and Megrelian khachapuri, lobiani, shkmeruli, gebzhalia, pkhali and pelamushi; Georgian wines are available.",
+      "sr": "Грузијска кухиња: хинкали, аџарски, имеретински и мегрелски хачапури, лобиани, шкмерули, гебжалија, пхали и пеламуши; у понуди су и грузијска вина."
+    },
+    "turkuaz-restaurant": {
+      "en": "Turkish food: lahmacun, menemen, mezze and hummus, İskender kebab, beyti, bulgur and other kebabs; baklava for dessert. The restaurant at Dositejeva 1a states that its menu is fully halal.",
+      "sr": "Турска кухиња: лахмаџун, менемен, мезе и хумус, искендер-кебаб, бејти, булгур и други кебаби; за десерт баклава. Ресторан у Доситејевој 1а наводи да је цео мени халал."
+    },
+    "jan-restaurant": {
+      "en": "Armenian food: shashlik and grilled meat, lula kebab, pork ribs, chicken and shawarma.",
+      "sr": "Јерменска кухиња: шашлик и месо са роштиља, љуља-кебаб, свињска ребра, пилетина и шаурма."
+    },
+    "king-tut": {
+      "en": "Egyptian food: koshari, hawawshi, ta'ameya, mahshi, kofta, ful and om ali dessert.",
+      "sr": "Египатска кухиња: кошари, хававши, таамеја, махши, кофта, фул и десерт ом-али."
+    },
+    "ikea-swedish-bistro": {
+      "en": "IKEA Swedish restaurant and bistro: meatballs, plant-based meatballs, Swedish pastries and cinnamon buns; the bistro also serves hot dogs and ice cream.",
+      "sr": "Шведски ресторан и бистро IKEA: ћуфте, биљне ћуфте, шведска пецива и ролнице са циметом; у бистроу има и хот-догова и сладоледа."
+    },
+    "hard-rock-belgrade": {
+      "en": "American food: Legendary Burger, BBQ ribs, wings, sandwiches, steaks and brownies.",
+      "sr": "Америчка кухиња: Legendary Burger, BBQ ребра, крилца, сендвичи, стејкови и брауни."
+    },
+    "kfc-delta-city": {"en":"American fried-chicken chain: Hot Wings, Strips, Zinger, Twister and fries.","sr":"Амерички ланац са прженом пилетином: Hot Wings, Strips, Zinger, Twister и помфрит."},
+    "kfc-ada-drive-thru": {"en":"American fried-chicken chain: Hot Wings, Strips, Zinger, Twister and fries.","sr":"Амерички ланац са прженом пилетином: Hot Wings, Strips, Zinger, Twister и помфрит."},
+    "kfc-studentski-trg": {"en":"American fried-chicken chain: Hot Wings, Strips, Zinger, Twister and fries.","sr":"Амерички ланац са прженом пилетином: Hot Wings, Strips, Zinger, Twister и помфрит."},
+    "kfc-usce": {"en":"American fried-chicken chain: Hot Wings, Strips, Zinger, Twister and fries.","sr":"Амерички ланац са прженом пилетином: Hot Wings, Strips, Zinger, Twister и помфрит."},
+    "kfc-ava-shopping-park": {"en":"American fried-chicken chain: Hot Wings, Strips, Zinger, Twister and fries.","sr":"Амерички ланац са прженом пилетином: Hot Wings, Strips, Zinger, Twister и помфрит."},
+    "mcdonalds-fontana": {"en":"American fast-food chain: Big Mac, cheeseburgers, McChicken, Chicken McNuggets, McWrap and fries.","sr":"Амерички ланац брзе хране: Big Mac, чизбургери, McChicken, Chicken McNuggets, McWrap и помфрит."},
+    "mcdonalds-blok-41-dt": {"en":"American fast-food chain: Big Mac, cheeseburgers, McChicken, Chicken McNuggets, McWrap and fries.","sr":"Амерички ланац брзе хране: Big Mac, чизбургери, McChicken, Chicken McNuggets, McWrap и помфрит."},
+    "mcdonalds-delta-city": {"en":"American fast-food chain: Big Mac, cheeseburgers, McChicken, Chicken McNuggets, McWrap and fries.","sr":"Амерички ланац брзе хране: Big Mac, чизбургери, McChicken, Chicken McNuggets, McWrap и помфрит."},
+    "mcdonalds-piramida": {"en":"American fast-food chain: Big Mac, cheeseburgers, McChicken, Chicken McNuggets, McWrap and fries.","sr":"Амерички ланац брзе хране: Big Mac, чизбургери, McChicken, Chicken McNuggets, McWrap и помфрит."},
+    "mcdonalds-zeleni-venac": {"en":"American fast-food chain: Big Mac, cheeseburgers, McChicken, Chicken McNuggets, McWrap and fries.","sr":"Амерички ланац брзе хране: Big Mac, чизбургери, McChicken, Chicken McNuggets, McWrap и помфрит."},
+    "mcdonalds-slavija": {"en":"American fast-food chain: Big Mac, cheeseburgers, McChicken, Chicken McNuggets, McWrap and fries.","sr":"Амерички ланац брзе хране: Big Mac, чизбургери, McChicken, Chicken McNuggets, McWrap и помфрит."},
+    "mcdonalds-galerija": {"en":"American fast-food chain: Big Mac, cheeseburgers, McChicken, Chicken McNuggets, McWrap and fries.","sr":"Амерички ланац брзе хране: Big Mac, чизбургери, McChicken, Chicken McNuggets, McWrap и помфрит."},
+    "mcdonalds-ava-park-dt": {"en":"American fast-food chain: Big Mac, cheeseburgers, McChicken, Chicken McNuggets, McWrap and fries.","sr":"Амерички ланац брзе хране: Big Mac, чизбургери, McChicken, Chicken McNuggets, McWrap и помфрит."},
+    "mcdonalds-bezistan": {"en":"American fast-food chain: Big Mac, cheeseburgers, McChicken, Chicken McNuggets, McWrap and fries.","sr":"Амерички ланац брзе хране: Big Mac, чизбургери, McChicken, Chicken McNuggets, McWrap и помфрит."},
+    "biryani-central": {
+      "en": "Indian food: chicken biryani, butter chicken, chicken curry, dal tadka, palak paneer, kheer and mango lassi.",
+      "sr": "Индијска кухиња: бирјани са пилетином, butter chicken, пилећи кари, дал тадка, палак-панир, кхир и манго-ласи."
+    },
+    "indian-punjabi-cuisine": {
+      "en": "Punjabi food: samosa and pakora, chicken tikka, tandoori chicken, curries, palak paneer, naan and chicken biryani.",
+      "sr": "Панџапска кухиња: самоса и пакора, chicken tikka, тандури пилетина, кари, палак-панир, наан и бирјани са пилетином."
+    },
+    "tao-thai": {
+      "en": "Thai food: pad thai, massaman curry, pad kra pao, pad see ew, tom-yum fried rice and dishes with coconut milk.",
+      "sr": "Тајландска кухиња: пад-тај, масаман кари, пад-крапао, пад-си-ју, пржени пиринач том-јам и јела са кокосовим млеком."
+    },
+    "tuk-tuk-thai": {
+      "en": "Thai food: satay, red and massaman curries, Thai noodles and rice, spring rolls and mango sticky rice.",
+      "sr": "Тајландска кухиња: сатај, црвени и масаман кари, тајландски резанци и пиринач, spring rolls и лепљиви пиринач са мангом."
+    },
+    "anadolija-turkish": {
+      "en": "Turkish and Anatolian food: menemen, shakshuka, haydari, pide, lahmacun, mantı, saç tava and tandır kebab.",
+      "sr": "Турска и анадолска кухиња: менемен, шакшука, хајдари, пиде, лахмаџун, манти, сач-тава и тандир-кебаб."
+    },
+    "kultura-turkish": {
+      "en": "Turkish food: menemen, shakshuka, haydari, ezme, pide, lahmacun, Turkish köfte and baklava.",
+      "sr": "Турска кухиња: менемен, шакшука, хајдари, езме, пиде, лахмаџун, турске ћуфте и баклава."
+    },
+    "osteria-mozzarella": {
+      "en": "Regional Italian food: pasta, risotto, pizza, meat and fish dishes, seafood, cheeses and desserts.",
+      "sr": "Италијанска кухиња по регионима: паста, рижото, пица, јела од меса и рибе, морски плодови, сиреви и десерти."
+    },
+    "trattoria-campania": {
+      "en": "Cuisine of Campania: wood-fired Neapolitan pizza, burrata, pasta, Neapolitan ragù, polpette and torta caprese.",
+      "sr": "Кухиња регије Кампанија: наполитанска пица из пећи на дрва, бурата, паста, наполитански рагу, polpette и torta caprese."
+    },
+    "luigi-pizzeria": {
+      "en": "Italian street food: Neapolitan pizza, panuozzo, pizza a portafoglio, pasta, lasagna and arancini.",
+      "sr": "Италијански street food: наполитанска пица, пануоцо, pizza a portafoglio, паста, лазање и аранчини."
+    },
+    "moon-sushi-nbg": {
+      "en": "Japanese and Asian food: sushi and rolls, salmon tartare, edamame, gyoza, donburi and hot dishes.",
+      "sr": "Јапанска и азијска кухиња: суши и ролнице, тартар од лососа, едамаме, гиоза, донбури и топла јела."
+    },
+    "ebisu-square-nine": {
+      "en": "Japanese food: teppanyaki, ramen, soft-shell crab, aburi sushi, sashimi and sake.",
+      "sr": "Јапанска кухиња: тепањаки, рамен, мекооклопни рак, aburi суши, сашими и саке."
+    },
+    "hanan": {
+      "en": "Lebanese food: falafel, hummus, tabbouleh, shawarma, shish taouk, kibbeh, mezze and baba ganoush.",
+      "sr": "Либанска кухиња: фалафел, хумус, табуле, шаурма, шиш-таук, кибе, мезе и баба-гануш."
+    },
+    "yalla-yalla": {
+      "en": "Lebanese street food: falafel, chicken shawarma, hummus, lentil soup and dishes with tahini.",
+      "sr": "Либански street food: фалафел, пилећа шаурма, хумус, супа од сочива и јела са тахинијем."
+    },
+    "zapata-pozo": {
+      "en": "Mexican food: chimichanga, guacamole, enchilada, burrito, quesadilla, tacos and pico de gallo.",
+      "sr": "Мексичка кухиња: чимичанга, гвакамоле, енчилада, бурито, кесадиља, тако и pico de gallo."
+    },
+    "tortilla-casa-centar": {
+      "en": "Mexican fast-casual: burritos, quesadillas, soft and crunchy tacos, taquitos, crunchwraps and churros.",
+      "sr": "Мексички fast-casual: бурито, кесадиље, меки и хрскави тако, такитоси, crunchwrap и чуроси."
+    },
+    "golden-wok": {
+      "en": "Chinese food: crispy chicken, meat with peanuts and cashews, sweet-and-sour dishes, udon, spring rolls and mapo tofu.",
+      "sr": "Кинеска кухиња: хрскава пилетина, месо са кикирикијем и индијским орахом, слатко-кисела јела, удон, spring rolls и мапо-тофу."
+    },
+    "yxlanzh": {
+      "en": "Northwestern Chinese food: hand-pulled noodles and soups, dumplings, fried rice, cumin beef, tofu and dishes with wood-ear mushrooms.",
+      "sr": "Кухиња северозападне Кине: ручно прављени резанци и супе, кнедле, пржени пиринач, говедина са кумином, тофу и јела са црним дрвенастим печуркама."
+    },
+    "mo-sarpi-beograd": {
+      "en": "Chinese street food: roujiamo — crispy flatbread with slow-cooked meat, cold liangpi noodles and baozi; located at Makedonska 5 by Trg Republike.",
+      "sr": "Кинески street food: roujiamo — хрскава лепиња са споро куваним месом, хладни liangpi резанци и баоци; локал је у Македонској 5 код Трга републике."
+    },
+    "da-noodles": {
+      "en": "Chinese noodle shop: homemade noodles in broth or dry, Hong Kong-style chow mein and chow fun, and dumplings with beef, pork or chicken; located at Makedonska 5.",
+      "sr": "Кинеска продавница резанаца: домаћи резанци у бујону или без њега, хонгконшки chow mein и chow fun и кнедле са говедином, свињетином или пилетином; локал је у Македонској 5."
+    },
+    "k-kitchen": {
+      "en": "Korean-East Asian menu centred on bibimbap: versions with beef, chicken, pork, shrimp and vegetables, spicy chicken with Korean gochujang paste; fried udon and tempura are also served.",
+      "sr": "Корејско-источноазијски мени са нагласком на бибимбап: варијанте са говедином, пилетином, свињетином, шкампима и поврћем, љута пилетина са корејском пастом кочухџанг; припремају и пржени удон и темпуру."
+    },
+    "xalo-ocakbasi": {
+      "en": "Turkish ocakbaşı: Adana and Urfa kebab, tavuk şiş, dürüm, lahmacun, Turkish köfte, çoban salad and ayran; located at Makedonska 5, unit 33.",
+      "sr": "Турски ocakbaşı: адана и урфа кебаб, tavuk şiş, dürüm, лахмаџун, турске ћуфте, чобан-салата и ајран; локал је у Македонској 5, локал 33."
+    },
+    "intergalactic-diner-centar": {
+      "en": "American diner: classic, smash and UFO burgers, pork ribs, fries and onion rings, American pancakes with maple syrup and milkshakes.",
+      "sr": "Амерички diner: класични, smash и UFO бургери, свињска ребра, кромпир и колутови лука, америчке палачинке са јаворовим сирупом и милкшејкови."
+    },
+    "intergalactic-diner-novi-beograd": {
+      "en": "American diner: classic, smash and UFO burgers, pork ribs, fries and onion rings, American pancakes with maple syrup and milkshakes.",
+      "sr": "Амерички diner: класични, smash и UFO бургери, свињска ребра, кромпир и колутови лука, америчке палачинке са јаворовим сирупом и милкшејкови."
+    },
+    "asia-food-delta-city": {
+      "en": "Chinese food: hot-and-sour soup, fried rice and noodles, Sichuan chicken and beef, sweet-and-sour chicken, chicken with peanuts, mapo tofu and spring rolls.",
+      "sr": "Кинеска кухиња: љуто-кисела супа, пржени пиринач и резанци, сечуанска пилетина и говедина, слатко-кисела пилетина, пилетина са кикирикијем, мапо-тофу и spring rolls."
+    },
+    "dva-stapica-nbg": {
+      "en": "Chinese food: hot-and-sour soup, spring rolls, chicken with peanuts in spicy Sichuan sauce, sweet-and-sour chicken balls, wheat noodles and fried rice.",
+      "sr": "Кинеска кухиња: љуто-кисела супа, spring rolls, пилетина са кикирикијем у љутом сечуанском сосу, слатко-киселе пилеће куглице, пшенични резанци и пржени пиринач."
+    },
+    "good-dumplings-brankov": {
+      "en": "Chinese dumpling shop: hot-and-sour soup, pickled cabbage, boiled and fried dumplings with pork, chicken or beef, rice and noodles.",
+      "sr": "Кинеска продавница кнедли: љуто-кисела супа, кисели купус, куване и пржене кнедле са свињетином, пилетином или говедином, пиринач и резанци."
+    },
+    "berezka-bistro-dorcol": {
+      "en": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and prepared lunches. The bistro also serves international dishes.",
+      "sr": "Кафе и кулинарски део у продавници Berezka са сопственом кухињом: пелмени и вареники, сирники, „харинга под бундом“, винегрет, руска салата и готови ручкови. Бистро служи и интернационална јела."
+    },
+    "berezka-bistro-sarajevska": {
+      "en": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and prepared lunches. The bistro also serves international dishes.",
+      "sr": "Кафе и кулинарски део у продавници Berezka са сопственом кухињом: пелмени и вареники, сирники, „харинга под бундом“, винегрет, руска салата и готови ручкови. Бистро служи и интернационална јела."
+    },
+    "berezka-bistro-vracar": {
+      "en": "Café and prepared-food counter inside Berezka with its own kitchen: Siberian pelmeni, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and prepared lunches. The bistro also serves international dishes.",
+      "sr": "Кафе и кулинарски део у продавници Berezka са сопственом кухињом: сибирски пелмени, сирники, „харинга под бундом“, винегрет, руска салата и готови ручкови. Бистро служи и интернационална јела."
+    },
+    "berezka-bistro-novi-beograd": {
+      "en": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and prepared lunches. The bistro also serves international dishes.",
+      "sr": "Кафе и кулинарски део у продавници Berezka са сопственом кухињом: пелмени и вареники, сирники, „харинга под бундом“, винегрет, руска салата и готови ручкови. Бистро служи и интернационална јела."
+    }
+  }
+}
