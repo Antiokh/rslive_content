@@ -3,7 +3,7 @@
   "hours": 24,
   "generated_at": "2026-10-08T19:03:00+02:00",
   "commit_count": 1,
-  "article_count": 4,
+  "article_count": 6,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/employing-foreigners/index.mdx",
@@ -22,11 +22,27 @@
       ]
     },
     {
+      "repo_path": "src/content/docs/en/employing-foreigners-serbia/index.mdx",
+      "title": "Employing a foreign worker in Serbia",
+      "live_url": "https://rslive.ru/en/employing-foreigners-serbia/",
+      "summaries": [
+        "Added a direct link to the new step-by-step guide for moving from a self-employment single permit to local employment"
+      ]
+    },
+    {
       "repo_path": "src/content/docs/en/employing-foreigners-serbia/change-work-basis/index.mdx",
       "title": "From self-employment to employment in Serbia",
       "live_url": "https://rslive.ru/en/employing-foreigners-serbia/change-work-basis/",
       "summaries": [
         "Added an English guide to changing a single-permit work basis from self-employment to local employment, including NSZ consent, PPZ, CROSO, B2B transition risks and work already performed"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/zaposljavanje-stranaca/index.mdx",
+      "title": "Како запослити страног радника у Србији",
+      "live_url": "https://rslive.ru/sr/zaposljavanje-stranaca/",
+      "summaries": [
+        "Додали директан линк ка новом водичу за прелазак са јединствене дозволе по основу самозапошљавања на радни однос"
       ]
     },
     {
