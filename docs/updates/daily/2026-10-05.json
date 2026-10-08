@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-05",
+  "hours": 24,
+  "generated_at": "2026-10-05T18:19:00+02:00",
+  "commit_count": 1,
+  "article_count": 3,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/employing-foreigners/index.mdx",
+      "title": "Как оформить иностранного работника в Сербии",
+      "live_url": "https://rslive.ru/arrival/employing-foreigners/",
+      "summaries": [
+        "Добавили инструкцию для работодателей по оформлению иностранца: выбор между наймом, самозанятостью, направлением, внутрикорпоративным переводом и B2B, а также PPZ, NSZ, единое разрешение, CROSO и переход с самозанятости на работу по найму"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/employing-foreigners-serbia/index.mdx",
+      "title": "Employing a foreign worker in Serbia",
+      "live_url": "https://rslive.ru/en/employing-foreigners-serbia/",
+      "summaries": [
+        "Added the English employer guide covering local employment, self-employment, posting, intra-company transfer, B2B, PPZ/NSZ, the single permit, CROSO and changing from a self-employment work basis to employment"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/zaposljavanje-stranaca/index.mdx",
+      "title": "Како запослити страног радника у Србији",
+      "live_url": "https://rslive.ru/sr/zaposljavanje-stranaca/",
+      "summaries": [
+        "Додали водич за послодавце о локалном запошљавању, самозапошљавању, упућивању, кретању у оквиру привредног друштва, B2B односу, PPZ/NSZ поступцима, јединственој дозволи, CROSO пријави и преласку са самозапошљавања на радни однос"
+      ]
+    }
+  ]
+}
