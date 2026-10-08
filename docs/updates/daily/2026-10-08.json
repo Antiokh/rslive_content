@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-08",
+  "hours": 24,
+  "generated_at": "2026-10-08T19:03:00+02:00",
+  "commit_count": 1,
+  "article_count": 3,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/employing-foreigners/change-work-basis/index.mdx",
+      "title": "Как перейти с ИП на работу по найму в Сербии",
+      "live_url": "https://rslive.ru/arrival/employing-foreigners/change-work-basis/",
+      "summaries": [
+        "Добавили практический гайд по saglasnost NSZ, PPZ, CROSO, переходу preduzetnik → zaposleni, тесту самостоятельности, временным договорам и оплате уже выполненной работы"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/employing-foreigners-serbia/change-work-basis/index.mdx",
+      "title": "From self-employment to employment in Serbia",
+      "live_url": "https://rslive.ru/en/employing-foreigners-serbia/change-work-basis/",
+      "summaries": [
+        "Added an English guide to changing a single-permit work basis from self-employment to local employment, including NSZ consent, PPZ, CROSO, B2B transition risks and work already performed"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/zaposljavanje-stranaca/promena-osnova-rada/index.mdx",
+      "title": "Како прећи са предузетника на радни однос у Србији",
+      "live_url": "https://rslive.ru/sr/zaposljavanje-stranaca/promena-osnova-rada/",
+      "summaries": [
+        "Додали практичан водич за промену радног основа са самозапошљавања на запослење, укључујући сагласност NSZ, PPZ, CROSO, B2B прелаз и већ обављени рад"
+      ]
+    }
+  ]
+}
