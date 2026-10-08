@@ -788,6 +788,19 @@ pages:
       - "запрос связан с темой: Как работодателю проверить право иностранца на работу, выбрать модель занятости, пройти PPZ и NSZ, получить единое разрешение и зарегистрировать сотрудника в CROSO."
       - "нужна информация по теме «Как оформить иностранного работника в Сербии»"
     anchors: []
+  - url: "/arrival/employing-foreigners/change-work-basis/"
+    title: "Как перейти с ИП на работу по найму в Сербии"
+    description: "Пошаговый переход с jedinstvena dozvola по samozapošljavanje на работу по найму: согласие NSZ, PPZ, CROSO, B2B-переход, test samostalnosti и уже выполненная работа."
+    keywords: ["переход с ИП на работу Сербия", "samozapošljavanje zaposlenje", "promena osnova rada", "смена основания работы Сербия", "согласие NSZ", "saglasnost NSZ", "ИП и трудовой договор Сербия", "preduzetnik zaposleni", "test samostalnosti", "работа до разрешения Сербия"]
+    tags: ["переезд", "первые шаги", "переход с ИП на работу Сербия", "samozapošljavanje zaposlenje", "promena osnova rada", "смена основания работы Сербия", "согласие NSZ", "saglasnost NSZ", "ИП и трудовой договор Сербия", "preduzetnik zaposleni", "test samostalnosti", "работа до разрешения Сербия", "иностранный работник", "NSZ", "самозанятость", "смена основания работы"]
+    aliases: ["перейти с ИП в штат в Сербии", "перевести samozapošljavanje на zaposlenje", "сменить основание с самозанятости на найм"]
+    link_when:
+      - "иностранец с jedinstvena dozvola по samozapošljavanje хочет перейти на работу по найму"
+      - "работодатель требует сначала сменить основание пребывания до оформления сотрудника"
+      - "нужно понять можно ли сначала работать через preduzetnik, а затем стать сотрудником того же заказчика"
+      - "запрос связан с темой: Пошаговый переход с jedinstvena dozvola по samozapošljavanje на работу по найму: согласие NSZ, PPZ, CROSO, B2B-переход, test samostalnosti и уже выполненная работа."
+      - "нужна информация по теме «Как перейти с ИП на работу по найму в Сербии»"
+    anchors: []
   - url: "/arrival/freelance/"
     title: "Фриланс"
     description: "Налогообложение доходов фрилансера в Сербии: кто использует портал Frilenseri, сроки квартальной декларации, две модели 2026 года и связь с правом иностранца на работу."
@@ -1402,6 +1415,20 @@ pages:
       - "someone needs to understand whether a self-employment single permit can be moved to employment"
       - "the request is about: Employer guide to checking a foreign worker's right to work, choosing local employment, self-employment, posting or intra-company transfer, handling PPZ and NSZ, the single permit and CROSO registration."
       - "information is needed about “Employing a foreign worker in Serbia”"
+    anchors: []
+  - url: "/en/employing-foreigners-serbia/change-work-basis/"
+    title: "From self-employment to employment in Serbia"
+    locale: "en"
+    description: "Step-by-step guide for moving from a single permit based on samozapošljavanje to local employment: NSZ consent, PPZ, CROSO, B2B transition, Test samostalnosti and work already performed."
+    keywords: ["self-employment to employment Serbia", "samozapošljavanje zaposlenje", "promena osnova rada", "change work basis Serbia", "NSZ consent", "saglasnost NSZ", "preduzetnik employee Serbia", "Test samostalnosti", "work before permit Serbia"]
+    tags: ["английский", "self-employment to employment Serbia", "samozapošljavanje zaposlenje", "promena osnova rada", "change work basis Serbia", "NSZ consent", "saglasnost NSZ", "preduzetnik employee Serbia", "Test samostalnosti", "work before permit Serbia", "foreign worker", "NSZ", "self-employment", "change of work basis"]
+    aliases: ["move from Serbian entrepreneur to employee", "change samozapošljavanje to employment", "switch a single permit from self-employment to employment"]
+    link_when:
+      - "a foreign national with a self-employment single permit wants to become an employee"
+      - "an employer says the person must first change the residence basis before employment"
+      - "someone needs to know whether they can work as a preduzetnik and later become an employee of the same client"
+      - "the request is about: Step-by-step guide for moving from a single permit based on samozapošljavanje to local employment: NSZ consent, PPZ, CROSO, B2B transition, Test samostalnosti and work already performed."
+      - "information is needed about “From self-employment to employment in Serbia”"
     anchors: []
   - url: "/en/foreigner-residence-registration/"
     title: "How to register a foreigner's stay through eUprava"
@@ -3543,6 +3570,20 @@ pages:
       - "потребно је разумети да ли јединствена дозвола по основу самозапошљавања може да се промени на запошљавање"
       - "упит је о теми: Водич за послодавца: како проверити право странца на рад, изабрати запошљавање, самозапошљавање, упућивање или трансфер унутар компаније, спровести PPZ и NSZ, јединствену дозволу и пријаву у CROSO."
       - "потребне су информације о теми „Како запослити страног радника у Србији“"
+    anchors: []
+  - url: "/sr/zaposljavanje-stranaca/promena-osnova-rada/"
+    title: "Како прећи са предузетника на радни однос у Србији"
+    locale: "sr"
+    description: "Корак-по-корак прелазак са јединствене дозволе по основу samozapošljavanje на радни однос: сагласност NSZ, PPZ, CROSO, B2B прелаз, Test samostalnosti и већ обављени рад."
+    keywords: ["прелазак са предузетника на радни однос", "samozapošljavanje zaposlenje", "promena osnova rada", "сагласност NSZ", "preduzetnik zaposleni", "Test samostalnosti", "рад пре дозволе Србија"]
+    tags: ["сербский", "прелазак са предузетника на радни однос", "samozapošljavanje zaposlenje", "promena osnova rada", "сагласност NSZ", "preduzetnik zaposleni", "Test samostalnosti", "рад пре дозволе Србија", "страни радник", "NSZ", "самозапошљавање", "промена основа рада"]
+    aliases: ["прелазак са предузетника у радни однос", "промена samozapošljavanje у zaposlenje", "промена радног основа јединствене дозволе"]
+    link_when:
+      - "странац са јединственом дозволом по основу samozapošljavanje жели да заснује радни однос"
+      - "послодавац тражи да странац прво промени основ боравка"
+      - "треба проверити да ли предузетник може касније да постане запослен код истог налогодавца"
+      - "упит је о теми: Корак-по-корак прелазак са јединствене дозволе по основу samozapošljavanje на радни однос: сагласност NSZ, PPZ, CROSO, B2B прелаз, Test samostalnosti и већ обављени рад."
+      - "потребне су информације о теми „Како прећи са предузетника на радни однос у Србији“"
     anchors: []
   - url: "/uplatnica/"
     title: "Форма платёжки (Uplatnica)"
