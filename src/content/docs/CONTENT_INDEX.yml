@@ -775,6 +775,19 @@ pages:
       - "нужна информация по теме «Перевозки Россия – Сербия»"
       - "запрос связан с темой: ! Использование частных компаний, осуществляющих перевозку, может быть выгодным для больших грузов. Многие компании предлагают услугу «от двери до двери» и берут на себя таможенное оформление. Сроки доставки варьируются"
     anchors: []
+  - url: "/arrival/employing-foreigners/"
+    title: "Как оформить иностранного работника в Сербии"
+    description: "Как работодателю проверить право иностранца на работу, выбрать модель занятости, пройти PPZ и NSZ, получить единое разрешение и зарегистрировать сотрудника в CROSO."
+    keywords: ["иностранный работник Сербия", "работодатель иностранца Сербия", "разрешение на работу Сербия", "jedinstvena dozvola", "PPZ", "NSZ", "CROSO", "самозанятость Сербия", "preduzetnik иностранный работник", "командированный работник Сербия", "внутрикорпоративный перевод Сербия"]
+    tags: ["переезд", "первые шаги", "иностранный работник Сербия", "работодатель иностранца Сербия", "разрешение на работу Сербия", "jedinstvena dozvola", "PPZ", "NSZ", "CROSO", "самозанятость Сербия", "preduzetnik иностранный работник", "командированный работник Сербия", "внутрикорпоративный перевод Сербия", "работодатель", "иностранный работник"]
+    aliases: ["как нанять иностранца в Сербии", "оформление иностранного сотрудника", "foreign employee Serbia"]
+    link_when:
+      - "компания впервые нанимает иностранца в Сербии"
+      - "юристу или HR нужно выбрать между наймом, ИП, командированием и внутрикорпоративным переводом"
+      - "нужно понять можно ли перевести единое разрешение с самозанятости на найм"
+      - "запрос связан с темой: Как работодателю проверить право иностранца на работу, выбрать модель занятости, пройти PPZ и NSZ, получить единое разрешение и зарегистрировать сотрудника в CROSO."
+      - "нужна информация по теме «Как оформить иностранного работника в Сербии»"
+    anchors: []
   - url: "/arrival/freelance/"
     title: "Фриланс"
     description: "Налогообложение доходов фрилансера в Сербии: кто использует портал Frilenseri, сроки квартальной декларации, две модели 2026 года и связь с правом иностранца на работу."
@@ -1375,6 +1388,20 @@ pages:
       - "a host and a foreign guest need the same explanation of stay registration"
       - "the request is about: How a foreigner's stay is registered in Serbia: police, eUprava and eTurista, electronic confirmation, the paper beli karton and registration after a new entry."
       - "information is needed about “Beli karton: registering a foreigner's stay in Serbia”"
+    anchors: []
+  - url: "/en/employing-foreigners-serbia/"
+    title: "Employing a foreign worker in Serbia"
+    locale: "en"
+    description: "Employer guide to checking a foreign worker's right to work, choosing local employment, self-employment, posting or intra-company transfer, handling PPZ and NSZ, the single permit and CROSO registration."
+    keywords: ["employing foreigners Serbia", "foreign worker Serbia", "Serbia work permit employer", "single permit Serbia", "jedinstvena dozvola", "PPZ Serbia", "NSZ Serbia", "CROSO foreign employee", "self-employment Serbia foreigner", "posted worker Serbia", "intra-company transfer Serbia"]
+    tags: ["английский", "employing foreigners Serbia", "foreign worker Serbia", "Serbia work permit employer", "single permit Serbia", "jedinstvena dozvola", "PPZ Serbia", "NSZ Serbia", "CROSO foreign employee", "self-employment Serbia foreigner", "posted worker Serbia", "intra-company transfer Serbia", "employer", "foreign worker", "NSZ", "PPZ", "CROSO"]
+    aliases: ["hire a foreigner in Serbia", "foreign employee Serbia", "work permit employer Serbia"]
+    link_when:
+      - "a company is hiring a foreign national in Serbia for the first time"
+      - "HR or legal needs to choose between employment, self-employment, posting and intra-company transfer"
+      - "someone needs to understand whether a self-employment single permit can be moved to employment"
+      - "the request is about: Employer guide to checking a foreign worker's right to work, choosing local employment, self-employment, posting or intra-company transfer, handling PPZ and NSZ, the single permit and CROSO registration."
+      - "information is needed about “Employing a foreign worker in Serbia”"
     anchors: []
   - url: "/en/foreigner-residence-registration/"
     title: "How to register a foreigner's stay through eUprava"
@@ -3502,6 +3529,20 @@ pages:
     link_when:
       - "нужна страница пользователя Petro в сербской редакции"
       - "потребне су информације о теми „petro“"
+    anchors: []
+  - url: "/sr/zaposljavanje-stranaca/"
+    title: "Како запослити страног радника у Србији"
+    locale: "sr"
+    description: "Водич за послодавца: како проверити право странца на рад, изабрати запошљавање, самозапошљавање, упућивање или трансфер унутар компаније, спровести PPZ и NSZ, јединствену дозволу и пријаву у CROSO."
+    keywords: ["запошљавање странаца Србија", "страни радник Србија", "дозвола за рад странца", "јединствена дозвола", "PPZ", "NSZ", "CROSO", "самозапошљавање странца", "предузетник странац", "упућено лице", "кретање у оквиру привредног друштва"]
+    tags: ["сербский", "запошљавање странаца Србија", "страни радник Србија", "дозвола за рад странца", "јединствена дозвола", "PPZ", "NSZ", "CROSO", "самозапошљавање странца", "предузетник странац", "упућено лице", "кретање у оквиру привредног друштва", "послодавац", "страни радник"]
+    aliases: ["како запослити странца у Србији", "запошљавање страног држављанина", "дозвола за рад странца Србија"]
+    link_when:
+      - "компанија први пут запошљава странца у Србији"
+      - "HR или правна служба бира између радног односа, самозапошљавања, упућивања и трансфера унутар компаније"
+      - "потребно је разумети да ли јединствена дозвола по основу самозапошљавања може да се промени на запошљавање"
+      - "упит је о теми: Водич за послодавца: како проверити право странца на рад, изабрати запошљавање, самозапошљавање, упућивање или трансфер унутар компаније, спровести PPZ и NSZ, јединствену дозволу и пријаву у CROSO."
+      - "потребне су информације о теми „Како запослити страног радника у Србији“"
     anchors: []
   - url: "/uplatnica/"
     title: "Форма платёжки (Uplatnica)"
