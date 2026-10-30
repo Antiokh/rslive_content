@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-30",
+  "hours": 24,
+  "generated_at": "2026-10-30T14:04:53.818Z",
+  "commit_count": 1,
+  "article_count": 4,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/map/cuisine/index.mdx",
+      "title": "Национальные кухни Белграда",
+      "live_url": "https://rslive.ru/map/cuisine/",
+      "summaries": [
+        "Добавили Zapata (Vojvode Bogdana 13) и Zapata Ciudad (Vuka Karadžića 14) с официальными ссылками и картами; оба ресторана появились как отдельные точки на гастрономической карте"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/national-cuisines-belgrade/index.mdx",
+      "title": "National cuisines in Belgrade",
+      "live_url": "https://rslive.ru/en/national-cuisines-belgrade/",
+      "summaries": [
+        "Added the official Zapata website and the two Belgrade restaurant locations with map links"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/nacionalne-kuhinje-beograda/index.mdx",
+      "title": "Националне кухиње Београда",
+      "live_url": "https://rslive.ru/sr/nacionalne-kuhinje-beograda/",
+      "summaries": [
+        "Додали званични сајт и две локације ресторана Zapata са линковима ка мапама"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/lifestyle/world-cuisines-belgrade/index.mdx",
+      "title": "Кухни мира в Белграде: где знакомиться с разными гастрономическими традициями",
+      "live_url": "https://rslive.ru/lifestyle/world-cuisines-belgrade/",
+      "summaries": [
+        "Добавили Zapata и Zapata Ciudad в раздел мексиканской кухни с адресами, примерами блюд и ссылкой на официальный сайт"
+      ]
+    }
+  ]
+}
