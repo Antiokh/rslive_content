@@ -1,8 +1,8 @@
 {
   "date": "2026-10-30",
   "hours": 24,
-  "generated_at": "2026-10-30T14:04:53.818Z",
-  "commit_count": 1,
+  "generated_at": "2026-10-30T15:00:03.548Z",
+  "commit_count": 2,
   "article_count": 4,
   "articles": [
     {
@@ -10,7 +10,8 @@
       "title": "Национальные кухни Белграда",
       "live_url": "https://rslive.ru/map/cuisine/",
       "summaries": [
-        "Добавили Zapata (Vojvode Bogdana 13) и Zapata Ciudad (Vuka Karadžića 14) с официальными ссылками и картами; оба ресторана появились как отдельные точки на гастрономической карте"
+        "Добавили Zapata (Vojvode Bogdana 13) и Zapata Ciudad (Vuka Karadžića 14) с официальными ссылками и картами; оба ресторана появились как отдельные точки на гастрономической карте",
+        "Добавили восемь проверенных точек на карту: Zapata Cerezo, La Chona, La Taqueria, Nachos, Seasons by Stories и три ресторана Wok Republic; дополнили списки филиалов и грузинской кухни"
       ]
     },
     {
@@ -18,7 +19,8 @@
       "title": "National cuisines in Belgrade",
       "live_url": "https://rslive.ru/en/national-cuisines-belgrade/",
       "summaries": [
-        "Added the official Zapata website and the two Belgrade restaurant locations with map links"
+        "Added the official Zapata website and the two Belgrade restaurant locations with map links",
+        "Added eight verified map points (Zapata Cerezo, La Chona, La Taqueria, Nachos, Seasons by Stories and three Wok Republic venues) and updated Georgian and branch listings"
       ]
     },
     {
@@ -26,7 +28,8 @@
       "title": "Националне кухиње Београда",
       "live_url": "https://rslive.ru/sr/nacionalne-kuhinje-beograda/",
       "summaries": [
-        "Додали званични сајт и две локације ресторана Zapata са линковима ка мапама"
+        "Додали званични сајт и две локације ресторана Zapata са линковима ка мапама",
+        "Додали осам проверених тачака на мапу (Zapata Cerezo, La Chona, La Taqueria, Nachos, Seasons by Stories и три Wok Republic локала) и допунили спискове грузијских ресторана и локација"
       ]
     },
     {
