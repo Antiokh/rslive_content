@@ -1,7 +1,7 @@
 {
   "datasetId": "belgrade-world-restaurants",
   "language": "en",
-  "sourceSnapshotAt": "2026-09-26",
+  "sourceSnapshotAt": "2026-10-30",
   "descriptions": {
     "idol-tiki-bar": "Chinese-Asian menu at a tiki bar: Hong Kong-style crispy wontons, pork bao, shoyu, miso and tonkotsu ramen, kung pao chicken, tom yum, fried noodles and rice; the bar specializes in tiki cocktails.",
     "x-wangs-kitchen": "Chinese restaurant with a large menu of soups, noodles and dumplings; hot pot is a separate specialty. Popular dishes also include fried noodles, rice and sweet-and-sour chicken.",
@@ -67,6 +67,8 @@
     "hanan": "Lebanese food: falafel, hummus, tabbouleh, shawarma, shish taouk, kibbeh, mezze and baba ghanoush.",
     "yalla-yalla": "Lebanese street food: falafel, chicken shawarma, hummus, lentil soup and tahini-based dishes.",
     "zapata-pozo": "Mexican food: chimichanga, guacamole, enchilada, burrito, quesadilla, tacos and pico de gallo.",
+    "zapata-zvezdara": "Mexican and Tex-Mex dishes: tacos, enchiladas, burritos, quesadillas and salsas.",
+    "zapata-ciudad": "Mexican cuisine: tacos, enchiladas, burritos, quesadillas and cocktails.",
     "tortilla-casa-centar": "Mexican fast-casual: burritos, quesadillas, soft and crunchy tacos, taquitos, Crunchwrap and churros.",
     "golden-wok": "Chinese food: crispy chicken, meat with peanuts and cashews, sweet-and-sour dishes, udon, spring rolls and mapo tofu.",
     "yxlanzh": "Northwestern Chinese cuisine: hand-pulled noodles and soups, dumplings, fried rice, cumin beef, tofu and wood-ear mushroom dishes.",
