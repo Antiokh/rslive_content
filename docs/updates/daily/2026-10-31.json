@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-31",
+  "hours": 24,
+  "generated_at": "2026-10-31T07:31:51.783Z",
+  "commit_count": 1,
+  "article_count": 9,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/refund/index.mdx",
+      "title": "Как вернуть деньги из ALTA banka после отзыва лицензии",
+      "live_url": "https://rslive.ru/arrival/bank/alta/refund/",
+      "summaries": [
+        "Добавили инструкцию по возврату средств после отзыва лицензии ALTA banka 31.10.2026: лимит страхования 50 000 €, организация выплат за 7 рабочих дней после судебного решения, заявление в банк-агент и трёхлетний срок обращения",
+        "Разобрали резидентство предпринимателей и компаний, требования на суммы сверх лимита, переводы в пути и отличие ALTA banka от ALTA GROUP DOO (ранее ALTA PAY GROUP DOO)",
+        "По сообщению AOD уточнили: компетентный суд по ALTA — Хозяйственный суд в Белграде; решение об открытии банкротства ещё предстоит проверить, как и номер дела и срок предъявления кредиторских требований"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/index.mdx",
+      "title": "Alta Banka",
+      "live_url": "https://rslive.ru/arrival/bank/alta/",
+      "summaries": [
+        "Поставили отзыв лицензии и ссылку на возврат средств в начало; прежние тарифы и банковские операции перевели в историческую справку с прошедшим временем и предупреждением о недействительных реквизитах"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/index.mdx",
+      "title": "Банки и финансы",
+      "live_url": "https://rslive.ru/arrival/bank/",
+      "summaries": [
+        "Убрали ALTA banka из актуальных вариантов открытия банковского счёта, добавили предупреждение и ссылку на инструкцию по страховым выплатам"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/index.mdx",
+      "title": "Первые шаги после переезда",
+      "live_url": "https://rslive.ru/arrival/",
+      "summaries": [
+        "Исключили ALTA banka из перечня банков для новых клиентов и добавили ссылку на возврат средств существующим клиентам"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/finance/index.mdx",
+      "title": "Деньги и финансы при переезде в Сербию",
+      "live_url": "https://rslive.ru/move/finance/",
+      "summaries": [
+        "Сняли ALTA banka с перечня действующих получателей переводов и пометили прежние кейсы как исторические"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/acquiring/index.mdx",
+      "title": "Эквайринг и приём платежей",
+      "live_url": "https://rslive.ru/arrival/business/acquiring/",
+      "summaries": [
+        "Развели ALTA banka с отозванной лицензией и отдельную ALTA GROUP DOO (ранее ALTA PAY GROUP DOO, матичный номер 21035254); убрали неактуальный банковский тариф"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/inflow/index.mdx",
+      "title": "Приём платежей от юрлиц",
+      "live_url": "https://rslive.ru/arrival/business/inflow/",
+      "summaries": [
+        "Убрали ALTA banka из актуальных рекомендаций для предпринимателей, отметили отзыв лицензии и дали маршрут возврата средств"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/cef/index.mdx",
+      "title": "ЭЦП, картицы, читач, челик",
+      "live_url": "https://rslive.ru/adaptation/cef/",
+      "summaries": [
+        "Убрали устаревший пример использования считывателя смарт-карт в корпоративном банкинге ALTA"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/intro/index.mdx",
+      "title": "Инструкция по Сербии",
+      "live_url": "https://rslive.ru/intro/",
+      "summaries": [
+        "Убрали ALTA banka из перечня действующих банков в навигации и добавили ссылку на возврат средств после отзыва лицензии"
+      ]
+    }
+  ]
+}
