@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-31",
+  "hours": 24,
+  "generated_at": "2026-10-31T07:31:51.783Z",
+  "commit_count": 1,
+  "article_count": 6,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/refund/index.mdx",
+      "title": "ALTA banka лишилась лицензии: как вернуть деньги со счёта",
+      "live_url": "https://rslive.ru/arrival/bank/alta/refund/",
+      "summaries": [
+        "Опубликовали инструкцию для вкладчиков после отзыва лицензии ALTA banka 31.10.2026: покрытие до 50 000 €, срок объявления банка-агента, заявление на выплату и требование сверх лимита через суд",
+        "Отдельно разобрали нерезидентов, предпринимателей и DOO, незавершённые переводы, различие ALTA banka и AltaPay; указали, что банк-агент и дата выплат пока не объявлены"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/index.mdx",
+      "title": "Alta Banka",
+      "live_url": "https://rslive.ru/arrival/bank/alta/",
+      "summaries": [
+        "Поставили на первое место отзыв лицензии НБС и маршрут возврата средств; прежние тарифы, карты, SWIFT и условия счёта оставили только в явно обозначенном архиве"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/index.mdx",
+      "title": "Банки и финансы",
+      "live_url": "https://rslive.ru/arrival/bank/",
+      "summaries": [
+        "Убрали ALTA banka из актуальных вариантов открытия банковского счёта, добавили предупреждение и ссылку на инструкцию по страховым выплатам"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/index.mdx",
+      "title": "Первые шаги после переезда",
+      "live_url": "https://rslive.ru/arrival/",
+      "summaries": [
+        "Исключили ALTA banka из перечня банков для новых клиентов и добавили ссылку на возврат средств существующим клиентам"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/finance/index.mdx",
+      "title": "Деньги и финансы при переезде в Сербию",
+      "live_url": "https://rslive.ru/move/finance/",
+      "summaries": [
+        "Сняли ALTA banka с перечня действующих получателей переводов и пометили прежние кейсы как исторические"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/acquiring/index.mdx",
+      "title": "Эквайринг и приём платежей",
+      "live_url": "https://rslive.ru/arrival/business/acquiring/",
+      "summaries": [
+        "Развели ALTA banka с отозванной лицензией и отдельную ALTA PAY GROUP, убрали неактуальный тариф банка из сравнения"
+      ]
+    }
+  ]
+}
