@@ -2,8 +2,8 @@
   "date": "2026-10-31",
   "hours": 24,
   "generated_at": "2026-10-31T07:31:51.783Z",
-  "commit_count": 1,
-  "article_count": 9,
+  "commit_count": 2,
+  "article_count": 10,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/bank/alta/refund/index.mdx",
@@ -77,6 +77,14 @@
       "live_url": "https://rslive.ru/intro/",
       "summaries": [
         "Убрали ALTA banka из перечня действующих банков в навигации и добавили ссылку на возврат средств после отзыва лицензии"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/close/index.mdx",
+      "title": "Закрытие предпринимателя",
+      "live_url": "https://rslive.ru/arrival/business/close/",
+      "summaries": [
+        "Уточнили, что случаи открытия бизнес-счёта ALTA во время prekid относятся только к периоду до отзыва лицензии 31.10.2026; добавили предупреждение о невозможности новых операций и ссылку на возврат средств"
       ]
     }
   ]
