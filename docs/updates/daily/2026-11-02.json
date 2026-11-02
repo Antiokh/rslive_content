@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-02",
+  "hours": 24,
+  "generated_at": "2026-11-02T10:43:37+01:00",
+  "commit_count": 2,
+  "article_count": 5,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/map/blacklist/index.mdx",
+      "title": "Черный список квартир",
+      "live_url": "https://rslive.ru/map/blacklist/",
+      "summaries": [
+        "Убрали ссылки на новый коммерческий сайт, Telegram-канал и бот проекта; сохранили атрибуцию исторического источника Relocate Help Black List без активных переходов",
+        "Карту перевели на прямое открытие собственного архивного снимка RSLive из 305 пользовательских отметок от 22 августа 2026 года"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/employing-foreigners/change-work-basis/index.mdx",
+      "title": "Как перейти с ИП на работу по найму в Сербии",
+      "live_url": "https://rslive.ru/arrival/employing-foreigners/change-work-basis/",
+      "summaries": [
+        "Уточнили порядок перехода с ИП на работу по найму: проект договора для NSZ, согласие до смены рабочего основания, оформление договора и CROSO до начала работы; добавили санкции за незаконный допуск"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/jedinstvena-dozvola/index.mdx",
+      "title": "Единое разрешение на проживание и работу",
+      "live_url": "https://rslive.ru/arrival/jedinstvena-dozvola/",
+      "summaries": [
+        "Уточнили штрафы и миграционные последствия использования единой дозволы не по основанию, в том числе обязательность решения о прекращении её действия при установлении законных оснований и возможные дополнительные меры"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/jobs/index.mdx",
+      "title": "Поиск работы в Сербии",
+      "live_url": "https://rslive.ru/arrival/jobs/",
+      "summaries": [
+        "Добавили предупреждение о штрафе иностранцу за работу без надлежащего основания и возможных последствиях для единого разрешения"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/employing-foreigners/index.mdx",
+      "title": "Как оформить иностранного работника в Сербии",
+      "live_url": "https://rslive.ru/arrival/employing-foreigners/",
+      "summaries": [
+        "Добавили размеры штрафов для работодателя, предпринимателя и ответственного лица, а также риск запрета определённой деятельности"
+      ]
+    }
+  ]
+}
