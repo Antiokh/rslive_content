@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-02",
+  "hours": 24,
+  "generated_at": "2026-11-02T10:22:00+01:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/map/blacklist/index.mdx",
+      "title": "Черный список квартир",
+      "live_url": "https://rslive.ru/map/blacklist/",
+      "summaries": [
+        "Убрали ссылки на новый коммерческий сайт, Telegram-канал и бот проекта; сохранили атрибуцию исторического источника Relocate Help Black List без активных переходов",
+        "Карту перевели на прямое открытие собственного архивного снимка RSLive из 305 пользовательских отметок от 22 августа 2026 года"
+      ]
+    }
+  ]
+}
