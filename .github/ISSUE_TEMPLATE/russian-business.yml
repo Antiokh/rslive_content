@@ -1,0 +1,65 @@
+name: "Добавить русскоязычный бизнес"
+description: "Предложить организацию или услугу для каталога RSLive. Заявка публична и проходит редакционную проверку."
+title: "[Каталог бизнеса] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Это публичная заявка GitHub.** Указывайте только сведения, предназначенные для открытой публикации. Отправка заявки не гарантирует включения в каталог.
+  - type: input
+    id: business_name
+    attributes:
+      label: "Название бизнеса"
+      placeholder: "Как называется организация или проект"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Категория"
+      options:
+        - "Кафе и рестораны"
+        - "Бары"
+        - "Магазины"
+        - "Красота и здоровье"
+        - "Услуги"
+        - "Образование"
+        - "Развлечения и досуг"
+        - "Другое"
+    validations:
+      required: true
+  - type: input
+    id: city
+    attributes:
+      label: "Город"
+      placeholder: "Белград, Нови-Сад, Ниш и т. д. / онлайн"
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: "Официальная публичная ссылка"
+      description: "Сайт, Instagram, Telegram-страница проекта или другой первичный источник"
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: input
+    id: address
+    attributes:
+      label: "Публичный адрес (необязательно)"
+      description: "Не указывайте домашний адрес или непубличное место приёма"
+      placeholder: "Улица и номер, если место принимает посетителей"
+  - type: textarea
+    id: description
+    attributes:
+      label: "Чем занимается бизнес"
+      description: "Конкретные товары, услуги или виды досуга. Можно добавить ссылку на карту."
+    validations:
+      required: true
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: "Публичность заявки"
+      options:
+        - label: "Я понимаю, что заявку увидят все пользователи GitHub, а сведения будут проверены редакцией до публикации."
+          required: true
