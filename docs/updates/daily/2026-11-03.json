@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-03",
+  "hours": 24,
+  "generated_at": "2026-11-03T23:39:24+01:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/adaptation/srpski/index.mdx",
+      "title": "Изучение сербского языка",
+      "live_url": "https://rslive.ru/adaptation/srpski/",
+      "summaries": [
+        "Добавили book2 / 50LANGUAGES со 100 бесплатными аудиоуроками и русско-сербскими фразами; включили caolaki.com как заявленный создателями бесплатный сайт для взрослых и детей, отдельно отметив невозможность независимой проверки доступности."
+      ]
+    }
+  ]
+}
