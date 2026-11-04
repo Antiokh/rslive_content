@@ -565,6 +565,59 @@ async function checkUpdateJson() {
   }
 }
 
+
+const internalUpdateTerms = /\b(?:Supabase(?:-backed)?|PostgreSQL|Postgres|SQLite|SQL|backend|dataset|Edge\s+Functions?|GitHub\s+Actions)\b/i;
+
+// Inspect added publication lines, not historical notes or technical project documentation.
+function checkNewPublicUpdateCopy() {
+  const base = process.env.QC_BASE_SHA?.trim();
+  const head = process.env.QC_HEAD_SHA?.trim() || 'HEAD';
+  if (!base || /^0+$/.test(base)) return;
+
+  let diff;
+  try {
+    diff = gitOutput([
+      'diff', '--unified=0', base, head, '--',
+      'docs/updates/daily', 'docs/updates/monthly',
+    ]);
+  } catch {
+    console.log('Could not inspect update diff for internal infrastructure terms.');
+    return;
+  }
+
+  let file = null;
+  let lineNumber = 0;
+
+  for (const line of diff.split('\n')) {
+    if (line.startsWith('+++ ')) {
+      const next = line.slice(4);
+      file = next.startsWith('b/') ? next.slice(2) : null;
+      continue;
+    }
+    if (line.startsWith('@@ ')) {
+      const match = line.match(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/);
+      lineNumber = match ? Number(match[1]) : 0;
+      continue;
+    }
+    if (line.startsWith('+')) {
+      const added = line.slice(1);
+      const isUpdate = file && /^docs\/updates\/(?:daily\/\d{4}-\d{2}-\d{2}\.(?:json|md)|monthly\/\d{4}-\d{2}\.md)$/.test(file);
+      const isEntry = /^\s*(?:"[^"]+"|-\s+\[[^\]]+\])/.test(added);
+      if (isUpdate && isEntry && internalUpdateTerms.test(added)) {
+        report(
+          'error',
+          file,
+          lineNumber,
+          'Public update mentions internal implementation (database, backend or deployment tool). Describe the reader-facing change instead.',
+        );
+      }
+      lineNumber += 1;
+    } else if (line.startsWith(' ')) {
+      lineNumber += 1;
+    }
+  }
+}
+
 async function loadStickerNames() {
   const names = new Set();
   let entries = [];
@@ -733,6 +786,7 @@ async function main() {
   checkContentIndexCoverage(mdxFiles, indexUrls);
   const knownRoutes = new Set([...routeSet, ...indexUrls]);
   await checkUpdateJson();
+  checkNewPublicUpdateCopy();
 
   const parsedByFile = new Map();
   for (const file of mdxFiles) {
