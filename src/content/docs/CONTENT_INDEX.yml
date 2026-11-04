@@ -1413,6 +1413,18 @@ pages:
       - "the request is about: The pig mascot sticker pack: where to install it, how the illustrations are used on RSLive and how technical sticker names work."
       - "information is needed about “RSLive stickers”"
     anchors: []
+  - url: "/en/ark-business-alta-map/"
+    title: "Ark Business: map of businesses listed after ALTA banka"
+    locale: "en"
+    description: "An external Ark Business map of businesses listed as affected by the withdrawal of ALTA banka's licence, with source attribution and a note on the organisers' Russian foreign-agent status."
+    keywords: ["Ark Business Serbia map", "Kovcheg Business ALTA banka", "Serbia Russian businesses ALTA", "Ark foreign agent Russia"]
+    tags: ["английский", "Ark Business Serbia map", "Kovcheg Business ALTA banka", "Serbia Russian businesses ALTA", "Ark foreign agent Russia"]
+    aliases: ["Ark Business ALTA map", "Kovcheg Business Serbia map"]
+    link_when:
+      - "an English-speaking reader is looking for the third-party Ark Business map after ALTA banka"
+      - "the request is about: An external Ark Business map of businesses listed as affected by the withdrawal of ALTA banka's licence, with source attribution and a note on the organisers' Russian foreign-agent status."
+      - "information is needed about “Ark Business: map of businesses listed after ALTA banka”"
+    anchors: []
   - url: "/en/beli-karton/"
     title: "Beli karton: registering a foreigner's stay in Serbia"
     locale: "en"
@@ -1491,6 +1503,30 @@ pages:
       - "нужно объяснить связь Поросёнка Петра с эмиграционным мемом"
       - "the request is about: Where the Pig Peter meme came from, how it became associated with emigration and why the character appears in the RSLive identity."
       - "information is needed about “Pig Peter and the RSLive mascot”"
+    anchors: []
+  - url: "/en/russian-business-directory/"
+    title: "Directory of Russian-speaking businesses in Serbia"
+    locale: "en"
+    description: "An editorial directory of Russian-speaking cafés, shops, services, beauty and wellness, education and leisure businesses throughout Serbia."
+    keywords: ["Russian-speaking business directory Serbia", "Russian businesses Belgrade", "Russian-speaking services Novi Sad", "Russian shops and cafes Serbia"]
+    tags: ["английский", "Russian-speaking business directory Serbia", "Russian businesses Belgrade", "Russian-speaking services Novi Sad", "Russian shops and cafes Serbia"]
+    aliases: ["Russian business directory in Serbia", "Russian-speaking companies and services in Serbia"]
+    link_when:
+      - "an English-speaking reader wants to search Russian-speaking businesses or services in Serbia"
+      - "the request is about: An editorial directory of Russian-speaking cafés, shops, services, beauty and wellness, education and leisure businesses throughout Serbia."
+      - "information is needed about “Directory of Russian-speaking businesses in Serbia”"
+    anchors: []
+  - url: "/en/russian-businesses-serbia/"
+    title: "Map of Russian-speaking businesses in Serbia"
+    locale: "en"
+    description: "An RSLive editorial map of Russian-speaking cafés, shops, services, education, wellness and leisure across Serbia, with category filters."
+    keywords: ["Russian-speaking businesses Serbia map", "Russian businesses Belgrade", "Russian-speaking services Novi Sad", "Russian shops Serbia"]
+    tags: ["английский", "Russian-speaking businesses Serbia map", "Russian businesses Belgrade", "Russian-speaking services Novi Sad", "Russian shops Serbia"]
+    aliases: ["Russian-speaking business map of Serbia", "Russian businesses across Serbia"]
+    link_when:
+      - "a reader needs an English map of Russian-speaking businesses in Serbia, including services and shops"
+      - "the request is about: An RSLive editorial map of Russian-speaking cafés, shops, services, education, wellness and leisure across Serbia, with category filters."
+      - "information is needed about “Map of Russian-speaking businesses in Serbia”"
     anchors: []
   - url: "/en/russian-places-serbia/"
     title: "Russian-speaking places in Serbia"
@@ -3468,6 +3504,30 @@ pages:
       - "упит је о теми: Како се пријављује боравиште странца у Србији: полиција, еУправа и еТуриста, електронска потврда, папирни бели картон и поновна пријава после новог уласка."
       - "потребне су информације о теми „Бели картон: пријава боравишта странца у Србији“"
     anchors: []
+  - url: "/sr/imenik-ruskojezicnih-biznisa/"
+    title: "Именик рускојезичних бизниса у Србији"
+    locale: "sr"
+    description: "Редакцијски именик рускојезичних кафића, продавница, услуга, козметичких и образовних пројеката и активности у Србији."
+    keywords: ["именик рускојезичних бизниса Србија", "руски бизниси Београд", "рускојезичне услуге Нови Сад", "руске продавнице Србија"]
+    tags: ["сербский", "именик рускојезичних бизниса Србија", "руски бизниси Београд", "рускојезичне услуге Нови Сад", "руске продавнице Србија"]
+    aliases: ["Рускојезична предузећа у Србији", "Именик руских бизниса"]
+    link_when:
+      - "читаоцу на српском треба списак рускојезичних предузећа, продавница или услуга"
+      - "упит је о теми: Редакцијски именик рускојезичних кафића, продавница, услуга, козметичких и образовних пројеката и активности у Србији."
+      - "потребне су информације о теми „Именик рускојезичних бизниса у Србији“"
+    anchors: []
+  - url: "/sr/kovceg-biznis-alta-mapa/"
+    title: "„Ковчег Бизнес“: мапа предузећа после ALTA banka"
+    locale: "sr"
+    description: "Спољна мапа предузећа која иницијатива „Ковчег Бизнес“ наводи као погођена одузимањем дозволе ALTA banka, са изворима и упозорењем о статусу организатора у Русији."
+    keywords: ["Ковчег Бизнес мапа Србија", "ALTA banka предузећа мапа", "руски бизниси ALTA", "Ковчег страни агент Русија"]
+    tags: ["сербский", "Ковчег Бизнес мапа Србија", "ALTA banka предузећа мапа", "руски бизниси ALTA", "Ковчег страни агент Русија"]
+    aliases: ["Мапа Ковчег Бизнес", "Мапа предузећа после ALTA banka"]
+    link_when:
+      - "читаоцу треба српска страница са спољном мапом иницијативе Ковчег Бизнес"
+      - "упит је о теми: Спољна мапа предузећа која иницијатива „Ковчег Бизнес“ наводи као погођена одузимањем дозволе ALTA banka, са изворима и упозорењем о статусу организатора у Русији."
+      - "потребне су информације о теми „„Ковчег Бизнес“: мапа предузећа после ALTA banka“"
+    anchors: []
   - url: "/sr/nacionalne-kuhinje-beograda/"
     title: "Националне кухиње Београда"
     locale: "sr"
@@ -3595,6 +3655,18 @@ pages:
       - "потребна је српска верзија редакцијске мапе руских места RSLive-а"
       - "упит је о теми: Редакцијска мапа RSLive-а са рускојезичним кафићима, ресторанима, баровима и продавницама у Србији и местима повезаним са рускојезичном заједницом."
       - "потребне су информације о теми „Руска и рускојезична места у Србији“"
+    anchors: []
+  - url: "/sr/ruskojezicni-biznisi-u-srbiji/"
+    title: "Мапа рускојезичних бизниса у Србији"
+    locale: "sr"
+    description: "Редакцијска мапа RSLive-а: рускојезични кафићи, продавнице, услуге, образовање, лепота и забава у Србији, са филтерима по делатности."
+    keywords: ["рускојезични бизниси Србија мапа", "руски бизниси Београд", "руске продавнице Србија", "рускојезичне услуге Нови Сад"]
+    tags: ["сербский", "рускојезични бизниси Србија мапа", "руски бизниси Београд", "руске продавнице Србија", "рускојезичне услуге Нови Сад"]
+    aliases: ["Мапа рускојезичних бизниса", "Руски бизниси у Србији"]
+    link_when:
+      - "читаоцу на српском треба мапа рускојезичних предузећа, продавница и услуга у Србији"
+      - "упит је о теми: Редакцијска мапа RSLive-а: рускојезични кафићи, продавнице, услуге, образовање, лепота и забава у Србији, са филтерима по делатности."
+      - "потребне су информације о теми „Мапа рускојезичних бизниса у Србији“"
     anchors: []
   - url: "/sr/user/petro/"
     title: "petro"
