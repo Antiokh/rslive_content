@@ -55,3 +55,15 @@ Daily JSON summaries, human-readable daily notes and monthly roll-ups are source
 - Technical terms may still appear in a specialist article when they are the subject of the article. This rule governs publication summaries, not the article content itself.
 - Keep daily JSON, daily Markdown and monthly Markdown semantically consistent when correcting an existing update; a previously published external post is not edited retroactively by changing the update stack.
 - The content-quality check rejects newly added or modified lines containing known internal infrastructure terms in daily/monthly update entries. Review unusual cases manually rather than silently stripping words from a public message.
+
+## Update language and localization
+
+Write each article's `summaries` in the language of its published page, determined by the canonical URL / content path:
+
+- `/en/` and `src/content/docs/en/**`: English summaries, English post template and CTA.
+- `/sr/` and `src/content/docs/sr/**`: Serbian summaries, Serbian post template and CTA. Current Serbian editorial pages primarily use Serbian Cyrillic.
+- Other canonical routes: Russian summaries, Russian post template and CTA.
+
+The daily Markdown and monthly archive may contain updates for multiple languages. Each entry retains the language of its target page; **do not translate everything into Russian in order to make the archive homogeneous.**
+
+The Edge ingest checks that the content path agrees with the canonical URL, rejects English summaries containing Cyrillic and flags recognizable Russian-only vocabulary in Serbian summaries. Content CI checks changed daily JSON summaries similarly. These checks are guardrails, **not proof of language quality**: translators/editors must ensure the entire announcement is written naturally in the target language. Fix the canonical stack rather than silently translating an already approved variant during delivery.
