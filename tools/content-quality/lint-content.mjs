@@ -568,6 +568,63 @@ async function checkUpdateJson() {
 
 const internalUpdateTerms = /\b(?:Supabase(?:-backed)?|PostgreSQL|Postgres|SQLite|SQL|backend|dataset|Edge\s+Functions?|GitHub\s+Actions)\b/i;
 
+const russianWordsInSerbian = /[ыъёэ]|(?:^|[^\p{L}])(?:добавили|опубликовали|подготовили|уточнили|связали|создали|вынесли|перевели|обновили)(?=$|[^\p{L}])/iu;
+
+async function checkChangedDailySummaryLanguages() {
+  const base = process.env.QC_BASE_SHA?.trim();
+  const head = process.env.QC_HEAD_SHA?.trim() || 'HEAD';
+  if (!base || /^0+$/.test(base)) return;
+
+  let files;
+  try {
+    files = gitOutput(['diff', '--name-only', base, head, '--', 'docs/updates/daily']);
+  } catch {
+    console.log('Could not determine changed daily JSON files for locale checks.');
+    return;
+  }
+  for (const relative of files.split('\n').filter(name => /^docs\/updates\/daily\/\d{4}-\d{2}-\d{2}\.json$/.test(name))) {
+    let current;
+    try {
+      current = JSON.parse(await readFile(path.join(root, relative), 'utf8'));
+    } catch {
+      // Existing JSON syntax check reports malformed files.
+      continue;
+    }
+    let baseline = {};
+    try {
+      baseline = JSON.parse(readFileAtRevision(base, relative) ?? '{}');
+    } catch {
+      baseline = {};
+    }
+    const previous = new Map((baseline.articles ?? []).map(article => [article.repo_path, article]));
+    for (const article of current.articles ?? []) {
+      const old = previous.get(article.repo_path);
+      if (old && JSON.stringify(old.summaries) === JSON.stringify(article.summaries)) continue;
+      const locale = article.repo_path?.startsWith('src/content/docs/en/') ? 'en'
+        : article.repo_path?.startsWith('src/content/docs/sr/') ? 'sr' : 'ru';
+      const urlLocale = typeof article.live_url === 'string' && article.live_url.startsWith('https://rslive.ru/en/') ? 'en'
+        : typeof article.live_url === 'string' && article.live_url.startsWith('https://rslive.ru/sr/') ? 'sr' : 'ru';
+      if (locale !== urlLocale) {
+        report('error', relative, 1, 'Daily summary locale mismatch for ' + article.repo_path + ': path=' + locale + ', URL=' + urlLocale + '.');
+      }
+      if (!Array.isArray(article.summaries) || article.summaries.length === 0) {
+        report('error', relative, 1, 'Missing daily summary for ' + article.repo_path + '.');
+        continue;
+      }
+      for (const summary of article.summaries) {
+        if (typeof summary !== 'string') continue;
+        if (locale === 'en' && /[\u0400-\u052f]/u.test(summary)) {
+          report('error', relative, 1, 'English page ' + article.repo_path + ' has a Cyrillic/Russian update summary.');
+        } else if (locale === 'sr' && russianWordsInSerbian.test(summary)) {
+          report('error', relative, 1, 'Serbian page ' + article.repo_path + ' appears to have a Russian update summary.');
+        }
+      }
+    }
+  }
+}
+
+
+
 // Inspect added publication lines, not historical notes or technical project documentation.
 function checkNewPublicUpdateCopy() {
   const base = process.env.QC_BASE_SHA?.trim();
@@ -787,6 +844,7 @@ async function main() {
   const knownRoutes = new Set([...routeSet, ...indexUrls]);
   await checkUpdateJson();
   checkNewPublicUpdateCopy();
+  await checkChangedDailySummaryLanguages();
 
   const parsedByFile = new Map();
   for (const file of mdxFiles) {
