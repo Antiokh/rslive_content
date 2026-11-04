@@ -2,8 +2,8 @@
   "date": "2026-11-04",
   "hours": 24,
   "generated_at": "2026-11-04T18:03:00+01:00",
-  "commit_count": 2,
-  "article_count": 17,
+  "commit_count": 3,
+  "article_count": 25,
   "articles": [
     {
       "repo_path": "src/content/docs/map/russian-businesses/index.mdx",
@@ -139,6 +139,70 @@
       "live_url": "https://rslive.ru/sr/rusi-u-srbiji/",
       "summaries": [
         "Добавили сербские ссылки на каталог и карту бизнеса в обзор русского сообщества"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/bank-unavailable/index.mdx",
+      "title": "Что делать бизнесу, если банковский счёт недоступен",
+      "live_url": "https://rslive.ru/arrival/business/bank-unavailable/",
+      "summaries": [
+        "Добавили пошаговую инструкцию PR и DOO при недоступности банка: новый счёт, семидневный срок внесения pazar, налоги третьим лицом, зарплата, риск штрафов и документы."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/refund/index.mdx",
+      "title": "Как вернуть деньги из ALTA banka после отзыва лицензии",
+      "live_url": "https://rslive.ru/arrival/bank/alta/refund/",
+      "summaries": [
+        "Обновили статус банкротства ALTA от 3 ноября, назначенный банк-агент Poštanska štedionica, ожидаемые объявления о выплатах и порядок кредиторских требований сверх 50 000 €."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/index.mdx",
+      "title": "Alta Banka",
+      "live_url": "https://rslive.ru/arrival/bank/alta/",
+      "summaries": [
+        "Уточнили дату отзыва лицензии ALTA — 30 октября 2026 года, судебное решение от 3 ноября и ссылку на действия бизнеса при недоступном счёте."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/index.mdx",
+      "title": "Банки и финансы",
+      "live_url": "https://rslive.ru/arrival/bank/",
+      "summaries": [
+        "Исправили дату отзыва лицензии ALTA и добавили ссылку на экстренную инструкцию для PR и DOO."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/index.mdx",
+      "title": "Бизнес в Сербии",
+      "live_url": "https://rslive.ru/arrival/business/",
+      "summaries": [
+        "Добавили предупреждение и прямой переход к инструкции по продолжению работы бизнеса при недоступном банковском счёте."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/eporezi/index.mdx",
+      "title": "Портал ePorezi",
+      "live_url": "https://rslive.ru/gov/taxes/eporezi/",
+      "summaries": [
+        "Разграничили обычную уплату налогов со своего бизнес-счёта и исключительную оплату третьим лицом при банковском кризисе."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/codes/index.mdx",
+      "title": "Платёжные коды квитанций",
+      "live_url": "https://rslive.ru/gov/taxes/codes/",
+      "summaries": [
+        "Добавили предупреждение о специальных кодах и реквизитах при уплате налогов за другое юрлицо, со ссылкой на подробную инструкцию."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/personal/salary/index.mdx",
+      "title": "Налог с зарплаты",
+      "live_url": "https://rslive.ru/gov/taxes/personal/salary/",
+      "summaries": [
+        "Добавили ссылку на порядок оформления зарплаты и невыплаты при недоступном счёте работодателя."
       ]
     }
   ]
