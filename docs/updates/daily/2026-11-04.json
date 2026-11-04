@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-04",
+  "hours": 24,
+  "generated_at": "2026-11-04T18:03:00+01:00",
+  "commit_count": 1,
+  "article_count": 5,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/map/russian-businesses/index.mdx",
+      "title": "Карта русскоязычных бизнесов в Сербии",
+      "live_url": "https://rslive.ru/map/russian-businesses/",
+      "summaries": [
+        "Создали общую редакционную карту русскоязычных бизнесов из опубликованных данных Supabase, с фильтром по сфере деятельности и пояснением, почему бизнес без проверенных координат остаётся только в каталоге"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/ark-business/index.mdx",
+      "title": "«Ковчег Бизнес»: карта предприятий после ALTA banka",
+      "live_url": "https://rslive.ru/map/ark-business/",
+      "summaries": [
+        "Вынесли внешнюю Google-карту инициативы «Ковчег Бизнес» в отдельную статью Maps с источниками, ссылками на подачу и верификацию заявок и предупреждением о включении проекта «Ковчег» в реестр иностранных агентов РФ"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/index.mdx",
+      "title": "Карты",
+      "live_url": "https://rslive.ru/map/",
+      "summaries": [
+        "Добавили в навигацию раздела карты общего русскоязычного бизнеса и внешней инициативы «Ковчег Бизнес»"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/russians/business/index.mdx",
+      "title": "Русскоязычные бизнесы в Сербии",
+      "live_url": "https://rslive.ru/adaptation/russians/business/",
+      "summaries": [
+        "Перевели карту каталога на единый редакционный набор всех категорий и перенесли подробности о внешней инициативе после ALTA banka на отдельную страницу Maps"
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/russian-places/index.mdx",
+      "title": "Русские заведения в Сербии",
+      "live_url": "https://rslive.ru/map/russian-places/",
+      "summaries": [
+        "Уточнили связь специализированной карты кафе и магазинов с общей картой русскоязычных бизнесов и полным каталогом"
+      ]
+    }
+  ]
+}
