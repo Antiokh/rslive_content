@@ -1,0 +1,74 @@
+---
+title: "Directory of Russian-speaking businesses in Serbia"
+description: "An editorial directory of Russian-speaking cafés, shops, services, beauty and wellness, education and leisure businesses throughout Serbia."
+ogSticker: russian-flag
+keywords: ["Russian-speaking business directory Serbia", "Russian businesses Belgrade", "Russian-speaking services Novi Sad", "Russian shops and cafes Serbia"]
+sourceCheckedAt: 2026-11-04
+live: "https://rslive.ru/en/russian-business-directory/"
+linking:
+  aliases:
+    - "Russian business directory in Serbia"
+    - "Russian-speaking companies and services in Serbia"
+  when:
+    - "an English-speaking reader wants to search Russian-speaking businesses or services in Serbia"
+---
+
+This directory covers Russian-speaking and Russian-community **cafés, restaurants, bars, shops, services, beauty and wellness, education, and leisure businesses** in Serbia. Search by name, category or city, then follow the organisation's public contact link. Inclusion does not mean RSLive recommends or guarantees the quality of its products or services.
+
+<Aside type="note" title="Supporting local businesses">
+  Following events involving ALTA banka, members of the community have encouraged customers to support local Russian-speaking entrepreneurs. You can do so by shopping, booking services or visiting a venue. **Being listed here does not mean a business used ALTA banka or suffered financial losses.** For businesses dealing with funds at that bank, see the [Russian-language guide to ALTA banka refunds](/arrival/bank/alta/refund/).
+</Aside>
+
+## Separate external initiative after ALTA banka
+
+The [Ark Business map](/en/ark-business-alta-map/) is a third-party list of businesses whose organisers say they were affected by the banking situation. Its page explains the organisers' status under Russian law and their application and verification process. It is not part of RSLive's editorial directory.
+
+## Business directory
+
+Use the search box above the table or the filters under the **Category** and **City** column headings. Businesses without a public address remain in the list.
+
+<SupabaseTable
+  table="data_russian_business_directory"
+  title="Russian-speaking businesses"
+  showTitle={false}
+  select="name,category:category_en,city,address,description:description_en,contact_url,map_url"
+  order="name"
+  limit={1000}
+  pageSize={25}
+  columns={[
+    { key: "name", label: "Business", stretch: true },
+    { key: "category", label: "Category" },
+    { key: "city", label: "City" },
+    { key: "address", label: "Address" },
+    { key: "description", label: "What it offers", longText: true },
+    { key: "contact_url", label: "Contact", icon: "website", iconOnly: true },
+    { key: "map_url", label: "On Google Maps", icon: "link", iconOnly: true },
+  ]}
+/>
+
+Service, education and leisure categories are being expanded as new submissions are reviewed. The directory already includes the editorial list of cafés, bars and shops. If your business is missing, you can [propose it for review](https://github.com/Antiokh/rslive_content/issues/new?template=russian-business.yml).
+
+## Map of public locations
+
+The map shows businesses from **all categories that have verified public coordinates**. Businesses without a public location are listed in the directory above.
+
+<MapEmbed
+  src="/map-renderer-v2/?source=rslive-dataset%3Arussian-businesses&lang=en"
+  offlineSrc="/map-renderer-v2/?source=rslive-dataset%3Arussian-businesses&lang=en"
+  renderer="maplibre"
+  title="Russian-speaking businesses in Serbia"
+  caption="Editorial map of businesses with verified public coordinates"
+  height="65vh"
+  regions={['belgrade', 'novi-sad', 'nis', 'subotica']}
+  SerbiaMap
+/>
+
+You can also open the [full-size map of Russian-speaking businesses](/en/russian-businesses-serbia/) or the [specialised map of cafés, bars and shops](/en/russian-places-serbia/).
+
+## Suggest a business
+
+You can suggest a new organisation or report an outdated address or contact. Include its business name, category, city, public website or social account and a short description. **Do not submit private home addresses or confidential contact information.**
+
+<LinkButton href="https://github.com/Antiokh/rslive_content/issues/new?template=russian-business.yml">Suggest a business for the directory</LinkButton>
+
+The submission form currently has Russian-language labels and requires a GitHub account. Submissions are public and reviewed before inclusion; submitting does not guarantee publication. You can also read about [Russians in Serbia](/en/russians-in-serbia/).
