@@ -10,7 +10,7 @@
       "title": "Карта русскоязычных бизнесов в Сербии",
       "live_url": "https://rslive.ru/map/russian-businesses/",
       "summaries": [
-        "Создали общую редакционную карту русскоязычных бизнесов из опубликованных данных Supabase, с фильтром по сфере деятельности и пояснением, почему бизнес без проверенных координат остаётся только в каталоге"
+        "Создали общую редакционную карту русскоязычных бизнесов с фильтром по сфере деятельности; организации без проверенных координат доступны только в каталоге"
       ]
     },
     {
@@ -50,7 +50,7 @@
       "title": "Map of Russian-speaking businesses in Serbia",
       "live_url": "https://rslive.ru/en/russian-businesses-serbia/",
       "summaries": [
-        "Добавили англоязычную общую карту русскоязычных бизнесов с фильтром категорий и ссылками на полный каталог и внешние источники"
+        "Published an English-language map of Russian-speaking businesses, with category filters and links to the full directory and external resources"
       ]
     },
     {
@@ -58,7 +58,7 @@
       "title": "Мапа рускојезичних бизниса у Србији",
       "live_url": "https://rslive.ru/sr/ruskojezicni-biznisi-u-srbiji/",
       "summaries": [
-        "Опубликовали сербскую общую карту русскоязычного бизнеса с переводами элементов карты и переходом к полному каталогу"
+        "Објавили општу мапу рускојезичних бизниса на српском, са преведеним ознакама на мапи и везом ка комплетном именику"
       ]
     },
     {
@@ -66,7 +66,7 @@
       "title": "Directory of Russian-speaking businesses in Serbia",
       "live_url": "https://rslive.ru/en/russian-business-directory/",
       "summaries": [
-        "Добавили англоязычный поисковый каталог заведений и услуг, включая организации без координат, с локализованными данными Supabase"
+        "Added a searchable directory of Russian-speaking businesses and services in English, including businesses without verified coordinates, with search by name, category and city"
       ]
     },
     {
@@ -74,7 +74,7 @@
       "title": "Именик рускојезичних бизниса у Србији",
       "live_url": "https://rslive.ru/sr/imenik-ruskojezicnih-biznisa/",
       "summaries": [
-        "Добавили сербский поисковый каталог заведений и услуг с переводами категорий и описаний и отдельной картой"
+        "Додали претраживи именик локала и услуга на српском, са преведеним категоријама и описима и засебном мапом"
       ]
     },
     {
@@ -82,7 +82,7 @@
       "title": "Ark Business: map of businesses listed after ALTA banka",
       "live_url": "https://rslive.ru/en/ark-business-alta-map/",
       "summaries": [
-        "Подготовили английскую страницу внешней карты «Ковчег Бизнес» с порядком подачи заявок и подтверждённым статусом основного проекта как иностранного агента в РФ"
+        "Published an English-language page about the independent Ark Business map, with submission instructions and information about the organizers' foreign-agent designation in Russia"
       ]
     },
     {
@@ -90,7 +90,7 @@
       "title": "„Ковчег Бизнес“: мапа предузећа после ALTA banka",
       "live_url": "https://rslive.ru/sr/kovceg-biznis-alta-mapa/",
       "summaries": [
-        "Подготовили сербскую страницу внешней карты «Ковчег Бизнес» с описанием проверки MB/PIB и ссылкой на реестр иностранных агентов РФ"
+        "Објавили страницу на српском о независној мапи „Ковчег Бизнис“, са упутством за проверу матичног броја и ПИБ-а и везом ка руском регистру страних агената"
       ]
     },
     {
@@ -98,7 +98,7 @@
       "title": "RSLive in English",
       "live_url": "https://rslive.ru/en/",
       "summaries": [
-        "Добавили в английскую главную страницу ссылки на общую карту русскоязычных бизнесов, каталог и внешнюю карту после ALTA banka"
+        "Added links on the English homepage to the Russian-speaking business map and directory, plus the separate community map related to ALTA banka"
       ]
     },
     {
@@ -106,7 +106,7 @@
       "title": "RSLive на српском",
       "live_url": "https://rslive.ru/sr/",
       "summaries": [
-        "Добавили на сербскую главную страницу общую карту, каталог и внешнюю карту «Ковчег Бизнес»"
+        "На почетну страницу на српском додали смо везе ка мапи рускојезичних бизниса, именику и засебној мапи повезаној са ситуацијом око ALTA banke"
       ]
     },
     {
@@ -114,7 +114,7 @@
       "title": "Russian-speaking places in Serbia",
       "live_url": "https://rslive.ru/en/russian-places-serbia/",
       "summaries": [
-        "Связали английскую специализированную карту кафе, баров и магазинов с полной картой бизнеса и каталогом"
+        "Linked the English-language map of cafés, bars and shops to the wider business map and searchable directory"
       ]
     },
     {
@@ -122,7 +122,7 @@
       "title": "Руска и рускојезична места у Србији",
       "live_url": "https://rslive.ru/sr/ruska-mesta-u-srbiji/",
       "summaries": [
-        "Связали сербскую специализированную карту заведений с общей картой бизнеса и каталогом"
+        "Повезали посебну мапу локала на српском са општом мапом рускојезичних бизниса и претраживим имеником"
       ]
     },
     {
@@ -130,7 +130,7 @@
       "title": "Russians in Serbia",
       "live_url": "https://rslive.ru/en/russians-in-serbia/",
       "summaries": [
-        "Добавили английские ссылки на локализованные каталог и карту бизнеса в обзор русского сообщества"
+        "Added links to the English-language business directory and map in the overview of the Russian-speaking community in Serbia"
       ]
     },
     {
@@ -138,7 +138,7 @@
       "title": "Руси у Србији",
       "live_url": "https://rslive.ru/sr/rusi-u-srbiji/",
       "summaries": [
-        "Добавили сербские ссылки на каталог и карту бизнеса в обзор русского сообщества"
+        "У преглед руске заједнице у Србији додали смо везе ка именику и мапи бизниса на српском"
       ]
     }
   ]
