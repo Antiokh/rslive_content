@@ -1,0 +1,20 @@
+name: Temporary Git Data snapshot write-path validator
+
+on:
+  push:
+    branches:
+      - agent/map-snapshot-gitdata-smoke-20261105
+
+permissions:
+  contents: read
+
+jobs:
+  validate-triplet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate Yandex and Google map data snapshots
+        run: node scripts/check-map-data.mjs
