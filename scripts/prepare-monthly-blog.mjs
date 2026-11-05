@@ -70,7 +70,7 @@ export function parseMonthlyUpdates(markdown, month) {
     if (!match) throw new Error('Unsupported monthly article link: ' + line.slice(0, 150));
     if (!currentDay) throw new Error('Entry without a dated section: ' + line.slice(0, 100));
     const route = match[2].replace(/^https:\/\/rslive\.ru/, '');
-    if (!/^\/(?!\/)[a-zA-Z0-9_/%.-]*\/$/.test(route)) {
+    if (!/^\/(?:[a-zA-Z0-9_/%.-]*\/)?$/.test(route)) {
       throw new Error('Unsafe or noncanonical route: ' + route);
     }
     if (INTERNAL_TERMS.test(match[1] + ' ' + match[3])) {
