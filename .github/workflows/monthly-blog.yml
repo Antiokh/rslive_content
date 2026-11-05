@@ -1,0 +1,101 @@
+name: Месячный блог RSLive
+
+on:
+  schedule:
+    # 2-е число, 07:17 UTC: предыдущий месяц завершён в Europe/Belgrade.
+    - cron: '17 7 2 * *'
+  workflow_dispatch:
+    inputs:
+      month:
+        description: 'Закрытый месяц YYYY-MM; пусто = предыдущий календарный месяц'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: rslive-monthly-blog
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Подготовить выпуск в /blog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Загрузить канонический контент
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Подготовить Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Проверить генератор
+        run: node --test scripts/prepare-monthly-blog.test.mjs
+
+      - name: Подготовить страницу и рабочую ветку
+        id: generate
+        env:
+          INPUT_MONTH: ${{ inputs.month }}
+        run: |
+          set -euo pipefail
+          if [ -n "$INPUT_MONTH" ]; then
+            month="$INPUT_MONTH"
+          else
+            month="$(node -e '
+              const ym = new Intl.DateTimeFormat("sv-SE", {
+                timeZone: "Europe/Belgrade", year: "numeric", month: "2-digit",
+              }).format(new Date());
+              const [year, m] = ym.split("-").map(Number);
+              process.stdout.write(m === 1
+                ? String(year - 1) + "-12"
+                : String(year) + "-" + String(m - 1).padStart(2, "0"));
+            ')"
+          fi
+
+          if ! [[ "$month" =~ ^[0-9]{4}-(0[1-9]|1[0-2])$ ]]; then
+            echo "Неверный month: $month" >&2
+            exit 1
+          fi
+          echo "month=$month" >> "$GITHUB_OUTPUT"
+
+          source="docs/updates/monthly/$month.md"
+          target="src/content/docs/blog/updates-$month/index.mdx"
+          branch="agent/monthly-blog-$month"
+          test -f "$source" || { echo "Нет завершённой monthly-сводки $source" >&2; exit 1; }
+
+          if [ -f "$target" ]; then
+            echo "Выпуск уже существует: $target"
+            exit 0
+          fi
+          if git ls-remote --exit-code origin "refs/heads/$branch" >/dev/null; then
+            echo "Рабочая ветка уже существует: $branch — не затрагиваем чужую редактуру"
+            exit 0
+          fi
+
+          node scripts/prepare-monthly-blog.mjs --month "$month"
+          git switch -c "$branch"
+          git config user.name "rslive-content-automation"
+          git config user.email "actions@github.com"
+          git add -- "$target"
+          git commit -m "docs: prepare monthly blog summary for $month"
+          git push origin "HEAD:refs/heads/$branch"
+          echo "created=true" >> "$GITHUB_OUTPUT"
+
+      - name: Открыть редакционный PR
+        if: steps.generate.outputs.created == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN || github.token }}
+          MONTH: ${{ steps.generate.outputs.month }}
+        run: |
+          set -euo pipefail
+          gh pr create --base main --head "agent/monthly-blog-$MONTH" --draft \
+            --title "Блог: итоги RSLive за $MONTH" \
+            --body "Автоматически подготовленный месячный выпуск из канонической сводки \`docs/updates/monthly/$MONTH.md\`.
+
+          Перед merge проверьте редакционную точность, язык, ссылки и изменения исходной monthly-сводки. Содержимое не публикуется без объединения PR. Это не повторная проверка юридических и административных фактов."
