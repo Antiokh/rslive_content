@@ -410,7 +410,7 @@ Pilot MID:
 1mxkFBhCULwjecdQUWUIfE1BAQahFG6I
 ```
 
-### Плановый Google My Maps LKG через Supabase (подготовка)
+### Google My Maps LKG через Supabase (пилот)
 
 Для изменяемых сторонних Google My Maps предусмотрен отдельный механизм в `Antiokh/rslive.ru`: две последовательные миграции `supabase/migrations/20261105183721_google_mymaps_supabase_pipeline.sql` и `supabase/migrations/20261105211500_map_ingest_revision_fencing.sql`, а также Edge Function `supabase/functions/map-snapshot-publish/`.
 
