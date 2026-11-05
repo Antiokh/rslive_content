@@ -59,7 +59,7 @@ jobs:
         if: steps.refresh.outcome == 'success'
         run: |
           set -euo pipefail
-          jq -r '"Google My Maps: \(.updated) updated, \(.unchanged) unchanged, \(.failed) failed"' /tmp/google-mymaps-lkg-report.json >> "$GITHUB_STEP_SUMMARY"
+          jq -r '"Google My Maps: \(.updated) updated, \(.unchanged) unchanged, \(.deferred) address-only, \(.failed) failed"' /tmp/google-mymaps-lkg-report.json >> "$GITHUB_STEP_SUMMARY"
           jq -r '.results[] | "- \(.mid): \(.state) \(.features // "") \(.error // "")"' /tmp/google-mymaps-lkg-report.json >> "$GITHUB_STEP_SUMMARY"
 
       - name: Commit changed LKG only (never a timestamp-only commit)
