@@ -2,8 +2,8 @@ name: Google My Maps LKG — scheduled refresh
 
 on:
   schedule:
-    # Every six hours (UTC); provider updates are not tied to content commits.
-    - cron: '37 */6 * * *'
+    # Once daily, 05:37 UTC; provider updates are not tied to content commits.
+    - cron: '37 5 * * *'
   workflow_dispatch:
 
 permissions:
