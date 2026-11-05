@@ -1,0 +1,97 @@
+name: Google My Maps LKG — scheduled refresh
+
+on:
+  schedule:
+    # Every six hours (UTC); provider updates are not tied to content commits.
+    - cron: '37 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: google-mymaps-lkg-main
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh Google My Maps snapshots
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout current content main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          # PAT is required so this push starts content-index and content-sync workflows.
+          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+
+      - name: Checkout engine parser and allowlist
+        uses: actions/checkout@v4
+        with:
+          repository: Antiokh/rslive.ru
+          ref: main
+          token: ${{ secrets.RSLIVE_CONTENT_SYNC_TOKEN }}
+          path: rslive-engine
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Test standalone Google LKG importer
+        run: node rslive-engine/astro/scripts/check-google-mymaps-lkg-refresh.mjs
+
+      - name: Fetch and compare source snapshots
+        id: refresh
+        run: |
+          set -euo pipefail
+          node rslive-engine/astro/scripts/refresh-google-mymaps-lkg.mjs \
+            --snapshot-dir map-data/snapshots/google-mymaps \
+            --report /tmp/google-mymaps-lkg-report.json
+
+      - name: Validate all committed map snapshots
+        run: node scripts/check-map-data.mjs
+
+      - name: Report source status
+        if: steps.refresh.outcome == 'success'
+        run: |
+          set -euo pipefail
+          jq -r '"Google My Maps: \(.updated) updated, \(.unchanged) unchanged, \(.failed) failed"' /tmp/google-mymaps-lkg-report.json >> "$GITHUB_STEP_SUMMARY"
+          jq -r '.results[] | "- \(.mid): \(.state) \(.features // "") \(.error // "")"' /tmp/google-mymaps-lkg-report.json >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit changed LKG only (never a timestamp-only commit)
+        if: steps.refresh.outcome == 'success'
+        run: |
+          set -euo pipefail
+          git add -A -- map-data/snapshots/google-mymaps/
+          if git diff --cached --quiet; then
+            echo 'No semantic changes; leaving main untouched.'
+            exit 0
+          fi
+
+          git config user.name 'rslive-map-snapshot-bot'
+          git config user.email 'actions@github.com'
+          git commit -m 'data: refresh controlled Google My Maps LKG snapshots'
+
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main
+            node scripts/check-map-data.mjs
+            if git push origin HEAD:main; then
+              break
+            fi
+            if [ "$attempt" = 3 ]; then exit 1; fi
+            sleep 5
+          done
+
+      - name: Surface individual provider failures after saving healthy sources
+        if: steps.refresh.outcome == 'success'
+        run: |
+          set -euo pipefail
+          jq -e '.failed == 0' /tmp/google-mymaps-lkg-report.json >/dev/null || {
+            echo 'One or more source fetches failed. Their committed LKG files were preserved.' >&2
+            exit 1
+          }
