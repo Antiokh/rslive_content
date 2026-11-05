@@ -13,6 +13,7 @@ const requiredGoogleMids = Object.freeze([
   '1GobqFwJp0QiRJcMYpBKIusIVxUI43kE',
   '1qkp5VjmSJBjdaRRnxEtv0gZEaL2Dpk4',
   '1kjRg87uMqwqNh0re4t7vw9XE79DLx7w',
+  '1WOiyXq0yP2MSOxm9N5aukdOydy0tplI',
 ]);
 
 function fail(message) {

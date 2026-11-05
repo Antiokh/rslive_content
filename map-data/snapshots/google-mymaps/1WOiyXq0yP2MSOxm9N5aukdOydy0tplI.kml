@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Podržati ruske preduzetnike|Поддержать российских предпринимателей</name>
+    <description><![CDATA[Карта бизнесов, открытых русскоязычными предпринимателями, которые пострадали от отзыва лицензии банка ALTA<br><br>Podržati ruske preduzetnike koji su pogođeni oduzimanjem dozvole za rad banci ALTA.<br><br>Карта подготовлена сообществом "Ковчег Бизнес"<br>Наш сайт: https://kovcheg.business/<br>Телеграмм канал: https://t.me/Ark_financial]]></description>
+    <Style id="icon-1899-DB4436-nodesc-normal">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-DB4436-nodesc-highlight">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-DB4436-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-DB4436-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-DB4436-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Belgrade</name>
+      <Placemark>
+        <name>Auditoria Belgrade | Bookstore | Cultural center | Cafe</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4749142,44.8188976,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Лав и Жабац (Lav i Žabac bookstore)</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4558161,44.821189,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>New Money Bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4641342,44.8207997,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>MasterLand</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4568166,44.8231287,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[MasterLand — Balkanska (Handmade & Pokloni)]]></name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.458397,44.8086379,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>✂️ OREKHOVSKY | Hair • Cut • Color • Spa</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4601399,44.8114157,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>VapeMe Waterfront Vape Shop Elektronske Cigarete</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.45189,44.8023617,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>VapeMe - vape shop Elektronske Cigarete Papiroska</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4604766,44.8137522,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>VapeMe vape shop elektronske cigarete vukov spomenik</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4816872,44.8075279,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>VapeMe vape shop Elektronske Cigarete Papiroska Bulevar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4906985,44.7988396,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Science Hub</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4529978,44.8020499,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Che Design School Belgrade</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4636595,44.8086421,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Smart Coffee</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4673761,44.8129041,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Smart Coffee</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.514465,44.7860444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Smart Coffee</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4790063,44.768938,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Smart Coffee</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4673761,44.8129041,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Blanca</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4758074,44.791858,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>OG Kebab</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4890306,44.7995069,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Between Espresso & Wine Bar]]></name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4631533,44.8208267,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>KP radionica</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.460115,44.8080163,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Pivski Pas</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4107124,44.7727976,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bife bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4590931,44.8145019,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>FixLab popravka laptopova i elektronike</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4848764,44.8041245,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gotcha Hookah Lounge</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4145692,44.8305747,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>МИР Specialty Coffee | MIR</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4867347,44.8011695,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PUNCH RAMEN BELGRADE</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4590913,44.8143677,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Nova House of beauty</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4776531,44.8183279,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>FLEX CLUB</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4560155,44.8229841,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>YoYo Coffee Roasters</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.5054028,44.7818886,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[kura© | rotisserie & wine]]></name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4866927,44.8011754,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>PROSTO Belgrade</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4612187,44.8214519,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>CAO Flowers | Flower Delivery Belgrade</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4719649,44.8210408,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kunst wine bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4737372,44.8040538,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gubernija store</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4790063,44.768938,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Maj Plants&Care]]></name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4607224,44.8093042,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hair extension STUDIO28</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4641592,44.8086658,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Fluff Grooming</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4742822,44.8180548,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>11:11 Elevens Store</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4751235,44.8053279,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>ca.ca.fe</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4051848,44.8204806,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kafeterija Kofilin - Кафетерија Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.475234,44.8053424,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Shaurman / Doner Kuća</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4560048,44.8121775,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>SENSE—S.SPACE</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.462191,44.8146094,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kafeterija Kofilin - Кофейня Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4605254,44.823363,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kofilin / Carice Milice 9</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.455887,44.815402,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kofilin Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4824903,44.7982243,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>URA! Russian dumplings</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4535611,44.8136689,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kafeterija Kofilin - Кофейня Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.464404,44.8088686,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kafeterija Kofilin - Кофейня Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4091406,44.8464711,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kafeterija Kofilin - Кофейня Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4705532,44.8014082,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Needle Castle</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4882058,44.79365,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kafeterija Kofilin - Waterfront - Кофейня Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4514611,44.8020756,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Demokratija bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4651504,44.8171251,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Šaurmović/Shawarma/Шаурма</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4557724,44.8141385,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>HairBG - russian hairdresser, keratin</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4870273,44.8036316,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>For You massage Belgrade</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4745501,44.812931,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>The Hobbit House</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4765191,44.8137754,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>BEER HOUSE</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4687907,44.813768,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>365.APParel</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4687835,44.8113207,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Nomad Beauty Salon | Salon lepote</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4791684,44.7968024,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Coffee pass</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4666623,44.8167971,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>HUMTTO obuća</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4545339,44.8178752,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Eloe Lounge Hookah bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4871175,44.7994454,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Willow coffee shop</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4635279,44.8155315,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Willow coffee shop Vracar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4772506,44.7973963,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>mypets_woofinery</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.3962121,44.8019705,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>SOLARNA KAPIJA</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.489341,44.8011483,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kikiriki Latte</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4729859,44.8191714,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>The Cinema Bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4669302,44.8062982,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Shawarma Vertel (šavarma, šaurma, šaverma i falafel, шаверма и фалафель)</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4901731,44.815081,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Moments Photostudio (self-portrait)</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4586392,44.8147067,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Novi Sad</name>
+      <Placemark>
+        <name>Quick Duck palačinkarnica</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8452956,45.2562751,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Miracle Store - Handmade Gifts & Korean cosmetics]]></name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8369682,45.2550621,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Vino&Delekatese]]></name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8487813,45.2566148,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>la Zorro</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8536075,45.2614436,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>CHEWS</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8309358,45.2619979,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>JULIANNA</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8483809,45.2567289,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Paulin detailing</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.788366,45.2357603,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Reparo</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8488491,45.2583706,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rent a Car Novi Sad | My Rent Car | Аренда авто Нови Сад</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8458574,45.2462149,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Service Power</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8413392,45.2559474,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Timeless beauty</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8160187,45.258576,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[O'nigiri]]></name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8441651,45.2564264,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kefi</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8385836,45.2548078,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kids and Sweets</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.7831318,45.2729192,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Tako Lako</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8088056,45.2419763,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kafeterija Kofilin - Кофейня Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.841026,45.2482334,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kafeterija Kofilin - Кофейня Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8329678,45.2486868,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Drago mi je</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8404449,45.2535444,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Medved - ruska kuhinja</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8247877,45.2458629,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>VapeMe - vape shop Elektronske Cigarete Papiroska Novi Sad</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8350607,45.254619,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Green House Coffee Liman</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8468691,45.2445721,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Pekara MESTO TESTO Novi Sad</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8325266,45.2619372,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Green House Coffee</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8501069,45.262699,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>FOODZI by IKIGAI</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8157763,45.2584763,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Green House Coffee Kostica</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8394505,45.2499518,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sushi.Me</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8112577,45.2577426,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sunrice Sushi Novi Sad</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8169558,45.2637793,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[DN Nails&Beauty Studio by Natalija Dunaeva]]></name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8426489,45.2598818,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Drago mi je</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.849611,45.259669,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Dolgikh Lepota</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.836975,45.2478569,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kafeterija Kofilin - Кофейня Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8484761,45.256695,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Babushka European Deli</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8249855,45.2434673,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8158152,45.2631644,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Chester Smoke Bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8512459,45.2577514,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Martin Kafa</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8420385,45.2517508,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Martin kafa</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8499818,45.2568103,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Martin Kafa</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8190318,45.2471619,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Blinok</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8417216,45.2509479,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ray bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8459636,45.2565536,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>МОСКВАЕ́</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8253743,45.2425143,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Subotica</name>
+      <Placemark>
+        <name>Kafeterija Kofilin - Кофейня Кофилин</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.6677985,46.1025836,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>SU Bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.6673677,46.1008707,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
