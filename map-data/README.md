@@ -412,7 +412,7 @@ Pilot MID:
 
 ### Плановый импорт Google My Maps (переходная схема)
 
-Новый workflow `.github/workflows/refresh-google-mymaps-lkg.yml` запускается по Cron `37 */6 * * *` (UTC, раз в шесть часов) и вручную через `workflow_dispatch`. Он запускается **независимо от коммитов статей**.
+Новый workflow `.github/workflows/refresh-google-mymaps-lkg.yml` запускается по Cron `37 5 * * *` (UTC, раз в сутки) и вручную через `workflow_dispatch`. Он запускается **независимо от коммитов статей**.
 
 - Список разрешённых MID берётся из актуального `Antiokh/rslive.ru: astro/config/maps.config.mjs` (`googleMyMapsCandidates`). Workflow получает движок через `RSLIVE_CONTENT_SYNC_TOKEN` и использует новый скрипт `astro/scripts/refresh-google-mymaps-lkg.mjs` вместе с его offline-тестами.
 - Для каждого MID заново получается KML (максимум 5 MiB, таймаут 10 секунд), проверяются документ, геометрии и WGS84-координаты; преобразование использует тот же формат GeoJSON, что прежний build refresh.
