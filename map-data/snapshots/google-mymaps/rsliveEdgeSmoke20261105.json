@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "sourceKind": "google-mymaps",
+  "sourceId": "google-mymaps:rsliveEdgeSmoke20261105",
+  "upstreamId": "rsliveEdgeSmoke20261105",
+  "upstreamUrl": "https://www.google.com/maps/d/viewer?mid=rsliveEdgeSmoke20261105",
+  "acquisition": "supabase-http-kml",
+  "exportUrl": "https://www.google.com/maps/d/kml?mid=rsliveEdgeSmoke20261105&forcekml=1",
+  "snapshotAt": "2026-11-05T22:01:21.524Z",
+  "contentType": "text/xml; charset=utf-8",
+  "bytes": 30900,
+  "sha256": "eab9e73e3e8f5f765705940411c57a2cf308c26aa57a40f4c183fc6806aa5c66",
+  "semanticHash": "eab9e73e3e8f5f765705940411c57a2cf308c26aa57a40f4c183fc6806aa5c66",
+  "generation": 1,
+  "sourceJobId": "b7e4c0d7-65f2-4c3f-bb63-9867e29b1a11",
+  "counts": {
+    "placemarks": 112,
+    "folders": 3,
+    "points": 112,
+    "lineStrings": 0,
+    "polygons": 0,
+    "multiGeometries": 0,
+    "geometries": 112
+  },
+  "geojsonFeatures": 112,
+  "dataFile": "rsliveEdgeSmoke20261105.kml"
+}
