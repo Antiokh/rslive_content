@@ -410,6 +410,20 @@ Pilot MID:
 1mxkFBhCULwjecdQUWUIfE1BAQahFG6I
 ```
 
+### Плановый Google My Maps LKG через Supabase (подготовка)
+
+Для изменяемых сторонних Google My Maps предусмотрен отдельный механизм в `Antiokh/rslive.ru`: `supabase/migrations/20261105183721_google_mymaps_supabase_pipeline.sql` и Edge Function `supabase/functions/map-snapshot-publish/`.
+
+- `pg_cron` раз в сутки в 05:37 UTC вызывает `map_ingest.poll_sources()`.
+- PostgreSQL через `extensions.http_get` получает KML **только для заранее разрешённых MID**, извлекает `Placemark` через XML/XPath, рассчитывает SHA-256 нормализованных имени, описания и координат каждой записи. Общий хэш строится из отсортированных хэшей записей, без зависимости от их порядка и времени выгрузки.
+- Изменения направляются в приватную очередь. `pg_net` передаёт их Edge Function с заголовком, защищённым секретом из Supabase Vault. Edge повторно проверяет геометрию и количество точек, сравнивает с GitHub и публикует **все три файла одной операцией Git Trees/Commits API** — или не делает коммит, если объекты не изменились.
+- При сокращении больше 30% или росте больше 35%, пустой карте, ошибке HTTP или неправильных координатах сохраняется прежний LKG. Два адресных KML без геометрии остаются отложенными.
+- Для карты «Ковчег Бизнес» добавляются только новые кандидаты в `data_russian_business_source_candidates` со статусом `pending`. Имеющиеся редакционные решения, `matched` и публичные бизнес-карточки не переписываются.
+- Публикация использует `GITHUB_TOKEN` **только из Edge Secrets**. Источники в новой таблице `map_ingest.sources` **выключены по умолчанию**. Активация допускается после проверки прав ключа, Edge и полученного снимка.
+- Существующий fetch KML при Astro build не отключён. Разграничение двух механизмов будет завершено отдельно, после проверки новой схемы.
+
+Известное расхождение: KML `1mxkFBhCULwjecdQUWUIfE1BAQahFG6I` содержит 199 отметок, а его сохранённый GeoJSON — 111. Автоимпорт блокирует такой прирост до ручной проверки источника.
+
 ## Yandex Constructor LKG
 
 Yandex Constructor используется как provider-managed thematic source: владельцы Blacklist Serbia могут менять точки независимо от репозитория. Поэтому для явно allowlisted Constructor действует controlled daily LKG refresh.
