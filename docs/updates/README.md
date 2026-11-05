@@ -67,3 +67,31 @@ Write each article's `summaries` in the language of its published page, determin
 The daily Markdown and monthly archive may contain updates for multiple languages. Each entry retains the language of its target page; **do not translate everything into Russian in order to make the archive homogeneous.**
 
 The Edge ingest checks that the content path agrees with the canonical URL, rejects English summaries containing Cyrillic and flags recognizable Russian-only vocabulary in Serbian summaries. Content CI checks changed daily JSON summaries similarly. These checks are guardrails, **not proof of language quality**: translators/editors must ensure the entire announcement is written naturally in the target language. Fix the canonical stack rather than silently translating an already approved variant during delivery.
+
+## Monthly blog from the canonical update archive
+
+In addition to the monthly social digest, every **closed** month gets one reader-facing Starlight Blog article:
+
+- Source of facts and links: `docs/updates/monthly/YYYY-MM.md` in this repository. Do not derive a new month from social post status, Git commits or the old rolling July–August blog article.
+- Canonical route: `/blog/updates-YYYY-MM/`, owned by `src/content/docs/blog/updates-YYYY-MM/index.mdx` in `rslive_content`. The engine's mirrored copy is **not** an edit target.
+- Layout: Russian-language overview grouped by reader topic, four annotated highlights per topic, and links to every other distinct page that changed. English and Serbian page titles/summary snippets retain their **source language**, rather than being silently translated. Per-article social announcements remain in the article's own language.
+- Every figure is counted from the monthly archive: dated headings, recorded changes, and distinct canonical article URLs. A partial monthly archive is presented as partial; there is no invented coverage for missing days.
+- The article uses its **actual publication date**, not the last day of the month. Backfilled articles identify themselves as retrospective; publishing the digest does not imply all laws, prices or procedures were reverified that day.
+- Internal implementation details are rejected before rendering. If a canonical monthly entry contains a prohibited technical term, fix the archive and review the change, rather than silently emitting a public post with internal details.
+- The generated monthly blog page is a derivative presentation of the *same* month and does **not** get added to its own daily/monthly update stack: that would recursively trigger news about the digest itself. New reporting or substantive additions to a blog article are normal content changes and do require updates.
+
+### Production workflow
+
+The workflow `.github/workflows/monthly-blog.yml` runs on the **second calendar day** of each month (07:17 UTC, safely after month close in Europe/Belgrade), or manually with `workflow_dispatch` and an optional closed `YYYY-MM`.
+
+It runs `node --test scripts/prepare-monthly-blog.test.mjs`, then `node scripts/prepare-monthly-blog.mjs --month YYYY-MM`. If a page already exists or a month-specific branch is open, it leaves that work untouched. Otherwise it pushes `agent/monthly-blog-YYYY-MM` and opens a **draft PR**. An editor checks sources, language, links, metadata and the final month archive before merging: the workflow never publishes a draft automatically.
+
+To preview a month without writing files:
+
+`node scripts/prepare-monthly-blog.mjs --month 2026-10 --dry-run`
+
+To create a retrospective issue with an honest release date:
+
+`node scripts/prepare-monthly-blog.mjs --month 2026-10 --date 2026-11-05 --retrospective`
+
+Once a blog PR is merged, the existing `content-index.yml` and `notify-rslive-ru.yml` workflows regenerate the index and synchronize the page to the engine. Do **not** hand-edit the generated `CONTENT_INDEX.yml`. If GitHub Actions has been restricted from creating PRs, grant the designated workflow token permission to create pull requests and rerun the workflow; the failure must be visible and not silently treated as a published blog post.
