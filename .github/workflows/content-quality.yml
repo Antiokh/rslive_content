@@ -11,6 +11,8 @@ on:
       - "src/content/docs/**"
       - "docs/updates/**"
       - "tools/content-quality/**"
+      - "scripts/prepare-monthly-blog*.mjs"
+      - ".github/workflows/monthly-blog.yml"
       - ".github/workflows/content-quality.yml"
   push:
     branches:
@@ -19,6 +21,8 @@ on:
       - "src/content/docs/**"
       - "docs/updates/**"
       - "tools/content-quality/**"
+      - "scripts/prepare-monthly-blog*.mjs"
+      - ".github/workflows/monthly-blog.yml"
       - ".github/workflows/content-quality.yml"
   workflow_dispatch:
 
@@ -78,6 +82,10 @@ jobs:
           else
             echo "Bootstrap: trusted generator is not in main yet; use the committed legacy index for this one migration PR."
           fi
+
+      - name: Проверка генератора месячного блога
+        working-directory: candidate
+        run: node --test scripts/prepare-monthly-blog.test.mjs
 
       - name: Контент проверен
         working-directory: candidate
