@@ -104,6 +104,15 @@ function monthLabel(month) {
   return MONTH_NAMES[number - 1] + ' ' + month.slice(0, 4) + ' года';
 }
 
+function countForm(value, one, few, many) {
+  const rem100 = value % 100;
+  if (rem100 >= 11 && rem100 <= 14) return many;
+  const rem10 = value % 10;
+  if (rem10 === 1) return one;
+  if (rem10 >= 2 && rem10 <= 4) return few;
+  return many;
+}
+
 function renderSection(group) {
   const lines = ['## ' + group.name, ''];
   const highlights = group.pages.slice(0, 4);
@@ -131,7 +140,8 @@ export function renderMonthlyBlog(parsed, publicationDate, options = {}) {
   const month = parsed.month;
   const title = 'Что изменилось в RSLive за ' + monthLabel(month);
   const description = 'Обзор изменений статей RSLive за ' + monthLabel(month)
-    + ': ' + parsed.pages.length + ' обновлённых страниц и ' + parsed.entries + ' записей в редакционной сводке.';
+    + ': ' + parsed.pages.length + ' ' + countForm(parsed.pages.length, 'обновлённая страница', 'обновлённые страницы', 'обновлённых страниц')
+    + ' и ' + parsed.entries + ' ' + countForm(parsed.entries, 'запись', 'записи', 'записей') + ' в редакционной сводке.';
   const route = '/blog/updates-' + month + '/';
   const frontmatter = [
     '---',
@@ -148,9 +158,9 @@ export function renderMonthlyBlog(parsed, publicationDate, options = {}) {
     '',
   ];
   const start = 'За ' + monthLabel(month) + ' в редакционной сводке зафиксировано '
-    + parsed.entries + ' изменений на ' + parsed.pages.length + ' страницах за '
-    + parsed.days + ' ' + (parsed.days % 10 === 1 && parsed.days % 100 !== 11 ? 'день'
-      : parsed.days % 10 >= 2 && parsed.days % 10 <= 4 && !(parsed.days % 100 >= 12 && parsed.days % 100 <= 14) ? 'дня' : 'дней')
+    + parsed.entries + ' ' + countForm(parsed.entries, 'изменение', 'изменения', 'изменений')
+    + ' на ' + parsed.pages.length + ' ' + countForm(parsed.pages.length, 'странице', 'страницах', 'страницах')
+    + ' за ' + parsed.days + ' ' + countForm(parsed.days, 'день', 'дня', 'дней')
     + '. Ниже — обзор по темам. Каждая ссылка ведёт к соответствующей статье, а не к служебным материалам редакции.';
   const note = 'Этот выпуск подготовлен по архиву редакционных изменений. Он показывает, что было добавлено или пересмотрено в течение месяца; дата выпуска не означает, что все приведённые в статьях нормы, цены и процедуры повторно проверены сегодня.';
   const groups = SECTIONS.map((section) => ({
@@ -167,7 +177,7 @@ export function renderMonthlyBlog(parsed, publicationDate, options = {}) {
   if (options.retrospective) {
     body.push('**Архивный выпуск:** составлен ретроспективно, после окончания указанного календарного месяца.', '');
   }
-  return frontmatter.join('\n') + body.join('\n').trimEnd() + '\n';
+  return frontmatter.join('\n') + '\n' + body.join('\n').trimEnd() + '\n';
 }
 
 function todayInBelgrade() {
