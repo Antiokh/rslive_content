@@ -3,7 +3,7 @@
   "hours": 24,
   "generated_at": "2026-11-05T00:17:52+01:00",
   "commit_count": 3,
-  "article_count": 11,
+  "article_count": 12,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/business/bank-unavailable/index.mdx",
@@ -93,6 +93,14 @@
       "live_url": "https://rslive.ru/adaptation/russians/business/",
       "summaries": [
         "Добавили в общий каталог публичные MB, PIB, проверенные ссылки CompanyWall и статус ALTA; связали с одной картой и уточнили, что непроверенный статус не означает отсутствия проблем."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/ark-business/index.mdx",
+      "title": "«Ковчег Бизнес»: карта предприятий после ALTA banka",
+      "live_url": "https://rslive.ru/map/ark-business/",
+      "summaries": [
+        "Переопределили внешнюю карту как источник кандидатов и связали её с единой картой RSLive, где статус ALTA подтверждается проверенным списком Симич или банковскими реестрами."
       ]
     }
   ]
