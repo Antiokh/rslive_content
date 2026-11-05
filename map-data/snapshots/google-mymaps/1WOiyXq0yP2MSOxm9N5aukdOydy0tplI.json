@@ -4,12 +4,12 @@
   "sourceId": "google-mymaps:1WOiyXq0yP2MSOxm9N5aukdOydy0tplI",
   "upstreamId": "1WOiyXq0yP2MSOxm9N5aukdOydy0tplI",
   "upstreamUrl": "https://www.google.com/maps/d/viewer?mid=1WOiyXq0yP2MSOxm9N5aukdOydy0tplI",
-  "acquisition": "provided-kml-export",
+  "acquisition": "supabase-http-kml-smoke",
   "exportUrl": "https://www.google.com/maps/d/kml?mid=1WOiyXq0yP2MSOxm9N5aukdOydy0tplI&forcekml=1",
-  "snapshotAt": "2026-11-05T17:24:39.235Z",
+  "snapshotAt": "2026-11-05T21:00:00.000Z",
   "contentType": "application/xml",
-  "bytes": 30884,
-  "sha256": "3b0de571dacaacc3baa2c1a3d13f47d81b3d7cd47f7a5444d32d8830dbdc8b5e",
+  "bytes": 30901,
+  "sha256": "882feb5b2cd0cb1d42c38dc63c0bbc46d127bff419b66d454aacc893c9b0705a",
   "counts": {
     "placemarks": 112,
     "folders": 3,
@@ -19,5 +19,6 @@
     "multiGeometries": 0,
     "geometries": 112
   },
-  "dataFile": "1WOiyXq0yP2MSOxm9N5aukdOydy0tplI.kml"
+  "dataFile": "1WOiyXq0yP2MSOxm9N5aukdOydy0tplI.kml",
+  "generation": 999
 }
