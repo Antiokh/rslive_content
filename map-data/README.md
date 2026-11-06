@@ -2,9 +2,7 @@
 
 Этот каталог хранит first-party snapshots карт для `rslive.ru`.
 
-По умолчанию редко меняющиеся OSM/KML snapshots **не обновляются автоматически**: новый snapshot делают вручную только тогда, когда есть практическая причина обновить покрытие, исправить ошибку или заменить источник.
-
-Отдельное исключение — явно allowlisted provider-managed thematic sources, содержимое которых меняется независимо от RSLive. Для таких источников допустим controlled scheduled LKG refresh с тем же fail-closed parser/filter contract, что использует production build. Сейчас это правило применяется только к Blacklist Serbia в Yandex Constructor и описано ниже.
+По умолчанию OSM и вручную полученные KML/GeoJSON snapshots обновляются только после проверки человеком. Для изменяемых provider-managed источников действуют два отдельных scheduled LKG-процесса: **Yandex Constructor** (Blacklist Serbia, GitHub Actions) и **пилот Google My Maps** (Supabase Cron/HTTP/Edge, сейчас включён только MID «Ковчега»). Оба используют fail-closed проверки и сохраняют предыдущий рабочий snapshot при ошибке. Старый Google KML importer при Astro build пока работает независимо и не отключён.
 
 ## Главное правило
 
@@ -409,6 +407,31 @@ Pilot MID:
 ```text
 1mxkFBhCULwjecdQUWUIfE1BAQahFG6I
 ```
+
+### Google My Maps LKG через Supabase (пилот)
+
+Для изменяемых сторонних Google My Maps предусмотрен отдельный механизм в `Antiokh/rslive.ru`: четыре последовательные миграции `supabase/migrations/20261105183721_google_mymaps_supabase_pipeline.sql`, `supabase/migrations/20261105211500_map_ingest_revision_fencing.sql`, `supabase/migrations/20261105224600_map_ingest_geometry_semantic_signature.sql`, `supabase/migrations/20261106001000_map_ingest_reject_unsupported_geometry.sql`, а также Edge Function `supabase/functions/map-snapshot-publish/`.
+
+- `pg_cron` раз в сутки в 05:37 UTC вызывает `map_ingest.poll_sources()`.
+- PostgreSQL через `extensions.http_get` получает KML **только для заранее разрешённых MID**, извлекает `Placemark` через XML/XPath, рассчитывает SHA-256 нормализованных имени, описания и **типизированной структуры геометрии** (`Point`, `LineString`, `Polygon` с внешним и внутренними кольцами, вложенные `MultiGeometry`). Даже при одинаковых координатах смена типа геометрии меняет хэш. Общий хэш строится из отсортированных хэшей записей, без зависимости от порядка Placemarks и времени выгрузки.
+- Изменения направляются в приватную очередь с возрастающей версией по каждому MID: старые задания снимаются, параллельные публикации ограничены lease-токеном, а перед записью проверяются версия в PostgreSQL и версия в GitHub metadata. `pg_net` вызывает Edge Function с секретом из Supabase Vault. Edge читает существующие GeoJSON/metadata по pinned Git Trees/Blobs (в том числе при размере GeoJSON больше 1 МБ), повторно проверяет геометрию и количество точек, отвергает незамкнутые Polygon rings и неподдерживаемые дочерние геометрии внутри `MultiGeometry` (например, `Point` вместе с `Model` или `gx:Track`), не допуская частичной публикации, и публикует **все три файла одним Git-коммитом** — или не делает коммит, если объекты не изменились.
+- Пороги считаются от **исторического максимума принятого количества объектов** (`baseline_features`, high-water-mark), а не от последнего меньшего снимка: допускается сокращение 100→80, но следующее 80→69 отклоняется (69 меньше 70% от 100). При сокращении больше 30% от high-water-mark, росте больше 35%, пустой карте, ошибке HTTP или неправильных координатах сохраняется прежний LKG. Это сознательная защита от накопительного исчезновения точек. Два адресных KML без геометрии остаются отложенными.
+- Для карты «Ковчег Бизнес» добавляются только новые кандидаты в `data_russian_business_source_candidates` со статусом `pending`. Имеющиеся редакционные решения, `matched` и публичные бизнес-карточки не переписываются.
+- Публикация использует `GITHUB_TOKEN` **только из Edge Secrets**. Endpoint Edge настраивается отдельно для каждого проекта Supabase в приватной `map_ingest.runtime_config.edge_url`; при отсутствии настройки отправка прекращается. Источники `map_ingest.sources` **выключены по умолчанию**; `enabled=false` отменяет ожидающие и обрабатываемые задания этого MID и отзывает активную lease. Активация допускается после проверки прав ключа, Edge и полученного снимка.
+- Существующий fetch KML при Astro build не отключён. Разграничение двух механизмов будет завершено отдельно, после проверки новой схемы.
+
+Первый production smoke test (2026-11-05): Supabase успешно получил 112 KML Placemark «Ковчега», рассчитал row hashes и обработал задание в Edge. GitHub сообщил о доступе на запись, но объекты не изменились — новый коммит не потребовался. Включён только MID «Ковчега»; остальные шесть источников пока выключены. Код движка находится в отдельном draft PR до merge.
+
+
+Повторный runtime smoke test (2026-11-05): Edge v2 обработала идемпотентное задание «Ковчега» (generation 2) с первой попытки; новый GitHub-коммит не потребовался. Устаревшие и отменённые задания проверены в откатываемом SQL-тесте, включая A→B→retry A. Позже выполнен отдельный полный Edge→GitHub тест с изменёнными данными и независимая сборка Astro (см. ниже).
+
+
+Результат приёмки (2026-11-05): первые две Supabase-миграции зарегистрированы в production history после проверки фактически установленных функций; третья миграция типизированного геометрического хэша и четвёртая миграция fail-closed для неподдерживаемых геометрий **установлены и зарегистрированы** в production; clean-DB SQL CI для всех четырёх версий завершился успешно ([workflow](https://github.com/Antiokh/rslive.ru/actions/runs/42124721119)). Edge в изолированном тесте опубликовал **изменённый KML, GeoJSON и JSON metadata одним Git-коммитом** в отдельную ветку ([коммит](https://github.com/Antiokh/rslive_content/commit/616cd7086f73c6af96c77cb1c82ff54247f68e81)); [валидатор map-data](https://github.com/Antiokh/rslive_content/actions/runs/42117857265) прошёл. Штатная Edge Function восстановлена, временные тестовые строки из Supabase удалены, production `main` не тронут. Полная Astro-сборка через GitHub Actions прошла, а Cloudflare Pages после синхронизации engine PR с `main` **успешно собрал и опубликовал preview** ([deployment `33b0a282`](https://dash.cloudflare.com/?to=/fa47bc5cf310af4bde847f7cf6445a1d/pages/view/rslive/33b0a282-7cbe-4bf0-b1e7-0a9ccae410fa), коммит `87821d1`). Старые неудачные проверки Cloudflare больше не являются блокером; последующие HEAD PR проверяются отдельно.
+
+
+Текущий Edge publisher — версия 6 с проверкой mixed `MultiGeometry`. Расширение allowlist за пределы одного MID остаётся отдельным решением: старый fetch при Astro build всё ещё работает и пока не обеспечивает аналогичных SQL high-water и typed-geometry guards на generated runtime map.
+
+Известное расхождение: KML `1mxkFBhCULwjecdQUWUIfE1BAQahFG6I` содержит 199 отметок, а его сохранённый GeoJSON — 111. Автоимпорт блокирует такой прирост до ручной проверки источника.
 
 ## Yandex Constructor LKG
 
