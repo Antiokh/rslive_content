@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-06",
+  "hours": 24,
+  "generated_at": "2026-11-06T09:53:20+01:00",
+  "commit_count": 1,
+  "article_count": 1,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/visarun/index.mdx",
+      "title": "Визаран",
+      "live_url": "https://rslive.ru/arrival/visarun/",
+      "summaries": [
+        "Добавили разбор двух судебных дел марта 2026 года о применении правила 90/180 к регулярным визаранам, пояснили спорность такого подхода для граждан РФ и практические действия при проверке."
+      ]
+    }
+  ]
+}

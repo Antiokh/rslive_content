@@ -2,8 +2,8 @@
   "date": "2026-11-05",
   "hours": 24,
   "generated_at": "2026-11-05T00:17:52+01:00",
-  "commit_count": 4,
-  "article_count": 14,
+  "commit_count": 3,
+  "article_count": 13,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/business/bank-unavailable/index.mdx",
@@ -112,14 +112,6 @@
       "live_url": "https://rslive.ru/map/",
       "summaries": [
         "Отделили общую редакционную карту русскоязычных бизнесов от внешних карт-источников («Ковчег Бизнес» и «Маленькая РФ») в меню раздела."
-      ]
-    },
-    {
-      "repo_path": "src/content/docs/arrival/visarun/index.mdx",
-      "title": "Визаран",
-      "live_url": "https://rslive.ru/arrival/visarun/",
-      "summaries": [
-        "Добавили разбор двух судебных дел марта 2026 года о применении правила 90/180 к регулярным визаранам, пояснили спорность такого подхода для граждан РФ и практические действия при проверке."
       ]
     }
   ]
