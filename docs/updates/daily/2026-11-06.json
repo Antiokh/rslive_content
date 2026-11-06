@@ -2,8 +2,8 @@
   "date": "2026-11-06",
   "hours": 24,
   "generated_at": "2026-11-06T09:53:20+01:00",
-  "commit_count": 1,
-  "article_count": 1,
+  "commit_count": 2,
+  "article_count": 3,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/visarun/index.mdx",
@@ -11,6 +11,22 @@
       "live_url": "https://rslive.ru/arrival/visarun/",
       "summaries": [
         "Добавили разбор двух судебных дел марта 2026 года о применении правила 90/180 к регулярным визаранам, пояснили спорность такого подхода для граждан РФ и практические действия при проверке."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/index.mdx",
+      "title": "Alta Banka",
+      "live_url": "https://rslive.ru/arrival/bank/alta/",
+      "summaries": [
+        "Добавили ссылку на волонтёрский проект Volonteri.org: формы запроса и предложения помощи пострадавшим от ALTA banka и контактный чат."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/adaptation/russians/index.mdx",
+      "title": "Русское комьюнити в Сербии",
+      "live_url": "https://rslive.ru/adaptation/russians/",
+      "summaries": [
+        "Добавили формы взаимопомощи Volonteri.org для пострадавших от ALTA banka, контактный чат и отдельно обозначили поддержку предпринимателей через каталог услуг."
       ]
     }
   ]
