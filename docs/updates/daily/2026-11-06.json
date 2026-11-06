@@ -2,8 +2,8 @@
   "date": "2026-11-06",
   "hours": 24,
   "generated_at": "2026-11-06T09:53:20+01:00",
-  "commit_count": 2,
-  "article_count": 3,
+  "commit_count": 3,
+  "article_count": 4,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/visarun/index.mdx",
@@ -27,6 +27,14 @@
       "live_url": "https://rslive.ru/adaptation/russians/",
       "summaries": [
         "Добавили формы взаимопомощи Volonteri.org для пострадавших от ALTA banka, контактный чат и отдельно обозначили поддержку предпринимателей через каталог услуг."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/index.mdx",
+      "title": "Добродошли!",
+      "live_url": "https://rslive.ru/",
+      "summaries": [
+        "Добавили на главную страницу кнопку «Поставить звезду на GitHub» и ссылку для поддержки проекта в разделе «Как помочь проекту»."
       ]
     }
   ]
