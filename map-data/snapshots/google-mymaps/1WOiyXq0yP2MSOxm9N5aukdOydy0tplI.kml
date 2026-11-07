@@ -624,6 +624,15 @@
         </Point>
       </Placemark>
       <Placemark>
+        <name>PROKUDNIK.CUTS barbershop</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4559478,44.8158929,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
         <name>mypets_woofinery</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
         <Point>
@@ -677,6 +686,24 @@
           </coordinates>
         </Point>
       </Placemark>
+      <Placemark>
+        <name>Volna</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4594818,44.8103813,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Shavarma patrol</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4781439,44.7953055,0
+          </coordinates>
+        </Point>
+      </Placemark>
     </Folder>
     <Folder>
       <name>Novi Sad</name>
@@ -686,6 +713,15 @@
         <Point>
           <coordinates>
             19.8452956,45.2562751,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>DayDream photostudio</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8624059,45.2333547,0
           </coordinates>
         </Point>
       </Placemark>
