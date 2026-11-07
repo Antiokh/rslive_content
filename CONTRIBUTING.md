@@ -251,7 +251,7 @@ import Aside from '@astrojs/starlight/components/Aside.astro';
 - Добавляйте осмысленный alt-текст.
 - Не используйте изображение вместо текста, таблицы или квитанции, если данные должны быть доступны поиску и ассистивным технологиям.
 - Для iframe всегда задавайте `title`.
-- Для карты используйте `MapEmbed`, для YouTube — `YouTube`, для остальных допустимых iframe — `EmbedFrame`.
+- Для карты используйте `MapEmbed`, для Street View с обязательным статическим offline fallback — `StreetViewEmbed`, для YouTube — `YouTube`, для остальных допустимых iframe — `EmbedFrame`.
 - Не вставляйте произвольный `<iframe>` без проверки безопасности и необходимости.
 - Не храните реальные персональные данные плательщика в props `UplatnicaGenerator`; текущая реализация передаёт QR payload внешнему сервису, что отдельно описано в `docs/MDX_COMPONENTS.md`.
 
