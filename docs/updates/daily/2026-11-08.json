@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-08",
+  "hours": 24,
+  "generated_at": "2026-11-08T16:17:00+01:00",
+  "commit_count": 1,
+  "article_count": 5,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/refund/index.mdx",
+      "title": "Как вернуть деньги из ALTA banka после отзыва лицензии",
+      "live_url": "https://rslive.ru/arrival/bank/alta/refund/",
+      "summaries": [
+        "Добавили начало страховых выплат 13 ноября 2026 года, официальные списки отделений, документы, порядок валютного перевода и срок обращения до 3 ноября 2029 года. Отдельно описали возмещение малым инвесторам до 20 000 € с заявлением до 3 мая 2027 года, оплату кредитов ALTA и неиспользованные чеки."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/index.mdx",
+      "title": "Alta Banka",
+      "live_url": "https://rslive.ru/arrival/bank/alta/",
+      "summaries": [
+        "Обновили дату начала страховых выплат ALTA 13 ноября 2026 года, банк-агент, документы и крайний срок обращения."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/index.mdx",
+      "title": "Банки и финансы",
+      "live_url": "https://rslive.ru/arrival/bank/",
+      "summaries": [
+        "Уточнили начало выплат бывшим клиентам ALTA и переход к инструкции для вкладчиков."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/bank-unavailable/index.mdx",
+      "title": "Что делать бизнесу, если банковский счёт недоступен",
+      "live_url": "https://rslive.ru/arrival/business/bank-unavailable/",
+      "summaries": [
+        "Добавили дату выплат ALTA, документы представителя PR и DOO и необходимость параллельно открывать новый счёт."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/posted/index.mdx",
+      "title": "Банка Поштанска штедионица",
+      "live_url": "https://rslive.ru/arrival/bank/posted/",
+      "summaries": [
+        "Добавили памятку о назначенных отделениях Poštanska štedionica для страховых выплат ALTA с 13 ноября."
+      ]
+    }
+  ]
+}
