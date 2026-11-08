@@ -109,15 +109,6 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>Przionica D59B</name>
-        <styleUrl>#icon-1899-0288D1-labelson-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            20.467637,44.823192,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>Salon de thé by Small Tree</name>
         <styleUrl>#icon-1899-0288D1-labelson-nodesc</styleUrl>
         <Point>
@@ -804,15 +795,6 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>Gurme</name>
-        <styleUrl>#icon-1899-0288D1-labelson-nodesc</styleUrl>
-        <Point>
-          <coordinates>
-            20.4760664,44.8095585,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>Stories</name>
         <styleUrl>#icon-1899-0288D1-labelson-nodesc</styleUrl>
         <Point>
@@ -1394,6 +1376,33 @@
         <Point>
           <coordinates>
             20.463952,44.808499,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bluz i Pivo</name>
+        <styleUrl>#icon-1899-0288D1-labelson-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4657503,44.8178621,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gurme</name>
+        <styleUrl>#icon-1899-0288D1-labelson-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4555708,44.8122878,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Pržionica</name>
+        <styleUrl>#icon-1899-0288D1-labelson-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4676404,44.8232664,0
           </coordinates>
         </Point>
       </Placemark>
