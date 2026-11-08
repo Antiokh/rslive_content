@@ -2,8 +2,8 @@
   "date": "2026-11-08",
   "hours": 24,
   "generated_at": "2026-11-08T16:17:00+01:00",
-  "commit_count": 1,
-  "article_count": 5,
+  "commit_count": 2,
+  "article_count": 11,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/bank/alta/refund/index.mdx",
@@ -43,6 +43,54 @@
       "live_url": "https://rslive.ru/arrival/bank/posted/",
       "summaries": [
         "Добавили памятку о назначенных отделениях Poštanska štedionica для страховых выплат ALTA с 13 ноября."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/kd2025/index.mdx",
+      "title": "KD 2025: замена кодов деятельности в 2027 году",
+      "live_url": "https://rslive.ru/arrival/business/kd2025/",
+      "summaries": [
+        "Подготовили инструкцию о переходе с KD 2010 на KD 2025: автоматическая замена в APR, проверка таблицы соответствия, бесплатный выбор кода при неоднозначности, сроки и действия при ошибке. Отдельно разобрали риск потери 10-процентного ограничения роста паушальной базы и порядок проверки и обжалования налогового решения за 2027 год."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/codes/index.mdx",
+      "title": "Коды деятельности",
+      "live_url": "https://rslive.ru/arrival/business/codes/",
+      "summaries": [
+        "Добавили предупреждение о KD 2025 и переход к инструкции по новой классификации; объяснили разницу между общим справочником и официальной таблицей соответствия."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/business/preduzetnik/index.mdx",
+      "title": "Налоги preduzetnik",
+      "live_url": "https://rslive.ru/gov/taxes/business/preduzetnik/",
+      "summaries": [
+        "Разобрали налоговый риск технической замены кода KD 2025: правило 10-процентного ограничения базы, отсутствие отдельного разъяснения и проверку решения за 2027 год."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/calculation/index.mdx",
+      "title": "Как считаются налоги в Сербии",
+      "live_url": "https://rslive.ru/gov/taxes/calculation/",
+      "summaries": [
+        "Уточнили различие возрастных коэффициентов паушала и ограничения роста базы на 10% при переходе KD 2025; добавили действия при необоснованном перерасчёте."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/eporezi/index.mdx",
+      "title": "Портал ePorezi",
+      "live_url": "https://rslive.ru/gov/taxes/eporezi/",
+      "summaries": [
+        "Добавили проверку налогового решения паушальца за 2027 год после перекодировки KD 2025 и ссылку на процедуру исправления неверного расчёта."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/index.mdx",
+      "title": "Бизнес в Сербии",
+      "live_url": "https://rslive.ru/arrival/business/",
+      "summaries": [
+        "Добавили переход к полной инструкции по классификатору KD 2025, срокам корректировки и возможным налоговым последствиям для паушальцев."
       ]
     }
   ]
