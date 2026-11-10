@@ -704,6 +704,114 @@
           </coordinates>
         </Point>
       </Placemark>
+      <Placemark>
+        <name>NODA SPACE</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4618861,44.8108503,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Mala Moskva</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4778592,44.807145,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>SUSHI WOK Beograd</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.471128,44.812521,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Waffle Heart Zemun</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4123784,44.8459285,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Pivograd Vračar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4732786,44.7942168,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>LEVEL Kopirnica</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4834232,44.8040815,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>MARE beauty loft</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4762266,44.8173194,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>HookahPlace Belgrade</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4727558,44.7927919,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>TrueRamen</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4558921,44.8148041,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Pivograd Dorćol</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4643946,44.8196123,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gurme</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4555708,44.8122878,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Nomad Cocktail Bar</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.849645,45.256308,0
+          </coordinates>
+        </Point>
+      </Placemark>
     </Folder>
     <Folder>
       <name>Novi Sad</name>
@@ -758,6 +866,15 @@
         <Point>
           <coordinates>
             19.8309358,45.2619979,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>wrrraps</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.845353,45.256665,0
           </coordinates>
         </Point>
       </Placemark>
@@ -1073,6 +1190,15 @@
         <Point>
           <coordinates>
             19.8253743,45.2425143,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Pivograd Novi Sad</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            19.8328562,45.2547433,0
           </coordinates>
         </Point>
       </Placemark>
