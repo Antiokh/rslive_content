@@ -1264,8 +1264,8 @@ ogSticker: "Командой осуществляется проведение �
         False,
     )
     assert "### 3. 🪶 Корней Чуковский" in rendered
-    assert locate_inline_line("Служебный текст.\\nФраза для проверки 123.\\n", "Фраза для проверки 123.", "Фраза для проверки 123.") == 2
-    assert locate_inline_line("Фраза для проверки 123.\\nФраза для проверки 123.", "Фраза для проверки 123.", "Фраза для проверки 123.") is None
+    assert locate_inline_line("Служебный текст.\nФраза для проверки 123.\n", "Фраза для проверки 123.", "Фраза для проверки 123.") == 2
+    assert locate_inline_line("Фраза для проверки 123.\nФраза для проверки 123.", "Фраза для проверки 123.", "Фраза для проверки 123.") is None
     assert "Тяжёлая конструкция" in rendered
     assert "SINGLE_REVIEW" not in rendered
     assert "→ REVIEW" not in rendered
