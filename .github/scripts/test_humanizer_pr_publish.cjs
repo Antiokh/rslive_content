@@ -33,7 +33,7 @@ assert.ok(workflow.includes("--inline-output"));
 assert.ok(dispatcher.includes("branches: [main]"));
 assert.ok(dispatcher.includes("actions: write"));
 
-const publish = new AsyncFunction("github", "context", "core", "process",
+const publish = new AsyncFunction("github", "context", "core", "process", "require",
   extract(workflow, "Комментарий и замечания в diff"));
 const resolve = new AsyncFunction("github", "context", "core", "process",
   extract(workflow, "Получение текущих refs PR"));
@@ -130,7 +130,7 @@ const pr = {
       { env: {
         COMMENT_PATH: commentFile, INLINE_PATH: inlineFile,
         REVIEW_PR_NUMBER: "7", REVIEW_TARGET: JSON.stringify(expected),
-      } });
+      } }, require);
     return writes;
   }
   try {
