@@ -1,0 +1,41 @@
+name: Обновить отзывы редколлегии после изменения main
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Dispatcher never executes PR content and only triggers the trusted reviewer.
+permissions:
+  contents: read
+  pull-requests: read
+  actions: write
+
+concurrency:
+  group: rslive-humanizer-base-refresh
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Повторная проверка открытых PR к main
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            const prs = await github.paginate(github.rest.pulls.list, {
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', base: 'main', per_page: 100,
+            });
+            const ownerRepo = context.repo.owner + '/' + context.repo.repo;
+            for (const pr of prs) {
+              if (pr.state !== 'open' || pr.base?.ref !== 'main' ||
+                  pr.head?.repo?.full_name !== ownerRepo ||
+                  pr.user?.login === 'dependabot[bot]') continue;
+              await github.rest.actions.createWorkflowDispatch({
+                owner: context.repo.owner, repo: context.repo.repo,
+                workflow_id: 'humanizer-russian-review.yml',
+                ref: 'main', inputs: { pr_number: String(pr.number) },
+              });
+              core.info('Отзыв редколлегии запрошен для PR #' + pr.number);
+            }
