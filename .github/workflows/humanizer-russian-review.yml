@@ -150,13 +150,25 @@ jobs:
         id: generate
         if: steps.integration.outcome == 'success'
         run: |
-          python3 base/.github/scripts/humanizer_pr_review.py \
-            --humanizer-root /tmp/humanizer_russian \
-            --base-root base \
-            --head-root head \
-            --files /tmp/humanizer-files.txt \
-            --output /tmp/humanizer-comment.md \
-            --inline-output /tmp/humanizer-inline.json
+          # The PR may introduce the inline-capable adapter for the first time.
+          # Until it is merged, only the older trusted base adapter may run.
+          if grep -q -- '--inline-output' base/.github/scripts/humanizer_pr_review.py; then
+            python3 base/.github/scripts/humanizer_pr_review.py \
+              --humanizer-root /tmp/humanizer_russian \
+              --base-root base \
+              --head-root head \
+              --files /tmp/humanizer-files.txt \
+              --output /tmp/humanizer-comment.md \
+              --inline-output /tmp/humanizer-inline.json
+          else
+            python3 base/.github/scripts/humanizer_pr_review.py \
+              --humanizer-root /tmp/humanizer_russian \
+              --base-root base \
+              --head-root head \
+              --files /tmp/humanizer-files.txt \
+              --output /tmp/humanizer-comment.md
+            printf '[]\n' > /tmp/humanizer-inline.json
+          fi
 
       - name: Завершение отчёта даже при ошибке проверки
         id: finalize
