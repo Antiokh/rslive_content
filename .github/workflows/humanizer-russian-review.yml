@@ -2,7 +2,20 @@ name: Редколлегия
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, synchronize, reopened, ready_for_review, edited]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Open PR to recheck against current main
+        required: true
+        type: number
+
+concurrency:
+  group: >-
+    ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && !github.event.changes.base &&
+        format('rslive-humanizer-metadata-{0}-{1}', github.event.pull_request.number, github.run_id) ||
+        format('rslive-humanizer-{0}', github.event_name == 'workflow_dispatch' && inputs.pr_number || github.event.pull_request.number) }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -14,35 +27,72 @@ env:
 jobs:
   humanizer:
     name: Отзыв
+    if: github.event_name != 'pull_request' || github.event.action != 'edited' || github.event.changes.base != null
     runs-on: ubuntu-latest
 
     steps:
+      - name: Получение текущих refs PR
+        id: pr
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          REVIEW_PR_NUMBER: ${{ github.event_name == 'workflow_dispatch' && inputs.pr_number || github.event.pull_request.number }}
+        with:
+          script: |
+            const number = Number(process.env.REVIEW_PR_NUMBER);
+            if (!Number.isSafeInteger(number) || number < 1) throw new Error('Invalid PR number');
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner, repo: context.repo.repo, pull_number: number,
+            });
+            core.setOutput('active', 'false');
+            if (pr.state !== 'open') return;
+            if (context.eventName === 'workflow_dispatch' &&
+                (pr.base?.ref !== 'main' ||
+                 pr.head?.repo?.full_name !== context.repo.owner + '/' + context.repo.repo ||
+                 pr.user?.login === 'dependabot[bot]')) return;
+            core.setOutput('active', 'true');
+            core.setOutput('number', String(number));
+            core.setOutput('base_sha', pr.base.sha);
+            core.setOutput('head_sha', pr.head.sha);
+            core.setOutput('head_repo', pr.head.repo.full_name);
+            core.setOutput('author', pr.user?.login || '');
+            core.setOutput('target', JSON.stringify({
+              head: { sha: pr.head.sha },
+              base: { ref: pr.base.ref, sha: pr.base.sha },
+            }));
       - name: Получение доверенного кода проверки
+        id: checkout_base
+        if: steps.pr.outputs.active == 'true'
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ steps.pr.outputs.base_sha }}
           path: base
           fetch-depth: 1
           persist-credentials: false
 
       - name: Получение предложенного контента
+        id: checkout_head
+        if: steps.pr.outputs.active == 'true'
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ steps.pr.outputs.head_repo }}
+          ref: ${{ steps.pr.outputs.head_sha }}
           path: head
           fetch-depth: 1
           persist-credentials: false
 
       - name: Сбор списка изменённых MDX-файлов
+        id: selection
+        if: steps.checkout_base.outcome == 'success' && steps.checkout_head.outcome == 'success'
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          REVIEW_PR_NUMBER: ${{ steps.pr.outputs.number }}
         with:
           script: |
             const fs = require('fs');
             const files = await github.paginate(github.rest.pulls.listFiles, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.issue.number,
+              pull_number: Number(process.env.REVIEW_PR_NUMBER),
               per_page: 100,
             });
             const mdx = files
@@ -55,6 +105,8 @@ jobs:
             fs.writeFileSync('/tmp/humanizer-files.txt', mdx.join('\n'));
 
       - name: Получение зафиксированной версии редколлегии
+        id: editors
+        if: steps.selection.outcome == 'success'
         run: |
           git init /tmp/humanizer_russian
           git -C /tmp/humanizer_russian remote add origin https://github.com/Antiokh/humanizer_russian.git
@@ -64,6 +116,8 @@ jobs:
           python3 /tmp/humanizer_russian/scripts/lint.py --self-test
 
       - name: Проверка интеграции
+        id: integration
+        if: steps.editors.outcome == 'success'
         run: |
           python3 base/.github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
@@ -81,51 +135,165 @@ jobs:
           PY
 
       - name: Формирование отзыва редколлегии
+        id: generate
+        if: steps.integration.outcome == 'success'
         run: |
           python3 base/.github/scripts/humanizer_pr_review.py \
             --humanizer-root /tmp/humanizer_russian \
             --base-root base \
             --head-root head \
             --files /tmp/humanizer-files.txt \
-            --output /tmp/humanizer-comment.md
+            --output /tmp/humanizer-comment.md \
+            --inline-output /tmp/humanizer-inline.json
+
+      - name: Завершение отчёта даже при ошибке проверки
+        id: finalize
+        if: always() && steps.pr.outputs.active == 'true'
+        env:
+          BASE_OUTCOME: ${{ steps.checkout_base.outcome }}
+          HEAD_OUTCOME: ${{ steps.checkout_head.outcome }}
+          SELECTION_OUTCOME: ${{ steps.selection.outcome }}
+          EDITORS_OUTCOME: ${{ steps.editors.outcome }}
+          INTEGRATION_OUTCOME: ${{ steps.integration.outcome }}
+          GENERATE_OUTCOME: ${{ steps.generate.outcome }}
+        run: |
+          if [ "$BASE_OUTCOME" != success ] ||
+             [ "$HEAD_OUTCOME" != success ] ||
+             [ "$SELECTION_OUTCOME" != success ] ||
+             [ "$EDITORS_OUTCOME" != success ] ||
+             [ "$INTEGRATION_OUTCOME" != success ] ||
+             [ "$GENERATE_OUTCOME" != success ] ||
+             [ ! -s /tmp/humanizer-comment.md ]; then
+            printf '%s\n' \
+              '<!-- humanizer-russian-review -->' \
+              '## 📝 Отзыв редколлегии' \
+              '' \
+              '⚠️ Проверка не завершилась. Старый результат не подтверждает текущую версию PR.' \
+              > /tmp/humanizer-comment.md
+            printf '[]\n' > /tmp/humanizer-inline.json
+          fi
 
       - name: Добавление отзыва в сводку запуска
+        if: always() && steps.finalize.outcome == 'success'
         run: cat /tmp/humanizer-comment.md >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Обновление комментария редколлегии
-        if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
+      - name: Комментарий и замечания в diff
+        if: >-
+          always() && steps.finalize.outcome == 'success' &&
+          steps.pr.outputs.head_repo == github.repository &&
+          steps.pr.outputs.author != 'dependabot[bot]' &&
+          github.actor != 'dependabot[bot]'
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           COMMENT_PATH: /tmp/humanizer-comment.md
+          INLINE_PATH: /tmp/humanizer-inline.json
+          REVIEW_PR_NUMBER: ${{ steps.pr.outputs.number }}
+          REVIEW_TARGET: ${{ steps.pr.outputs.target }}
         with:
           script: |
             const fs = require('fs');
-            const markers = [
-              '<!-- humanizer-russian-review -->',
-              '<!-- humanizer-ru-review -->',
-            ];
+            const number = Number(process.env.REVIEW_PR_NUMBER);
+            const expected = JSON.parse(process.env.REVIEW_TARGET);
+            const isCurrent = pr =>
+              pr.state === 'open' &&
+              pr.head?.sha === expected.head.sha &&
+              pr.base?.ref === expected.base.ref &&
+              pr.base?.sha === expected.base.sha;
+            const getPr = async () => (await github.rest.pulls.get({
+              owner: context.repo.owner, repo: context.repo.repo, pull_number: number,
+            })).data;
+            if (!isCurrent(await getPr())) {
+              core.info('Outdated review: PR head or base changed.');
+              return;
+            }
             const body = fs.readFileSync(process.env.COMMENT_PATH, 'utf8');
+            const markers = ['<!-- humanizer-russian-review -->', '<!-- humanizer-ru-review -->'];
             const comments = await github.paginate(github.rest.issues.listComments, {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              per_page: 100,
+              owner: context.repo.owner, repo: context.repo.repo, issue_number: number, per_page: 100,
             });
             const existing = comments.find(comment =>
-              comment.body && markers.some(marker => comment.body.includes(marker))
+              comment.user?.login === 'github-actions[bot]' &&
+              typeof comment.body === 'string' &&
+              markers.some(marker => comment.body.includes(marker))
             );
+            if (!isCurrent(await getPr())) return;
             if (existing) {
               await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body,
+                owner: context.repo.owner, repo: context.repo.repo,
+                comment_id: existing.id, body,
               });
             } else {
               await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body,
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: number, body,
               });
+            }
+
+            // GitHub supports inline review comments only on actual diff lines.
+            // Never guess the location from the Humanizer synthetic text line.
+            try {
+              const suggested = fs.existsSync(process.env.INLINE_PATH)
+                ? JSON.parse(fs.readFileSync(process.env.INLINE_PATH, 'utf8')) : [];
+              const changes = await github.paginate(github.rest.pulls.listFiles, {
+                owner: context.repo.owner, repo: context.repo.repo,
+                pull_number: number, per_page: 100,
+              });
+              const added = new Map();
+              for (const file of changes) {
+                if (!file.patch || file.status === 'removed') continue;
+                const lines = new Set();
+                let at = -1;
+                for (const line of file.patch.split('\n')) {
+                  const hunk = line.match(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/);
+                  if (hunk) { at = Number(hunk[1]); continue; }
+                  if (at < 0) continue;
+                  if (line.startsWith('+') && !line.startsWith('+++')) {
+                    lines.add(at++);
+                  } else if (line.startsWith(' ')) {
+                    at++;
+                  }
+                }
+                added.set(file.filename, lines);
+              }
+              const oldInline = await github.paginate(github.rest.pulls.listReviewComments, {
+                owner: context.repo.owner, repo: context.repo.repo,
+                pull_number: number, per_page: 100,
+              });
+              const seen = new Set();
+              for (const comment of oldInline) {
+                if (comment.user?.login !== 'github-actions[bot]') continue;
+                for (const match of (comment.body || '').matchAll(/humanizer-inline:([a-f0-9]{20})/g))
+                  seen.add(match[1]);
+              }
+              const grouped = new Map();
+              for (const note of suggested) {
+                if (!note || typeof note.id !== 'string' ||
+                    !/^[a-f0-9]{20}$/.test(note.id) || seen.has(note.id) ||
+                    !added.get(note.path)?.has(note.line)) continue;
+                const key = note.path + ':' + note.line;
+                const group = grouped.get(key) || [];
+                if (group.length < 3 && !group.some(item => item.id === note.id))
+                  group.push(note);
+                grouped.set(key, group);
+              }
+              const reviewComments = [...grouped.entries()].slice(0, 8).map(([key, group]) => {
+                const first = group[0];
+                const commentBody = group.length === 1 ? first.body : [
+                  '**Редакторские замечания к этому фрагменту**',
+                  ...group.map(item => '<details>\n<summary>' +
+                    item.body.split('\n')[0].replaceAll('*', '') +
+                    '</summary>\n\n' + item.body + '\n\n</details>'),
+                ].join('\n\n');
+                return { path: first.path, line: first.line, side: 'RIGHT', body: commentBody };
+              });
+              if (reviewComments.length && isCurrent(await getPr())) {
+                await github.rest.pulls.createReview({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  pull_number: number, commit_id: expected.head.sha,
+                  event: 'COMMENT', comments: reviewComments,
+                });
+                core.info('Posted ' + reviewComments.length + ' inline editorial discussions.');
+              }
+            } catch (error) {
+              core.warning('Unable to publish inline review; summary remains available: ' + error.message);
             }
