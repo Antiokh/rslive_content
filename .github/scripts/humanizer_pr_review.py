@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import json
 import re
@@ -792,12 +793,53 @@ def scope_line(path: str, scope: dict) -> str:
     )
 
 
+def locate_inline_line(raw: str, reviewed: str, excerpt: str) -> int | None:
+    """Only anchor an exact, unique excerpt visible in the reviewed input.
+
+    Finding.line refers to a synthetic title/description/body document and
+    cannot be used directly as a GitHub MDX line number.
+    """
+    needle = str(excerpt or "").strip()
+    if len(needle) < 12 or "\n" in needle or "\r" in needle:
+        return None
+    if reviewed.casefold().count(needle.casefold()) != 1:
+        return None
+    if raw.casefold().count(needle.casefold()) != 1:
+        return None
+    index = raw.casefold().find(needle.casefold())
+    return raw.count("\n", 0, index) + 1
+
+
+def inline_suggestion(path: str, finding: dict, raw: str, reviewed: str) -> dict | None:
+    line = locate_inline_line(raw, reviewed, finding.get("excerpt", ""))
+    if line is None:
+        return None
+    editor = finding_editor_id(finding)
+    title = visible_title(finding, editor)
+    excerpt = safe_inline(finding.get("excerpt", ""), 220)
+    reason = visible_reason(finding)
+    fingerprint = hashlib.sha256(
+        (path + "\0" + editor + "\0" + str(finding.get("rule_id", "")) +
+         "\0" + normalize_excerpt(finding.get("excerpt", ""))).encode("utf-8")
+    ).hexdigest()[:20]
+    return {
+        "path": path,
+        "line": line,
+        "id": fingerprint,
+        "body": (
+            f"**{title}**\\n\\n> {excerpt}\\n\\n{reason}\\n\\n"
+            f"<!-- humanizer-inline:{fingerprint} -->"
+        ).replace("\\n", "\n"),
+    }
+
+
 def build_comment(
     humanizer,
     humanizer_root: Path,
     base_root: Path,
     head_root: Path,
     files_path: Path,
+    inline_out: list[dict] | None = None,
 ) -> str:
     files = read_paths(files_path)
     sha = humanizer_sha(humanizer_root)
@@ -846,6 +888,10 @@ def build_comment(
         )
         for finding in new_findings:
             records.append({"path": rel, "finding": finding})
+            if inline_out is not None:
+                note = inline_suggestion(rel, finding, head_raw, head_text)
+                if note is not None:
+                    inline_out.append(note)
 
     body = [MARKER, f"## 📝 {PUBLIC_TITLE}", ""]
 
@@ -901,19 +947,24 @@ def build_comment(
 
     show_path = len(checked) > 1
     for number, editor in enumerate(EDITORS, 1):
-        editor_id = editor[0]
-        body.extend(
-            [
-                render_editor_section(
-                    number,
-                    editor,
-                    records_by_editor[editor_id],
-                    counts[editor_id],
-                    show_path,
-                ),
-                "",
-            ]
+        editor_id, emoji, name, _fallback = editor
+        count = counts[editor_id]
+        status = (
+            f"{count} {plural(count, ('замечание', 'замечания', 'замечаний'))}"
+            if count else "замечаний нет"
         )
+        body.extend([
+            "<details>",
+            f"<summary>{number}. {emoji} {name} — {status}</summary>",
+            "",
+            render_editor_section(
+                number, editor, records_by_editor[editor_id],
+                count, show_path,
+            ),
+            "",
+            "</details>",
+            "",
+        ])
 
     omitted = max(0, len(records) - len(visible_records))
     if omitted:
@@ -1213,6 +1264,8 @@ ogSticker: "Командой осуществляется проведение �
         False,
     )
     assert "### 3. 🪶 Корней Чуковский" in rendered
+    assert locate_inline_line("Служебный текст.\\nФраза для проверки 123.\\n", "Фраза для проверки 123.", "Фраза для проверки 123.") == 2
+    assert locate_inline_line("Фраза для проверки 123.\\nФраза для проверки 123.", "Фраза для проверки 123.", "Фраза для проверки 123.") is None
     assert "Тяжёлая конструкция" in rendered
     assert "SINGLE_REVIEW" not in rendered
     assert "→ REVIEW" not in rendered
@@ -1251,6 +1304,7 @@ def main() -> int:
     parser.add_argument("--head-root", type=Path)
     parser.add_argument("--files", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--inline-output", type=Path)
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
 
@@ -1270,14 +1324,20 @@ def main() -> int:
             + ", ".join("--" + name.replace("_", "-") for name in missing)
         )
 
+    inline: list[dict] = []
     comment = build_comment(
         humanizer,
         args.humanizer_root,
         args.base_root,
         args.head_root,
         args.files,
+        inline,
     )
     args.output.write_text(comment, encoding="utf-8")
+    if args.inline_output is not None:
+        args.inline_output.write_text(
+            json.dumps(inline, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
     return 0
 
 
