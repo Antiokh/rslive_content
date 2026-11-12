@@ -40,9 +40,21 @@ jobs:
           script: |
             const number = Number(process.env.REVIEW_PR_NUMBER);
             if (!Number.isSafeInteger(number) || number < 1) throw new Error('Invalid PR number');
-            const { data: pr } = await github.rest.pulls.get({
-              owner: context.repo.owner, repo: context.repo.repo, pull_number: number,
-            });
+            const getPr = async () => {
+              for (let attempt = 1; attempt <= 3; attempt++) {
+                try {
+                  const response = await github.rest.pulls.get({
+                    owner: context.repo.owner, repo: context.repo.repo,
+                    pull_number: number,
+                  });
+                  return response.data;
+                } catch (error) {
+                  if (attempt === 3 || ![429, 502, 503, 504].includes(error.status)) throw error;
+                  await new Promise(resolve => setTimeout(resolve, attempt * 1000));
+                }
+              }
+            };
+            const pr = await getPr();
             core.setOutput('active', 'false');
             if (pr.state !== 'open') return;
             if (context.eventName === 'workflow_dispatch' &&
@@ -199,9 +211,19 @@ jobs:
               pr.head?.sha === expected.head.sha &&
               pr.base?.ref === expected.base.ref &&
               pr.base?.sha === expected.base.sha;
-            const getPr = async () => (await github.rest.pulls.get({
-              owner: context.repo.owner, repo: context.repo.repo, pull_number: number,
-            })).data;
+            const getPr = async () => {
+              for (let attempt = 1; attempt <= 3; attempt++) {
+                try {
+                  return (await github.rest.pulls.get({
+                    owner: context.repo.owner, repo: context.repo.repo,
+                    pull_number: number,
+                  })).data;
+                } catch (error) {
+                  if (attempt === 3 || ![429, 502, 503, 504].includes(error.status)) throw error;
+                  await new Promise(resolve => setTimeout(resolve, attempt * 1000));
+                }
+              }
+            };
             if (!isCurrent(await getPr())) {
               core.info('Outdated review: PR head or base changed.');
               return;
