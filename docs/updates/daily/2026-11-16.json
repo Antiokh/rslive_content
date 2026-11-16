@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-16",
+  "hours": 24,
+  "generated_at": "2026-11-16T23:02:03.080Z",
+  "commit_count": 1,
+  "article_count": 7,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/bank/alta/refund/index.mdx",
+      "title": "Как вернуть деньги из ALTA banka после отзыва лицензии",
+      "live_url": "https://rslive.ru/arrival/bank/alta/refund/",
+      "summaries": [
+        "Добавили номер судебного дела ALTA, 90-дневный срок требований на непокрытый остаток и порядок подачи двух комплектов документов; уточнили получение справки при отсутствии оригинала договора, выплату через банк-агент, запись и часы отделений."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/posted/index.mdx",
+      "title": "Банка Поштанска штедионица",
+      "live_url": "https://rslive.ru/arrival/bank/posted/",
+      "summaries": [
+        "Уточнили часы специализированного отделения страховых выплат ALTA, русскоязычную инструкцию банка и получение справок при отсутствии оригиналов документов."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/finance/index.mdx",
+      "title": "Финансовые вопросы",
+      "live_url": "https://rslive.ru/move/finance/",
+      "summaries": [
+        "Предупредили о включении Unistream в санкционный список ЕС 16 ноября 2026 года: прежние комиссии, лимиты и партнёрские пункты не подтверждают доступность переводов в Сербии; добавили порядок проверки до отправки средств."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/index.mdx",
+      "title": "Банки и финансы",
+      "live_url": "https://rslive.ru/arrival/bank/",
+      "summaries": [
+        "Добавили ноябрьскую практику открытия счетов после ALTA: разницу между частными отзывами и официальными правилами, уведомление Yettel Bank об очередях, проверку статуса заявки и отдельных валютных возможностей."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/bank-unavailable/index.mdx",
+      "title": "Что делать бизнесу, если банковский счёт недоступен",
+      "live_url": "https://rslive.ru/arrival/business/bank-unavailable/",
+      "summaries": [
+        "Уточнили необходимость проверять не только одобрение новой заявки, но и действующие реквизиты и возможность платежей; добавили осторожный ориентир по срокам из пользовательских сообщений."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/raiffeisen/index.mdx",
+      "title": "Raiffeisen Banka",
+      "live_url": "https://rslive.ru/arrival/bank/raiffeisen/",
+      "summaries": [
+        "Добавили датированные пользовательские сообщения об одобрении счетов с оговоркой, что они не устанавливают сроки или обязательные условия для всех заявителей."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/adriatic/index.mdx",
+      "title": "Adriatic Banka",
+      "live_url": "https://rslive.ru/arrival/bank/adriatic/",
+      "summaries": [
+        "Дополнительно описали противоречивые пользовательские случаи открытия и ожидания ответа; сохранили предупреждение об индивидуальном рассмотрении."
+      ]
+    }
+  ]
+}
