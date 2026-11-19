@@ -812,6 +812,15 @@
           </coordinates>
         </Point>
       </Placemark>
+      <Placemark>
+        <name>SHAURMAGEDON | Shawarma | Шаурма</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            20.4637814,44.8148162,0
+          </coordinates>
+        </Point>
+      </Placemark>
     </Folder>
     <Folder>
       <name>Novi Sad</name>
