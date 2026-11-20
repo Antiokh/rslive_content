@@ -1,7 +1,7 @@
 {
   "datasetId": "belgrade-world-restaurants",
   "language": "en",
-  "sourceSnapshotAt": "2026-11-20",
+  "sourceSnapshotAt": "2026-11-21",
   "descriptions": {
     "idol-tiki-bar": "Chinese-Asian menu at a tiki bar: Hong Kong-style crispy wontons, pork bao, shoyu, miso and tonkotsu ramen, kung pao chicken, tom yum, fried noodles and rice; the bar specializes in tiki cocktails.",
     "x-wangs-kitchen": "Chinese restaurant with a large menu of soups, noodles and dumplings; hot pot is a separate specialty. Popular dishes also include fried noodles, rice and sweet-and-sour chicken.",
@@ -93,6 +93,13 @@
     "berezka-bistro-dorcol": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes.",
     "berezka-bistro-sarajevska": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes.",
     "berezka-bistro-vracar": "Café and prepared-food counter inside Berezka with its own kitchen: Siberian pelmeni, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes.",
-    "berezka-bistro-novi-beograd": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes."
+    "berezka-bistro-novi-beograd": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes.",
+    "eatalian-dorcol": "Italian food bar in Dorćol serving piadina, panini, pasta, lasagna, Italian cheeses and cured meats.",
+    "pizza-bar-novi-beograd": "Pizzeria in Novi Beograd offering thin-crust Italian-style and thick Chicago-style pizzas, pasta and risotto.",
+    "prana-brunch-hilandarska": "Brunch restaurant with a mixed menu: fresh handmade pasta, breakfasts, poke bowls and desserts. Not exclusively Italian.",
+    "dolcino-miljakovac": "Café, dessert shop and restaurant in Miljakovac with pizza, pasta, risotto, breakfasts and desserts. A mixed menu featuring Italian dishes.",
+    "gurme-doner-sremska": "Turkish döner kebab and halal street food on Sremska: chicken and beef döner, flatbreads, side dishes and sauces.",
+    "cypress-tacos-rige-od-fere": "Mexican street food in Dorćol: tacos, burritos and quesadillas. The Cypress Tacos location on Rige od Fere.",
+    "taverna-piatakia-zemun": "Greek music taverna in Zemun with meze, Greek specialties and live Greek music, at Novogradska 10."
   }
 }
