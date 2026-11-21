@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/scripts/humanizer_pr_review.py'
       - '.github/workflows/humanizer-russian-review.yml'
+      - '.github/workflows/humanizer-base-refresh.yml'
+      - '.github/scripts/test_humanizer_pr_publish.cjs'
       - '.github/workflows/humanizer-input-contract.yml'
       - 'docs/HUMANIZER_REVIEW.md'
 
@@ -63,3 +65,5 @@ jobs:
           assert data['public_machine_status_exposed'] is False
           print('Оценка всей статьи: OK')
           PY
+      - name: Регрессия публикации inline-замечаний
+        run: node .github/scripts/test_humanizer_pr_publish.cjs
