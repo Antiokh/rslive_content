@@ -1,7 +1,7 @@
 {
   "datasetId": "belgrade-world-restaurants",
   "language": "en",
-  "sourceSnapshotAt": "2026-11-20",
+  "sourceSnapshotAt": "2026-11-25",
   "descriptions": {
     "idol-tiki-bar": "Chinese-Asian menu at a tiki bar: Hong Kong-style crispy wontons, pork bao, shoyu, miso and tonkotsu ramen, kung pao chicken, tom yum, fried noodles and rice; the bar specializes in tiki cocktails.",
     "x-wangs-kitchen": "Chinese restaurant with a large menu of soups, noodles and dumplings; hot pot is a separate specialty. Popular dishes also include fried noodles, rice and sweet-and-sour chicken.",
@@ -93,6 +93,7 @@
     "berezka-bistro-dorcol": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes.",
     "berezka-bistro-sarajevska": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes.",
     "berezka-bistro-vracar": "Café and prepared-food counter inside Berezka with its own kitchen: Siberian pelmeni, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes.",
-    "berezka-bistro-novi-beograd": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes."
+    "berezka-bistro-novi-beograd": "Café and prepared-food counter inside Berezka with its own kitchen: pelmeni and vareniki, syrniki, herring under a fur coat, vinaigrette salad, Olivier salad and ready-made lunches. The bistro also serves international dishes.",
+    "djordjija-zemun": "Georgian restaurant on the Zemun quay (Kej oslobođenja 73): khinkali, Adjarian, Imeretian and Megrelian khachapuri, lobiani, kubdari, ajapsandali and Georgian wines."
   }
 }
