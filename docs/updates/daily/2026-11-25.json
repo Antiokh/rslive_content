@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-25",
+  "hours": 24,
+  "generated_at": "2026-11-25T18:43:00Z",
+  "commit_count": 1,
+  "article_count": 2,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/arrival/bank/index.mdx",
+      "title": "Банки и финансы",
+      "live_url": "https://rslive.ru/arrival/bank/",
+      "summaries": [
+        "Уточнили состав базового счёта и максимальную плату 150 динаров, разъяснение НБС об отказах российским гражданам, правила письменного отказа и порядок подачи жалобы с доказательствами."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/bank-unavailable/index.mdx",
+      "title": "Что делать бизнесу, если банковский счёт недоступен",
+      "live_url": "https://rslive.ru/arrival/business/bank-unavailable/",
+      "summaries": [
+        "Добавили порядок действий при отказе или затягивании открытия бизнес-счёта для PR и DOO: письменный ответ, претензия банку и жалоба в НБС; отделили гарантии личного базового счёта от бизнес-счетов."
+      ]
+    }
+  ]
+}
