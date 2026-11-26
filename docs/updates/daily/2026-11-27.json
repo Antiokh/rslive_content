@@ -1,9 +1,9 @@
 {
   "date": "2026-11-27",
   "hours": 24,
-  "generated_at": "2026-11-26T23:26:00Z",
-  "commit_count": 1,
-  "article_count": 2,
+  "generated_at": "2026-11-26T23:32:00Z",
+  "commit_count": 2,
+  "article_count": 5,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/bank/index.mdx",
@@ -22,6 +22,30 @@
       "summaries": [
         "Добавили порядок действий при отказе или затягивании открытия бизнес-счёта для PR и DOO: письменный ответ, претензия банку и жалоба в НБС; отделили гарантии личного базового счёта от бизнес-счетов.",
         "Добавили подтверждение НБС о получении жалоб предпринимателей и компаний с российскими собственниками."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/map/cuisine/index.mdx",
+      "title": "Национальные кухни Белграда",
+      "live_url": "https://rslive.ru/map/cuisine/",
+      "summaries": [
+        "Добавили Georgian Supra с адресом и официальным сайтом в список грузинских ресторанов; обновили ссылку в карточке на карте."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/national-cuisines-belgrade/index.mdx",
+      "title": "National cuisines in Belgrade",
+      "live_url": "https://rslive.ru/en/national-cuisines-belgrade/",
+      "summaries": [
+        "Added Georgian Supra with its address and official website to the Georgian restaurant list and updated its map card link."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/nacionalne-kuhinje-beograda/index.mdx",
+      "title": "Националне кухиње Београда",
+      "live_url": "https://rslive.ru/sr/nacionalne-kuhinje-beograda/",
+      "summaries": [
+        "Додали Georgian Supra са адресом и званичним сајтом на списак грузијских ресторана и ажурирали линк на картици на мапи."
       ]
     }
   ]
