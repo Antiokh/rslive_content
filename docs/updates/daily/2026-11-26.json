@@ -2,8 +2,8 @@
   "date": "2026-11-26",
   "hours": 24,
   "generated_at": "2026-11-26T13:09:00.000Z",
-  "commit_count": 6,
-  "article_count": 53,
+  "commit_count": 7,
+  "article_count": 57,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/dance/index.mdx",
@@ -433,6 +433,38 @@
       "live_url": "https://rslive.ru/sr/putovanja/",
       "summaries": [
         "Објавили смо каталог путовања на српском са предлозима излета, националним парковима и званичним изворима; непреведени водичи су јасно означени."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/serbian-fortresses/index.mdx",
+      "title": "Fortresses of Serbia: where to go and what to combine",
+      "live_url": "https://rslive.ru/en/serbian-fortresses/",
+      "summaries": [
+        "Published an English guide to Serbian fortresses with regional itineraries and practical advice on access."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/tvrdjave-srbije/index.mdx",
+      "title": "Тврђаве Србије: куда ићи и са чиме спојити посету",
+      "live_url": "https://rslive.ru/sr/tvrdjave-srbije/",
+      "summaries": [
+        "Објавили смо водич кроз тврђаве Србије на српском, са регионалним маршрутама и саветима за проверу приступа."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/yugoslav-memorials/index.mdx",
+      "title": "Yugoslav monuments: memorial architecture in Serbia",
+      "live_url": "https://rslive.ru/en/yugoslav-memorials/",
+      "summaries": [
+        "Published an English guide to Yugoslav memorial architecture in Serbia, including creators, dates, historical context and access."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/jugoslovenski-spomenici/index.mdx",
+      "title": "Споменици Југославије: меморијална архитектура Србије",
+      "live_url": "https://rslive.ru/sr/jugoslovenski-spomenici/",
+      "summaries": [
+        "Објавили смо водич кроз југословенску меморијалну архитектуру у Србији на српском, са ауторима, датумима, историјским контекстом и саветима за посету."
       ]
     }
   ]
