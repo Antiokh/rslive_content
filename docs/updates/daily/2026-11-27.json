@@ -1,9 +1,9 @@
 {
   "date": "2026-11-27",
   "hours": 24,
-  "generated_at": "2026-11-26T23:26:00Z",
-  "commit_count": 1,
-  "article_count": 2,
+  "generated_at": "2026-11-26T23:30:00Z",
+  "commit_count": 2,
+  "article_count": 14,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/bank/index.mdx",
@@ -22,6 +22,102 @@
       "summaries": [
         "Добавили порядок действий при отказе или затягивании открытия бизнес-счёта для PR и DOO: письменный ответ, претензия банку и жалоба в НБС; отделили гарантии личного базового счёта от бизнес-счетов.",
         "Добавили подтверждение НБС о получении жалоб предпринимателей и компаний с российскими собственниками."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/rental-blacklist/index.mdx",
+      "title": "Rental blacklist",
+      "live_url": "https://rslive.ru/en/rental-blacklist/",
+      "summaries": [
+        "Explained the source of archived reviews and how to read or copy the original text."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/crna-lista-stanova/index.mdx",
+      "title": "Црна листа станова",
+      "live_url": "https://rslive.ru/sr/crna-lista-stanova/",
+      "summaries": [
+        "Објаснили смо порекло архивираних рецензија и како читати или копирати оригинални текст."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/non-smoking-venues/index.mdx",
+      "title": "Non-smoking venues in Belgrade",
+      "live_url": "https://rslive.ru/en/non-smoking-venues/",
+      "summaries": [
+        "Added access to a saved map with English controls and original-source attribution."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/nepusacki-lokali/index.mdx",
+      "title": "Непушачки локали у Београду",
+      "live_url": "https://rslive.ru/sr/nepusacki-lokali/",
+      "summaries": [
+        "Додали смо приступ сачуваној мапи са командама на српском и наведеним извором."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/dance-studios/index.mdx",
+      "title": "Dance studios in Serbia",
+      "live_url": "https://rslive.ru/en/dance-studios/",
+      "summaries": [
+        "Added access to a saved map with English controls and original-source attribution."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/plesne-sale/index.mdx",
+      "title": "Плесне сале у Србији",
+      "live_url": "https://rslive.ru/sr/plesne-sale/",
+      "summaries": [
+        "Додали смо приступ сачуваној мапи са командама на српском и наведеним извором."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/russian-cultural-heritage/index.mdx",
+      "title": "Russian Soul: Russian cultural heritage in Serbia",
+      "live_url": "https://rslive.ru/en/russian-cultural-heritage/",
+      "summaries": [
+        "Added access to a saved map with English controls and original-source attribution."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/rusko-kulturno-nasledje/index.mdx",
+      "title": "Руска душа: руско културно наслеђе у Србији",
+      "live_url": "https://rslive.ru/sr/rusko-kulturno-nasledje/",
+      "summaries": [
+        "Додали смо приступ сачуваној мапи са командама на српском и наведеним извором."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/little-russia/index.mdx",
+      "title": "Little Russia",
+      "live_url": "https://rslive.ru/en/little-russia/",
+      "summaries": [
+        "Added access to a saved map with English controls and original-source attribution."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/mala-rf/index.mdx",
+      "title": "Мала РФ",
+      "live_url": "https://rslive.ru/sr/mala-rf/",
+      "summaries": [
+        "Додали смо приступ сачуваној мапи са командама на српском и наведеним извором."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/ark-business-alta-map/index.mdx",
+      "title": "Ark Business: map of businesses listed after ALTA banka",
+      "live_url": "https://rslive.ru/en/ark-business-alta-map/",
+      "summaries": [
+        "Added access to a saved map with English controls and original-source attribution."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/kovceg-biznis-alta-mapa/index.mdx",
+      "title": "„Ковчег Бизнес“: мапа предузећа после ALTA banka",
+      "live_url": "https://rslive.ru/sr/kovceg-biznis-alta-mapa/",
+      "summaries": [
+        "Додали смо приступ сачуваној мапи са командама на српском и наведеним извором."
       ]
     }
   ]
