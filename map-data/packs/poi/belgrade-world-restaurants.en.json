@@ -1,7 +1,7 @@
 {
   "datasetId": "belgrade-world-restaurants",
   "language": "en",
-  "sourceSnapshotAt": "2026-11-26",
+  "sourceSnapshotAt": "2026-11-27",
   "descriptions": {
     "idol-tiki-bar": "Chinese-Asian menu at a tiki bar: Hong Kong-style crispy wontons, pork bao, shoyu, miso and tonkotsu ramen, kung pao chicken, tom yum, fried noodles and rice; the bar specializes in tiki cocktails.",
     "x-wangs-kitchen": "Chinese restaurant with a large menu of soups, noodles and dumplings; hot pot is a separate specialty. Popular dishes also include fried noodles, rice and sweet-and-sour chicken.",
@@ -231,6 +231,11 @@
     "all-italian-kondina": "Italian café and pizzeria at Kondina 16: pizza, pasta, risotto, sandwiches and desserts. Delivery and takeaway available.",
     "obrock-beo-shopping-center": "Fast-food restaurant at BEO Shopping Center, Vojislava Ilića 141, second floor: Serbian-style gyros, cooked dishes, soups, grilled food and salads. Mixed Serbian and Greek cuisine. The pin indicates the shopping-centre location from the restaurant directory.",
     "obrock-big-fashion": "O'Brock branch at BIG FASHION, Višnjička 84, second floor, unit 203A. The chain serves mixed Serbian and Greek cuisine: gyros, cooked dishes, grilled food and salads. The pin indicates the shopping-centre location from the restaurant directory.",
-    "obrock-delta-city": "Chain branch at Delta City shopping centre, Jurija Gagarina 16, second floor: Serbian-style gyros, cooked dishes, grilled food and salads. Mixed Serbian and Greek cuisine. Coordinates represent the venue's OpenStreetMap point; the floor is confirmed by the mall directory."
+    "obrock-delta-city": "Chain branch at Delta City shopping centre, Jurija Gagarina 16, second floor: Serbian-style gyros, cooked dishes, grilled food and salads. Mixed Serbian and Greek cuisine. Coordinates represent the venue's OpenStreetMap point; the floor is confirmed by the mall directory.",
+    "la-gitana-cetinjska": "Eatery at the Dvorištance bar, Cetinjska 15: nachos with guacamole, pico de gallo and jalapeños, and burgers. Mixed menu with Mexican dishes rather than a traditional Mexican restaurant.",
+    "istok-outpost-palilula": "Pan-Asian eatery at Palilula Market, Ilije Garašanina 5A, unit 35: Thai tom yum, filled steamed buns, rice dishes and noodles. Mixed Thai, Vietnamese and Korean cuisine.",
+    "mala-riksa-sarajevska-40": "Eatery at Sarajevska 40: Chinese dishes with vegetables, tofu and rice dumplings, alongside Serbian cooked dishes. Mixed Chinese and Serbian cuisine; a separate location near Maxi.",
+    "mala-riksa-maxi-sarajevska": "Mala Rikša outlet in the Maxi shopping complex, Sarajevska 38/38A: Chinese and Serbian cooked dishes, vegetables and tofu. Separate outlet; coordinates from the address navigation link, not a surveyed entrance.",
+    "sushirrito-waterfront": "Japanese-Asian Sushirrito restaurant in Belgrade Waterfront, Hercegovačka 15a: large sushi burritos, sushi, poke, gyoza, tempura and mochi. Separate branch with delivery."
   }
 }
