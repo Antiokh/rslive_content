@@ -1,7 +1,7 @@
 {
   "datasetId": "belgrade-world-restaurants",
   "language": "en",
-  "sourceSnapshotAt": "2026-11-21",
+  "sourceSnapshotAt": "2026-11-26",
   "descriptions": {
     "idol-tiki-bar": "Chinese-Asian menu at a tiki bar: Hong Kong-style crispy wontons, pork bao, shoyu, miso and tonkotsu ramen, kung pao chicken, tom yum, fried noodles and rice; the bar specializes in tiki cocktails.",
     "x-wangs-kitchen": "Chinese restaurant with a large menu of soups, noodles and dumplings; hot pot is a separate specialty. Popular dishes also include fried noodles, rice and sweet-and-sour chicken.",
@@ -100,6 +100,12 @@
     "dolcino-miljakovac": "Café, dessert shop and restaurant in Miljakovac with pizza, pasta, risotto, breakfasts and desserts. A mixed menu featuring Italian dishes.",
     "gurme-doner-sremska": "Turkish döner kebab and halal street food on Sremska: chicken and beef döner, flatbreads, side dishes and sauces.",
     "cypress-tacos-rige-od-fere": "Mexican street food in Dorćol: tacos, burritos and quesadillas. The Cypress Tacos location on Rige od Fere.",
-    "taverna-piatakia-zemun": "Greek music taverna in Zemun with meze, Greek specialties and live Greek music, at Novogradska 10."
+    "taverna-piatakia-zemun": "Greek music taverna in Zemun with meze, Greek specialties and live Greek music, at Novogradska 10.",
+    "moon-sushi-centar": "Sushi and Asian fusion in the city centre at Trg Politika 3: rolls, salmon tartare, edamame, donburi and hot dishes.",
+    "angry-monk-uzun-mirkova": "Japanese-inspired pan-Asian fusion at Uzun Mirkova 11: sushi, rolls, ramen, hot dishes and cocktails; not exclusively Japanese.",
+    "diwali-mahal-senjak": "Indian restaurant at Sanje Živanovića 2b serving curries, tandoor dishes, vegetable masala, rice, Indian breads and snacks.",
+    "piatakia-novi-beograd": "Greek restaurant at Bulevar Arsenija Čarnojevića 54: meze, baked feta, calamari and other Greek and eastern Mediterranean dishes.",
+    "mezestoran-dvoriste": "Greek and Mediterranean cuisine in a courtyard at Svetogorska 46: meze, zucchini croquettes with tzatziki, octopus orzo and regional dishes.",
+    "sushi-factory-vracar": "Sushi restaurant at Kursulina 12: signature rolls, gyoza, poke and Japanese-Asian hot dishes. A separate Sushi Factory location."
   }
 }
