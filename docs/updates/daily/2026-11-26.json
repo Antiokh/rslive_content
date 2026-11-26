@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-26",
+  "hours": 24,
+  "generated_at": "2026-11-26T11:30:00.000Z",
+  "commit_count": 1,
+  "article_count": 24,
+  "articles": [
+    {
+      "repo_path": "src/content/docs/sr/crna-lista-stanova/index.mdx",
+      "title": "Црна листа станова",
+      "live_url": "https://rslive.ru/sr/crna-lista-stanova/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/prodavnice-ruskih-proizvoda/index.mdx",
+      "title": "Руске и источноевропске намирнице у Београду",
+      "live_url": "https://rslive.ru/sr/prodavnice-ruskih-proizvoda/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/nepusacki-lokali/index.mdx",
+      "title": "Непушачки локали у Београду",
+      "live_url": "https://rslive.ru/sr/nepusacki-lokali/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/sudski-tumaci/index.mdx",
+      "title": "Судски тумачи за руски језик",
+      "live_url": "https://rslive.ru/sr/sudski-tumaci/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/plesne-sale/index.mdx",
+      "title": "Плесне сале у Србији",
+      "live_url": "https://rslive.ru/sr/plesne-sale/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/rusko-kulturno-nasledje/index.mdx",
+      "title": "Руска душа: руско културно наслеђе у Србији",
+      "live_url": "https://rslive.ru/sr/rusko-kulturno-nasledje/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/mala-rf/index.mdx",
+      "title": "Мала РФ",
+      "live_url": "https://rslive.ru/sr/mala-rf/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/ambasada-rusije/index.mdx",
+      "title": "Амбасада Русије у Србији: адресе и мапе",
+      "live_url": "https://rslive.ru/sr/ambasada-rusije/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/prvi-osnovni-sud/index.mdx",
+      "title": "Први основни суд у Београду",
+      "live_url": "https://rslive.ru/sr/prvi-osnovni-sud/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/uprava-za-strance/index.mdx",
+      "title": "Управа за странце: адресе и контакти",
+      "live_url": "https://rslive.ru/sr/uprava-za-strance/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/banje-srbije/index.mdx",
+      "title": "Бање и термална одмаралишта Србије",
+      "live_url": "https://rslive.ru/sr/banje-srbije/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/mape/index.mdx",
+      "title": "Мапе Србије",
+      "live_url": "https://rslive.ru/sr/mape/",
+      "summaries": [
+        "Додали смо страницу на српском у каталог мапа RSLive-а."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/rental-blacklist/index.mdx",
+      "title": "Rental blacklist",
+      "live_url": "https://rslive.ru/en/rental-blacklist/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/familiar-foods-belgrade/index.mdx",
+      "title": "Russian and Eastern European groceries in Belgrade",
+      "live_url": "https://rslive.ru/en/familiar-foods-belgrade/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/non-smoking-venues/index.mdx",
+      "title": "Non-smoking venues in Belgrade",
+      "live_url": "https://rslive.ru/en/non-smoking-venues/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/court-interpreters/index.mdx",
+      "title": "Court interpreters for Russian",
+      "live_url": "https://rslive.ru/en/court-interpreters/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/dance-studios/index.mdx",
+      "title": "Dance studios in Serbia",
+      "live_url": "https://rslive.ru/en/dance-studios/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/russian-cultural-heritage/index.mdx",
+      "title": "Russian Soul: Russian cultural heritage in Serbia",
+      "live_url": "https://rslive.ru/en/russian-cultural-heritage/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/little-russia/index.mdx",
+      "title": "Little Russia",
+      "live_url": "https://rslive.ru/en/little-russia/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/russian-embassy/index.mdx",
+      "title": "Russian embassy in Serbia: addresses and maps",
+      "live_url": "https://rslive.ru/en/russian-embassy/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/first-basic-court/index.mdx",
+      "title": "First Basic Court in Belgrade",
+      "live_url": "https://rslive.ru/en/first-basic-court/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/foreigners-offices/index.mdx",
+      "title": "Foreigners offices: addresses and contacts",
+      "live_url": "https://rslive.ru/en/foreigners-offices/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/serbian-spa-resorts/index.mdx",
+      "title": "Serbian spas and thermal resorts",
+      "live_url": "https://rslive.ru/en/serbian-spa-resorts/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/maps/index.mdx",
+      "title": "Maps of Serbia",
+      "live_url": "https://rslive.ru/en/maps/",
+      "summaries": [
+        "Added an English page to the RSLive map directory."
+      ]
+    }
+  ]
+}
