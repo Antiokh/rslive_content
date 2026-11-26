@@ -3,7 +3,7 @@
   "hours": 24,
   "generated_at": "2026-11-26T11:30:00.000Z",
   "commit_count": 1,
-  "article_count": 24,
+  "article_count": 28,
   "articles": [
     {
       "repo_path": "src/content/docs/sr/crna-lista-stanova/index.mdx",
@@ -195,6 +195,38 @@
       "live_url": "https://rslive.ru/en/maps/",
       "summaries": [
         "Added an English page to the RSLive map directory."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/russian-businesses-serbia/index.mdx",
+      "title": "Map of Russian-speaking businesses in Serbia",
+      "live_url": "https://rslive.ru/en/russian-businesses-serbia/",
+      "summaries": [
+        "Added a table of businesses shown on the map, with English headings."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/ruskojezicni-biznisi-u-srbiji/index.mdx",
+      "title": "Мапа рускојезичних бизниса у Србији",
+      "live_url": "https://rslive.ru/sr/ruskojezicni-biznisi-u-srbiji/",
+      "summaries": [
+        "Додали смо табелу предузећа приказаних на мапи, са заглављима на српском."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/russian-places-serbia/index.mdx",
+      "title": "Russian-speaking places in Serbia",
+      "live_url": "https://rslive.ru/en/russian-places-serbia/",
+      "summaries": [
+        "Added a table of mapped places and a link to the English Little Russia page."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/ruska-mesta-u-srbiji/index.mdx",
+      "title": "Руска и рускојезична места у Србији",
+      "live_url": "https://rslive.ru/sr/ruska-mesta-u-srbiji/",
+      "summaries": [
+        "Додали смо табелу места са мапе и везу ка страници „Мала РФ“ на српском."
       ]
     }
   ]
