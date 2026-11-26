@@ -3,7 +3,7 @@
   "hours": 24,
   "generated_at": "2026-11-26T13:09:00.000Z",
   "commit_count": 6,
-  "article_count": 48,
+  "article_count": 53,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/dance/index.mdx",
@@ -393,6 +393,46 @@
       "live_url": "https://rslive.ru/sr/about/app/",
       "summaries": [
         "Објавили смо упутство на српском за инсталацију апликације, офлајн читање, ажурирање и брисање сачуваних података."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sources/index.mdx",
+      "title": "Источники",
+      "live_url": "https://rslive.ru/sources/",
+      "summaries": [
+        "Убрали неработающую старую форму и добавили действующий способ предложить ресурс через GitHub, сохранив каталог источников."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/sources/index.mdx",
+      "title": "Sources",
+      "live_url": "https://rslive.ru/en/sources/",
+      "summaries": [
+        "Published the English sources directory with instructions for suggesting resources."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/sources/index.mdx",
+      "title": "Извори",
+      "live_url": "https://rslive.ru/sr/sources/",
+      "summaries": [
+        "Објавили смо каталог извора на српском и упутство за предлагање нових извора."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/travel/index.mdx",
+      "title": "Travelling in Serbia",
+      "live_url": "https://rslive.ru/en/travel/",
+      "summaries": [
+        "Published the English travel directory with itineraries, national park guidance and official sources; untranslated guides are marked explicitly."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/putovanja/index.mdx",
+      "title": "Путовања по Србији",
+      "live_url": "https://rslive.ru/sr/putovanja/",
+      "summaries": [
+        "Објавили смо каталог путовања на српском са предлозима излета, националним парковима и званичним изворима; непреведени водичи су јасно означени."
       ]
     }
   ]
