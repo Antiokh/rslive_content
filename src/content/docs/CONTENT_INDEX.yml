@@ -1464,6 +1464,26 @@ pages:
       - "the request is about: How RSLive handles advertising, paid placement and article curation by subject-matter experts and organizations."
       - "information is needed about “Advertising and article curation”"
     anchors: []
+  - url: "/en/about/app/"
+    title: "App and offline mode"
+    locale: "en"
+    description: "How to install RSLive, read offline, update efficiently and remove the downloaded copy."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: How to install RSLive, read offline, update efficiently and remove the downloaded copy."
+      - "information is needed about “App and offline mode”"
+    anchors: []
+  - url: "/en/about/editorial-policy/"
+    title: "Editorial policy"
+    locale: "en"
+    description: "How RSLive verifies, updates and corrects its articles."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: How RSLive verifies, updates and corrects its articles."
+      - "information is needed about “Editorial policy”"
+    anchors: []
   - url: "/en/about/privacy/"
     title: "Privacy Policy"
     locale: "en"
@@ -1813,6 +1833,26 @@ pages:
     link_when:
       - "the request is about: Map: Serbian spas and thermal resorts."
       - "information is needed about “Serbian spas and thermal resorts”"
+    anchors: []
+  - url: "/en/sources/"
+    title: "Sources"
+    locale: "en"
+    description: "RSLive's directory of information sources and how to suggest a new resource."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: RSLive's directory of information sources and how to suggest a new resource."
+      - "information is needed about “Sources”"
+    anchors: []
+  - url: "/en/travel/"
+    title: "Travelling in Serbia"
+    locale: "en"
+    description: "City trips, historical monuments, national parks and regions of Serbia: planning routes and practical travel considerations."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: City trips, historical monuments, national parks and regions of Serbia: planning routes and practical travel considerations."
+      - "information is needed about “Travelling in Serbia”"
     anchors: []
   - url: "/gov/"
     title: "Государство и бюрократия"
@@ -3667,12 +3707,12 @@ pages:
     anchors: []
   - url: "/sources/"
     title: "Источники"
-    description: "---- struct global ---- schema: sources cols: * csv: 0 max: 1000 ---- ---- Как парсить Telegram Добавить источник action script fetch_title_add_sqlite.php Thanks \"Данные добавлены, обновите страницу.\" fieldset \"Адрес сай"
+    description: "Каталог источников RSLive: ссылки на ресурсы и порядок предложения новых источников."
     tags: ["ссылка", "ресурс"]
     aliases: []
     link_when:
       - "ищешь дополнительные ресурсы"
-      - "запрос связан с темой: ---- struct global ---- schema: sources cols: * csv: 0 max: 1000 ---- ---- Как парсить Telegram Добавить источник action script fetch_title_add_sqlite.php Thanks \"Данные добавлены, обновите страницу.\" fieldset \"Адрес сай"
+      - "запрос связан с темой: Каталог источников RSLive: ссылки на ресурсы и порядок предложения новых источников."
       - "нужна информация по теме «Источники»"
     anchors: []
   - url: "/sr/"
@@ -3711,6 +3751,26 @@ pages:
       - "сербская компания или специалист хочет стать куратором статьи"
       - "упит је о теми: Како RSLive приступа оглашавању, плаћеном позиционирању и кураторству чланака од стране стручњака и организација."
       - "потребне су информације о теми „Оглашавање и кураторство чланака“"
+    anchors: []
+  - url: "/sr/about/app/"
+    title: "Апликација и офлајн режим"
+    locale: "sr"
+    description: "Како инсталирати RSLive, читати без интернета, штедљиво ажурирати и обрисати сачувану копију."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Како инсталирати RSLive, читати без интернета, штедљиво ажурирати и обрисати сачувану копију."
+      - "потребне су информације о теми „Апликација и офлајн режим“"
+    anchors: []
+  - url: "/sr/about/editorial-policy/"
+    title: "Уређивачка политика"
+    locale: "sr"
+    description: "Правила провере, ажурирања и исправљања материјала портала RSLive."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Правила провере, ажурирања и исправљања материјала портала RSLive."
+      - "потребне су информације о теми „Уређивачка политика“"
     anchors: []
   - url: "/sr/about/privacy/"
     title: "Политика приватности"
@@ -3915,6 +3975,16 @@ pages:
       - "упит је о теми: Мапа: Први основни суд у Београду."
       - "потребне су информације о теми „Први основни суд у Београду“"
     anchors: []
+  - url: "/sr/putovanja/"
+    title: "Путовања по Србији"
+    locale: "sr"
+    description: "Маршрути кроз градове, историјске споменике, националне паркове и регионе Србије: планирање путовања и практични савети."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Маршрути кроз градове, историјске споменике, националне паркове и регионе Србије: планирање путовања и практични савети."
+      - "потребне су информације о теми „Путовања по Србији“"
+    anchors: []
   - url: "/sr/rusi-u-srbiji/"
     title: "Руси у Србији"
     locale: "sr"
@@ -4026,6 +4096,16 @@ pages:
       - "читаоцу на српском треба мапа рускојезичних предузећа, продавница и услуга у Србији"
       - "упит је о теми: Редакцијска мапа RSLive-а: рускојезични кафићи, продавнице, услуге, образовање, лепота и забава у Србији, са филтерима по делатности."
       - "потребне су информације о теми „Мапа рускојезичних бизниса у Србији“"
+    anchors: []
+  - url: "/sr/sources/"
+    title: "Извори"
+    locale: "sr"
+    description: "Каталог извора RSLive-а и упутство за предлагање нових извора."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Каталог извора RSLive-а и упутство за предлагање нових извора."
+      - "потребне су информације о теми „Извори“"
     anchors: []
   - url: "/sr/sudski-tumaci/"
     title: "Судски тумачи за руски језик"
