@@ -3,7 +3,7 @@
   "hours": 24,
   "generated_at": "2026-11-26T11:46:27.371Z",
   "commit_count": 3,
-  "article_count": 30,
+  "article_count": 32,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/dance/index.mdx",
@@ -243,6 +243,22 @@
       "live_url": "https://rslive.ru/gov/sanctions/",
       "summaries": [
         "Добавили подробный обзор санкций ЕС и фактических ограничений в Сербии: банки, платежи, экспорт, транспорт, энергетика, миграция и услуги, с отдельным разбором неформальных ограничений и источниками."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/russians-in-serbia/sanctions/index.mdx",
+      "title": "Sanctions against Russia and restrictions affecting Russian citizens in Serbia",
+      "live_url": "https://rslive.ru/en/russians-in-serbia/sanctions/",
+      "summaries": [
+        "Published a complete English edition of the sanctions overview, including official measures, banking practice, informal restrictions and 45 source notes."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/rusi-u-srbiji/sankcije/index.mdx",
+      "title": "Санкције против Русије и ограничења за руске држављане у Србији",
+      "live_url": "https://rslive.ru/sr/rusi-u-srbiji/sankcije/",
+      "summaries": [
+        "Објавили смо потпуну српску верзију прегледа санкција, са званичним мерама, банкарском праксом, неформалним ограничењима и 45 фуснота са изворима."
       ]
     }
   ]
