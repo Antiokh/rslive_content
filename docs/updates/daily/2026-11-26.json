@@ -2,8 +2,8 @@
   "date": "2026-11-26",
   "hours": 24,
   "generated_at": "2026-11-26T13:09:00.000Z",
-  "commit_count": 4,
-  "article_count": 33,
+  "commit_count": 5,
+  "article_count": 44,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/dance/index.mdx",
@@ -273,6 +273,94 @@
       "live_url": "https://rslive.ru/integration/house/",
       "summaries": [
         "Добавили проверку обслуживания отопления, расходов на топливо и теплопотерь перед заменой системы."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/sanctions/index.mdx",
+      "title": "Санкции против России и ограничения для россиян в Сербии",
+      "live_url": "https://rslive.ru/gov/sanctions/",
+      "summaries": [
+        "Добавили подробный обзор санкций ЕС и фактических ограничений в Сербии: банки, платежи, экспорт, транспорт, энергетика, миграция и услуги, с отдельным разбором неформальных ограничений и источниками."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/russians-in-serbia/sanctions/index.mdx",
+      "title": "Sanctions against Russia and restrictions affecting Russian citizens in Serbia",
+      "live_url": "https://rslive.ru/en/russians-in-serbia/sanctions/",
+      "summaries": [
+        "Published a complete English edition of the sanctions overview, including official measures, banking practice, informal restrictions and 45 source notes."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/rusi-u-srbiji/sankcije/index.mdx",
+      "title": "Санкције против Русије и ограничења за руске држављане у Србији",
+      "live_url": "https://rslive.ru/sr/rusi-u-srbiji/sankcije/",
+      "summaries": [
+        "Објавили смо потпуну српску верзију прегледа санкција, са званичним мерама, банкарском праксом, неформалним ограничењима и 45 фуснота са изворима."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/index.mdx",
+      "title": "Государство и бюрократия",
+      "live_url": "https://rslive.ru/gov/",
+      "summaries": [
+        "Добавили переход к обзору санкций против России и ограничений в Сербии: государственные меры, банковская практика и ограничения иностранных контрагентов."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/index.mdx",
+      "title": "Банки и финансы",
+      "live_url": "https://rslive.ru/arrival/bank/",
+      "summaries": [
+        "Добавили переход к обзору санкций и банковских ограничений, который помогает различать требования законодательства, банков и зарубежных корреспондентов."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/index.mdx",
+      "title": "Бизнес в Сербии",
+      "live_url": "https://rslive.ru/arrival/business/",
+      "summaries": [
+        "Добавили переход к обзору санкций и экспортного контроля для бизнеса, связанного с Россией."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/boravak/index.mdx",
+      "title": "РВП и ВНЖ в Сербии",
+      "live_url": "https://rslive.ru/arrival/boravak/",
+      "summaries": [
+        "Добавили ссылку на обзор международных ограничений и отдельных случаев отказов гражданам России."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/index.mdx",
+      "title": "RSLive in English",
+      "live_url": "https://rslive.ru/en/",
+      "summaries": [
+        "Added a link to the English overview of sanctions and restrictions affecting Russian citizens in Serbia."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/russians-in-serbia/index.mdx",
+      "title": "Russians in Serbia",
+      "live_url": "https://rslive.ru/en/russians-in-serbia/",
+      "summaries": [
+        "Added a link to the guide on official sanctions and practical restrictions affecting Russian citizens in Serbia."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/index.mdx",
+      "title": "RSLive на српском",
+      "live_url": "https://rslive.ru/sr/",
+      "summaries": [
+        "Додали смо везу ка прегледу санкција и ограничења за руске држављане у Србији."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/rusi-u-srbiji/index.mdx",
+      "title": "Руси у Србији",
+      "live_url": "https://rslive.ru/sr/rusi-u-srbiji/",
+      "summaries": [
+        "Додали смо везу ка тексту о званичним санкцијама и практичним ограничењима за руске држављане у Србији."
       ]
     }
   ]
