@@ -2,8 +2,8 @@
   "date": "2026-11-26",
   "hours": 24,
   "generated_at": "2026-11-26T11:46:27.371Z",
-  "commit_count": 2,
-  "article_count": 29,
+  "commit_count": 3,
+  "article_count": 30,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/dance/index.mdx",
@@ -235,6 +235,14 @@
       "live_url": "https://rslive.ru/sr/ruska-mesta-u-srbiji/",
       "summaries": [
         "Додали смо табелу места са мапе и везу ка страници „Мала РФ“ на српском."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/sanctions/index.mdx",
+      "title": "Санкции против России и ограничения для россиян в Сербии",
+      "live_url": "https://rslive.ru/gov/sanctions/",
+      "summaries": [
+        "Добавили подробный обзор санкций ЕС и фактических ограничений в Сербии: банки, платежи, экспорт, транспорт, энергетика, миграция и услуги, с отдельным разбором неформальных ограничений и источниками."
       ]
     }
   ]
