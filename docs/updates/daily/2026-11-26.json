@@ -2,8 +2,8 @@
   "date": "2026-11-26",
   "hours": 24,
   "generated_at": "2026-11-26T13:09:00.000Z",
-  "commit_count": 5,
-  "article_count": 44,
+  "commit_count": 6,
+  "article_count": 48,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/dance/index.mdx",
@@ -361,6 +361,38 @@
       "live_url": "https://rslive.ru/sr/rusi-u-srbiji/",
       "summaries": [
         "Додали смо везу ка тексту о званичним санкцијама и практичним ограничењима за руске држављане у Србији."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/about/editorial-policy/index.mdx",
+      "title": "Editorial policy",
+      "live_url": "https://rslive.ru/en/about/editorial-policy/",
+      "summaries": [
+        "Published an English version of the editorial policy, explaining source verification, dates, authorship and corrections."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/about/editorial-policy/index.mdx",
+      "title": "Уређивачка политика",
+      "live_url": "https://rslive.ru/sr/about/editorial-policy/",
+      "summaries": [
+        "Објавили смо уређивачку политику на српском: хијерархија извора, датуми провере, ауторство и исправке."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/about/app/index.mdx",
+      "title": "App and offline mode",
+      "live_url": "https://rslive.ru/en/about/app/",
+      "summaries": [
+        "Published an English guide to installing RSLive, offline downloads, incremental updates and removing saved data."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/about/app/index.mdx",
+      "title": "Апликација и офлајн режим",
+      "live_url": "https://rslive.ru/sr/about/app/",
+      "summaries": [
+        "Објавили смо упутство на српском за инсталацију апликације, офлајн читање, ажурирање и брисање сачуваних података."
       ]
     }
   ]
