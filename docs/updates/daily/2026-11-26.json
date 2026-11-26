@@ -1,9 +1,9 @@
 {
   "date": "2026-11-26",
   "hours": 24,
-  "generated_at": "2026-11-26T11:46:27.371Z",
-  "commit_count": 3,
-  "article_count": 32,
+  "generated_at": "2026-11-26T13:09:00.000Z",
+  "commit_count": 5,
+  "article_count": 44,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/dance/index.mdx",
@@ -26,7 +26,8 @@
       "title": "Руске и источноевропске намирнице у Београду",
       "live_url": "https://rslive.ru/sr/prodavnice-ruskih-proizvoda/",
       "summaries": [
-        "Додали смо страницу на српском у каталог мапа RSLive-а."
+        "Додали смо страницу на српском у каталог мапа RSLive-а.",
+        "Превели смо описе свих 31 продавнице на мапи на српски."
       ]
     },
     {
@@ -98,7 +99,8 @@
       "title": "Бање и термална одмаралишта Србије",
       "live_url": "https://rslive.ru/sr/banje-srbije/",
       "summaries": [
-        "Додали смо страницу на српском у каталог мапа RSLive-а."
+        "Додали смо страницу на српском у каталог мапа RSLive-а.",
+        "Превели смо описе свих 32 бањске и термалне дестинације на српски."
       ]
     },
     {
@@ -122,7 +124,8 @@
       "title": "Russian and Eastern European groceries in Belgrade",
       "live_url": "https://rslive.ru/en/familiar-foods-belgrade/",
       "summaries": [
-        "Added an English page to the RSLive map directory."
+        "Added an English page to the RSLive map directory.",
+        "Translated the descriptions of all 31 grocery map locations into English."
       ]
     },
     {
@@ -194,7 +197,8 @@
       "title": "Serbian spas and thermal resorts",
       "live_url": "https://rslive.ru/en/serbian-spa-resorts/",
       "summaries": [
-        "Added an English page to the RSLive map directory."
+        "Added an English page to the RSLive map directory.",
+        "Translated the descriptions of all 32 spa and thermal resort locations into English."
       ]
     },
     {
@@ -210,7 +214,8 @@
       "title": "Map of Russian-speaking businesses in Serbia",
       "live_url": "https://rslive.ru/en/russian-businesses-serbia/",
       "summaries": [
-        "Added a table of businesses shown on the map, with English headings."
+        "Added a table of businesses shown on the map, with English headings.",
+        "Explained the red and blue ALTA map markers and what the documented connection does and does not establish."
       ]
     },
     {
@@ -218,7 +223,8 @@
       "title": "Мапа рускојезичних бизниса у Србији",
       "live_url": "https://rslive.ru/sr/ruskojezicni-biznisi-u-srbiji/",
       "summaries": [
-        "Додали смо табелу предузећа приказаних на мапи, са заглављима на српском."
+        "Додали смо табелу предузећа приказаних на мапи, са заглављима на српском.",
+        "Објаснили смо значење црвених и плавих ознака ALTA и ограничења потврђене везе."
       ]
     },
     {
@@ -235,6 +241,38 @@
       "live_url": "https://rslive.ru/sr/ruska-mesta-u-srbiji/",
       "summaries": [
         "Додали смо табелу места са мапе и везу ка страници „Мала РФ“ на српском."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/heating/index.mdx",
+      "title": "Отопление жилья в Сербии",
+      "live_url": "https://rslive.ru/move/housing/heating/",
+      "summaries": [
+        "Добавили обзор систем отопления, расчёты AERS на сезон 2026/2027, пример расхода по зонам EPS и чек-лист для аренды и покупки жилья."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/move/housing/index.mdx",
+      "title": "Поиск жилья",
+      "live_url": "https://rslive.ru/move/housing/",
+      "summaries": [
+        "Добавили переход к сравнению систем отопления и сезонных расходов."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/integration/properties/index.mdx",
+      "title": "Недвижимость в Сербии",
+      "live_url": "https://rslive.ru/integration/properties/",
+      "summaries": [
+        "Добавили проверку годовых расходов на отопление и затрат на ремонт системы перед покупкой."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/integration/house/index.mdx",
+      "title": "Покупка дома в Сербии",
+      "live_url": "https://rslive.ru/integration/house/",
+      "summaries": [
+        "Добавили проверку обслуживания отопления, расходов на топливо и теплопотерь перед заменой системы."
       ]
     },
     {
@@ -259,6 +297,70 @@
       "live_url": "https://rslive.ru/sr/rusi-u-srbiji/sankcije/",
       "summaries": [
         "Објавили смо потпуну српску верзију прегледа санкција, са званичним мерама, банкарском праксом, неформалним ограничењима и 45 фуснота са изворима."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/index.mdx",
+      "title": "Государство и бюрократия",
+      "live_url": "https://rslive.ru/gov/",
+      "summaries": [
+        "Добавили переход к обзору санкций против России и ограничений в Сербии: государственные меры, банковская практика и ограничения иностранных контрагентов."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/index.mdx",
+      "title": "Банки и финансы",
+      "live_url": "https://rslive.ru/arrival/bank/",
+      "summaries": [
+        "Добавили переход к обзору санкций и банковских ограничений, который помогает различать требования законодательства, банков и зарубежных корреспондентов."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/business/index.mdx",
+      "title": "Бизнес в Сербии",
+      "live_url": "https://rslive.ru/arrival/business/",
+      "summaries": [
+        "Добавили переход к обзору санкций и экспортного контроля для бизнеса, связанного с Россией."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/boravak/index.mdx",
+      "title": "РВП и ВНЖ в Сербии",
+      "live_url": "https://rslive.ru/arrival/boravak/",
+      "summaries": [
+        "Добавили ссылку на обзор международных ограничений и отдельных случаев отказов гражданам России."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/index.mdx",
+      "title": "RSLive in English",
+      "live_url": "https://rslive.ru/en/",
+      "summaries": [
+        "Added a link to the English overview of sanctions and restrictions affecting Russian citizens in Serbia."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/russians-in-serbia/index.mdx",
+      "title": "Russians in Serbia",
+      "live_url": "https://rslive.ru/en/russians-in-serbia/",
+      "summaries": [
+        "Added a link to the guide on official sanctions and practical restrictions affecting Russian citizens in Serbia."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/index.mdx",
+      "title": "RSLive на српском",
+      "live_url": "https://rslive.ru/sr/",
+      "summaries": [
+        "Додали смо везу ка прегледу санкција и ограничења за руске држављане у Србији."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/rusi-u-srbiji/index.mdx",
+      "title": "Руси у Србији",
+      "live_url": "https://rslive.ru/sr/rusi-u-srbiji/",
+      "summaries": [
+        "Додали смо везу ка тексту о званичним санкцијама и практичним ограничењима за руске држављане у Србији."
       ]
     }
   ]

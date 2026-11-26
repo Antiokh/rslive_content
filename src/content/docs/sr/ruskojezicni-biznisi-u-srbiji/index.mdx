@@ -15,12 +15,14 @@ linking:
 
 Ова **редакцијска мапа RSLive-а** обједињује рускојезичне и са рускојезичном заједницом повезане кафиће, ресторане, барове, продавнице, услуге, образовање, лепоту, здравље и слободне активности у Србији. Помоћу **филтера категорија** можете приказати само одређену делатност.
 
+**Црвене ознаке** означавају документовану везу са ALTA банком, а извор потврде наведен је у картици. **Плаве ознаке** значе да веза још није потврђена; оне не доказују да предузеће није имало рачун у ALTA нити да није претрпело штету. Рачун у другој банци не поништава потврђену везу са ALTA банком. Сам податак о рачуну не доказује висину штете нити ко је прихватилац картичних плаћања.[^1][^2]
+
 <MapEmbed
   src="/map-renderer-v2/?source=rslive-dataset%3Arussian-businesses&lang=sr"
   offlineSrc="/map-renderer-v2/?source=rslive-dataset%3Arussian-businesses&lang=sr"
   renderer="maplibre"
   title="Рускојезични бизниси у Србији"
-  caption="Редакцијски подаци RSLive-а. На мапи су само објављени бизниси са провереним координатама."
+  caption="Мапа RSLive-а: црвено — документована веза са ALTA; плаво — веза још није потврђена."
   height="72vh"
   regions={['belgrade', 'novi-sad', 'nis', 'subotica']}
   SerbiaMap
@@ -42,3 +44,6 @@ linking:
 - [Именик рускојезичних бизниса](/sr/imenik-ruskojezicnih-biznisa/) — укључује и предузећа без координата.
 
 [Предложите бизнис за редакцијску проверу](https://github.com/Antiokh/rslive_content/issues/new?template=russian-business.yml). Образац на GitHub-у тренутно је на руском.
+
+[^1]: [Заједно уз руске бизнисе — проверени списак](https://docs.google.com/spreadsheets/d/1IBRo4Frwh6ph5q1Bykk8JeNIzJwntW5JVyS1YGQXJCE/edit?gid=0#gid=0).
+[^2]: [Народна банка Србије — регистар рачуна правних лица](https://webappcenter.nbs.rs/PnWebApp/CompanyAccount/CompanyAccountResident/Index?isSearchExecuted=false); [CompanyWall — пример рачуна са префиксом 190](https://www.companywall.rs/firma/askona/MMxBpJl8D). Детаљан поступак провере и врсте доказа описани су у [руском издању](/map/russian-businesses/).
