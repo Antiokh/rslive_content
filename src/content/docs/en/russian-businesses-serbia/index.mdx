@@ -15,15 +15,18 @@ linking:
 
 This **RSLive editorial map** brings together Russian-speaking and Russian-community cafés, restaurants, bars, shops, services, education, beauty and wellness, and leisure businesses in Serbia. Use the map's **category filter** to view one type of business at a time.
 
+**Red markers** indicate a documented connection to ALTA banka, with the evidence source identified in the card. **Blue markers** mean that this connection has not yet been verified; they do not establish that a business had no ALTA account or suffered no loss. The presence of an account at another bank does not negate a confirmed ALTA connection. An ALTA account alone does not establish the amount of loss or the card-payment acquirer.[^1][^2]
+
 <MapEmbed
   src="/map-renderer-v2/?source=rslive-dataset%3Arussian-businesses&lang=en"
   offlineSrc="/map-renderer-v2/?source=rslive-dataset%3Arussian-businesses&lang=en"
   renderer="maplibre"
   title="Russian-speaking businesses in Serbia"
-  caption="RSLive editorial dataset. Only published businesses with verified coordinates appear on the map."
+  caption="RSLive map: red — documented ALTA connection; blue — not yet verified."
   height="72vh"
   regions={['belgrade', 'novi-sad', 'nis', 'subotica']}
   SerbiaMap
+  showTable
 />
 
 <Aside type="note" title="Why some businesses are not shown as map pins">
@@ -41,3 +44,6 @@ This map combines the previously reviewed [Russian-speaking cafés, bars and sho
 - [Full Russian-speaking business directory](/en/russian-business-directory/) — also includes businesses without map coordinates.
 
 You can [propose a business for editorial review](https://github.com/Antiokh/rslive_content/issues/new?template=russian-business.yml). The GitHub submission form is currently in Russian.
+
+[^1]: [Zajedno uz ruske biznise — verified list](https://docs.google.com/spreadsheets/d/1IBRo4Frwh6ph5q1Bykk8JeNIzJwntW5JVyS1YGQXJCE/edit?gid=0#gid=0).
+[^2]: [National Bank of Serbia — register of company accounts](https://webappcenter.nbs.rs/PnWebApp/CompanyAccount/CompanyAccountResident/Index?isSearchExecuted=false); [CompanyWall — example of accounts with prefix 190](https://www.companywall.rs/firma/askona/MMxBpJl8D). See the [Russian edition](/map/russian-businesses/) for the detailed verification method and evidence types.
