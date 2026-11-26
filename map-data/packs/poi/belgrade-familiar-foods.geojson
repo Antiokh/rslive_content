@@ -44,36 +44,718 @@
     "attribution": "RSLive first-party thematic dataset compiled from the familiar-foods article, the committed «Маленькая РФ» snapshot and current public store/delivery sources; per-feature provenance is retained."
   },
   "features": [
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4545188,44.826551]},"properties":{"id":"berezka-dorcol","name":"Berezka — Dorćol","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Bulevar Vojvode Bojovića 4v. Ищите: ряженку и другие молочные продукты, бородинский хлеб, селёдку и другую рыбу, икру, квас, пельмени и вареники, сырники, чай и сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://wolt.com/sr/srb/belgrade/venue/berezka-market","mapUrl":"https://www.google.com/maps/search/?api=1&query=44.826551%2C20.4545188"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4927835,44.7944988]},"properties":{"id":"berezka-vracar","name":"Berezka — Vračar","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Vojislava Ilića 29. Ищите: ряженку и другие молочные продукты, бородинский хлеб, селёдку и другую рыбу, икру, квас, пельмени и вареники, сырники, чай и сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://wolt.com/sr/srb/belgrade/venue/berezka-market-vracar","mapUrl":"https://www.google.com/maps/search/?api=1&query=44.7944988%2C20.4927835"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.3956933,44.8157007]},"properties":{"id":"berezka-novi-beograd","name":"Berezka — Novi Beograd","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Bulevar Heroja sa Košara 2v. Ищите: ряженку и другие молочные продукты, бородинский хлеб, селёдку и другую рыбу, икру, квас, пельмени и вареники, сырники, чай и сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://wolt.com/sr/srb/belgrade/venue/berezka-market-novi-beograd","mapUrl":"https://www.google.com/maps/search/?api=1&query=44.8157007%2C20.3956933"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4552646,44.8037709]},"properties":{"id":"berezka-sarajevska","name":"Berezka — Sarajevska","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Sarajevska 27. Ищите: ряженку и другие молочные продукты, бородинский хлеб, селёдку и другую рыбу, икру, квас, пельмени и вареники, сырники, чай и сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://wolt.com/sr/srb/belgrade/venue/berezka-market-stari-grad","mapUrl":"https://www.google.com/maps/search/?api=1&query=Berezka%20Market%20Sarajevska%2027%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.462817,44.815005]},"properties":{"id":"mix-markt-decanska","name":"Mix Markt — Dečanska","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Dečanska 5. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://www.mixmarkt.eu/sr/srbija/prodavnice/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Decanska%205%20Beograd&query_place_id=ChIJzUGVji17WkcRSt_-PW8YaMM"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.472777,44.813003]},"properties":{"id":"mix-markt-27-marta","name":"Mix Markt — 27 Marta","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: 27 Marta 7. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://www.mixmarkt.eu/sr/srbija/prodavnice/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Mix%20Markt%2027%20Marta%207%20Beograd&query_place_id=ChIJSYjlSwB7WkcRiOH5hEXsIhg"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.451531,44.800866]},"properties":{"id":"mix-markt-sarajevska","name":"Mix Markt — Sarajevska","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Sarajevska 70. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://www.mixmarkt.eu/sr/srbija/prodavnice/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Sarajevska%2070%20Beograd&query_place_id=ChIJr9WObABxWkcRW4MVBoIv1qQ"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.479008,44.803729]},"properties":{"id":"mix-markt-bulevar-kralja-aleksandra","name":"Mix Markt — Bulevar Kralja Aleksandra","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Bulevar Kralja Aleksandra 124. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://www.mixmarkt.eu/sr/srbija/prodavnice/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Bulevar%20Kralja%20Aleksandra%20124%20Beograd&query_place_id=ChIJzVJ9mEp7WkcRXD7Iizt-Wr8"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4641794,44.8074145]},"properties":{"id":"mix-markt-kralja-milana","name":"Mix Markt — Kralja Milana","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Kralja Milana 21. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-19","provenanceUrl":"https://www.mixmarkt.eu/sr/srbija/prodavnice/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Kralja%20Milana%2021%20Beograd&query_place_id=ChIJzbzcWrx7WkcRT7zirdX1w3M"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.3965,44.8153]},"properties":{"id":"mix-markt-tadije-sondermajera","name":"Mix Markt — Tadije Sondermajera","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Tadije Sondermajera 10И. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-19","provenanceUrl":"https://www.mixmarkt.eu/sr/srbija/prodavnice/20489/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Tadije%20Sondermajera%2010I%20Beograd&query_place_id=ChIJr_sbOL9vWkcR6L4Ry74fsHQ"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.400102,44.805048]},"properties":{"id":"mix-markt-jurija-gagarina","name":"Mix Markt — Jurija Gagarina","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Jurija Gagarina 22D, lokal 4. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://www.mixmarkt.eu/sr/srbija/prodavnice/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Jurija%20Gagarina%2022D%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.477235,44.80397]},"properties":{"id":"assorti-konfeta","name":"ASSORTI / Konfeta","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Golsvordijeva 33. Восточноевропейские продукты и сладости; полезная точка для привычных импортных товаров. Ассортимент меняется.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://www.waze.com/live-map/directions/rs/bg/assorti-konfeta-eastern-european-food-and-drinks-store?to=place.ChIJ7ecYWS97WkcRP_9bIOLs2CA","mapUrl":"https://www.google.com/maps/search/?api=1&query=ASSORTI%20Konfeta%20Golsvordijeva%2033&query_place_id=ChIJ7ecYWS97WkcRP_9bIOLs2CA"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.476499,44.818219]},"properties":{"id":"rusmarket-cvijiceva","name":"RusMarket — Cvijićeva","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Cvijićeva 18. Русские продукты и импортная бакалея; сюда имеет смысл идти за привычными марками и товарами, которых нет в обычном супермаркете. Ассортимент меняется.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://t.me/s/RusMarketBeograd","mapUrl":"https://www.google.com/maps/search/?api=1&query=RusMarket%20Cvijiceva%2018%20Beograd&query_place_id=ChIJBT9uagB7WkcRSJBJ1ZZEMqM"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4790063,44.768938]},"properties":{"id":"gubernija-rusmarket","name":"Gubernija RusMarket","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Vojvode Stepe 264. Ищите: гречку, бородинский хлеб, рыбу, молочные продукты, сгущёнку, квас, чёрный чай и сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://wolt.com/sr/srb/belgrade/venue/ruski-market-td-prk-5","mapUrl":"https://www.google.com/maps/search/?api=1&query=44.768938%2C20.4790063"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4535397,44.8136817]},"properties":{"id":"ura-store","name":"URA Store","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Kraljevića Marka 11. Ищите прежде всего пельмени и вареники: с мясом, курицей, картофелем, вишней, творогом и другими начинками. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://wolt.com/sr/srb/belgrade/venue/ura-store","mapUrl":"https://www.google.com/maps/search/?api=1&query=44.8136817%2C20.4535397"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4598428,44.8110176]},"properties":{"id":"ruski-market-5-oclock","name":"Ruski market 5 o'clock","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Balkanska 27. Специализированная точка для чёрного и ароматизированного чая: Earl Grey, чай с ягодами и добавками, пуэр, улун; есть также кофе и сладости. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://wolt.com/sr/srb/belgrade/venue/ruski-market-5-oclock","mapUrl":"https://www.google.com/maps/search/?api=1&query=44.8110176%2C20.4598428"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4693,44.7958]},"properties":{"id":"fix-price-branicevska","name":"Fix Price — Braničevska","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Braničevska 7. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется, наличие конкретного товара не гарантируется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://fix-price.rs/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Branicevska%207%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4807059,44.7979827]},"properties":{"id":"fix-price-cara-nikolaja-ii","name":"Fix Price — Cara Nikolaja II","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Cara Nikolaja II 58. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется, наличие конкретного товара не гарантируется.","sourceId":"manual:web-research:2026-09-09","provenanceUrl":"https://fix-price.rs/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Cara%20Nikolaja%20II%2058%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.486448,44.819805]},"properties":{"id":"svetofor-viline-vode","name":"Светофор — Viline vode","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Viline vode 47. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://svetofor.rs/kontakt/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Svetofor%20Viline%20vode%2047%20Beograd&query_place_id=ChIJ2554EQB7WkcRpt-nPxCvMgw"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.485658,44.766015]},"properties":{"id":"svetofor-peka-dapcevica","name":"Светофор — Bulevar Peka Dapčevića","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Bulevar Peka Dapčevića 28. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://svetofor.rs/kontakt/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Svetofor%20Bulevar%20Peka%20Dapcevica%2028%20Beograd&query_place_id=ChIJi3QBJh9xWkcRSDRMjIooTaM"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.510516,44.776968]},"properties":{"id":"svetofor-konjarnik","name":"Светофор — Konjarnik","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Vladimira Tomanovića 59. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://svetofor.rs/kontakt/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Svetofor%20Vladimira%20Tomanovica%2059%20Beograd&query_place_id=ChIJ0wRoNgBxWkcRSlh145oHKT0"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.551901,44.773789]},"properties":{"id":"svetofor-smederevski-put","name":"Светофор — Smederevski put","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Smederevski put 25M. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://svetofor.rs/kontakt/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Svetofor%20Smederevski%20put%2025M%20Beograd&query_place_id=ChIJ7xs2WQB3WkcR99kd7Wra3FU"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.380409,44.823032]},"properties":{"id":"svetofor-rajkova","name":"Светофор — Rajkova","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Rajkova 22. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://svetofor.rs/kontakt/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Svetofor%20Rajkova%2022%20Beograd&query_place_id=ChIJ3c0psnJlWkcRFaLLTTwINkA"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.590064,44.733226]},"properties":{"id":"svetofor-lestane","name":"Светофор — Leštane","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Kružni put bb, Leštane. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.","sourceId":"google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804","provenanceUrl":"https://svetofor.rs/kontakt/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Svetofor%20Lestane%20Kruzni%20put%20bb&query_place_id=ChIJUzxAdgB3WkcRl5ppJFqzDnI"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4019,44.8065]},"properties":{"id":"prva-ruska-kuhinja-novi-beograd","name":"Prva ruska kuhinja — Novi Beograd","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Uroša Martinovića 5. Русская гастрономия и магазин: замороженные продукты, готовые блюда, творог, мясные и рыбные продукты, хлеб, сладости и снеки. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-26","provenanceUrl":"https://wolt.com/sr/srb/belgrade/venue/prva-ruska-kuhinja-novi-beograd","mapUrl":"https://www.google.com/maps/search/?api=1&query=Prva%20ruska%20kuhinja%20Urosa%20Martinovica%205%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4689,44.819]},"properties":{"id":"rusmarket-djordja-jovanovica","name":"RusMarket — Đorđa Jovanovića","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Đorđa Jovanovića 19. Русские продукты и импортная бакалея; точка для привычных марок и товаров, которых может не быть в обычном супермаркете. Ассортимент меняется.","sourceId":"manual:web-research:2026-09-26","provenanceUrl":"https://www.kaza.rs/zgrada/beograd/djordja-jovanovica/19","mapUrl":"https://www.google.com/maps/search/?api=1&query=RusMarket%20Djordja%20Jovanovica%2019%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4857,44.7901]},"properties":{"id":"fix-price-krusevacka","name":"Fix Price — Kruševačka","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Kruševačka 22. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется.","sourceId":"manual:web-research:2026-09-26","provenanceUrl":"https://fix-price.rs/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Krusevacka%2022%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.48131,44.7654]},"properties":{"id":"fix-price-vojvode-stepe","name":"Fix Price — Vojvode Stepe","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Vojvode Stepe 312, комплекс Voždove kapije. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется.","sourceId":"manual:web-research:2026-09-26","provenanceUrl":"https://fix-price.rs/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Vojvode%20Stepe%20312%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.506535,44.798288]},"properties":{"id":"fix-price-cingrijina","name":"Fix Price — Čingrijina","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Čingrijina 13A. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется.","sourceId":"manual:web-research:2026-09-26","provenanceUrl":"https://fix-price.rs/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Cingrijina%2013A%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4235,44.7825]},"properties":{"id":"fix-price-pozeska","name":"Fix Price — Požeška","category":"shop","storeType":"budget-chain","markerIcon":"food","description":"Адрес: Požeška 31, Banovo brdo. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется.","sourceId":"manual:web-research:2026-09-26","provenanceUrl":"https://fix-price.rs/","mapUrl":"https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Pozeska%2031%20Beograd"}},
-    {"type":"Feature","geometry":{"type":"Point","coordinates":[20.4529884,44.8282861]},"properties":{"id":"multi-cook-dunavska","name":"Multi Cook","category":"shop","storeType":"specialty","markerIcon":"food","description":"Адрес: Dunavska 2Ž. Handmade frozen food: пельмени, наггетсы, фаршированный перец, сарма, жюльен, блинчики, колбасы, плескавицы, ćuфте и другие замороженные полуфабрикаты. Точка открылась 26 сентября 2026 года; ассортимент меняется.","sourceId":"user-report:2026-09-26","provenanceUrl":"https://maps.app.goo.gl/FGwYn76hLnmpy8fh9","mapUrl":"https://www.google.com/maps/search/?api=1&query=44.8282861%2C20.4529884"}}
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4545188,
+          44.826551
+        ]
+      },
+      "properties": {
+        "id": "berezka-dorcol",
+        "name": "Berezka — Dorćol",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Bulevar Vojvode Bojovića 4v. Ищите: ряженку и другие молочные продукты, бородинский хлеб, селёдку и другую рыбу, икру, квас, пельмени и вареники, сырники, чай и сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://wolt.com/sr/srb/belgrade/venue/berezka-market",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=44.826551%2C20.4545188",
+        "descriptionEn": "Address: Bulevar Vojvode Bojovića 4v. Look for ryazhenka and other dairy products, Borodinsky bread, herring and other fish, roe, kvass, pelmeni and vareniki, syrniki, tea and sweets. Stock changes.",
+        "descriptionSr": "Адреса: Bulevar Vojvode Bojovića 4v. Потражите рјаженку и друге млечне производе, бородински хлеб, харингу и другу рибу, икру, квас, пелмене и варенике, сирнике, чај и слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4927835,
+          44.7944988
+        ]
+      },
+      "properties": {
+        "id": "berezka-vracar",
+        "name": "Berezka — Vračar",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Vojislava Ilića 29. Ищите: ряженку и другие молочные продукты, бородинский хлеб, селёдку и другую рыбу, икру, квас, пельмени и вареники, сырники, чай и сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://wolt.com/sr/srb/belgrade/venue/berezka-market-vracar",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=44.7944988%2C20.4927835",
+        "descriptionEn": "Address: Vojislava Ilića 29. Look for ryazhenka and other dairy products, Borodinsky bread, herring and other fish, roe, kvass, pelmeni and vareniki, syrniki, tea and sweets. Stock changes.",
+        "descriptionSr": "Адреса: Vojislava Ilića 29. Потражите рјаженку и друге млечне производе, бородински хлеб, харингу и другу рибу, икру, квас, пелмене и варенике, сирнике, чај и слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.3956933,
+          44.8157007
+        ]
+      },
+      "properties": {
+        "id": "berezka-novi-beograd",
+        "name": "Berezka — Novi Beograd",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Bulevar Heroja sa Košara 2v. Ищите: ряженку и другие молочные продукты, бородинский хлеб, селёдку и другую рыбу, икру, квас, пельмени и вареники, сырники, чай и сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://wolt.com/sr/srb/belgrade/venue/berezka-market-novi-beograd",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=44.8157007%2C20.3956933",
+        "descriptionEn": "Address: Bulevar Heroja sa Košara 2v. Look for ryazhenka and other dairy products, Borodinsky bread, herring and other fish, roe, kvass, pelmeni and vareniki, syrniki, tea and sweets. Stock changes.",
+        "descriptionSr": "Адреса: Bulevar Heroja sa Košara 2v. Потражите рјаженку и друге млечне производе, бородински хлеб, харингу и другу рибу, икру, квас, пелмене и варенике, сирнике, чај и слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4552646,
+          44.8037709
+        ]
+      },
+      "properties": {
+        "id": "berezka-sarajevska",
+        "name": "Berezka — Sarajevska",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Sarajevska 27. Ищите: ряженку и другие молочные продукты, бородинский хлеб, селёдку и другую рыбу, икру, квас, пельмени и вареники, сырники, чай и сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://wolt.com/sr/srb/belgrade/venue/berezka-market-stari-grad",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Berezka%20Market%20Sarajevska%2027%20Beograd",
+        "descriptionEn": "Address: Sarajevska 27. Look for ryazhenka and other dairy products, Borodinsky bread, herring and other fish, roe, kvass, pelmeni and vareniki, syrniki, tea and sweets. Stock changes.",
+        "descriptionSr": "Адреса: Sarajevska 27. Потражите рјаженку и друге млечне производе, бородински хлеб, харингу и другу рибу, икру, квас, пелмене и варенике, сирнике, чај и слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.462817,
+          44.815005
+        ]
+      },
+      "properties": {
+        "id": "mix-markt-decanska",
+        "name": "Mix Markt — Dečanska",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Dečanska 5. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://www.mixmarkt.eu/sr/srbija/prodavnice/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Decanska%205%20Beograd&query_place_id=ChIJzUGVji17WkcRSt_-PW8YaMM",
+        "descriptionEn": "Address: Dečanska 5. Look for Borodinsky bread, herring and other fish, roe, Doktorskaya and other sausages, kvass, pelmeni, tea, zefir and other Eastern European sweets. Stock changes.",
+        "descriptionSr": "Адреса: Dečanska 5. Потражите бородински хлеб, харингу и другу рибу, икру, докторску и друге кобасице, квас, пелмене, чај, зефир и друге источноевропске слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.472777,
+          44.813003
+        ]
+      },
+      "properties": {
+        "id": "mix-markt-27-marta",
+        "name": "Mix Markt — 27 Marta",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: 27 Marta 7. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://www.mixmarkt.eu/sr/srbija/prodavnice/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mix%20Markt%2027%20Marta%207%20Beograd&query_place_id=ChIJSYjlSwB7WkcRiOH5hEXsIhg",
+        "descriptionEn": "Address: 27 Marta 7. Look for Borodinsky bread, herring and other fish, roe, Doktorskaya and other sausages, kvass, pelmeni, tea, zefir and other Eastern European sweets. Stock changes.",
+        "descriptionSr": "Адреса: 27 Marta 7. Потражите бородински хлеб, харингу и другу рибу, икру, докторску и друге кобасице, квас, пелмене, чај, зефир и друге источноевропске слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.451531,
+          44.800866
+        ]
+      },
+      "properties": {
+        "id": "mix-markt-sarajevska",
+        "name": "Mix Markt — Sarajevska",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Sarajevska 70. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://www.mixmarkt.eu/sr/srbija/prodavnice/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Sarajevska%2070%20Beograd&query_place_id=ChIJr9WObABxWkcRW4MVBoIv1qQ",
+        "descriptionEn": "Address: Sarajevska 70. Look for Borodinsky bread, herring and other fish, roe, Doktorskaya and other sausages, kvass, pelmeni, tea, zefir and other Eastern European sweets. Stock changes.",
+        "descriptionSr": "Адреса: Sarajevska 70. Потражите бородински хлеб, харингу и другу рибу, икру, докторску и друге кобасице, квас, пелмене, чај, зефир и друге источноевропске слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.479008,
+          44.803729
+        ]
+      },
+      "properties": {
+        "id": "mix-markt-bulevar-kralja-aleksandra",
+        "name": "Mix Markt — Bulevar Kralja Aleksandra",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Bulevar Kralja Aleksandra 124. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://www.mixmarkt.eu/sr/srbija/prodavnice/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Bulevar%20Kralja%20Aleksandra%20124%20Beograd&query_place_id=ChIJzVJ9mEp7WkcRXD7Iizt-Wr8",
+        "descriptionEn": "Address: Bulevar Kralja Aleksandra 124. Look for Borodinsky bread, herring and other fish, roe, Doktorskaya and other sausages, kvass, pelmeni, tea, zefir and other Eastern European sweets. Stock changes.",
+        "descriptionSr": "Адреса: Bulevar Kralja Aleksandra 124. Потражите бородински хлеб, харингу и другу рибу, икру, докторску и друге кобасице, квас, пелмене, чај, зефир и друге источноевропске слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4641794,
+          44.8074145
+        ]
+      },
+      "properties": {
+        "id": "mix-markt-kralja-milana",
+        "name": "Mix Markt — Kralja Milana",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Kralja Milana 21. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-19",
+        "provenanceUrl": "https://www.mixmarkt.eu/sr/srbija/prodavnice/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Kralja%20Milana%2021%20Beograd&query_place_id=ChIJzbzcWrx7WkcRT7zirdX1w3M",
+        "descriptionEn": "Address: Kralja Milana 21. Look for Borodinsky bread, herring and other fish, roe, Doktorskaya and other sausages, kvass, pelmeni, tea, zefir and other Eastern European sweets. Stock changes.",
+        "descriptionSr": "Адреса: Kralja Milana 21. Потражите бородински хлеб, харингу и другу рибу, икру, докторску и друге кобасице, квас, пелмене, чај, зефир и друге источноевропске слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.3965,
+          44.8153
+        ]
+      },
+      "properties": {
+        "id": "mix-markt-tadije-sondermajera",
+        "name": "Mix Markt — Tadije Sondermajera",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Tadije Sondermajera 10И. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-19",
+        "provenanceUrl": "https://www.mixmarkt.eu/sr/srbija/prodavnice/20489/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Tadije%20Sondermajera%2010I%20Beograd&query_place_id=ChIJr_sbOL9vWkcR6L4Ry74fsHQ",
+        "descriptionEn": "Address: Tadije Sondermajera 10И. Look for Borodinsky bread, herring and other fish, roe, Doktorskaya and other sausages, kvass, pelmeni, tea, zefir and other Eastern European sweets. Stock changes.",
+        "descriptionSr": "Адреса: Tadije Sondermajera 10И. Потражите бородински хлеб, харингу и другу рибу, икру, докторску и друге кобасице, квас, пелмене, чај, зефир и друге источноевропске слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.400102,
+          44.805048
+        ]
+      },
+      "properties": {
+        "id": "mix-markt-jurija-gagarina",
+        "name": "Mix Markt — Jurija Gagarina",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Jurija Gagarina 22D, lokal 4. Ищите: бородинский хлеб, селёдку и другую рыбу, икру, «Докторскую» и другие колбасы, квас, пельмени, чай, зефир и другие восточноевропейские сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://www.mixmarkt.eu/sr/srbija/prodavnice/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mix%20Markt%20Jurija%20Gagarina%2022D%20Beograd",
+        "descriptionEn": "Address: Jurija Gagarina 22D, lokal 4. Look for Borodinsky bread, herring and other fish, roe, Doktorskaya and other sausages, kvass, pelmeni, tea, zefir and other Eastern European sweets. Stock changes.",
+        "descriptionSr": "Адреса: Jurija Gagarina 22D, lokal 4. Потражите бородински хлеб, харингу и другу рибу, икру, докторску и друге кобасице, квас, пелмене, чај, зефир и друге источноевропске слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.477235,
+          44.80397
+        ]
+      },
+      "properties": {
+        "id": "assorti-konfeta",
+        "name": "ASSORTI / Konfeta",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Golsvordijeva 33. Восточноевропейские продукты и сладости; полезная точка для привычных импортных товаров. Ассортимент меняется.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://www.waze.com/live-map/directions/rs/bg/assorti-konfeta-eastern-european-food-and-drinks-store?to=place.ChIJ7ecYWS97WkcRP_9bIOLs2CA",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=ASSORTI%20Konfeta%20Golsvordijeva%2033&query_place_id=ChIJ7ecYWS97WkcRP_9bIOLs2CA",
+        "descriptionEn": "Address: Golsvordijeva 33. Eastern European groceries and sweets; useful for familiar imported products. Stock changes.",
+        "descriptionSr": "Адреса: Golsvordijeva 33. Источноевропске намирнице и слаткиши; корисно место за познате увозне производе. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.476499,
+          44.818219
+        ]
+      },
+      "properties": {
+        "id": "rusmarket-cvijiceva",
+        "name": "RusMarket — Cvijićeva",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Cvijićeva 18. Русские продукты и импортная бакалея; сюда имеет смысл идти за привычными марками и товарами, которых нет в обычном супермаркете. Ассортимент меняется.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://t.me/s/RusMarketBeograd",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=RusMarket%20Cvijiceva%2018%20Beograd&query_place_id=ChIJBT9uagB7WkcRSJBJ1ZZEMqM",
+        "descriptionEn": "Address: Cvijićeva 18. Russian groceries and imported pantry staples; look for familiar brands and products not usually found in ordinary supermarkets. Stock changes.",
+        "descriptionSr": "Адреса: Cvijićeva 18. Руске намирнице и увозни прехрамбени производи; потражите познате марке и производе којих можда нема у обичним супермаркетима. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4790063,
+          44.768938
+        ]
+      },
+      "properties": {
+        "id": "gubernija-rusmarket",
+        "name": "Gubernija RusMarket",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Vojvode Stepe 264. Ищите: гречку, бородинский хлеб, рыбу, молочные продукты, сгущёнку, квас, чёрный чай и сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://wolt.com/sr/srb/belgrade/venue/ruski-market-td-prk-5",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=44.768938%2C20.4790063",
+        "descriptionEn": "Address: Vojvode Stepe 264. Look for buckwheat, Borodinsky bread, fish, dairy products, condensed milk, kvass, black tea and sweets. Stock changes.",
+        "descriptionSr": "Адреса: Vojvode Stepe 264. Потражите хељду, бородински хлеб, рибу, млечне производе, кондензовано млеко, квас, црни чај и слаткише. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4535397,
+          44.8136817
+        ]
+      },
+      "properties": {
+        "id": "ura-store",
+        "name": "URA Store",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Kraljevića Marka 11. Ищите прежде всего пельмени и вареники: с мясом, курицей, картофелем, вишней, творогом и другими начинками. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://wolt.com/sr/srb/belgrade/venue/ura-store",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=44.8136817%2C20.4535397",
+        "descriptionEn": "Address: Kraljevića Marka 11. Look primarily for pelmeni and vareniki with meat, chicken, potato, cherry, curd cheese and other fillings. Stock changes.",
+        "descriptionSr": "Адреса: Kraljevića Marka 11. Потражите пре свега пелмене и варенике са месом, пилетином, кромпиром, вишњама, младим сиром и другим пуњењима. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4598428,
+          44.8110176
+        ]
+      },
+      "properties": {
+        "id": "ruski-market-5-oclock",
+        "name": "Ruski market 5 o'clock",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Balkanska 27. Специализированная точка для чёрного и ароматизированного чая: Earl Grey, чай с ягодами и добавками, пуэр, улун; есть также кофе и сладости. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://wolt.com/sr/srb/belgrade/venue/ruski-market-5-oclock",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=44.8110176%2C20.4598428",
+        "descriptionEn": "Address: Balkanska 27. Specialist shop for black and flavoured tea: Earl Grey, berry and flavoured blends, pu-erh and oolong; coffee and sweets are also available. Stock changes.",
+        "descriptionSr": "Адреса: Balkanska 27. Специјализована продавница црног и ароматизованог чаја: Earl Grey, чај са бобичастим воћем и додацима, пуер и улонг; има и кафе и слаткиша. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4693,
+          44.7958
+        ]
+      },
+      "properties": {
+        "id": "fix-price-branicevska",
+        "name": "Fix Price — Braničevska",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Braničevska 7. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется, наличие конкретного товара не гарантируется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://fix-price.rs/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Branicevska%207%20Beograd",
+        "descriptionEn": "Address: Braničevska 7. Discount shop with food and drinks; check snacks, biscuits, pantry staples and other familiar items. Stock changes frequently. Availability of specific products is not guaranteed.",
+        "descriptionSr": "Адреса: Braničevska 7. Дисконт са храном и пићем; потражите грицкалице, кекс, основне намирнице и друге познате производе. Асортиман се често мења. Доступност конкретног производа није загарантована."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4807059,
+          44.7979827
+        ]
+      },
+      "properties": {
+        "id": "fix-price-cara-nikolaja-ii",
+        "name": "Fix Price — Cara Nikolaja II",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Cara Nikolaja II 58. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется, наличие конкретного товара не гарантируется.",
+        "sourceId": "manual:web-research:2026-09-09",
+        "provenanceUrl": "https://fix-price.rs/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Cara%20Nikolaja%20II%2058%20Beograd",
+        "descriptionEn": "Address: Cara Nikolaja II 58. Discount shop with food and drinks; check snacks, biscuits, pantry staples and other familiar items. Stock changes frequently. Availability of specific products is not guaranteed.",
+        "descriptionSr": "Адреса: Cara Nikolaja II 58. Дисконт са храном и пићем; потражите грицкалице, кекс, основне намирнице и друге познате производе. Асортиман се често мења. Доступност конкретног производа није загарантована."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.486448,
+          44.819805
+        ]
+      },
+      "properties": {
+        "id": "svetofor-viline-vode",
+        "name": "Светофор — Viline vode",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Viline vode 47. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://svetofor.rs/kontakt/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Svetofor%20Viline%20vode%2047%20Beograd&query_place_id=ChIJ2554EQB7WkcRpt-nPxCvMgw",
+        "descriptionEn": "Address: Viline vode 47. Start here for buckwheat; the Svetofor chain is also listed as a place to look for herring, smoked mackerel, condensed milk and kvass. Availability depends on deliveries.",
+        "descriptionSr": "Адреса: Viline vode 47. Овде прво потражите хељду; Светофор је у водичу наведен и као место за куповину харинге, димљене скуше, кондензованог млека и кваса. Доступност зависи од испоруке."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.485658,
+          44.766015
+        ]
+      },
+      "properties": {
+        "id": "svetofor-peka-dapcevica",
+        "name": "Светофор — Bulevar Peka Dapčevića",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Bulevar Peka Dapčevića 28. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://svetofor.rs/kontakt/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Svetofor%20Bulevar%20Peka%20Dapcevica%2028%20Beograd&query_place_id=ChIJi3QBJh9xWkcRSDRMjIooTaM",
+        "descriptionEn": "Address: Bulevar Peka Dapčevića 28. Start here for buckwheat; the Svetofor chain is also listed as a place to look for herring, smoked mackerel, condensed milk and kvass. Availability depends on deliveries.",
+        "descriptionSr": "Адреса: Bulevar Peka Dapčevića 28. Овде прво потражите хељду; Светофор је у водичу наведен и као место за куповину харинге, димљене скуше, кондензованог млека и кваса. Доступност зависи од испоруке."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.510516,
+          44.776968
+        ]
+      },
+      "properties": {
+        "id": "svetofor-konjarnik",
+        "name": "Светофор — Konjarnik",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Vladimira Tomanovića 59. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://svetofor.rs/kontakt/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Svetofor%20Vladimira%20Tomanovica%2059%20Beograd&query_place_id=ChIJ0wRoNgBxWkcRSlh145oHKT0",
+        "descriptionEn": "Address: Vladimira Tomanovića 59. Start here for buckwheat; the Svetofor chain is also listed as a place to look for herring, smoked mackerel, condensed milk and kvass. Availability depends on deliveries.",
+        "descriptionSr": "Адреса: Vladimira Tomanovića 59. Овде прво потражите хељду; Светофор је у водичу наведен и као место за куповину харинге, димљене скуше, кондензованог млека и кваса. Доступност зависи од испоруке."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.551901,
+          44.773789
+        ]
+      },
+      "properties": {
+        "id": "svetofor-smederevski-put",
+        "name": "Светофор — Smederevski put",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Smederevski put 25M. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://svetofor.rs/kontakt/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Svetofor%20Smederevski%20put%2025M%20Beograd&query_place_id=ChIJ7xs2WQB3WkcR99kd7Wra3FU",
+        "descriptionEn": "Address: Smederevski put 25M. Start here for buckwheat; the Svetofor chain is also listed as a place to look for herring, smoked mackerel, condensed milk and kvass. Availability depends on deliveries.",
+        "descriptionSr": "Адреса: Smederevski put 25M. Овде прво потражите хељду; Светофор је у водичу наведен и као место за куповину харинге, димљене скуше, кондензованог млека и кваса. Доступност зависи од испоруке."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.380409,
+          44.823032
+        ]
+      },
+      "properties": {
+        "id": "svetofor-rajkova",
+        "name": "Светофор — Rajkova",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Rajkova 22. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://svetofor.rs/kontakt/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Svetofor%20Rajkova%2022%20Beograd&query_place_id=ChIJ3c0psnJlWkcRFaLLTTwINkA",
+        "descriptionEn": "Address: Rajkova 22. Start here for buckwheat; the Svetofor chain is also listed as a place to look for herring, smoked mackerel, condensed milk and kvass. Availability depends on deliveries.",
+        "descriptionSr": "Адреса: Rajkova 22. Овде прво потражите хељду; Светофор је у водичу наведен и као место за куповину харинге, димљене скуше, кондензованог млека и кваса. Доступност зависи од испоруке."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.590064,
+          44.733226
+        ]
+      },
+      "properties": {
+        "id": "svetofor-lestane",
+        "name": "Светофор — Leštane",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Kružni put bb, Leštane. Начинайте отсюда за гречкой; в справочнике «Светофор» также отмечен как место поиска селёдки, копчёной скумбрии, сгущёнки и кваса. Наличие зависит от поставки.",
+        "sourceId": "google-mymaps:12l4BVYg_FV0d9CMeEWEtnJDQioL9804",
+        "provenanceUrl": "https://svetofor.rs/kontakt/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Svetofor%20Lestane%20Kruzni%20put%20bb&query_place_id=ChIJUzxAdgB3WkcRl5ppJFqzDnI",
+        "descriptionEn": "Address: Kružni put bb, Leštane. Start here for buckwheat; the Svetofor chain is also listed as a place to look for herring, smoked mackerel, condensed milk and kvass. Availability depends on deliveries.",
+        "descriptionSr": "Адреса: Kružni put bb, Leštane. Овде прво потражите хељду; Светофор је у водичу наведен и као место за куповину харинге, димљене скуше, кондензованог млека и кваса. Доступност зависи од испоруке."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4019,
+          44.8065
+        ]
+      },
+      "properties": {
+        "id": "prva-ruska-kuhinja-novi-beograd",
+        "name": "Prva ruska kuhinja — Novi Beograd",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Uroša Martinovića 5. Русская гастрономия и магазин: замороженные продукты, готовые блюда, творог, мясные и рыбные продукты, хлеб, сладости и снеки. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-26",
+        "provenanceUrl": "https://wolt.com/sr/srb/belgrade/venue/prva-ruska-kuhinja-novi-beograd",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Prva%20ruska%20kuhinja%20Urosa%20Martinovica%205%20Beograd",
+        "descriptionEn": "Address: Uroša Martinovića 5. Russian deli and shop: frozen foods, prepared dishes, curd cheese, meat and fish products, bread, sweets and snacks. Stock changes.",
+        "descriptionSr": "Адреса: Uroša Martinovića 5. Руска гастрономија и продавница: замрзнута храна, готова јела, млади сир, месни и рибљи производи, хлеб, слаткиши и грицкалице. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4689,
+          44.819
+        ]
+      },
+      "properties": {
+        "id": "rusmarket-djordja-jovanovica",
+        "name": "RusMarket — Đorđa Jovanovića",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Đorđa Jovanovića 19. Русские продукты и импортная бакалея; точка для привычных марок и товаров, которых может не быть в обычном супермаркете. Ассортимент меняется.",
+        "sourceId": "manual:web-research:2026-09-26",
+        "provenanceUrl": "https://www.kaza.rs/zgrada/beograd/djordja-jovanovica/19",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=RusMarket%20Djordja%20Jovanovica%2019%20Beograd",
+        "descriptionEn": "Address: Đorđa Jovanovića 19. Russian groceries and imported pantry staples; look for familiar brands and products not usually found in ordinary supermarkets. Stock changes.",
+        "descriptionSr": "Адреса: Đorđa Jovanovića 19. Руске намирнице и увозни прехрамбени производи; потражите познате марке и производе којих можда нема у обичним супермаркетима. Асортиман се мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4857,
+          44.7901
+        ]
+      },
+      "properties": {
+        "id": "fix-price-krusevacka",
+        "name": "Fix Price — Kruševačka",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Kruševačka 22. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется.",
+        "sourceId": "manual:web-research:2026-09-26",
+        "provenanceUrl": "https://fix-price.rs/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Krusevacka%2022%20Beograd",
+        "descriptionEn": "Address: Kruševačka 22. Discount shop with food and drinks; check snacks, biscuits, pantry staples and other familiar items. Stock changes frequently.",
+        "descriptionSr": "Адреса: Kruševačka 22. Дисконт са храном и пићем; потражите грицкалице, кекс, основне намирнице и друге познате производе. Асортиман се често мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.48131,
+          44.7654
+        ]
+      },
+      "properties": {
+        "id": "fix-price-vojvode-stepe",
+        "name": "Fix Price — Vojvode Stepe",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Vojvode Stepe 312, комплекс Voždove kapije. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется.",
+        "sourceId": "manual:web-research:2026-09-26",
+        "provenanceUrl": "https://fix-price.rs/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Vojvode%20Stepe%20312%20Beograd",
+        "descriptionEn": "Address: Vojvode Stepe 312, комплекс Voždove kapije. Discount shop with food and drinks; check snacks, biscuits, pantry staples and other familiar items. Stock changes frequently.",
+        "descriptionSr": "Адреса: Vojvode Stepe 312, комплекс Voždove kapije. Дисконт са храном и пићем; потражите грицкалице, кекс, основне намирнице и друге познате производе. Асортиман се често мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.506535,
+          44.798288
+        ]
+      },
+      "properties": {
+        "id": "fix-price-cingrijina",
+        "name": "Fix Price — Čingrijina",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Čingrijina 13A. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется.",
+        "sourceId": "manual:web-research:2026-09-26",
+        "provenanceUrl": "https://fix-price.rs/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Cingrijina%2013A%20Beograd",
+        "descriptionEn": "Address: Čingrijina 13A. Discount shop with food and drinks; check snacks, biscuits, pantry staples and other familiar items. Stock changes frequently.",
+        "descriptionSr": "Адреса: Čingrijina 13A. Дисконт са храном и пићем; потражите грицкалице, кекс, основне намирнице и друге познате производе. Асортиман се често мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4235,
+          44.7825
+        ]
+      },
+      "properties": {
+        "id": "fix-price-pozeska",
+        "name": "Fix Price — Požeška",
+        "category": "shop",
+        "storeType": "budget-chain",
+        "markerIcon": "food",
+        "description": "Адрес: Požeška 31, Banovo brdo. Дискаунтер с продуктами и напитками; проверяйте снеки, печенье, базовую бакалею и другие привычные позиции. Ассортимент часто обновляется.",
+        "sourceId": "manual:web-research:2026-09-26",
+        "provenanceUrl": "https://fix-price.rs/",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=Fix%20Price%20Pozeska%2031%20Beograd",
+        "descriptionEn": "Address: Požeška 31, Banovo brdo. Discount shop with food and drinks; check snacks, biscuits, pantry staples and other familiar items. Stock changes frequently.",
+        "descriptionSr": "Адреса: Požeška 31, Banovo brdo. Дисконт са храном и пићем; потражите грицкалице, кекс, основне намирнице и друге познате производе. Асортиман се често мења."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.4529884,
+          44.8282861
+        ]
+      },
+      "properties": {
+        "id": "multi-cook-dunavska",
+        "name": "Multi Cook",
+        "category": "shop",
+        "storeType": "specialty",
+        "markerIcon": "food",
+        "description": "Адрес: Dunavska 2Ž. Handmade frozen food: пельмени, наггетсы, фаршированный перец, сарма, жюльен, блинчики, колбасы, плескавицы, ćuфте и другие замороженные полуфабрикаты. Точка открылась 26 сентября 2026 года; ассортимент меняется.",
+        "sourceId": "user-report:2026-09-26",
+        "provenanceUrl": "https://maps.app.goo.gl/FGwYn76hLnmpy8fh9",
+        "mapUrl": "https://www.google.com/maps/search/?api=1&query=44.8282861%2C20.4529884",
+        "descriptionEn": "Address: Dunavska 2Ž. Handmade frozen food: pelmeni, nuggets, stuffed peppers, sarma, julienne, pancakes, sausages, pljeskavica, ćufte and other frozen prepared foods. The shop opened on 26 September 2026; stock changes.",
+        "descriptionSr": "Адреса: Dunavska 2Ž. Ручно припремљена замрзнута храна: пелмени, нагетси, пуњене паприке, сарма, жулијен, палачинке, кобасице, пљескавице, ћуфте и други замрзнути полупроизводи. Продавница је отворена 26. септембра 2026. године; асортиман се мења."
+      }
+    }
   ]
 }
