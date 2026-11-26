@@ -32,6 +32,10 @@ node scripts/check-map-data.mjs
 
 Если рядом с source уже лежит `.geojson.gz`, validator дополнительно проверит, что он распаковывается байт-в-байт в исходный GeoJSON и действительно меньше source.
 
+## Локализация редакционных POI
+
+Карты `belgrade-familiar-foods.geojson` и `serbia-spa-resorts.geojson` содержат `description`, `descriptionEn` и `descriptionSr` для каждой точки. При добавлении или изменении точки обновляйте все три описания, сохраняя ID, исходные координаты и ссылки на источники. `scripts/check-map-data.mjs` проверяет непустые описания и уникальность ID. Оригинальные отзывы и сторонние snapshots не заменяются переводом.
+
 ## Что здесь хранится
 
 Штатные runtime source-файлы:
