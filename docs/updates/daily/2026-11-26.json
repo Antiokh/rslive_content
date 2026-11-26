@@ -3,7 +3,7 @@
   "hours": 24,
   "generated_at": "2026-11-26T13:09:00.000Z",
   "commit_count": 7,
-  "article_count": 57,
+  "article_count": 63,
   "articles": [
     {
       "repo_path": "src/content/docs/lifestyle/fun/dance/index.mdx",
@@ -465,6 +465,54 @@
       "live_url": "https://rslive.ru/sr/jugoslovenski-spomenici/",
       "summaries": [
         "Објавили смо водич кроз југословенску меморијалну архитектуру у Србији на српском, са ауторима, датумима, историјским контекстом и саветима за посету."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/serbian-wine-regions/index.mdx",
+      "title": "Serbian wine regions: planning wine tastings",
+      "live_url": "https://rslive.ru/en/serbian-wine-regions/",
+      "summaries": [
+        "Published an English guide to Serbian wine regions, local grape varieties, winery bookings and safe transport."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/vinski-regioni-srbije/index.mdx",
+      "title": "Вински региони Србије: како планирати дегустације",
+      "live_url": "https://rslive.ru/sr/vinski-regioni-srbije/",
+      "summaries": [
+        "Објавили смо водич кроз винске регионе Србије на српском, са локалним сортама, заказивањем посета винаријама и саветима за безбедан превоз."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/winter-in-serbia/index.mdx",
+      "title": "Winter in Serbia: where to go for snow and skiing",
+      "live_url": "https://rslive.ru/en/winter-in-serbia/",
+      "summaries": [
+        "Published an English guide to winter resorts and checking actual ski slope, lift and weather conditions."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/zimska-srbija/index.mdx",
+      "title": "Зимска Србија: куда ићи на снег и скијање",
+      "live_url": "https://rslive.ru/sr/zimska-srbija/",
+      "summaries": [
+        "Објавили смо водич кроз зимска одредишта Србије на српском, са саветима за проверу рада стаза, жичара и временских услова."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/en/short-nature-trips/index.mdx",
+      "title": "Short nature trips in Serbia",
+      "live_url": "https://rslive.ru/en/short-nature-trips/",
+      "summaries": [
+        "Published an English guide to short nature trips, lakes, hiking, Sirogojno and the Šargan Eight railway."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/kratki-izleti-u-prirodu/index.mdx",
+      "title": "Кратки излети у природу по Србији",
+      "live_url": "https://rslive.ru/sr/kratki-izleti-u-prirodu/",
+      "summaries": [
+        "Објавили смо водич на српском за кратке излете у природу, посете језерима, планинарење, Сирогојно и Шарганску осмицу."
       ]
     }
   ]
