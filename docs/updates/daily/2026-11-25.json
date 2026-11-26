@@ -1,24 +1,32 @@
 {
   "date": "2026-11-25",
   "hours": 24,
-  "generated_at": "2026-11-25T18:43:00Z",
+  "generated_at": "2026-11-25T18:43:06.000Z",
   "commit_count": 1,
-  "article_count": 2,
+  "article_count": 3,
   "articles": [
     {
-      "repo_path": "src/content/docs/arrival/bank/index.mdx",
-      "title": "Банки и финансы",
-      "live_url": "https://rslive.ru/arrival/bank/",
+      "repo_path": "src/content/docs/map/cuisine/index.mdx",
+      "title": "Национальные кухни Белграда",
+      "live_url": "https://rslive.ru/map/cuisine/",
       "summaries": [
-        "Уточнили состав базового счёта и максимальную плату 150 динаров, разъяснение НБС об отказах российским гражданам, правила письменного отказа и порядок подачи жалобы с доказательствами."
+        "Добавили грузинский ресторан Đorđija на Земунской набережной (Kej oslobođenja 73) в карту и список грузинской кухни."
       ]
     },
     {
-      "repo_path": "src/content/docs/arrival/business/bank-unavailable/index.mdx",
-      "title": "Что делать бизнесу, если банковский счёт недоступен",
-      "live_url": "https://rslive.ru/arrival/business/bank-unavailable/",
+      "repo_path": "src/content/docs/en/national-cuisines-belgrade/index.mdx",
+      "title": "National cuisines in Belgrade",
+      "live_url": "https://rslive.ru/en/national-cuisines-belgrade/",
       "summaries": [
-        "Добавили порядок действий при отказе или затягивании открытия бизнес-счёта для PR и DOO: письменный ответ, претензия банку и жалоба в НБС; отделили гарантии личного базового счёта от бизнес-счетов."
+        "Added the Georgian restaurant Dordija on the Zemun quay (Kej oslobodjenja 73) to the map and Georgian cuisine list."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/sr/nacionalne-kuhinje-beograda/index.mdx",
+      "title": "Националне кухиње Београда",
+      "live_url": "https://rslive.ru/sr/nacionalne-kuhinje-beograda/",
+      "summaries": [
+        "Додали смо грузијски ресторан Ђорђија на Земунском кеју (Кеј ослобођења 73) на мапу и у списак ресторана грузијске кухиње."
       ]
     }
   ]
