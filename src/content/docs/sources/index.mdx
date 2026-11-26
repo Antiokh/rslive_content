@@ -1,6 +1,15 @@
 ---
+translations:
+  en: "/en/sources/"
+  sr: "/sr/sources/"
+editionNav:
+  group: about
+  order: 40
+  labels:
+    en: "Sources"
+    sr: "Извори"
 title: "Источники"
-description: "---- struct global ---- schema: sources cols: * csv: 0 max: 1000 ---- ---- Как парсить Telegram Добавить источник action script fetch_title_add_sqlite.php Thanks \"Данные добавлены, обновите страницу.\" fieldset \"Адрес сай"
+description: "Каталог источников RSLive: ссылки на ресурсы и порядок предложения новых источников."
 ogSticker: internet-research
 live: "https://rslive.ru/sources/"
 linking:
@@ -13,22 +22,10 @@ linking:
 
 <StructTable schema="sources" limit={1000} pageSize={50} />
 
-----
-
 :::note
 Материалы Telegram-источников используются только после ручной проверки и привязки к профильной странице.
 :::
 
-<details>
-<summary>Добавить источник</summary>
+## Добавить источник
 
-
-action script fetch_title_add_sqlite.php
-Thanks "Данные добавлены, обновите страницу."
-
-fieldset "Адрес сайта"
-textbox  "url"
-submit "Добавить источник по URL"
-
-
-</details>
+Предложите источник через [GitHub Issues](https://github.com/Antiokh/rslive_content/issues/new). Укажите URL, название ресурса и для каких материалов он может быть полезен. Подробнее о проверке источников — в [редакционной политике](/about/editorial-policy/).
