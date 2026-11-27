@@ -34,6 +34,8 @@ node scripts/check-map-data.mjs
 
 ## Локализация редакционных POI
 
+Для карты национальных кухонь Белграда действует отдельный [агентский регламент](../docs/CUISINE_MAP_MAINTENANCE.md) и [очередь проверки](../docs/CUISINE_MAP_REVIEW_QUEUE.md). `belgrade-world-restaurants.geojson` хранит RU-описания, а соседние `.en.json` и `.sr.json` — переводы по ID. Validator проверяет соответствие ключей, метаданных, источников и геометрии.
+
 Карты `belgrade-familiar-foods.geojson` и `serbia-spa-resorts.geojson` содержат `description`, `descriptionEn` и `descriptionSr` для каждой точки. При добавлении или изменении точки обновляйте все три описания, сохраняя ID, исходные координаты и ссылки на источники. `scripts/check-map-data.mjs` проверяет непустые описания и уникальность ID. Оригинальные отзывы и сторонние snapshots не заменяются переводом.
 
 ## Что здесь хранится
