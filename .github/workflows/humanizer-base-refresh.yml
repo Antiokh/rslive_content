@@ -28,14 +28,35 @@ jobs:
               state: 'open', base: 'main', per_page: 100,
             });
             const ownerRepo = context.repo.owner + '/' + context.repo.repo;
+            const failures = [];
             for (const pr of prs) {
               if (pr.state !== 'open' || pr.base?.ref !== 'main' ||
                   pr.head?.repo?.full_name !== ownerRepo ||
                   pr.user?.login === 'dependabot[bot]') continue;
-              await github.rest.actions.createWorkflowDispatch({
-                owner: context.repo.owner, repo: context.repo.repo,
-                workflow_id: 'humanizer-russian-review.yml',
-                ref: 'main', inputs: { pr_number: String(pr.number) },
-              });
-              core.info('Отзыв редколлегии запрошен для PR #' + pr.number);
+              let sent = false;
+              let lastError;
+              for (let attempt = 1; attempt <= 3; attempt++) {
+                try {
+                  await github.rest.actions.createWorkflowDispatch({
+                    owner: context.repo.owner, repo: context.repo.repo,
+                    workflow_id: 'humanizer-russian-review.yml',
+                    ref: 'main', inputs: { pr_number: String(pr.number) },
+                  });
+                  sent = true;
+                  break;
+                } catch (error) {
+                  lastError = error;
+                  if (attempt === 3 || ![429, 502, 503, 504].includes(error.status)) break;
+                  await new Promise(resolve => setTimeout(resolve, attempt * 1000));
+                }
+              }
+              if (!sent) {
+                failures.push(pr.number);
+                core.warning('Не удалось обновить PR #' + pr.number + ': ' + lastError.message);
+                continue;
+              }
+              core.info('Отзыв запрошен для PR #' + pr.number);
+            }
+            if (failures.length) {
+              core.setFailed('Не удалось обновить PR: ' + failures.join(', '));
             }
