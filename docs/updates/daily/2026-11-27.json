@@ -2,8 +2,8 @@
   "date": "2026-11-27",
   "hours": 24,
   "generated_at": "2026-11-26T23:32:00Z",
-  "commit_count": 2,
-  "article_count": 5,
+  "commit_count": 3,
+  "article_count": 6,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/bank/index.mdx",
@@ -46,6 +46,14 @@
       "live_url": "https://rslive.ru/sr/nacionalne-kuhinje-beograda/",
       "summaries": [
         "Додали Georgian Supra са адресом и званичним сајтом на списак грузијских ресторана и ажурирали линк на картици на мапи."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/bank/raiffeisen/index.mdx",
+      "title": "Raiffeisen Banka",
+      "live_url": "https://rslive.ru/arrival/bank/raiffeisen/",
+      "summaries": [
+        "Вернули уведомление Raiffeisen от 10 октября 2024 года с разбором оснований закрытия бизнес-счетов, отказа в санкционно-чувствительных операциях и обратного выкупа неиспользованной валюты; отделили исторические условия от действующих договоров."
       ]
     }
   ]
