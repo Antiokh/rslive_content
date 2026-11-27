@@ -260,6 +260,72 @@ async function checkYandexSet(id) {
   return { sourceFeatureCount, geojsonFeatures, excludedOutsideSerbia, normalizedSha256 };
 }
 
+async function checkLocalizedEditorialPoi(id) {
+  const document = await readJson(path.join(mapRoot, 'packs/poi', `${id}.geojson`), id);
+  checkFeatureCollection(document, id);
+  const ids = new Set();
+  for (const feature of document.features) {
+    const properties = feature.properties || {};
+    if (!properties.id || ids.has(properties.id)) fail(`${id}: missing or repeated feature ID`);
+    ids.add(properties.id);
+    for (const key of ['description', 'descriptionEn', 'descriptionSr']) {
+      if (typeof properties[key] !== 'string' || !properties[key].trim()) {
+        fail(`${id}: ${properties.id} missing ${key}`);
+      }
+    }
+  }
+  return { features: document.features.length };
+}
+
+async function checkCuisineMap() {
+  const id = 'belgrade-world-restaurants';
+  const file = path.join(mapRoot, 'packs/poi', `${id}.geojson`);
+  const document = await readJson(file, id);
+  checkFeatureCollection(document, id);
+  if (document.properties?.datasetId !== id) fail(`${id}: wrong datasetId`);
+  const sources = document.properties?.coordinateSources;
+  if (!Array.isArray(sources) || !sources.length) fail(`${id}: missing coordinateSources`);
+  const sourceIds = new Set();
+  for (const source of sources) {
+    if (typeof source?.sourceId !== 'string' || !source.sourceId.trim() || sourceIds.has(source.sourceId)) {
+      fail(`${id}: missing or repeated sourceId`);
+    }
+    if (typeof source.snapshotAt !== 'string' || !source.snapshotAt.trim()) fail(`${id}: missing source snapshotAt`);
+    sourceIds.add(source.sourceId);
+  }
+  const ids = new Set();
+  for (const feature of document.features) {
+    const p = feature.properties || {};
+    if (typeof p.id !== 'string' || !p.id.trim() || ids.has(p.id)) fail(`${id}: missing or repeated feature ID`);
+    ids.add(p.id);
+    for (const key of ['name', 'description', 'cuisine', 'countryCode', 'markerIcon', 'provenanceUrl']) {
+      if (typeof p[key] !== 'string' || !p[key].trim()) fail(`${id}: ${p.id} missing ${key}`);
+    }
+    if (!sourceIds.has(p.sourceId)) fail(`${id}: ${p.id} references missing sourceId`);
+    const c = feature.geometry?.coordinates;
+    if (feature.type !== 'Feature' || feature.geometry?.type !== 'Point' || !Array.isArray(c) ||
+        c.length !== 2 || !c.every(Number.isFinite) || Math.abs(c[0]) > 180 || Math.abs(c[1]) > 90) {
+      fail(`${id}: ${p.id} invalid Point coordinates`);
+    }
+  }
+  for (const language of ['en', 'sr']) {
+    const t = await readJson(path.join(mapRoot, 'packs/poi', `${id}.${language}.json`), `${id} ${language}`);
+    if (t.datasetId !== id || t.language !== language || t.sourceSnapshotAt !== document.properties.snapshotAt) {
+      fail(`${id}: ${language} translation metadata mismatch`);
+    }
+    const d = t.descriptions;
+    if (!d || typeof d !== 'object' || Array.isArray(d) || Object.keys(d).length !== ids.size) {
+      fail(`${id}: ${language} translation ID count mismatch`);
+    }
+    for (const key of ids) {
+      if (!Object.hasOwn(d, key) || typeof d[key] !== 'string' || !d[key].trim()) {
+        fail(`${id}: ${key} missing ${language} translation`);
+      }
+    }
+  }
+  return { features: ids.size, sources: sourceIds.size, gzip: await checkOptionalGzip(file, id) };
+}
+
 async function checkRentalBlacklistPoi() {
   const file = path.join(mapRoot, 'packs/poi/serbia-rental-blacklist.geojson');
   const document = await readJson(file, 'Черный список аренды');
@@ -315,6 +381,9 @@ const result = {
   yandex: await checkAllYandexSidecars(),
   poi: {
     rentalBlacklist: await checkRentalBlacklistPoi(),
+    familiarFoods: await checkLocalizedEditorialPoi('belgrade-familiar-foods'),
+    worldRestaurants: await checkCuisineMap(),
+    spaResorts: await checkLocalizedEditorialPoi('serbia-spa-resorts'),
   },
 };
 

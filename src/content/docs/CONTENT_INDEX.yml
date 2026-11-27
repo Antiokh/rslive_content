@@ -310,6 +310,32 @@ pages:
       - "запрос связан с темой: Посольство и консульский отдел России в Белграде, почётное консульство в Нови-Саде, запись на приём, уведомление о сербском ПМЖ и истребование документов."
       - "нужна информация по теме «Посольство России в Сербии»"
     anchors: []
+  - url: "/adaptation/russians/events/"
+    title: "Мероприятия русского комьюнити в Сербии"
+    description: "Русскоязычные культурные мероприятия, народные праздники и встречи в Сербии: отдельные страницы событий и ссылки на афиши."
+    keywords: ["мероприятия русского комьюнити", "русские мероприятия в Сербии", "русские праздники в Белграде", "афиша на русском"]
+    tags: ["адаптация", "жизнь в Сербии", "мероприятия русского комьюнити", "русские мероприятия в Сербии", "русские праздники в Белграде", "афиша на русском"]
+    aliases: []
+    link_when:
+      - "нужно найти мероприятия русского комьюнити в Сербии"
+      - "интересуют русские народные праздники и культурные встречи в Сербии"
+      - "запрос связан с темой: Русскоязычные культурные мероприятия, народные праздники и встречи в Сербии: отдельные страницы событий и ссылки на афиши."
+      - "нужна информация по теме «Мероприятия русского комьюнити в Сербии»"
+    anchors: []
+  - url: "/adaptation/russians/events/masljanica/"
+    title: "Русская Масляница в Белграде"
+    description: "Масленица 2027 в Сербии: 14 марта, 11:30–16:00, Roštilj zona на Аде Циганлии в Белграде. Народные игры, песни, сказ, блины и мастер-классы. Вход свободный."
+    keywords: ["Русская Масляница", "Русская Масленица", "Масленица 2027", "Масляница Белград", "Масленица Сербия", "Maslenica u Beogradu", "Maslenitsa in Belgrade", "Ada Ciganlija"]
+    tags: ["адаптация", "жизнь в Сербии", "Русская Масляница", "Русская Масленица", "Масленица 2027", "Масляница Белград", "Масленица Сербия", "Maslenica u Beogradu", "Maslenitsa in Belgrade", "Ada Ciganlija", "события"]
+    aliases: ["масленица в Белграде", "масляница в Сербии", "русский народный фестиваль"]
+    link_when:
+      - "нужна информация о Русской Маслянице в Белграде"
+      - "ищешь программу Русской Масляницы 14 марта 2027 года"
+      - "ищешь семейный народный праздник в Белграде"
+      - "нужны народные игры, масленичные песни или сценарий Масленицы"
+      - "запрос связан с темой: Масленица 2027 в Сербии: 14 марта, 11:30–16:00, Roštilj zona на Аде Циганлии в Белграде. Народные игры, песни, сказ, блины и мастер-классы. Вход свободный."
+      - "нужна информация по теме «Русская Масляница в Белграде»"
+    anchors: []
   - url: "/adaptation/russians/ksors/"
     title: "КСОРС Сербии и входящие организации"
     description: "История, структура, деятельность и публичные связи Координационного совета организаций российских соотечественников в Сербии, а также список входящих обществ и известных проектов."
@@ -362,6 +388,16 @@ pages:
       - "запрос связан с темой: Ресурсы для изучения сербского языка, кириллица и латиница, бесплатные курсы, приложения, музыка, фильмы и ложные друзья переводчика"
       - "нужна информация по теме «Изучение сербского языка»"
       - "запрос связан с темой: Ресурсы для изучения сербского языка: кириллица и латиница, бесплатные курсы, приложения, подкасты, радио, аудиокниги, музыка, фильмы и ложные друзья переводчика."
+    anchors: []
+  - url: "/adaptation/srpski/self-study/"
+    title: "Самостоятельное изучение сербского по уровням A1–C2"
+    description: "Как определить свой уровень сербского, выбрать упражнения, научиться читать, писать, понимать речь и говорить. Ресурсы Читавука."
+    keywords: ["сербский самостоятельно", "сербский A1 A2 B1 B2 C1 C2", "план изучения сербского", "Читавук", "сербский чтение грамматика"]
+    tags: ["адаптация", "жизнь в Сербии", "сербский самостоятельно", "сербский A1 A2 B1 B2 C1 C2", "план изучения сербского", "Читавук", "сербский чтение грамматика"]
+    aliases: []
+    link_when:
+      - "запрос связан с темой: Как определить свой уровень сербского, выбрать упражнения, научиться читать, писать, понимать речь и говорить. Ресурсы Читавука."
+      - "нужна информация по теме «Самостоятельное изучение сербского по уровням A1–C2»"
     anchors: []
   - url: "/adaptation/work/"
     title: "Работа и бизнес"
@@ -1414,6 +1450,26 @@ pages:
       - "запрос связан с темой: Малая матура, баллы за 6–8 классы, lista želja, специализированные экзамены и отдельный порядок поступления для детей с иностранными школьными документами."
       - "нужна информация по теме «Поступление в среднюю школу»"
     anchors: []
+  - url: "/edu/serbian-exams/"
+    title: "Экзамены и сертификаты по сербскому языку"
+    description: "Где проверить уровень сербского, подготовиться к языковому экзамену и получить сертификат: университетские центры Белграда, Нови-Сада и Ниша."
+    keywords: ["сертификат сербского языка", "экзамен сербский язык", "сербский B2", "проверка уровня сербского", "srpski kao strani jezik", "CEFR"]
+    tags: ["образование", "сертификат сербского языка", "экзамен сербский язык", "сербский B2", "проверка уровня сербского", "srpski kao strani jezik", "CEFR"]
+    aliases: []
+    link_when:
+      - "запрос связан с темой: Где проверить уровень сербского, подготовиться к языковому экзамену и получить сертификат: университетские центры Белграда, Нови-Сада и Ниша."
+      - "нужна информация по теме «Экзамены и сертификаты по сербскому языку»"
+    anchors: []
+  - url: "/edu/university-preparation/"
+    title: "Подготовка к вступительным экзаменам в сербские вузы"
+    description: "Где найти программу вступительного экзамена, сборники задач, варианты прошлых лет и подготовительные курсы факультетов; словарь для абитуриента."
+    keywords: ["подготовка к поступлению Сербия", "prijemni ispit", "вступительные экзамены Сербия", "zbirka zadataka", "математика вступительный экзамен Сербия"]
+    tags: ["образование", "подготовка к поступлению Сербия", "prijemni ispit", "вступительные экзамены Сербия", "zbirka zadataka", "математика вступительный экзамен Сербия"]
+    aliases: []
+    link_when:
+      - "запрос связан с темой: Где найти программу вступительного экзамена, сборники задач, варианты прошлых лет и подготовительные курсы факультетов; словарь для абитуриента."
+      - "нужна информация по теме «Подготовка к вступительным экзаменам в сербские вузы»"
+    anchors: []
   - url: "/edu/university/"
     title: "Высшее образование в Сербии"
     description: "Как иностранцу поступить в вуз Сербии: права абитуриента, аккредитованные университеты и академии, платное и бесплатное обучение, программы на английском, признание документов, стипендии и РВП по учёбе."
@@ -1463,6 +1519,26 @@ pages:
       - "англоязычная компания или специалист хочет стать куратором статьи"
       - "the request is about: How RSLive handles advertising, paid placement and article curation by subject-matter experts and organizations."
       - "information is needed about “Advertising and article curation”"
+    anchors: []
+  - url: "/en/about/app/"
+    title: "App and offline mode"
+    locale: "en"
+    description: "How to install RSLive, read offline, update efficiently and remove the downloaded copy."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: How to install RSLive, read offline, update efficiently and remove the downloaded copy."
+      - "information is needed about “App and offline mode”"
+    anchors: []
+  - url: "/en/about/editorial-policy/"
+    title: "Editorial policy"
+    locale: "en"
+    description: "How RSLive verifies, updates and corrects its articles."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: How RSLive verifies, updates and corrects its articles."
+      - "information is needed about “Editorial policy”"
     anchors: []
   - url: "/en/about/privacy/"
     title: "Privacy Policy"
@@ -1514,6 +1590,26 @@ pages:
       - "the request is about: How a foreigner's stay is registered in Serbia: police, eUprava and eTurista, electronic confirmation, the paper beli karton and registration after a new entry."
       - "information is needed about “Beli karton: registering a foreigner's stay in Serbia”"
     anchors: []
+  - url: "/en/court-interpreters/"
+    title: "Court interpreters for Russian"
+    locale: "en"
+    description: "Map: Court interpreters for Russian."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Court interpreters for Russian."
+      - "information is needed about “Court interpreters for Russian”"
+    anchors: []
+  - url: "/en/dance-studios/"
+    title: "Dance studios in Serbia"
+    locale: "en"
+    description: "Map: Dance studios in Serbia."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Dance studios in Serbia."
+      - "information is needed about “Dance studios in Serbia”"
+    anchors: []
   - url: "/en/employing-foreigners-serbia/"
     title: "Employing a foreign worker in Serbia"
     locale: "en"
@@ -1542,6 +1638,26 @@ pages:
       - "the request is about: Step-by-step guide for moving from a single permit based on samozapošljavanje to local employment: NSZ consent, PPZ, CROSO, B2B transition, Test samostalnosti and work already performed."
       - "information is needed about “From self-employment to employment in Serbia”"
     anchors: []
+  - url: "/en/familiar-foods-belgrade/"
+    title: "Russian and Eastern European groceries in Belgrade"
+    locale: "en"
+    description: "Map: Russian and Eastern European groceries in Belgrade."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Russian and Eastern European groceries in Belgrade."
+      - "information is needed about “Russian and Eastern European groceries in Belgrade”"
+    anchors: []
+  - url: "/en/first-basic-court/"
+    title: "First Basic Court in Belgrade"
+    locale: "en"
+    description: "Map: First Basic Court in Belgrade."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: First Basic Court in Belgrade."
+      - "information is needed about “First Basic Court in Belgrade”"
+    anchors: []
   - url: "/en/foreigner-residence-registration/"
     title: "How to register a foreigner's stay through eUprava"
     locale: "en"
@@ -1554,6 +1670,36 @@ pages:
       - "нужно отправить хозяину жилья английскую версию процедуры eUprava"
       - "the request is about: A standalone guide for a property owner: eID, ConsentID, a qualified electronic certificate and electronic registration of a foreigner's stay through eUprava."
       - "information is needed about “How to register a foreigner's stay through eUprava”"
+    anchors: []
+  - url: "/en/foreigners-offices/"
+    title: "Foreigners offices: addresses and contacts"
+    locale: "en"
+    description: "Map: Foreigners offices: addresses and contacts."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Foreigners offices: addresses and contacts."
+      - "information is needed about “Foreigners offices: addresses and contacts”"
+    anchors: []
+  - url: "/en/little-russia/"
+    title: "Little Russia"
+    locale: "en"
+    description: "Map: Little Russia."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Little Russia."
+      - "information is needed about “Little Russia”"
+    anchors: []
+  - url: "/en/maps/"
+    title: "Maps of Serbia"
+    locale: "en"
+    description: "Directory of maps and map resources for Serbia."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Directory of maps and map resources for Serbia."
+      - "information is needed about “Maps of Serbia”"
     anchors: []
   - url: "/en/national-cuisines-belgrade/"
     title: "National cuisines in Belgrade"
@@ -1568,6 +1714,16 @@ pages:
       - "the request is about: A map and restaurant lists for different national cuisines in Belgrade."
       - "information is needed about “National cuisines in Belgrade”"
     anchors: []
+  - url: "/en/non-smoking-venues/"
+    title: "Non-smoking venues in Belgrade"
+    locale: "en"
+    description: "Map: Non-smoking venues in Belgrade."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Non-smoking venues in Belgrade."
+      - "information is needed about “Non-smoking venues in Belgrade”"
+    anchors: []
   - url: "/en/pig-peter/"
     title: "Pig Peter and the RSLive mascot"
     locale: "en"
@@ -1579,6 +1735,16 @@ pages:
       - "нужно объяснить связь Поросёнка Петра с эмиграционным мемом"
       - "the request is about: Where the Pig Peter meme came from, how it became associated with emigration and why the character appears in the RSLive identity."
       - "information is needed about “Pig Peter and the RSLive mascot”"
+    anchors: []
+  - url: "/en/rental-blacklist/"
+    title: "Rental blacklist"
+    locale: "en"
+    description: "Map: Rental blacklist."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Rental blacklist."
+      - "information is needed about “Rental blacklist”"
     anchors: []
   - url: "/en/russian-business-directory/"
     title: "Directory of Russian-speaking businesses in Serbia"
@@ -1604,6 +1770,26 @@ pages:
       - "the request is about: An RSLive editorial map of Russian-speaking cafés, shops, services, education, wellness and leisure across Serbia, with category filters."
       - "information is needed about “Map of Russian-speaking businesses in Serbia”"
     anchors: []
+  - url: "/en/russian-cultural-heritage/"
+    title: "Russian Soul: Russian cultural heritage in Serbia"
+    locale: "en"
+    description: "Map: Russian Soul: Russian cultural heritage in Serbia."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Russian Soul: Russian cultural heritage in Serbia."
+      - "information is needed about “Russian Soul: Russian cultural heritage in Serbia”"
+    anchors: []
+  - url: "/en/russian-embassy/"
+    title: "Russian embassy in Serbia: addresses and maps"
+    locale: "en"
+    description: "Map: Russian embassy in Serbia: addresses and maps."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Russian embassy in Serbia: addresses and maps."
+      - "information is needed about “Russian embassy in Serbia: addresses and maps”"
+    anchors: []
   - url: "/en/russian-places-serbia/"
     title: "Russian-speaking places in Serbia"
     locale: "en"
@@ -1612,8 +1798,8 @@ pages:
     tags: ["английский", "Russian places Serbia", "Russian cafes Serbia", "Russian restaurants Serbia", "Russian bars Serbia", "Russian shops Serbia", "Russian places Belgrade", "Russian places Novi Sad"]
     aliases: ["Russian-speaking places in Serbia", "Russian venues in Serbia"]
     link_when:
-      - "англоязычному читателю нужны русскоязычные кафе, рестораны, бары или магазины в Сербии"
-      - "нужна английская версия редакционной карты русских заведений RSLive"
+      - "an English-speaking reader needs Russian-speaking cafes, restaurants, bars or shops in Serbia"
+      - "an English version of the RSLive editorial map of Russian-speaking places is needed"
       - "the request is about: RSLive's editorial map of Russian-speaking and Russian-community cafés, restaurants, bars and shops in Serbia."
       - "information is needed about “Russian-speaking places in Serbia”"
     anchors: []
@@ -1680,6 +1866,49 @@ pages:
       - "нужно отличить Русский дом от консульства и общественных организаций"
       - "the request is about: History, institutional status, programmes and public controversies surrounding the Russian Centre for Science and Culture in Belgrade."
       - "information is needed about “Russian House in Belgrade”"
+    anchors: []
+  - url: "/en/russians-in-serbia/sanctions/"
+    title: "Sanctions against Russia and restrictions affecting Russian citizens in Serbia"
+    locale: "en"
+    description: "EU sanctions against Russia compared with Serbian law and practice: banking, payments, trade, export controls, transport, energy and migration."
+    keywords: ["Serbia Russia sanctions", "restrictions on Russian citizens in Serbia", "banking restrictions Serbia", "EU sanctions Serbia", "Russia Serbia money transfers", "Serbia export controls", "NIS sanctions", "informal restrictions"]
+    tags: ["английский", "Serbia Russia sanctions", "restrictions on Russian citizens in Serbia", "banking restrictions Serbia", "EU sanctions Serbia", "Russia Serbia money transfers", "Serbia export controls", "NIS sanctions", "informal restrictions", "international sanctions", "bank compliance", "export controls"]
+    aliases: ["does Serbia sanction Russia", "sanctions in Serbia", "Russian citizens banking restrictions"]
+    link_when:
+      - "the reader needs to understand which sanctions against Russia apply in Serbia"
+      - "the reader needs to distinguish state sanctions from restrictions imposed by banks and foreign suppliers"
+      - "the request is about: EU sanctions against Russia compared with Serbian law and practice: banking, payments, trade, export controls, transport, energy and migration."
+      - "information is needed about “Sanctions against Russia and restrictions affecting Russian citizens in Serbia”"
+    anchors: []
+  - url: "/en/serbian-spa-resorts/"
+    title: "Serbian spas and thermal resorts"
+    locale: "en"
+    description: "Map: Serbian spas and thermal resorts."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: Map: Serbian spas and thermal resorts."
+      - "information is needed about “Serbian spas and thermal resorts”"
+    anchors: []
+  - url: "/en/sources/"
+    title: "Sources"
+    locale: "en"
+    description: "RSLive's directory of information sources and how to suggest a new resource."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: RSLive's directory of information sources and how to suggest a new resource."
+      - "information is needed about “Sources”"
+    anchors: []
+  - url: "/en/travel/"
+    title: "Travelling in Serbia"
+    locale: "en"
+    description: "City trips, historical monuments, national parks and regions of Serbia: planning routes and practical travel considerations."
+    tags: ["английский"]
+    aliases: []
+    link_when:
+      - "the request is about: City trips, historical monuments, national parks and regions of Serbia: planning routes and practical travel considerations."
+      - "information is needed about “Travelling in Serbia”"
     anchors: []
   - url: "/gov/"
     title: "Государство и бюрократия"
@@ -1881,6 +2110,18 @@ pages:
       - "запрос связан с темой: Как иностранцу обратиться к Защитнику граждан Сербии, а когда вместо омбудсмана нужен административный спор в Управном суде."
       - "нужна информация по теме «Защитник граждан: жалоба на государственный орган»"
     anchors: []
+  - url: "/gov/sanctions/"
+    title: "Санкции против России и ограничения для россиян в Сербии"
+    description: "Какие меры действуют на практике: банки, платежи, торговля, экспортный контроль, транспорт, энергетика и миграция."
+    keywords: ["санкции Сербия Россия", "санкции против россиян в Сербии", "банковские ограничения для россиян", "санкции ЕС Сербия", "переводы из России в Сербию", "экспортный контроль Сербия", "NIS санкции", "неформальные ограничения"]
+    tags: ["госуслуги", "документы", "санкции Сербия Россия", "санкции против россиян в Сербии", "банковские ограничения для россиян", "санкции ЕС Сербия", "переводы из России в Сербию", "экспортный контроль Сербия", "NIS санкции", "неформальные ограничения", "международные санкции", "банковский комплаенс", "экспортный контроль"]
+    aliases: ["ввела ли Сербия санкции против России", "какие санкции действуют в Сербии", "неофициальные санкции Сербии"]
+    link_when:
+      - "нужно понять, действуют ли в Сербии санкции против России"
+      - "нужно отличить государственные санкции от ограничений банков и зарубежных поставщиков"
+      - "запрос связан с темой: Какие меры действуют на практике: банки, платежи, торговля, экспортный контроль, транспорт, энергетика и миграция."
+      - "нужна информация по теме «Санкции против России и ограничения для россиян в Сербии»"
+    anchors: []
   - url: "/gov/taxes/"
     title: "Налоги и пошлины"
     description: "Навигация по налогам Сербии: налоги бизнеса, личные налоги, имущество и активы, методика расчёта, ePorezi, LPA, переплаты и госпошлины."
@@ -2071,12 +2312,12 @@ pages:
     anchors: []
   - url: "/gov/taxes/marketplace/"
     title: "Покупки в онлайн-магазинах"
-    description: "! При покупке товаров через интернет у юридического лица таможня освобождает почтовые посылки стоимостью до 50 евро. Когда посылку отправляет частное лицо, сумма, освобождённая от таможни, составляет 70 евро. В первые тр"
+    description: "Пошлина и НДС при заказе товаров из-за границы в Сербию: лимиты 50 и 70 евро, стоимость доставки, примеры расчёта и сборы перевозчика."
     tags: ["госуслуги", "документы", "налоги"]
     aliases: []
     link_when:
       - "нужна информация по теме «Покупки в онлайн-магазинах»"
-      - "запрос связан с темой: ! При покупке товаров через интернет у юридического лица таможня освобождает почтовые посылки стоимостью до 50 евро. Когда посылку отправляет частное лицо, сумма, освобождённая от таможни, составляет 70 евро. В первые тр"
+      - "запрос связан с темой: Пошлина и НДС при заказе товаров из-за границы в Сербию: лимиты 50 и 70 евро, стоимость доставки, примеры расчёта и сборы перевозчика."
     anchors: []
   - url: "/gov/taxes/overpayment/"
     title: "Переплата и ошибочный налоговый платёж"
@@ -3109,18 +3350,6 @@ pages:
       - "запрос связан с темой: Контакты и адреса подразделений МВД Сербии, принимающих заявления иностранцев: Белград, Нови-Сад, Ниш, Суботица и другие города."
       - "нужна информация по теме «Адреса отделений по делам иностранцев»"
     anchors: []
-  - url: "/masljanica/"
-    title: "Русская Масляница"
-    description: "Русская Масляница в Белграде 14 марта 2027 года: народный праздник на Аде Циганлии с песнями, хороводами, играми, представлением и сожжением чучела."
-    keywords: ["Русская Масляница", "Русская Масленица", "Масляница Белград", "Масленица Белград"]
-    tags: ["Русская Масляница", "Русская Масленица", "Масляница Белград", "Масленица Белград", "события"]
-    aliases: ["масленица в Белграде"]
-    link_when:
-      - "нужна информация о Русской Маслянице в Белграде"
-      - "ищешь программу Русской Масляницы 14 марта 2027 года"
-      - "запрос связан с темой: Русская Масляница в Белграде 14 марта 2027 года: народный праздник на Аде Циганлии с песнями, хороводами, играми, представлением и сожжением чучела."
-      - "нужна информация по теме «Русская Масляница»"
-    anchors: []
   - url: "/med/"
     title: "Медицина и экстренная помощь"
     description: "Куда обращаться за медицинской помощью в Сербии: Дом здоровья, специалисты, больницы, скорая помощь, дежурные учреждения, экстренная помощь в Нови-Саде, возврат расходов, защита прав пациента и путь иностранного медика к профессиональному допуску."
@@ -3360,6 +3589,18 @@ pages:
       - "запрос связан с темой: Что зафиксировать при заселении и выезде из квартиры в Сербии: письменный договор, акт, опись, счётчики, текущий баланс коммунальных счетов, ремонт, визиты владельца и возврат депозита."
       - "нужна информация по теме «Приём и возврат арендованной квартиры»"
     anchors: []
+  - url: "/move/housing/heating/"
+    title: "Отопление жилья в Сербии"
+    description: "Виды отопления квартир и домов в Сербии, расходы на сезон 2026/2027, центральное отопление, газ, дрова, пеллеты, ТА-печи, кондиционеры и тепловые насосы. Что проверять при аренде и покупке."
+    keywords: ["отопление в Сербии", "grejanje", "центральное отопление Сербия", "etažno grejanje", "отопление на газе", "дрова пеллеты Сербия", "ТА-печь", "инверторный кондиционер отопление", "тепловой насос", "стоимость отопления Сербия", "зимние счета EPS"]
+    tags: ["переезд", "миграция", "отопление в Сербии", "grejanje", "центральное отопление Сербия", "etažno grejanje", "отопление на газе", "дрова пеллеты Сербия", "ТА-печь", "инверторный кондиционер отопление", "тепловой насос", "стоимость отопления Сербия", "зимние счета EPS"]
+    aliases: ["чем греть квартиру в Сербии", "какое отопление выгоднее"]
+    link_when:
+      - "нужно выбрать жильё с приемлемыми зимними расходами"
+      - "нужно сравнить системы отопления перед покупкой дома"
+      - "запрос связан с темой: Виды отопления квартир и домов в Сербии, расходы на сезон 2026/2027, центральное отопление, газ, дрова, пеллеты, ТА-печи, кондиционеры и тепловые насосы. Что проверять при аренде и покупке."
+      - "нужна информация по теме «Отопление жилья в Сербии»"
+    anchors: []
   - url: "/move/housing/quiet-hours/"
     title: "Тишина и kućni red"
     description: "Как работают правила тишины в многоквартирных домах Сербии: местный kućni red, часы отдыха в Белграде, ремонт, вечеринки, бытовая техника и жалобы."
@@ -3383,6 +3624,18 @@ pages:
       - "нужно проверить коммунальную задолженность и показания при въезде или выезде"
       - "запрос связан с темой: Как устроены коммунальные счета при аренде жилья в Сербии: EPS, белградский Infostan, вода, отопление, показания счётчиков, задолженность и передача квартиры."
       - "нужна информация по теме «Коммунальные услуги и счета»"
+    anchors: []
+  - url: "/move/housing/water/"
+    title: "Водопроводная и питьевая вода в Сербии"
+    description: "Можно ли пить воду из-под крана в Сербии, источники водоснабжения Белграда, жёсткость по районам, санитарный контроль, фильтры и лабораторный анализ."
+    keywords: ["питьевая вода Сербия", "вода из-под крана Белград", "жёсткость воды Белград", "анализ воды", "водоканал", "фильтры воды", "чесмовача"]
+    tags: ["переезд", "миграция", "питьевая вода Сербия", "вода из-под крана Белград", "жёсткость воды Белград", "анализ воды", "водоканал", "фильтры воды", "чесмовача"]
+    aliases: ["вода из-под крана в Сербии", "качество воды в Белграде"]
+    link_when:
+      - "нужно узнать, можно ли пить водопроводную воду"
+      - "нужно сравнить жёсткость воды в районах Белграда или заказать анализ"
+      - "запрос связан с темой: Можно ли пить воду из-под крана в Сербии, источники водоснабжения Белграда, жёсткость по районам, санитарный контроль, фильтры и лабораторный анализ."
+      - "нужна информация по теме «Водопроводная и питьевая вода в Сербии»"
     anchors: []
   - url: "/move/legal/"
     title: "Легализация документов"
@@ -3510,12 +3763,12 @@ pages:
     anchors: []
   - url: "/sources/"
     title: "Источники"
-    description: "---- struct global ---- schema: sources cols: * csv: 0 max: 1000 ---- ---- Как парсить Telegram Добавить источник action script fetch_title_add_sqlite.php Thanks \"Данные добавлены, обновите страницу.\" fieldset \"Адрес сай"
+    description: "Каталог источников RSLive: ссылки на ресурсы и порядок предложения новых источников."
     tags: ["ссылка", "ресурс"]
     aliases: []
     link_when:
       - "ищешь дополнительные ресурсы"
-      - "запрос связан с темой: ---- struct global ---- schema: sources cols: * csv: 0 max: 1000 ---- ---- Как парсить Telegram Добавить источник action script fetch_title_add_sqlite.php Thanks \"Данные добавлены, обновите страницу.\" fieldset \"Адрес сай"
+      - "запрос связан с темой: Каталог источников RSLive: ссылки на ресурсы и порядок предложения новых источников."
       - "нужна информация по теме «Источники»"
     anchors: []
   - url: "/sr/"
@@ -3555,6 +3808,26 @@ pages:
       - "упит је о теми: Како RSLive приступа оглашавању, плаћеном позиционирању и кураторству чланака од стране стручњака и организација."
       - "потребне су информације о теми „Оглашавање и кураторство чланака“"
     anchors: []
+  - url: "/sr/about/app/"
+    title: "Апликација и офлајн режим"
+    locale: "sr"
+    description: "Како инсталирати RSLive, читати без интернета, штедљиво ажурирати и обрисати сачувану копију."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Како инсталирати RSLive, читати без интернета, штедљиво ажурирати и обрисати сачувану копију."
+      - "потребне су информације о теми „Апликација и офлајн режим“"
+    anchors: []
+  - url: "/sr/about/editorial-policy/"
+    title: "Уређивачка политика"
+    locale: "sr"
+    description: "Правила провере, ажурирања и исправљања материјала портала RSLive."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Правила провере, ажурирања и исправљања материјала портала RSLive."
+      - "потребне су информације о теми „Уређивачка политика“"
+    anchors: []
   - url: "/sr/about/privacy/"
     title: "Политика приватности"
     locale: "sr"
@@ -3580,6 +3853,26 @@ pages:
       - "упит је о теми: Стикерпак са прасетом — маскотом RSLive: где га инсталирати, како се илустрације користе на сајту и како раде техничка имена стикера."
       - "потребне су информације о теми „RSLive стикери“"
     anchors: []
+  - url: "/sr/ambasada-rusije/"
+    title: "Амбасада Русије у Србији: адресе и мапе"
+    locale: "sr"
+    description: "Мапа: Амбасада Русије у Србији: адресе и мапе."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Амбасада Русије у Србији: адресе и мапе."
+      - "потребне су информације о теми „Амбасада Русије у Србији: адресе и мапе“"
+    anchors: []
+  - url: "/sr/banje-srbije/"
+    title: "Бање и термална одмаралишта Србије"
+    locale: "sr"
+    description: "Мапа: Бање и термална одмаралишта Србије."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Бање и термална одмаралишта Србије."
+      - "потребне су информације о теми „Бање и термална одмаралишта Србије“"
+    anchors: []
   - url: "/sr/beli-karton/"
     title: "Бели картон: пријава боравишта странца у Србији"
     locale: "sr"
@@ -3592,6 +3885,16 @@ pages:
       - "потребно је објаснити бели картон и домаћину и странцу"
       - "упит је о теми: Како се пријављује боравиште странца у Србији: полиција, еУправа и еТуриста, електронска потврда, папирни бели картон и поновна пријава после новог уласка."
       - "потребне су информације о теми „Бели картон: пријава боравишта странца у Србији“"
+    anchors: []
+  - url: "/sr/crna-lista-stanova/"
+    title: "Црна листа станова"
+    locale: "sr"
+    description: "Мапа: Црна листа станова."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Црна листа станова."
+      - "потребне су информације о теми „Црна листа станова“"
     anchors: []
   - url: "/sr/imenik-ruskojezicnih-biznisa/"
     title: "Именик рускојезичних бизниса у Србији"
@@ -3617,6 +3920,26 @@ pages:
       - "упит је о теми: Спољна мапа предузећа која иницијатива „Ковчег Бизнес“ наводи као погођена одузимањем дозволе ALTA banka, са изворима и упозорењем о статусу организатора у Русији."
       - "потребне су информације о теми „„Ковчег Бизнес“: мапа предузећа после ALTA banka“"
     anchors: []
+  - url: "/sr/mala-rf/"
+    title: "Мала РФ"
+    locale: "sr"
+    description: "Мапа: Мала РФ."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Мала РФ."
+      - "потребне су информације о теми „Мала РФ“"
+    anchors: []
+  - url: "/sr/mape/"
+    title: "Мапе Србије"
+    locale: "sr"
+    description: "Каталог мапа и картографских извора за Србију."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Каталог мапа и картографских извора за Србију."
+      - "потребне су информације о теми „Мапе Србије“"
+    anchors: []
   - url: "/sr/nacionalne-kuhinje-beograda/"
     title: "Националне кухиње Београда"
     locale: "sr"
@@ -3629,6 +3952,26 @@ pages:
       - "потребна је српска верзија мапе руске, јапанске, кинеске и других кухиња"
       - "упит је о теми: Мапа и спискови ресторана различитих националних кухиња у Београду."
       - "потребне су информације о теми „Националне кухиње Београда“"
+    anchors: []
+  - url: "/sr/nepusacki-lokali/"
+    title: "Непушачки локали у Београду"
+    locale: "sr"
+    description: "Мапа: Непушачки локали у Београду."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Непушачки локали у Београду."
+      - "потребне су информације о теми „Непушачки локали у Београду“"
+    anchors: []
+  - url: "/sr/plesne-sale/"
+    title: "Плесне сале у Србији"
+    locale: "sr"
+    description: "Мапа: Плесне сале у Србији."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Плесне сале у Србији."
+      - "потребне су информације о теми „Плесне сале у Србији“"
     anchors: []
   - url: "/sr/prase-petar/"
     title: "Прасе Петар и маскота RSLive"
@@ -3655,6 +3998,16 @@ pages:
       - "упит је о теми: Самостално упутство за власника стана или куће: eID, ConsentID, квалификовани електронски сертификат и електронска пријава боравишта странца преко портала еУправа."
       - "потребне су информације о теми „Како пријавити боравиште странца преко еУправе“"
     anchors: []
+  - url: "/sr/prodavnice-ruskih-proizvoda/"
+    title: "Руске и источноевропске намирнице у Београду"
+    locale: "sr"
+    description: "Мапа: Руске и источноевропске намирнице у Београду."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Руске и источноевропске намирнице у Београду."
+      - "потребне су информације о теми „Руске и источноевропске намирнице у Београду“"
+    anchors: []
   - url: "/sr/provera-stana-pre-najma/"
     title: "Контролна листа за преглед стана пре закупа"
     locale: "sr"
@@ -3667,6 +4020,26 @@ pages:
       - "нужно проверить документы, депозит, счета, правила проживания и регистрацию иностранца"
       - "упит је о теми: Екран који страни станар може да покаже власнику или агенту приликом разгледања: власништво, уговор, депозит, рачуни, стање стана, правила коришћења, пријава странца и услови исељења."
       - "потребне су информације о теми „Контролна листа за преглед стана пре закупа“"
+    anchors: []
+  - url: "/sr/prvi-osnovni-sud/"
+    title: "Први основни суд у Београду"
+    locale: "sr"
+    description: "Мапа: Први основни суд у Београду."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Први основни суд у Београду."
+      - "потребне су информације о теми „Први основни суд у Београду“"
+    anchors: []
+  - url: "/sr/putovanja/"
+    title: "Путовања по Србији"
+    locale: "sr"
+    description: "Маршрути кроз градове, историјске споменике, националне паркове и регионе Србије: планирање путовања и практични савети."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Маршрути кроз градове, историјске споменике, националне паркове и регионе Србије: планирање путовања и практични савети."
+      - "потребне су информације о теми „Путовања по Србији“"
     anchors: []
   - url: "/sr/rusi-u-srbiji/"
     title: "Руси у Србији"
@@ -3732,6 +4105,19 @@ pages:
       - "упит је о теми: Историја, правни и институционални статус, програми и јавне полемике о Руском центру за науку и културу у Београду."
       - "потребне су информације о теми „Руски дом у Београду“"
     anchors: []
+  - url: "/sr/rusi-u-srbiji/sankcije/"
+    title: "Санкције против Русије и ограничења за руске држављане у Србији"
+    locale: "sr"
+    description: "Поређење санкција ЕУ против Русије са прописима и праксом Србије: банке, плаћања, трговина, контрола извоза, транспорт, енергетика и миграције."
+    keywords: ["санкције Србија Русија", "ограничења за руске држављане у Србији", "банкарска ограничења Србија", "санкције ЕУ Србија", "новчани трансфери Русија Србија", "контрола извоза Србија", "НИС санкције", "неформална ограничења"]
+    tags: ["сербский", "санкције Србија Русија", "ограничења за руске држављане у Србији", "банкарска ограничења Србија", "санкције ЕУ Србија", "новчани трансфери Русија Србија", "контрола извоза Србија", "НИС санкције", "неформална ограничења", "међународне мере ограничавања", "банкарска усклађеност", "контрола извоза"]
+    aliases: ["Sankcije Rusiji u Srbiji", "да ли је Србија увела санкције Русији", "ограничења за Русе у Србији"]
+    link_when:
+      - "читалац жели да зна које санкције против Русије се примењују у Србији"
+      - "потребно је разликовати државне санкције од ограничења банака и страних добављача"
+      - "упит је о теми: Поређење санкција ЕУ против Русије са прописима и праксом Србије: банке, плаћања, трговина, контрола извоза, транспорт, енергетика и миграције."
+      - "потребне су информације о теми „Санкције против Русије и ограничења за руске држављане у Србији“"
+    anchors: []
   - url: "/sr/ruska-mesta-u-srbiji/"
     title: "Руска и рускојезична места у Србији"
     locale: "sr"
@@ -3745,6 +4131,16 @@ pages:
       - "упит је о теми: Редакцијска мапа RSLive-а са рускојезичним кафићима, ресторанима, баровима и продавницама у Србији и местима повезаним са рускојезичном заједницом."
       - "потребне су информације о теми „Руска и рускојезична места у Србији“"
     anchors: []
+  - url: "/sr/rusko-kulturno-nasledje/"
+    title: "Руска душа: руско културно наслеђе у Србији"
+    locale: "sr"
+    description: "Мапа: Руска душа: руско културно наслеђе у Србији."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Руска душа: руско културно наслеђе у Србији."
+      - "потребне су информације о теми „Руска душа: руско културно наслеђе у Србији“"
+    anchors: []
   - url: "/sr/ruskojezicni-biznisi-u-srbiji/"
     title: "Мапа рускојезичних бизниса у Србији"
     locale: "sr"
@@ -3756,6 +4152,36 @@ pages:
       - "читаоцу на српском треба мапа рускојезичних предузећа, продавница и услуга у Србији"
       - "упит је о теми: Редакцијска мапа RSLive-а: рускојезични кафићи, продавнице, услуге, образовање, лепота и забава у Србији, са филтерима по делатности."
       - "потребне су информације о теми „Мапа рускојезичних бизниса у Србији“"
+    anchors: []
+  - url: "/sr/sources/"
+    title: "Извори"
+    locale: "sr"
+    description: "Каталог извора RSLive-а и упутство за предлагање нових извора."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Каталог извора RSLive-а и упутство за предлагање нових извора."
+      - "потребне су информације о теми „Извори“"
+    anchors: []
+  - url: "/sr/sudski-tumaci/"
+    title: "Судски тумачи за руски језик"
+    locale: "sr"
+    description: "Мапа: Судски тумачи за руски језик."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Судски тумачи за руски језик."
+      - "потребне су информације о теми „Судски тумачи за руски језик“"
+    anchors: []
+  - url: "/sr/uprava-za-strance/"
+    title: "Управа за странце: адресе и контакти"
+    locale: "sr"
+    description: "Мапа: Управа за странце: адресе и контакти."
+    tags: ["сербский"]
+    aliases: []
+    link_when:
+      - "упит је о теми: Мапа: Управа за странце: адресе и контакти."
+      - "потребне су информације о теми „Управа за странце: адресе и контакти“"
     anchors: []
   - url: "/sr/user/petro/"
     title: "petro"
