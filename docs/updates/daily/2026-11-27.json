@@ -2,8 +2,8 @@
   "date": "2026-11-27",
   "hours": 24,
   "generated_at": "2026-11-27T13:56:00Z",
-  "commit_count": 7,
-  "article_count": 8,
+  "commit_count": 8,
+  "article_count": 11,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/bank/index.mdx",
@@ -72,6 +72,30 @@
       "live_url": "https://rslive.ru/adaptation/russians/events/",
       "summaries": [
         "Добавили раздел мероприятий русского комьюнити с отдельной страницей Русской Масляницы и ссылками на культурные афиши."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/post/index.mdx",
+      "title": "Почта, международные посылки и таможня",
+      "live_url": "https://rslive.ru/arrival/post/",
+      "summaries": [
+        "Добавили правила автоматизированного таможенного оформления с февраля 2026 года, расчёт платежей с доставкой и порядок отказа от посылки с аннулированием декларации."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/marketplace/index.mdx",
+      "title": "Покупки в онлайн-магазинах",
+      "live_url": "https://rslive.ru/gov/taxes/marketplace/",
+      "summaries": [
+        "Уточнили лимиты 50 и 70 евро, ставки пошлины и НДС, расчёт с доставкой и отдельные сборы оператора; добавили пример заказа светильников."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/shops/index.mdx",
+      "title": "Покупка товаров первой необходимости",
+      "live_url": "https://rslive.ru/arrival/shops/",
+      "summaries": [
+        "Добавили рекомендации по сравнению зарубежных и местных покупок с учётом налогов, доставки и услуг перевозчика."
       ]
     }
   ]
