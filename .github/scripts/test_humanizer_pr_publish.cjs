@@ -39,6 +39,8 @@ const resolve = new AsyncFunction("github", "context", "core", "process",
   extract(workflow, "Получение текущих refs PR"));
 const refresh = new AsyncFunction("github", "context", "core",
   extract(dispatcher, "Повторная проверка открытых PR к main"));
+const lookupFailure = new AsyncFunction("github", "context", "core",
+  extract(workflow, "Уведомление при недоступности исходного PR"));
 
 const expected = {
   head: { sha: "a".repeat(40) },
@@ -86,6 +88,52 @@ const pr = {
   assert.deepEqual(seenDispatch.map(x => x.inputs.pr_number), ["7"]);
   assert.equal(seenDispatch[0].workflow_id, "humanizer-russian-review.yml");
 
+  // One rejected dispatch must not suppress all later PRs.
+  const attempted = [], messages = [];
+  await refresh({
+    paginate: async () => [
+      { number: 10, ...pr },
+      { number: 11, ...pr },
+    ],
+    rest: {
+      pulls: { list: async () => {} },
+      actions: { createWorkflowDispatch: async args => {
+        attempted.push(args.inputs.pr_number);
+        if (args.inputs.pr_number === "10") {
+          const error = new Error("API refused dispatch");
+          error.status = 422;
+          throw error;
+        }
+      } },
+    },
+  }, { repo: { owner: "Antiokh", repo: "rslive_content" } },
+  { info: () => {}, warning: msg => messages.push(msg),
+    setFailed: msg => messages.push(msg) });
+  assert.deepEqual(attempted, ["10", "11"]);
+  assert.ok(messages.some(x => x.includes("10")));
+
+  // If the initial API lookup fails, invalidate a bot-owned summary only,
+  // using the GitHub pull_request event identity (no unconfirmed SHA).
+  const failureWrites = [];
+  const failureGithub = {
+    rest: { issues: {
+      listComments: async () => {},
+      updateComment: async args => failureWrites.push({ kind: "update", args }),
+      createComment: async args => failureWrites.push({ kind: "comment", args }),
+    } },
+    paginate: async () => [
+      { id: 42, user: { login: "github-actions[bot]" },
+        body: "<!-- humanizer-russian-review -->" },
+    ],
+  };
+  await lookupFailure(failureGithub,
+    { repo: { owner: "Antiokh", repo: "rslive_content" },
+      payload: { pull_request: { number: 7 } } },
+    { info: () => {} });
+  assert.equal(failureWrites[0].kind, "update");
+  assert.ok(failureWrites[0].args.body.includes("Прежний отчёт не подтверждает"));
+
+
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), "rslive-humanizer-"));
   const commentFile = path.join(temp, "comment.md");
   const inlineFile = path.join(temp, "inline.json");
@@ -95,10 +143,12 @@ const pr = {
     path: "src/content/docs/example.mdx", line: 2, id,
     body: "**Замечание**\n\nФрагмент\n\n<!-- humanizer-inline:" + id + " -->",
   }]));
+  const defaultNotes = JSON.parse(fs.readFileSync(inlineFile, "utf8"));
 
   async function run({ current = pr, comments = [], oldInline = [],
                        patch = "@@ -1 +1,2 @@\n context\n+новая строка",
-                       changedAfter = null } = {}) {
+                       changedAfter = null, notes = defaultNotes } = {}) {
+    fs.writeFileSync(inlineFile, JSON.stringify(notes));
     const writes = [];
     let reads = 0;
     const github = {
@@ -159,6 +209,37 @@ const pr = {
       id: 12, user: { login: "github-actions[bot]" },
       body: "<!-- humanizer-russian-review -->",
     }] })).map(x => x.kind), ["update", "review"]);
+
+    // Source lines beginning "++" arrive as "+++" in Git's hunk; counting
+    // them is necessary to anchor subsequent lines correctly.
+    const plusLine = await run({
+      notes: [{ ...defaultNotes[0], line: 3 }],
+      patch: "@@ -0,0 +1,3 @@\n+first\n+++literal plus\n+target",
+    });
+    assert.equal(plusLine.filter(x => x.kind === "review").length, 1);
+    assert.equal(plusLine.find(x => x.kind === "review").args.comments[0].line, 3);
+
+    // Eight groups is a lifetime cap for this PR, not eight per refresh.
+    const manyNotes = Array.from({ length: 12 }, (_, i) => ({
+      ...defaultNotes[0],
+      line: i + 1,
+      id: i.toString(16).padStart(20, "0"),
+      body: "<!-- humanizer-inline:" + i.toString(16).padStart(20, "0") + " -->",
+    }));
+    const manyPatch = "@@ -0,0 +1,12 @@\n" +
+      Array.from({ length: 12 }, (_, i) => "+line " + (i + 1)).join("\n");
+    const firstBatch = await run({ notes: manyNotes, patch: manyPatch });
+    const firstReview = firstBatch.find(x => x.kind === "review");
+    assert.equal(firstReview.args.comments.length, 8);
+    const alreadyPublished = firstReview.args.comments.map(comment => ({
+      user: { login: "github-actions[bot]" }, body: comment.body,
+    }));
+    assert.equal((await run({ notes: manyNotes, patch: manyPatch,
+      oldInline: alreadyPublished })).filter(x => x.kind === "review").length, 0);
+    const followUp = await run({ notes: manyNotes, patch: manyPatch,
+      oldInline: alreadyPublished.slice(0, 2) });
+    assert.equal(followUp.find(x => x.kind === "review").args.comments.length, 6);
+
     console.log("Humanizer inline publication, ref checks, spoofing and dispatch: OK");
   } finally {
     fs.rmSync(temp, { recursive: true, force: true });
