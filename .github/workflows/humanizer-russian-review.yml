@@ -281,7 +281,7 @@ jobs:
                   const hunk = line.match(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/);
                   if (hunk) { at = Number(hunk[1]); continue; }
                   if (at < 0) continue;
-                  if (line.startsWith('+') && !line.startsWith('+++')) {
+                  if (line.startsWith('+')) {
                     lines.add(at++);
                   } else if (line.startsWith(' ')) {
                     at++;
@@ -293,16 +293,19 @@ jobs:
                 owner: context.repo.owner, repo: context.repo.repo,
                 pull_number: number, per_page: 100,
               });
+              const botInline = oldInline.filter(comment =>
+                comment.user?.login === 'github-actions[bot]' &&
+                /humanizer-inline:[a-f0-9]{20}/.test(comment.body || '')
+              );
               const seen = new Set();
-              for (const comment of oldInline) {
-                if (comment.user?.login !== 'github-actions[bot]') continue;
+              for (const comment of botInline) {
                 for (const match of (comment.body || '').matchAll(/humanizer-inline:([a-f0-9]{20})/g))
                   seen.add(match[1]);
               }
               const grouped = new Map();
               for (const note of suggested) {
                 if (!note || typeof note.id !== 'string' ||
-                    !/^[a-f0-9]{20}$/.test(note.id) || seen.has(note.id) ||
+                    !/^[a-f0-9]{20}$/.test(note.id) ||
                     !added.get(note.path)?.has(note.line)) continue;
                 const key = note.path + ':' + note.line;
                 const group = grouped.get(key) || [];
@@ -310,7 +313,16 @@ jobs:
                   group.push(note);
                 grouped.set(key, group);
               }
-              const reviewComments = [...grouped.entries()].slice(0, 8).map(([key, group]) => {
+              // Select the same first eight anchors on every run. Excluding
+              // previously published findings before the cap would turn every
+              // refresh into another batch of eight discussions.
+              const remainingBudget = Math.max(0, 8 - botInline.length);
+              const reviewComments = [...grouped.entries()]
+                .sort(([a], [b]) => a.localeCompare(b))
+                .slice(0, 8)
+                .filter(([, group]) => !group.some(item => seen.has(item.id)))
+                .slice(0, remainingBudget)
+                .map(([key, group]) => {
                 const first = group[0];
                 const commentBody = group.length === 1 ? first.body : [
                   '**Редакторские замечания к этому фрагменту**',
