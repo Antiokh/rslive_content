@@ -2,8 +2,8 @@
   "date": "2026-11-27",
   "hours": 24,
   "generated_at": "2026-11-26T23:32:00Z",
-  "commit_count": 3,
-  "article_count": 6,
+  "commit_count": 4,
+  "article_count": 9,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/bank/index.mdx",
@@ -54,6 +54,30 @@
       "live_url": "https://rslive.ru/arrival/bank/raiffeisen/",
       "summaries": [
         "Вернули уведомление Raiffeisen от 10 октября 2024 года с разбором оснований закрытия бизнес-счетов, отказа в санкционно-чувствительных операциях и обратного выкупа неиспользованной валюты; отделили исторические условия от действующих договоров."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/post/index.mdx",
+      "title": "Почта, международные посылки и таможня",
+      "live_url": "https://rslive.ru/arrival/post/",
+      "summaries": [
+        "Добавили правила автоматизированного таможенного оформления с февраля 2026 года, расчёт платежей с доставкой и порядок отказа от посылки с аннулированием декларации."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/gov/taxes/marketplace/index.mdx",
+      "title": "Покупки в онлайн-магазинах",
+      "live_url": "https://rslive.ru/gov/taxes/marketplace/",
+      "summaries": [
+        "Уточнили лимиты 50 и 70 евро, ставки пошлины и НДС, расчёт с доставкой и отдельные сборы оператора; добавили пример заказа светильников."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/shops/index.mdx",
+      "title": "Покупка товаров первой необходимости",
+      "live_url": "https://rslive.ru/arrival/shops/",
+      "summaries": [
+        "Добавили рекомендации по сравнению зарубежных и местных покупок с учётом налогов, доставки и услуг перевозчика."
       ]
     }
   ]
