@@ -2,8 +2,8 @@
   "date": "2026-11-28",
   "hours": 24,
   "generated_at": "2026-11-28T11:02:00Z",
-  "commit_count": 1,
-  "article_count": 2,
+  "commit_count": 2,
+  "article_count": 3,
   "articles": [
     {
       "repo_path": "src/content/docs/arrival/bank/index.mdx",
@@ -19,6 +19,14 @@
       "live_url": "https://rslive.ru/gov/sanctions/",
       "summaries": [
         "Объяснили, почему банки усиливают проверки клиентов, связанных с Россией: перечень стран высокого риска ЕС, правила европейских банковских групп, ограничения налогового обмена и границы отказов по общим критериям риска."
+      ]
+    },
+    {
+      "repo_path": "src/content/docs/arrival/visarun/index.mdx",
+      "title": "Визаран",
+      "live_url": "https://rslive.ru/arrival/visarun/",
+      "summaries": [
+        "Обновили ссылку на приложение Dobri Visarun для записи на визаран и добавили ссылку на анонсы поездок в Threads."
       ]
     }
   ]
