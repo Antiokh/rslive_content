@@ -6,22 +6,22 @@
   "upstreamUrl": "https://www.google.com/maps/d/viewer?mid=1WOiyXq0yP2MSOxm9N5aukdOydy0tplI",
   "acquisition": "supabase-http-kml",
   "exportUrl": "https://www.google.com/maps/d/kml?mid=1WOiyXq0yP2MSOxm9N5aukdOydy0tplI&forcekml=1",
-  "snapshotAt": "2026-11-19T05:45:06.654Z",
+  "snapshotAt": "2026-11-28T05:45:06.459Z",
   "contentType": "text/xml; charset=utf-8",
-  "bytes": 35564,
-  "sha256": "7aafd9e9b83c7ea0abe75551607dce1cd01c4565d6910ec4727b5aea9564b494",
-  "semanticHash": "2f36177379354dd1a845fcf841d5e34fb3bac3a59abf861bf20951e937fe7d40",
-  "generation": 7,
-  "sourceJobId": "08a165fd-b06e-48f0-a49f-25e228faf2d0",
+  "bytes": 38872,
+  "sha256": "a0184cd202dd993c9f6564025357c9831eb2de3960a528ccf35d37fd960790ef",
+  "semanticHash": "e6c1375fec73bf874d4d59b69fdd048aefcac09c636e18c60bb6af2e38484b26",
+  "generation": 8,
+  "sourceJobId": "624f320b-3ab7-453c-bba5-f888161bf417",
   "counts": {
-    "placemarks": 131,
-    "folders": 3,
-    "points": 131,
+    "placemarks": 132,
+    "folders": 4,
+    "points": 132,
     "lineStrings": 0,
     "polygons": 0,
     "multiGeometries": 0,
-    "geometries": 131
+    "geometries": 132
   },
-  "geojsonFeatures": 131,
+  "geojsonFeatures": 132,
   "dataFile": "1WOiyXq0yP2MSOxm9N5aukdOydy0tplI.kml"
 }

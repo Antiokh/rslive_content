@@ -2,7 +2,43 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>Podržati ruske preduzetnike|Поддержать российских предпринимателей</name>
-    <description><![CDATA[Карта бизнесов, открытых русскоязычными предпринимателями, которые пострадали от отзыва лицензии банка ALTA<br><br>Podržati ruske preduzetnike koji su pogođeni oduzimanjem dozvole za rad banci ALTA.<br><br>Карта подготовлена сообществом "Ковчег Бизнес"<br>Наш сайт: https://kovcheg.business/<br>Телеграмм канал: https://t.me/Ark_financial]]></description>
+    <description><![CDATA[Карта бизнесов, открытых русскоязычными предпринимателями, которые пострадали от отзыва лицензии банка ALTA<br><br>Podržati ruske preduzetnike koji su pogođeni oduzimanjem dozvole za rad banci ALTA.<br><br>💙 Эту карту бесплатно ведёт сообщество «Ковчег Бизнес». Помогите нам и дальше поддерживать предпринимателей: https://support.kovcheg.business/?utm_source=gmap&utm_medium=map&utm_campaign=alta<br>💙 Mapu besplatno vodi zajednica «Kovčeg Biznis». Podržite nas: https://support.kovcheg.business/?utm_source=gmap&utm_medium=map&utm_campaign=alta]]></description>
+    <Style id="icon-1899-DB4436-normal">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-DB4436-highlight">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-DB4436">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-DB4436-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-DB4436-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
     <Style id="icon-1899-DB4436-nodesc-normal">
       <IconStyle>
         <color>ff3644db</color>
@@ -45,6 +81,24 @@
         <styleUrl>#icon-1899-DB4436-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
+    <Folder>
+      <name>❤️ Поддержать «Ковчег Бизнес» | Podržite «Kovčeg Biznis»</name>
+      <Placemark>
+        <name>Поддержать «Ковчег Бизнес» / Podržite nas</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3ABkJAZgWsbTXjeEitpSNurd4AkVRE9VcwqGD4PgXnnt0LaPGjqYMDQrPfA7dZS4tH2OOGR3iI0ziq5VqulpXUKUdMPLg0UbFHPD9l7CtBrzQhICtMfYQj8lnt5d8EC0Yhw0pFZcY2lYiCHMjjaAVA-t16exHx3yV3-AXZhlhEyIj60m7d-T80bI5ZkQoD3XravFuPGbziG49ctOhSqfOmqt42DdB5GJvvmYDIW5ft6DzLx8Mb6UYt2sZCDlWkGg?fife=s16383" height="200" width="auto" /><br><br>Эта карта бесплатна и существует благодаря донорам сообщества «Ковчег Бизнес». Мы помогаем русскоязычным предпринимателям за рубежом: консультации, защита прав, нетворкинг, поиск клиентов и инвестиций.<br><br>Поддержите нас — от 15 € в месяц или разово:<br>https://support.kovcheg.business/<br><br>Ova mapa je besplatna zahvaljujući donatorima zajednice «Kovčeg Biznis». Podržite nas:<br>https://support.kovcheg.business/<br><br>Telegram: https://t.me/Ark_financial ]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value>https://mymaps.usercontent.google.com/hostedimage/m/*/3ABkJAZgWsbTXjeEitpSNurd4AkVRE9VcwqGD4PgXnnt0LaPGjqYMDQrPfA7dZS4tH2OOGR3iI0ziq5VqulpXUKUdMPLg0UbFHPD9l7CtBrzQhICtMfYQj8lnt5d8EC0Yhw0pFZcY2lYiCHMjjaAVA-t16exHx3yV3-AXZhlhEyIj60m7d-T80bI5ZkQoD3XravFuPGbziG49ctOhSqfOmqt42DdB5GJvvmYDIW5ft6DzLx8Mb6UYt2sZCDlWkGg?fife=s16383</value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            20.4603643,44.8162625,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
     <Folder>
       <name>Belgrade</name>
       <Placemark>
