@@ -94,6 +94,7 @@
 - одиночный скрываемый блок — `Spoiler`;
 - платёжная квитанция — `UplatnicaGenerator`;
 - карта — `MapEmbed`;
+- интерактивная Street View-панорама со статическим offline fallback — `StreetViewEmbed`;
 - общий iframe — `EmbedFrame`;
 - YouTube — `YouTube`;
 - включение страницы или раздела — `ContentInclude`;
